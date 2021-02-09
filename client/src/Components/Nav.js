@@ -1,17 +1,41 @@
 import React, { useState } from 'react'
 
-const Nav = () => {
+const Nav = ({ layout, setLayout }) => {
 	const [showNav, setShowNav] = useState(false)
 
 	return (
 		<React.Fragment>
-			<nav style={{ display: showNav ? 'block' : 'none' }}>
+			<nav style={{ transform: `scaleY(${showNav ? 1 : 0})` }}>
 				<ul>
 					<li>Layouts: </li>
-					<li className='nav-btn'>Small</li>
-					<li className='nav-btn'>Medium</li>
-					<li className='nav-btn'>Large</li>
-					<li className='nav-btn'>X-large</li>
+					<li
+						onClick={e => setLayout(e.target.innerText)}
+						className={`nav-btn ${
+							layout === 'Small' ? 'green' : ''
+						}`}>
+						Small
+					</li>
+					<li
+						onClick={e => setLayout(e.target.innerText)}
+						className={`nav-btn ${
+							layout === 'Medium' ? 'green' : ''
+						}`}>
+						Medium
+					</li>
+					<li
+						onClick={e => setLayout(e.target.innerText)}
+						className={`nav-btn ${
+							layout === 'Large' ? 'green' : ''
+						}`}>
+						Large
+					</li>
+					<li
+						onClick={e => setLayout(e.target.innerText)}
+						className={`nav-btn ${
+							layout === 'X-large' ? 'green' : ''
+						}`}>
+						X-large
+					</li>
 				</ul>
 			</nav>
 			<div
