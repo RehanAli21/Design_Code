@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Nav from './Components/Nav'
 
 const App = () => {
-	return (
-		<div>
-			<h1>Design_Code</h1>
-		</div>
-	)
+	const [layout, setLayout] = useState('X-large')
+
+	return <Nav />
 }
 
 export default App
