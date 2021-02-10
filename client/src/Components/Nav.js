@@ -40,8 +40,8 @@ const Nav = ({ layout, setLayout }) => {
 			</nav>
 			<div
 				onClick={() => setShowNav(!showNav)}
-				className='create'
-				id='create'>
+				className='nav-show'
+				id='nav-show'>
 				&#8801;
 			</div>
 		</React.Fragment>
