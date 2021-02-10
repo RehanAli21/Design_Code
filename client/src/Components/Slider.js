@@ -3,15 +3,7 @@ import React from 'react'
 const Slider = ({ visible }) => {
 	return (
 		<div
-<<<<<<< HEAD
 			style={{ transform: `scaleY(${visible ? 1 : 0})` }}
-=======
-<<<<<<< HEAD
-			style={{ transform: `scaleY(${visible ? 1 : 0})` }}
-=======
-			style={{ display: visible ? 'block' : 'none' }}
->>>>>>> 43c296e8500b5a4a7bf0e29cc0778ee0737035f9
->>>>>>> cec95eeac26d6aa94e40845b830d9cee895505f5
 			className='slider-container'>
 			<ul>
 				<li>Navbar</li>
