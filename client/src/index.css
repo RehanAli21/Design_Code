@@ -4,6 +4,9 @@
 	box-sizing: border-box;
 	font-family: 'Segoe UI', sans-serif;
 }
+html {
+	scroll-behavior: smooth;
+}
 
 nav {
 	width: 100%;
@@ -43,7 +46,7 @@ nav .nav-btn:hover {
 	border: none;
 	border-radius: 50%;
 	color: white;
-	background-color: #111111;
+	background-color: green;
 	position: absolute;
 	right: 20px;
 	top: 8px;
@@ -66,7 +69,7 @@ main {
 	border: none;
 	border-radius: 50%;
 	color: white;
-	background-color: #111111;
+	background-color: green;
 	position: absolute;
 	right: 20px;
 	bottom: 8px;
@@ -75,31 +78,55 @@ main {
 	font-family: serif;
 }
 
-#create-options {
+.slider-container {
+	width: 150px;
 	position: absolute;
-	width: 200px;
-	height: 80vh;
 	right: 20px;
-	bottom: 60px;
-	background-color: #363636;
-	color: white;
-	border: none;
-	border-radius: 10px;
-	transition: 1s;
+	bottom: 10vh;
+	text-align: center;
+	transition: 0.1s;
+	transform-origin: bottom;
 }
 
-.create-options .option {
-	padding: 20px 0px;
+.slider-container ul {
+	list-style: none;
+	height: 80vh;
+	border-radius: 5px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	box-shadow: -2px 2px 5px grey;
+}
+
+.slider-container li {
+	color: white;
+	background-color: #363636;
+	padding: 20px 35px;
 	text-align: center;
-	border: 1px solid white;
 	font-size: 1em;
-	font-weight: bold;
+	transition: 0.25s;
 	cursor: pointer;
 }
 
-.create-options .option:hover {
-	background-color: white;
-	color: #363636;
-	border: 2px solid #363636;
-	/* border-right: 2px solid #363636; */
+.slider-container li:active {
+	font-size: 0.9em;
+	padding: 21px 35px;
+}
+
+.slider-container li:hover {
+	background-color: green;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: green;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: darkgreen;
 }
