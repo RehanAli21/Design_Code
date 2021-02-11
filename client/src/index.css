@@ -73,17 +73,52 @@ nav h3:hover {
 
 .main-div {
 	background-color: var(--third-white);
+	overflow: scroll;
+	display: grid;
+	grid-template-columns: 570px 750px 990px 1170px 1230px;
+}
+.main-div div {
+	background-color: white;
+	height: 300px;
+	margin: 20px 20px 0px 20px;
+	background-color: var(--third-white);
+	text-align: center;
+}
+.main-div .small {
+	width: 540px;
+	background-color: white;
+	box-shadow: 2px 2px 5px grey;
+}
+.main-div .medium {
+	width: 720px;
+	background-color: white;
+	box-shadow: 2px 2px 5px grey;
+}
+.main-div .large {
+	width: 960px;
+	background-color: white;
+	box-shadow: 2px 2px 5px grey;
+}
+.main-div .x-large {
+	width: 1140px;
+	background-color: white;
+	box-shadow: 2px 2px 5px grey;
+}
+.main-div .universal {
+	width: 1200px;
+	background-color: white;
+	box-shadow: 2px 2px 5px grey;
 }
 
 .propertybar {
 	text-align: center;
 }
-.propertybar h5 {
+.propertybar p {
 	margin: 20px auto;
 	width: auto;
 	border-bottom: 2px solid var(--text-color);
 	padding-bottom: 20px;
-	font-size: 1.3em;
+	font-weight: bolder;
 	color: var(--text-active-color);
 }
 
