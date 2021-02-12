@@ -5,13 +5,11 @@ export const PagesContext = createContext()
 export const PagesProvider = props => {
 	const [pages, setPages] = useState(['home'])
 	const [activePage, setActivePage] = useState('home')
-	const [pageWidths, setPageWidths] = useState([
-		'small',
-		'medium',
-		'large',
-		'x-large'
-	])
 	const [activePageWidth, setActivePageWidth] = useState('small')
+
+	console.log(activePage)
+	console.log(activePageWidth)
+
 	return (
 		<PagesContext.Provider
 			value={[

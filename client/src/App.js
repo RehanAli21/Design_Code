@@ -7,20 +7,18 @@ import { PagesProvider } from './Components/Contexts/PagesContext'
 
 const App = () => {
 	return (
-		<div>
-			<PagesProvider>
+		<PagesProvider>
+			<div>
 				<Navbar />
-			</PagesProvider>
-			<div className='three-section'>
-				<Toolbar />
-				<div className='main-div' id='main-div'>
-					<PagesProvider>
+				<div className='three-section'>
+					<Toolbar />
+					<div className='main-div' id='main-div'>
 						<Pages />
-					</PagesProvider>
+					</div>
+					<Propertiesbar />
 				</div>
-				<Propertiesbar />
 			</div>
-		</div>
+		</PagesProvider>
 	)
 }
 

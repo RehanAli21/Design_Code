@@ -1,13 +1,24 @@
-import React from 'react'
-// import { PagesContext } from './Contexts/PagesContext'
+import React, { useContext } from 'react'
+import { PagesContext } from './Contexts/PagesContext'
 
 //This compoenent controls page.
 const Pages = () => {
-	// const value = useContext(PagesContext)
+	const [
+		pages,
+		activePage,
+		setActivePage,
+		activePageWidth,
+		setActivePageWidth
+	] = useContext(PagesContext)
+
+	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
+
+	console.log('Pages: ', activePageWidth)
+
 	return (
 		<div>
-			<p>Small</p>
-			<div className='small'></div>
+			<p>{toCapitalize(activePageWidth)}</p>
+			<div className={activePageWidth.toLowerCase()}></div>
 		</div>
 	)
 }
