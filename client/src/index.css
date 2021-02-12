@@ -38,7 +38,7 @@ nav h3:hover {
 
 .three-section {
 	display: grid;
-	grid-template-columns: 1.1fr 7fr 2fr;
+	grid-template-columns: 150px auto 280px;
 }
 
 .toolbar {
@@ -74,13 +74,11 @@ nav h3:hover {
 .main-div {
 	background-color: var(--third-white);
 	overflow: scroll;
-	display: grid;
-	grid-template-columns: 570px 750px 990px 1170px 1230px;
 }
 .main-div div {
 	background-color: white;
 	height: 300px;
-	margin: 20px 20px 0px 20px;
+	margin: 20px auto 0px auto;
 	background-color: var(--third-white);
 	text-align: center;
 }

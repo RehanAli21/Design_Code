@@ -1,13 +1,15 @@
 import React from 'react'
 // import { PagesContext } from './Contexts/PagesContext'
 
-const Navbar = () => {
+//This compoenent controls page.
+const Pages = () => {
 	// const value = useContext(PagesContext)
 	return (
-		<nav>
-			<h3>Home</h3>
-		</nav>
+		<div>
+			<p>Small</p>
+			<div className='small'></div>
+		</div>
 	)
 }
 
-export default Navbar
+export default Pages
