@@ -7,17 +7,16 @@ export const PagesProvider = props => {
 	const [activePage, setActivePage] = useState('home')
 	const [activePageWidth, setActivePageWidth] = useState('small')
 
-	console.log(activePage)
-	console.log(activePageWidth)
-
 	return (
 		<PagesContext.Provider
 			value={[
-				pages,
-				activePage,
-				setActivePage,
-				activePageWidth,
-				setActivePageWidth
+				{
+					pages,
+					activePage,
+					setActivePage,
+					activePageWidth,
+					setActivePageWidth
+				}
 			]}>
 			{props.children}
 		</PagesContext.Provider>

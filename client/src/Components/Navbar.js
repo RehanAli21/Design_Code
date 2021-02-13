@@ -2,13 +2,9 @@ import React, { useContext } from 'react'
 import { PagesContext } from './Contexts/PagesContext'
 
 const Navbar = () => {
-	const [
-		pages,
-		activePage,
-		setActivePage,
-		activePageWidth,
-		setActivePageWidth
-	] = useContext(PagesContext)
+	const [{ pages, setActivePage, setActivePageWidth }] = useContext(
+		PagesContext
+	)
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 

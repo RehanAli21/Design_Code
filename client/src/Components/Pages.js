@@ -3,22 +3,16 @@ import { PagesContext } from './Contexts/PagesContext'
 
 //This compoenent controls page.
 const Pages = () => {
-	const [
-		pages,
-		activePage,
-		setActivePage,
-		activePageWidth,
-		setActivePageWidth
-	] = useContext(PagesContext)
+	const [{ activePageWidth }] = useContext(PagesContext)
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
-	console.log('Pages: ', activePageWidth)
-
 	return (
-		<div>
+		<div
+			className='full-width'
+			style={{ width: window.screen.width / 1.4 }}>
 			<p>{toCapitalize(activePageWidth)}</p>
-			<div className={activePageWidth.toLowerCase()}></div>
+			<div className={activePageWidth.toLowerCase() + ' pages-div'}></div>
 		</div>
 	)
 }

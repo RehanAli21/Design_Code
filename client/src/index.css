@@ -13,9 +13,6 @@
 	box-sizing: border-box;
 	font-family: 'Segoe UI', sans-serif;
 }
-html {
-	scroll-behavior: smooth;
-}
 
 nav {
 	width: auto;
@@ -23,7 +20,7 @@ nav {
 	background-color: var(--main-white);
 	color: var(--text-active-color);
 	display: grid;
-	grid-template-columns: 100px auto auto;
+	grid-template-columns: 100px auto auto auto;
 	text-align: center;
 	border-bottom: 1px solid silver;
 }
@@ -48,24 +45,41 @@ nav label {
 nav select {
 	background-color: var(--main-white);
 	font-size: 0.8em;
+	font-weight: bold;
 	padding: 5px;
 	color: var(--text-active-color);
 	border-radius: 5px;
 	border: none;
 	cursor: pointer;
 }
+nav select:hover {
+	color: var(--main-blue);
+}
 nav option {
 	color: var(--main-blue);
+}
+nav .nav-zoom p {
+	display: inline-block;
+	cursor: pointer;
+	font-weight: bold;
+	font-size: 1rem;
+	margin-right: 20px;
+}
+nav .nav-zoom p:hover {
+	color: var(--main-blue);
+}
+nav .nav-zoom p:active {
+	transform: scale(0.95);
 }
 
 .three-section {
 	display: grid;
-	grid-template-columns: 150px auto 280px;
+	grid-template-columns: 145px auto 280px;
+	height: 92.5vh;
 }
-
 .toolbar {
 	width: 100%;
-	height: 92vh;
+	height: auto;
 	overflow: hidden;
 	border-right: 1px solid silver;
 	display: grid;
@@ -95,39 +109,43 @@ nav option {
 
 .main-div {
 	background-color: var(--third-white);
-	overflow: scroll;
-}
-.main-div div {
-	background-color: white;
-	height: 300px;
-	margin: 20px auto 0px auto;
-	background-color: var(--third-white);
+	overflow: hidden;
 	text-align: center;
+	width: 100%;
+	height: 100%;
+}
+.main-div .full-width {
+	height: 92.5vh;
+}
+.main-div .full-width p {
+	padding-top: 10px;
+}
+.main-div .pages-div {
+	background-color: white;
+	min-height: 300px;
+	margin: 10px auto 0px auto;
+	background-color: var(--third-white);
+	transform: scale(0.8);
 }
 .main-div .small {
 	width: 540px;
 	background-color: white;
-	box-shadow: 2px 2px 5px grey;
+	box-shadow: 2px 2px 15px grey;
 }
 .main-div .medium {
 	width: 720px;
 	background-color: white;
-	box-shadow: 2px 2px 5px grey;
+	box-shadow: 2px 2px 15px grey;
 }
 .main-div .large {
 	width: 960px;
 	background-color: white;
-	box-shadow: 2px 2px 5px grey;
+	box-shadow: 2px 2px 15px grey;
 }
 .main-div .x-large {
 	width: 1140px;
 	background-color: white;
-	box-shadow: 2px 2px 5px grey;
-}
-.main-div .universal {
-	width: 1200px;
-	background-color: white;
-	box-shadow: 2px 2px 5px grey;
+	box-shadow: 2px 2px 15px grey;
 }
 
 .propertybar {

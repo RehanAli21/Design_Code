@@ -12,7 +12,9 @@ const Toolbar = () => {
 				<p>Buttons</p>
 				<p>Images</p>
 			</div>
-			<p>Layers</p>
+			<div>
+				<p>Layers</p>
+			</div>
 		</div>
 	)
 }
