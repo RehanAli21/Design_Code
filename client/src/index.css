@@ -71,6 +71,30 @@ nav .nav-zoom p:hover {
 nav .nav-zoom p:active {
 	transform: scale(0.95);
 }
+nav .addpage-div input {
+	background-color: var(--second-white);
+	border: none;
+	color: var(--text-color);
+	border-bottom: 1px solid var(--text-active-color);
+	padding: 5px;
+	outline: none;
+}
+nav .addpage-div button {
+	background-color: var(--second-white);
+	border: none;
+	color: var(--text-color);
+	border-bottom: 1px solid var(--text-active-color);
+	padding: 5px;
+	outline: none;
+	font-weight: bold;
+}
+nav .addpage-div button:hover {
+	color: var(--main-blue);
+	cursor: pointer;
+}
+nav .addpage-div button:focus {
+	color: var(--main-blue);
+}
 
 .three-section {
 	display: grid;
@@ -123,7 +147,7 @@ nav .nav-zoom p:active {
 .main-div .pages-div {
 	background-color: white;
 	min-height: 300px;
-	margin: 10px auto 0px auto;
+	margin: 0px auto;
 	background-color: var(--third-white);
 	transform: scale(0.8);
 }
@@ -150,6 +174,7 @@ nav .nav-zoom p:active {
 
 .propertybar {
 	text-align: center;
+	border-left: 1px solid var(--text-color);
 }
 .propertybar p {
 	margin: 20px auto;

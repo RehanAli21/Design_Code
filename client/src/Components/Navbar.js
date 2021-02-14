@@ -1,10 +1,21 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { PagesContext } from './Contexts/PagesContext'
 
 const Navbar = () => {
-	const { pages, setActivePage, setActivePageWidth } = useContext(
+	const [pageName, setPageName] = useState('')
+	const { pages, setPages, setActivePage, setActivePageWidth } = useContext(
 		PagesContext
 	)
+
+	const addPage = () => {
+		if (pageName !== '') {
+			const temp = []
+			pages.forEach(page => temp.push(page))
+			temp.push(pageName)
+			setPages(temp)
+			document.getElementById('addpage-input').value = ''
+		}
+	}
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
@@ -29,6 +40,15 @@ const Navbar = () => {
 						<option key={page}>{toCapitalize(page)}</option>
 					))}
 				</select>
+			</div>
+			<div className='addpage-div'>
+				<input
+					id='addpage-input'
+					onChange={e => setPageName(e.target.value)}
+					type='text'
+					placeholder='Add Page...'
+				/>
+				<button onClick={addPage}>ADD</button>
 			</div>
 		</nav>
 	)

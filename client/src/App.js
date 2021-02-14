@@ -10,10 +10,10 @@ const App = () => {
 	const [move, setMove] = useState(true)
 
 	document.addEventListener('keydown', e =>
-		e.key.toLowerCase() === 'm' ? setMove(false) : null
+		e.key.toLowerCase() === 'z' ? setMove(false) : null
 	)
 	document.addEventListener('keyup', e =>
-		e.key.toLowerCase() === 'm' ? setMove(true) : null
+		e.key.toLowerCase() === 'z' ? setMove(true) : null
 	)
 
 	return (
@@ -29,8 +29,8 @@ const App = () => {
 						<TransformWrapper
 							options={{
 								disabled: move,
-								minScale: 0.5,
-								maxScale: 2,
+								minScale: 0.25,
+								maxScale: 4,
 								limitToBounds: false
 							}}
 							doubleClick={{ mode: 'reset' }}>
