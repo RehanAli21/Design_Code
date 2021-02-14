@@ -9,15 +9,13 @@ export const PagesProvider = props => {
 
 	return (
 		<PagesContext.Provider
-			value={[
-				{
-					pages,
-					activePage,
-					setActivePage,
-					activePageWidth,
-					setActivePageWidth
-				}
-			]}>
+			value={{
+				pages,
+				activePage,
+				setActivePage,
+				activePageWidth,
+				setActivePageWidth
+			}}>
 			{props.children}
 		</PagesContext.Provider>
 	)

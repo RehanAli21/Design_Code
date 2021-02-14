@@ -3,7 +3,7 @@ import { PagesContext } from './Contexts/PagesContext'
 
 //This compoenent controls page.
 const Pages = () => {
-	const [{ activePageWidth }] = useContext(PagesContext)
+	const { activePageWidth } = useContext(PagesContext)
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 

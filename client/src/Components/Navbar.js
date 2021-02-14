@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { PagesContext } from './Contexts/PagesContext'
 
 const Navbar = () => {
-	const [{ pages, setActivePage, setActivePageWidth }] = useContext(
+	const { pages, setActivePage, setActivePageWidth } = useContext(
 		PagesContext
 	)
 
