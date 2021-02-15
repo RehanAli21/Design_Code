@@ -1,18 +1,33 @@
 import React, { useContext, useState } from 'react'
 import { PagesContext } from './Contexts/PagesContext'
+import { PagesDataContext } from './Contexts/PagesDataContext'
 
 const Navbar = () => {
 	const [pageName, setPageName] = useState('')
 	const { pages, setPages, setActivePage, setActivePageWidth } = useContext(
 		PagesContext
 	)
+	const { data, setData } = useContext(PagesDataContext)
 
 	const addPage = () => {
 		if (pageName !== '') {
-			const temp = []
+			//checking if already page with this page exits
+			if (data[pageName]) return alert('This Page Already exits.')
+
+			//for adding page in data of PagesDataContext
+			let temp = {}
+			for (let e in data) temp[e] = data[e]
+			temp[pageName] = []
+			setData(temp)
+			/////////////////////////////////
+
+			//for adding page in pages of PagesCintext
+			temp = []
 			pages.forEach(page => temp.push(page))
 			temp.push(pageName)
 			setPages(temp)
+			/////////////////////////////////
+			//for reseting
 			setPageName('')
 			document.getElementById('addpage-input').value = ''
 		}
