@@ -28,8 +28,9 @@ nav > h1 {
 	height: 100%;
 	width: 100%;
 	cursor: pointer;
-	font-size: 1.8em;
-	border-right: 1px solid grey;
+	display: flex;
+	place-items: center;
+	justify-content: center;
 }
 nav > h1:hover {
 	color: var(--main-blue);

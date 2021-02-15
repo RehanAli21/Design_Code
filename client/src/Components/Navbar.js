@@ -13,6 +13,7 @@ const Navbar = () => {
 			pages.forEach(page => temp.push(page))
 			temp.push(pageName)
 			setPages(temp)
+			setPageName('')
 			document.getElementById('addpage-input').value = ''
 		}
 	}

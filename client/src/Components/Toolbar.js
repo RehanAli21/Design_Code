@@ -1,16 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { activePage } from './Contexts/PagesContext'
+import { PagesDataContext } from './Contexts/PagesDataContext'
 
 const Toolbar = () => {
+	const { data, setData } = useContext(PagesDataContext)
+
 	return (
 		<div className='toolbar'>
 			<div className='tools'>
-				<p>Navbar</p>
-				<p>Section</p>
-				<p>Text</p>
-				<p>Form</p>
-				<p>Inputs</p>
-				<p>Buttons</p>
-				<p>Images</p>
+				<p>Div</p>
 			</div>
 			<div>
 				<p>Layers</p>
