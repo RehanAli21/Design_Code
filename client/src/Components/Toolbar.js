@@ -2,10 +2,12 @@ import React, { useContext } from 'react'
 import { PagesContext } from './Contexts/PagesContext'
 import { PagesDataContext } from './Contexts/PagesDataContext'
 import { divStyle } from './StylesTypes/DivStyles'
+import { LayersContext } from './Contexts/LayersContext'
 
 const Toolbar = () => {
 	const { data, setData, setElements } = useContext(PagesDataContext)
 	const { activePage } = useContext(PagesContext)
+	const { show, setShow } = useContext(LayersContext)
 
 	const addDiv = () => {
 		const temp = {}
@@ -60,7 +62,7 @@ const Toolbar = () => {
 				<p onClick={addDiv}>Div</p>
 			</div>
 			<div>
-				<p>Layers</p>
+				<p onClick={() => setShow(!show)}>Layers</p>
 			</div>
 		</div>
 	)

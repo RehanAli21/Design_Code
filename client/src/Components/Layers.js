@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { LayersContext } from './Contexts/LayersContext'
 
-const Layers = ({ show }) => {
+const Layers = () => {
+	const { show } = useContext(LayersContext)
+
 	return (
 		<div
 			style={{ display: show ? 'block' : 'none' }}
