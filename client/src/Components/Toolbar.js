@@ -8,22 +8,58 @@ const Toolbar = () => {
 	const { activePage } = useContext(PagesContext)
 
 	const addDiv = () => {
-		console.log(data)
-		console.log(divStyle)
-		const row = data[activePage].length
-		const div = {
-			tag: 'div',
-			style: divStyle,
-			className: `main-div-${row}`,
-			id: `main-div-${row}`,
-			children: []
-		}
 		const temp = {}
 		for (let e in data) temp[e] = data[e]
 
-		temp[activePage].push(div)
+		const div_num = temp[activePage].length
+		temp[activePage].push({
+			tag: 'div',
+			style: divStyle,
+			className: `main-div-${div_num}`,
+			id: `main-div-${div_num}`,
+			children: [
+				{
+					tag: 'input',
+					style: divStyle,
+					className: `main-div-${div_num}-input`,
+					id: `main-div-${div_num}-input`,
+					children: []
+				}
+			]
+		})
 		setData(temp)
-		console.log(data)
+
+		setElements(setElementFunc(temp[activePage]))
+	}
+
+	const setElementFunc = i => {
+		if (i.length <= 0) return
+
+		const b = []
+		i.forEach(element => {
+			if (element['tag'] === 'div') {
+				b.push(
+					<div
+						key={element['id']}
+						className={element['className']}
+						style={element['style']}
+						id={element['id']}>
+						{setElementFunc(element['children'])}
+					</div>
+				)
+			} else if (element['tag'] === 'input') {
+				b.push(
+					<input
+						key={element['id']}
+						className={element['className']}
+						style={element['style']}
+					/>
+				)
+			}
+			console.log(element)
+		})
+
+		return b
 	}
 
 	return (
