@@ -3,6 +3,7 @@ import Navbar from './Components/Navbar'
 import Toolbar from './Components/Toolbar'
 import Propertiesbar from './Components/Propertiesbar'
 import Pages from './Components/Pages'
+import Layers from './Components/Layers'
 import { PagesProvider } from './Components/Contexts/PagesContext'
 import { PagesDataProvider } from './Components/Contexts/PagesDataContext'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
@@ -24,6 +25,7 @@ const App = () => {
 					<Navbar />
 					<div className='three-section'>
 						<Toolbar />
+						<Layers />
 						<div
 							style={{ cursor: move ? 'default' : 'grab' }}
 							className='main-div'

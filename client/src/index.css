@@ -99,7 +99,7 @@ nav .addpage-div button:focus {
 
 .three-section {
 	display: grid;
-	grid-template-columns: 145px auto 280px;
+	grid-template-columns: 130px auto 280px;
 	height: 92.5vh;
 }
 .toolbar {
@@ -130,6 +130,16 @@ nav .addpage-div button:focus {
 
 .toolbar p:active {
 	font-weight: normal;
+}
+
+.layers {
+	position: absolute;
+	left: 130px;
+	width: 150px;
+	height: 92vh;
+	overflow: scroll;
+	background-color: var(--main-white);
+	z-index: 1;
 }
 
 .main-div {

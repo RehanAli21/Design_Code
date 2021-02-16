@@ -17,15 +17,7 @@ const Toolbar = () => {
 			style: divStyle,
 			className: `main-div-${div_num}`,
 			id: `main-div-${div_num}`,
-			children: [
-				{
-					tag: 'input',
-					style: divStyle,
-					className: `main-div-${div_num}-input`,
-					id: `main-div-${div_num}-input`,
-					children: []
-				}
-			]
+			children: []
 		})
 		setData(temp)
 
