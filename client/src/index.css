@@ -99,47 +99,64 @@ nav .addpage-div button:focus {
 
 .three-section {
 	display: grid;
-	grid-template-columns: 130px auto 280px;
+	grid-template-columns: 140px auto 280px;
 	height: 92.5vh;
 }
+
 .toolbar {
-	width: 100%;
-	height: auto;
-	overflow: hidden;
-	border-right: 1px solid silver;
-	display: grid;
-	grid-template-rows: 80% 20%;
+	position: absolute;
+	z-index: 1;
+	width: 140px;
+	height: 92.5vh;
+	left: 140px;
+	background-color: var(--main-white);
 }
 .tools {
 	overflow: scroll;
+	display: flex;
+	flex-direction: row;
 }
 .toolbar p {
-	display: block;
 	text-align: center;
 	border: none;
 	color: var(--text-active-color);
-	background-color: white;
+	background-color: var(--main-white);
 	font-weight: bold;
 	width: 100%;
 	padding: 15px 0px;
 	cursor: pointer;
 }
 .toolbar p:hover {
-	color: var(--main-blue);
+	color: white;
+	background-color: var(--main-blue);
 }
 
 .toolbar p:active {
-	font-weight: normal;
+	transform: scale(0.95);
 }
 
 .layers {
-	position: absolute;
-	left: 130px;
-	width: 150px;
-	height: 92vh;
+	width: 100%;
 	overflow: scroll;
-	background-color: var(--main-white);
-	z-index: 1;
+	background-color: white;
+}
+.layers ul {
+	list-style: none;
+}
+.layers ul li {
+	padding: 5px;
+	width: auto;
+	color: var(--text-active-color);
+	font-weight: bold;
+}
+.layers p:hover {
+	cursor: pointer;
+	padding: 5px;
+	background-color: var(--main-blue);
+	color: white;
+}
+.layers p:active {
+	transform: scale(0.95);
 }
 
 .main-div {
@@ -151,34 +168,21 @@ nav .addpage-div button:focus {
 }
 .main-div .full-width {
 	height: 92.5vh;
+	display: grid;
+	grid-auto-flow: column;
 }
 .main-div .full-width p {
 	padding-top: 10px;
+	padding-bottom: 0px;
 }
 .main-div .pages-div {
 	background-color: white;
 	min-height: 300px;
-	margin: 0px auto;
-	background-color: var(--third-white);
+	padding: 0px;
+	margin-top: none;
+	margin-left: 50px;
 	transform: scale(0.8);
-}
-.main-div .small {
-	width: 540px;
-	background-color: white;
-	box-shadow: 2px 2px 15px grey;
-}
-.main-div .medium {
 	width: 720px;
-	background-color: white;
-	box-shadow: 2px 2px 15px grey;
-}
-.main-div .large {
-	width: 960px;
-	background-color: white;
-	box-shadow: 2px 2px 15px grey;
-}
-.main-div .x-large {
-	width: 1140px;
 	background-color: white;
 	box-shadow: 2px 2px 15px grey;
 }

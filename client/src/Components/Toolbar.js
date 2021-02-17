@@ -6,9 +6,6 @@ const Toolbar = () => {
 			<div className='tools'>
 				<p>Div</p>
 			</div>
-			<div>
-				<p>Layers</p>
-			</div>
 		</div>
 	)
 }
