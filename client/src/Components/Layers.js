@@ -1,14 +1,7 @@
-import React, { useContext } from 'react'
-import { LayersContext } from './Contexts/LayersContext'
+import React from 'react'
 
 const Layers = () => {
-	const { show } = useContext(LayersContext)
-
-	return (
-		<div
-			style={{ display: show ? 'block' : 'none' }}
-			className='layers'></div>
-	)
+	return <div className='layers'></div>
 }
 
 export default Layers
