@@ -154,6 +154,9 @@ nav .addpage-div button:focus {
 	color: var(--text-active-color);
 	font-weight: bold;
 }
+.layers ul li p {
+	text-align: left;
+}
 .layers ul li p:hover {
 	cursor: pointer;
 	padding: 5px;

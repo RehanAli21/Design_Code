@@ -16,11 +16,9 @@ const Layers = () => {
 					return (
 						<li>
 							<p>{e[0]}</p>
+							{showLayers(e[2])}
 						</li>
 					)
-					// if (e[2].length > 0) {
-					// 	showLayers(e[2])
-					// }
 				})}
 			</ul>
 		)
