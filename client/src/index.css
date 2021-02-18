@@ -140,6 +140,11 @@ nav .addpage-div button:focus {
 	overflow: scroll;
 	background-color: white;
 }
+.layers p {
+	text-align: center;
+	color: var(--text-active-color);
+	font-weight: 500;
+}
 .layers ul {
 	list-style: none;
 }
@@ -149,13 +154,13 @@ nav .addpage-div button:focus {
 	color: var(--text-active-color);
 	font-weight: bold;
 }
-.layers p:hover {
+.layers ul li p:hover {
 	cursor: pointer;
 	padding: 5px;
 	background-color: var(--main-blue);
 	color: white;
 }
-.layers p:active {
+.layers ul li p:active {
 	transform: scale(0.95);
 }
 

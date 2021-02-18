@@ -1,36 +1,47 @@
 import React, { useState, useContext } from 'react'
+import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Navbar = () => {
-	const { pages, setPages } = useContext(PageContext)
+	const { pages, setPages, activePage, setActivePage } = useContext(
+		PageContext
+	)
 	const [pageName, setPageName] = useState('')
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
 	const addPage = () => {
-		//if PageName is blank or present in pages, then stop.
+		console.log(pages)
 		if (pageName === '') return
-		for (let i = 0; i < pages.length; i++)
-			if (pageName.toLowerCase() === pages[i].toLowerCase())
-				return alert('This page already exits!')
+		if (pages.hasOwnProperty(pageName)) return
 
-		const temp = []
-		pages.forEach(e => temp.push(e))
-		temp.push(pageName)
+		const temp = Object.assign({}, pages)
+		temp[pageName] = []
 
 		setPages(temp)
+
 		document.getElementById('addpage-input').value = ''
+	}
+
+	const changeActivePage = e => {
+		if (e.target.value !== activePage)
+			setActivePage(e.target.value.toLowerCase())
+	}
+
+	const showPages = () => {
+		const temp = []
+
+		for (let i in pages) {
+			temp.push(<option key={uuid()}>{toCapitalize(i)}</option>)
+		}
+		return temp
 	}
 
 	return (
 		<nav>
 			<h1>{'<'}</h1>
 			<div>
-				<select>
-					{pages.map(page => (
-						<option key={page}>{toCapitalize(page)}</option>
-					))}
-				</select>
+				<select onChange={changeActivePage}>{showPages()}</select>
 			</div>
 			<div className='addpage-div'>
 				<input

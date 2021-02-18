@@ -1,28 +1,37 @@
 import React, { useContext } from 'react'
-import { LayerContext } from './Contexts/LayerContext'
+import uuid from 'react-uuid'
+// import { LayerContext } from './Contexts/LayerContext'
+import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
-	const { layers } = useContext(LayerContext)
+	// const { layers } = useContext(LayerContext)
+	const { pages, activePage } = useContext(PageContext)
 
-	const showLayers = layers => {
+	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
+
+	const showLayers = data => {
 		return (
 			<ul>
-				{layers.map(layer => {
-					if (Array.isArray(layer)) {
-						return showLayers(layer)
-					} else {
-						return (
-							<li>
-								<p>{layer.toUpperCase()}</p>
-							</li>
-						)
-					}
+				{data.map(e => {
+					return (
+						<li>
+							<p>{e[0]}</p>
+						</li>
+					)
+					// if (e[2].length > 0) {
+					// 	showLayers(e[2])
+					// }
 				})}
 			</ul>
 		)
 	}
 
-	return <div className='layers'>{showLayers(layers)}</div>
+	return (
+		<div className='layers'>
+			<p>{toCapitalize(activePage)}</p>
+			{showLayers(pages[activePage])}
+		</div>
+	)
 }
 
 export default Layers
