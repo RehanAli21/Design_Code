@@ -106,7 +106,7 @@ nav .addpage-div button:focus {
 
 .three-section {
 	display: grid;
-	grid-template-columns: 140px auto 280px;
+	grid-template-columns: 250px auto 280px;
 	height: 92.5vh;
 }
 
@@ -115,7 +115,7 @@ nav .addpage-div button:focus {
 	z-index: 1;
 	width: 140px;
 	height: 92.5vh;
-	left: 140px;
+	left: 250px;
 	background-color: var(--main-white);
 }
 .tools {
@@ -146,6 +146,7 @@ nav .addpage-div button:focus {
 	width: 100%;
 	overflow: scroll;
 	background-color: white;
+	margin-left: 15px;
 }
 .layers > p {
 	text-align: center;
@@ -161,12 +162,13 @@ nav .addpage-div button:focus {
 	transform: scale(0.9);
 }
 .layers ul {
+	width: 100%;
 	list-style: none;
 }
 .layers ul li {
 	padding: 2px 0px;
 	margin-left: 10px;
-	width: auto;
+	width: 100px;
 	color: var(--text-active-color);
 	font-weight: bold;
 	display: grid;
@@ -176,6 +178,7 @@ nav .addpage-div button:focus {
 	text-align: left;
 	padding: 2px 0px;
 	padding-left: 5px;
+	width: 100%;
 	border-left: 1px solid black;
 }
 .layers ul li p:hover {

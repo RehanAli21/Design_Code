@@ -32,9 +32,12 @@ const Layers = () => {
 		const e = []
 
 		arr.forEach(a => {
-			if (a[1].id === id) return
-			if (a[2].length > 0) deleteIt(a)
-			e.push(a)
+			if (a[1].id !== id) {
+				if (a[2].length > 0) {
+					a[2] = deleteIt(a[2], id)
+				}
+				e.push(a)
+			}
 		})
 
 		return e
