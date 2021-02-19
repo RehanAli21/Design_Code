@@ -39,25 +39,32 @@ nav > div {
 	height: 100%;
 	margin-top: 1vh;
 	font-size: 20px;
+	position: relative;
 }
-nav label {
-	margin-right: 10px;
+nav p {
+	font-size: 1.1rem;
+	font-weight: bolder;
+	margin-top: 0.9vh;
 }
-nav select {
-	background-color: var(--main-white);
-	font-size: 0.8em;
-	font-weight: bold;
+nav ul {
+	position: absolute;
+	list-style: none;
+	z-index: 2;
+	left: 35%;
+	top: 85%;
+	display: none;
+}
+nav ul li {
+	font-size: 1.1rem;
+	font-weight: bolder;
+	background-color: white;
 	padding: 5px;
-	color: var(--text-active-color);
-	border-radius: 5px;
-	border: none;
+	width: 120px;
 	cursor: pointer;
 }
-nav select:hover {
-	color: var(--main-blue);
-}
-nav option {
-	color: var(--main-blue);
+nav ul li:hover {
+	background-color: var(--main-blue);
+	color: white;
 }
 nav .nav-zoom p {
 	display: inline-block;
@@ -140,10 +147,18 @@ nav .addpage-div button:focus {
 	overflow: scroll;
 	background-color: white;
 }
-.layers p {
+.layers > p {
 	text-align: center;
-	color: var(--text-active-color);
 	font-weight: 500;
+	padding: 2px 0px;
+	cursor: pointer;
+}
+.layers > p:hover {
+	background-color: var(--main-blue);
+	color: white;
+}
+.layers > p:active {
+	transform: scale(0.9);
 }
 .layers ul {
 	list-style: none;
@@ -171,8 +186,9 @@ nav .addpage-div button:focus {
 .layers ul li p:active {
 	transform: scale(0.95);
 }
-.layers ul li .bg-blue {
-	padding: 2px 4px;
+.bg-blue {
+	padding: 2px 0px;
+	padding-left: 4px;
 	background-color: var(--main-blue);
 	color: white;
 }
