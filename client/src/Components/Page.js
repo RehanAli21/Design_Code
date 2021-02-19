@@ -13,7 +13,7 @@ const Page = () => {
 			style={{ width: window.screen.width / 1.4 }}>
 			<div>
 				<p>{toCapitalize(activePage)}</p>
-				<div className='medium pages-div' id={uuid()}></div>
+				<div className='pages-div' id={uuid()}></div>
 			</div>
 		</div>
 	)

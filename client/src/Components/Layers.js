@@ -1,10 +1,8 @@
 import React, { useContext } from 'react'
 import uuid from 'react-uuid'
-// import { LayerContext } from './Contexts/LayerContext'
 import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
-	// const { layers } = useContext(LayerContext)
 	const { pages, activePage, activeElement, setActiveElement } = useContext(
 		PageContext
 	)
@@ -29,6 +27,7 @@ const Layers = () => {
 								onClick={changeActiveElement}>
 								{e[0]}
 							</p>
+							<button className='layer-delete'>D</button>
 							{showLayers(e[2])}
 						</li>
 					)

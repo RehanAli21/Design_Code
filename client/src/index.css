@@ -149,14 +149,18 @@ nav .addpage-div button:focus {
 	list-style: none;
 }
 .layers ul li {
-	padding: 2px 5px;
+	padding: 2px 0px;
+	margin-left: 10px;
 	width: auto;
 	color: var(--text-active-color);
 	font-weight: bold;
+	display: grid;
+	grid-template-columns: 85% 15%;
 }
 .layers ul li p {
 	text-align: left;
-	padding: 2px;
+	padding: 2px 0px;
+	padding-left: 5px;
 }
 .layers ul li p:hover {
 	cursor: pointer;
@@ -170,6 +174,21 @@ nav .addpage-div button:focus {
 	padding: 2px;
 	background-color: var(--main-blue);
 	color: white;
+}
+.layers ul li button {
+	background-color: transparent;
+	color: red;
+	font-weight: bolder;
+	border: none;
+	border-radius: 5px;
+	outline: none;
+	float: right;
+}
+.layers ul li button:hover {
+	transform: scale(1.1);
+}
+.layers ul li button:active {
+	transform: scale(0.9);
 }
 
 .main-div {
@@ -192,12 +211,13 @@ nav .addpage-div button:focus {
 	background-color: white;
 	min-height: 300px;
 	padding: 0px;
-	margin-top: none;
+	margin-top: none !important;
 	margin-left: 50px;
 	transform: scale(0.8);
 	width: 720px;
 	background-color: white;
 	box-shadow: 2px 2px 15px grey;
+	resize: both;
 }
 
 .propertybar {
