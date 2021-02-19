@@ -7,6 +7,10 @@ const Page = () => {
 	const { pages, activePage, width } = useContext(PageContext)
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
+	const uniqueString = () =>
+		Math.random().toString(36).substring(2, 15) +
+		Math.random().toString(36).substring(2, 15)
+
 	const showElements = arr => {
 		const temp = []
 		if (!arr) return null
@@ -16,7 +20,17 @@ const Page = () => {
 				temp.push(
 					React.createElement(
 						e[0],
-						{ key: uuid() },
+						{
+							key: uuid(),
+							style:
+								width < 540
+									? e[1].styles.small
+									: width < 720
+									? e[1].styles.medium
+									: width < 960
+									? e[1].styles.large
+									: e[1].styles.xlarge
+						},
 						showElements(e[2])
 					)
 				)

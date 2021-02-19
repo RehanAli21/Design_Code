@@ -1,25 +1,15 @@
 import React, { useContext } from 'react'
-import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
+import Div from './Tools/Div'
 
 const Toolbar = () => {
 	const { pages, setPages, activePage, activeElement } = useContext(
 		PageContext
 	)
 
-	const addDiv = () => {
-		const div = ['div', { id: uuid() }, []]
-
-		const temp = Object.assign({}, pages)
-
-		if (activeElement === activePage) {
-			temp[activePage].push(div)
-		} else {
-			findAndInsert(temp[activePage], activeElement, div)
-		}
-
-		setPages(temp)
-	}
+	const uniqueString = () =>
+		Math.random().toString(36).substring(2, 15) +
+		Math.random().toString(36).substring(2, 15)
 
 	const findAndInsert = (children, id, element) => {
 		children.forEach(child => {
@@ -34,7 +24,14 @@ const Toolbar = () => {
 	return (
 		<div className='toolbar'>
 			<div className='tools'>
-				<p onClick={addDiv}>Div</p>
+				<Div
+					findAndInsert={findAndInsert}
+					activeElement={activeElement}
+					activePage={activePage}
+					pages={pages}
+					setPages={setPages}
+					uniqueString={uniqueString}
+				/>
 			</div>
 		</div>
 	)
