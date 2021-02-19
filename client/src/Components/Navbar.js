@@ -3,7 +3,7 @@ import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Navbar = () => {
-	const { pages, setPages, activePage, setActivePage } = useContext(
+	const { pages, setPages, activePage, setActivePage, setWidth } = useContext(
 		PageContext
 	)
 	const [pageName, setPageName] = useState('')

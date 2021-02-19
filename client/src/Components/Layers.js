@@ -28,12 +28,10 @@ const Layers = () => {
 
 	const deleteIt = (arr, id) => {
 		const e = []
-		console.log(arr)
+
 		arr.forEach(a => {
 			if (a[1].id === id) return
-
 			if (a[2].length > 0) deleteIt(a)
-
 			e.push(a)
 		})
 

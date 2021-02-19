@@ -172,7 +172,7 @@ nav .addpage-div button:focus {
 	transform: scale(0.95);
 }
 .layers ul li .bg-blue {
-	padding: 2px;
+	padding: 2px 4px;
 	background-color: var(--main-blue);
 	color: white;
 }
@@ -203,17 +203,16 @@ nav .addpage-div button:focus {
 	height: 92.5vh;
 	display: grid;
 	grid-auto-flow: column;
+	text-align: center;
 }
-.main-div .full-width p {
-	padding-top: 10px;
-	padding-bottom: 0px;
-}
+
 .main-div .pages-div {
 	background-color: white;
 	min-height: 300px;
 	padding: 0px;
 	margin-top: none !important;
-	margin-left: 50px;
+	margin-left: auto;
+	margin-right: auto;
 	transform: scale(0.8);
 	width: 720px;
 	background-color: white;

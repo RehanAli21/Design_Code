@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import Resizable from 'react-resizable-box'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 
@@ -12,8 +13,10 @@ const Page = () => {
 			className='full-width'
 			style={{ width: window.screen.width / 1.4 }}>
 			<div>
-				<p>{toCapitalize(activePage)}</p>
-				<div className='pages-div' id={uuid()}></div>
+				<Resizable
+					className='pages-div'
+					width={720}
+					id={uuid()}></Resizable>
 			</div>
 		</div>
 	)
