@@ -149,22 +149,27 @@ nav .addpage-div button:focus {
 	list-style: none;
 }
 .layers ul li {
-	padding: 5px;
+	padding: 2px 5px;
 	width: auto;
 	color: var(--text-active-color);
 	font-weight: bold;
 }
 .layers ul li p {
 	text-align: left;
+	padding: 2px;
 }
 .layers ul li p:hover {
 	cursor: pointer;
-	padding: 5px;
 	background-color: var(--main-blue);
 	color: white;
 }
 .layers ul li p:active {
 	transform: scale(0.95);
+}
+.layers ul li .bg-blue {
+	padding: 2px;
+	background-color: var(--main-blue);
+	color: white;
 }
 
 .main-div {
