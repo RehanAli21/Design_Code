@@ -24,6 +24,8 @@ const Layers = () => {
 
 		temp[activePage] = deleteIt(temp[activePage], id)
 		setPages(temp)
+
+		if (id === activeElement) setActiveElement('')
 	}
 
 	const deleteIt = (arr, id) => {
@@ -68,7 +70,11 @@ const Layers = () => {
 
 	return (
 		<div className='layers'>
-			<p>{toCapitalize(activePage)}</p>
+			<p
+				className={activePage === activeElement ? 'bg-blue ' : ''}
+				onClick={() => setActiveElement(activePage)}>
+				{toCapitalize(activePage)}
+			</p>
 			{showLayers(pages[activePage])}
 		</div>
 	)
