@@ -6,7 +6,6 @@ export const PageProvider = props => {
 	const [pages, setPages] = useState({ home: [] })
 	const [activePage, setActivePage] = useState('home')
 	const [activeElement, setActiveElement] = useState('')
-	const [width, setWidth] = useState(0)
 
 	return (
 		<PageContext.Provider
@@ -16,9 +15,7 @@ export const PageProvider = props => {
 				activePage,
 				setActivePage,
 				activeElement,
-				setActiveElement,
-				width,
-				setWidth
+				setActiveElement
 			}}>
 			{props.children}
 		</PageContext.Provider>

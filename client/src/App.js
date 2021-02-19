@@ -7,7 +7,6 @@ import Layers from './Components/Layers'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 
 import { PageProvider } from './Components/Contexts/PageContext'
-import { LayerProvider } from './Components/Contexts/LayerContext'
 
 const App = () => {
 	const [move, setMove] = useState(true)
@@ -22,31 +21,29 @@ const App = () => {
 	return (
 		<div>
 			<PageProvider>
-				<LayerProvider>
-					<Navbar />
-					<div className='three-section'>
-						<Toolbar />
-						<Layers />
-						<div
-							style={{ cursor: move ? 'default' : 'grab' }}
-							className='main-div'
-							id='main-div'>
-							<TransformWrapper
-								options={{
-									disabled: move,
-									minScale: 0.25,
-									maxScale: 4,
-									limitToBounds: false
-								}}
-								doubleClick={{ mode: 'reset' }}>
-								<TransformComponent>
-									<Page />
-								</TransformComponent>
-							</TransformWrapper>
-						</div>
-						<Propertiesbar />
+				<Navbar />
+				<div className='three-section'>
+					<Toolbar />
+					<Layers />
+					<div
+						style={{ cursor: move ? 'default' : 'grab' }}
+						className='main-div'
+						id='main-div'>
+						<TransformWrapper
+							options={{
+								disabled: move,
+								minScale: 0.25,
+								maxScale: 4,
+								limitToBounds: false
+							}}
+							doubleClick={{ mode: 'reset' }}>
+							<TransformComponent>
+								<Page />
+							</TransformComponent>
+						</TransformWrapper>
 					</div>
-				</LayerProvider>
+					<Propertiesbar />
+				</div>
 			</PageProvider>
 		</div>
 	)
