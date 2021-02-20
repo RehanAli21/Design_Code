@@ -29,7 +29,15 @@ const Div = ({
 		} else {
 			findAndInsert(temp[activePage], activeElement, [
 				'div',
-				{ id: uniqueString() },
+				{
+					id: uniqueString(),
+					styles: {
+						small: divStyle,
+						medium: divStyle,
+						large: divStyle,
+						xlarge: divStyle
+					}
+				},
 				[]
 			])
 		}
