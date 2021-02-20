@@ -3,9 +3,14 @@ import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Navbar = () => {
-	const { pages, setPages, activePage, setActivePage } = useContext(
-		PageContext
-	)
+	const {
+		pages,
+		setPages,
+		activePage,
+		setActivePage,
+		width,
+		setWidth
+	} = useContext(PageContext)
 	const [pageName, setPageName] = useState('')
 	const [show, setShow] = useState(false)
 
@@ -49,7 +54,10 @@ const Navbar = () => {
 			<h1>{'<'}</h1>
 			<div>
 				<p onClick={() => setShow(!show)}>
-					{toCapitalize(activePage)} <span>V</span>
+					{toCapitalize(activePage)}
+					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>
+						&#10148;
+					</span>
 				</p>
 				<ul style={{ display: show ? 'block' : 'none' }}>
 					{showPages()}
@@ -64,6 +72,19 @@ const Navbar = () => {
 					autoComplete='off'
 				/>
 				<button onClick={addPage}>ADD</button>
+			</div>
+			<div>
+				<p style={{ fontWeight: 'normal', fontSize: '0.95rem' }}>
+					Page Width: <span>{width}px</span>
+					<input
+						type='range'
+						min='300'
+						max='2000'
+						defaultValue='720'
+						style={{ outline: 'none', marginLeft: '10px' }}
+						onChange={e => setWidth(e.target.value)}
+					/>
+				</p>
 			</div>
 		</nav>
 	)

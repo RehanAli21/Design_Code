@@ -1,11 +1,10 @@
 import React, { useContext } from 'react'
-import Resizable from 'react-resizable-box'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage } = useContext(PageContext)
+	const { pages, activePage, width } = useContext(PageContext)
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
 	const showElements = arr => {
@@ -24,6 +23,7 @@ const Page = () => {
 
 			temp.push(React.createElement(e[0], { key: uuid() }, null))
 		})
+
 		return temp
 	}
 
@@ -32,9 +32,12 @@ const Page = () => {
 			className='full-width'
 			style={{ width: window.screen.width / 1.4 }}>
 			<div>
-				<Resizable className='pages-div' width={720} id={activePage}>
+				<div
+					className='pages-div'
+					style={{ width: `${width}px`, minWidth: '300px' }}
+					id={activePage}>
 					{showElements(pages[activePage])}
-				</Resizable>
+				</div>
 			</div>
 		</div>
 	)
