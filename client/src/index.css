@@ -45,14 +45,16 @@ nav p {
 	font-size: 1.1rem;
 	font-weight: bolder;
 	margin-top: 0.9vh;
+	cursor: pointer;
 }
 nav ul {
 	position: absolute;
 	list-style: none;
 	z-index: 2;
-	left: 35%;
-	top: 85%;
+	left: 60%;
+	top: 0;
 	display: none;
+	box-shadow: 2px 2px 20px grey;
 }
 nav ul li {
 	font-size: 1.1rem;
@@ -106,7 +108,7 @@ nav .addpage-div button:focus {
 
 .three-section {
 	display: grid;
-	grid-template-columns: 250px auto 280px;
+	grid-template-columns: 225px auto 280px;
 	height: 92.5vh;
 }
 
@@ -115,7 +117,7 @@ nav .addpage-div button:focus {
 	z-index: 1;
 	width: 140px;
 	height: 92.5vh;
-	left: 250px;
+	left: 225px;
 	background-color: var(--main-white);
 }
 .tools {
