@@ -34,7 +34,18 @@ const Page = () => {
 			<div>
 				<div
 					className='pages-div'
-					style={{ width: `${width}px`, minWidth: '300px' }}
+					style={{
+						width: `${width}px`,
+						minWidth: '300px',
+						marginLeft:
+							width < 720
+								? '15%'
+								: width < 1000
+								? '10%'
+								: width < 1500
+								? '5%'
+								: '0%'
+					}}
 					id={activePage}>
 					{showElements(pages[activePage])}
 				</div>
