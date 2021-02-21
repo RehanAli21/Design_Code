@@ -245,19 +245,27 @@ nav .addpage-div button:focus {
 	overflow-y: scroll;
 }
 .propertybar > p {
-	margin: 10px auto 0px auto;
+	margin: 20px auto 0px auto;
+	padding-bottom: 20px;
 	width: auto;
 	font-weight: bolder;
 	color: var(--text-active-color);
+	box-shadow: 0px 2px 2px grey;
 }
 .propertybar .second-heading {
 	padding: 5px 10px;
 	text-align: left;
 	border: none;
 	font-weight: normal;
-	background-color: var(--third-white);
-	margin-top: 30px;
-	margin-bottom: 20px;
+	font-size: 1rem;
+	color: var(--text-color);
+	margin-top: 20px;
+	margin-bottom: 15px;
+}
+.propertybar .borders {
+	border: none;
+	box-shadow: 0px 2px 2px grey;
+	padding-bottom: 20px;
 }
 .propertybar .div-property .one {
 	text-align: left;

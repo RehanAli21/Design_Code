@@ -69,8 +69,8 @@ const Propertiesbar = () => {
 		<div className='propertybar'>
 			<p>Properties</p>
 			<div className='div-property'>
-				<div className='w-h'>
-					<p className='second-heading'>Transform</p>
+				<div className='w-h borders'>
+					<p className='second-heading'>TRANSFORM</p>
 					<div className='one'>
 						<div className='w'>
 							<label>W : </label>
@@ -90,7 +90,7 @@ const Propertiesbar = () => {
 						</div>
 						<div className='x'>
 							<label>X : </label>
-							<input type='number' defaultValue='30' />
+							<input type='number' defaultValue='0' />
 							<select>
 								<option>EM</option>
 								<option>REM</option>
@@ -99,7 +99,7 @@ const Propertiesbar = () => {
 						</div>
 						<div className='y'>
 							<label>Y : </label>
-							<input type='number' defaultValue='30' />
+							<input type='number' defaultValue='0' />
 							<select>
 								<option>EM</option>
 								<option>REM</option>
@@ -108,9 +108,22 @@ const Propertiesbar = () => {
 						</div>
 					</div>
 				</div>
-				<div className='m-p'>
-					<p className='second-heading'>Margins and Paddings</p>
-					<div></div>
+				<div className='ap borders'>
+					<p className='second-heading'>APPEARANCE</p>
+					<div>
+						<label>Opacity : </label>{' '}
+						<input
+							type='range'
+							min='0'
+							max='100'
+							defaultValue='100'
+						/>
+					</div>
+					<div>
+						<input type='checkbox' />
+						<label>Fill : </label>
+						<input type='color' />
+					</div>
 				</div>
 			</div>
 		</div>
