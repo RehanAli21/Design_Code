@@ -1,8 +1,8 @@
 export const divStyle = {
-	width: '',
+	width: '30px',
 	minWidth: '',
 	maxWidth: '',
-	height: '',
+	height: '30px',
 	minHeight: '',
 	maxHeight: '',
 	margin: '',

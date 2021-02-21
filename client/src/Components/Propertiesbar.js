@@ -23,7 +23,7 @@ const Propertiesbar = () => {
 				setXlarge(e[1].styles.xlarge)
 				return true
 			} else if (e[2].length > 0) {
-				if (showProperties(e[2], id)) return
+				if (showProperties(e[2], id)) return true
 			}
 		})
 	}
@@ -68,7 +68,32 @@ const Propertiesbar = () => {
 	return (
 		<div className='propertybar'>
 			<p>Properties</p>
-			{showList()}
+			<div className='div-property'>
+				<div className='w-h'>
+					<p className='second-heading'>Transform</p>
+					<div className='one'>
+						<div className='w'>
+							<label>W : </label>
+							<input type='number' defaultValue='30' />
+							<select>
+								<option>PX</option>
+								<option>VW</option>
+							</select>
+						</div>
+						<div className='h'>
+							<label>H : </label>
+							<input type='number' defaultValue='30' />
+							<select>
+								<option>PX</option>
+								<option>VH</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div>
+					<p className='second-heading'>Margins and Paddings</p>
+				</div>
+			</div>
 		</div>
 	)
 }

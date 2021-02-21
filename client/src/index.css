@@ -241,15 +241,65 @@ nav .addpage-div button:focus {
 
 .propertybar {
 	text-align: center;
-	border-left: 1px solid var(--text-color);
+	border-left: 1px solid grey;
+	background-color: var(--second-white);
 }
-.propertybar p {
-	margin: 20px auto;
+.propertybar > p {
+	margin: 10px auto 0px auto;
 	width: auto;
-	border-bottom: 2px solid var(--text-color);
-	padding-bottom: 20px;
 	font-weight: bolder;
 	color: var(--text-active-color);
+}
+.propertybar .second-heading {
+	padding: 5px 10px;
+	text-align: left;
+	border: none;
+	font-weight: normal;
+	background-color: var(--third-white);
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+.propertybar .div-property .one {
+	text-align: left;
+}
+.propertybar .div-property .one > button {
+	float: right;
+	margin-right: 40px;
+	padding: 3px 5px;
+	outline: none;
+}
+.propertybar .w,
+.propertybar .h {
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	display: grid;
+	grid-template-columns: 1fr 2fr 1.5fr;
+	margin-bottom: 10px;
+}
+.propertybar .w label,
+.propertybar .h label {
+	padding: 5px 10px;
+	text-align: right;
+	font-size: 0.9rem;
+}
+.propertybar .w input,
+.propertybar .h input {
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 5px;
+	width: 75px;
+	font-size: 1rem;
+	outline: none;
+	background-color: var(--second-white);
+}
+.propertybar .w select,
+.propertybar .h select {
+	background-color: var(--second-white);
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 5px;
+	margin-left: 5px;
 }
 
 /* width */
