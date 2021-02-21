@@ -15,10 +15,13 @@ const Toolbar = () => {
 		children.forEach(child => {
 			if (child[1].id === id) {
 				child[2].push(element)
+				return children
 			} else if (child[2].length > 0) {
 				findAndInsert(child[2], id, element)
 			}
 		})
+
+		return children
 	}
 
 	return (

@@ -11,35 +11,28 @@ const Div = ({
 }) => {
 	const addDiv = () => {
 		const temp = Object.assign({}, pages)
+		const div = [
+			'div',
+			{
+				id: uniqueString(),
+				styles: {
+					small: divStyle,
+					medium: divStyle,
+					large: divStyle,
+					xlarge: divStyle
+				}
+			},
+			[]
+		]
 
 		if (activeElement === activePage) {
-			temp[activePage].push([
-				'div',
-				{
-					id: uniqueString(),
-					styles: {
-						small: divStyle,
-						medium: divStyle,
-						large: divStyle,
-						xlarge: divStyle
-					}
-				},
-				[]
-			])
+			temp[activePage].push(div)
 		} else {
-			findAndInsert(temp[activePage], activeElement, [
-				'div',
-				{
-					id: uniqueString(),
-					styles: {
-						small: divStyle,
-						medium: divStyle,
-						large: divStyle,
-						xlarge: divStyle
-					}
-				},
-				[]
-			])
+			temp[activePage] = findAndInsert(
+				temp[activePage],
+				activeElement,
+				div
+			)
 		}
 
 		setPages(temp)
