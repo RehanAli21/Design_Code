@@ -226,7 +226,6 @@ nav .addpage-div button:focus {
 	grid-auto-flow: column;
 	text-align: center;
 }
-
 .main-div .pages-div {
 	background-color: white;
 	min-height: 300px;
@@ -243,6 +242,7 @@ nav .addpage-div button:focus {
 	text-align: center;
 	border-left: 1px solid grey;
 	background-color: var(--second-white);
+	overflow-y: scroll;
 }
 .propertybar > p {
 	margin: 10px auto 0px auto;
@@ -269,7 +269,9 @@ nav .addpage-div button:focus {
 	outline: none;
 }
 .propertybar .w,
-.propertybar .h {
+.propertybar .h,
+.propertybar .x,
+.propertybar .y {
 	margin-left: auto;
 	margin-right: auto;
 	width: 80%;
@@ -278,13 +280,17 @@ nav .addpage-div button:focus {
 	margin-bottom: 10px;
 }
 .propertybar .w label,
-.propertybar .h label {
+.propertybar .h label,
+.propertybar .x label,
+.propertybar .y label {
 	padding: 5px 10px;
 	text-align: right;
 	font-size: 0.9rem;
 }
 .propertybar .w input,
-.propertybar .h input {
+.propertybar .h input,
+.propertybar .x input,
+.propertybar .y input {
 	border: none;
 	border-bottom: 1px solid var(--text-color);
 	padding: 5px;
@@ -294,7 +300,9 @@ nav .addpage-div button:focus {
 	background-color: var(--second-white);
 }
 .propertybar .w select,
-.propertybar .h select {
+.propertybar .h select,
+.propertybar .x select,
+.propertybar .y select {
 	background-color: var(--second-white);
 	border: none;
 	border-bottom: 1px solid var(--text-color);

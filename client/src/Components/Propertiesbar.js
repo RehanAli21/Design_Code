@@ -88,10 +88,29 @@ const Propertiesbar = () => {
 								<option>VH</option>
 							</select>
 						</div>
+						<div className='x'>
+							<label>X : </label>
+							<input type='number' defaultValue='30' />
+							<select>
+								<option>EM</option>
+								<option>REM</option>
+								<option>PX</option>
+							</select>
+						</div>
+						<div className='y'>
+							<label>Y : </label>
+							<input type='number' defaultValue='30' />
+							<select>
+								<option>EM</option>
+								<option>REM</option>
+								<option>PX</option>
+							</select>
+						</div>
 					</div>
 				</div>
-				<div>
+				<div className='m-p'>
 					<p className='second-heading'>Margins and Paddings</p>
+					<div></div>
 				</div>
 			</div>
 		</div>
