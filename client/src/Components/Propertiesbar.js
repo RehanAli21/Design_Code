@@ -16,6 +16,10 @@ const Propertiesbar = () => {
 		showProperties(pages[activePage], activeElement)
 	}, [pages, activePage, activeElement])
 
+	useEffect(() => {
+		console.log(document.getElementById(activeElement))
+	}, [activeElement])
+
 	const showProperties = (arr, id) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
@@ -28,43 +32,6 @@ const Propertiesbar = () => {
 				if (showProperties(e[2], id)) return true
 			}
 		})
-	}
-
-	const showList = () => {
-		return (
-			<ul>
-				<li>
-					<h5>Small</h5>
-					<ul>{mapList(small)}</ul>
-				</li>
-				<li>
-					<h5>Medium</h5>
-					<ul>{mapList(medium)}</ul>
-				</li>
-				<li>
-					<h5>Large</h5>
-					<ul>{mapList(large)}</ul>
-				</li>
-				<li>
-					<h5>X Large</h5>
-					<ul>{mapList(xlarge)}</ul>
-				</li>
-			</ul>
-		)
-	}
-	const mapList = obj => {
-		const temp = []
-		for (const key in obj) {
-			temp.push(
-				<li
-					key={uuid()}
-					style={{ width: '100%', backgroundColor: 'red' }}>
-					<span style={{ width: '75%' }}>{key}</span>
-					<input style={{ width: '25%' }} type='text' />
-				</li>
-			)
-		}
-		return temp
 	}
 
 	return (

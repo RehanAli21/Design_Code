@@ -16,7 +16,7 @@ export const divStyle = {
 	paddingTop: '',
 	paddingBottom: '',
 	color: '',
-	backgroundColor: '',
+	backgroundColor: 'orange',
 	border: '',
 	borderTop: '',
 	borderBottom: '',

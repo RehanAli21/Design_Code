@@ -14,7 +14,7 @@ const Layers = () => {
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
 	const changeActiveElement = e => {
-		setActiveElement(e.target.id)
+		setActiveElement(e)
 	}
 
 	const deleteMe = e => {
@@ -50,11 +50,13 @@ const Layers = () => {
 					return (
 						<li key={uuid()}>
 							<p
-								id={e[1].id}
+								// id={e[1].id}
 								className={
 									e[1].id === activeElement ? 'bg-blue ' : ''
 								}
-								onClick={changeActiveElement}>
+								onClick={() =>
+									changeActiveElement(`${e[1].id}`)
+								}>
 								{e[0]}
 							</p>
 							<button
