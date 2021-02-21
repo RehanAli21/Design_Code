@@ -111,18 +111,42 @@ const Propertiesbar = () => {
 				<div className='ap borders'>
 					<p className='second-heading'>APPEARANCE</p>
 					<div>
-						<label>Opacity : </label>{' '}
-						<input
-							type='range'
-							min='0'
-							max='100'
-							defaultValue='100'
-						/>
-					</div>
-					<div>
-						<input type='checkbox' />
-						<label>Fill : </label>
-						<input type='color' />
+						<div className='two'>
+							<label>Color: </label>
+							<input type='color' defaultValue='#ffffff' />
+						</div>
+						<div className='one'>
+							<label>Opacity: </label>
+							<input
+								type='range'
+								defaultValue='1'
+								min='0'
+								max='1'
+							/>
+						</div>
+						<div className='ap-borders'>
+							<input type='checkbox' defaultValue='false' />
+							<span>Border</span>
+							<div className='b'>
+								<div className='two'>
+									<div>
+										<label>Size: </label>
+										<input
+											type='number'
+											defaultValue='1'
+											min='0'
+										/>
+									</div>
+									<div>
+										<label>Color: </label>
+										<input
+											type='color'
+											defaultValue='#464646'
+										/>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
