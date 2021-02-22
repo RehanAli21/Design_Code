@@ -37,11 +37,11 @@ const Layers = () => {
 			}
 			e.push(arr[arr.length - 1])
 
-			for (let i = 0; i < arr.length; i++) {
-				if (arr[i][2].length > 0) {
-					arr[i][2] = levelUpHelper(arr[i][2], id)
+			e.forEach(ele => {
+				if (ele[2].length > 0) {
+					ele[2] = levelUpHelper(ele[2], id)
 				}
-			}
+			})
 		} else {
 			arr.forEach(a => e.push(a))
 		}
