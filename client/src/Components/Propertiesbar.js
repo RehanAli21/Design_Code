@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react'
-import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Propertiesbar = () => {
@@ -17,7 +16,12 @@ const Propertiesbar = () => {
 	}, [pages, activePage, activeElement])
 
 	useEffect(() => {
-		console.log(document.getElementById(activeElement))
+		if (activeElement) {
+			console.log(document.getElementById(activeElement).clientWidth)
+			console.log(document.getElementById(activeElement).clientHeight)
+			console.log(document.getElementById(activeElement).clientLeft)
+			console.log(document.getElementById(activeElement).clientTop)
+		}
 	}, [activeElement])
 
 	const showProperties = (arr, id) => {

@@ -17,9 +17,40 @@ const Layers = () => {
 		setActiveElement(e)
 	}
 
-	const deleteMe = e => {
-		const id = e.target.id.split('_')[0]
+	const levelUp = id => {
+		const temp = Object.assign({}, pages)
 
+		temp[activePage] = levelUpHelper(temp[activePage], id)
+		setPages(temp)
+	}
+	const levelUpHelper = (arr, id) => {
+		const e = []
+
+		if (arr.length > 1) {
+			for (let i = 0; i < arr.length - 1; i++) {
+				if (arr[i + 1][1].id === id) {
+					let t = arr[i]
+					arr[i] = arr[i + 1]
+					arr[i + 1] = t
+				}
+				e.push(arr[i])
+			}
+			e.push(arr[arr.length - 1])
+
+			for (let i = 0; i < arr.length; i++) {
+				if (arr[i][2].length > 0) {
+					arr[i][2] = levelUpHelper(arr[i][2], id)
+				}
+			}
+		} else {
+			arr.forEach(a => e.push(a))
+		}
+
+		console.log(e)
+		return e
+	}
+
+	const deleteMe = id => {
 		const temp = Object.assign({}, pages)
 
 		temp[activePage] = deleteIt(temp[activePage], id)
@@ -50,7 +81,6 @@ const Layers = () => {
 					return (
 						<li key={uuid()}>
 							<p
-								// id={e[1].id}
 								className={
 									e[1].id === activeElement ? 'bg-blue ' : ''
 								}
@@ -60,8 +90,12 @@ const Layers = () => {
 								{e[0]}
 							</p>
 							<button
-								id={e[1].id + '_btn'}
-								onClick={deleteMe}
+								onClick={() => levelUp(`${e[1].id}`)}
+								className='layer-delete'>
+								^
+							</button>
+							<button
+								onClick={() => deleteMe(`${e[1].id}`)}
 								className='layer-delete'>
 								X
 							</button>
@@ -75,11 +109,14 @@ const Layers = () => {
 
 	return (
 		<div className='layers'>
-			<p
-				className={activePage === activeElement ? 'bg-blue ' : ''}
-				onClick={() => setActiveElement(activePage)}>
-				{toCapitalize(activePage)}
-			</p>
+			<div>
+				<p
+					className={activePage === activeElement ? 'bg-blue ' : ''}
+					onClick={() => setActiveElement(activePage)}>
+					{toCapitalize(activePage)}
+				</p>
+				<button>U</button>
+			</div>
 			{showLayers(pages[activePage])}
 		</div>
 	)

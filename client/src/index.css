@@ -150,18 +150,34 @@ nav .addpage-div button:focus {
 	background-color: white;
 	margin-left: 15px;
 }
-.layers > p {
+.layers > div {
+	display: grid;
+	grid-template-columns: 5fr 1fr 15px;
+}
+.layers > div p {
 	text-align: center;
 	font-weight: 500;
 	padding: 2px 0px;
 	cursor: pointer;
 }
-.layers > p:hover {
+.layers > div p:hover {
 	background-color: var(--main-blue);
 	color: white;
 }
-.layers > p:active {
+.layers > div p:active {
 	transform: scale(0.9);
+}
+.layers > div button {
+	background-color: white;
+	border: 1px solid var(--main-blue);
+	outline: none;
+	border-radius: 2px;
+	color: var(--main-blue);
+}
+.layers > div button:active {
+	transform: scale(0.9);
+	background-color: var(--main-blue);
+	color: white;
 }
 .layers ul {
 	width: 100%;
@@ -170,11 +186,11 @@ nav .addpage-div button:focus {
 .layers ul li {
 	padding: 2px 0px;
 	margin-left: 10px;
-	width: 100px;
+	width: 120px;
 	color: var(--text-active-color);
 	font-weight: bold;
 	display: grid;
-	grid-template-columns: 85% 15%;
+	grid-template-columns: 70% 15% 15%;
 }
 .layers ul li p {
 	text-align: left;
