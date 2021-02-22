@@ -46,7 +46,6 @@ const Layers = () => {
 			arr.forEach(a => e.push(a))
 		}
 
-		console.log(e)
 		return e
 	}
 

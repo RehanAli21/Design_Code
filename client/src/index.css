@@ -186,11 +186,11 @@ nav .addpage-div button:focus {
 .layers ul li {
 	padding: 2px 0px;
 	margin-left: 10px;
-	width: 120px;
+	width: 130px;
 	color: var(--text-active-color);
 	font-weight: bold;
 	display: grid;
-	grid-template-columns: 70% 15% 15%;
+	grid-template-columns: 100px 30px 30px;
 }
 .layers ul li p {
 	text-align: left;
@@ -214,16 +214,20 @@ nav .addpage-div button:focus {
 	color: white;
 }
 .layers ul li button {
-	background-color: transparent;
-	color: red;
+	background-color: var(--main-blue);
+	color: white;
 	font-weight: bold;
+	font-size: 0.75rem;
 	border: none;
-	border-radius: 5px;
 	outline: none;
 	float: right;
+	border-radius: 50%;
+	cursor: pointer;
+	margin-left: 5px;
 }
 .layers ul li button:hover {
 	transform: scale(1.1);
+	background-color: var(--main-blue);
 }
 .layers ul li button:active {
 	transform: scale(0.9);
