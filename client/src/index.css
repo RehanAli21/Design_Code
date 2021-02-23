@@ -168,16 +168,20 @@ nav .addpage-div button:focus {
 	transform: scale(0.9);
 }
 .layers > div button {
-	background-color: white;
-	border: 1px solid var(--main-blue);
+	background-color: var(--main-blue);
 	outline: none;
-	border-radius: 2px;
-	color: var(--main-blue);
+	border: none;
+	border-radius: 50%;
+	width: 25px;
+	height: 25px;
+	color: white;
+	font-weight: bold;
 }
 .layers > div button:active {
 	transform: scale(0.9);
-	background-color: var(--main-blue);
-	color: white;
+	background-color: white;
+	color: var(--main-blue);
+	border: 2px solid var(--main-blue);
 }
 .layers ul {
 	width: 100%;
@@ -197,7 +201,7 @@ nav .addpage-div button:focus {
 	padding: 2px 0px;
 	padding-left: 5px;
 	width: 100%;
-	border-left: 1px solid black;
+	border-left: 2px solid black;
 }
 .layers ul li p:hover {
 	cursor: pointer;

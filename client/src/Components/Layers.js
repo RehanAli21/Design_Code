@@ -13,9 +13,7 @@ const Layers = () => {
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
-	const changeActiveElement = e => {
-		setActiveElement(e)
-	}
+	const changeActiveElement = e => setActiveElement(e)
 
 	const levelUp = id => {
 		const temp = Object.assign({}, pages)
@@ -44,6 +42,11 @@ const Layers = () => {
 			})
 		} else {
 			arr.forEach(a => e.push(a))
+			e.forEach(ele => {
+				if (ele[2].length > 0) {
+					ele[2] = levelUpHelper(ele[2], id)
+				}
+			})
 		}
 
 		return e
@@ -52,19 +55,18 @@ const Layers = () => {
 	const deleteMe = id => {
 		const temp = Object.assign({}, pages)
 
-		temp[activePage] = deleteIt(temp[activePage], id)
+		temp[activePage] = deleteHelper(temp[activePage], id)
 		setPages(temp)
 
 		if (id === activeElement) setActiveElement('')
 	}
-
-	const deleteIt = (arr, id) => {
+	const deleteHelper = (arr, id) => {
 		const e = []
 
 		arr.forEach(a => {
 			if (a[1].id !== id) {
 				if (a[2].length > 0) {
-					a[2] = deleteIt(a[2], id)
+					a[2] = deleteHelper(a[2], id)
 				}
 				e.push(a)
 			}
