@@ -7,6 +7,19 @@ export const PageProvider = props => {
 	const [activePage, setActivePage] = useState('home')
 	const [activeElement, setActiveElement] = useState('')
 	const [width, setWidth] = useState(720)
+	const [actionHistory, setActionHistory] = useState([])
+
+	const setHistory = () => {
+		const temp = []
+		actionHistory.forEach(e => temp.push(e))
+
+		if (temp.length > 5) temp.shift()
+
+		temp.push({ [activePage]: pages[activePage] })
+
+		setActionHistory(temp)
+		console.log(actionHistory)
+	}
 
 	return (
 		<PageContext.Provider
@@ -18,7 +31,8 @@ export const PageProvider = props => {
 				activeElement,
 				setActiveElement,
 				width,
-				setWidth
+				setWidth,
+				setHistory
 			}}>
 			{props.children}
 		</PageContext.Provider>

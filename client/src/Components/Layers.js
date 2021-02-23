@@ -3,13 +3,13 @@ import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
-	const [undo, setUndo] = useState([])
 	const {
 		pages,
 		setPages,
 		activePage,
 		activeElement,
-		setActiveElement
+		setActiveElement,
+		setHistory
 	} = useContext(PageContext)
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -17,9 +17,11 @@ const Layers = () => {
 	const changeActiveElement = e => setActiveElement(e)
 
 	const levelUp = id => {
-		const temp = Object.assign({}, pages)
+		setHistory()
 
+		const temp = Object.assign({}, pages)
 		temp[activePage] = levelUpHelper(temp[activePage], id)
+
 		setPages(temp)
 	}
 	const levelUpHelper = (arr, id) => {
@@ -54,6 +56,8 @@ const Layers = () => {
 	}
 
 	const deleteMe = id => {
+		setHistory()
+
 		const temp = Object.assign({}, pages)
 
 		temp[activePage] = deleteHelper(temp[activePage], id)

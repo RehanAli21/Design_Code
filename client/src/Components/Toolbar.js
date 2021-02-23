@@ -3,9 +3,13 @@ import { PageContext } from './Contexts/PageContext'
 import Div from './Tools/Div'
 
 const Toolbar = () => {
-	const { pages, setPages, activePage, activeElement } = useContext(
-		PageContext
-	)
+	const {
+		pages,
+		setPages,
+		activePage,
+		activeElement,
+		setHistory
+	} = useContext(PageContext)
 
 	const uniqueString = () =>
 		Math.random().toString(36).substring(2, 15) +
@@ -34,6 +38,7 @@ const Toolbar = () => {
 					pages={pages}
 					setPages={setPages}
 					uniqueString={uniqueString}
+					setHistory={setHistory}
 				/>
 			</div>
 		</div>

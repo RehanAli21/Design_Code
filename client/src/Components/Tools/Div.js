@@ -7,7 +7,8 @@ const Div = ({
 	findAndInsert,
 	uniqueString,
 	setPages,
-	pages
+	pages,
+	setHistory
 }) => {
 	const addDiv = () => {
 		const temp = Object.assign({}, pages)
@@ -24,6 +25,8 @@ const Div = ({
 			},
 			[]
 		]
+
+		setHistory()
 
 		if (activeElement === activePage) {
 			temp[activePage].push(div)
