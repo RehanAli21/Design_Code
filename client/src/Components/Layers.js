@@ -1,8 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
+	const [undo, setUndo] = useState([])
 	const {
 		pages,
 		setPages,
@@ -108,6 +109,9 @@ const Layers = () => {
 		)
 	}
 
+	const undoFunc = () => {}
+	const redoFunc = () => {}
+
 	return (
 		<div className='layers'>
 			<div>
@@ -116,7 +120,8 @@ const Layers = () => {
 					onClick={() => setActiveElement(activePage)}>
 					{toCapitalize(activePage)}
 				</p>
-				<button>U</button>
+				<button onClick={undoFunc}>U</button>
+				<button onClick={redoFunc}>R</button>
 			</div>
 			{showLayers(pages[activePage])}
 		</div>

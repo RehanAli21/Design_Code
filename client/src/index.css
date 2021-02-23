@@ -152,7 +152,7 @@ nav .addpage-div button:focus {
 }
 .layers > div {
 	display: grid;
-	grid-template-columns: 5fr 1fr 15px;
+	grid-template-columns: 5fr 1fr 1fr 15px;
 }
 .layers > div p {
 	text-align: center;
