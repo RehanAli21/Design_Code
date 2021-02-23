@@ -7,18 +7,22 @@ export const PageProvider = props => {
 	const [activePage, setActivePage] = useState('home')
 	const [activeElement, setActiveElement] = useState('')
 	const [width, setWidth] = useState(720)
-	const [actionHistory, setActionHistory] = useState([])
+	const [actionHistory, setActionHistory] = useState({ home: [] })
 
 	const setHistory = () => {
 		const temp = []
-		actionHistory.forEach(e => temp.push(e))
+		actionHistory[activePage].forEach(e => temp.push(e))
 
-		if (temp.length > 5) temp.shift()
+		if (temp.length > 3)
+			for (let i = temp.length - 1; i > 3; i--) temp.shift()
 
-		temp.push({ [activePage]: pages[activePage] })
+		const a = []
+		pages[activePage].forEach(p => a.push(p))
+		temp.push(a)
 
-		setActionHistory(temp)
-		console.log(actionHistory)
+		const historyTemp = Object.assign({}, actionHistory)
+		historyTemp[activePage] = temp
+		setActionHistory(historyTemp)
 	}
 
 	return (
