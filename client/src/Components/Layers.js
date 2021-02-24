@@ -89,10 +89,27 @@ const Layers = () => {
 
 	const showLayers = data => {
 		return (
-			<ul>
+			<ul className='show-ul'>
 				{data.map(e => {
 					return (
 						<li key={uuid()}>
+							<button
+								onClick={e => {
+									if (
+										e.target.nextSibling.nextSibling
+											.nextSibling.nextSibling
+											.className === 'show-ul'
+									) {
+										e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
+											'hide-ul'
+									} else {
+										e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
+											'show-ul'
+									}
+								}}
+								className='layer-show'>
+								V
+							</button>
 							<p
 								className={
 									e[1].id === activeElement ? 'bg-blue ' : ''
@@ -104,12 +121,12 @@ const Layers = () => {
 							</p>
 							<button
 								onClick={() => levelUp(`${e[1].id}`)}
-								className='layer-delete'>
+								className='btn'>
 								^
 							</button>
 							<button
 								onClick={() => deleteMe(`${e[1].id}`)}
-								className='layer-delete'>
+								className='btn'>
 								X
 							</button>
 							{showLayers(e[2])}

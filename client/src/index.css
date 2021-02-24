@@ -183,6 +183,12 @@ nav .addpage-div button:focus {
 	color: var(--main-blue);
 	border: 2px solid var(--main-blue);
 }
+.layers .show-ul {
+	display: block;
+}
+.layers .hide-ul {
+	display: none;
+}
 .layers ul {
 	width: 100%;
 	list-style: none;
@@ -194,7 +200,7 @@ nav .addpage-div button:focus {
 	color: var(--text-active-color);
 	font-weight: bold;
 	display: grid;
-	grid-template-columns: 100px 30px 30px;
+	grid-template-columns: 30px 100px 30px 30px;
 }
 .layers ul li p {
 	text-align: left;
@@ -217,23 +223,37 @@ nav .addpage-div button:focus {
 	background-color: var(--main-blue);
 	color: white;
 }
-.layers ul li button {
+.layers ul li .btn {
 	background-color: var(--main-blue);
 	color: white;
 	font-weight: bold;
 	font-size: 0.75rem;
 	border: none;
 	outline: none;
-	float: right;
 	border-radius: 50%;
 	cursor: pointer;
 	margin-left: 5px;
 }
-.layers ul li button:hover {
+.layers ul li .btn:hover {
 	transform: scale(1.1);
-	background-color: var(--main-blue);
 }
-.layers ul li button:active {
+.layers ul li .btn:active {
+	transform: scale(0.9);
+}
+.layers ul li .layer-show {
+	background-color: var(--text-active-color);
+	color: white;
+	font-weight: bold;
+	font-size: 0.75rem;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	margin-left: 5px;
+}
+.layers ul li .layer-show:hover {
+	transform: scale(1.1);
+}
+.layers ul li .layer-show:active {
 	transform: scale(0.9);
 }
 

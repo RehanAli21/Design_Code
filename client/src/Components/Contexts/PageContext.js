@@ -38,7 +38,6 @@ export const PageProvider = props => {
 
 	const undoHelper = (arr, parentId, object) => {
 		if (parentId === object[1]) {
-			console.log('index: ', object[2])
 			if (object[2] === 0) {
 				arr.unshift(object[0])
 			} else {
