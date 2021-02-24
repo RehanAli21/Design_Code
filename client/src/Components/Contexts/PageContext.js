@@ -25,9 +25,20 @@ export const PageProvider = props => {
 		setActionHistory(historyTemp)
 	}
 
-	const undoFunc = () => {}
+	const undoFunc = () => {
+		if (actionHistory[activePage].length < 1) return
 
-	const redoFunc = () => {}
+		const pagesTemp = Object.assign({}, pages)
+		const historyTemp = Object.assign({}, actionHistory)
+
+		pagesTemp[activePage] =
+			historyTemp[activePage][historyTemp[activePage].length - 1]
+
+		console.log(pagesTemp)
+		console.log(historyTemp)
+
+		setPages(pagesTemp)
+	}
 
 	return (
 		<PageContext.Provider
@@ -41,8 +52,7 @@ export const PageProvider = props => {
 				width,
 				setWidth,
 				setHistory,
-				undoFunc,
-				redoFunc
+				undoFunc
 			}}>
 			{props.children}
 		</PageContext.Provider>
