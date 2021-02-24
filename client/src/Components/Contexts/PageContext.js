@@ -9,11 +9,11 @@ export const PageProvider = props => {
 	const [width, setWidth] = useState(720)
 	const [actionHistory, setActionHistory] = useState({ home: [] })
 
-	const setHistory = (parentId, object) => {
+	const setHistory = (parentId, object, index) => {
 		if (parentId && object) {
 			const temp = Object.assign({}, actionHistory)
 
-			temp[activePage].push([object, parentId])
+			temp[activePage].push([object, parentId, index])
 		}
 	}
 
@@ -30,12 +30,20 @@ export const PageProvider = props => {
 			historyTemp[activePage][length]
 		)
 
+		historyTemp[activePage].pop()
+
 		setPages(pagesTemp)
+		setActionHistory(historyTemp)
 	}
 
 	const undoHelper = (arr, parentId, object) => {
 		if (parentId === object[1]) {
-			arr.push(object[0])
+			console.log('index: ', object[2])
+			if (object[2] === 0) {
+				arr.unshift(object[0])
+			} else {
+				arr.splice(object[2], 0, object[0])
+			}
 			return true
 		} else {
 			arr.forEach(a => {

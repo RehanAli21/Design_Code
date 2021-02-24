@@ -69,7 +69,7 @@ const Layers = () => {
 	}
 	const deleteHelper = (arr, id, parentId) => {
 		const e = []
-
+		let index = 0
 		arr.forEach(a => {
 			if (a[1].id !== id) {
 				if (a[2].length > 0) {
@@ -78,9 +78,11 @@ const Layers = () => {
 				e.push(a)
 			}
 			if (a[1].id === id) {
-				setHistory(parentId, a)
+				setHistory(parentId, a, index)
 			}
+			index++
 		})
+		index = 0
 
 		return e
 	}
