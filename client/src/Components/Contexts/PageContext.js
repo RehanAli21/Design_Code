@@ -25,6 +25,10 @@ export const PageProvider = props => {
 		setActionHistory(historyTemp)
 	}
 
+	const undoFunc = () => {}
+
+	const redoFunc = () => {}
+
 	return (
 		<PageContext.Provider
 			value={{
@@ -36,7 +40,9 @@ export const PageProvider = props => {
 				setActiveElement,
 				width,
 				setWidth,
-				setHistory
+				setHistory,
+				undoFunc,
+				redoFunc
 			}}>
 			{props.children}
 		</PageContext.Provider>

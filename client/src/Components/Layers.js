@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
@@ -9,7 +9,8 @@ const Layers = () => {
 		activePage,
 		activeElement,
 		setActiveElement,
-		setHistory
+		setHistory,
+		undoFunc
 	} = useContext(PageContext)
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -113,9 +114,6 @@ const Layers = () => {
 		)
 	}
 
-	const undoFunc = () => {}
-	const redoFunc = () => {}
-
 	return (
 		<div className='layers'>
 			<div>
@@ -125,7 +123,6 @@ const Layers = () => {
 					{toCapitalize(activePage)}
 				</p>
 				<button onClick={undoFunc}>U</button>
-				<button onClick={redoFunc}>R</button>
 			</div>
 			{showLayers(pages[activePage])}
 		</div>
