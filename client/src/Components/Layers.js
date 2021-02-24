@@ -12,6 +12,7 @@ const Layers = () => {
 		setHistory,
 		undoFunc
 	} = useContext(PageContext)
+	let repeat = true
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
@@ -61,20 +62,23 @@ const Layers = () => {
 
 		const temp = Object.assign({}, pages)
 
-		temp[activePage] = deleteHelper(temp[activePage], id)
+		temp[activePage] = deleteHelper(temp[activePage], id, activePage)
 		setPages(temp)
 
 		if (id === activeElement) setActiveElement('')
 	}
-	const deleteHelper = (arr, id) => {
+	const deleteHelper = (arr, id, parentId) => {
 		const e = []
 
 		arr.forEach(a => {
 			if (a[1].id !== id) {
 				if (a[2].length > 0) {
-					a[2] = deleteHelper(a[2], id)
+					a[2] = deleteHelper(a[2], id, a[1].id)
 				}
 				e.push(a)
+			}
+			if (a[1].id === id) {
+				setHistory(parentId, a)
 			}
 		})
 

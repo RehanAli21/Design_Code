@@ -9,35 +9,41 @@ export const PageProvider = props => {
 	const [width, setWidth] = useState(720)
 	const [actionHistory, setActionHistory] = useState({ home: [] })
 
-	const setHistory = () => {
-		const temp = []
-		actionHistory[activePage].forEach(e => temp.push(e))
+	const setHistory = (parentId, object) => {
+		if (parentId && object) {
+			const temp = Object.assign({}, actionHistory)
 
-		if (temp.length > 3)
-			for (let i = temp.length - 1; i > 3; i--) temp.shift()
-
-		const a = []
-		pages[activePage].forEach(p => a.push(p))
-		temp.push(a)
-
-		const historyTemp = Object.assign({}, actionHistory)
-		historyTemp[activePage] = temp
-		setActionHistory(historyTemp)
+			temp[activePage].push([object, parentId])
+		}
 	}
 
 	const undoFunc = () => {
 		if (actionHistory[activePage].length < 1) return
-
 		const pagesTemp = Object.assign({}, pages)
 		const historyTemp = Object.assign({}, actionHistory)
 
-		pagesTemp[activePage] =
-			historyTemp[activePage][historyTemp[activePage].length - 1]
+		const length = historyTemp[activePage].length - 1
 
-		console.log(pagesTemp)
-		console.log(historyTemp)
+		undoHelper(
+			pagesTemp[activePage],
+			activePage,
+			historyTemp[activePage][length]
+		)
 
 		setPages(pagesTemp)
+	}
+
+	const undoHelper = (arr, parentId, object) => {
+		if (parentId === object[1]) {
+			arr.push(object[0])
+			return true
+		} else {
+			arr.forEach(a => {
+				if (undoHelper(a[2], a[1].id, object)) {
+					return true
+				}
+			})
+		}
 	}
 
 	return (
