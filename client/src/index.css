@@ -244,7 +244,7 @@ nav .addpage-div button:focus {
 	background-color: var(--text-active-color);
 	color: white;
 	font-weight: bold;
-	font-size: 0.75rem;
+	font-size: 0.5rem;
 	border: none;
 	outline: none;
 	cursor: pointer;
@@ -280,6 +280,7 @@ nav .addpage-div button:focus {
 	background-color: white;
 	box-shadow: 2px 2px 15px grey;
 	resize: both;
+	position: relative;
 }
 
 .propertybar {
@@ -310,6 +311,25 @@ nav .addpage-div button:focus {
 	border: none;
 	box-shadow: 0px 2px 2px grey;
 	padding-bottom: 20px;
+}
+.propertybar .align-ul li {
+	width: 90;
+	margin-left: 5%;
+	display: grid;
+	grid-template-columns: 3fr 1fr 1fr 1fr 5%;
+	margin-bottom: 10px;
+}
+.propertybar .align-ul li button {
+	color: black;
+	font-weight: bolder;
+	border: none;
+	background-color: var(--third-white);
+	padding: 5px;
+	cursor: pointer;
+	outline: none;
+}
+.propertybar .align-ul li button:hover {
+	transform: scale(1.1);
 }
 .propertybar .div-property .one {
 	text-align: left;
@@ -454,6 +474,86 @@ nav .addpage-div button:focus {
 	width: 40px;
 	border: none;
 	box-shadow: 1px 1px 2px grey;
+}
+
+/*For upper layer component*/
+/* .ul-container {
+	width: 200px;
+	height: 200px;
+	margin: 100px auto;
+	position: relative;
+	background-color: white;
+	transform: scale(1.5);
+} */
+.upper-layer {
+	position: absolute;
+	background-color: transparent;
+	border: 2px solid var(--main-blue);
+	width: 80px;
+	height: 80px;
+	top: 0px;
+	left: 0px;
+}
+.mover {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: var(--main-blue);
+	left: 40%;
+	top: -12px;
+	cursor: move;
+	border-radius: 50%;
+}
+.mover:active {
+	transform: scale(1.1);
+}
+.mover .line {
+	height: 5px;
+	width: 2px;
+	position: absolute;
+	bottom: -1px;
+	left: 40%;
+	background-color: var(--main-blue);
+}
+.top-left {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: var(--main-blue);
+	left: -5px;
+	top: -5px;
+	border-radius: 50%;
+	cursor: se-resize;
+}
+.top-right {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: var(--main-blue);
+	right: -5px;
+	top: -5px;
+	border-radius: 50%;
+	cursor: ne-resize;
+}
+.bottom-left {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: var(--main-blue);
+	left: -5px;
+	bottom: -5px;
+	border-radius: 50%;
+	cursor: sw-resize;
+}
+.bottom-right {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	background-color: var(--main-blue);
+	right: -5px;
+	bottom: -5px;
+	border-radius: 50%;
+	cursor: nw-resize;
 }
 
 /* width */

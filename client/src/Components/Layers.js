@@ -12,7 +12,6 @@ const Layers = () => {
 		setHistory,
 		undoFunc
 	} = useContext(PageContext)
-	let repeat = true
 
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
@@ -108,7 +107,7 @@ const Layers = () => {
 									}
 								}}
 								className='layer-show'>
-								V
+								&#10148;
 							</button>
 							<p
 								className={

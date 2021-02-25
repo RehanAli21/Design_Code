@@ -15,15 +15,6 @@ const Propertiesbar = () => {
 		showProperties(pages[activePage], activeElement)
 	}, [pages, activePage, activeElement])
 
-	useEffect(() => {
-		if (activeElement) {
-			console.log(document.getElementById(activeElement).clientWidth)
-			console.log(document.getElementById(activeElement).clientHeight)
-			console.log(document.getElementById(activeElement).clientLeft)
-			console.log(document.getElementById(activeElement).clientTop)
-		}
-	}, [activeElement])
-
 	const showProperties = (arr, id) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
@@ -42,6 +33,25 @@ const Propertiesbar = () => {
 		<div className='propertybar'>
 			<p>Properties</p>
 			<div className='div-property'>
+				<div className='align borders'>
+					<p className='second-heading'>ALIGNMENT</p>
+					<div>
+						<ul className='align-ul'>
+							<li>
+								<label>Self Align: </label>
+								<button>L</button>
+								<button>C</button>
+								<button>R</button>
+							</li>
+							<li>
+								<label>Item Align: </label>
+								<button>L</button>
+								<button>C</button>
+								<button>R</button>
+							</li>
+						</ul>
+					</div>
+				</div>
 				<div className='w-h borders'>
 					<p className='second-heading'>TRANSFORM</p>
 					<div className='one'>
