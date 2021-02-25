@@ -9,9 +9,7 @@ const UpperLayer = ({
 	width,
 	height,
 	marginLeft,
-	marginTop,
-	setMarginLeft,
-	setMarginTop
+	marginTop
 }) => {
 	const [l, setL] = useState(marginLeft)
 	const [t, setT] = useState(marginTop)
@@ -62,7 +60,8 @@ const UpperLayer = ({
 					onDrag={move}
 					draggable='true'
 					id='mover'
-					className='mover'>
+					className='mover'
+					style={{ left: (w - 10) / 2.1 }}>
 					<div className='line'></div>
 				</div>
 				<div

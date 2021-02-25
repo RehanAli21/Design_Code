@@ -1,17 +1,22 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
-import UpperLayer from './UpperLayer'
 import uuid from 'react-uuid'
 
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage, width } = useContext(PageContext)
+	const { pages, activePage, width, activeElement } = useContext(PageContext)
 
 	// const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
 	// const uniqueString = () =>
 	// 	Math.random().toString(36).substring(2, 15) +
 	// 	Math.random().toString(36).substring(2, 15)
+
+	useEffect(() => {
+		if (activeElement && activeElement !== activePage) {
+			console.log(document.getElementById(activeElement))
+		}
+	}, [activeElement, activePage])
 
 	const showElements = arr => {
 		const temp = []
@@ -82,14 +87,6 @@ const Page = () => {
 								? '5%'
 								: '0%'
 					}}>
-					<UpperLayer
-						parentWidth={width}
-						parentHeight={300}
-						width={60}
-						height={60}
-						marginLeft={0}
-						marginTop={0}
-					/>
 					{showElements(pages[activePage])}
 				</div>
 			</div>

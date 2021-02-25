@@ -316,11 +316,17 @@ nav .addpage-div button:focus {
 	width: 90;
 	margin-left: 5%;
 	display: grid;
-	grid-template-columns: 3fr 1fr 1fr 1fr 5%;
 	margin-bottom: 10px;
+}
+.propertybar .align-ul .one {
+	grid-template-columns: auto 40px 40px 40px auto;
+}
+.propertybar .align-ul .two {
+	grid-template-columns: auto 40px 40px 40px 40px auto;
 }
 .propertybar .align-ul li button {
 	color: black;
+	width: 100%;
 	font-weight: bolder;
 	border: none;
 	background-color: var(--third-white);
@@ -499,7 +505,7 @@ nav .addpage-div button:focus {
 	width: 10px;
 	height: 10px;
 	background-color: var(--main-blue);
-	left: 40%;
+	/* left: 45%; */
 	top: -12px;
 	cursor: move;
 	border-radius: 50%;

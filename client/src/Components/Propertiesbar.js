@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from './Contexts/PageContext'
+import Align from './Properties/Align'
 
 const Propertiesbar = () => {
 	const [small, setSmall] = useState({})
@@ -8,12 +9,23 @@ const Propertiesbar = () => {
 	const [xlarge, setXlarge] = useState({})
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
+	const [activeWidth, setActiveWidth] = useState('')
+	const [widthUnit, setWidthUnit] = useState('px')
+	const [activeHeight, setActiveHeight] = useState('')
+	const [heightUnit, setHeighthUnit] = useState('px')
+	const [marginLeft, setMarginLeft] = useState(0)
+	const [marginTop, setMarginTop] = useState(0)
+	const [bgColor, setBgColor] = useState('rgb(255, 255, 255, 1)')
+	const [border, setBorder] = useState('none')
+	const [shadow, setShadow] = useState('none')
 
-	const { pages, activePage, activeElement } = useContext(PageContext)
+	const { pages, activePage, activeElement, width } = useContext(PageContext)
 
 	useEffect(() => {
 		showProperties(pages[activePage], activeElement)
 	}, [pages, activePage, activeElement])
+
+	useEffect(() => {}, [width])
 
 	const showProperties = (arr, id) => {
 		arr.forEach(e => {
@@ -33,40 +45,44 @@ const Propertiesbar = () => {
 		<div className='propertybar'>
 			<p>Properties</p>
 			<div className='div-property'>
-				<div className='align borders'>
-					<p className='second-heading'>ALIGNMENT</p>
-					<div>
-						<ul className='align-ul'>
-							<li>
-								<label>Self Align: </label>
-								<button>L</button>
-								<button>C</button>
-								<button>R</button>
-							</li>
-							<li>
-								<label>Item Align: </label>
-								<button>L</button>
-								<button>C</button>
-								<button>R</button>
-							</li>
-						</ul>
-					</div>
-				</div>
+				<Align />
 				<div className='w-h borders'>
 					<p className='second-heading'>TRANSFORM</p>
 					<div className='one'>
 						<div className='w'>
 							<label>W : </label>
-							<input type='number' defaultValue='30' />
-							<select>
+							<input
+								onChange={e =>
+									setActiveWidth(
+										`${e.target.value}${widthUnit}`
+									)
+								}
+								type='number'
+								defaultValue='30'
+							/>
+							<select
+								onChange={e =>
+									setWidthUnit(e.target.value.toLowerCase())
+								}>
 								<option>PX</option>
 								<option>VW</option>
 							</select>
 						</div>
 						<div className='h'>
 							<label>H : </label>
-							<input type='number' defaultValue='30' />
-							<select>
+							<input
+								onChange={e =>
+									setActiveHeight(
+										`${e.target.value}${heightUnit}`
+									)
+								}
+								type='number'
+								defaultValue='30'
+							/>
+							<select
+								onChange={e =>
+									setHeighthUnit(e.target.value.toLowerCase())
+								}>
 								<option>PX</option>
 								<option>VH</option>
 							</select>
