@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import Align from './Properties/Align'
+import Appearance from './Properties/Appearance'
 
 const Propertiesbar = () => {
 	const [small, setSmall] = useState({})
 	const [medium, setMedium] = useState({})
 	const [large, setLarge] = useState({})
 	const [xlarge, setXlarge] = useState({})
-	const [showBorderSection, setShowBorderSection] = useState(false)
-	const [showShadowSection, setShowShadowSection] = useState(false)
+
 	const [activeWidth, setActiveWidth] = useState('')
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [activeHeight, setActiveHeight] = useState('')
@@ -107,123 +107,7 @@ const Propertiesbar = () => {
 						</div>
 					</div>
 				</div>
-				<div className='ap borders'>
-					<p className='second-heading'>APPEARANCE</p>
-					<div>
-						<div className='two md'>
-							<label>Color: </label>
-							<input type='color' defaultValue='#ffffff' />
-						</div>
-						<div className='one md'>
-							<label>Opacity: </label>
-							<input
-								type='range'
-								defaultValue='1'
-								min='0'
-								max='1'
-							/>
-						</div>
-						<div className='ap-borders md'>
-							<input
-								type='checkbox'
-								onChange={() =>
-									setShowBorderSection(!showBorderSection)
-								}
-							/>
-							<span>Border</span>
-							<div
-								style={{
-									display: showBorderSection
-										? 'block'
-										: 'none'
-								}}
-								className='b'>
-								<div className='two'>
-									<div className='mds'>
-										<label>Color: </label>
-										<input
-											type='color'
-											defaultValue='#464646'
-										/>
-									</div>
-									<div className='mds'>
-										<label>Size: </label>
-										<input
-											type='number'
-											defaultValue='1'
-											min='0'
-										/>
-									</div>
-									<div className='mds'>
-										<label>Radius: </label>
-										<input
-											type='number'
-											defaultValue='1'
-											min='0'
-										/>
-									</div>
-									<div className='mds'>
-										<label>Type: </label>
-										<select>
-											<option>solid</option>
-											<option>inset</option>
-											<option>outset</option>
-											<option>ridge</option>
-										</select>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div className='shadow'>
-							<input
-								type='checkbox'
-								onChange={() =>
-									setShowShadowSection(!showShadowSection)
-								}
-							/>
-							<span>Shadow</span>
-							<div
-								style={{
-									display: showShadowSection
-										? 'block'
-										: 'none'
-								}}
-								className='one'>
-								<div>
-									<label>X: </label>
-									<input
-										type='number'
-										min='0'
-										defaultValue='0'
-									/>
-								</div>
-								<div>
-									<label>Y: </label>
-									<input
-										type='number'
-										min='0'
-										defaultValue='0'
-									/>
-								</div>
-								<div>
-									<label>B: </label>
-									<input
-										type='number'
-										min='0'
-										defaultValue='0'
-									/>
-								</div>
-								<div>
-									<label>C: </label>
-									<input
-										type='color'
-										defaultValue='#464646'
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<Appearance />
 			</div>
 		</div>
 	)
