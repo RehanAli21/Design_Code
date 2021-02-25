@@ -3,6 +3,10 @@ import React, { useState } from 'react'
 const Appearance = () => {
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
+	const [bgColor, setBgColor] = useState('rgb(255, 255, 255, 1)')
+	const [border, setBorder] = useState('none')
+	const [shadow, setShadow] = useState('none')
+
 	return (
 		<div className='ap borders'>
 			<p className='second-heading'>APPEARANCE</p>

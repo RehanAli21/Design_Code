@@ -86,6 +86,19 @@ const Layers = () => {
 		return e
 	}
 
+	const showAndHideList = e => {
+		if (
+			e.target.nextSibling.nextSibling.nextSibling.nextSibling
+				.className === 'show-ul'
+		) {
+			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
+				'hide-ul'
+		} else {
+			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
+				'show-ul'
+		}
+	}
+
 	const showLayers = data => {
 		return (
 			<ul className='show-ul'>
@@ -93,19 +106,7 @@ const Layers = () => {
 					return (
 						<li key={uuid()}>
 							<button
-								onClick={e => {
-									if (
-										e.target.nextSibling.nextSibling
-											.nextSibling.nextSibling
-											.className === 'show-ul'
-									) {
-										e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
-											'hide-ul'
-									} else {
-										e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
-											'show-ul'
-									}
-								}}
+								onClick={e => showAndHideList(e)}
 								className='layer-show'>
 								&#10148;
 							</button>

@@ -2,22 +2,14 @@ import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import Align from './Properties/Align'
 import Appearance from './Properties/Appearance'
+import Transform from './Properties/Transform'
 
 const Propertiesbar = () => {
 	const [small, setSmall] = useState({})
 	const [medium, setMedium] = useState({})
 	const [large, setLarge] = useState({})
 	const [xlarge, setXlarge] = useState({})
-
-	const [activeWidth, setActiveWidth] = useState('')
-	const [widthUnit, setWidthUnit] = useState('px')
-	const [activeHeight, setActiveHeight] = useState('')
-	const [heightUnit, setHeighthUnit] = useState('px')
-	const [marginLeft, setMarginLeft] = useState(0)
-	const [marginTop, setMarginTop] = useState(0)
-	const [bgColor, setBgColor] = useState('rgb(255, 255, 255, 1)')
-	const [border, setBorder] = useState('none')
-	const [shadow, setShadow] = useState('none')
+	const [activeWidth, setActiveWidth] = useState()
 
 	const { pages, activePage, activeElement, width } = useContext(PageContext)
 
@@ -25,7 +17,17 @@ const Propertiesbar = () => {
 		showProperties(pages[activePage], activeElement)
 	}, [pages, activePage, activeElement])
 
-	useEffect(() => {}, [width])
+	useEffect(() => {
+		setActiveWidth(
+			width < 540
+				? small
+				: width < 720
+				? medium
+				: width < 960
+				? large
+				: xlarge
+		)
+	}, [width, small, medium, large, xlarge])
 
 	const showProperties = (arr, id) => {
 		arr.forEach(e => {
@@ -45,69 +47,9 @@ const Propertiesbar = () => {
 		<div className='propertybar'>
 			<p>Properties</p>
 			<div className='div-property'>
-				<Align />
-				<div className='w-h borders'>
-					<p className='second-heading'>TRANSFORM</p>
-					<div className='one'>
-						<div className='w'>
-							<label>W : </label>
-							<input
-								onChange={e =>
-									setActiveWidth(
-										`${e.target.value}${widthUnit}`
-									)
-								}
-								type='number'
-								defaultValue='30'
-							/>
-							<select
-								onChange={e =>
-									setWidthUnit(e.target.value.toLowerCase())
-								}>
-								<option>PX</option>
-								<option>VW</option>
-							</select>
-						</div>
-						<div className='h'>
-							<label>H : </label>
-							<input
-								onChange={e =>
-									setActiveHeight(
-										`${e.target.value}${heightUnit}`
-									)
-								}
-								type='number'
-								defaultValue='30'
-							/>
-							<select
-								onChange={e =>
-									setHeighthUnit(e.target.value.toLowerCase())
-								}>
-								<option>PX</option>
-								<option>VH</option>
-							</select>
-						</div>
-						<div className='x'>
-							<label>X : </label>
-							<input type='number' defaultValue='0' />
-							<select>
-								<option>EM</option>
-								<option>REM</option>
-								<option>PX</option>
-							</select>
-						</div>
-						<div className='y'>
-							<label>Y : </label>
-							<input type='number' defaultValue='0' />
-							<select>
-								<option>EM</option>
-								<option>REM</option>
-								<option>PX</option>
-							</select>
-						</div>
-					</div>
-				</div>
-				<Appearance />
+				<Align style={activeWidth} />
+				<Transform style={activeWidth} />
+				<Appearance style={activeWidth} />
 			</div>
 		</div>
 	)
