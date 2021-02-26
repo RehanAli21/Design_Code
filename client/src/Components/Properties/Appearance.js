@@ -3,9 +3,23 @@ import React, { useState } from 'react'
 const Appearance = () => {
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
-	const [bgColor, setBgColor] = useState('rgb(255, 255, 255, 1)')
+	const [opacity, setOpacity] = useState(1)
+	const [bgColor, setBgColor] = useState(`rgb(255, 255, 255, ${opacity})`)
+	const [bColor, setBColor] = useState('rgb(70,70,70)')
+	const [bSize, setBSize] = useState(1)
+	const [bRadius, setBRdius] = useState('1px')
+	const [bType, setBtype] = useState('solid')
 	const [border, setBorder] = useState('none')
 	const [shadow, setShadow] = useState('none')
+
+	const hexToRGB = (hex, o) => {
+		let hex_color = hex.replace('#', ''),
+			r = parseInt(hex_color.substring(0, 2), 16),
+			g = parseInt(hex_color.substring(2, 4), 16),
+			b = parseInt(hex_color.substring(4, 6), 16)
+
+		return `rgba(${r},${g},${b},${o})`
+	}
 
 	return (
 		<div className='ap borders'>
@@ -13,11 +27,23 @@ const Appearance = () => {
 			<div>
 				<div className='two md'>
 					<label>Color: </label>
-					<input type='color' defaultValue='#ffffff' />
+					<input
+						onChange={e =>
+							setBgColor(hexToRGB(e.target.value, opacity))
+						}
+						type='color'
+						defaultValue='#ffffff'
+					/>
 				</div>
 				<div className='one md'>
 					<label>Opacity: </label>
-					<input type='range' defaultValue='1' min='0' max='1' />
+					<input
+						step='0.1'
+						type='range'
+						defaultValue='1'
+						min='0'
+						max='1'
+					/>
 				</div>
 				<div className='ap-borders md'>
 					<input
@@ -35,7 +61,13 @@ const Appearance = () => {
 						<div className='two'>
 							<div className='mds'>
 								<label>Color: </label>
-								<input type='color' defaultValue='#464646' />
+								<input
+									onChange={e =>
+										setBColor(hexToRGB(e.target.value, 1))
+									}
+									type='color'
+									defaultValue='#464646'
+								/>
 							</div>
 							<div className='mds'>
 								<label>Size: </label>
