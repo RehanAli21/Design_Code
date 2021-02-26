@@ -274,7 +274,6 @@ nav .addpage-div button:focus {
 	background-color: white;
 	min-height: 300px;
 	padding: 0px;
-	margin-top: none !important;
 	transform: scale(0.8);
 	width: 720px;
 	background-color: white;

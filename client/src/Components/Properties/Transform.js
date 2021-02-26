@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 
 const Transform = () => {
-	const [width, setWidth] = useState('')
+	const [width, setWidth] = useState('30px')
+	const [height, setHeight] = useState('30px')
 	const [widthUnit, setWidthUnit] = useState('px')
-	const [height, setHeight] = useState('')
 	const [heightUnit, setHeighthUnit] = useState('px')
-	const [marginLeft, setMarginLeft] = useState(0)
 	const [mlUnit, setMLUnit] = useState('em')
-	const [marginTop, setMarginTop] = useState(0)
 	const [mtUnit, setMTUnit] = useState('em')
+	const [marginLeft, setMarginLeft] = useState(`0em`)
+	const [marginTop, setMarginTop] = useState(`0em`)
 
 	return (
 		<div className='w-h borders'>

@@ -9,8 +9,12 @@ const Appearance = () => {
 	const [bSize, setBSize] = useState(1)
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
-	const [border, setBorder] = useState('none')
-	const [shadow, setShadow] = useState('none')
+	const [border, setBorder] = useState(`${bSize} ${bType} ${bColor}`)
+	const [sX, setSX] = useState('0px')
+	const [sY, setSY] = useState('0px')
+	const [sColor, setSColor] = useState('rgba(0, 0, 0, 1)')
+	const [sBlur, setSBlur] = useState('0px')
+	const [shadow, setShadow] = useState(`${sX} ${sY} ${sBlur} ${sColor}`)
 
 	const hexToRGB = (hex, o) => {
 		let hex_color = hex.replace('#', ''),
@@ -38,6 +42,7 @@ const Appearance = () => {
 				<div className='one md'>
 					<label>Opacity: </label>
 					<input
+						onChange={e => setOpacity(e.target.value)}
 						step='0.1'
 						type='range'
 						defaultValue='1'
@@ -71,15 +76,30 @@ const Appearance = () => {
 							</div>
 							<div className='mds'>
 								<label>Size: </label>
-								<input type='number' defaultValue='1' min='0' />
+								<input
+									onChange={e =>
+										setBSize(`${e.target.value}px`)
+									}
+									type='number'
+									defaultValue='1'
+									min='0'
+								/>
 							</div>
 							<div className='mds'>
 								<label>Radius: </label>
-								<input type='number' defaultValue='1' min='0' />
+								<input
+									onChange={e =>
+										setBRdius(`${e.target.value}px`)
+									}
+									type='number'
+									defaultValue='1'
+									min='0'
+								/>
 							</div>
 							<div className='mds'>
 								<label>Type: </label>
-								<select>
+								<select
+									onChange={e => setBtype(e.target.value)}>
 									<option>solid</option>
 									<option>inset</option>
 									<option>outset</option>
@@ -104,19 +124,38 @@ const Appearance = () => {
 						className='one'>
 						<div>
 							<label>X: </label>
-							<input type='number' min='0' defaultValue='0' />
+							<input
+								onChange={e => setSX(e.target.value)}
+								type='number'
+								defaultValue='0'
+							/>
 						</div>
 						<div>
 							<label>Y: </label>
-							<input type='number' min='0' defaultValue='0' />
+							<input
+								onChange={e => setSY(e.target.value)}
+								type='number'
+								defaultValue='0'
+							/>
 						</div>
 						<div>
 							<label>B: </label>
-							<input type='number' min='0' defaultValue='0' />
+							<input
+								onChange={e => setSBlur(e.target.value)}
+								type='number'
+								min='0'
+								defaultValue='0'
+							/>
 						</div>
 						<div>
 							<label>C: </label>
-							<input type='color' defaultValue='#464646' />
+							<input
+								onChange={e =>
+									setSColor(hexToRGB(e.target.value, 1))
+								}
+								type='color'
+								defaultValue='#464646'
+							/>
 						</div>
 					</div>
 				</div>
