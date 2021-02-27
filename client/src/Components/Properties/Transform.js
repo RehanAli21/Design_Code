@@ -88,13 +88,13 @@ const Transform = ({
 		if (small && medium && large && xlarge) {
 			const changedWidth = `${widths}${widthUnit}`
 			if (width < 540) {
-				setHWProperty(small, setSmall, 'width', changedWidth)
+				setProperties(small, setSmall, 'width', changedWidth)
 			} else if (width < 720) {
-				setHWProperty(medium, setMedium, 'width', changedWidth)
+				setProperties(medium, setMedium, 'width', changedWidth)
 			} else if (width < 970) {
-				setHWProperty(large, setLarge, 'width', changedWidth)
+				setProperties(large, setLarge, 'width', changedWidth)
 			} else {
-				setHWProperty(xlarge, setXlarge, 'width', changedWidth)
+				setProperties(xlarge, setXlarge, 'width', changedWidth)
 			}
 		}
 	}, [widths, widthUnit])
@@ -103,25 +103,46 @@ const Transform = ({
 		if (small && medium && large && xlarge) {
 			const changedHeight = `${heights}${heightUnit}`
 			if (width < 540) {
-				setHWProperty(small, setSmall, 'height', changedHeight)
+				setProperties(small, setSmall, 'height', changedHeight)
 			} else if (width < 720) {
-				setHWProperty(medium, setMedium, 'height', changedHeight)
+				setProperties(medium, setMedium, 'height', changedHeight)
 			} else if (width < 970) {
-				setHWProperty(large, setLarge, 'height', changedHeight)
+				setProperties(large, setLarge, 'height', changedHeight)
 			} else {
-				setHWProperty(xlarge, setXlarge, 'height', changedHeight)
+				setProperties(xlarge, setXlarge, 'height', changedHeight)
 			}
 		}
 	}, [heights, heightUnit])
 
-	const setHWProperty = (obj, setObj, propertyName, property) => {
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const changedmarginLeft = `${marginLeft}${mlUnit}`
+			if (width < 540) {
+				setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
+			} else if (width < 720) {
+				setProperties(
+					medium,
+					setMedium,
+					'marginLeft',
+					changedmarginLeft
+				)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
+			} else {
+				setProperties(
+					xlarge,
+					setXlarge,
+					'marginLeft',
+					changedmarginLeft
+				)
+			}
+		}
+	}, [marginLeft, mlUnit])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
 		setObj(temp)
-	}
-
-	const geta = (obj, property) => {
-		if (obj[property]) obj[property].replace(/[^\d.-]/g, '')
 	}
 
 	return (
