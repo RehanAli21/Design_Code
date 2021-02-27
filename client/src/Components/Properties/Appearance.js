@@ -61,6 +61,23 @@ const Appearance = ({
 		}
 	}, [bgColor, opacity])
 
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const changedShadow = showShadowSection
+				? `${sX} ${sY} ${sBlur} ${hexToRGB(sColor, 1)}`
+				: ''
+			if (width < 540) {
+				setProperties(small, setSmall, 'boxShadow', changedShadow)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'boxShadow', changedShadow)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'boxShadow', changedShadow)
+			} else {
+				setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
+			}
+		}
+	}, [showShadowSection, sX, sY, sColor, sBlur])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -199,7 +216,7 @@ const Appearance = ({
 						<div>
 							<label>X: </label>
 							<input
-								onChange={e => setSX(e.target.value)}
+								onChange={e => setSX(e.target.value + 'px')}
 								type='number'
 								defaultValue='0'
 							/>
@@ -207,7 +224,7 @@ const Appearance = ({
 						<div>
 							<label>Y: </label>
 							<input
-								onChange={e => setSY(e.target.value)}
+								onChange={e => setSY(e.target.value + 'px')}
 								type='number'
 								defaultValue='0'
 							/>
@@ -215,7 +232,7 @@ const Appearance = ({
 						<div>
 							<label>B: </label>
 							<input
-								onChange={e => setSBlur(e.target.value)}
+								onChange={e => setSBlur(e.target.value + 'px')}
 								type='number'
 								min='0'
 								defaultValue='0'
@@ -224,9 +241,7 @@ const Appearance = ({
 						<div>
 							<label>C: </label>
 							<input
-								onChange={e =>
-									setSColor(hexToRGB(e.target.value, 1))
-								}
+								onChange={e => setSColor(e.target.value)}
 								type='color'
 								defaultValue='#464646'
 							/>
