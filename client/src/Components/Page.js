@@ -1,21 +1,16 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage, width, activeElement } = useContext(PageContext)
+	const { pages, activePage, width, render } = useContext(PageContext)
 
 	// const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
 	// const uniqueString = () =>
 	// 	Math.random().toString(36).substring(2, 15) +
 	// 	Math.random().toString(36).substring(2, 15)
-
-	useEffect(() => {
-		if (activeElement && activeElement !== activePage) {
-		}
-	}, [activeElement, activePage])
 
 	const showElements = arr => {
 		const temp = []
@@ -49,7 +44,7 @@ const Page = () => {
 		<div
 			className='full-width'
 			style={{ width: window.screen.width / 1.4 }}>
-			<div>
+			<div className={render ? 'ok' : ''}>
 				<div
 					className='pages-div'
 					id={activePage}

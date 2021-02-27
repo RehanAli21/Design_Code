@@ -8,6 +8,7 @@ export const PageProvider = props => {
 	const [activeElement, setActiveElement] = useState('')
 	const [width, setWidth] = useState(720)
 	const [actionHistory, setActionHistory] = useState({ home: [] })
+	const [render, setRender] = useState(false)
 
 	const setHistory = (parentId, object, index) => {
 		if (parentId && object) {
@@ -65,7 +66,9 @@ export const PageProvider = props => {
 				width,
 				setWidth,
 				setHistory,
-				undoFunc
+				undoFunc,
+				render,
+				setRender
 			}}>
 			{props.children}
 		</PageContext.Provider>

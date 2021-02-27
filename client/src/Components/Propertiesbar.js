@@ -5,12 +5,18 @@ import Appearance from './Properties/Appearance'
 import Transform from './Properties/Transform'
 
 const Propertiesbar = () => {
+	const {
+		pages,
+		activePage,
+		activeElement,
+		width,
+		render,
+		setRender
+	} = useContext(PageContext)
 	const [small, setSmall] = useState({})
 	const [medium, setMedium] = useState({})
 	const [large, setLarge] = useState({})
 	const [xlarge, setXlarge] = useState({})
-
-	const { pages, activePage, activeElement, width } = useContext(PageContext)
 
 	useEffect(() => {
 		setWidthsStates(pages[activePage], activeElement)
@@ -40,8 +46,7 @@ const Propertiesbar = () => {
 
 		if (notBlank && activeElement !== activePage) {
 			setProperties(pages[activePage], activeElement)
-		} else {
-			console.log('eqal')
+			setRender(!render)
 		}
 	}, [small, medium, large, xlarge])
 
@@ -52,7 +57,6 @@ const Propertiesbar = () => {
 				e[1].styles.medium = medium
 				e[1].styles.large = large
 				e[1].styles.xlarge = xlarge
-				console.log(medium)
 				return true
 			} else if (e[2].length > 0) {
 				if (setProperties(e[2], id)) return true
