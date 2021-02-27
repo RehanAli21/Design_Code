@@ -17,10 +17,9 @@ const Appearance = ({
 	const [opacity, setOpacity] = useState(1)
 	const [bgColor, setBgColor] = useState(`rgba(255, 255, 255, 1)`)
 	const [bColor, setBColor] = useState('rgb(70,70,70)')
-	const [bSize, setBSize] = useState(1)
+	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
-	const [border, setBorder] = useState(`1px solid black`)
 	const [sX, setSX] = useState('0px')
 	const [sY, setSY] = useState('0px')
 	const [sColor, setSColor] = useState('rgba(0, 0, 0, 1)')
@@ -61,6 +60,24 @@ const Appearance = ({
 			}
 		}
 	}, [bgColor, opacity])
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const changedBorder = showBorderSection
+				? `${bSize} ${bType} ${hexToRGB(bColor, 1)}`
+				: ''
+
+			if (width < 540) {
+				setProperties(small, setSmall, 'border', changedBorder)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'border', changedBorder)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'border', changedBorder)
+			} else {
+				setProperties(xlarge, setXlarge, 'border', changedBorder)
+			}
+		}
+	}, [showBorderSection, bSize, bType, bColor])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -117,9 +134,7 @@ const Appearance = ({
 							<div className='mds'>
 								<label>Color: </label>
 								<input
-									onChange={e =>
-										setBColor(hexToRGB(e.target.value, 1))
-									}
+									onChange={e => setBColor(e.target.value)}
 									type='color'
 									defaultValue='#464646'
 								/>
