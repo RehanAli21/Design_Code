@@ -336,6 +336,9 @@ nav .addpage-div button:focus {
 .propertybar .align-ul li button:hover {
 	transform: scale(1.1);
 }
+.propertybar .align-ul li button:active {
+	transform: scale(0.9);
+}
 .propertybar .div-property .one {
 	text-align: left;
 }

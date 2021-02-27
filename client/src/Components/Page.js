@@ -14,7 +14,6 @@ const Page = () => {
 
 	useEffect(() => {
 		if (activeElement && activeElement !== activePage) {
-			console.log(document.getElementById(activeElement))
 		}
 	}, [activeElement, activePage])
 

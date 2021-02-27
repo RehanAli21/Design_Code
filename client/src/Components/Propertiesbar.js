@@ -9,27 +9,14 @@ const Propertiesbar = () => {
 	const [medium, setMedium] = useState({})
 	const [large, setLarge] = useState({})
 	const [xlarge, setXlarge] = useState({})
-	const [activeWidth, setActiveWidth] = useState()
 
 	const { pages, activePage, activeElement, width } = useContext(PageContext)
 
 	useEffect(() => {
-		showProperties(pages[activePage], activeElement)
+		setWidthsStates(pages[activePage], activeElement)
 	}, [pages, activePage, activeElement])
 
-	useEffect(() => {
-		setActiveWidth(
-			width < 540
-				? small
-				: width < 720
-				? medium
-				: width < 960
-				? large
-				: xlarge
-		)
-	}, [width, small, medium, large, xlarge])
-
-	const showProperties = (arr, id) => {
+	const setWidthsStates = (arr, id) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
 				setSmall(e[1].styles.small)
@@ -38,7 +25,37 @@ const Propertiesbar = () => {
 				setXlarge(e[1].styles.xlarge)
 				return true
 			} else if (e[2].length > 0) {
-				if (showProperties(e[2], id)) return true
+				if (setWidthsStates(e[2], id)) return true
+			}
+		})
+	}
+
+	useEffect(() => {
+		const notBlank =
+			small !== {} &&
+			medium !== {} &&
+			large !== {} &&
+			xlarge !== {} &&
+			activeElement !== ''
+
+		if (notBlank && activeElement !== activePage) {
+			setProperties(pages[activePage], activeElement)
+		} else {
+			console.log('eqal')
+		}
+	}, [small, medium, large, xlarge])
+
+	const setProperties = (arr, id) => {
+		arr.forEach(e => {
+			if (e[1].id === id) {
+				e[1].styles.small = small
+				e[1].styles.medium = medium
+				e[1].styles.large = large
+				e[1].styles.xlarge = xlarge
+				console.log(medium)
+				return true
+			} else if (e[2].length > 0) {
+				if (setProperties(e[2], id)) return true
 			}
 		})
 	}
@@ -47,9 +64,19 @@ const Propertiesbar = () => {
 		<div className='propertybar'>
 			<p>Properties</p>
 			<div className='div-property'>
-				<Align style={activeWidth} />
-				<Transform style={activeWidth} />
-				<Appearance style={activeWidth} />
+				<Align
+					small={small}
+					setSmall={setSmall}
+					medium={medium}
+					setMedium={setMedium}
+					large={large}
+					setLarge={setLarge}
+					xlarge={xlarge}
+					setXlarge={setXlarge}
+					width={width}
+				/>
+				<Transform />
+				<Appearance />
 			</div>
 		</div>
 	)

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Appearance = () => {
+const Appearance = ({ set }) => {
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [opacity, setOpacity] = useState(1)
