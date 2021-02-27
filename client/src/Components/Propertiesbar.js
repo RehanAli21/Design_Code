@@ -13,6 +13,7 @@ const Propertiesbar = () => {
 		render,
 		setRender
 	} = useContext(PageContext)
+
 	const [small, setSmall] = useState({})
 	const [medium, setMedium] = useState({})
 	const [large, setLarge] = useState({})
@@ -79,7 +80,17 @@ const Propertiesbar = () => {
 					setXlarge={setXlarge}
 					width={width}
 				/>
-				<Transform />
+				<Transform
+					small={small}
+					setSmall={setSmall}
+					medium={medium}
+					setMedium={setMedium}
+					large={large}
+					setLarge={setLarge}
+					xlarge={xlarge}
+					setXlarge={setXlarge}
+					width={width}
+				/>
 				<Appearance />
 			</div>
 		</div>

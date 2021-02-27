@@ -1,6 +1,6 @@
 export const divStyle = {
-	width: '30px',
-	height: '30px',
+	width: '',
+	height: '',
 	margin: '',
 	marginLeft: '',
 	marginRight: '',
