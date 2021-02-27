@@ -61,27 +61,35 @@ const Appearance = ({
 		}
 	}, [bgColor, opacity])
 
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
+
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedBorder = showBorderSection
 				? `${bSize} ${bType} ${hexToRGB(bColor, 1)}`
 				: ''
+			const changedBorderRadius = showBorderSection ? bRadius : ''
 
 			if (width < 540) {
-				setProperties(small, setSmall, 'border', changedBorder)
+				setBorder(small, setSmall, changedBorder, changedBorderRadius)
 			} else if (width < 720) {
-				setProperties(medium, setMedium, 'border', changedBorder)
+				setBorder(medium, setMedium, changedBorder, changedBorderRadius)
 			} else if (width < 970) {
-				setProperties(large, setLarge, 'border', changedBorder)
+				setBorder(large, setLarge, changedBorder, changedBorderRadius)
 			} else {
-				setProperties(xlarge, setXlarge, 'border', changedBorder)
+				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
 			}
 		}
-	}, [showBorderSection, bSize, bType, bColor])
+	}, [showBorderSection, bSize, bType, bColor, bRadius])
 
-	const setProperties = (obj, setObj, propertyName, property) => {
+	const setBorder = (obj, setObj, b, br) => {
 		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
+		temp.border = b
+		temp.borderRadius = br
 		setObj(temp)
 	}
 
@@ -153,6 +161,7 @@ const Appearance = ({
 							<div className='mds'>
 								<label>Radius: </label>
 								<input
+									style={{ width: '100%' }}
 									onChange={e =>
 										setBRdius(`${e.target.value}px`)
 									}
