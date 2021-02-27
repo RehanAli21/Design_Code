@@ -139,6 +139,21 @@ const Transform = ({
 		}
 	}, [marginLeft, mlUnit])
 
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const changedmarginTop = `${marginTop}${mtUnit}`
+			if (width < 540) {
+				setProperties(small, setSmall, 'marginTop', changedmarginTop)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'marginTop', changedmarginTop)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'marginTop', changedmarginTop)
+			} else {
+				setProperties(xlarge, setXlarge, 'marginTop', changedmarginTop)
+			}
+		}
+	}, [marginTop, mtUnit])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
