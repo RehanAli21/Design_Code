@@ -1,20 +1,72 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-const Appearance = ({ set }) => {
+const Appearance = ({
+	small,
+	setSmall,
+	medium,
+	setMedium,
+	large,
+	setLarge,
+	xlarge,
+	setXlarge,
+	width,
+	activeElement
+}) => {
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [opacity, setOpacity] = useState(1)
-	const [bgColor, setBgColor] = useState(`rgb(255, 255, 255, ${opacity})`)
+	const [bgColor, setBgColor] = useState(`rgba(255, 255, 255, 1)`)
 	const [bColor, setBColor] = useState('rgb(70,70,70)')
 	const [bSize, setBSize] = useState(1)
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
-	const [border, setBorder] = useState(`${bSize} ${bType} ${bColor}`)
+	const [border, setBorder] = useState(`1px solid black`)
 	const [sX, setSX] = useState('0px')
 	const [sY, setSY] = useState('0px')
 	const [sColor, setSColor] = useState('rgba(0, 0, 0, 1)')
 	const [sBlur, setSBlur] = useState('0px')
-	const [shadow, setShadow] = useState(`${sX} ${sY} ${sBlur} ${sColor}`)
+	const [shadow, setShadow] = useState(`0px 0px 0px black`)
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const changedBgColor = hexToRGB(bgColor, opacity)
+			if (width < 540) {
+				setProperties(
+					small,
+					setSmall,
+					'backgroundColor',
+					changedBgColor
+				)
+			} else if (width < 720) {
+				setProperties(
+					medium,
+					setMedium,
+					'backgroundColor',
+					changedBgColor
+				)
+			} else if (width < 970) {
+				setProperties(
+					large,
+					setLarge,
+					'backgroundColor',
+					changedBgColor
+				)
+			} else {
+				setProperties(
+					xlarge,
+					setXlarge,
+					'backgroundColor',
+					changedBgColor
+				)
+			}
+		}
+	}, [bgColor, opacity])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
 
 	const hexToRGB = (hex, o) => {
 		let hex_color = hex.replace('#', ''),
@@ -32,9 +84,7 @@ const Appearance = ({ set }) => {
 				<div className='two md'>
 					<label>Color: </label>
 					<input
-						onChange={e =>
-							setBgColor(hexToRGB(e.target.value, opacity))
-						}
+						onChange={e => setBgColor(e.target.value)}
 						type='color'
 						defaultValue='#ffffff'
 					/>
