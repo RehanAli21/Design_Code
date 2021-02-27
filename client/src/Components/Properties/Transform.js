@@ -9,21 +9,84 @@ const Transform = ({
 	setLarge,
 	xlarge,
 	setXlarge,
-	width
+	width,
+	activeElement
 }) => {
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
 	const [widths, setWidths] = useState(`0`)
-	const [heights, setHeights] = useState(`0px`)
+	const [heights, setHeights] = useState(`0`)
 	const [mlUnit, setMLUnit] = useState('em')
 	const [mtUnit, setMTUnit] = useState('em')
-	const [marginLeft, setMarginLeft] = useState(`0${mlUnit}`)
-	const [marginTop, setMarginTop] = useState(`0${mtUnit}`)
+	const [marginLeft, setMarginLeft] = useState(`0`)
+	const [marginTop, setMarginTop] = useState(`0`)
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const widthInput = document.getElementById('a-t-w')
+			const heightInput = document.getElementById('a-t-h')
+			const marginLeftInput = document.getElementById('a-t-ml')
+			const marginTopInput = document.getElementById('a-t-mt')
+
+			if (width < 540) {
+				widthInput.value = small.width
+					? small.width.replace(/[^\d.-]/g, '')
+					: '0'
+				heightInput.value = small.height
+					? small.height.replace(/[^\d.-]/g, '')
+					: '0'
+				marginLeftInput.value = small.marginLeft
+					? small.marginLeft.replace(/[^\d.-]/g, '')
+					: '0'
+				marginTopInput.value = small.marginTop
+					? small.marginTop.replace(/[^\d.-]/g, '')
+					: '0'
+			} else if (width < 720) {
+				widthInput.value = medium.width
+					? medium.width.replace(/[^\d.-]/g, '')
+					: '0'
+				heightInput.value = medium.height
+					? medium.height.replace(/[^\d.-]/g, '')
+					: '0'
+				marginLeftInput.value = medium.marginLeft
+					? medium.marginLeft.replace(/[^\d.-]/g, '')
+					: '0'
+				marginTopInput.value = medium.marginTop
+					? medium.marginTop.replace(/[^\d.-]/g, '')
+					: '0'
+			} else if (width < 970) {
+				widthInput.value = large.width
+					? large.width.replace(/[^\d.-]/g, '')
+					: '0'
+				heightInput.value = large.height
+					? large.height.replace(/[^\d.-]/g, '')
+					: '0'
+				marginLeftInput.value = large.marginLeft
+					? large.marginLeft.replace(/[^\d.-]/g, '')
+					: '0'
+				marginTopInput.value = large.marginTop
+					? large.marginTop.replace(/[^\d.-]/g, '')
+					: '0'
+			} else {
+				widthInput.value = xlarge.width
+					? xlarge.width.replace(/[^\d.-]/g, '')
+					: '0'
+				heightInput.value = xlarge.height
+					? xlarge.height.replace(/[^\d.-]/g, '')
+					: '0'
+				marginLeftInput.value = xlarge.marginLeft
+					? xlarge.marginLeft.replace(/[^\d.-]/g, '')
+					: '0'
+				marginTopInput.value = xlarge.marginTop
+					? xlarge.marginTop.replace(/[^\d.-]/g, '')
+					: '0'
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedWidth = `${widths}${widthUnit}`
-			console.log(changedWidth)
 			if (width < 540) {
 				setHWProperty(small, setSmall, 'width', changedWidth)
 			} else if (width < 720) {
@@ -57,6 +120,10 @@ const Transform = ({
 		setObj(temp)
 	}
 
+	const geta = (obj, property) => {
+		if (obj[property]) obj[property].replace(/[^\d.-]/g, '')
+	}
+
 	return (
 		<div className='w-h borders'>
 			<p className='second-heading'>TRANSFORM</p>
@@ -67,7 +134,6 @@ const Transform = ({
 						id='a-t-w'
 						onChange={e => setWidths(e.target.value)}
 						type='number'
-						defaultValue='0'
 						min='0'
 						max={widthUnit === '%' ? '100' : ''}
 					/>
@@ -85,7 +151,6 @@ const Transform = ({
 						id='a-t-h'
 						onChange={e => setHeights(e.target.value)}
 						type='number'
-						defaultValue='0'
 						min='0'
 						max={heightUnit === '%' ? '100' : ''}
 					/>
@@ -101,11 +166,10 @@ const Transform = ({
 				<div className='x'>
 					<label>X : </label>
 					<input
-						onChange={e =>
-							setMarginLeft(`${e.target.value}${mlUnit}`)
-						}
+						id='a-t-ml'
+						onChange={e => setMarginLeft(e.target.value)}
 						type='number'
-						defaultValue='0'
+						min='0'
 					/>
 					<select
 						onChange={e => setMLUnit(e.target.value.toLowerCase())}>
@@ -117,11 +181,10 @@ const Transform = ({
 				<div className='y'>
 					<label>Y : </label>
 					<input
-						onChange={e =>
-							setMarginTop(`${e.target.value}${mtUnit}`)
-						}
+						id='a-t-mt'
+						onChange={e => setMarginTop(e.target.value)}
 						type='number'
-						defaultValue='0'
+						min='0'
 					/>
 					<select
 						onChange={e => setMTUnit(e.target.value.toLowerCase())}>

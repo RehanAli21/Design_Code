@@ -90,6 +90,8 @@ const Propertiesbar = () => {
 					xlarge={xlarge}
 					setXlarge={setXlarge}
 					width={width}
+					render={render}
+					activeElement={activeElement}
 				/>
 				<Appearance />
 			</div>
