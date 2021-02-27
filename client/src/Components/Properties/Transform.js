@@ -13,8 +13,8 @@ const Transform = ({
 }) => {
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
-	const [widths, setWidths] = useState(`0${widthUnit}`)
-	const [heights, setHeights] = useState(`0${heightUnit}`)
+	const [widths, setWidths] = useState(`0`)
+	const [heights, setHeights] = useState(`0px`)
 	const [mlUnit, setMLUnit] = useState('em')
 	const [mtUnit, setMTUnit] = useState('em')
 	const [marginLeft, setMarginLeft] = useState(`0${mlUnit}`)
@@ -22,29 +22,31 @@ const Transform = ({
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
+			const changedWidth = `${widths}${widthUnit}`
+			console.log(changedWidth)
 			if (width < 540) {
-				setHWProperty(small, setSmall, 'width', widths)
+				setHWProperty(small, setSmall, 'width', changedWidth)
 			} else if (width < 720) {
-				setHWProperty(medium, setMedium, 'width', widths)
+				setHWProperty(medium, setMedium, 'width', changedWidth)
 			} else if (width < 970) {
-				setHWProperty(large, setLarge, 'width', widths)
+				setHWProperty(large, setLarge, 'width', changedWidth)
 			} else {
-				setHWProperty(xlarge, setXlarge, 'width', widths)
+				setHWProperty(xlarge, setXlarge, 'width', changedWidth)
 			}
 		}
 	}, [widths, widthUnit])
 
 	useEffect(() => {
-		console.log(widths)
 		if (small && medium && large && xlarge) {
+			const changedHeight = `${heights}${heightUnit}`
 			if (width < 540) {
-				setHWProperty(small, setSmall, 'height', heights)
+				setHWProperty(small, setSmall, 'height', changedHeight)
 			} else if (width < 720) {
-				setHWProperty(medium, setMedium, 'height', heights)
+				setHWProperty(medium, setMedium, 'height', changedHeight)
 			} else if (width < 970) {
-				setHWProperty(large, setLarge, 'height', heights)
+				setHWProperty(large, setLarge, 'height', changedHeight)
 			} else {
-				setHWProperty(xlarge, setXlarge, 'height', heights)
+				setHWProperty(xlarge, setXlarge, 'height', changedHeight)
 			}
 		}
 	}, [heights, heightUnit])
@@ -62,9 +64,8 @@ const Transform = ({
 				<div className='w'>
 					<label>W : </label>
 					<input
-						onChange={e =>
-							setWidths(`${e.target.value}${widthUnit}`)
-						}
+						id='a-t-w'
+						onChange={e => setWidths(e.target.value)}
 						type='number'
 						defaultValue='0'
 						min='0'
@@ -81,9 +82,8 @@ const Transform = ({
 				<div className='h'>
 					<label>H : </label>
 					<input
-						onChange={e =>
-							setHeights(`${e.target.value}${heightUnit}`)
-						}
+						id='a-t-h'
+						onChange={e => setHeights(e.target.value)}
 						type='number'
 						defaultValue='0'
 						min='0'
