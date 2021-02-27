@@ -24,11 +24,35 @@ const Appearance = ({
 	const [sY, setSY] = useState('0px')
 	const [sColor, setSColor] = useState('rgba(0, 0, 0, 1)')
 	const [sBlur, setSBlur] = useState('0px')
-	const [shadow, setShadow] = useState(`0px 0px 0px black`)
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const bgColorInput = document.getElementById('a-bgcolor')
+
+			if (width < 540) {
+				bgColorInput.value = small.backgroundColor
+					? RGBToHex(small.backgroundColor)
+					: '#ffffff'
+			} else if (width < 720) {
+				bgColorInput.value = medium.backgroundColor
+					? RGBToHex(medium.backgroundColor)
+					: '#ffffff'
+			} else if (width < 970) {
+				bgColorInput.value = large.backgroundColor
+					? RGBToHex(large.backgroundColor)
+					: '#ffffff'
+			} else {
+				bgColorInput.value = xlarge.backgroundColor
+					? RGBToHex(xlarge.backgroundColor)
+					: '#ffffff'
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedBgColor = hexToRGB(bgColor, opacity)
+			console.log(changedBgColor)
 			if (width < 540) {
 				setProperties(
 					small,
@@ -119,6 +143,20 @@ const Appearance = ({
 		return `rgba(${r},${g},${b},${o})`
 	}
 
+	const RGBToHex = color => {
+		const rgba = color.replace(/^rgba?\(|s+|\)$/g, '').split(',')
+		const hex = `#${(
+			(1 << 24) +
+			(parseInt(rgba[0]) << 16) +
+			(parseInt(rgba[1]) << 8) +
+			parseInt(rgba[2])
+		)
+			.toString(16)
+			.slice(1)}`
+
+		return hex
+	}
+
 	return (
 		<div className='ap borders'>
 			<p className='second-heading'>APPEARANCE</p>
@@ -126,6 +164,7 @@ const Appearance = ({
 				<div className='two md'>
 					<label>Color: </label>
 					<input
+						id='a-bgcolor'
 						onChange={e => setBgColor(e.target.value)}
 						type='color'
 						defaultValue='#ffffff'
@@ -134,6 +173,7 @@ const Appearance = ({
 				<div className='one md'>
 					<label>Opacity: </label>
 					<input
+						id='a-bgcolorOpacity'
 						onChange={e => setOpacity(e.target.value)}
 						step='0.1'
 						type='range'

@@ -5,7 +5,7 @@ export const divStyle = {
 	marginTop: '',
 	marginLeft: '',
 	marginRight: '',
-	backgroundColor: 'orange',
+	backgroundColor: '',
 	border: '',
 	borderRadius: '',
 	textAlign: '',
