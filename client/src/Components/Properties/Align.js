@@ -18,12 +18,36 @@ const Align = ({
 		if (small && medium && large && xlarge) {
 			if (width < 540) {
 				setSelfAlignProperty(small, setSmall)
+				if (medium.marginLeft === '' && medium.marginRight === '')
+					setSelfAlignProperty(medium, setMedium)
+				if (large.marginLeft === '' && large.marginRight === '')
+					setSelfAlignProperty(large, setLarge)
+				if (xlarge.marginLeft === '' && xlarge.marginRight === '')
+					setSelfAlignProperty(xlarge, setXlarge)
 			} else if (width < 720) {
 				setSelfAlignProperty(medium, setMedium)
+				if (small.marginLeft === '' && small.marginRight === '')
+					setSelfAlignProperty(small, setSmall)
+				if (large.marginLeft === '' && large.marginRight === '')
+					setSelfAlignProperty(large, setLarge)
+				if (xlarge.marginLeft === '' && xlarge.marginRight === '')
+					setSelfAlignProperty(xlarge, setXlarge)
 			} else if (width < 970) {
 				setSelfAlignProperty(large, setLarge)
+				if (medium.marginLeft === '' && medium.marginRight === '')
+					setSelfAlignProperty(medium, setMedium)
+				if (small.marginLeft === '' && small.marginRight === '')
+					setSelfAlignProperty(small, setSmall)
+				if (xlarge.marginLeft === '' && xlarge.marginRight === '')
+					setSelfAlignProperty(xlarge, setXlarge)
 			} else {
 				setSelfAlignProperty(xlarge, setXlarge)
+				if (medium.marginLeft === '' && medium.marginRight === '')
+					setSelfAlignProperty(medium, setMedium)
+				if (large.marginLeft === '' && large.marginRight === '')
+					setSelfAlignProperty(large, setLarge)
+				if (small.marginLeft === '' && small.marginRight === '')
+					setSelfAlignProperty(small, setSmall)
 			}
 		}
 	}, [selfAlign])
@@ -47,12 +71,24 @@ const Align = ({
 		if (small && medium && large && xlarge) {
 			if (width < 540) {
 				setTextAlignProperty(small, setSmall)
+				if (medium.textAlign) setTextAlignProperty(medium, setMedium)
+				if (large.textAlign) setTextAlignProperty(large, setLarge)
+				if (xlarge.textAlign) setTextAlignProperty(xlarge, setXlarge)
 			} else if (width < 720) {
 				setTextAlignProperty(medium, setMedium)
+				if (small.textAlign) setTextAlignProperty(small, setSmall)
+				if (large.textAlign) setTextAlignProperty(large, setLarge)
+				if (xlarge.textAlign) setTextAlignProperty(xlarge, setXlarge)
 			} else if (width < 970) {
 				setTextAlignProperty(large, setLarge)
+				if (medium.textAlign) setTextAlignProperty(medium, setMedium)
+				if (small.textAlign) setTextAlignProperty(small, setSmall)
+				if (xlarge.textAlign) setTextAlignProperty(xlarge, setXlarge)
 			} else {
 				setTextAlignProperty(xlarge, setXlarge)
+				if (medium.textAlign) setTextAlignProperty(medium, setMedium)
+				if (large.textAlign) setTextAlignProperty(large, setLarge)
+				if (small.textAlign) setTextAlignProperty(small, setSmall)
 			}
 		}
 	}, [textAlign])
