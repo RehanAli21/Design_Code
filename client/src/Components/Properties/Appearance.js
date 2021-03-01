@@ -20,10 +20,12 @@ const Appearance = ({
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
+	const [borderChanged, setBorderChanged] = useState(false)
 	const [sX, setSX] = useState('0px')
 	const [sY, setSY] = useState('0px')
-	const [sColor, setSColor] = useState('rgba(0, 0, 0, 1)')
+	const [sColor, setSColor] = useState('#464646')
 	const [sBlur, setSBlur] = useState('0px')
+	const [shadowChanged, setShadowChanged] = useState(false)
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -33,6 +35,11 @@ const Appearance = ({
 			const bColorInput = document.getElementById('a-b-color')
 			const bSizeInput = document.getElementById('a-b-size')
 			const bTypeInput = document.getElementById('a-b-type')
+			const sActiveInput = document.getElementById('a-s-active')
+			const sXInput = document.getElementById('a-s-x')
+			const sYInput = document.getElementById('a-s-y')
+			const sBlurInput = document.getElementById('a-s-blur')
+			const sColorInput = document.getElementById('a-s-color')
 
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor
@@ -44,7 +51,6 @@ const Appearance = ({
 				if (small.border) {
 					bActiveInput.checked = true
 					setShowBorderSection(true)
-					console.log(small.border.split(' ')[2])
 					bColorInput.value = RGBToHex(small.border.split(' ')[2])
 					bSizeInput.value = small.border.split(' ')[0].split('p')[0]
 					bTypeInput.value = small.border.split(' ')[1]
@@ -54,6 +60,23 @@ const Appearance = ({
 					bColorInput.value = '#ffffff'
 					bSizeInput.value = '0'
 					bTypeInput.value = 'solid'
+				}
+				if (small.boxShadow) {
+					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
+					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
+					sBlurInput.value = large.boxShadow
+						.split(' ')[2]
+						.split('p')[0]
+					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
+					sActiveInput.checked = true
+					setShowShadowSection(true)
+				} else {
+					sXInput.value = '0'
+					sYInput.value = '0'
+					sBlurInput.value = '0'
+					sColorInput.value = '#464646'
+					sActiveInput.checked = false
+					setShowShadowSection(false)
 				}
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor
@@ -65,7 +88,6 @@ const Appearance = ({
 				if (medium.border) {
 					bActiveInput.checked = true
 					setShowBorderSection(true)
-					console.log(medium.border.split(' ')[2])
 					bColorInput.value = RGBToHex(medium.border.split(' ')[2])
 					bSizeInput.value = medium.border.split(' ')[0].split('p')[0]
 					bTypeInput.value = medium.border.split(' ')[1]
@@ -75,6 +97,23 @@ const Appearance = ({
 					bColorInput.value = '#ffffff'
 					bSizeInput.value = '0'
 					bTypeInput.value = 'solid'
+				}
+				if (medium.boxShadow) {
+					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
+					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
+					sBlurInput.value = large.boxShadow
+						.split(' ')[2]
+						.split('p')[0]
+					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
+					sActiveInput.checked = true
+					setShowShadowSection(true)
+				} else {
+					sXInput.value = '0'
+					sYInput.value = '0'
+					sBlurInput.value = '0'
+					sColorInput.value = '#464646'
+					sActiveInput.checked = false
+					setShowShadowSection(false)
 				}
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor
@@ -96,6 +135,23 @@ const Appearance = ({
 					bActiveInput.checked = false
 					setShowBorderSection(false)
 				}
+				if (large.boxShadow) {
+					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
+					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
+					sBlurInput.value = large.boxShadow
+						.split(' ')[2]
+						.split('p')[0]
+					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
+					sActiveInput.checked = true
+					setShowShadowSection(true)
+				} else {
+					sXInput.value = '0'
+					sYInput.value = '0'
+					sBlurInput.value = '0'
+					sColorInput.value = '#464646'
+					sActiveInput.checked = false
+					setShowShadowSection(false)
+				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor
 					? RGBToHex(xlarge.backgroundColor)
@@ -106,7 +162,6 @@ const Appearance = ({
 				if (xlarge.border) {
 					bActiveInput.checked = true
 					setShowBorderSection(true)
-					console.log(xlarge.border.split(' ')[2])
 					bColorInput.value = RGBToHex(xlarge.border.split(' ')[2])
 					bSizeInput.value = xlarge.border.split(' ')[0].split('p')[0]
 					bTypeInput.value = xlarge.border.split(' ')[1]
@@ -116,6 +171,23 @@ const Appearance = ({
 					bColorInput.value = '#ffffff'
 					bSizeInput.value = '0'
 					bTypeInput.value = 'solid'
+				}
+				if (xlarge.boxShadow) {
+					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
+					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
+					sBlurInput.value = large.boxShadow
+						.split(' ')[2]
+						.split('p')[0]
+					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
+					sActiveInput.checked = true
+					setShowShadowSection(true)
+				} else {
+					sXInput.value = '0'
+					sYInput.value = '0'
+					sBlurInput.value = '0'
+					sColorInput.value = '#464646'
+					sActiveInput.checked = false
+					setShowShadowSection(false)
 				}
 			}
 		}
@@ -157,10 +229,11 @@ const Appearance = ({
 	}, [bgColor, opacity])
 
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && shadowChanged) {
 			const changedShadow = showShadowSection
 				? `${sX} ${sY} ${sBlur} ${hexToRGB(sColor, 1)}`
 				: ''
+			console.log(changedShadow)
 			if (width < 540) {
 				setProperties(small, setSmall, 'boxShadow', changedShadow)
 			} else if (width < 720) {
@@ -170,6 +243,8 @@ const Appearance = ({
 			} else {
 				setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
 			}
+
+			setShadowChanged(false)
 		}
 	}, [showShadowSection, sX, sY, sColor, sBlur])
 
@@ -180,7 +255,7 @@ const Appearance = ({
 	}
 
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && borderChanged) {
 			const changedBorder = showBorderSection
 				? `${bSize} ${bType} ${hexToRGB(bColor, 1)}`
 				: ''
@@ -195,6 +270,7 @@ const Appearance = ({
 			} else {
 				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
 			}
+			setBorderChanged(false)
 		}
 	}, [showBorderSection, bSize, bType, bColor, bRadius])
 
@@ -257,7 +333,10 @@ const Appearance = ({
 					<input
 						id='a-b-active'
 						type='checkbox'
-						onChange={e => setShowBorderSection(e.target.checked)}
+						onChange={e => {
+							setBorderChanged(true)
+							setShowBorderSection(e.target.checked)
+						}}
 					/>
 					<span>Border</span>
 					<div
@@ -270,7 +349,10 @@ const Appearance = ({
 								<label>Color: </label>
 								<input
 									id='a-b-color'
-									onChange={e => setBColor(e.target.value)}
+									onChange={e => {
+										setBorderChanged(true)
+										setBColor(e.target.value)
+									}}
 									type='color'
 									defaultValue='#ffffff'
 								/>
@@ -279,9 +361,10 @@ const Appearance = ({
 								<label>Size: </label>
 								<input
 									id='a-b-size'
-									onChange={e =>
+									onChange={e => {
+										setBorderChanged(true)
 										setBSize(`${e.target.value}px`)
-									}
+									}}
 									type='number'
 									defaultValue='1'
 									min='0'
@@ -292,9 +375,10 @@ const Appearance = ({
 								<input
 									id='a-b-radius'
 									style={{ width: '100%' }}
-									onChange={e =>
+									onChange={e => {
+										setBorderChanged(true)
 										setBRdius(`${e.target.value}px`)
-									}
+									}}
 									type='number'
 									defaultValue='1'
 									min='0'
@@ -305,7 +389,10 @@ const Appearance = ({
 								<label>Type: </label>
 								<select
 									id='a-b-type'
-									onChange={e => setBtype(e.target.value)}>
+									onChange={e => {
+										setBorderChanged(true)
+										setBtype(e.target.value)
+									}}>
 									<option>solid</option>
 									<option>inset</option>
 									<option>outset</option>
@@ -317,10 +404,12 @@ const Appearance = ({
 				</div>
 				<div className='shadow'>
 					<input
+						id='a-s-active'
 						type='checkbox'
-						onChange={() =>
+						onChange={() => {
+							setShadowChanged(true)
 							setShowShadowSection(!showShadowSection)
-						}
+						}}
 					/>
 					<span>Shadow</span>
 					<div
@@ -331,7 +420,11 @@ const Appearance = ({
 						<div>
 							<label>X: </label>
 							<input
-								onChange={e => setSX(e.target.value + 'px')}
+								id='a-s-x'
+								onChange={e => {
+									setShadowChanged(true)
+									setSX(e.target.value + 'px')
+								}}
 								type='number'
 								defaultValue='0'
 							/>
@@ -339,7 +432,11 @@ const Appearance = ({
 						<div>
 							<label>Y: </label>
 							<input
-								onChange={e => setSY(e.target.value + 'px')}
+								id='a-s-y'
+								onChange={e => {
+									setShadowChanged(true)
+									setSY(e.target.value + 'px')
+								}}
 								type='number'
 								defaultValue='0'
 							/>
@@ -347,7 +444,11 @@ const Appearance = ({
 						<div>
 							<label>B: </label>
 							<input
-								onChange={e => setSBlur(e.target.value + 'px')}
+								id='a-s-blur'
+								onChange={e => {
+									setShadowChanged(true)
+									setSBlur(e.target.value + 'px')
+								}}
 								type='number'
 								min='0'
 								defaultValue='0'
@@ -356,7 +457,11 @@ const Appearance = ({
 						<div>
 							<label>C: </label>
 							<input
-								onChange={e => setSColor(e.target.value)}
+								id='a-s-color'
+								onChange={e => {
+									setShadowChanged(true)
+									setSColor(e.target.value)
+								}}
 								type='color'
 								defaultValue='#464646'
 							/>
