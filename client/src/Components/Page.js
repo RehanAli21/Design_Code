@@ -60,6 +60,7 @@ const Page = () => {
 								? '5%'
 								: '0%'
 					}}>
+					<div style={{ margin: 'none' }}></div>
 					{showElements(pages[activePage])}
 				</div>
 			</div>

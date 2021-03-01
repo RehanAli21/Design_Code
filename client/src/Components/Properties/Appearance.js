@@ -28,8 +28,23 @@ const Appearance = ({
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const bgColorInput = document.getElementById('a-bgcolor')
+			const bActiveInput = document.getElementById('a-b-active')
 			const bRadiusInput = document.getElementById('a-b-radius')
+			const bColorInput = document.getElementById('a-b-color')
+			const bSizeInput = document.getElementById('a-b-size')
+			const bTypeInput = document.getElementById('a-b-type')
 
+			if (
+				small.border &&
+				medium.border &&
+				large.border &&
+				xlarge.border
+			) {
+				console.log(small.border)
+				console.log(medium.border)
+				console.log(large.border)
+				console.log(xlarge.border)
+			}
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor
 					? RGBToHex(small.backgroundColor)
@@ -37,6 +52,15 @@ const Appearance = ({
 				bRadiusInput.value = small.borderRadius
 					? small.borderRadius.split('p')[0]
 					: '0'
+				if (small.border) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = RGBToHex(small.border.split(' ')[2])
+					bSizeInput.value = small.border.split(' ')[0].split('p')[0]
+				} else {
+					bActiveInput.checked = false
+					setShowBorderSection(false)
+				}
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor
 					? RGBToHex(medium.backgroundColor)
@@ -44,6 +68,15 @@ const Appearance = ({
 				bRadiusInput.value = medium.borderRadius
 					? medium.borderRadius.split('p')[0]
 					: '0'
+				if (medium.border) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = RGBToHex(medium.border.split(' ')[2])
+					bSizeInput.value = medium.border.split(' ')[0].split('p')[0]
+				} else {
+					bActiveInput.checked = false
+					setShowBorderSection(false)
+				}
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor
 					? RGBToHex(large.backgroundColor)
@@ -51,6 +84,15 @@ const Appearance = ({
 				bRadiusInput.value = large.borderRadius
 					? large.borderRadius.split('p')[0]
 					: '0'
+				if (large.border) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = RGBToHex(large.border.split(' ')[2])
+					bSizeInput.value = large.border.split(' ')[0].split('p')[0]
+				} else {
+					bActiveInput.checked = false
+					setShowBorderSection(false)
+				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor
 					? RGBToHex(xlarge.backgroundColor)
@@ -58,6 +100,15 @@ const Appearance = ({
 				bRadiusInput.value = xlarge.borderRadius
 					? xlarge.borderRadius.split('p')[0]
 					: '0'
+				if (xlarge.border) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = RGBToHex(xlarge.border.split(' ')[2])
+					bSizeInput.value = xlarge.border.split(' ')[0].split('p')[0]
+				} else {
+					bActiveInput.checked = false
+					setShowBorderSection(false)
+				}
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
@@ -196,10 +247,9 @@ const Appearance = ({
 				</div>
 				<div className='ap-borders md'>
 					<input
+						id='a-b-active'
 						type='checkbox'
-						onChange={() =>
-							setShowBorderSection(!showBorderSection)
-						}
+						onChange={e => setShowBorderSection(e.target.checked)}
 					/>
 					<span>Border</span>
 					<div
