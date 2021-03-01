@@ -16,7 +16,7 @@ const Appearance = ({
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [opacity, setOpacity] = useState(1)
 	const [bgColor, setBgColor] = useState(`rgba(255, 255, 255, 1)`)
-	const [bColor, setBColor] = useState('rgb(70,70,70)')
+	const [bColor, setBColor] = useState('#ffffff')
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
@@ -34,17 +34,6 @@ const Appearance = ({
 			const bSizeInput = document.getElementById('a-b-size')
 			const bTypeInput = document.getElementById('a-b-type')
 
-			if (
-				small.border &&
-				medium.border &&
-				large.border &&
-				xlarge.border
-			) {
-				console.log(small.border)
-				console.log(medium.border)
-				console.log(large.border)
-				console.log(xlarge.border)
-			}
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor
 					? RGBToHex(small.backgroundColor)
@@ -55,11 +44,16 @@ const Appearance = ({
 				if (small.border) {
 					bActiveInput.checked = true
 					setShowBorderSection(true)
+					console.log(small.border.split(' ')[2])
 					bColorInput.value = RGBToHex(small.border.split(' ')[2])
 					bSizeInput.value = small.border.split(' ')[0].split('p')[0]
+					bTypeInput.value = small.border.split(' ')[1]
 				} else {
 					bActiveInput.checked = false
 					setShowBorderSection(false)
+					bColorInput.value = '#ffffff'
+					bSizeInput.value = '0'
+					bTypeInput.value = 'solid'
 				}
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor
@@ -71,11 +65,16 @@ const Appearance = ({
 				if (medium.border) {
 					bActiveInput.checked = true
 					setShowBorderSection(true)
+					console.log(medium.border.split(' ')[2])
 					bColorInput.value = RGBToHex(medium.border.split(' ')[2])
 					bSizeInput.value = medium.border.split(' ')[0].split('p')[0]
+					bTypeInput.value = medium.border.split(' ')[1]
 				} else {
 					bActiveInput.checked = false
 					setShowBorderSection(false)
+					bColorInput.value = '#ffffff'
+					bSizeInput.value = '0'
+					bTypeInput.value = 'solid'
 				}
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor
@@ -89,7 +88,11 @@ const Appearance = ({
 					setShowBorderSection(true)
 					bColorInput.value = RGBToHex(large.border.split(' ')[2])
 					bSizeInput.value = large.border.split(' ')[0].split('p')[0]
+					bTypeInput.value = large.border.split(' ')[1]
 				} else {
+					bColorInput.value = '#ffffff'
+					bSizeInput.value = '0'
+					bTypeInput.value = 'solid'
 					bActiveInput.checked = false
 					setShowBorderSection(false)
 				}
@@ -103,11 +106,16 @@ const Appearance = ({
 				if (xlarge.border) {
 					bActiveInput.checked = true
 					setShowBorderSection(true)
+					console.log(xlarge.border.split(' ')[2])
 					bColorInput.value = RGBToHex(xlarge.border.split(' ')[2])
 					bSizeInput.value = xlarge.border.split(' ')[0].split('p')[0]
+					bTypeInput.value = xlarge.border.split(' ')[1]
 				} else {
 					bActiveInput.checked = false
 					setShowBorderSection(false)
+					bColorInput.value = '#ffffff'
+					bSizeInput.value = '0'
+					bTypeInput.value = 'solid'
 				}
 			}
 		}
@@ -264,7 +272,7 @@ const Appearance = ({
 									id='a-b-color'
 									onChange={e => setBColor(e.target.value)}
 									type='color'
-									defaultValue='#464646'
+									defaultValue='#ffffff'
 								/>
 							</div>
 							<div className='mds'>
