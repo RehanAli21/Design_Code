@@ -28,23 +28,36 @@ const Appearance = ({
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const bgColorInput = document.getElementById('a-bgcolor')
+			const bRadiusInput = document.getElementById('a-b-radius')
 
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor
 					? RGBToHex(small.backgroundColor)
 					: '#ffffff'
+				bRadiusInput.value = small.borderRadius
+					? small.borderRadius.split('p')[0]
+					: '0'
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor
 					? RGBToHex(medium.backgroundColor)
 					: '#ffffff'
+				bRadiusInput.value = medium.borderRadius
+					? medium.borderRadius.split('p')[0]
+					: '0'
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor
 					? RGBToHex(large.backgroundColor)
 					: '#ffffff'
+				bRadiusInput.value = large.borderRadius
+					? large.borderRadius.split('p')[0]
+					: '0'
 			} else {
 				bgColorInput.value = xlarge.backgroundColor
 					? RGBToHex(xlarge.backgroundColor)
 					: '#ffffff'
+				bRadiusInput.value = xlarge.borderRadius
+					? xlarge.borderRadius.split('p')[0]
+					: '0'
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
@@ -52,7 +65,6 @@ const Appearance = ({
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedBgColor = hexToRGB(bgColor, opacity)
-			console.log(changedBgColor)
 			if (width < 540) {
 				setProperties(
 					small,
@@ -199,6 +211,7 @@ const Appearance = ({
 							<div className='mds'>
 								<label>Color: </label>
 								<input
+									id='a-b-color'
 									onChange={e => setBColor(e.target.value)}
 									type='color'
 									defaultValue='#464646'
@@ -207,6 +220,7 @@ const Appearance = ({
 							<div className='mds'>
 								<label>Size: </label>
 								<input
+									id='a-b-size'
 									onChange={e =>
 										setBSize(`${e.target.value}px`)
 									}
@@ -218,6 +232,7 @@ const Appearance = ({
 							<div className='mds'>
 								<label>Radius: </label>
 								<input
+									id='a-b-radius'
 									style={{ width: '100%' }}
 									onChange={e =>
 										setBRdius(`${e.target.value}px`)
@@ -225,11 +240,13 @@ const Appearance = ({
 									type='number'
 									defaultValue='1'
 									min='0'
+									max='50'
 								/>
 							</div>
 							<div className='mds'>
 								<label>Type: </label>
 								<select
+									id='a-b-type'
 									onChange={e => setBtype(e.target.value)}>
 									<option>solid</option>
 									<option>inset</option>
