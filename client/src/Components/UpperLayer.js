@@ -18,13 +18,13 @@ const UpperLayer = ({
 
 	const move = e => {
 		if (e.pageX > oldx) {
-			if (l < parentWidth - width) setL(l + 1)
+			if (l < parentWidth - w) setL(l + 1)
 		} else if (e.pageX < oldx) {
 			if (l >= 0) setL(l - 1)
 		}
 
 		if (e.pageY > oldy) {
-			if (t < parentHeight - height) setT(t + 1)
+			if (t < parentHeight - h) setT(t + 1)
 		} else if (e.pageY < oldy) {
 			if (t >= 0) setT(t - 1)
 		}
@@ -41,9 +41,9 @@ const UpperLayer = ({
 		}
 
 		if (e.pageY > oldy) {
-			if (height < parentHeight) setH(h + 1)
+			if (h < parentHeight) setH(h + 1)
 		} else if (e.pageY < oldy) {
-			if (height >= 0) setH(h - 1)
+			if (h >= 0) setH(h - 1)
 		}
 
 		oldy = e.pageY
@@ -52,9 +52,9 @@ const UpperLayer = ({
 
 	const HeightChange = e => {
 		if (e.pageY > oldy) {
-			if (height < parentHeight) setH(h + 1)
+			if (h < parentHeight) setH(h + 1)
 		} else if (e.pageY < oldy) {
-			if (height >= 0) setH(h - 1)
+			if (h >= 0) setH(h - 1)
 		}
 
 		oldy = e.pageY
@@ -62,9 +62,9 @@ const UpperLayer = ({
 
 	const WidthChange = e => {
 		if (e.pageX > oldx) {
-			if (width < parentWidth) setW(w + 1)
+			if (w < parentWidth) setW(w + 1)
 		} else if (e.pageX < oldx) {
-			if (width >= 0) setW(w - 1)
+			if (w >= 0) setW(w - 1)
 		}
 		oldx = e.pageX
 	}
