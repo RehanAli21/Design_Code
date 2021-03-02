@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
+import UpperLayer from './UpperLayer'
 
 //This compoenent controls page.
 const Page = () => {
@@ -61,6 +62,14 @@ const Page = () => {
 								: '0%'
 					}}>
 					<div style={{ margin: 'none' }}></div>
+					<UpperLayer
+						parentWidth={width}
+						parentHeight={300}
+						height={50}
+						width={40}
+						marginLeft={0}
+						marginTop={0}
+					/>
 					{showElements(pages[activePage])}
 				</div>
 			</div>

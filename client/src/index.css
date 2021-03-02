@@ -501,28 +501,27 @@ nav .addpage-div button:focus {
 	top: 0px;
 	left: 0px;
 }
-.mover {
+.upper-layer .mover {
 	position: absolute;
 	width: 10px;
 	height: 10px;
 	background-color: var(--main-blue);
-	/* left: 45%; */
-	top: -12px;
+	top: -18px;
 	cursor: move;
 	border-radius: 50%;
 }
-.mover:active {
+.upper-layer .mover:active {
 	transform: scale(1.1);
 }
-.mover .line {
-	height: 5px;
+.upper-layer .mover .line {
+	height: 10px;
 	width: 2px;
 	position: absolute;
-	bottom: -1px;
+	bottom: -5px;
 	left: 40%;
 	background-color: var(--main-blue);
 }
-.top-left {
+.upper-layer .top-left {
 	position: absolute;
 	width: 10px;
 	height: 10px;
@@ -532,7 +531,7 @@ nav .addpage-div button:focus {
 	border-radius: 50%;
 	cursor: se-resize;
 }
-.top-right {
+.upper-layer .top-right {
 	position: absolute;
 	width: 10px;
 	height: 10px;
@@ -542,7 +541,7 @@ nav .addpage-div button:focus {
 	border-radius: 50%;
 	cursor: ne-resize;
 }
-.bottom-left {
+.upper-layer .bottom-left {
 	position: absolute;
 	width: 10px;
 	height: 10px;
@@ -552,7 +551,7 @@ nav .addpage-div button:focus {
 	border-radius: 50%;
 	cursor: sw-resize;
 }
-.bottom-right {
+.upper-layer .bottom-right {
 	position: absolute;
 	width: 10px;
 	height: 10px;
@@ -561,6 +560,45 @@ nav .addpage-div button:focus {
 	bottom: -5px;
 	border-radius: 50%;
 	cursor: nw-resize;
+}
+
+.upper-layer .top {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	top: -6px;
+	background-color: var(--main-blue);
+	border-radius: 50%;
+	cursor: n-resize;
+}
+
+.upper-layer .bottom {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	bottom: -6px;
+	background-color: var(--main-blue);
+	border-radius: 50%;
+	cursor: n-resize;
+}
+
+.upper-layer .left {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	left: -6px;
+	background-color: var(--main-blue);
+	border-radius: 50%;
+	cursor: w-resize;
+}
+.upper-layer .right {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	right: -6px;
+	background-color: var(--main-blue);
+	border-radius: 50%;
+	cursor: w-resize;
 }
 
 /* width */

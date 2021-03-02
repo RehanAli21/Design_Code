@@ -50,6 +50,25 @@ const UpperLayer = ({
 		oldx = e.pageX
 	}
 
+	const HeightChange = e => {
+		if (e.pageY > oldy) {
+			if (height < parentHeight) setH(h + 1)
+		} else if (e.pageY < oldy) {
+			if (height >= 0) setH(h - 1)
+		}
+
+		oldy = e.pageY
+	}
+
+	const WidthChange = e => {
+		if (e.pageX > oldx) {
+			if (width < parentWidth) setW(w + 1)
+		} else if (e.pageX < oldx) {
+			if (width >= 0) setW(w - 1)
+		}
+		oldx = e.pageX
+	}
+
 	return (
 		<div id='ul-container' className='ul-container'>
 			<div
@@ -84,6 +103,26 @@ const UpperLayer = ({
 					id='br'
 					onDrag={widthHeight}
 					className='bottom-right'></div>
+				<div
+					draggable='true'
+					className='top'
+					onDrag={HeightChange}
+					style={{ left: (w - 10) / 2.1 }}></div>
+				<div
+					draggable='true'
+					className='bottom'
+					onDrag={HeightChange}
+					style={{ left: (w - 10) / 2.1 }}></div>
+				<div
+					draggable='true'
+					className='left'
+					onDrag={WidthChange}
+					style={{ top: (h - 10) / 2.1 }}></div>
+				<div
+					draggable='true'
+					className='right'
+					onDrag={WidthChange}
+					style={{ top: (h - 10) / 2.1 }}></div>
 			</div>
 		</div>
 	)
