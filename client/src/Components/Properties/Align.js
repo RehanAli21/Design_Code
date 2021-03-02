@@ -9,7 +9,15 @@ const Align = ({
 	setLarge,
 	xlarge,
 	setXlarge,
-	width
+	width,
+	changedSmall,
+	setChangedSmall,
+	changedMedium,
+	setChangedMedium,
+	changedLarge,
+	setChangedLarge,
+	changedXlarge,
+	setChangedXlarge
 }) => {
 	const [selfAlign, setSelfAlign] = useState('left')
 	const [textAlign, setTextAlign] = useState('left')
@@ -18,36 +26,28 @@ const Align = ({
 		if (small && medium && large && xlarge) {
 			if (width < 540) {
 				setSelfAlignProperty(small, setSmall)
-				if (medium.marginLeft === '' && medium.marginRight === '')
-					setSelfAlignProperty(medium, setMedium)
-				if (large.marginLeft === '' && large.marginRight === '')
-					setSelfAlignProperty(large, setLarge)
-				if (xlarge.marginLeft === '' && xlarge.marginRight === '')
-					setSelfAlignProperty(xlarge, setXlarge)
+				setChangedSmall(true)
+				if (!changedMedium) setSelfAlignProperty(medium, setMedium)
+				if (!changedLarge) setSelfAlignProperty(large, setLarge)
+				if (!changedXlarge) setSelfAlignProperty(xlarge, setXlarge)
 			} else if (width < 720) {
 				setSelfAlignProperty(medium, setMedium)
-				if (small.marginLeft === '' && small.marginRight === '')
-					setSelfAlignProperty(small, setSmall)
-				if (large.marginLeft === '' && large.marginRight === '')
-					setSelfAlignProperty(large, setLarge)
-				if (xlarge.marginLeft === '' && xlarge.marginRight === '')
-					setSelfAlignProperty(xlarge, setXlarge)
+				setChangedMedium(true)
+				if (!changedSmall) setSelfAlignProperty(small, setSmall)
+				if (!changedLarge) setSelfAlignProperty(large, setLarge)
+				if (!changedXlarge) setSelfAlignProperty(xlarge, setXlarge)
 			} else if (width < 970) {
 				setSelfAlignProperty(large, setLarge)
-				if (medium.marginLeft === '' && medium.marginRight === '')
-					setSelfAlignProperty(medium, setMedium)
-				if (small.marginLeft === '' && small.marginRight === '')
-					setSelfAlignProperty(small, setSmall)
-				if (xlarge.marginLeft === '' && xlarge.marginRight === '')
-					setSelfAlignProperty(xlarge, setXlarge)
+				setChangedLarge(true)
+				if (!changedMedium) setSelfAlignProperty(medium, setMedium)
+				if (!changedSmall) setSelfAlignProperty(small, setSmall)
+				if (!changedXlarge) setSelfAlignProperty(xlarge, setXlarge)
 			} else {
 				setSelfAlignProperty(xlarge, setXlarge)
-				if (medium.marginLeft === '' && medium.marginRight === '')
-					setSelfAlignProperty(medium, setMedium)
-				if (large.marginLeft === '' && large.marginRight === '')
-					setSelfAlignProperty(large, setLarge)
-				if (small.marginLeft === '' && small.marginRight === '')
-					setSelfAlignProperty(small, setSmall)
+				setChangedXlarge(true)
+				if (!setChangedMedium) setSelfAlignProperty(medium, setMedium)
+				if (!setChangedLarge) setSelfAlignProperty(large, setLarge)
+				if (!changedSmall) setSelfAlignProperty(small, setSmall)
 			}
 		}
 	}, [selfAlign])
@@ -71,24 +71,28 @@ const Align = ({
 		if (small && medium && large && xlarge) {
 			if (width < 540) {
 				setTextAlignProperty(small, setSmall)
-				if (medium.textAlign) setTextAlignProperty(medium, setMedium)
-				if (large.textAlign) setTextAlignProperty(large, setLarge)
-				if (xlarge.textAlign) setTextAlignProperty(xlarge, setXlarge)
+				setChangedSmall(true)
+				if (!changedMedium) setTextAlignProperty(medium, setMedium)
+				if (!changedLarge) setTextAlignProperty(large, setLarge)
+				if (!changedXlarge) setTextAlignProperty(xlarge, setXlarge)
 			} else if (width < 720) {
 				setTextAlignProperty(medium, setMedium)
-				if (small.textAlign) setTextAlignProperty(small, setSmall)
-				if (large.textAlign) setTextAlignProperty(large, setLarge)
-				if (xlarge.textAlign) setTextAlignProperty(xlarge, setXlarge)
+				setChangedMedium(true)
+				if (!changedSmall) setTextAlignProperty(small, setSmall)
+				if (!changedLarge) setTextAlignProperty(large, setLarge)
+				if (!changedXlarge) setTextAlignProperty(xlarge, setXlarge)
 			} else if (width < 970) {
 				setTextAlignProperty(large, setLarge)
-				if (medium.textAlign) setTextAlignProperty(medium, setMedium)
-				if (small.textAlign) setTextAlignProperty(small, setSmall)
-				if (xlarge.textAlign) setTextAlignProperty(xlarge, setXlarge)
+				setChangedLarge(true)
+				if (!changedMedium) setTextAlignProperty(medium, setMedium)
+				if (!changedSmall) setTextAlignProperty(small, setSmall)
+				if (!changedXlarge) setTextAlignProperty(xlarge, setXlarge)
 			} else {
 				setTextAlignProperty(xlarge, setXlarge)
-				if (medium.textAlign) setTextAlignProperty(medium, setMedium)
-				if (large.textAlign) setTextAlignProperty(large, setLarge)
-				if (small.textAlign) setTextAlignProperty(small, setSmall)
+				setChangedXlarge(true)
+				if (!changedMedium) setTextAlignProperty(medium, setMedium)
+				if (!changedLarge) setTextAlignProperty(large, setLarge)
+				if (!changedSmall) setTextAlignProperty(small, setSmall)
 			}
 		}
 	}, [textAlign])
