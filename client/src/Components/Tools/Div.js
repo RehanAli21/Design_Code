@@ -20,6 +20,12 @@ const Div = ({
 					medium: divStyle,
 					large: divStyle,
 					xlarge: divStyle
+				},
+				styleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false
 				}
 			},
 			[]
