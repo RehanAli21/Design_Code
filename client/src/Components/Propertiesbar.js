@@ -140,6 +140,14 @@ const Propertiesbar = () => {
 					setXlarge={setXlarge}
 					width={width}
 					activeElement={activeElement}
+					changedSmall={changedSmall}
+					setChangedSmall={setChangedSmall}
+					changedMedium={changedMedium}
+					setChangedMedium={setChangedMedium}
+					changedLarge={changedLarge}
+					setChangedLarge={setChangedLarge}
+					changedXlarge={changedXlarge}
+					setChangedXlarge={setChangedXlarge}
 				/>
 			</div>
 		</div>

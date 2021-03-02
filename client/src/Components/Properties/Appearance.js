@@ -10,7 +10,15 @@ const Appearance = ({
 	xlarge,
 	setXlarge,
 	width,
-	activeElement
+	activeElement,
+	changedSmall,
+	setChangedSmall,
+	changedMedium,
+	setChangedMedium,
+	changedLarge,
+	setChangedLarge,
+	changedXlarge,
+	setChangedXlarge
 }) => {
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
@@ -203,6 +211,28 @@ const Appearance = ({
 					'backgroundColor',
 					changedBgColor
 				)
+				setChangedSmall(true)
+				if (!changedMedium)
+					setProperties(
+						medium,
+						setMedium,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedLarge)
+					setProperties(
+						large,
+						setLarge,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedXlarge)
+					setProperties(
+						xlarge,
+						setXlarge,
+						'backgroundColor',
+						changedBgColor
+					)
 			} else if (width < 720) {
 				setProperties(
 					medium,
@@ -210,6 +240,28 @@ const Appearance = ({
 					'backgroundColor',
 					changedBgColor
 				)
+				setChangedMedium(true)
+				if (!changedSmall)
+					setProperties(
+						small,
+						setSmall,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedLarge)
+					setProperties(
+						large,
+						setLarge,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedXlarge)
+					setProperties(
+						xlarge,
+						setXlarge,
+						'backgroundColor',
+						changedBgColor
+					)
 			} else if (width < 970) {
 				setProperties(
 					large,
@@ -217,6 +269,28 @@ const Appearance = ({
 					'backgroundColor',
 					changedBgColor
 				)
+				setChangedLarge(true)
+				if (!changedSmall)
+					setProperties(
+						small,
+						setSmall,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedMedium)
+					setProperties(
+						medium,
+						setMedium,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedXlarge)
+					setProperties(
+						xlarge,
+						setXlarge,
+						'backgroundColor',
+						changedBgColor
+					)
 			} else {
 				setProperties(
 					xlarge,
@@ -224,6 +298,28 @@ const Appearance = ({
 					'backgroundColor',
 					changedBgColor
 				)
+				setChangedXlarge(true)
+				if (!changedSmall)
+					setProperties(
+						small,
+						setSmall,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedMedium)
+					setProperties(
+						medium,
+						setMedium,
+						'backgroundColor',
+						changedBgColor
+					)
+				if (!changedLarge)
+					setProperties(
+						large,
+						setLarge,
+						'backgroundColor',
+						changedBgColor
+					)
 			}
 		}
 	}, [bgColor, opacity])
@@ -236,12 +332,40 @@ const Appearance = ({
 			console.log(changedShadow)
 			if (width < 540) {
 				setProperties(small, setSmall, 'boxShadow', changedShadow)
+				setChangedSmall(true)
+				if (!changedMedium)
+					setProperties(medium, setMedium, 'boxShadow', changedShadow)
+				if (!changedLarge)
+					setProperties(large, setLarge, 'boxShadow', changedShadow)
+				if (!changedXlarge)
+					setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
 			} else if (width < 720) {
 				setProperties(medium, setMedium, 'boxShadow', changedShadow)
+				setChangedMedium(true)
+				if (!changedSmall)
+					setProperties(small, setSmall, 'boxShadow', changedShadow)
+				if (!changedLarge)
+					setProperties(large, setLarge, 'boxShadow', changedShadow)
+				if (!changedXlarge)
+					setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
 			} else if (width < 970) {
 				setProperties(large, setLarge, 'boxShadow', changedShadow)
+				setChangedLarge(true)
+				if (!changedSmall)
+					setProperties(small, setSmall, 'boxShadow', changedShadow)
+				if (!changedMedium)
+					setProperties(medium, setMedium, 'boxShadow', changedShadow)
+				if (!changedXlarge)
+					setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
 			} else {
 				setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
+				setChangedXlarge(true)
+				if (!changedSmall)
+					setProperties(small, setSmall, 'boxShadow', changedShadow)
+				if (!changedMedium)
+					setProperties(medium, setMedium, 'boxShadow', changedShadow)
+				if (!changedLarge)
+					setProperties(large, setLarge, 'boxShadow', changedShadow)
 			}
 
 			setShadowChanged(false)
@@ -263,12 +387,100 @@ const Appearance = ({
 
 			if (width < 540) {
 				setBorder(small, setSmall, changedBorder, changedBorderRadius)
+				setChangedSmall(true)
+				if (!changedMedium)
+					setBorder(
+						medium,
+						setMedium,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedLarge)
+					setBorder(
+						large,
+						setLarge,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedXlarge)
+					setBorder(
+						xlarge,
+						setXlarge,
+						changedBorder,
+						changedBorderRadius
+					)
 			} else if (width < 720) {
 				setBorder(medium, setMedium, changedBorder, changedBorderRadius)
+				setChangedMedium(true)
+				if (!changedSmall)
+					setBorder(
+						small,
+						setSmall,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedLarge)
+					setBorder(
+						large,
+						setLarge,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedXlarge)
+					setBorder(
+						xlarge,
+						setXlarge,
+						changedBorder,
+						changedBorderRadius
+					)
 			} else if (width < 970) {
 				setBorder(large, setLarge, changedBorder, changedBorderRadius)
+				setChangedLarge(true)
+				if (!changedSmall)
+					setBorder(
+						small,
+						setSmall,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedMedium)
+					setBorder(
+						medium,
+						setMedium,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedXlarge)
+					setBorder(
+						xlarge,
+						setXlarge,
+						changedBorder,
+						changedBorderRadius
+					)
 			} else {
 				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+				setChangedXlarge(true)
+				if (!changedSmall)
+					setBorder(
+						small,
+						setSmall,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedMedium)
+					setBorder(
+						medium,
+						setMedium,
+						changedBorder,
+						changedBorderRadius
+					)
+				if (!changedLarge)
+					setBorder(
+						large,
+						setLarge,
+						changedBorder,
+						changedBorderRadius
+					)
 			}
 			setBorderChanged(false)
 		}
