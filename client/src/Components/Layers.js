@@ -13,80 +13,106 @@ const Layers = () => {
 		undoFunc
 	} = useContext(PageContext)
 
+	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
+	//For changing Active Element
 	const changeActiveElement = e => setActiveElement(e)
 
+	//For moving elements up in siblings
 	const levelUp = id => {
-		setHistory()
-
+		//Assigning pages data into new variable
 		const temp = Object.assign({}, pages)
+		//calling function to move element up
 		temp[activePage] = levelUpHelper(temp[activePage], id)
-
+		//Assigning new data to pages data after moving element
 		setPages(temp)
 	}
-	const levelUpHelper = (arr, id) => {
-		const e = []
 
+	//Helper Function For moving elements up, using recursion
+	const levelUpHelper = (arr, id) => {
+		//For assigning data into varible
+		const e = []
+		//Array length > 1, then element can move up
 		if (arr.length > 1) {
+			//Iterating each element
 			for (let i = 0; i < arr.length - 1; i++) {
+				//if element found, then swape with the element
+				//which is above the element.
 				if (arr[i + 1][1].id === id) {
 					let t = arr[i]
 					arr[i] = arr[i + 1]
 					arr[i + 1] = t
 				}
+				//inserting data into array
 				e.push(arr[i])
 			}
+			//above code does'nt insert last element,
+			//so inserting last element.
 			e.push(arr[arr.length - 1])
-
-			e.forEach(ele => {
-				if (ele[2].length > 0) {
-					ele[2] = levelUpHelper(ele[2], id)
-				}
-			})
 		} else {
+			//if Array length < 1, then insert that element
 			arr.forEach(a => e.push(a))
-			e.forEach(ele => {
-				if (ele[2].length > 0) {
-					ele[2] = levelUpHelper(ele[2], id)
-				}
-			})
 		}
+
+		//Doing recursion on each child on array
+		e.forEach(ele => {
+			//Checking if there is a child by child arr length
+			if (ele[2].length > 0) {
+				ele[2] = levelUpHelper(ele[2], id)
+			}
+		})
 
 		return e
 	}
 
+	//For deleting elements
 	const deleteMe = id => {
-		setHistory()
-
+		//Assigning pages data into new variable
 		const temp = Object.assign({}, pages)
-
+		//calling function to delete element
 		temp[activePage] = deleteHelper(temp[activePage], id, activePage)
+		//Assigning new data to pages data after deleting element
 		setPages(temp)
 
 		if (id === activeElement) setActiveElement('')
 	}
+	//Helper Function For deleting elements, using recursion
 	const deleteHelper = (arr, id, parentId) => {
+		//For assigning data into varible
 		const e = []
+		//For undo functinality,
+		//it track the index of deleted element
 		let index = 0
+		//Iterating each element of array
 		arr.forEach(a => {
+			//if element not found, find it into children
+			//and insert data into array
 			if (a[1].id !== id) {
+				//Checks if there are children by length
 				if (a[2].length > 0) {
 					a[2] = deleteHelper(a[2], id, a[1].id)
 				}
+				//inserting data into variable
 				e.push(a)
 			}
+			//If element found seting History, for undo feature
 			if (a[1].id === id) {
 				setHistory(parentId, a, index)
 			}
+			//increamenting index after every child
 			index++
 		})
+		//when all children iterated, then reseting index
 		index = 0
 
 		return e
 	}
 
+	//For hiding feature of elements list
 	const showAndHideList = e => {
+		//targeting four times nextSibling, because fourth sibling
+		//is responsible for showing children list
 		if (
 			e.target.nextSibling.nextSibling.nextSibling.nextSibling
 				.className === 'show-ul'
@@ -99,6 +125,7 @@ const Layers = () => {
 		}
 	}
 
+	//For making list of elements, and showing the list
 	const showLayers = data => {
 		return (
 			<ul className='show-ul'>
