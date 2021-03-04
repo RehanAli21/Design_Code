@@ -1,23 +1,24 @@
 import React, { useContext } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
-import UpperLayer from './UpperLayer'
 
 //This compoenent controls page.
 const Page = () => {
 	const { pages, activePage, width, render } = useContext(PageContext)
 
-	// const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
-
-	// const uniqueString = () =>
-	// 	Math.random().toString(36).substring(2, 15) +
-	// 	Math.random().toString(36).substring(2, 15)
-
+	//For showing elements into a div which acts
+	//as body element/tag, using recursion
 	const showElements = arr => {
+		//Variable for storing elments
 		const temp = []
-		if (!arr) return null
-
+		//Iterating each element
 		arr.forEach(e => {
+			//Inserting elements into variable.
+			//Using React.createElement func for creating elements
+			//first parameter is element type
+			//second parameter giving 3 things, first: key, second: id
+			//	third: different style according to the width of body tag
+			//third parameter for children, if there is children do recursion
 			temp.push(
 				React.createElement(
 					e[0],
@@ -61,15 +62,6 @@ const Page = () => {
 								? '5%'
 								: '0%'
 					}}>
-					<div style={{ margin: 'none' }}></div>
-					<UpperLayer
-						parentWidth={width}
-						parentHeight={300}
-						height={50}
-						width={40}
-						marginLeft={0}
-						marginTop={0}
-					/>
 					{showElements(pages[activePage])}
 				</div>
 			</div>
