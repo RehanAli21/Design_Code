@@ -11,34 +11,46 @@ const Navbar = () => {
 		width,
 		setWidth
 	} = useContext(PageContext)
+	//For storing new page name
 	const [pageName, setPageName] = useState('')
+	//For controlling showing pages menu
 	const [show, setShow] = useState(false)
 
+	//For making first character Capital
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
 
+	//For adding Pages into Pages data
 	const addPage = () => {
-		console.log(pages)
+		//If pageName is blank do nothing
 		if (pageName === '') return
+		//If page alreadt exits, do nothing
 		if (pages.hasOwnProperty(pageName)) return
 
+		//Assigning pages data into new variable
 		const temp = Object.assign({}, pages)
+		//Adding new page and assign array
 		temp[pageName] = []
-
+		//Assigning data after new page insertion into pages data
 		setPages(temp)
 
+		//For reseting page input
 		document.getElementById('addpage-input').value = ''
 	}
 
+	//For changing shown pages
 	const changeActivePage = e => {
+		//If page is not already assigned, then change page
 		if (e.target.innerText !== activePage)
 			setActivePage(e.target.innerText.toLowerCase())
 
 		setShow(!show)
 	}
 
+	//For showing available pages list
 	const showPages = () => {
+		//For storing list of pages
 		const temp = []
-
+		//For inserting list of pages
 		for (let i in pages) {
 			temp.push(
 				<li onClick={changeActivePage} key={uuid()}>
