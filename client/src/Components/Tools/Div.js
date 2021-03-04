@@ -1,6 +1,7 @@
 import React from 'react'
 import { divStyle } from '../Styles/divStyle'
 
+//This component is for adding div element
 const Div = ({
 	activeElement,
 	activePage,
@@ -9,8 +10,12 @@ const Div = ({
 	setPages,
 	pages
 }) => {
+	//For adding element into pages data
 	const addDiv = () => {
+		//Assigning new variable pages data,
+		//For inserting div element
 		const temp = Object.assign({}, pages)
+		//For holding all data of a div element
 		const div = [
 			'div',
 			{
@@ -30,7 +35,7 @@ const Div = ({
 			},
 			[]
 		]
-
+		//if inserting div into body
 		if (activeElement === activePage) {
 			temp[activePage].push(div)
 		} else {
@@ -40,7 +45,7 @@ const Div = ({
 				div
 			)
 		}
-
+		//Assigning new data into pages data
 		setPages(temp)
 	}
 
