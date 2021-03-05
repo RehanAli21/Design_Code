@@ -1,10 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage, width, render } = useContext(PageContext)
+	const { pages, activePage, width, activeElement, render } = useContext(
+		PageContext
+	)
+	let parent = ''
 
 	//For showing elements into a div which acts
 	//as body element/tag, using recursion
@@ -40,6 +43,22 @@ const Page = () => {
 		})
 
 		return temp
+	}
+
+	useEffect(() => {
+		findParent(activePage, pages[activePage], activeElement)
+		console.log(parent)
+	}, [activePage, pages, activeElement])
+
+	const findParent = (parentId, arr, id) => {
+		arr.forEach(element => {
+			if (element[1].id === id) {
+				parent = parentId
+				return true
+			} else if (element[2].length > 0) {
+				if (findParent(element[1].id, element[2], id)) return true
+			}
+		})
 	}
 
 	return (
