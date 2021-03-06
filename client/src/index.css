@@ -484,14 +484,6 @@ nav .addpage-div button:focus {
 }
 
 /*For upper layer component*/
-/* .ul-container {
-	width: 200px;
-	height: 200px;
-	margin: 100px auto;
-	position: relative;
-	background-color: white;
-	transform: scale(1.5);
-} */
 .upper-layer {
 	position: absolute;
 	background-color: transparent;
@@ -500,6 +492,7 @@ nav .addpage-div button:focus {
 	height: 80px;
 	top: 0px;
 	left: 0px;
+	z-index: 9999;
 }
 .upper-layer .mover {
 	position: absolute;
