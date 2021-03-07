@@ -253,12 +253,19 @@ const Transform = ({
 	}
 
 	const WidthChange = e => {
-		// if (e.pageX > oldx) {
-		// 	if (w < parentWidth) setW(w + 1)
-		// } else if (e.pageX < oldx) {
-		// 	if (w >= 0) setW(w - 1)
-		// }
-		// oldx = e.pageX
+		const ele = document.getElementById(activeElement)
+		let width = ele.style.width.split('p')[0]
+
+		if (e.pageX > oldx) {
+			width++
+		} else if (e.pageX < oldx) {
+			width--
+		}
+
+		setWidths(width)
+		setWidthUnit('px')
+
+		oldx = e.pageX
 	}
 
 	//For width change from input
