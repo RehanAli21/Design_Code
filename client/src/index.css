@@ -502,6 +502,7 @@ nav .addpage-div button:focus {
 	top: -18px;
 	cursor: move;
 	border-radius: 50%;
+	transform: scale(1.5);
 }
 .upper-layer .mover:active {
 	transform: scale(1.1);

@@ -33,12 +33,6 @@ const Transform = ({
 	const [mtUnit, setMTUnit] = useState('em')
 	const [marginLeft, setMarginLeft] = useState(`0`)
 	const [marginTop, setMarginTop] = useState(`0`)
-	const [l, setL] = useState(0)
-	const [t, setT] = useState(0)
-	const [w, setW] = useState(0)
-	const [h, setH] = useState(0)
-	const [parentWidth, setParentWidth] = useState(0)
-	const [parentHeight, setParentHeight] = useState(0)
 
 	//For Default input values
 	useEffect(() => {
@@ -112,8 +106,6 @@ const Transform = ({
 			if (e !== null) {
 				let p = document.getElementById(activeElement).parentElement
 
-				changeStatesForUpperLayer(p, e)
-
 				const upperLayer = document.getElementById('ul-container')
 				if (upperLayer !== null) {
 					upperLayer.remove()
@@ -134,22 +126,6 @@ const Transform = ({
 						style="left: ${(e.clientWidth - 10) / 2.1}px">
 						<div class='line'></div>
 					</div>
-					<div
-						draggable='true'
-						id='tl'
-						class='top-left size'></div>
-					<div
-						draggable='true'
-						id='tr'
-						class='top-right'></div>
-					<div
-						draggable='true'
-						id='bl'
-						class='bottom-left'></div>
-					<div
-						draggable='true'
-						id='br'
-						class='bottom-right'></div>
 					<div
 						draggable='true'
 						class='top'
@@ -176,11 +152,6 @@ const Transform = ({
 
 				addEvent('mover', move)
 
-				addEvent('tl', widthHeight)
-				addEvent('tr', widthHeight)
-				addEvent('bl', widthHeight)
-				addEvent('br', widthHeight)
-
 				addEvent('upperlayer-l', WidthChange)
 				addEvent('upperlayer-r', WidthChange)
 				addEvent('upperlayer-b', HeightChange)
@@ -192,52 +163,42 @@ const Transform = ({
 	const addEvent = (e, func) =>
 		document.getElementById(e).addEventListener('drag', func)
 
-	const changeStatesForUpperLayer = (p, e) => {
-		setParentWidth(p.clientWidth)
-		setParentHeight(p.clientHeight)
-		setL(e.offsetLeft)
-		setT(e.offsetTop)
-		setW(e.clientWidth)
-		setH(e.clientHeight)
-	}
-
 	const move = e => {
-		// let ml = marginLeft
-		// console.log(ml)
-		// if (e.pageX > oldx) {
-		// 	ml++
-		// } else if (e.pageX < oldx) {
-		// 	if (ml > 0) ml--
-		// }
-		// if (e.pageY > oldy) {
-		// 	if (t < parentHeight - h) setT(t + 1)
-		// } else if (e.pageY < oldy) {
-		// 	if (t >= 0) setT(t - 1)
-		// }
-		// oldy = e.pageY
-		// oldx = e.pageX
-		// console.log(ml)
-		// setMLUnit('px')
-		// setMarginLeft(ml)
-	}
+		let ele = document.getElementById(activeElement)
+		let upperlayer = document.getElementById('ul-container')
+		let ml = ele.style.marginLeft.split('p')[0]
+		let mt = ele.style.marginTop.split('p')[0]
 
-	const widthHeight = e => {
-		// if (e.pageX > oldx) {
-		// 	if (width < parentWidth) setW(w + 1)
-		// } else if (e.pageX < oldx) {
-		// 	if (width >= 0) setW(w - 1)
-		// }
-		// if (e.pageY > oldy) {
-		// 	if (h < parentHeight) setH(h + 1)
-		// } else if (e.pageY < oldy) {
-		// 	if (h >= 0) setH(h - 1)
-		// }
-		// oldy = e.pageY
-		// oldx = e.pageX
+		if (e.pageX > oldx) {
+			ml++
+		} else if (e.pageX < oldx) {
+			if (ml > 0) ml--
+		}
+
+		if (e.pageY > oldy) {
+			mt++
+		} else if (e.pageY < oldy) {
+			if (ml > 0) mt--
+		}
+
+		upperlayer.style.marginLeft = `${ml}px`
+		upperlayer.style.marginTop = `${mt}px`
+
+		setMLUnit('px')
+		setMarginLeft(ml)
+		document.getElementById('a-t-mlu').value = 'px'
+		setMTUnit('px')
+		setMarginTop(mt)
+		document.getElementById('a-t-mtu').value = 'px'
+
+		oldy = e.pageY
+		oldx = e.pageX
 	}
 
 	const HeightChange = e => {
 		const ele = document.getElementById(activeElement)
+		const upperlayer = document.getElementById('ul-container')
+
 		let height = ele.style.height.split('p')[0]
 
 		if (e.pageY > oldy) {
@@ -246,6 +207,7 @@ const Transform = ({
 			height--
 		}
 
+		upperlayer.style.height = `${height}px`
 		setHeights(height)
 		setHeighthUnit('px')
 
@@ -254,6 +216,8 @@ const Transform = ({
 
 	const WidthChange = e => {
 		const ele = document.getElementById(activeElement)
+		const upperlayer = document.getElementById('ul-container')
+
 		let width = ele.style.width.split('p')[0]
 
 		if (e.pageX > oldx) {
@@ -262,6 +226,7 @@ const Transform = ({
 			width--
 		}
 
+		upperlayer.style.width = `${width}px`
 		setWidths(width)
 		setWidthUnit('px')
 
@@ -639,6 +604,7 @@ const Transform = ({
 						min='0'
 					/>
 					<select
+						id='a-t-mlu'
 						onChange={e => setMLUnit(e.target.value.toLowerCase())}>
 						<option>EM</option>
 						<option>REM</option>
@@ -654,6 +620,7 @@ const Transform = ({
 						min='0'
 					/>
 					<select
+						id='a-t-mlt'
 						onChange={e => setMTUnit(e.target.value.toLowerCase())}>
 						<option>EM</option>
 						<option>REM</option>
