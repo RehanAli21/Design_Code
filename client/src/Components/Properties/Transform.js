@@ -157,6 +157,11 @@ const Transform = ({
 				addEvent('upperlayer-b', HeightChange)
 				addEvent('upperlayer-t', HeightChange)
 			}
+		} else if (activeElement === activePage) {
+			const upperLayer = document.getElementById('ul-container')
+			if (upperLayer !== null) {
+				upperLayer.remove()
+			}
 		}
 	}, [activePage, activeElement, width, pages, render])
 
@@ -181,15 +186,19 @@ const Transform = ({
 			if (ml > 0) mt--
 		}
 
-		upperlayer.style.marginLeft = `${ml}px`
-		upperlayer.style.marginTop = `${mt}px`
+		if (upperlayer) {
+			upperlayer.style.marginLeft = `${ml}px`
+			upperlayer.style.marginTop = `${mt}px`
+		}
 
 		setMLUnit('px')
 		setMarginLeft(ml)
-		document.getElementById('a-t-mlu').value = 'px'
 		setMTUnit('px')
 		setMarginTop(mt)
-		document.getElementById('a-t-mtu').value = 'px'
+		if (document.getElementById('a-t-mlu'))
+			document.getElementById('a-t-mlu').value = 'px'
+		if (document.getElementById('a-t-mtu'))
+			document.getElementById('a-t-mtu').value = 'px'
 
 		oldy = e.pageY
 		oldx = e.pageX
