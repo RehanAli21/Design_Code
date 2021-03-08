@@ -44,64 +44,31 @@ const Transform = ({
 			const marginTopInput = document.getElementById('a-t-mt')
 
 			if (width < 540) {
-				widthInput.value = small.width
-					? small.width.replace(/[^\d.-]/g, '')
-					: '0'
-				heightInput.value = small.height
-					? small.height.replace(/[^\d.-]/g, '')
-					: '0'
-				marginLeftInput.value = small.marginLeft
-					? small.marginLeft.replace(/[^\d.-]/g, '')
-					: '0'
-				marginTopInput.value = small.marginTop
-					? small.marginTop.replace(/[^\d.-]/g, '')
-					: '0'
+				widthInput.value = small.width ? small.width.replace(/[^\d.-]/g, '') : '0'
+				heightInput.value = small.height ? small.height.replace(/[^\d.-]/g, '') : '0'
+				marginLeftInput.value = small.marginLeft ? small.marginLeft.replace(/[^\d.-]/g, '') : '0'
+				marginTopInput.value = small.marginTop ? small.marginTop.replace(/[^\d.-]/g, '') : '0'
 			} else if (width < 720) {
-				widthInput.value = medium.width
-					? medium.width.replace(/[^\d.-]/g, '')
-					: '0'
-				heightInput.value = medium.height
-					? medium.height.replace(/[^\d.-]/g, '')
-					: '0'
-				marginLeftInput.value = medium.marginLeft
-					? medium.marginLeft.replace(/[^\d.-]/g, '')
-					: '0'
-				marginTopInput.value = medium.marginTop
-					? medium.marginTop.replace(/[^\d.-]/g, '')
-					: '0'
+				widthInput.value = medium.width ? medium.width.replace(/[^\d.-]/g, '') : '0'
+				heightInput.value = medium.height ? medium.height.replace(/[^\d.-]/g, '') : '0'
+				marginLeftInput.value = medium.marginLeft ? medium.marginLeft.replace(/[^\d.-]/g, '') : '0'
+				marginTopInput.value = medium.marginTop ? medium.marginTop.replace(/[^\d.-]/g, '') : '0'
 			} else if (width < 970) {
-				widthInput.value = large.width
-					? large.width.replace(/[^\d.-]/g, '')
-					: '0'
-				heightInput.value = large.height
-					? large.height.replace(/[^\d.-]/g, '')
-					: '0'
-				marginLeftInput.value = large.marginLeft
-					? large.marginLeft.replace(/[^\d.-]/g, '')
-					: '0'
-				marginTopInput.value = large.marginTop
-					? large.marginTop.replace(/[^\d.-]/g, '')
-					: '0'
+				widthInput.value = large.width ? large.width.replace(/[^\d.-]/g, '') : '0'
+				heightInput.value = large.height ? large.height.replace(/[^\d.-]/g, '') : '0'
+				marginLeftInput.value = large.marginLeft ? large.marginLeft.replace(/[^\d.-]/g, '') : '0'
+				marginTopInput.value = large.marginTop ? large.marginTop.replace(/[^\d.-]/g, '') : '0'
 			} else {
-				widthInput.value = xlarge.width
-					? xlarge.width.replace(/[^\d.-]/g, '')
-					: '0'
-				heightInput.value = xlarge.height
-					? xlarge.height.replace(/[^\d.-]/g, '')
-					: '0'
-				marginLeftInput.value = xlarge.marginLeft
-					? xlarge.marginLeft.replace(/[^\d.-]/g, '')
-					: '0'
-				marginTopInput.value = xlarge.marginTop
-					? xlarge.marginTop.replace(/[^\d.-]/g, '')
-					: '0'
+				widthInput.value = xlarge.width ? xlarge.width.replace(/[^\d.-]/g, '') : '0'
+				heightInput.value = xlarge.height ? xlarge.height.replace(/[^\d.-]/g, '') : '0'
+				marginLeftInput.value = xlarge.marginLeft ? xlarge.marginLeft.replace(/[^\d.-]/g, '') : '0'
+				marginTopInput.value = xlarge.marginTop ? xlarge.marginTop.replace(/[^\d.-]/g, '') : '0'
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
-		const conditions =
-			activeElement !== '' && activeElement !== activePage && showLayer
+		const conditions = activeElement !== '' && activeElement !== activePage && showLayer
 
 		if (conditions) {
 			let e = document.getElementById(activeElement)
@@ -116,9 +83,7 @@ const Transform = ({
 				const element = document.createElement('div')
 				element.innerHTML += `<div id='ul-container' class='ul-container'>
 			<div
-			style="width: ${e.clientWidth}px; height: ${e.clientHeight}px; margin-left: ${
-					e.offsetLeft
-				}px; margin-top: ${e.offsetTop}px;"
+			style="width: ${e.clientWidth}px; height: ${e.clientHeight}px; margin-left: ${e.offsetLeft}px; margin-top: ${e.offsetTop}px;"
 					class='upper-layer'
 					id='upper-layer'>
 					<div
@@ -167,8 +132,7 @@ const Transform = ({
 		}
 	}, [activePage, activeElement, width, pages, render, showLayer])
 
-	const addEvent = (e, func) =>
-		document.getElementById(e).addEventListener('drag', func)
+	const addEvent = (e, func) => document.getElementById(e).addEventListener('drag', func)
 
 	const move = e => {
 		let ele = document.getElementById(activeElement)
@@ -197,10 +161,8 @@ const Transform = ({
 		setMarginLeft(ml)
 		setMTUnit('px')
 		setMarginTop(mt)
-		if (document.getElementById('a-t-mlu'))
-			document.getElementById('a-t-mlu').value = 'px'
-		if (document.getElementById('a-t-mtu'))
-			document.getElementById('a-t-mtu').value = 'px'
+		if (document.getElementById('a-t-mlu')) document.getElementById('a-t-mlu').value = 'px'
+		if (document.getElementById('a-t-mtu')) document.getElementById('a-t-mtu').value = 'px'
 
 		oldy = e.pageY
 		oldx = e.pageX
@@ -251,39 +213,27 @@ const Transform = ({
 			if (width < 540) {
 				setProperties(small, setSmall, 'width', changedWidth)
 				setChangedSmall(true)
-				if (!changedMedium)
-					setProperties(medium, setMedium, 'width', changedWidth)
-				if (!changedLarge)
-					setProperties(large, setLarge, 'width', changedWidth)
-				if (!changedXlarge)
-					setProperties(xlarge, setXlarge, 'width', changedWidth)
+				if (!changedMedium) setProperties(medium, setMedium, 'width', changedWidth)
+				if (!changedLarge) setProperties(large, setLarge, 'width', changedWidth)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'width', changedWidth)
 			} else if (width < 720) {
 				setProperties(medium, setMedium, 'width', changedWidth)
 				setChangedMedium(true)
-				if (!changedSmall)
-					setProperties(small, setSmall, 'width', changedWidth)
-				if (!changedLarge)
-					setProperties(large, setLarge, 'width', changedWidth)
-				if (!changedXlarge)
-					setProperties(xlarge, setXlarge, 'width', changedWidth)
+				if (!changedSmall) setProperties(small, setSmall, 'width', changedWidth)
+				if (!changedLarge) setProperties(large, setLarge, 'width', changedWidth)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'width', changedWidth)
 			} else if (width < 970) {
 				setProperties(large, setLarge, 'width', changedWidth)
 				setChangedLarge(true)
-				if (!changedMedium)
-					setProperties(medium, setMedium, 'width', changedWidth)
-				if (!changedSmall)
-					setProperties(small, setSmall, 'width', changedWidth)
-				if (!changedXlarge)
-					setProperties(xlarge, setXlarge, 'width', changedWidth)
+				if (!changedMedium) setProperties(medium, setMedium, 'width', changedWidth)
+				if (!changedSmall) setProperties(small, setSmall, 'width', changedWidth)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'width', changedWidth)
 			} else {
 				setProperties(xlarge, setXlarge, 'width', changedWidth)
 				setChangedXlarge(true)
-				if (!changedMedium)
-					setProperties(medium, setMedium, 'width', changedWidth)
-				if (!changedLarge)
-					setProperties(large, setLarge, 'width', changedWidth)
-				if (!changedSmall)
-					setProperties(small, setSmall, 'width', changedWidth)
+				if (!changedMedium) setProperties(medium, setMedium, 'width', changedWidth)
+				if (!changedLarge) setProperties(large, setLarge, 'width', changedWidth)
+				if (!changedSmall) setProperties(small, setSmall, 'width', changedWidth)
 			}
 		}
 	}, [widths, widthUnit])
@@ -295,39 +245,27 @@ const Transform = ({
 			if (width < 540) {
 				setProperties(small, setSmall, 'height', changedHeight)
 				setChangedSmall(true)
-				if (!changedMedium)
-					setProperties(medium, setMedium, 'height', changedHeight)
-				if (!changedLarge)
-					setProperties(large, setLarge, 'height', changedHeight)
-				if (!changedXlarge)
-					setProperties(xlarge, setXlarge, 'height', changedHeight)
+				if (!changedMedium) setProperties(medium, setMedium, 'height', changedHeight)
+				if (!changedLarge) setProperties(large, setLarge, 'height', changedHeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'height', changedHeight)
 			} else if (width < 720) {
 				setProperties(medium, setMedium, 'height', changedHeight)
 				setChangedMedium(true)
-				if (!changedSmall)
-					setProperties(small, setSmall, 'height', changedHeight)
-				if (!changedLarge)
-					setProperties(large, setLarge, 'height', changedHeight)
-				if (!changedXlarge)
-					setProperties(xlarge, setXlarge, 'height', changedHeight)
+				if (!changedSmall) setProperties(small, setSmall, 'height', changedHeight)
+				if (!changedLarge) setProperties(large, setLarge, 'height', changedHeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'height', changedHeight)
 			} else if (width < 970) {
 				setProperties(large, setLarge, 'height', changedHeight)
 				setChangedLarge(true)
-				if (!changedMedium)
-					setProperties(medium, setMedium, 'height', changedHeight)
-				if (!changedSmall)
-					setProperties(small, setSmall, 'height', changedHeight)
-				if (!changedXlarge)
-					setProperties(xlarge, setXlarge, 'height', changedHeight)
+				if (!changedMedium) setProperties(medium, setMedium, 'height', changedHeight)
+				if (!changedSmall) setProperties(small, setSmall, 'height', changedHeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'height', changedHeight)
 			} else {
 				setProperties(xlarge, setXlarge, 'height', changedHeight)
 				setChangedXlarge(true)
-				if (!changedMedium)
-					setProperties(medium, setMedium, 'height', changedHeight)
-				if (!changedLarge)
-					setProperties(large, setLarge, 'height', changedHeight)
-				if (!changedSmall)
-					setProperties(small, setSmall, 'height', changedHeight)
+				if (!changedMedium) setProperties(medium, setMedium, 'height', changedHeight)
+				if (!changedLarge) setProperties(large, setLarge, 'height', changedHeight)
+				if (!changedSmall) setProperties(small, setSmall, 'height', changedHeight)
 			}
 		}
 	}, [heights, heightUnit])
@@ -343,112 +281,30 @@ const Transform = ({
 			if (width < 540) {
 				setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
 				setChangedSmall(true)
-				if (!changedMedium)
-					setProperties(
-						medium,
-						setMedium,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedLarge)
-					setProperties(
-						large,
-						setLarge,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedXlarge)
-					setProperties(
-						xlarge,
-						setXlarge,
-						'marginLeft',
-						changedmarginLeft
-					)
+				if (!changedMedium) setProperties(medium, setMedium, 'marginLeft', changedmarginLeft)
+				if (!changedLarge) setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginLeft', changedmarginLeft)
 			} else if (width < 720) {
-				setProperties(
-					medium,
-					setMedium,
-					'marginLeft',
-					changedmarginLeft
-				)
+				setProperties(medium, setMedium, 'marginLeft', changedmarginLeft)
 				setChangedMedium(true)
 
-				if (!changedSmall)
-					setProperties(
-						small,
-						setSmall,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedLarge)
-					setProperties(
-						large,
-						setLarge,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedXlarge)
-					setProperties(
-						xlarge,
-						setXlarge,
-						'marginLeft',
-						changedmarginLeft
-					)
+				if (!changedSmall) setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
+				if (!changedLarge) setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginLeft', changedmarginLeft)
 			} else if (width < 970) {
 				setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
 				setChangedLarge(true)
 
-				if (!changedSmall)
-					setProperties(
-						small,
-						setSmall,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedMedium)
-					setProperties(
-						medium,
-						setMedium,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedXlarge)
-					setProperties(
-						xlarge,
-						setXlarge,
-						'marginLeft',
-						changedmarginLeft
-					)
+				if (!changedSmall) setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
+				if (!changedMedium) setProperties(medium, setMedium, 'marginLeft', changedmarginLeft)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginLeft', changedmarginLeft)
 			} else {
-				setProperties(
-					xlarge,
-					setXlarge,
-					'marginLeft',
-					changedmarginLeft
-				)
+				setProperties(xlarge, setXlarge, 'marginLeft', changedmarginLeft)
 				setChangedXlarge(true)
 
-				if (!changedSmall)
-					setProperties(
-						small,
-						setSmall,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedMedium)
-					setProperties(
-						medium,
-						setMedium,
-						'marginLeft',
-						changedmarginLeft
-					)
-				if (!changedLarge)
-					setProperties(
-						large,
-						setLarge,
-						'marginLeft',
-						changedmarginLeft
-					)
+				if (!changedSmall) setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
+				if (!changedMedium) setProperties(medium, setMedium, 'marginLeft', changedmarginLeft)
+				if (!changedLarge) setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
 			}
 		}
 	}
@@ -461,102 +317,30 @@ const Transform = ({
 				setProperties(small, setSmall, 'marginTop', changedmarginTop)
 				setChangedSmall(true)
 
-				if (!changedMedium)
-					setProperties(
-						medium,
-						setMedium,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedLarge)
-					setProperties(
-						large,
-						setLarge,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedXlarge)
-					setProperties(
-						xlarge,
-						setXlarge,
-						'marginTop',
-						changedmarginTop
-					)
+				if (!changedMedium) setProperties(medium, setMedium, 'marginTop', changedmarginTop)
+				if (!changedLarge) setProperties(large, setLarge, 'marginTop', changedmarginTop)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginTop', changedmarginTop)
 			} else if (width < 720) {
 				setProperties(medium, setMedium, 'marginTop', changedmarginTop)
 				setChangedMedium(true)
 
-				if (!changedSmall)
-					setProperties(
-						small,
-						setSmall,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedLarge)
-					setProperties(
-						large,
-						setLarge,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedXlarge)
-					setProperties(
-						xlarge,
-						setXlarge,
-						'marginTop',
-						changedmarginTop
-					)
+				if (!changedSmall) setProperties(small, setSmall, 'marginTop', changedmarginTop)
+				if (!changedLarge) setProperties(large, setLarge, 'marginTop', changedmarginTop)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginTop', changedmarginTop)
 			} else if (width < 970) {
 				setProperties(large, setLarge, 'marginTop', changedmarginTop)
 				setChangedLarge(true)
 
-				if (!changedMedium)
-					setProperties(
-						medium,
-						setMedium,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedSmall)
-					setProperties(
-						small,
-						setSmall,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedXlarge)
-					setProperties(
-						xlarge,
-						setXlarge,
-						'marginTop',
-						changedmarginTop
-					)
+				if (!changedMedium) setProperties(medium, setMedium, 'marginTop', changedmarginTop)
+				if (!changedSmall) setProperties(small, setSmall, 'marginTop', changedmarginTop)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginTop', changedmarginTop)
 			} else {
 				setProperties(xlarge, setXlarge, 'marginTop', changedmarginTop)
 				setChangedXlarge(true)
 
-				if (!changedMedium)
-					setProperties(
-						medium,
-						setMedium,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedLarge)
-					setProperties(
-						large,
-						setLarge,
-						'marginTop',
-						changedmarginTop
-					)
-				if (!changedSmall)
-					setProperties(
-						small,
-						setSmall,
-						'marginTop',
-						changedmarginTop
-					)
+				if (!changedMedium) setProperties(medium, setMedium, 'marginTop', changedmarginTop)
+				if (!changedLarge) setProperties(large, setLarge, 'marginTop', changedmarginTop)
+				if (!changedSmall) setProperties(small, setSmall, 'marginTop', changedmarginTop)
 			}
 		}
 	}, [marginTop, mtUnit])
@@ -573,34 +357,16 @@ const Transform = ({
 			<div className='one'>
 				<div className='w'>
 					<label>W : </label>
-					<input
-						id='a-t-w'
-						onChange={e => setWidths(e.target.value)}
-						type='number'
-						min='0'
-						max={widthUnit === '%' ? '100' : ''}
-					/>
-					<select
-						onChange={e =>
-							setWidthUnit(e.target.value.toLowerCase())
-						}>
+					<input id='a-t-w' onChange={e => setWidths(e.target.value)} type='number' min='0' max={widthUnit === '%' ? '100' : ''} />
+					<select onChange={e => setWidthUnit(e.target.value.toLowerCase())}>
 						<option>PX</option>
 						<option>%</option>
 					</select>
 				</div>
 				<div className='h'>
 					<label>H : </label>
-					<input
-						id='a-t-h'
-						onChange={e => setHeights(e.target.value)}
-						type='number'
-						min='0'
-						max={heightUnit === '%' ? '100' : ''}
-					/>
-					<select
-						onChange={e =>
-							setHeighthUnit(e.target.value.toLowerCase())
-						}>
+					<input id='a-t-h' onChange={e => setHeights(e.target.value)} type='number' min='0' max={heightUnit === '%' ? '100' : ''} />
+					<select onChange={e => setHeighthUnit(e.target.value.toLowerCase())}>
 						<option>PX</option>
 						<option>VH</option>
 						<option>%</option>
@@ -608,15 +374,8 @@ const Transform = ({
 				</div>
 				<div className='x'>
 					<label>X : </label>
-					<input
-						id='a-t-ml'
-						onChange={e => setMarginLeft(e.target.value)}
-						type='number'
-						min='0'
-					/>
-					<select
-						id='a-t-mlu'
-						onChange={e => setMLUnit(e.target.value.toLowerCase())}>
+					<input id='a-t-ml' onChange={e => setMarginLeft(e.target.value)} type='number' min='0' />
+					<select id='a-t-mlu' onChange={e => setMLUnit(e.target.value.toLowerCase())}>
 						<option>EM</option>
 						<option>REM</option>
 						<option>PX</option>
@@ -624,15 +383,8 @@ const Transform = ({
 				</div>
 				<div className='y'>
 					<label>Y : </label>
-					<input
-						id='a-t-mt'
-						onChange={e => setMarginTop(e.target.value)}
-						type='number'
-						min='0'
-					/>
-					<select
-						id='a-t-mlt'
-						onChange={e => setMTUnit(e.target.value.toLowerCase())}>
+					<input id='a-t-mt' onChange={e => setMarginTop(e.target.value)} type='number' min='0' />
+					<select id='a-t-mlt' onChange={e => setMTUnit(e.target.value.toLowerCase())}>
 						<option>EM</option>
 						<option>REM</option>
 						<option>PX</option>

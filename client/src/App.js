@@ -11,12 +11,8 @@ import { PageProvider } from './Components/Contexts/PageContext'
 const App = () => {
 	const [move, setMove] = useState(true)
 
-	document.addEventListener('keydown', e =>
-		e.key.toLowerCase() === 'z' ? setMove(false) : null
-	)
-	document.addEventListener('keyup', e =>
-		e.key.toLowerCase() === 'z' ? setMove(true) : null
-	)
+	document.addEventListener('keydown', e => (e.key.toLowerCase() === 'z' ? setMove(false) : null))
+	document.addEventListener('keyup', e => (e.key.toLowerCase() === 'z' ? setMove(true) : null))
 
 	return (
 		<div>
@@ -25,10 +21,7 @@ const App = () => {
 				<div className='three-section'>
 					<Toolbar />
 					<Layers />
-					<div
-						style={{ cursor: move ? 'default' : 'grab' }}
-						className='main-div'
-						id='main-div'>
+					<div style={{ cursor: move ? 'default' : 'grab' }} className='main-div' id='main-div'>
 						<TransformWrapper
 							options={{
 								disabled: move,

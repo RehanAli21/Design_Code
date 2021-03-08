@@ -28,13 +28,7 @@ const Page = () => {
 						key: uuid(),
 						id: e[1].id,
 						style:
-							width < 540
-								? e[1].styles.small
-								: width < 720
-								? e[1].styles.medium
-								: width < 960
-								? e[1].styles.large
-								: e[1].styles.xlarge
+							width < 540 ? e[1].styles.small : width < 720 ? e[1].styles.medium : width < 960 ? e[1].styles.large : e[1].styles.xlarge
 					},
 					e[2].length > 0 ? showElements(e[2]) : null
 				)
@@ -45,9 +39,7 @@ const Page = () => {
 	}
 
 	return (
-		<div
-			className='full-width'
-			style={{ width: window.screen.width / 1.4 }}>
+		<div className='full-width' style={{ width: window.screen.width / 1.4 }}>
 			<div className={render ? 'ok' : ''}>
 				<div
 					className='pages-div'
@@ -55,14 +47,7 @@ const Page = () => {
 					style={{
 						width: `${width}px`,
 						minWidth: '300px',
-						marginLeft:
-							width < 720
-								? '15%'
-								: width < 1000
-								? '10%'
-								: width < 1500
-								? '5%'
-								: '0%'
+						marginLeft: width < 720 ? '15%' : width < 1000 ? '10%' : width < 1500 ? '5%' : '0%'
 					}}>
 					{showElements(pages[activePage])}
 				</div>

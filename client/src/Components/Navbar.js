@@ -3,14 +3,7 @@ import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Navbar = () => {
-	const {
-		pages,
-		setPages,
-		activePage,
-		setActivePage,
-		width,
-		setWidth
-	} = useContext(PageContext)
+	const { pages, setPages, activePage, setActivePage, width, setWidth } = useContext(PageContext)
 	//For storing new page name
 	const [pageName, setPageName] = useState('')
 	//For controlling showing pages menu
@@ -40,8 +33,7 @@ const Navbar = () => {
 	//For changing shown pages
 	const changeActivePage = e => {
 		//If page is not already assigned, then change page
-		if (e.target.innerText !== activePage)
-			setActivePage(e.target.innerText.toLowerCase())
+		if (e.target.innerText !== activePage) setActivePage(e.target.innerText.toLowerCase())
 
 		setShow(!show)
 	}
@@ -67,13 +59,9 @@ const Navbar = () => {
 			<div>
 				<p onClick={() => setShow(!show)}>
 					{toCapitalize(activePage)}
-					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>
-						&#10148;
-					</span>
+					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>&#10148;</span>
 				</p>
-				<ul style={{ display: show ? 'block' : 'none' }}>
-					{showPages()}
-				</ul>
+				<ul style={{ display: show ? 'block' : 'none' }}>{showPages()}</ul>
 			</div>
 			<div className='addpage-div'>
 				<input

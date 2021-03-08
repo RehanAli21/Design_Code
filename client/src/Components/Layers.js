@@ -3,15 +3,7 @@ import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
-	const {
-		pages,
-		setPages,
-		activePage,
-		activeElement,
-		setActiveElement,
-		setHistory,
-		undoFunc
-	} = useContext(PageContext)
+	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc } = useContext(PageContext)
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -113,15 +105,10 @@ const Layers = () => {
 	const showAndHideList = e => {
 		//targeting four times nextSibling, because fourth sibling
 		//is responsible for showing children list
-		if (
-			e.target.nextSibling.nextSibling.nextSibling.nextSibling
-				.className === 'show-ul'
-		) {
-			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
-				'hide-ul'
+		if (e.target.nextSibling.nextSibling.nextSibling.nextSibling.className === 'show-ul') {
+			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className = 'hide-ul'
 		} else {
-			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className =
-				'show-ul'
+			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className = 'show-ul'
 		}
 	}
 
@@ -132,28 +119,16 @@ const Layers = () => {
 				{data.map(e => {
 					return (
 						<li key={uuid()}>
-							<button
-								onClick={e => showAndHideList(e)}
-								className='layer-show'>
+							<button onClick={e => showAndHideList(e)} className='layer-show'>
 								&#10148;
 							</button>
-							<p
-								className={
-									e[1].id === activeElement ? 'bg-blue ' : ''
-								}
-								onClick={() =>
-									changeActiveElement(`${e[1].id}`)
-								}>
+							<p className={e[1].id === activeElement ? 'bg-blue ' : ''} onClick={() => changeActiveElement(`${e[1].id}`)}>
 								{e[0]}
 							</p>
-							<button
-								onClick={() => levelUp(`${e[1].id}`)}
-								className='btn'>
+							<button onClick={() => levelUp(`${e[1].id}`)} className='btn'>
 								^
 							</button>
-							<button
-								onClick={() => deleteMe(`${e[1].id}`)}
-								className='btn'>
+							<button onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
 								X
 							</button>
 							{showLayers(e[2])}
@@ -167,9 +142,7 @@ const Layers = () => {
 	return (
 		<div className='layers'>
 			<div>
-				<p
-					className={activePage === activeElement ? 'bg-blue ' : ''}
-					onClick={() => setActiveElement(activePage)}>
+				<p className={activePage === activeElement ? 'bg-blue ' : ''} onClick={() => setActiveElement(activePage)}>
 					{toCapitalize(activePage)}
 				</p>
 				<button onClick={undoFunc}>U</button>

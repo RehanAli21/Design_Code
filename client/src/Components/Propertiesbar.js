@@ -5,14 +5,7 @@ import Appearance from './Properties/Appearance'
 import Transform from './Properties/Transform'
 
 const Propertiesbar = () => {
-	const {
-		pages,
-		activePage,
-		activeElement,
-		width,
-		render,
-		setRender
-	} = useContext(PageContext)
+	const { pages, activePage, activeElement, width, render, setRender } = useContext(PageContext)
 
 	const [small, setSmall] = useState({})
 	const [medium, setMedium] = useState({})
@@ -47,27 +40,13 @@ const Propertiesbar = () => {
 	}
 
 	useEffect(() => {
-		const notBlank =
-			small !== {} &&
-			medium !== {} &&
-			large !== {} &&
-			xlarge !== {} &&
-			activeElement !== ''
+		const notBlank = small !== {} && medium !== {} && large !== {} && xlarge !== {} && activeElement !== ''
 
 		if (notBlank && activeElement !== activePage) {
 			setProperties(pages[activePage], activeElement)
 			setRender(!render)
 		}
-	}, [
-		small,
-		medium,
-		large,
-		xlarge,
-		changedSmall,
-		changedMedium,
-		changedLarge,
-		changedXlarge
-	])
+	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge])
 
 	const setProperties = (arr, id) => {
 		arr.forEach(e => {
@@ -90,11 +69,7 @@ const Propertiesbar = () => {
 	return (
 		<div className='propertybar'>
 			<div className='showlayer'>
-				<input
-					type='checkbox'
-					defaultChecked='true'
-					onClick={() => setShowLayer(!showLayer)}
-				/>
+				<input type='checkbox' defaultChecked='true' onClick={() => setShowLayer(!showLayer)} />
 				<label>Transform layer</label>
 			</div>
 			<div className='property'>

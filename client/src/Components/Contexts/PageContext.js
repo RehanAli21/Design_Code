@@ -25,11 +25,7 @@ export const PageProvider = props => {
 
 		const length = historyTemp[activePage].length - 1
 
-		undoHelper(
-			pagesTemp[activePage],
-			activePage,
-			historyTemp[activePage][length]
-		)
+		undoHelper(pagesTemp[activePage], activePage, historyTemp[activePage][length])
 
 		historyTemp[activePage].pop()
 

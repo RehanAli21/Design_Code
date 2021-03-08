@@ -5,14 +5,10 @@ import Div from './Tools/Div'
 //This component is for showing list of elemenets,
 //which can be added.
 const Toolbar = () => {
-	const { pages, setPages, activePage, activeElement } = useContext(
-		PageContext
-	)
+	const { pages, setPages, activePage, activeElement } = useContext(PageContext)
 
 	//For Getting unique string for ids of elements
-	const uniqueString = () =>
-		Math.random().toString(36).substring(2, 15) +
-		Math.random().toString(36).substring(2, 15)
+	const uniqueString = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
 	//For finding the parent element,
 	//in which elements will be added, using recursion
