@@ -23,7 +23,8 @@ const Transform = ({
 	changedLarge,
 	setChangedLarge,
 	changedXlarge,
-	setChangedXlarge
+	setChangedXlarge,
+	showLayer
 }) => {
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
@@ -99,7 +100,8 @@ const Transform = ({
 	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
-		const conditions = activeElement !== '' && activeElement !== activePage
+		const conditions =
+			activeElement !== '' && activeElement !== activePage && showLayer
 
 		if (conditions) {
 			let e = document.getElementById(activeElement)
@@ -157,13 +159,13 @@ const Transform = ({
 				addEvent('upperlayer-b', HeightChange)
 				addEvent('upperlayer-t', HeightChange)
 			}
-		} else if (activeElement === activePage) {
+		} else if (activeElement === activePage || !showLayer) {
 			const upperLayer = document.getElementById('ul-container')
 			if (upperLayer !== null) {
 				upperLayer.remove()
 			}
 		}
-	}, [activePage, activeElement, width, pages, render])
+	}, [activePage, activeElement, width, pages, render, showLayer])
 
 	const addEvent = (e, func) =>
 		document.getElementById(e).addEventListener('drag', func)

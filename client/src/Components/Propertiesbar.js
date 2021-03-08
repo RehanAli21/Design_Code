@@ -22,6 +22,7 @@ const Propertiesbar = () => {
 	const [changedMedium, setChangedMedium] = useState(false)
 	const [changedLarge, setChangedLarge] = useState(false)
 	const [changedXlarge, setChangedXlarge] = useState(false)
+	const [showLayer, setShowLayer] = useState(true)
 
 	useEffect(() => {
 		setWidthsStates(pages[activePage], activeElement)
@@ -88,8 +89,15 @@ const Propertiesbar = () => {
 
 	return (
 		<div className='propertybar'>
-			<p>Properties</p>
-			<div className='div-property'>
+			<div className='showlayer'>
+				<input
+					type='checkbox'
+					defaultChecked='true'
+					onClick={() => setShowLayer(!showLayer)}
+				/>
+				<label>Transform layer</label>
+			</div>
+			<div className='property'>
 				<Align
 					small={small}
 					setSmall={setSmall}
@@ -131,6 +139,7 @@ const Propertiesbar = () => {
 					setChangedLarge={setChangedLarge}
 					changedXlarge={changedXlarge}
 					setChangedXlarge={setChangedXlarge}
+					showLayer={showLayer}
 				/>
 				<Appearance
 					small={small}
