@@ -212,32 +212,10 @@ const Appearance = ({
 	useEffect(() => {
 		if (small && medium && large && xlarge && shadowChanged) {
 			const changedShadow = showShadowSection ? `${sX} ${sY} ${sBlur} ${hexToRGB(sColor, 1)}` : ''
-			console.log(changedShadow)
-			if (width < 540) {
-				setProperties(small, setSmall, 'boxShadow', changedShadow)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'boxShadow', changedShadow)
-				if (!changedLarge) setProperties(large, setLarge, 'boxShadow', changedShadow)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'boxShadow', changedShadow)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'boxShadow', changedShadow)
-				if (!changedLarge) setProperties(large, setLarge, 'boxShadow', changedShadow)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'boxShadow', changedShadow)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'boxShadow', changedShadow)
-				if (!changedMedium) setProperties(medium, setMedium, 'boxShadow', changedShadow)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
-			} else {
-				setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'boxShadow', changedShadow)
-				if (!changedMedium) setProperties(medium, setMedium, 'boxShadow', changedShadow)
-				if (!changedLarge) setProperties(large, setLarge, 'boxShadow', changedShadow)
-			}
+			setProperties(small, setSmall, 'boxShadow', changedShadow)
+			setProperties(medium, setMedium, 'boxShadow', changedShadow)
+			setProperties(large, setLarge, 'boxShadow', changedShadow)
+			setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
 
 			setShadowChanged(false)
 		}
