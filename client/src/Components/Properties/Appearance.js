@@ -28,7 +28,7 @@ const Appearance = ({
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
-	const [bSide, setBSide] = useState('All')
+	const [bSide, setBSide] = useState('all')
 	const [borderChanged, setBorderChanged] = useState(false)
 	const [sX, setSX] = useState('0px')
 	const [sY, setSY] = useState('0px')
@@ -232,16 +232,14 @@ const Appearance = ({
 			const changedBorder = showBorderSection ? `${bSize} ${bType} ${hexToRGB(bColor, 1)}` : ''
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
-			if (bSide === 'All') {
-				setBorder(small, setSmall, changedBorder, changedBorderRadius)
-				setBorder(medium, setMedium, changedBorder, changedBorderRadius)
-				setBorder(large, setLarge, changedBorder, changedBorderRadius)
-				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
-			}
-
-			setBorderChanged(false)
+			setBorder(small, setSmall, changedBorder, changedBorderRadius)
+			setBorder(medium, setMedium, changedBorder, changedBorderRadius)
+			setBorder(large, setLarge, changedBorder, changedBorderRadius)
+			setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
 		}
-	}, [showBorderSection, bSize, bType, bColor, bRadius, bSide])
+
+		setBorderChanged(false)
+	}, [showBorderSection, bSize, bType, bColor, bRadius])
 
 	const setBorder = (obj, setObj, b, br) => {
 		const temp = Object.assign({}, obj)
@@ -264,6 +262,26 @@ const Appearance = ({
 		const hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2])).toString(16).slice(1)}`
 
 		return hex
+	}
+
+	const allBorder = () => {}
+	const topBorder = () => {}
+	const bottomBorder = () => {}
+	const leftBorder = () => {}
+	const rightBorder = () => {}
+
+	const removeBorder = (obj, setObj, borderKey) => {
+		const temp = {}
+		for (const key in obj) if (key !== borderKey) temp[key] = obj[key]
+		delete temp[borderKey]
+		console.log('remove: ', temp)
+		setObj(temp)
+	}
+
+	const addBorder = (obj, setObj, borderKey, border) => {
+		const temp = Object.assign({}, obj)
+		temp[borderKey] = border
+		setObj(temp)
 	}
 
 	return (
@@ -356,20 +374,15 @@ const Appearance = ({
 									<option>ridge</option>
 								</select>
 							</div>
-							<div className='mds'>
-								<label>Sides: </label>
-								<select
-									id='a-b-side'
-									onChange={e => {
-										setBorderChanged(true)
-										setBSide(e.target.value)
-									}}>
-									<option>All</option>
-									<option>Top</option>
-									<option>Bottom</option>
-									<option>Left</option>
-									<option>Right</option>
-								</select>
+							<div className='mds' style={{ display: 'grid', gridTemplateColumns: '1fr' }}>
+								<p>Sides: </p>
+								<div style={{ marginTop: '5px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
+									<button onClick={allBorder}>A</button>
+									<button onClick={topBorder}>T</button>
+									<button onClick={bottomBorder}>B</button>
+									<button onClick={leftBorder}>L</button>
+									<button onClick={rightBorder}>R</button>
+								</div>
 							</div>
 						</div>
 					</div>
