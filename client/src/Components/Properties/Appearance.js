@@ -28,7 +28,7 @@ const Appearance = ({
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
-	const [bSide, setBSide] = useState('all')
+	const [bSide, setBSide] = useState('All')
 	const [borderChanged, setBorderChanged] = useState(false)
 	const [sX, setSX] = useState('0px')
 	const [sY, setSY] = useState('0px')
@@ -232,94 +232,11 @@ const Appearance = ({
 			const changedBorder = showBorderSection ? `${bSize} ${bType} ${hexToRGB(bColor, 1)}` : ''
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
-			if (bSide === 'all') {
-				if (width < 540) {
-					setBorder(small, setSmall, changedBorder, changedBorderRadius)
-					setChangedSmall(true)
-					if (!changedMedium) setBorder(medium, setMedium, changedBorder, changedBorderRadius)
-					if (!changedLarge) setBorder(large, setLarge, changedBorder, changedBorderRadius)
-					if (!changedXlarge) setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
-				} else if (width < 720) {
-					setBorder(medium, setMedium, changedBorder, changedBorderRadius)
-					setChangedMedium(true)
-					if (!changedSmall) setBorder(small, setSmall, changedBorder, changedBorderRadius)
-					if (!changedLarge) setBorder(large, setLarge, changedBorder, changedBorderRadius)
-					if (!changedXlarge) setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
-				} else if (width < 970) {
-					setBorder(large, setLarge, changedBorder, changedBorderRadius)
-					setChangedLarge(true)
-					if (!changedSmall) setBorder(small, setSmall, changedBorder, changedBorderRadius)
-					if (!changedMedium) setBorder(medium, setMedium, changedBorder, changedBorderRadius)
-					if (!changedXlarge) setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
-				} else {
-					setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
-					setChangedXlarge(true)
-					if (!changedSmall) setBorder(small, setSmall, changedBorder, changedBorderRadius)
-					if (!changedMedium) setBorder(medium, setMedium, changedBorder, changedBorderRadius)
-					if (!changedLarge) setBorder(large, setLarge, changedBorder, changedBorderRadius)
-				}
-			} else {
-				if (width < 540) {
-					setSideBorder(small, setSmall, changedBorder, changedBorderRadius, `border${bSide}`)
-					setChangedSmall(true)
-					if (!changedMedium) {
-						setBorder(medium, setMedium, '', changedBorderRadius)
-						setSideBorder(medium, setMedium, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedLarge) {
-						setBorder(large, setLarge, '', changedBorderRadius)
-						setSideBorder(large, setLarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedXlarge) {
-						setBorder(xlarge, setXlarge, '', changedBorderRadius)
-						setSideBorder(xlarge, setXlarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-				} else if (width < 720) {
-					setSideBorder(medium, setMedium, changedBorder, changedBorderRadius, `border${bSide}`)
-					setChangedMedium(true)
-					if (!changedSmall) {
-						setBorder(small, setSmall, '', changedBorderRadius)
-						setSideBorder(small, setSmall, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedLarge) {
-						setBorder(large, setLarge, '', changedBorderRadius)
-						setSideBorder(large, setLarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedXlarge) {
-						setBorder(xlarge, setXlarge, '', changedBorderRadius)
-						setSideBorder(xlarge, setXlarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-				} else if (width < 970) {
-					setSideBorder(large, setLarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					setChangedLarge(true)
-					if (!changedSmall) {
-						setBorder(small, setSmall, '', changedBorderRadius)
-						setSideBorder(small, setSmall, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedMedium) {
-						setBorder(medium, setMedium, '', changedBorderRadius)
-						setSideBorder(medium, setMedium, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedXlarge) {
-						setBorder(xlarge, setXlarge, '', changedBorderRadius)
-						setSideBorder(xlarge, setXlarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-				} else {
-					setSideBorder(xlarge, setXlarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					setChangedXlarge(true)
-					if (!changedSmall) {
-						setBorder(small, setSmall, '', changedBorderRadius)
-						setSideBorder(small, setSmall, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedMedium) {
-						setBorder(medium, setMedium, '', changedBorderRadius)
-						setSideBorder(medium, setMedium, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-					if (!changedLarge) {
-						setBorder(large, setLarge, '', changedBorderRadius)
-						setSideBorder(large, setLarge, changedBorder, changedBorderRadius, `border${bSide}`)
-					}
-				}
+			if (bSide === 'All') {
+				setBorder(small, setSmall, changedBorder, changedBorderRadius)
+				setBorder(medium, setMedium, changedBorder, changedBorderRadius)
+				setBorder(large, setLarge, changedBorder, changedBorderRadius)
+				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
 			}
 
 			setBorderChanged(false)
@@ -329,13 +246,6 @@ const Appearance = ({
 	const setBorder = (obj, setObj, b, br) => {
 		const temp = Object.assign({}, obj)
 		temp.border = b
-		temp.borderRadius = br
-		setObj(temp)
-	}
-
-	const setSideBorder = (obj, setObj, b, br, side) => {
-		const temp = Object.assign({}, obj)
-		temp[side] = b
 		temp.borderRadius = br
 		setObj(temp)
 	}
@@ -393,21 +303,6 @@ const Appearance = ({
 						className='b'>
 						<div className='two'>
 							<div className='mds'>
-								<label>Sides: </label>
-								<select
-									id='a-b-side'
-									onChange={e => {
-										setBorderChanged(true)
-										setBSide(e.target.value.toLowerCase())
-									}}>
-									<option>All</option>
-									<option>Top</option>
-									<option>Bottom</option>
-									<option>Left</option>
-									<option>Right</option>
-								</select>
-							</div>
-							<div className='mds'>
 								<label>Color: </label>
 								<input
 									id='a-b-color'
@@ -459,6 +354,21 @@ const Appearance = ({
 									<option>inset</option>
 									<option>outset</option>
 									<option>ridge</option>
+								</select>
+							</div>
+							<div className='mds'>
+								<label>Sides: </label>
+								<select
+									id='a-b-side'
+									onChange={e => {
+										setBorderChanged(true)
+										setBSide(e.target.value)
+									}}>
+									<option>All</option>
+									<option>Top</option>
+									<option>Bottom</option>
+									<option>Left</option>
+									<option>Right</option>
 								</select>
 							</div>
 						</div>

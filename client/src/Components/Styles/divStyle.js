@@ -7,10 +7,6 @@ export const divStyle = {
 	marginRight: '',
 	backgroundColor: '',
 	border: '',
-	borderTop: '',
-	borderBottom: '',
-	borderLeft: '',
-	borderRight: '',
 	borderRadius: '',
 	textAlign: '',
 	boxShadow: ''
