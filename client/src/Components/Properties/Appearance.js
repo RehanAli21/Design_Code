@@ -232,18 +232,33 @@ const Appearance = ({
 			const changedBorder = showBorderSection ? `${bSize} ${bType} ${hexToRGB(bColor, 1)}` : ''
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
-			setBorder(small, setSmall, changedBorder, changedBorderRadius)
-			setBorder(medium, setMedium, changedBorder, changedBorderRadius)
-			setBorder(large, setLarge, changedBorder, changedBorderRadius)
-			setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+			if (bSide === 'all') {
+				console.log('all')
+				setBorder(small, setSmall, changedBorder, changedBorderRadius)
+				setBorder(medium, setMedium, changedBorder, changedBorderRadius)
+				setBorder(large, setLarge, changedBorder, changedBorderRadius)
+				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+			} else if (bSide === 'top') {
+				console.log('top')
+				setSideBorder(small, setSmall, changedBorder, changedBorderRadius, 'BorderTop')
+				setSideBorder(medium, setMedium, changedBorder, changedBorderRadius, 'BorderTop')
+				setSideBorder(large, setLarge, changedBorder, changedBorderRadius, 'BorderTop')
+				setSideBorder(xlarge, setXlarge, changedBorder, changedBorderRadius, 'BorderTop')
+			}
 		}
 
 		setBorderChanged(false)
-	}, [showBorderSection, bSize, bType, bColor, bRadius])
+	}, [showBorderSection, bSize, bType, bColor, bRadius, bSide])
 
 	const setBorder = (obj, setObj, b, br) => {
 		const temp = Object.assign({}, obj)
 		temp.border = b
+		temp.borderRadius = br
+		setObj(temp)
+	}
+	const setSideBorder = (obj, setObj, b, br, borderSide) => {
+		const temp = Object.assign({}, obj)
+		temp[borderSide] = b
 		temp.borderRadius = br
 		setObj(temp)
 	}
@@ -264,13 +279,46 @@ const Appearance = ({
 		return hex
 	}
 
-	const allBorder = () => {}
+	const allBorder = () => {
+		if (large.borderTop) changeBorder(large, setLarge, 'border', 'borderTop')
+		if (large.borderBottom) changeBorder(large, setLarge, 'border', 'borderBottom')
+		if (large.borderLeft) changeBorder(large, setLarge, 'border', 'borderLeft')
+		if (large.borderRight) changeBorder(large, setLarge, 'border', 'borderRight')
+
+		setBSide('all')
+	}
 	const topBorder = () => {
 		if (large.border) changeBorder(large, setLarge, 'borderTop', 'border')
+		if (large.borderBottom) changeBorder(large, setLarge, 'borderTop', 'borderBottom')
+		if (large.borderLeft) changeBorder(large, setLarge, 'borderTop', 'borderLeft')
+		if (large.borderRight) changeBorder(large, setLarge, 'borderTop', 'borderRight')
+
+		setBSide('top')
 	}
-	const bottomBorder = () => {}
-	const leftBorder = () => {}
-	const rightBorder = () => {}
+	const bottomBorder = () => {
+		if (large.border) changeBorder(large, setLarge, 'borderBottom', 'border')
+		if (large.borderTop) changeBorder(large, setLarge, 'borderBottom', 'borderTop')
+		if (large.borderLeft) changeBorder(large, setLarge, 'borderBottom', 'borderLeft')
+		if (large.borderRight) changeBorder(large, setLarge, 'borderBottom', 'borderRight')
+
+		setBSide('bottom')
+	}
+	const leftBorder = () => {
+		if (large.border) changeBorder(large, setLarge, 'borderLeft', 'border')
+		if (large.borderTop) changeBorder(large, setLarge, 'borderLeft', 'borderTop')
+		if (large.borderBottom) changeBorder(large, setLarge, 'borderLeft', 'borderBottom')
+		if (large.borderRight) changeBorder(large, setLarge, 'borderLeft', 'borderRight')
+
+		setBSide('left')
+	}
+	const rightBorder = () => {
+		if (large.border) changeBorder(large, setLarge, 'borderRight', 'border')
+		if (large.borderTop) changeBorder(large, setLarge, 'borderRight', 'borderTop')
+		if (large.borderBottom) changeBorder(large, setLarge, 'borderRight', 'borderBottom')
+		if (large.borderLeft) changeBorder(large, setLarge, 'borderRight', 'borderLeft')
+
+		setBSide('right')
+	}
 
 	const changeBorder = (obj, setObj, bAdd, bDelete) => {
 		const temp = {}
