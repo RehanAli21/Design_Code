@@ -50,22 +50,29 @@ const Appearance = ({
 			const sBlurInput = document.getElementById('a-s-blur')
 			const sColorInput = document.getElementById('a-s-color')
 
+			if (large.border) {
+				bActiveInput.checked = true
+				setShowBorderSection(true)
+				bColorInput.value = RGBToHex(large.border.split(' ')[2])
+				bSizeInput.value = large.border.split(' ')[0].split('p')[0]
+				bTypeInput.value = large.border.split(' ')[1]
+			} else if (large.borderTop) {
+				bActiveInput.checked = true
+				setShowBorderSection(true)
+				bColorInput.value = RGBToHex(large.borderTop.split(' ')[2])
+				bSizeInput.value = large.borderTop.split(' ')[0].split('p')[0]
+				bTypeInput.value = large.borderTop.split(' ')[1]
+			} else {
+				bColorInput.value = '#ffffff'
+				bSizeInput.value = '0'
+				bTypeInput.value = 'solid'
+				bActiveInput.checked = false
+				setShowBorderSection(false)
+			}
+
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor ? RGBToHex(small.backgroundColor) : '#ffffff'
 				bRadiusInput.value = small.borderRadius ? small.borderRadius.split('p')[0] : '0'
-				if (small.border) {
-					bActiveInput.checked = true
-					setShowBorderSection(true)
-					bColorInput.value = RGBToHex(small.border.split(' ')[2])
-					bSizeInput.value = small.border.split(' ')[0].split('p')[0]
-					bTypeInput.value = small.border.split(' ')[1]
-				} else {
-					bActiveInput.checked = false
-					setShowBorderSection(false)
-					bColorInput.value = '#ffffff'
-					bSizeInput.value = '0'
-					bTypeInput.value = 'solid'
-				}
 				if (small.boxShadow) {
 					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
 					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
@@ -84,19 +91,6 @@ const Appearance = ({
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor ? RGBToHex(medium.backgroundColor) : '#ffffff'
 				bRadiusInput.value = medium.borderRadius ? medium.borderRadius.split('p')[0] : '0'
-				if (medium.border) {
-					bActiveInput.checked = true
-					setShowBorderSection(true)
-					bColorInput.value = RGBToHex(medium.border.split(' ')[2])
-					bSizeInput.value = medium.border.split(' ')[0].split('p')[0]
-					bTypeInput.value = medium.border.split(' ')[1]
-				} else {
-					bActiveInput.checked = false
-					setShowBorderSection(false)
-					bColorInput.value = '#ffffff'
-					bSizeInput.value = '0'
-					bTypeInput.value = 'solid'
-				}
 				if (medium.boxShadow) {
 					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
 					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
@@ -115,19 +109,6 @@ const Appearance = ({
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor ? RGBToHex(large.backgroundColor) : '#ffffff'
 				bRadiusInput.value = large.borderRadius ? large.borderRadius.split('p')[0] : '0'
-				if (large.border) {
-					bActiveInput.checked = true
-					setShowBorderSection(true)
-					bColorInput.value = RGBToHex(large.border.split(' ')[2])
-					bSizeInput.value = large.border.split(' ')[0].split('p')[0]
-					bTypeInput.value = large.border.split(' ')[1]
-				} else {
-					bColorInput.value = '#ffffff'
-					bSizeInput.value = '0'
-					bTypeInput.value = 'solid'
-					bActiveInput.checked = false
-					setShowBorderSection(false)
-				}
 				if (large.boxShadow) {
 					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
 					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
@@ -146,19 +127,7 @@ const Appearance = ({
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? RGBToHex(xlarge.backgroundColor) : '#ffffff'
 				bRadiusInput.value = xlarge.borderRadius ? xlarge.borderRadius.split('p')[0] : '0'
-				if (xlarge.border) {
-					bActiveInput.checked = true
-					setShowBorderSection(true)
-					bColorInput.value = RGBToHex(xlarge.border.split(' ')[2])
-					bSizeInput.value = xlarge.border.split(' ')[0].split('p')[0]
-					bTypeInput.value = xlarge.border.split(' ')[1]
-				} else {
-					bActiveInput.checked = false
-					setShowBorderSection(false)
-					bColorInput.value = '#ffffff'
-					bSizeInput.value = '0'
-					bTypeInput.value = 'solid'
-				}
+
 				if (xlarge.boxShadow) {
 					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
 					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
@@ -233,17 +202,15 @@ const Appearance = ({
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
 			if (bSide === 'all') {
-				console.log('all')
 				setBorder(small, setSmall, changedBorder, changedBorderRadius)
 				setBorder(medium, setMedium, changedBorder, changedBorderRadius)
 				setBorder(large, setLarge, changedBorder, changedBorderRadius)
 				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
 			} else if (bSide === 'top') {
-				console.log('top')
-				setSideBorder(small, setSmall, changedBorder, changedBorderRadius, 'BorderTop')
-				setSideBorder(medium, setMedium, changedBorder, changedBorderRadius, 'BorderTop')
-				setSideBorder(large, setLarge, changedBorder, changedBorderRadius, 'BorderTop')
-				setSideBorder(xlarge, setXlarge, changedBorder, changedBorderRadius, 'BorderTop')
+				setTopBorder(small, setSmall, changedBorder, changedBorderRadius)
+				setTopBorder(medium, setMedium, changedBorder, changedBorderRadius)
+				setTopBorder(large, setLarge, changedBorder, changedBorderRadius)
+				setTopBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
 			}
 		}
 
@@ -256,9 +223,9 @@ const Appearance = ({
 		temp.borderRadius = br
 		setObj(temp)
 	}
-	const setSideBorder = (obj, setObj, b, br, borderSide) => {
+	const setTopBorder = (obj, setObj, b, br) => {
 		const temp = Object.assign({}, obj)
-		temp[borderSide] = b
+		temp.borderTop = b
 		temp.borderRadius = br
 		setObj(temp)
 	}
