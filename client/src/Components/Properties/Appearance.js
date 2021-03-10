@@ -265,22 +265,19 @@ const Appearance = ({
 	}
 
 	const allBorder = () => {}
-	const topBorder = () => {}
+	const topBorder = () => {
+		if (large.border) changeBorder(large, setLarge, 'borderTop', 'border')
+	}
 	const bottomBorder = () => {}
 	const leftBorder = () => {}
 	const rightBorder = () => {}
 
-	const removeBorder = (obj, setObj, borderKey) => {
+	const changeBorder = (obj, setObj, bAdd, bDelete) => {
 		const temp = {}
-		for (const key in obj) if (key !== borderKey) temp[key] = obj[key]
-		delete temp[borderKey]
-		console.log('remove: ', temp)
-		setObj(temp)
-	}
-
-	const addBorder = (obj, setObj, borderKey, border) => {
-		const temp = Object.assign({}, obj)
-		temp[borderKey] = border
+		for (const key in obj) {
+			if (key === bDelete) temp[bAdd] = obj[key]
+			else temp[key] = obj[key]
+		}
 		setObj(temp)
 	}
 
