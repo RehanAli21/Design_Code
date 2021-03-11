@@ -74,6 +74,12 @@ const Appearance = ({
 				bColorInput.value = RGBToHex(large.borderLeft.split(' ')[2])
 				bSizeInput.value = large.borderLeft.split(' ')[0].split('p')[0]
 				bTypeInput.value = large.borderLeft.split(' ')[1]
+			} else if (large.borderRight) {
+				bActiveInput.checked = true
+				setShowBorderSection(true)
+				bColorInput.value = RGBToHex(large.borderRight.split(' ')[2])
+				bSizeInput.value = large.borderRight.split(' ')[0].split('p')[0]
+				bTypeInput.value = large.borderRight.split(' ')[1]
 			} else {
 				bColorInput.value = '#ffffff'
 				bSizeInput.value = '0'
@@ -233,6 +239,11 @@ const Appearance = ({
 				setLeftBorder(medium, setMedium, changedBorder, changedBorderRadius)
 				setLeftBorder(large, setLarge, changedBorder, changedBorderRadius)
 				setLeftBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+			} else if (bSide === 'right') {
+				setRightBorder(small, setSmall, changedBorder, changedBorderRadius)
+				setRightBorder(medium, setMedium, changedBorder, changedBorderRadius)
+				setRightBorder(large, setLarge, changedBorder, changedBorderRadius)
+				setRightBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
 			}
 		}
 
@@ -260,6 +271,12 @@ const Appearance = ({
 	const setLeftBorder = (obj, setObj, b, br) => {
 		const temp = Object.assign({}, obj)
 		temp.borderLeft = b
+		temp.borderRadius = br
+		setObj(temp)
+	}
+	const setRightBorder = (obj, setObj, b, br) => {
+		const temp = Object.assign({}, obj)
+		temp.borderRight = b
 		temp.borderRadius = br
 		setObj(temp)
 	}
@@ -394,10 +411,30 @@ const Appearance = ({
 		setBSide('left')
 	}
 	const rightBorder = () => {
-		if (large.border) changeBorder(large, setLarge, 'borderRight', 'border')
-		if (large.borderTop) changeBorder(large, setLarge, 'borderRight', 'borderTop')
-		if (large.borderBottom) changeBorder(large, setLarge, 'borderRight', 'borderBottom')
-		if (large.borderLeft) changeBorder(large, setLarge, 'borderRight', 'borderLeft')
+		if (large.border) {
+			changeBorder(small, setSmall, 'borderRight', 'border')
+			changeBorder(medium, setMedium, 'borderRight', 'border')
+			changeBorder(large, setLarge, 'borderRight', 'border')
+			changeBorder(xlarge, setXlarge, 'borderRight', 'border')
+		}
+		if (large.borderTop) {
+			changeBorder(small, setSmall, 'borderRight', 'borderTop')
+			changeBorder(medium, setMedium, 'borderRight', 'borderTop')
+			changeBorder(large, setLarge, 'borderRight', 'borderTop')
+			changeBorder(xlarge, setXlarge, 'borderRight', 'borderTop')
+		}
+		if (large.borderBottom) {
+			changeBorder(small, setSmall, 'borderRight', 'borderBottom')
+			changeBorder(medium, setMedium, 'borderRight', 'borderBottom')
+			changeBorder(large, setLarge, 'borderRight', 'borderBottom')
+			changeBorder(xlarge, setXlarge, 'borderRight', 'borderBottom')
+		}
+		if (large.borderLeft) {
+			changeBorder(small, setSmall, 'borderRight', 'borderLeft')
+			changeBorder(medium, setMedium, 'borderRight', 'borderLeft')
+			changeBorder(large, setLarge, 'borderRight', 'borderLeft')
+			changeBorder(xlarge, setXlarge, 'borderRight', 'borderLeft')
+		}
 
 		setBSide('right')
 	}
