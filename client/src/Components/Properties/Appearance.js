@@ -541,11 +541,21 @@ const Appearance = ({
 							<div className='mds' style={{ display: 'grid', gridTemplateColumns: '1fr' }}>
 								<p>Sides: </p>
 								<div style={{ marginTop: '5px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
-									<button onClick={allBorder}>A</button>
-									<button onClick={topBorder}>T</button>
-									<button onClick={bottomBorder}>B</button>
-									<button onClick={leftBorder}>L</button>
-									<button onClick={rightBorder}>R</button>
+									<button className={bSide === 'all' ? 'bb' : 'none'} onClick={allBorder}>
+										A
+									</button>
+									<button className={bSide === 'top' ? 'bb' : 'none'} onClick={topBorder}>
+										T
+									</button>
+									<button className={bSide === 'bottom' ? 'bb' : 'none'} onClick={bottomBorder}>
+										B
+									</button>
+									<button className={bSide === 'left' ? 'bb' : 'none'} onClick={leftBorder}>
+										L
+									</button>
+									<button className={bSide === 'right' ? 'bb' : 'none'} onClick={rightBorder}>
+										R
+									</button>
 								</div>
 							</div>
 						</div>

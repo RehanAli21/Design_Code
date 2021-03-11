@@ -448,6 +448,13 @@ nav .addpage-div button:focus {
 .propertybar .ap .ap-borders .b .two > div > label {
 	padding: 5px;
 }
+.propertybar .ap .ap-borders .b button {
+	border: 1px solid var(--main-blue);
+	outline: none;
+}
+.propertybar .bb {
+	border-color: var(--main-blue);
+}
 .propertybar .ap .shadow {
 	width: 80%;
 	text-align: left;
