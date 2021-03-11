@@ -88,79 +88,34 @@ const Appearance = ({
 				setShowBorderSection(false)
 			}
 
+			if (large.boxShadow) {
+				sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
+				sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
+				sBlurInput.value = large.boxShadow.split(' ')[2].split('p')[0]
+				sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
+				sActiveInput.checked = true
+				setShowShadowSection(true)
+			} else {
+				sXInput.value = '0'
+				sYInput.value = '0'
+				sBlurInput.value = '0'
+				sColorInput.value = '#464646'
+				sActiveInput.checked = false
+				setShowShadowSection(false)
+			}
+
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor ? RGBToHex(small.backgroundColor) : '#ffffff'
 				bRadiusInput.value = small.borderRadius ? small.borderRadius.split('p')[0] : '0'
-				if (small.boxShadow) {
-					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
-					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
-					sBlurInput.value = large.boxShadow.split(' ')[2].split('p')[0]
-					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
-					sActiveInput.checked = true
-					setShowShadowSection(true)
-				} else {
-					sXInput.value = '0'
-					sYInput.value = '0'
-					sBlurInput.value = '0'
-					sColorInput.value = '#464646'
-					sActiveInput.checked = false
-					setShowShadowSection(false)
-				}
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor ? RGBToHex(medium.backgroundColor) : '#ffffff'
 				bRadiusInput.value = medium.borderRadius ? medium.borderRadius.split('p')[0] : '0'
-				if (medium.boxShadow) {
-					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
-					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
-					sBlurInput.value = large.boxShadow.split(' ')[2].split('p')[0]
-					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
-					sActiveInput.checked = true
-					setShowShadowSection(true)
-				} else {
-					sXInput.value = '0'
-					sYInput.value = '0'
-					sBlurInput.value = '0'
-					sColorInput.value = '#464646'
-					sActiveInput.checked = false
-					setShowShadowSection(false)
-				}
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor ? RGBToHex(large.backgroundColor) : '#ffffff'
 				bRadiusInput.value = large.borderRadius ? large.borderRadius.split('p')[0] : '0'
-				if (large.boxShadow) {
-					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
-					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
-					sBlurInput.value = large.boxShadow.split(' ')[2].split('p')[0]
-					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
-					sActiveInput.checked = true
-					setShowShadowSection(true)
-				} else {
-					sXInput.value = '0'
-					sYInput.value = '0'
-					sBlurInput.value = '0'
-					sColorInput.value = '#464646'
-					sActiveInput.checked = false
-					setShowShadowSection(false)
-				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? RGBToHex(xlarge.backgroundColor) : '#ffffff'
 				bRadiusInput.value = xlarge.borderRadius ? xlarge.borderRadius.split('p')[0] : '0'
-
-				if (xlarge.boxShadow) {
-					sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
-					sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
-					sBlurInput.value = large.boxShadow.split(' ')[2].split('p')[0]
-					sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
-					sActiveInput.checked = true
-					setShowShadowSection(true)
-				} else {
-					sXInput.value = '0'
-					sYInput.value = '0'
-					sBlurInput.value = '0'
-					sColorInput.value = '#464646'
-					sActiveInput.checked = false
-					setShowShadowSection(false)
-				}
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
