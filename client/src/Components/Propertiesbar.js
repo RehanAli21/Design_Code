@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import Align from './Properties/Align'
 import Appearance from './Properties/Appearance'
+import Specific from './Properties/Specific'
 import Transform from './Properties/Transform'
 
 const Propertiesbar = () => {
@@ -73,6 +74,7 @@ const Propertiesbar = () => {
 				<label>Transform layer</label>
 			</div>
 			<div className='property'>
+				<Specific type={'div'} />
 				<Align
 					small={small}
 					setSmall={setSmall}

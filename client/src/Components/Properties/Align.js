@@ -112,16 +112,30 @@ const Align = ({
 				<ul className='align-ul'>
 					<li className='one'>
 						<label>Self Align: </label>
-						<button onClick={() => setSelfAlign('left')}>L</button>
-						<button onClick={() => setSelfAlign('center')}>C</button>
-						<button onClick={() => setSelfAlign('right')}>R</button>
+						<button className={selfAlign === 'left' ? 'bb' : 'none'} onClick={() => setSelfAlign('left')}>
+							L
+						</button>
+						<button className={selfAlign === 'center' ? 'bb' : 'none'} onClick={() => setSelfAlign('center')}>
+							C
+						</button>
+						<button className={selfAlign === 'right' ? 'bb' : 'none'} onClick={() => setSelfAlign('right')}>
+							R
+						</button>
 					</li>
 					<li className='two'>
 						<label>Text Align: </label>
-						<button onClick={() => setTextAlign('left')}>L</button>
-						<button onClick={() => setTextAlign('center')}>C</button>
-						<button onClick={() => setTextAlign('right')}>R</button>
-						<button onClick={() => setTextAlign('justify')}>J</button>
+						<button className={textAlign === 'left' ? 'bb' : 'none'} onClick={() => setTextAlign('left')}>
+							L
+						</button>
+						<button className={textAlign === 'center' ? 'bb' : 'none'} onClick={() => setTextAlign('center')}>
+							C
+						</button>
+						<button className={textAlign === 'right' ? 'bb' : 'none'} onClick={() => setTextAlign('right')}>
+							R
+						</button>
+						<button className={textAlign === 'justify' ? 'bb' : 'none'} onClick={() => setTextAlign('justify')}>
+							J
+						</button>
 					</li>
 				</ul>
 			</div>

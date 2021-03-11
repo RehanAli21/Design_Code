@@ -324,23 +324,8 @@ nav .addpage-div button:focus {
 	grid-template-columns: auto 40px 40px 40px 40px auto;
 }
 .propertybar .align-ul li button {
-	color: black;
-	width: 100%;
-	font-weight: bolder;
-	border: none;
-	background-color: var(--third-white);
-	padding: 5px;
-	cursor: pointer;
+	padding: 2px 4px;
 	outline: none;
-}
-.propertybar .align-ul li button:hover {
-	transform: scale(1.1);
-}
-.propertybar .align-ul li button:active {
-	transform: scale(0.9);
-}
-.propertybar .div-property .one {
-	text-align: left;
 }
 .propertybar .div-property .one > button {
 	float: right;
