@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 
@@ -12,8 +12,6 @@ let oldy = 0
 //This compoenent controls page.
 const Page = () => {
 	const { pages, activePage, width, render } = useContext(PageContext)
-	const [move, setMove] = useState(false)
-	const [drag, setDrag] = useState(false)
 
 	//for zooming functionality by mouse wheel
 	document.addEventListener('wheel', e => {
@@ -46,8 +44,8 @@ const Page = () => {
 				left -= 5
 			}
 
-			ele.style.top = `${top}px`
-			ele.style.left = `${left}px`
+			ele.style.top = `${top * scale}px`
+			ele.style.left = `${left * scale}px`
 
 			oldy = e.pageY
 			oldx = e.pageX
@@ -57,14 +55,12 @@ const Page = () => {
 	//for zoom and drag functionality by keyboard
 	document.addEventListener('keydown', e => {
 		//for enabling zoom
-		if (e.key === 'z') {
+		if (e.key === 'z' && z === false) {
 			z = true
-			setMove(true)
 		}
 		//for enabling drag
-		if (e.key === 'x') {
+		if (e.key === 'x' && x === false) {
 			x = true
-			setDrag(true)
 		}
 		//for reseting zoom and drag
 		if (e.key === 'r' && z === true) {
@@ -123,12 +119,10 @@ const Page = () => {
 		//for disabling zoom
 		if (e.key === 'z') {
 			z = false
-			setMove(false)
 		}
 		//for disabling drag
 		if (e.key === 'x') {
 			x = false
-			setDrag(false)
 		}
 	})
 
@@ -154,7 +148,13 @@ const Page = () => {
 						key: uuid(),
 						id: e[1].id,
 						style:
-							width < 540 ? e[1].styles.small : width < 720 ? e[1].styles.medium : width < 960 ? e[1].styles.large : e[1].styles.xlarge,
+							width < 540
+								? e[1].styles.small
+								: width < 720
+								? e[1].styles.medium
+								: width < 960
+								? e[1].styles.large
+								: e[1].styles.xlarge,
 					},
 					e[2].length > 0 ? showElements(e[2]) : null
 				)
@@ -165,7 +165,7 @@ const Page = () => {
 	}
 
 	return (
-		<div style={{ cursor: drag ? 'grabbing' : move ? 'grab' : 'default' }} className={render ? 'ok main-div' : 'main-div'}>
+		<div className={render ? 'ok main-div' : 'main-div'}>
 			<div
 				className='pages-div'
 				id={activePage}
