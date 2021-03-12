@@ -7,22 +7,42 @@ let x = false
 let top = 0
 let left = 0
 let scale = 0.8
+let oldx = 0
+let oldy = 0
 //This compoenent controls page.
 const Page = () => {
 	const { pages, activePage, width, render } = useContext(PageContext)
 	const [move, setMove] = useState(false)
 	const [drag, setDrag] = useState(false)
 
+	//for zooming functionality by mouse wheel
+	document.addEventListener('wheel', e => {
+		if (z === true) {
+			const ele = document.querySelector('.pages-div')
+			if (ele) {
+				if (e.deltaY === -100) {
+					if (scale < 2) scale += 0.01
+				} else if (e.deltaY === 100) {
+					if (scale > 0.5) scale -= 0.01
+				}
+				ele.style.transform = `scale(${scale})`
+			}
+		}
+	})
+
+	//for zoom and drag functionality by keyboard
 	document.addEventListener('keydown', e => {
+		//for enabling zoom
 		if (e.key === 'z') {
 			z = true
 			setMove(true)
 		}
+		//for enabling drag
 		if (e.key === 'x') {
 			x = true
 			setDrag(true)
 		}
-
+		//for reseting zoom and drag
 		if (e.key === 'r' && z === true) {
 			const ele = document.querySelector('.pages-div')
 			if (ele) {
@@ -33,43 +53,55 @@ const Page = () => {
 				}
 			}
 		}
-
+		//for zooming the page element
 		if (e.key === 'ArrowUp' && scale < 2 && z === true && x === false) {
-			scale += 0.01
 			const ele = document.querySelector('.pages-div')
-			if (ele) ele.style.transform = `scale(${scale})`
+			if (ele) {
+				scale += 0.01
+				ele.style.transform = `scale(${scale})`
+			}
 		} else if (e.key === 'ArrowDown' && scale > 0.5 && z === true && x === false) {
-			scale -= 0.01
 			const ele = document.querySelector('.pages-div')
-			if (ele) ele.style.transform = `scale(${scale})`
+			if (ele) {
+				scale -= 0.01
+				ele.style.transform = `scale(${scale})`
+			}
 		}
-
+		//for draging the page element
 		if (e.key === 'ArrowUp' && z === true && x === true) {
-			top -= 5
 			const ele = document.querySelector('.pages-div')
-			if (ele) ele.style.top = `${top * scale}px`
+			if (ele) {
+				top -= 5
+				ele.style.top = `${top * scale}px`
+			}
 		} else if (e.key === 'ArrowDown' && z === true && x === true) {
-			top += 5
 			const ele = document.querySelector('.pages-div')
-			if (ele) ele.style.top = `${top * scale}px`
-		}
-
-		if (e.key === 'ArrowLeft' && z === true && x === true) {
-			left -= 5
+			if (ele) {
+				top += 5
+				ele.style.top = `${top * scale}px`
+			}
+		} else if (e.key === 'ArrowLeft' && z === true && x === true) {
 			const ele = document.querySelector('.pages-div')
-			if (ele) ele.style.left = `${left * scale}px`
+			if (ele) {
+				left -= 5
+				ele.style.left = `${left * scale}px`
+			}
 		} else if (e.key === 'ArrowRight' && z === true && x === true) {
-			left += 5
 			const ele = document.querySelector('.pages-div')
-			if (ele) ele.style.left = `${left * scale}px`
+			if (ele) {
+				left += 5
+				ele.style.left = `${left * scale}px`
+			}
 		}
 	})
-
+	//for disabling zoom and drag
 	document.addEventListener('keyup', e => {
+		//for disabling zoom
 		if (e.key === 'z') {
 			z = false
 			setMove(false)
 		}
+		//for disabling drag
 		if (e.key === 'x') {
 			x = false
 			setDrag(false)
