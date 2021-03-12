@@ -30,6 +30,30 @@ const Page = () => {
 		}
 	})
 
+	//for darg functionality by mouse move
+	document.addEventListener('mousemove', e => {
+		const ele = document.querySelector('.pages-div')
+		if (ele && z === true && x === true) {
+			if (oldy > e.pageY) {
+				top -= 5
+			} else if (oldy < e.pageY) {
+				top += 5
+			}
+
+			if (oldx < e.pageX) {
+				left += 5
+			} else if (oldx > e.pageX) {
+				left -= 5
+			}
+
+			ele.style.top = `${top}px`
+			ele.style.left = `${left}px`
+
+			oldy = e.pageY
+			oldx = e.pageX
+		}
+	})
+
 	//for zoom and drag functionality by keyboard
 	document.addEventListener('keydown', e => {
 		//for enabling zoom
