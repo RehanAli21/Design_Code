@@ -392,7 +392,7 @@ const Transform = ({
 				<div className='y'>
 					<label>Y : </label>
 					<input id='a-t-mt' onChange={e => setMarginTop(e.target.value)} type='number' min='0' />
-					<select id='a-t-mlt' onChange={e => setMTUnit(e.target.value.toLowerCase())}>
+					<select id='a-t-mtu' onChange={e => setMTUnit(e.target.value.toLowerCase())}>
 						<option>EM</option>
 						<option>REM</option>
 						<option>PX</option>
