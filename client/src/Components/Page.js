@@ -3,6 +3,9 @@ import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 
 let z = false
+let x = false
+let top = 0
+let left = 0
 let scale = 0.8
 //This compoenent controls page.
 const Page = () => {
@@ -14,19 +17,42 @@ const Page = () => {
 			z = true
 			setMove(true)
 		}
-		if (e.key === 'ArrowUp' && scale < 2 && z === true) {
+		if (e.key === 'x') x = true
+
+		if (e.key === 'ArrowUp' && scale < 2 && z === true && x === false) {
 			scale += 0.01
 			const ele = document.querySelector('.pages-div')
 			if (ele) ele.style.transform = `scale(${scale})`
-		} else if (e.key === 'ArrowDown' && scale > 0.5 && z === true) {
+		} else if (e.key === 'ArrowDown' && scale > 0.5 && z === true && x === false) {
 			scale -= 0.01
 			const ele = document.querySelector('.pages-div')
 			if (ele) ele.style.transform = `scale(${scale})`
+		}
+
+		if (e.key === 'ArrowUp' && scale < 2 && z === true && x === true) {
+			top -= 5
+			const ele = document.querySelector('.pages-div')
+			if (ele) ele.style.top = `${top}px`
+		} else if (e.key === 'ArrowDown' && scale < 2 && z === true && x === true) {
+			top += 5
+			const ele = document.querySelector('.pages-div')
+			if (ele) ele.style.top = `${top}px`
+		}
+
+		if (e.key === 'ArrowLeft' && scale < 2 && z === true && x === true) {
+			left -= 5
+			const ele = document.querySelector('.pages-div')
+			if (ele) ele.style.left = `${left}px`
+		} else if (e.key === 'ArrowRight' && scale < 2 && z === true && x === true) {
+			left += 5
+			const ele = document.querySelector('.pages-div')
+			if (ele) ele.style.left = `${left}px`
 		}
 	})
 
 	document.addEventListener('keyup', e => {
 		if (e.key === 'z') z = false
+		if (e.key === 'x') x = false
 	})
 
 	//For showing elements into a div which acts

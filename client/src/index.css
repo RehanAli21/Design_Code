@@ -263,6 +263,7 @@ nav .addpage-div button:focus {
 	text-align: center;
 	width: 100%;
 	height: 100%;
+	position: relative;
 }
 .main-div .pages-div {
 	background-color: white;
@@ -272,8 +273,9 @@ nav .addpage-div button:focus {
 	width: 720px;
 	background-color: white;
 	box-shadow: 2px 2px 15px grey;
-	resize: both;
-	position: relative;
+	position: absolute;
+	left: 0px;
+	top: 0px;
 }
 
 .propertybar {
