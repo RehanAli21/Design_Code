@@ -264,12 +264,6 @@ nav .addpage-div button:focus {
 	width: 100%;
 	height: 100%;
 }
-.main-div .full-width {
-	height: 92.5vh;
-	display: grid;
-	grid-auto-flow: column;
-	text-align: center;
-}
 .main-div .pages-div {
 	background-color: white;
 	min-height: 300px;
