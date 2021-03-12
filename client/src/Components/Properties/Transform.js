@@ -24,7 +24,7 @@ const Transform = ({
 	setChangedLarge,
 	changedXlarge,
 	setChangedXlarge,
-	showLayer
+	showLayer,
 }) => {
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
@@ -272,12 +272,8 @@ const Transform = ({
 
 	//For margin left change from input
 	useEffect(() => {
-		marginLeftFunc(marginLeft, mlUnit)
-	}, [marginLeft, mlUnit])
-
-	const marginLeftFunc = (ml, mlunit) => {
 		if (small && medium && large && xlarge) {
-			const changedmarginLeft = `${ml}${mlunit}`
+			const changedmarginLeft = `${marginLeft}${mlUnit}`
 			if (width < 540) {
 				setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
 				setChangedSmall(true)
@@ -307,7 +303,7 @@ const Transform = ({
 				if (!changedLarge) setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
 			}
 		}
-	}
+	}, [marginLeft, mlUnit])
 
 	//For margin top change from input
 	useEffect(() => {
@@ -357,7 +353,13 @@ const Transform = ({
 			<div className='one'>
 				<div className='w'>
 					<label>W : </label>
-					<input id='a-t-w' onChange={e => setWidths(e.target.value)} type='number' min='0' max={widthUnit === '%' ? '100' : ''} />
+					<input
+						id='a-t-w'
+						onChange={e => setWidths(e.target.value)}
+						type='number'
+						min='0'
+						max={widthUnit === '%' ? '100' : ''}
+					/>
 					<select onChange={e => setWidthUnit(e.target.value.toLowerCase())}>
 						<option>PX</option>
 						<option>%</option>
@@ -365,7 +367,13 @@ const Transform = ({
 				</div>
 				<div className='h'>
 					<label>H : </label>
-					<input id='a-t-h' onChange={e => setHeights(e.target.value)} type='number' min='0' max={heightUnit === '%' ? '100' : ''} />
+					<input
+						id='a-t-h'
+						onChange={e => setHeights(e.target.value)}
+						type='number'
+						min='0'
+						max={heightUnit === '%' ? '100' : ''}
+					/>
 					<select onChange={e => setHeighthUnit(e.target.value.toLowerCase())}>
 						<option>PX</option>
 						<option>VH</option>
