@@ -74,7 +74,26 @@ const Propertiesbar = () => {
 				<label>Transform layer</label>
 			</div>
 			<div className='property'>
-				<Specific type={'div'} />
+				<Specific
+					small={small}
+					setSmall={setSmall}
+					medium={medium}
+					setMedium={setMedium}
+					large={large}
+					setLarge={setLarge}
+					xlarge={xlarge}
+					setXlarge={setXlarge}
+					width={width}
+					changedSmall={changedSmall}
+					setChangedSmall={setChangedSmall}
+					changedMedium={changedMedium}
+					setChangedMedium={setChangedMedium}
+					changedLarge={changedLarge}
+					setChangedLarge={setChangedLarge}
+					changedXlarge={changedXlarge}
+					setChangedXlarge={setChangedXlarge}
+					type={'div'}
+				/>
 				<Align
 					small={small}
 					setSmall={setSmall}
