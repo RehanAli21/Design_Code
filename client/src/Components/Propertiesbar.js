@@ -69,7 +69,7 @@ const Propertiesbar = () => {
 
 	return (
 		<div className='propertybar'>
-			<div className='showlayer'>
+			<div className='showlayer borders'>
 				<input type='checkbox' defaultChecked='true' onClick={() => setShowLayer(!showLayer)} />
 				<label>Transform layer</label>
 			</div>
@@ -92,7 +92,7 @@ const Propertiesbar = () => {
 					setChangedLarge={setChangedLarge}
 					changedXlarge={changedXlarge}
 					setChangedXlarge={setChangedXlarge}
-					type={'div'}
+					activeElement={activeElement}
 				/>
 				<Align
 					small={small}
