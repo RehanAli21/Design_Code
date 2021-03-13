@@ -336,6 +336,7 @@ nav .addpage-div button:focus {
 	border-bottom: 1px solid var(--text-color);
 	padding: 3px;
 	margin-left: 20px;
+	margin-top: 10px;
 	outline: none;
 	background-color: var(--second-white);
 }

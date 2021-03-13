@@ -34,6 +34,47 @@ const DivProperties = () => {
 		[0, '%'],
 	])
 
+	const showRowsFunc = () => {
+		const temp = []
+
+		for (let i = 0; i < rowsNum; i++) {
+			temp.push(
+				<div className='ínvalue'>
+					<input type='number' />
+					<select>
+						<option>PX</option>
+						<option>VH</option>
+						<option>EM</option>
+						<option>REM</option>
+					</select>
+				</div>
+			)
+		}
+		return temp
+	}
+
+	const showColFunc = () => {
+		const temp = []
+
+		for (let i = 0; i < colsNum; i++) {
+			temp.push(
+				<div className='ínvalue'>
+					<input type='number' />
+					<select>
+						<option>%</option>
+						<option>VW</option>
+						<option>FR</option>
+						<option>PX</option>
+						<option>EM</option>
+						<option>REM</option>
+					</select>
+				</div>
+			)
+		}
+
+		return temp
+	}
+
 	return (
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
@@ -51,15 +92,7 @@ const DivProperties = () => {
 					/>
 				</div>
 				<div className='rows margins' style={{ display: showRow ? 'block' : 'none' }}>
-					<div className='ínvalue'>
-						<input type='number' />
-						<select>
-							<option>PX</option>
-							<option>VH</option>
-							<option>EM</option>
-							<option>REM</option>
-						</select>
-					</div>
+					{showRowsFunc()}
 				</div>
 			</div>
 			<div className='cols-div'>
@@ -76,17 +109,7 @@ const DivProperties = () => {
 					/>
 				</div>
 				<div className='cols margins' style={{ display: showCol ? 'block' : 'none' }}>
-					<div className='ínvalue'>
-						<input type='number' />
-						<select>
-							<option>%</option>
-							<option>VW</option>
-							<option>FR</option>
-							<option>PX</option>
-							<option>EM</option>
-							<option>REM</option>
-						</select>
-					</div>
+					{showColFunc()}
 				</div>
 			</div>
 		</div>
