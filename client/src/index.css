@@ -327,6 +327,25 @@ nav .addpage-div button:focus {
 	outline: none;
 	background-color: var(--second-white);
 }
+.propertybar .r-c .margins {
+	margin: 10px 0px 15px 0px;
+}
+.propertybar .r-c .ínvalue input[type='number'] {
+	width: 100px;
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	margin-left: 20px;
+	outline: none;
+	background-color: var(--second-white);
+}
+.propertybar .r-c .ínvalue select {
+	background-color: var(--second-white);
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	margin-left: 5px;
+}
 .propertybar .align-ul li {
 	width: 90;
 	margin-left: 5%;
