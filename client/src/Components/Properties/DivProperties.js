@@ -39,9 +39,9 @@ const DivProperties = () => {
 
 		for (let i = 0; i < rowsNum; i++) {
 			temp.push(
-				<div className='ínvalue'>
-					<input type='number' />
-					<select>
+				<div className='ínvalue' key={i}>
+					<input type='number' onChange={e => setRowsValues(e, i)} />
+					<select onChange={e => setRowsValuesType(e, i)}>
 						<option>PX</option>
 						<option>VH</option>
 						<option>EM</option>
@@ -58,9 +58,9 @@ const DivProperties = () => {
 
 		for (let i = 0; i < colsNum; i++) {
 			temp.push(
-				<div className='ínvalue'>
-					<input type='number' />
-					<select>
+				<div className='ínvalue' key={i}>
+					<input type='number' onChange={e => setColsValues(e, i)} />
+					<select onChange={e => setColsValuesType(e, i)}>
 						<option>%</option>
 						<option>VW</option>
 						<option>FR</option>
@@ -71,8 +71,28 @@ const DivProperties = () => {
 				</div>
 			)
 		}
-
 		return temp
+	}
+
+	const setRowsValues = (e, index) => {
+		const temp = rowValues
+		temp[index][0] = parseInt(e.target.value)
+		setRowValues(temp)
+	}
+	const setRowsValuesType = (e, index) => {
+		const temp = rowValues
+		temp[index][1] = e.target.value.toLowerCase()
+		setRowValues(temp)
+	}
+	const setColsValues = (e, index) => {
+		const temp = colValues
+		temp[index][0] = parseInt(e.target.value)
+		setColValues(temp)
+	}
+	const setColsValuesType = (e, index) => {
+		const temp = colValues
+		temp[index][1] = e.target.value.toLowerCase()
+		setColValues(temp)
 	}
 
 	return (
