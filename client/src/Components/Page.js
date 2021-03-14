@@ -160,14 +160,12 @@ const Page = () => {
 				)
 			)
 		})
-		console.log(temp)
-		// const ele = document.getElementById(activePage)
-		// if (ele) {
-		// 	while (ele.lastChild) {
-		// 		console.log(ele.children)
-		// 	}
-		// }
-		return (
+
+		return temp
+	}
+
+	return (
+		<div className={render ? 'ok main-div' : 'main-div'}>
 			<div
 				className='pages-div'
 				id={activePage}
@@ -176,12 +174,10 @@ const Page = () => {
 					minWidth: '300px',
 					marginLeft: width < 720 ? '15%' : width < 1000 ? '10%' : width < 1500 ? '5%' : '0%',
 				}}>
-				{temp}
+				{showElements(pages[activePage])}
 			</div>
-		)
-	}
-
-	return <div className={render ? 'ok main-div' : 'main-div'}>{showElements(pages[activePage])}</div>
+		</div>
+	)
 }
 
 export default Page

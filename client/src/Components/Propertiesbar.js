@@ -128,9 +128,6 @@ const Propertiesbar = () => {
 					setChangedXlarge={setChangedXlarge}
 				/>
 				<Transform
-					pages={pages}
-					render={render}
-					activePage={activePage}
 					small={small}
 					setSmall={setSmall}
 					medium={medium}
@@ -149,7 +146,6 @@ const Propertiesbar = () => {
 					setChangedLarge={setChangedLarge}
 					changedXlarge={changedXlarge}
 					setChangedXlarge={setChangedXlarge}
-					showLayer={showLayer}
 				/>
 				<Appearance
 					small={small}

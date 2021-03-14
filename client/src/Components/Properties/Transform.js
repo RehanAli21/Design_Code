@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-let oldx = 0
-let oldy = 0
 const Transform = ({
-	pages,
-	render,
-	activePage,
 	small,
 	setSmall,
 	medium,
@@ -24,7 +19,6 @@ const Transform = ({
 	setChangedLarge,
 	changedXlarge,
 	setChangedXlarge,
-	showLayer,
 }) => {
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
