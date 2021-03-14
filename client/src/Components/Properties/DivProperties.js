@@ -117,8 +117,45 @@ const DivProperties = ({
 	}
 
 	useEffect(() => {
-		console.log('çhanged')
+		if (small && medium && large && xlarge && showRow) {
+			if (width < 540) {
+				setGridRow(small, setSmall)
+				setChangedSmall(true)
+				if (!changedMedium) setGridRow(medium, setMedium)
+				if (!changedLarge) setGridRow(large, setLarge)
+				if (!changedXlarge) setGridRow(xlarge, setXlarge)
+			} else if (width < 720) {
+				setGridRow(medium, setMedium)
+				setChangedMedium(true)
+				if (!changedSmall) setGridRow(small, setSmall)
+				if (!changedLarge) setGridRow(large, setLarge)
+				if (!changedXlarge) setGridRow(xlarge, setXlarge)
+			} else if (width < 970) {
+				setGridRow(large, setLarge)
+				setChangedLarge(true)
+				if (!changedSmall) setGridRow(small, setSmall)
+				if (!changedMedium) setGridRow(medium, setMedium)
+				if (!changedXlarge) setGridRow(xlarge, setXlarge)
+			} else {
+				setGridRow(xlarge, setXlarge)
+				setChangedSmall(true)
+				if (!changedSmall) setGridRow(small, setSmall)
+				if (!changedMedium) setGridRow(medium, setMedium)
+				if (!changedLarge) setGridRow(large, setLarge)
+			}
+		}
 	}, [showRow, rowsNum, rowValues])
+
+	const setGridRow = (obj, setObj) => {
+		const temp = Object.assign({}, obj)
+		let gridRow = ''
+
+		for (let i = 0; i < rowsNum; i++) gridRow += `${rowValues[i][0]}${rowValues[i][1]} `
+
+		temp.gridTemplateRows = gridRow
+
+		setObj(temp)
+	}
 
 	const showRowsFunc = () => {
 		const temp = []
@@ -126,7 +163,7 @@ const DivProperties = ({
 		for (let i = 0; i < rowsNum; i++) {
 			temp.push(
 				<div className='ínvalue' key={i}>
-					<input type='number' onChange={e => setRowsValues(e, i)} />
+					<input min='0' defaultValue='0' type='number' onChange={e => setRowsValues(e, i)} />
 					<select onChange={e => setRowsValuesType(e, i)}>
 						<option>PX</option>
 						<option>VH</option>
@@ -145,7 +182,7 @@ const DivProperties = ({
 		for (let i = 0; i < colsNum; i++) {
 			temp.push(
 				<div className='ínvalue' key={i}>
-					<input type='number' onChange={e => setColsValues(e, i)} />
+					<input min='0' defaultValue='0' type='number' onChange={e => setColsValues(e, i)} />
 					<select onChange={e => setColsValuesType(e, i)}>
 						<option>%</option>
 						<option>VW</option>
@@ -197,6 +234,7 @@ const DivProperties = ({
 						placeholder='No: Rows'
 						min='0'
 						max='12'
+						defaultValue='0'
 						style={{ transform: `scale(${showRow ? 1 : 0})` }}
 						onChange={e => setRowNum(e.target.value)}
 					/>
@@ -214,6 +252,7 @@ const DivProperties = ({
 						placeholder='No: Cols'
 						min='0'
 						max='12'
+						defaultValue='0'
 						style={{ transform: `scale(${showCol ? 1 : 0})` }}
 						onChange={e => setColsNum(e.target.value)}
 					/>
