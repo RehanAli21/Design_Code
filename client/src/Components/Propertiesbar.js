@@ -8,6 +8,7 @@ import Transform from './Properties/Transform'
 const Propertiesbar = () => {
 	const { pages, activePage, activeElement, width, render, setRender } = useContext(PageContext)
 
+	const [prevElement, setPrevElement] = useState('')
 	const [small, setSmall] = useState({})
 	const [medium, setMedium] = useState({})
 	const [large, setLarge] = useState({})
@@ -17,6 +18,18 @@ const Propertiesbar = () => {
 	const [changedLarge, setChangedLarge] = useState(false)
 	const [changedXlarge, setChangedXlarge] = useState(false)
 	const [showLayer, setShowLayer] = useState(true)
+
+	useEffect(() => {
+		const ele = document.getElementById(activeElement)
+
+		if (ele) {
+			if (prevElement !== '' && document.getElementById(prevElement)) {
+				document.getElementById(prevElement).style.outline = 'none'
+			}
+			ele.style.outline = '2px solid rgb(32, 144, 220)'
+			setPrevElement(activeElement)
+		}
+	}, [activeElement, activePage, small, medium, large, xlarge, pages, render, width])
 
 	useEffect(() => {
 		setWidthsStates(pages[activePage], activeElement)
