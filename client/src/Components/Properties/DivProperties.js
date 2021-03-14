@@ -116,6 +116,10 @@ const DivProperties = ({
 		setObj(temp)
 	}
 
+	useEffect(() => {
+		console.log('çhanged')
+	}, [showRow, rowsNum, rowValues])
+
 	const showRowsFunc = () => {
 		const temp = []
 
@@ -157,22 +161,26 @@ const DivProperties = ({
 	}
 
 	const setRowsValues = (e, index) => {
-		const temp = rowValues
+		const temp = []
+		rowValues.forEach(e => temp.push(e))
 		temp[index][0] = parseInt(e.target.value)
 		setRowValues(temp)
 	}
 	const setRowsValuesType = (e, index) => {
-		const temp = rowValues
+		const temp = []
+		rowValues.forEach(e => temp.push(e))
 		temp[index][1] = e.target.value.toLowerCase()
 		setRowValues(temp)
 	}
 	const setColsValues = (e, index) => {
-		const temp = colValues
+		const temp = []
+		colValues.forEach(e => temp.push(e))
 		temp[index][0] = parseInt(e.target.value)
 		setColValues(temp)
 	}
 	const setColsValuesType = (e, index) => {
-		const temp = colValues
+		const temp = []
+		colValues.forEach(e => temp.push(e))
 		temp[index][1] = e.target.value.toLowerCase()
 		setColValues(temp)
 	}
