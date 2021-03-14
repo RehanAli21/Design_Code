@@ -93,6 +93,7 @@ const Propertiesbar = () => {
 					changedXlarge={changedXlarge}
 					setChangedXlarge={setChangedXlarge}
 					activeElement={activeElement}
+					activePage={activePage}
 				/>
 				<Align
 					small={small}

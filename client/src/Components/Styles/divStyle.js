@@ -9,5 +9,8 @@ export const divStyle = {
 	border: '',
 	borderRadius: '',
 	textAlign: '',
-	boxShadow: ''
+	boxShadow: '',
+	display: '',
+	gridTemplateColumns: '',
+	gridTemplateRows: '',
 }

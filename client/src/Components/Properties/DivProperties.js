@@ -1,6 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-const DivProperties = () => {
+const DivProperties = ({
+	small,
+	setSmall,
+	medium,
+	setMedium,
+	large,
+	setLarge,
+	xlarge,
+	setXlarge,
+	width,
+	changedSmall,
+	setChangedSmall,
+	changedMedium,
+	setChangedMedium,
+	changedLarge,
+	setChangedLarge,
+	changedXlarge,
+	setChangedXlarge,
+}) => {
 	const [showRow, setShowRow] = useState(false)
 	const [rowsNum, setRowNum] = useState(0)
 	const [rowValues, setRowValues] = useState([
@@ -33,6 +51,70 @@ const DivProperties = () => {
 		[0, '%'],
 		[0, '%'],
 	])
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (showRow || showCol) {
+				if (width < 540) {
+					setDisplayGrid(small, setSmall, 'grid')
+					setChangedSmall(true)
+					if (!changedMedium) setDisplayGrid(medium, setMedium, 'grid')
+					if (!changedLarge) setDisplayGrid(large, setLarge, 'grid')
+					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, 'grid')
+				} else if (width < 720) {
+					setDisplayGrid(medium, setMedium, 'grid')
+					setChangedMedium(true)
+					if (!changedSmall) setDisplayGrid(small, setSmall, 'grid')
+					if (!changedLarge) setDisplayGrid(large, setLarge, 'grid')
+					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, 'grid')
+				} else if (width < 970) {
+					setDisplayGrid(large, setLarge, 'grid')
+					setChangedLarge(true)
+					if (!changedSmall) setDisplayGrid(small, setSmall, 'grid')
+					if (!changedMedium) setDisplayGrid(medium, setMedium, 'grid')
+					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, 'grid')
+				} else {
+					setDisplayGrid(xlarge, setXlarge, 'grid')
+					setChangedSmall(true)
+					if (!changedSmall) setDisplayGrid(small, setSmall, 'grid')
+					if (!changedMedium) setDisplayGrid(medium, setMedium, 'grid')
+					if (!changedLarge) setDisplayGrid(large, setLarge, 'grid')
+				}
+			} else {
+				if (width < 540) {
+					setDisplayGrid(small, setSmall, '')
+					setChangedSmall(true)
+					if (!changedMedium) setDisplayGrid(medium, setMedium, '')
+					if (!changedLarge) setDisplayGrid(large, setLarge, '')
+					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, '')
+				} else if (width < 720) {
+					setDisplayGrid(medium, setMedium, '')
+					setChangedMedium(true)
+					if (!changedSmall) setDisplayGrid(small, setSmall, '')
+					if (!changedLarge) setDisplayGrid(large, setLarge, '')
+					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, '')
+				} else if (width < 970) {
+					setDisplayGrid(large, setLarge, '')
+					setChangedLarge(true)
+					if (!changedSmall) setDisplayGrid(small, setSmall, '')
+					if (!changedMedium) setDisplayGrid(medium, setMedium, '')
+					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, '')
+				} else {
+					setDisplayGrid(xlarge, setXlarge, '')
+					setChangedSmall(true)
+					if (!changedSmall) setDisplayGrid(small, setSmall, '')
+					if (!changedMedium) setDisplayGrid(medium, setMedium, '')
+					if (!changedLarge) setDisplayGrid(large, setLarge, '')
+				}
+			}
+		}
+	}, [showRow, showCol])
+
+	const setDisplayGrid = (obj, setObj, value) => {
+		const temp = Object.assign({}, obj)
+		temp.display = value
+		setObj(temp)
+	}
 
 	const showRowsFunc = () => {
 		const temp = []
