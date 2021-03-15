@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 
-const Appearance = ({
-	small,
-	setSmall,
-	medium,
-	setMedium,
-	large,
-	setLarge,
-	xlarge,
-	setXlarge,
-	width,
-	activeElement,
-	changedSmall,
-	setChangedSmall,
-	changedMedium,
-	setChangedMedium,
-	changedLarge,
-	setChangedLarge,
-	changedXlarge,
-	setChangedXlarge
-}) => {
+const Appearance = ({ width, activeElement }) => {
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [opacity, setOpacity] = useState(1)
@@ -247,7 +247,9 @@ const Appearance = ({
 
 	const RGBToHex = color => {
 		const rgba = color.replace(/^rgba?\(|s+|\)$/g, '').split(',')
-		const hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2])).toString(16).slice(1)}`
+		const hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2]))
+			.toString(16)
+			.slice(1)}`
 
 		return hex
 	}
@@ -435,7 +437,7 @@ const Appearance = ({
 					<span>Border</span>
 					<div
 						style={{
-							display: showBorderSection ? 'block' : 'none'
+							display: showBorderSection ? 'block' : 'none',
 						}}
 						className='b'>
 						<div className='two'>
@@ -528,7 +530,7 @@ const Appearance = ({
 					<span>Shadow</span>
 					<div
 						style={{
-							display: showShadowSection ? 'block' : 'none'
+							display: showShadowSection ? 'block' : 'none',
 						}}
 						className='one'>
 						<div>

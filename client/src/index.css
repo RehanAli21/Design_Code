@@ -308,18 +308,21 @@ nav .addpage-div button:focus {
 }
 .propertybar .r-c > div {
 	text-align: left;
-	padding-left: 10%;
+	padding-left: 20px;
 	margin: 10px 0px;
 }
-.propertybar .r-c .checkin {
+.propertybar .r-c .grid {
 	display: grid;
-	grid-template-columns: 10px 100px auto;
-	justify-items: center;
+	grid-template-columns: 20px auto auto;
 	align-items: center;
-	font-size: 1rem;
 }
-.propertybar .r-c .checkin input[type='number'] {
-	width: 100px;
+.propertybar .r-c .row-col-div {
+	display: grid;
+	grid-template-columns: 40% 40%;
+	column-gap: 30px;
+}
+.propertybar .r-c .row-col-div input[type='number'] {
+	width: 100%;
 	font-size: 1rem;
 	border: none;
 	border-bottom: 1px solid var(--text-color);
@@ -330,12 +333,14 @@ nav .addpage-div button:focus {
 .propertybar .r-c .margins {
 	margin: 10px 0px 15px 0px;
 }
+.propertybar .r-c .ínvalue {
+	display: grid;
+	grid-template-columns: 60% auto;
+	column-gap: 2px;
+}
 .propertybar .r-c .ínvalue input[type='number'] {
-	width: 100px;
 	border: none;
 	border-bottom: 1px solid var(--text-color);
-	padding: 3px;
-	margin-left: 20px;
 	margin-top: 10px;
 	outline: none;
 	background-color: var(--second-white);
@@ -344,8 +349,6 @@ nav .addpage-div button:focus {
 	background-color: var(--second-white);
 	border: none;
 	border-bottom: 1px solid var(--text-color);
-	padding: 3px;
-	margin-left: 5px;
 }
 .propertybar .align-ul li {
 	width: 90;

@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { PageContext } from './Contexts/PageContext'
+import { PropertiesContext } from './Contexts/PropertiesContext'
 import Align from './Properties/Align'
 import Appearance from './Properties/Appearance'
 import Specific from './Properties/Specific'
@@ -8,16 +9,26 @@ import Transform from './Properties/Transform'
 const Propertiesbar = () => {
 	const { pages, activePage, activeElement, width, render, setRender } = useContext(PageContext)
 
-	const [prevElement, setPrevElement] = useState('')
-	const [small, setSmall] = useState({})
-	const [medium, setMedium] = useState({})
-	const [large, setLarge] = useState({})
-	const [xlarge, setXlarge] = useState({})
-	const [changedSmall, setChangedSmall] = useState(false)
-	const [changedMedium, setChangedMedium] = useState(false)
-	const [changedLarge, setChangedLarge] = useState(false)
-	const [changedXlarge, setChangedXlarge] = useState(false)
-	const [showLayer, setShowLayer] = useState(true)
+	const {
+		prevElement,
+		setPrevElement,
+		small,
+		medium,
+		large,
+		xlarge,
+		setSmall,
+		setMedium,
+		setLarge,
+		setXlarge,
+		changedSmall,
+		changedMedium,
+		changedLarge,
+		changedXlarge,
+		setChangedSmall,
+		setChangedMedium,
+		setChangedLarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -60,6 +71,7 @@ const Propertiesbar = () => {
 			setProperties(pages[activePage], activeElement)
 			setRender(!render)
 		}
+		console.log(large)
 	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge])
 
 	const setProperties = (arr, id) => {
@@ -82,91 +94,11 @@ const Propertiesbar = () => {
 
 	return (
 		<div className='propertybar'>
-			<div className='showlayer borders'>
-				<input type='checkbox' defaultChecked='true' onClick={() => setShowLayer(!showLayer)} />
-				<label>Transform layer</label>
-			</div>
 			<div className='property'>
-				<Specific
-					small={small}
-					setSmall={setSmall}
-					medium={medium}
-					setMedium={setMedium}
-					large={large}
-					setLarge={setLarge}
-					xlarge={xlarge}
-					setXlarge={setXlarge}
-					width={width}
-					changedSmall={changedSmall}
-					setChangedSmall={setChangedSmall}
-					changedMedium={changedMedium}
-					setChangedMedium={setChangedMedium}
-					changedLarge={changedLarge}
-					setChangedLarge={setChangedLarge}
-					changedXlarge={changedXlarge}
-					setChangedXlarge={setChangedXlarge}
-					activeElement={activeElement}
-					activePage={activePage}
-				/>
-				<Align
-					small={small}
-					setSmall={setSmall}
-					medium={medium}
-					setMedium={setMedium}
-					large={large}
-					setLarge={setLarge}
-					xlarge={xlarge}
-					setXlarge={setXlarge}
-					width={width}
-					changedSmall={changedSmall}
-					setChangedSmall={setChangedSmall}
-					changedMedium={changedMedium}
-					setChangedMedium={setChangedMedium}
-					changedLarge={changedLarge}
-					setChangedLarge={setChangedLarge}
-					changedXlarge={changedXlarge}
-					setChangedXlarge={setChangedXlarge}
-				/>
-				<Transform
-					small={small}
-					setSmall={setSmall}
-					medium={medium}
-					setMedium={setMedium}
-					large={large}
-					setLarge={setLarge}
-					xlarge={xlarge}
-					setXlarge={setXlarge}
-					width={width}
-					activeElement={activeElement}
-					changedSmall={changedSmall}
-					setChangedSmall={setChangedSmall}
-					changedMedium={changedMedium}
-					setChangedMedium={setChangedMedium}
-					changedLarge={changedLarge}
-					setChangedLarge={setChangedLarge}
-					changedXlarge={changedXlarge}
-					setChangedXlarge={setChangedXlarge}
-				/>
-				<Appearance
-					small={small}
-					setSmall={setSmall}
-					medium={medium}
-					setMedium={setMedium}
-					large={large}
-					setLarge={setLarge}
-					xlarge={xlarge}
-					setXlarge={setXlarge}
-					width={width}
-					activeElement={activeElement}
-					changedSmall={changedSmall}
-					setChangedSmall={setChangedSmall}
-					changedMedium={changedMedium}
-					setChangedMedium={setChangedMedium}
-					changedLarge={changedLarge}
-					setChangedLarge={setChangedLarge}
-					changedXlarge={changedXlarge}
-					setChangedXlarge={setChangedXlarge}
-				/>
+				<Specific />
+				<Align width={width} />
+				<Transform width={width} activeElement={activeElement} />
+				<Appearance width={width} activeElement={activeElement} />
 			</div>
 		</div>
 	)

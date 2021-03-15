@@ -6,6 +6,7 @@ import Page from './Components/Page'
 import Layers from './Components/Layers'
 
 import { PageProvider } from './Components/Contexts/PageContext'
+import { PropertiesProvider } from './Components/Contexts/PropertiesContext'
 
 const App = () => {
 	return (
@@ -16,7 +17,9 @@ const App = () => {
 					<Toolbar />
 					<Layers />
 					<Page />
-					<Propertiesbar />
+					<PropertiesProvider>
+						<Propertiesbar />
+					</PropertiesProvider>
 				</div>
 			</PageProvider>
 		</div>

@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 
-const Transform = ({
-	small,
-	setSmall,
-	medium,
-	setMedium,
-	large,
-	setLarge,
-	xlarge,
-	setXlarge,
-	width,
-	activeElement,
-	changedSmall,
-	setChangedSmall,
-	changedMedium,
-	setChangedMedium,
-	changedLarge,
-	setChangedLarge,
-	changedXlarge,
-	setChangedXlarge,
-}) => {
+const Transform = ({ width, activeElement }) => {
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
 	const [widths, setWidths] = useState(`0`)

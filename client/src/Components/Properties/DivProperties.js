@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 
-const DivProperties = ({
-	small,
-	setSmall,
-	medium,
-	setMedium,
-	large,
-	setLarge,
-	xlarge,
-	setXlarge,
-	width,
-	changedSmall,
-	setChangedSmall,
-	changedMedium,
-	setChangedMedium,
-	changedLarge,
-	setChangedLarge,
-	changedXlarge,
-	setChangedXlarge,
-}) => {
-	const [showRow, setShowRow] = useState(false)
+const DivProperties = ({ width }) => {
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
+
+	const [grid, setGrid] = useState(false)
 	const [rowsNum, setRowNum] = useState(0)
 	const [rowValues, setRowValues] = useState([
 		[0, 'px'],
@@ -35,7 +37,6 @@ const DivProperties = ({
 		[0, 'px'],
 		[0, 'px'],
 	])
-	const [showCol, setShowCol] = useState(false)
 	const [colsNum, setColsNum] = useState(0)
 	const [colValues, setColValues] = useState([
 		[0, '%'],
@@ -54,7 +55,7 @@ const DivProperties = ({
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (showRow === true || showCol === true) {
+			if (grid) {
 				if (width < 540) {
 					setDisplayGrid(small, setSmall, 'grid')
 					setChangedSmall(true)
@@ -80,7 +81,7 @@ const DivProperties = ({
 					if (!changedMedium) setDisplayGrid(medium, setMedium, 'grid')
 					if (!changedLarge) setDisplayGrid(large, setLarge, 'grid')
 				}
-			} else if (showRow === false && showCol === false) {
+			} else {
 				if (width < 540) {
 					setDisplayGrid(small, setSmall, '')
 					setChangedSmall(true)
@@ -101,23 +102,24 @@ const DivProperties = ({
 					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, '')
 				} else {
 					setDisplayGrid(xlarge, setXlarge, '')
-					setChangedSmall(true)
+					setChangedXlarge(true)
 					if (!changedSmall) setDisplayGrid(small, setSmall, '')
 					if (!changedMedium) setDisplayGrid(medium, setMedium, '')
 					if (!changedLarge) setDisplayGrid(large, setLarge, '')
 				}
 			}
 		}
-	}, [showRow])
+	}, [grid])
 
 	const setDisplayGrid = (obj, setObj, value) => {
 		const temp = Object.assign({}, obj)
 		temp.display = value
+		console.log(temp)
 		setObj(temp)
 	}
 
 	useEffect(() => {
-		if (small && medium && large && xlarge && showRow) {
+		if (small && medium && large && xlarge && grid) {
 			if (width < 540) {
 				setGridRow(small, setSmall)
 				setChangedSmall(true)
@@ -144,7 +146,7 @@ const DivProperties = ({
 				if (!changedLarge) setGridRow(large, setLarge)
 			}
 		}
-	}, [showRow, rowsNum, rowValues])
+	}, [grid, rowsNum, rowValues])
 
 	const setGridRow = (obj, setObj) => {
 		const temp = Object.assign({}, obj)
@@ -225,40 +227,18 @@ const DivProperties = ({
 	return (
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
-			<div className='rows-div'>
-				<div className='checkin'>
-					<input type='checkbox' onChange={() => setShowRow(!showRow)} />
-					<label>Rows</label>
-					<input
-						type='number'
-						placeholder='No: Rows'
-						min='0'
-						max='12'
-						defaultValue='0'
-						style={{ transform: `scale(${showRow ? 1 : 0})` }}
-						onChange={e => setRowNum(e.target.value)}
-					/>
-				</div>
-				<div className='rows margins' style={{ display: showRow ? 'block' : 'none' }}>
-					{showRowsFunc()}
-				</div>
+			<div className='grid'>
+				<input type='checkbox' onChange={() => setGrid(!grid)} />
+				<label>Rows / Columns</label>
 			</div>
-			<div className='cols-div'>
-				<div className='checkin'>
-					<input type='checkbox' onChange={() => setShowCol(!showCol)} />
-					<label>Columns</label>
-					<input
-						type='number'
-						placeholder='No: Cols'
-						min='0'
-						max='12'
-						defaultValue='0'
-						style={{ transform: `scale(${showCol ? 1 : 0})` }}
-						onChange={e => setColsNum(e.target.value)}
-					/>
+			<div className='row-col-div' style={{ display: grid ? 'grid' : 'none' }}>
+				<div className='margins'>
+					<input type='number' min='0' max='12' placeholder='No: rows' onChange={e => setRowNum(e.target.value)} />
+					<div className='row'>{showRowsFunc()}</div>
 				</div>
-				<div className='cols margins' style={{ display: showCol ? 'block' : 'none' }}>
-					{showColFunc()}
+				<div className='margins left-border'>
+					<input type='number' min='0' max='12' placeholder='No: cols' onChange={e => setColsNum(e.target.value)} />
+					<div className='çol'>{showColFunc()}</div>
 				</div>
 			</div>
 		</div>

@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 
-const Align = ({
-	small,
-	setSmall,
-	medium,
-	setMedium,
-	large,
-	setLarge,
-	xlarge,
-	setXlarge,
-	width,
-	changedSmall,
-	setChangedSmall,
-	changedMedium,
-	setChangedMedium,
-	changedLarge,
-	setChangedLarge,
-	changedXlarge,
-	setChangedXlarge
-}) => {
+const Align = ({ width }) => {
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
+
 	const [selfAlign, setSelfAlign] = useState('left')
 	const [textAlign, setTextAlign] = useState('left')
 
