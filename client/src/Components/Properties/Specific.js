@@ -8,7 +8,7 @@ const Specific = () => {
 
 	if (activeElement === activePage || !ele) return <div></div>
 
-	return ele.tagName === 'DIV' ? <DivProperties width={width} /> : <div></div>
+	return ele.tagName === 'DIV' ? <DivProperties width={width} activeElement={activeElement} /> : <div></div>
 }
 
 export default Specific
