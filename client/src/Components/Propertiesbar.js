@@ -35,7 +35,7 @@ const Propertiesbar = () => {
 
 		if (ele) {
 			if (prevElement !== '' && document.getElementById(prevElement)) {
-				document.getElementById(prevElement).style.outline = 'none'
+				document.getElementById(prevElement).style.outline = ''
 			}
 			ele.style.outline = '2px solid rgb(32, 144, 220)'
 			setPrevElement(activeElement)
