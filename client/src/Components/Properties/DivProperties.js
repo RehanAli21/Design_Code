@@ -154,7 +154,9 @@ const DivProperties = ({ width }) => {
 		const temp = Object.assign({}, obj)
 		let gridRow = ''
 
-		for (let i = 0; i < rowsNum; i++) gridRow += `${rowValues[i][0]}${rowValues[i][1]} `
+		if (rowsNum > 0) {
+			for (let i = 0; i < rowsNum; i++) gridRow += `${rowValues[i][0]}${rowValues[i][1]} `
+		}
 
 		temp.gridTemplateRows = gridRow
 
@@ -195,7 +197,9 @@ const DivProperties = ({ width }) => {
 		const temp = Object.assign({}, obj)
 		let gridCol = ''
 
-		for (let i = 0; i < colsNum; i++) gridCol += `${colValues[i][0]}${colValues[i][1]} `
+		if (colsNum > 0) {
+			for (let i = 0; i < colsNum; i++) gridCol += `${colValues[i][0]}${colValues[i][1]} `
+		}
 
 		temp.gridTemplateColumns = gridCol
 
