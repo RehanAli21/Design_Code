@@ -22,6 +22,7 @@ const DivProperties = ({ width }) => {
 	} = useContext(PropertiesContext)
 
 	const [grid, setGrid] = useState(false)
+	const [grid1, setGrid1] = useState(false)
 	const [rowsNum, setRowNum] = useState(0)
 	const [rowValues, setRowValues] = useState([
 		[0, 'px'],
@@ -55,7 +56,7 @@ const DivProperties = ({ width }) => {
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (grid) {
+			if (grid || grid1) {
 				if (width < 540) {
 					setDisplayGrid(small, setSmall, 'grid')
 					setChangedSmall(true)
@@ -109,12 +110,13 @@ const DivProperties = ({ width }) => {
 				}
 			}
 		}
-	}, [grid])
+	}, [grid, grid1])
+
+	useEffect(() => setGrid1(!grid1), [grid])
 
 	const setDisplayGrid = (obj, setObj, value) => {
 		const temp = Object.assign({}, obj)
 		temp.display = value
-		console.log(temp)
 		setObj(temp)
 	}
 

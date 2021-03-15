@@ -71,7 +71,6 @@ const Propertiesbar = () => {
 			setProperties(pages[activePage], activeElement)
 			setRender(!render)
 		}
-		console.log(large)
 	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge])
 
 	const setProperties = (arr, id) => {
