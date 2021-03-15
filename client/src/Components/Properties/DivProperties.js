@@ -56,7 +56,7 @@ const DivProperties = ({ width }) => {
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (grid || grid1) {
+			if (grid) {
 				if (width < 540) {
 					setDisplayGrid(small, setSmall, 'grid')
 					setChangedSmall(true)
@@ -157,6 +157,47 @@ const DivProperties = ({ width }) => {
 		for (let i = 0; i < rowsNum; i++) gridRow += `${rowValues[i][0]}${rowValues[i][1]} `
 
 		temp.gridTemplateRows = gridRow
+
+		setObj(temp)
+	}
+
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid) {
+			if (width < 540) {
+				setGridCol(small, setSmall)
+				setChangedSmall(true)
+				if (!changedMedium) setGridCol(medium, setMedium)
+				if (!changedLarge) setGridCol(large, setLarge)
+				if (!changedXlarge) setGridCol(xlarge, setXlarge)
+			} else if (width < 720) {
+				setGridCol(medium, setMedium)
+				setChangedMedium(true)
+				if (!changedSmall) setGridCol(small, setSmall)
+				if (!changedLarge) setGridCol(large, setLarge)
+				if (!changedXlarge) setGridCol(xlarge, setXlarge)
+			} else if (width < 970) {
+				setGridCol(large, setLarge)
+				setChangedLarge(true)
+				if (!changedSmall) setGridCol(small, setSmall)
+				if (!changedMedium) setGridCol(medium, setMedium)
+				if (!changedXlarge) setGridCol(xlarge, setXlarge)
+			} else {
+				setGridCol(xlarge, setXlarge)
+				setChangedSmall(true)
+				if (!changedSmall) setGridCol(small, setSmall)
+				if (!changedMedium) setGridCol(medium, setMedium)
+				if (!changedLarge) setGridCol(large, setLarge)
+			}
+		}
+	}, [grid, colsNum, colValues])
+
+	const setGridCol = (obj, setObj) => {
+		const temp = Object.assign({}, obj)
+		let gridCol = ''
+
+		for (let i = 0; i < colsNum; i++) gridCol += `${colValues[i][0]}${colValues[i][1]} `
+
+		temp.gridTemplateColumns = gridCol
 
 		setObj(temp)
 	}
