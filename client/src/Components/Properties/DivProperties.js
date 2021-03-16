@@ -499,8 +499,22 @@ const DivProperties = ({ width, activeElement }) => {
 		for (let i = 0; i < rowsNum; i++) {
 			temp.push(
 				<div className='ínvalue' key={i}>
-					<input min='0' id={`r-rowinput${i}`} defaultValue='0' type='number' onChange={e => setRowsValues(e, i)} />
-					<select id={`r-rowselect${i}`} onChange={e => setRowsValuesType(e, i)}>
+					<input
+						min='0'
+						id={`r-rowinput${i}`}
+						defaultValue='0'
+						type='number'
+						onChange={e => {
+							setChangedGrid(true)
+							setRowsValues(e, i)
+						}}
+					/>
+					<select
+						id={`r-rowselect${i}`}
+						onChange={e => {
+							setChangedGrid(true)
+							setRowsValuesType(e, i)
+						}}>
 						<option>PX</option>
 						<option>VH</option>
 						<option>EM</option>
@@ -518,8 +532,22 @@ const DivProperties = ({ width, activeElement }) => {
 		for (let i = 0; i < colsNum; i++) {
 			temp.push(
 				<div className='ínvalue' key={i}>
-					<input min='0' id={`c-colinput${i}`} defaultValue='0' type='number' onChange={e => setColsValues(e, i)} />
-					<select id={`c-colselect${i}`} onChange={e => setColsValuesType(e, i)}>
+					<input
+						min='0'
+						id={`c-colinput${i}`}
+						defaultValue='0'
+						type='number'
+						onChange={e => {
+							setChangedGrid(true)
+							setColsValues(e, i)
+						}}
+					/>
+					<select
+						id={`c-colselect${i}`}
+						onChange={e => {
+							setChangedGrid(true)
+							setColsValuesType(e, i)
+						}}>
 						<option>%</option>
 						<option>VW</option>
 						<option>FR</option>
