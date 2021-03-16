@@ -473,7 +473,6 @@ nav .addpage-div button:focus {
 	padding: 5px;
 }
 .propertybar .ap .ap-borders .b button {
-	border: 1px solid var(--main-blue);
 	outline: none;
 }
 .propertybar .bb {
