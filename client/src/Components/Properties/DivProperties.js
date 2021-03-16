@@ -67,6 +67,8 @@ const DivProperties = ({ width, activeElement }) => {
 			const gridCheckbox = document.getElementById('r-c-grid')
 			const gridRowInput = document.getElementById('r-c-row')
 			const gridColInput = document.getElementById('r-c-col')
+			const rowGapInput = document.getElementById('r-c-rowgap')
+			const colGapInput = document.getElementById('r-c-colgap')
 
 			for (let i = 0; i < rowsNum; i++) {
 				rowsInput.push(document.getElementById(`r-rowinput${i}`))
@@ -79,13 +81,13 @@ const DivProperties = ({ width, activeElement }) => {
 			}
 
 			if (width < 540) {
-				if (small.display === 'grid') {
-					gridCheckbox.checked = true
-					setGrid(true)
-				} else {
-					gridCheckbox.checked = false
-					setGrid(false)
-				}
+				const isGrid = small.display === 'grid'
+				gridCheckbox.checked = isGrid
+				setGrid(isGrid)
+
+				rowGapInput.value = small.rowGap ? small.rowGap.split('p')[0] : 0
+				colGapInput.value = small.columnGap ? small.columnGap.split('p')[0] : 0
+
 				if (small.gridTemplateRows) {
 					const rowsValues = small.gridTemplateRows.split(' ')
 					setRowsNum(rowsValues.length - 1)
@@ -143,13 +145,12 @@ const DivProperties = ({ width, activeElement }) => {
 					gridColInput.value = 0
 				}
 			} else if (width < 720) {
-				if (medium.display === 'grid') {
-					gridCheckbox.checked = true
-					setGrid(true)
-				} else {
-					gridCheckbox.checked = false
-					setGrid(false)
-				}
+				const isGrid = medium.display === 'grid'
+				gridCheckbox.checked = isGrid
+				setGrid(isGrid)
+
+				rowGapInput.value = medium.rowGap ? medium.rowGap.split('p')[0] : 0
+				colGapInput.value = medium.columnGap ? medium.columnGap.split('p')[0] : 0
 				if (medium.gridTemplateRows) {
 					const rowsValues = medium.gridTemplateRows.split(' ')
 					setRowsNum(rowsValues.length - 1)
@@ -207,13 +208,13 @@ const DivProperties = ({ width, activeElement }) => {
 					gridColInput.value = 0
 				}
 			} else if (width < 970) {
-				if (large.display === 'grid') {
-					gridCheckbox.checked = true
-					setGrid(true)
-				} else {
-					gridCheckbox.checked = false
-					setGrid(false)
-				}
+				const isGrid = large.display === 'grid'
+				gridCheckbox.checked = isGrid
+				setGrid(isGrid)
+
+				rowGapInput.value = large.rowGap ? large.rowGap.split('p')[0] : 0
+				colGapInput.value = large.columnGap ? large.columnGap.split('p')[0] : 0
+
 				if (large.gridTemplateRows) {
 					const rowsValues = large.gridTemplateRows.split(' ')
 					setRowsNum(rowsValues.length - 1)
@@ -271,13 +272,13 @@ const DivProperties = ({ width, activeElement }) => {
 					gridColInput.value = 0
 				}
 			} else {
-				if (xlarge.display === 'grid') {
-					gridCheckbox.checked = true
-					setGrid(true)
-				} else {
-					gridCheckbox.checked = false
-					setGrid(false)
-				}
+				const isGrid = xlarge.display === 'grid'
+				gridCheckbox.checked = isGrid
+				setGrid(isGrid)
+
+				rowGapInput.value = xlarge.rowGap ? xlarge.rowGap.split('p')[0] : 0
+				colGapInput.value = xlarge.columnGap ? xlarge.columnGap.split('p')[0] : 0
+
 				if (xlarge.gridTemplateRows) {
 					const rowsValues = xlarge.gridTemplateRows.split(' ')
 					setRowsNum(rowsValues.length - 1)
@@ -684,6 +685,7 @@ const DivProperties = ({ width, activeElement }) => {
 						<label>R-G:</label>
 						<input
 							type='number'
+							defaultValue='0'
 							min='0'
 							id='r-c-rowgap'
 							onChange={e => {
@@ -714,6 +716,7 @@ const DivProperties = ({ width, activeElement }) => {
 						<label>C-G:</label>
 						<input
 							type='number'
+							defaultValue='0'
 							min='0'
 							id='r-c-colgap'
 							onChange={e => {
