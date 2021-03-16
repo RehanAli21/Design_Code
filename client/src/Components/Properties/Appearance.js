@@ -55,35 +55,35 @@ const Appearance = ({ width, activeElement }) => {
 				setShowBorderSection(true)
 				bColorInput.value = RGBToHex(large.border.split(' ')[2])
 				bSizeInput.value = large.border.split(' ')[0].split('p')[0]
-				bTypeInput.value = large.border.split(' ')[1]
+				bTypeInput.selectedIndex = borderTypeIndex(large.border.split(' ')[1])
 			} else if (large.borderTop) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
 				bColorInput.value = RGBToHex(large.borderTop.split(' ')[2])
 				bSizeInput.value = large.borderTop.split(' ')[0].split('p')[0]
-				bTypeInput.value = large.borderTop.split(' ')[1]
+				bTypeInput.selectedIndex = borderTypeIndex(large.borderTop.split(' ')[1])
 			} else if (large.borderBottom) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
 				bColorInput.value = RGBToHex(large.borderBottom.split(' ')[2])
 				bSizeInput.value = large.borderBottom.split(' ')[0].split('p')[0]
-				bTypeInput.value = large.borderBottom.split(' ')[1]
+				bTypeInput.selectedIndex = borderTypeIndex(large.borderBottom.split(' ')[1])
 			} else if (large.borderLeft) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
 				bColorInput.value = RGBToHex(large.borderLeft.split(' ')[2])
 				bSizeInput.value = large.borderLeft.split(' ')[0].split('p')[0]
-				bTypeInput.value = large.borderLeft.split(' ')[1]
+				bTypeInput.selectedIndex = borderTypeIndex(large.borderLeft.split(' ')[1])
 			} else if (large.borderRight) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
 				bColorInput.value = RGBToHex(large.borderRight.split(' ')[2])
 				bSizeInput.value = large.borderRight.split(' ')[0].split('p')[0]
-				bTypeInput.value = large.borderRight.split(' ')[1]
+				bTypeInput.selectedIndex = borderTypeIndex(large.borderRight.split(' ')[1])
 			} else {
 				bColorInput.value = '#ffffff'
 				bSizeInput.value = '0'
-				bTypeInput.value = 'solid'
+				bTypeInput.selectedIndex = 0
 				bActiveInput.checked = false
 				setShowBorderSection(false)
 			}
@@ -119,6 +119,10 @@ const Appearance = ({ width, activeElement }) => {
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
+
+	const borderTypeIndex = s => {
+		return s === 'solid' ? 0 : s === 'inset' ? 1 : s === 'outset' ? 2 : 3
+	}
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
