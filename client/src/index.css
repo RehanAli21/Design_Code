@@ -333,6 +333,17 @@ nav .addpage-div button:focus {
 .propertybar .r-c .margins {
 	margin: 10px 0px 15px 0px;
 }
+.propertybar .r-c .gap {
+	display: grid;
+	grid-template-columns: 45% 45%;
+	column-gap: 5%;
+	border-bottom: 2px solid var(--main-blue);
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+.propertybar .r-c .gap > label {
+	padding: 3px;
+}
 .propertybar .r-c .ínvalue {
 	display: grid;
 	grid-template-columns: 60% auto;

@@ -13,4 +13,6 @@ export const divStyle = {
 	display: '',
 	gridTemplateColumns: '',
 	gridTemplateRows: '',
+	rowGap: '',
+	columnGap: '',
 }

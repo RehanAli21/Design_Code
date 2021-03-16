@@ -573,33 +573,48 @@ const DivProperties = ({ width, activeElement }) => {
 				<label>Rows / Columns</label>
 			</div>
 			<div className='row-col-div' style={{ display: grid ? 'grid' : 'none' }}>
-				<div className='margins'>
-					<input
-						type='number'
-						min='0'
-						max='12'
-						placeholder='No: rows'
-						id='r-c-row'
-						onChange={e => {
-							setChangedGrid(true)
-							setRowsNum(e.target.value)
-						}}
-					/>
-					<div className='row'>{showRowsFunc()}</div>
+				<div className='margins two-rows'>
+					<div className='gap'>
+						<label>R-G:</label>
+						<input type='number' min='0' id='r-c-rowgap' />
+					</div>
+					<div>
+						<label>No: Rows</label>
+						<input
+							type='number'
+							min='0'
+							max='12'
+							placeholder='No: rows'
+							id='r-c-row'
+							onChange={e => {
+								setChangedGrid(true)
+								setRowsNum(e.target.value)
+							}}
+						/>
+
+						<div className='row'>{showRowsFunc()}</div>
+					</div>
 				</div>
 				<div className='margins left-border'>
-					<input
-						type='number'
-						min='0'
-						max='12'
-						placeholder='No: cols'
-						id='r-c-col'
-						onChange={e => {
-							setChangedGrid(true)
-							setColsNum(e.target.value)
-						}}
-					/>
-					<div className='çol'>{showColFunc()}</div>
+					<div className='gap'>
+						<label>C-G:</label>
+						<input type='number' min='0' id='r-c-colgap' />
+					</div>
+					<div>
+						<label>No: Columns</label>
+						<input
+							type='number'
+							min='0'
+							max='12'
+							placeholder='No: cols'
+							id='r-c-col'
+							onChange={e => {
+								setChangedGrid(true)
+								setColsNum(e.target.value)
+							}}
+						/>
+						<div className='çol'>{showColFunc()}</div>
+					</div>
 				</div>
 			</div>
 		</div>
