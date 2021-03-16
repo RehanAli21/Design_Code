@@ -533,6 +533,44 @@ const DivProperties = ({ width, activeElement }) => {
 		setObj(temp)
 	}
 
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid && changedGrid) {
+			if (width < 540) {
+				setColGapValue(small, setSmall)
+				setChangedSmall(true)
+				if (!changedMedium) setColGapValue(medium, setMedium)
+				if (!changedLarge) setColGapValue(large, setLarge)
+				if (!changedXlarge) setColGapValue(xlarge, setXlarge)
+			} else if (width < 720) {
+				setColGapValue(medium, setMedium)
+				setChangedMedium(true)
+				if (!changedSmall) setColGapValue(small, setSmall)
+				if (!changedLarge) setColGapValue(large, setLarge)
+				if (!changedXlarge) setColGapValue(xlarge, setXlarge)
+			} else if (width < 970) {
+				setColGapValue(large, setLarge)
+				setChangedLarge(true)
+				if (!changedSmall) setColGapValue(small, setSmall)
+				if (!changedMedium) setColGapValue(medium, setMedium)
+				if (!changedXlarge) setColGapValue(xlarge, setXlarge)
+			} else {
+				setColGapValue(xlarge, setXlarge)
+				setChangedSmall(true)
+				if (!changedSmall) setColGapValue(small, setSmall)
+				if (!changedMedium) setColGapValue(medium, setMedium)
+				if (!changedLarge) setColGapValue(large, setLarge)
+			}
+
+			setChangedGrid(true)
+		}
+	}, [grid, colGap])
+
+	const setColGapValue = (obj, setObj) => {
+		const temp = Object.assign({}, obj)
+		temp.columnGap = `${colGap}px`
+		setObj(temp)
+	}
+
 	const showRowsFunc = () => {
 		const temp = []
 
