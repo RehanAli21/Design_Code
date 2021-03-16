@@ -39,6 +39,7 @@ const DivProperties = ({ width, activeElement }) => {
 		[0, 'px'],
 		[0, 'px'],
 	])
+	const [rowGap, setRowGap] = useState(0)
 	const [colsNum, setColsNum] = useState(0)
 	const [colValues, setColValues] = useState([
 		[0, '%'],
@@ -54,6 +55,7 @@ const DivProperties = ({ width, activeElement }) => {
 		[0, '%'],
 		[0, '%'],
 	])
+	const [colGap, setColGap] = useState(0)
 
 	//For default values
 	useEffect(() => {
@@ -493,6 +495,44 @@ const DivProperties = ({ width, activeElement }) => {
 		setObj(temp)
 	}
 
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid && changedGrid) {
+			if (width < 540) {
+				setRowGapValue(small, setSmall)
+				setChangedSmall(true)
+				if (!changedMedium) setRowGapValue(medium, setMedium)
+				if (!changedLarge) setRowGapValue(large, setLarge)
+				if (!changedXlarge) setRowGapValue(xlarge, setXlarge)
+			} else if (width < 720) {
+				setRowGapValue(medium, setMedium)
+				setChangedMedium(true)
+				if (!changedSmall) setRowGapValue(small, setSmall)
+				if (!changedLarge) setRowGapValue(large, setLarge)
+				if (!changedXlarge) setRowGapValue(xlarge, setXlarge)
+			} else if (width < 970) {
+				setRowGapValue(large, setLarge)
+				setChangedLarge(true)
+				if (!changedSmall) setRowGapValue(small, setSmall)
+				if (!changedMedium) setRowGapValue(medium, setMedium)
+				if (!changedXlarge) setRowGapValue(xlarge, setXlarge)
+			} else {
+				setRowGapValue(xlarge, setXlarge)
+				setChangedSmall(true)
+				if (!changedSmall) setRowGapValue(small, setSmall)
+				if (!changedMedium) setRowGapValue(medium, setMedium)
+				if (!changedLarge) setRowGapValue(large, setLarge)
+			}
+
+			setChangedGrid(true)
+		}
+	}, [grid, rowGap])
+
+	const setRowGapValue = (obj, setObj) => {
+		const temp = Object.assign({}, obj)
+		temp.rowGap = `${rowGap}px`
+		setObj(temp)
+	}
+
 	const showRowsFunc = () => {
 		const temp = []
 
@@ -604,7 +644,15 @@ const DivProperties = ({ width, activeElement }) => {
 				<div className='margins two-rows'>
 					<div className='gap'>
 						<label>R-G:</label>
-						<input type='number' min='0' id='r-c-rowgap' />
+						<input
+							type='number'
+							min='0'
+							id='r-c-rowgap'
+							onChange={e => {
+								setChangedGrid(true)
+								setRowGap(e.target.value)
+							}}
+						/>
 					</div>
 					<div>
 						<label>No: Rows</label>
@@ -626,7 +674,15 @@ const DivProperties = ({ width, activeElement }) => {
 				<div className='margins left-border'>
 					<div className='gap'>
 						<label>C-G:</label>
-						<input type='number' min='0' id='r-c-colgap' />
+						<input
+							type='number'
+							min='0'
+							id='r-c-colgap'
+							onChange={e => {
+								setChangedGrid(true)
+								setColGap(e.target.value)
+							}}
+						/>
 					</div>
 					<div>
 						<label>No: Columns</label>
