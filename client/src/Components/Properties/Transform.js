@@ -33,33 +33,70 @@ const Transform = ({ width, activeElement }) => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const widthInput = document.getElementById('a-t-w')
+			const widthSelect = document.getElementById('a-t-ws')
 			const heightInput = document.getElementById('a-t-h')
+			const heightSelect = document.getElementById('a-t-hs')
 			const marginLeftInput = document.getElementById('a-t-ml')
+			const marginLeftSelect = document.getElementById('a-t-mlu')
 			const marginTopInput = document.getElementById('a-t-mt')
+			const marginTopSelect = document.getElementById('a-t-mtu')
 
 			if (width < 540) {
 				widthInput.value = small.width ? small.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = small.height ? small.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = small.marginLeft ? small.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = small.marginTop ? small.marginTop.replace(/[^\d.-]/g, '') : '0'
+
+				widthSelect.selectedIndex = small.width ? widthTypeIndex(small.width) : 0
+				heightSelect.selectedIndex = small.height ? heightTypeIndex(small.height) : 0
+				marginLeftSelect.selectedIndex = small.marginLeft ? marginLeftTypeIndex(small.marginLeft) : 0
+				marginTopSelect.selectedIndex = small.marginTop ? marginTopTypeIndex(small.marginTop) : 0
 			} else if (width < 720) {
 				widthInput.value = medium.width ? medium.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = medium.height ? medium.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = medium.marginLeft ? medium.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = medium.marginTop ? medium.marginTop.replace(/[^\d.-]/g, '') : '0'
+
+				widthSelect.selectedIndex = medium.width ? widthTypeIndex(medium.width) : 0
+				heightSelect.selectedIndex = medium.height ? heightTypeIndex(medium.height) : 0
+				marginLeftSelect.selectedIndex = medium.marginLeft ? marginLeftTypeIndex(medium.marginLeft) : 0
+				marginTopSelect.selectedIndex = medium.marginTop ? marginTopTypeIndex(medium.marginTop) : 0
 			} else if (width < 970) {
 				widthInput.value = large.width ? large.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = large.height ? large.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = large.marginLeft ? large.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = large.marginTop ? large.marginTop.replace(/[^\d.-]/g, '') : '0'
+
+				widthSelect.selectedIndex = large.width ? widthTypeIndex(large.width) : 0
+				heightSelect.selectedIndex = large.height ? heightTypeIndex(large.height) : 0
+				marginLeftSelect.selectedIndex = large.marginLeft ? marginLeftTypeIndex(large.marginLeft) : 0
+				marginTopSelect.selectedIndex = large.marginTop ? marginTopTypeIndex(large.marginTop) : 0
 			} else {
 				widthInput.value = xlarge.width ? xlarge.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = xlarge.height ? xlarge.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = xlarge.marginLeft ? xlarge.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = xlarge.marginTop ? xlarge.marginTop.replace(/[^\d.-]/g, '') : '0'
+
+				widthSelect.selectedIndex = xlarge.width ? widthTypeIndex(xlarge.width) : 0
+				heightSelect.selectedIndex = xlarge.height ? heightTypeIndex(xlarge.height) : 0
+				marginLeftSelect.selectedIndex = xlarge.marginLeft ? marginLeftTypeIndex(xlarge.marginLeft) : 0
+				marginTopSelect.selectedIndex = xlarge.marginTop ? marginTopTypeIndex(xlarge.marginTop) : 0
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
+
+	const widthTypeIndex = s => {
+		return s.search('px') !== -1 ? 0 : s.search('%') !== -1 ? 1 : s.search('rem') !== -1 ? 2 : 3
+	}
+	const heightTypeIndex = s => {
+		return s.search('px') !== -1 ? 0 : s.search('vh') !== -1 ? 1 : s.search('%') !== -1 ? 2 : s.search('rem') !== -1 ? 3 : 4
+	}
+	const marginLeftTypeIndex = s => {
+		return s.search('em') !== -1 ? 0 : s.search('rem') !== -1 ? 1 : 2
+	}
+	const marginTopTypeIndex = s => {
+		return s.search('em') !== -1 ? 0 : s.search('rem') !== -1 ? 1 : 2
+	}
 
 	//For width change from input
 	useEffect(() => {
@@ -215,9 +252,11 @@ const Transform = ({ width, activeElement }) => {
 						min='0'
 						max={widthUnit === '%' ? '100' : ''}
 					/>
-					<select onChange={e => setWidthUnit(e.target.value.toLowerCase())}>
+					<select id='a-t-ws' onChange={e => setWidthUnit(e.target.value.toLowerCase())}>
 						<option>PX</option>
 						<option>%</option>
+						<option>REM</option>
+						<option>EM</option>
 					</select>
 				</div>
 				<div className='h'>
@@ -229,10 +268,12 @@ const Transform = ({ width, activeElement }) => {
 						min='0'
 						max={heightUnit === '%' ? '100' : ''}
 					/>
-					<select onChange={e => setHeighthUnit(e.target.value.toLowerCase())}>
+					<select id='a-t-hs' onChange={e => setHeighthUnit(e.target.value.toLowerCase())}>
 						<option>PX</option>
 						<option>VH</option>
 						<option>%</option>
+						<option>REM</option>
+						<option>EM</option>
 					</select>
 				</div>
 				<div className='x'>
