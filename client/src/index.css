@@ -14,6 +14,47 @@
 	font-family: 'Segoe UI', sans-serif;
 }
 
+.templateComp {
+	position: absolute;
+	z-index: 999;
+	background-color: var(--main-white);
+	width: 100vw;
+	height: 100vh;
+	text-align: center;
+	padding: 5vh 0;
+}
+.templateComp > div {
+	display: grid;
+	grid-template-columns: 50% 50%;
+	margin-top: 30px;
+	font-size: 20px;
+}
+.templateComp input {
+	font-size: 20px;
+	border: none;
+	border-radius: 5px;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	background-color: rgba(200, 200, 200, 0.1);
+	text-align: center;
+}
+.templateComp input[type='color'] {
+	background-color: var(--main-white);
+	border: none;
+	width: 35px;
+	height: 100%;
+}
+
+.templateComp .colorinputs {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 200px;
+	display: grid;
+	grid-template-columns: 20% auto;
+	column-gap: 20px;
+}
+
 nav {
 	width: auto;
 	height: 7.5vh;
