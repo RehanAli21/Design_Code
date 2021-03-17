@@ -34,18 +34,18 @@ const TemplateValues = () => {
 	useEffect(() => {
 		const temp = {}
 		for (let i = 0; i < colorNum; i++) {
-			if (colorValue[i][1] !== '') temp[colorValue[i][1]] = colorValue[i][0]
+			if (colorValue[i][1] !== '' && colorValue[i][0] !== '') temp[colorValue[i][1]] = colorValue[i][0]
 		}
 		setColors(temp)
-	}, [colorValue])
+	}, [colorValue, colorNum])
 
 	useEffect(() => {
 		const temp = {}
 		for (let i = 0; i < fontSizeNum; i++) {
-			if (fontValue[i][1] !== '') temp[fontValue[i][1]] = fontValue[i][0]
+			if (fontValue[i][1] !== '' && fontValue[i][0] !== '') temp[fontValue[i][1]] = fontValue[i][0]
 		}
 		setFontSizes(temp)
-	}, [fontValue])
+	}, [fontValue, fontSizeNum])
 
 	const changeColorColor = (e, i) => {
 		const temp = []
