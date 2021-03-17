@@ -1,8 +1,49 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { TemplateContext } from './Contexts/TemplateContext'
 
 const TemplateValues = () => {
+	const { setColors, setFontSizes, showTemplate } = useContext(TemplateContext)
+
 	const [colorNum, setColorNum] = useState(0)
 	const [fontSizeNum, setFontSizeNum] = useState(0)
+	const [colorValue, setColoValue] = useState([
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+	])
+	const [fontValue, setFontValue] = useState([
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+		['', ''],
+	])
+
+	const changeColorColor = (e, i) => {
+		const temp = []
+		colorValue.forEach(e => temp.push(e))
+		temp[i][0] = e.target.value
+		setColoValue(temp)
+	}
+
+	const changeColorName = (e, i) => {
+		const temp = []
+		colorValue.forEach(e => temp.push(e))
+		temp[i][1] = e.target.value
+		setColoValue(temp)
+	}
 
 	const showColorsOption = () => {
 		const temp = []
@@ -10,12 +51,26 @@ const TemplateValues = () => {
 		for (let i = 0; i < colorNum; i++) {
 			temp.push(
 				<div key={i} className='colorinputs'>
-					<input type='color' />
-					<input type='text' placeholder='Color Name' />
+					<input type='color' onChange={e => changeColorColor(e, i)} />
+					<input type='text' placeholder='Color Name' onChange={e => changeColorName(e, i)} />
 				</div>
 			)
 		}
 		return temp
+	}
+
+	const changeFontSize = (e, i) => {
+		const temp = []
+		fontValue.forEach(e => temp.push(e))
+		temp[i][0] = `${e.target.value}px`
+		setFontValue(temp)
+	}
+
+	const changeFontName = (e, i) => {
+		const temp = []
+		fontValue.forEach(e => temp.push(e))
+		temp[i][1] = e.target.value
+		setFontValue(temp)
 	}
 
 	const showFontsOptions = () => {
@@ -24,8 +79,8 @@ const TemplateValues = () => {
 		for (let i = 0; i < fontSizeNum; i++) {
 			temp.push(
 				<div key={i} className='fontinputs'>
-					<input type='number' />
-					<input type='text' placeholder='FontSize Name' />
+					<input type='number' onChange={e => changeFontSize(e, i)} />
+					<input type='text' placeholder='FontSize Name' onChange={e => changeFontName(e, i)} />
 				</div>
 			)
 		}
