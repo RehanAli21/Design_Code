@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { TemplateContext } from './Contexts/TemplateContext'
 
 const TemplateValues = () => {
-	const { setColors, setFontSizes, showTemplate, setShowTemplate } = useContext(TemplateContext)
+	const { colors, setColors, fontSizes, setFontSizes, showTemplate, setShowTemplate } = useContext(TemplateContext)
 
 	const [colorNum, setColorNum] = useState(0)
 	const [fontSizeNum, setFontSizeNum] = useState(0)
@@ -30,6 +30,14 @@ const TemplateValues = () => {
 		['', ''],
 		['', ''],
 	])
+
+	useEffect(() => {
+		const temp = {}
+		for (let i = 0; i < colorNum; i++) {
+			if (colorValue[i][1] !== '') temp[colorValue[i][1]] = colorValue[i][0]
+		}
+		setColors(temp)
+	}, [colorValue])
 
 	const changeColorColor = (e, i) => {
 		const temp = []
