@@ -24,8 +24,10 @@
 	padding: 5vh 0;
 }
 .templateComp > div {
+	margin-left: 200px;
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 35% 35%;
+	column-gap: 80px;
 	margin-top: 30px;
 	font-size: 20px;
 }
@@ -52,6 +54,16 @@
 	width: 200px;
 	display: grid;
 	grid-template-columns: 20% auto;
+	column-gap: 20px;
+}
+
+.templateComp .fontinputs {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 200px;
+	display: grid;
+	grid-template-columns: 35% auto;
 	column-gap: 20px;
 }
 

@@ -18,6 +18,21 @@ const TemplateValues = () => {
 		return temp
 	}
 
+	const showFontsOptions = () => {
+		const temp = []
+
+		for (let i = 0; i < fontSizeNum; i++) {
+			temp.push(
+				<div key={i} className='fontinputs'>
+					<input type='number' />
+					<input type='text' placeholder='FontSize Name' />
+				</div>
+			)
+		}
+
+		return temp
+	}
+
 	return (
 		<div className='templateComp'>
 			<h1>Create Template Values</h1>
@@ -48,7 +63,7 @@ const TemplateValues = () => {
 							onChange={e => setFontSizeNum(e.target.value)}
 						/>
 					</div>
-					<div className='two'></div>
+					<div className='two'>{showFontsOptions()}</div>
 				</div>
 			</div>
 		</div>
