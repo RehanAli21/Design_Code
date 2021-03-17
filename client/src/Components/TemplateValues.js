@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { TemplateContext } from './Contexts/TemplateContext'
 
 const TemplateValues = () => {
-	const { setColors, setFontSizes, showTemplate } = useContext(TemplateContext)
+	const { setColors, setFontSizes, showTemplate, setShowTemplate } = useContext(TemplateContext)
 
 	const [colorNum, setColorNum] = useState(0)
 	const [fontSizeNum, setFontSizeNum] = useState(0)
@@ -89,7 +89,8 @@ const TemplateValues = () => {
 	}
 
 	return (
-		<div className='templateComp'>
+		<div style={{ display: showTemplate ? 'block' : 'none' }} className='templateComp'>
+			<button onClick={() => setShowTemplate(false)}>Done</button>
 			<h1>Create Template Values</h1>
 			<div>
 				<div className='t-colors'>

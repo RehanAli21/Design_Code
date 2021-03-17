@@ -67,6 +67,19 @@
 	column-gap: 20px;
 }
 
+.templateComp > button {
+	border: 1px solid var(--text-active-color);
+	background-color: transparent;
+	font-size: 1em;
+	float: right;
+	width: 60px;
+	height: 40px;
+	margin-right: 50px;
+}
+.templateComp > button:active {
+	transform: scale(0.9);
+}
+
 nav {
 	width: auto;
 	height: 7.5vh;
