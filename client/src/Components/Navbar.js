@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 import { TemplateContext } from './Contexts/TemplateContext'
-import TemplateValues from './TemplateValues'
 
 const Navbar = () => {
 	const { pages, setPages, activePage, setActivePage, width, setWidth } = useContext(PageContext)
@@ -35,6 +34,33 @@ const Navbar = () => {
 		document.getElementById('addpage-input').value = ''
 	}
 
+	//For deleting the activePage
+	const deletePage = () => {
+		//For storing pages data without storing activePage
+		const temp = {}
+		//For checking how many times loop runs
+		let i = 0
+		//For assigning the new activePage
+		let a = ''
+
+		//Storing all element of pages into temp except,
+		//the page we want to delete
+		for (const key in pages) {
+			if (key !== activePage) {
+				a = key
+				temp[key] = pages[key]
+			}
+			i++
+		}
+		//if i < 2, then it means there are only 1 page.
+		//And if there is only 1 page, then it can't be deleted
+		if (i < 2) return
+		//setting new ActivePage, because old one is deleted
+		setActivePage(a)
+		//setting pages data after deleting page.
+		setPages(temp)
+	}
+
 	//For changing shown pages
 	const changeActivePage = e => {
 		//If page is not already assigned, then change page
@@ -61,12 +87,15 @@ const Navbar = () => {
 	return (
 		<nav>
 			<h1>{'<'}</h1>
-			<div>
+			<div className='pages-div'>
 				<p onClick={() => setShow(!show)}>
 					{toCapitalize(activePage)}
 					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>&#10148;</span>
 				</p>
 				<ul style={{ display: show ? 'block' : 'none' }}>{showPages()}</ul>
+			</div>
+			<div className='deletepage-div'>
+				<button onClick={deletePage}>Delete page</button>
 			</div>
 			<div className='addpage-div'>
 				<input

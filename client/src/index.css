@@ -86,7 +86,7 @@ nav {
 	background-color: var(--main-white);
 	color: var(--text-active-color);
 	display: grid;
-	grid-template-columns: 100px auto auto auto auto;
+	grid-template-columns: 200px 150px 100px auto auto auto;
 	text-align: center;
 	border-bottom: 1px solid silver;
 }
@@ -106,6 +106,19 @@ nav > div {
 	margin-top: 1vh;
 	font-size: 20px;
 	position: relative;
+}
+nav .deletepage-div Button {
+	background-color: var(--second-white);
+	border: 1px solid var(--text-active-color);
+	padding: 6px 7px;
+	outline: none;
+	cursor: pointer;
+}
+nav .deletepage-div Button:hover {
+	transform: scale(1.02);
+}
+nav .deletepage-div Button:active {
+	transform: scale(0.95);
 }
 nav p {
 	font-size: 1.1rem;
@@ -171,7 +184,6 @@ nav .addpage-div button:hover {
 nav .addpage-div button:focus {
 	color: var(--main-blue);
 }
-
 nav .TemplateButton {
 	background-color: var(--second-white);
 	border: 1px solid var(--text-active-color);
