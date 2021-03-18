@@ -39,6 +39,7 @@ const Appearance = ({ width, activeElement }) => {
 	const [sY, setSY] = useState('0px')
 	const [sColor, setSColor] = useState('#464646')
 	const [sBlur, setSBlur] = useState('0px')
+	const [customShadowColor, setCustomShadowColor] = useState(false)
 	const [shadowChanged, setShadowChanged] = useState(false)
 
 	useEffect(() => {
@@ -453,6 +454,24 @@ const Appearance = ({ width, activeElement }) => {
 		)
 	}
 
+	const showCustomShadowColorOptions = () => {
+		const temp = []
+
+		for (const key in colors) {
+			temp.push(<option value={colors[key]}>{key}</option>)
+		}
+		temp.push(<option value='custom'>Custom</option>)
+
+		return (
+			<select
+				onChange={e => {
+					setCustomShadowColor(e.target.value === 'custom')
+				}}>
+				{temp}
+			</select>
+		)
+	}
+
 	return (
 		<div className='ap borders'>
 			<p className='second-heading'>APPEARANCE</p>
@@ -629,7 +648,9 @@ const Appearance = ({ width, activeElement }) => {
 						</div>
 						<div>
 							<label>C: </label>
+							{showCustomShadowColorOptions()}
 							<input
+								disabled={!customShadowColor}
 								id='a-s-color'
 								onChange={e => {
 									setShadowChanged(true)

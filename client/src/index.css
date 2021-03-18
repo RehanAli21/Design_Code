@@ -588,10 +588,18 @@ nav .addpage-div button:focus {
 	background-color: var(--second-white);
 }
 .propertybar .ap .shadow > .one input[type='color'] {
-	margin: 5px 0px;
+	margin: 5px;
 	width: 40px;
 	border: none;
 	box-shadow: 1px 1px 2px grey;
+}
+.propertybar .ap .shadow > .one select {
+	background-color: var(--second-white);
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	width: 85px;
+	margin-left: 35px;
 }
 
 /* width */
