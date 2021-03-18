@@ -465,6 +465,8 @@ const Appearance = ({ width, activeElement }) => {
 		return (
 			<select
 				onChange={e => {
+					setShadowChanged(true)
+					setSColor(e.target.value)
 					setCustomShadowColor(e.target.value === 'custom')
 				}}>
 				{temp}
