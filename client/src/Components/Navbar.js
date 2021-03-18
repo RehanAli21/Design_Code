@@ -1,9 +1,14 @@
 import React, { useState, useContext } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
+import { TemplateContext } from './Contexts/TemplateContext'
+import TemplateValues from './TemplateValues'
 
 const Navbar = () => {
 	const { pages, setPages, activePage, setActivePage, width, setWidth } = useContext(PageContext)
+
+	const { showTemplate, setShowTemplate } = useContext(TemplateContext)
+
 	//For storing new page name
 	const [pageName, setPageName] = useState('')
 	//For controlling showing pages menu
@@ -72,6 +77,11 @@ const Navbar = () => {
 					autoComplete='off'
 				/>
 				<button onClick={addPage}>ADD</button>
+			</div>
+			<div>
+				<button onClick={() => setShowTemplate(!showTemplate)} className='TemplateButton'>
+					Show Template Values
+				</button>
 			</div>
 			<div>
 				<p style={{ fontWeight: 'normal', fontSize: '0.95rem' }}>

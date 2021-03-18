@@ -86,7 +86,7 @@ nav {
 	background-color: var(--main-white);
 	color: var(--text-active-color);
 	display: grid;
-	grid-template-columns: 100px auto auto auto;
+	grid-template-columns: 100px auto auto auto auto;
 	text-align: center;
 	border-bottom: 1px solid silver;
 }
@@ -170,6 +170,20 @@ nav .addpage-div button:hover {
 }
 nav .addpage-div button:focus {
 	color: var(--main-blue);
+}
+
+nav .TemplateButton {
+	background-color: var(--second-white);
+	border: 1px solid var(--text-active-color);
+	padding: 6px 7px;
+	outline: none;
+	cursor: pointer;
+}
+nav .TemplateButton:hover {
+	transform: scale(1.02);
+}
+nav .TemplateButton:active {
+	transform: scale(0.95);
 }
 
 .three-section {
