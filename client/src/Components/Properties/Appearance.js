@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
+import { TemplateContext } from '../Contexts/TemplateContext'
 
 const Appearance = ({ width, activeElement }) => {
 	const {
@@ -20,10 +21,13 @@ const Appearance = ({ width, activeElement }) => {
 		changedXlarge,
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
+	const { colors } = useContext(TemplateContext)
+
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [opacity, setOpacity] = useState(1)
 	const [bgColor, setBgColor] = useState(`#ffffff`)
+	const [customBgColor, setCustomBgColor] = useState(false)
 	const [bColor, setBColor] = useState('#ffffff')
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
@@ -409,13 +413,38 @@ const Appearance = ({ width, activeElement }) => {
 		setObj(temp)
 	}
 
+	const showCustomBgColorOptions = () => {
+		const temp = []
+
+		for (const key in colors) {
+			temp.push(<option value={colors[key]}>{key}</option>)
+		}
+		temp.push(<option value='custom'>Custom</option>)
+
+		return (
+			<select
+				onChange={e => {
+					setCustomBgColor(e.target.value === 'custom' ? true : false)
+				}}>
+				{temp}
+			</select>
+		)
+	}
+
 	return (
 		<div className='ap borders'>
 			<p className='second-heading'>APPEARANCE</p>
 			<div>
 				<div className='two md'>
 					<label>Color: </label>
-					<input id='a-bgcolor' onChange={e => setBgColor(e.target.value)} type='color' defaultValue='#ffffff' />
+					{showCustomBgColorOptions()}
+					<input
+						disabled={!customBgColor}
+						id='a-bgcolor'
+						onChange={e => setBgColor(e.target.value)}
+						type='color'
+						defaultValue='#ffffff'
+					/>
 				</div>
 				<div className='one md'>
 					<label>Opacity: </label>
