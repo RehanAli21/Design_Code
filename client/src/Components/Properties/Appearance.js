@@ -424,6 +424,7 @@ const Appearance = ({ width, activeElement }) => {
 		return (
 			<select
 				onChange={e => {
+					setBgColor(e.target.value)
 					setCustomBgColor(e.target.value === 'custom' ? true : false)
 				}}>
 				{temp}
