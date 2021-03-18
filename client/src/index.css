@@ -515,8 +515,8 @@ nav .addpage-div button:focus {
 	margin-left: 10px;
 }
 .propertybar .ap .ap-borders .b .two > div {
-	width: 80%;
-	margin-left: 10%;
+	width: 85%;
+	margin-left: 7.5%;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 }
@@ -524,6 +524,10 @@ nav .addpage-div button:focus {
 	display: grid;
 	grid-template-columns: 1fr;
 	text-align: left;
+}
+.propertybar .ap .ap-borders .b .two .borderColor {
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 7px;
 }
 .propertybar .ap .ap-borders .b .two > div > input[type='number'] {
 	border: none;

@@ -33,6 +33,7 @@ const Appearance = ({ width, activeElement }) => {
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
 	const [bSide, setBSide] = useState('all')
+	const [customBorderColor, setCustomBorderColor] = useState(false)
 	const [borderChanged, setBorderChanged] = useState(false)
 	const [sX, setSX] = useState('0px')
 	const [sY, setSY] = useState('0px')
@@ -425,7 +426,27 @@ const Appearance = ({ width, activeElement }) => {
 			<select
 				onChange={e => {
 					setBgColor(e.target.value)
-					setCustomBgColor(e.target.value === 'custom' ? true : false)
+					setCustomBgColor(e.target.value === 'custom')
+				}}>
+				{temp}
+			</select>
+		)
+	}
+
+	const showCustomBorderColorOptions = () => {
+		const temp = []
+
+		for (const key in colors) {
+			temp.push(<option value={colors[key]}>{key}</option>)
+		}
+		temp.push(<option value='custom'>Custom</option>)
+
+		return (
+			<select
+				onChange={e => {
+					setBorderChanged(true)
+					setBColor(e.target.value)
+					setCustomBorderColor(e.target.value === 'custom')
 				}}>
 				{temp}
 			</select>
@@ -475,9 +496,11 @@ const Appearance = ({ width, activeElement }) => {
 						}}
 						className='b'>
 						<div className='two'>
-							<div className='mds'>
+							<div className='mds borderColor'>
 								<label>Color: </label>
+								{showCustomBorderColorOptions()}
 								<input
+									disabled={!customBorderColor}
 									id='a-b-color'
 									onChange={e => {
 										setBorderChanged(true)
