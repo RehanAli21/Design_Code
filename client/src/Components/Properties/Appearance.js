@@ -27,19 +27,19 @@ const Appearance = ({ width, activeElement }) => {
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [opacity, setOpacity] = useState(1)
 	const [bgColor, setBgColor] = useState(`#ffffff`)
-	const [customBgColor, setCustomBgColor] = useState(false)
+	const [customBgColor, setCustomBgColor] = useState(true)
 	const [bColor, setBColor] = useState('#ffffff')
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
 	const [bSide, setBSide] = useState('all')
-	const [customBorderColor, setCustomBorderColor] = useState(false)
+	const [customBorderColor, setCustomBorderColor] = useState(true)
 	const [borderChanged, setBorderChanged] = useState(false)
 	const [sX, setSX] = useState('0px')
 	const [sY, setSY] = useState('0px')
 	const [sColor, setSColor] = useState('#464646')
 	const [sBlur, setSBlur] = useState('0px')
-	const [customShadowColor, setCustomShadowColor] = useState(false)
+	const [customShadowColor, setCustomShadowColor] = useState(true)
 	const [shadowChanged, setShadowChanged] = useState(false)
 
 	useEffect(() => {
@@ -418,10 +418,10 @@ const Appearance = ({ width, activeElement }) => {
 	const showCustomBgColorOptions = () => {
 		const temp = []
 
+		temp.push(<option value='custom'>Custom</option>)
 		for (const key in colors) {
 			temp.push(<option value={colors[key]}>{key}</option>)
 		}
-		temp.push(<option value='custom'>Custom</option>)
 
 		return (
 			<select
@@ -437,10 +437,10 @@ const Appearance = ({ width, activeElement }) => {
 	const showCustomBorderColorOptions = () => {
 		const temp = []
 
+		temp.push(<option value='custom'>Custom</option>)
 		for (const key in colors) {
 			temp.push(<option value={colors[key]}>{key}</option>)
 		}
-		temp.push(<option value='custom'>Custom</option>)
 
 		return (
 			<select
@@ -457,10 +457,10 @@ const Appearance = ({ width, activeElement }) => {
 	const showCustomShadowColorOptions = () => {
 		const temp = []
 
+		temp.push(<option value='custom'>Custom</option>)
 		for (const key in colors) {
 			temp.push(<option value={colors[key]}>{key}</option>)
 		}
-		temp.push(<option value='custom'>Custom</option>)
 
 		return (
 			<select
