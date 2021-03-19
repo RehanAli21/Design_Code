@@ -13,6 +13,9 @@
 	box-sizing: border-box;
 	font-family: 'Segoe UI', sans-serif;
 }
+body input {
+	border: none;
+}
 
 .templateComp {
 	position: absolute;
