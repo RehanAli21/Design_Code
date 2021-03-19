@@ -17,12 +17,12 @@ const Toolbar = () => {
 		//Iterating each child in children array
 		children.forEach(child => {
 			//if parent found by id, then insert element into children
-			if (child[1].id === id) {
+			if (child[2] && child[1].id === id) {
 				child[2].push(element)
 				return children
 			}
 			//else if there is children, then find into children recusively
-			else if (child[2].length > 0) {
+			else if (child[2] && child[2].length > 0) {
 				findAndInsert(child[2], id, element)
 			}
 		})

@@ -58,7 +58,7 @@ const Propertiesbar = () => {
 				setChangedLarge(e[1].styleWidth.changedLarge)
 				setChangedXlarge(e[1].styleWidth.changeXlarge)
 				return true
-			} else if (e[2].length > 0) {
+			} else if (e[2] && e[2].length > 0) {
 				if (setWidthsStates(e[2], id)) return true
 			}
 		})
@@ -85,7 +85,7 @@ const Propertiesbar = () => {
 				e[1].styleWidth.changedLarge = changedLarge
 				e[1].styleWidth.changeXlarge = changedXlarge
 				return true
-			} else if (e[2].length > 0) {
+			} else if (e[2] && e[2].length > 0) {
 				if (setProperties(e[2], id)) return true
 			}
 		})

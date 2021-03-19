@@ -28,7 +28,6 @@ const Input = ({ activeElement, activePage, findAndInsert, uniqueString, setPage
 					changeXlarge: false,
 				},
 			},
-			[],
 		]
 		//if inserting input into body
 		if (activeElement === activePage) {

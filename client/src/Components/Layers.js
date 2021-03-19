@@ -122,7 +122,9 @@ const Layers = () => {
 							<button onClick={e => showAndHideList(e)} className='layer-show'>
 								&#10148;
 							</button>
-							<p className={e[1].id === activeElement ? 'bg-blue ' : ''} onClick={() => changeActiveElement(`${e[1].id}`)}>
+							<p
+								className={e[1].id === activeElement ? 'bg-blue ' : ''}
+								onClick={() => changeActiveElement(`${e[1].id}`)}>
 								{e[0]}
 							</p>
 							<button onClick={() => levelUp(`${e[1].id}`)} className='btn'>
@@ -131,7 +133,7 @@ const Layers = () => {
 							<button onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
 								X
 							</button>
-							{showLayers(e[2])}
+							{e[2] ? showLayers(e[2]) : null}
 						</li>
 					)
 				})}
