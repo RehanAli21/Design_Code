@@ -137,28 +137,50 @@ const Page = () => {
 			 * Inserting elements into variable.
 			 * Using React.createElement func for creating elements
 			 * first parameter is element type
-			 * second parameter giving 3 things, first: key, second: id
-			 * 		third: different style according to the width of body tag
+			 * second parameter giving attributes for elements
 			 * third parameter for children, if there is children do recursion
 			 */
-			temp.push(
-				React.createElement(
-					e[0],
-					{
-						key: uuid(),
-						id: e[1].id,
-						style:
-							width < 540
-								? e[1].styles.small
-								: width < 720
-								? e[1].styles.medium
-								: width < 960
-								? e[1].styles.large
-								: e[1].styles.xlarge,
-					},
-					e[2].length > 0 ? showElements(e[2]) : null
+			if (e[0] === 'div') {
+				temp.push(
+					React.createElement(
+						e[0],
+						{
+							key: uuid(),
+							id: e[1].id,
+							style:
+								width < 540
+									? e[1].styles.small
+									: width < 720
+									? e[1].styles.medium
+									: width < 960
+									? e[1].styles.large
+									: e[1].styles.xlarge,
+						},
+						e[2].length > 0 ? showElements(e[2]) : null
+					)
 				)
-			)
+			} else if (e[0] === 'input') {
+				temp.push(
+					React.createElement(
+						e[0],
+						{
+							key: uuid(),
+							id: e[1].id,
+							type: e[1].type,
+							placeholder: e[1].placeholder,
+							style:
+								width < 540
+									? e[1].styles.small
+									: width < 720
+									? e[1].styles.medium
+									: width < 960
+									? e[1].styles.large
+									: e[1].styles.xlarge,
+						},
+						null
+					)
+				)
+			}
 		})
 
 		return temp
