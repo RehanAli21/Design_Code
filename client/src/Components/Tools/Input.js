@@ -1,14 +1,14 @@
 import React from 'react'
 import { inputStyle } from '../Styles/inputStyle'
 
-//This component is for adding div element
+//This component is for adding input element
 const Input = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
 	//For adding element into pages data
 	const addInput = () => {
 		//Assigning new variable pages data,
-		//For inserting div element
+		//For inserting input element
 		const temp = Object.assign({}, pages)
-		//For holding all data of a div element
+		//For holding all data of a input element
 		const input = [
 			'input',
 			{

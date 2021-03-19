@@ -87,7 +87,7 @@ const Navbar = () => {
 	return (
 		<nav>
 			<h1>{'<'}</h1>
-			<div className='pages-div'>
+			<div className='page-div'>
 				<p onClick={() => setShow(!show)}>
 					{toCapitalize(activePage)}
 					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>&#10148;</span>
@@ -97,7 +97,7 @@ const Navbar = () => {
 			<div className='deletepage-div'>
 				<button onClick={deletePage}>Delete page</button>
 			</div>
-			<div className='addpage-div'>
+			<div className='addpage-input'>
 				<input
 					onChange={e => setPageName(e.target.value.toLowerCase())}
 					id='addpage-input'

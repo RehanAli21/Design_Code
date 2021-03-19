@@ -160,7 +160,7 @@ nav .nav-zoom p:hover {
 nav .nav-zoom p:active {
 	transform: scale(0.95);
 }
-nav .addpage-div input {
+nav .addpage-input input {
 	background-color: var(--second-white);
 	border: none;
 	color: var(--text-color);
@@ -168,7 +168,7 @@ nav .addpage-div input {
 	padding: 5px;
 	outline: none;
 }
-nav .addpage-div button {
+nav .addpage-input button {
 	background-color: var(--second-white);
 	border: none;
 	color: var(--text-color);
@@ -177,11 +177,11 @@ nav .addpage-div button {
 	outline: none;
 	font-weight: bold;
 }
-nav .addpage-div button:hover {
+nav .addpage-input button:hover {
 	color: var(--main-blue);
 	cursor: pointer;
 }
-nav .addpage-div button:focus {
+nav .addpage-input button:focus {
 	color: var(--main-blue);
 }
 nav .TemplateButton {
@@ -215,7 +215,7 @@ nav .TemplateButton:active {
 .tools {
 	overflow: scroll;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }
 .toolbar p {
 	text-align: center;
@@ -352,7 +352,6 @@ nav .TemplateButton:active {
 .main-div {
 	background-color: var(--third-white);
 	overflow: hidden;
-	text-align: center;
 	width: 100%;
 	height: 100%;
 	position: relative;
