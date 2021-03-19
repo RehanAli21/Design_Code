@@ -418,9 +418,17 @@ const Appearance = ({ width, activeElement }) => {
 	const showCustomBgColorOptions = () => {
 		const temp = []
 
-		temp.push(<option value='custom'>Custom</option>)
+		temp.push(
+			<option key='çustom' value='custom'>
+				Custom
+			</option>
+		)
 		for (const key in colors) {
-			temp.push(<option value={colors[key]}>{key}</option>)
+			temp.push(
+				<option key={key} value={colors[key]}>
+					{key}
+				</option>
+			)
 		}
 
 		return (
@@ -437,9 +445,17 @@ const Appearance = ({ width, activeElement }) => {
 	const showCustomBorderColorOptions = () => {
 		const temp = []
 
-		temp.push(<option value='custom'>Custom</option>)
+		temp.push(
+			<option key='custom' value='custom'>
+				Custom
+			</option>
+		)
 		for (const key in colors) {
-			temp.push(<option value={colors[key]}>{key}</option>)
+			temp.push(
+				<option key={key} value={colors[key]}>
+					{key}
+				</option>
+			)
 		}
 
 		return (
@@ -457,9 +473,17 @@ const Appearance = ({ width, activeElement }) => {
 	const showCustomShadowColorOptions = () => {
 		const temp = []
 
-		temp.push(<option value='custom'>Custom</option>)
+		temp.push(
+			<option key='custom' value='custom'>
+				Custom
+			</option>
+		)
 		for (const key in colors) {
-			temp.push(<option value={colors[key]}>{key}</option>)
+			temp.push(
+				<option key={key} value={colors[key]}>
+					{key}
+				</option>
+			)
 		}
 
 		return (
