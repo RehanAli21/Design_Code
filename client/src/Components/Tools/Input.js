@@ -40,7 +40,7 @@ const Input = ({ activeElement, activePage, findAndInsert, uniqueString, setPage
 		setPages(temp)
 	}
 
-	return <p onClick={addInput}>Feild</p>
+	return <p onClick={addInput}>Input Field</p>
 }
 
 export default Input

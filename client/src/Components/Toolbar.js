@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import Div from './Tools/Div'
+import Input from './Tools/Input'
 
 //This component is for showing list of elemenets,
 //which can be added.
@@ -33,6 +34,14 @@ const Toolbar = () => {
 		<div className='toolbar'>
 			<div className='tools'>
 				<Div
+					findAndInsert={findAndInsert}
+					activeElement={activeElement}
+					activePage={activePage}
+					pages={pages}
+					setPages={setPages}
+					uniqueString={uniqueString}
+				/>
+				<Input
 					findAndInsert={findAndInsert}
 					activeElement={activeElement}
 					activePage={activePage}
