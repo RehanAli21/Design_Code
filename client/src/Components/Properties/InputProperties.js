@@ -41,6 +41,20 @@ const InputProperties = () => {
 		})
 	}
 
+	//For Placeholder change of input
+	useEffect(() => {
+		const temp = Object.assign({}, pages)
+		findAndChangePlaceholder(temp[activePage], placeholder)
+		setRender(!render)
+	}, [placeholder])
+	//For finding and changing input placeholder
+	const findAndChangePlaceholder = (arr, placeholder) => {
+		arr.forEach(e => {
+			if (e[1].id === activeElement) e[1].placeholder = placeholder
+			else if (e[2]) findAndChangePlaceholder(e[2], placeholder)
+		})
+	}
+
 	return (
 		<div className='borders input-specific'>
 			<p className='second-heading'>Input Properties</p>
