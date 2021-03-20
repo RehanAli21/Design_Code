@@ -55,6 +55,42 @@ const InputProperties = () => {
 		})
 	}
 
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setChangedPadding(small, setSmall, padding)
+				setChangedSmall(true)
+				if (!changedMedium) setChangedPadding(medium, setMedium, padding)
+				if (!changedLarge) setChangedPadding(large, setLarge, padding)
+				if (!changedXlarge) setChangedPadding(xlarge, setXlarge, padding)
+			} else if (width < 720) {
+				setChangedPadding(medium, setMedium, padding)
+				setChangedMedium(true)
+				if (!changedSmall) setChangedPadding(small, setSmall, padding)
+				if (!changedLarge) setChangedPadding(large, setLarge, padding)
+				if (!changedXlarge) setChangedPadding(xlarge, setXlarge, padding)
+			} else if (width < 970) {
+				setChangedPadding(large, setLarge, padding)
+				setChangedLarge(true)
+				if (!changedSmall) setChangedPadding(small, setSmall, padding)
+				if (!changedMedium) setChangedPadding(medium, setMedium, padding)
+				if (!changedXlarge) setChangedPadding(xlarge, setXlarge, padding)
+			} else {
+				setChangedPadding(xlarge, setXlarge, padding)
+				setChangedSmall(true)
+				if (!changedSmall) setChangedPadding(small, setSmall, padding)
+				if (!changedMedium) setChangedPadding(medium, setMedium, padding)
+				if (!changedLarge) setChangedPadding(large, setLarge, padding)
+			}
+		}
+	}, [padding])
+
+	const setChangedPadding = (obj, setObj, padding) => {
+		const temp = Object.assign({}, obj)
+		temp.padding = padding
+		setObj(temp)
+	}
+
 	return (
 		<div className='borders input-specific'>
 			<p className='second-heading'>Input Properties</p>
