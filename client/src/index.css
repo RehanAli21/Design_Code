@@ -615,7 +615,7 @@ nav .TemplateButton:active {
 	outline: none;
 	background-color: var(--second-white);
 }
-.propertybar .ap .shadow > .one input[type='color'] {
+.propertybar .ap input[type='color'] {
 	margin: 5px;
 	width: 40px;
 	border: none;
@@ -628,6 +628,26 @@ nav .TemplateButton:active {
 	padding: 3px;
 	width: 85px;
 	margin-left: 35px;
+}
+.propertybar .input-specific > div {
+	text-align: left;
+	display: grid;
+	grid-template-columns: auto 100px 5%;
+	margin-left: 26px;
+	margin-top: 10px;
+}
+.propertybar .input-specific select {
+	background-color: var(--second-white);
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+}
+.propertybar .input-specific input {
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	outline: none;
+	background-color: var(--second-white);
 }
 
 /* width */
