@@ -23,22 +23,26 @@ const InputProperties = () => {
 	} = useContext(PropertiesContext)
 	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 
-	const [type, setType] = useState('text')
-	const [placeholder, setPlaceholder] = useState('placeholder')
+	const [type, setType] = useState('')
+	const [placeholder, setPlaceholder] = useState('')
 	const [padding, setPadding] = useState('')
 
 	//For type change of input
 	useEffect(() => {
-		const temp = Object.assign({}, pages)
-		findAndChange(temp[activePage], 'type', type)
-		setPages(temp)
+		if (type !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChange(temp[activePage], 'type', type)
+			setPages(temp)
+		}
 	}, [type])
 
 	//For Placeholder change of input
 	useEffect(() => {
-		const temp = Object.assign({}, pages)
-		findAndChange(temp[activePage], 'placeholder', placeholder)
-		setPages(temp)
+		if (placeholder !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChange(temp[activePage], 'placeholder', placeholder)
+			setPages(temp)
+		}
 	}, [placeholder])
 
 	//For finding element and changing attribute value
@@ -78,7 +82,7 @@ const InputProperties = () => {
 				if (!changedXlarge) setChangedPadding(xlarge, setXlarge, padding)
 			} else {
 				setChangedPadding(xlarge, setXlarge, padding)
-				setChangedSmall(true)
+				setChangedXlarge(true)
 				if (!changedSmall) setChangedPadding(small, setSmall, padding)
 				if (!changedMedium) setChangedPadding(medium, setMedium, padding)
 				if (!changedLarge) setChangedPadding(large, setLarge, padding)

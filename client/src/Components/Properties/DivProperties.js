@@ -362,7 +362,7 @@ const DivProperties = ({ width, activeElement }) => {
 					if (!changedXlarge) setDisplayGrid(xlarge, setXlarge, 'grid')
 				} else {
 					setDisplayGrid(xlarge, setXlarge, 'grid')
-					setChangedSmall(true)
+					setChangedXlarge(true)
 					if (!changedSmall) setDisplayGrid(small, setSmall, 'grid')
 					if (!changedMedium) setDisplayGrid(medium, setMedium, 'grid')
 					if (!changedLarge) setDisplayGrid(large, setLarge, 'grid')
