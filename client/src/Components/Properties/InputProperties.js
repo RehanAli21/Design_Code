@@ -21,7 +21,7 @@ const InputProperties = () => {
 		changedXlarge,
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages, render, setRender } = useContext(PageContext)
+	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [type, setType] = useState('text')
 	const [placeholder, setPlaceholder] = useState('placeholder')
@@ -30,31 +30,32 @@ const InputProperties = () => {
 	//For type change of input
 	useEffect(() => {
 		const temp = Object.assign({}, pages)
-		findElementInPages(temp[activePage], type)
-		setRender(!render)
+		findAndChange(temp[activePage], 'type', type)
+		setPages(temp)
 	}, [type])
-	//For finding and changing input type
-	const findElementInPages = (arr, InputType) => {
-		arr.forEach(e => {
-			if (e[1].id === activeElement) e[1].type = InputType
-			else if (e[2]) findElementInPages(e[2], InputType)
-		})
-	}
 
 	//For Placeholder change of input
 	useEffect(() => {
 		const temp = Object.assign({}, pages)
-		findAndChangePlaceholder(temp[activePage], placeholder)
-		setRender(!render)
+		findAndChange(temp[activePage], 'placeholder', placeholder)
+		setPages(temp)
 	}, [placeholder])
-	//For finding and changing input placeholder
-	const findAndChangePlaceholder = (arr, placeholder) => {
-		arr.forEach(e => {
-			if (e[1].id === activeElement) e[1].placeholder = placeholder
-			else if (e[2]) findAndChangePlaceholder(e[2], placeholder)
-		})
+
+	//For finding element and changing attribute value
+	const findAndChange = (arr, attribute, changedValue) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				arr[i][1][attribute] = changedValue
+				return true
+			} else if (arr[i][2]) {
+				if (findAndChange(arr[i][2], attribute, changedValue)) {
+					return true
+				}
+			}
+		}
 	}
 
+	//For Changing padding of input
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			if (width < 540) {
@@ -84,7 +85,7 @@ const InputProperties = () => {
 			}
 		}
 	}, [padding])
-
+	//Helper function for changing padding
 	const setChangedPadding = (obj, setObj, padding) => {
 		const temp = Object.assign({}, obj)
 		temp.padding = padding
