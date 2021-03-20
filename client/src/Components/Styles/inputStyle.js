@@ -10,4 +10,5 @@ export const inputStyle = {
 	borderRadius: '',
 	textAlign: '',
 	boxShadow: '',
+	padding: '',
 }

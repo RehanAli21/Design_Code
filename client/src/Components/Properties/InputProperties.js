@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 
 const InputProperties = ({ width, activeElement }) => {
@@ -21,12 +21,16 @@ const InputProperties = ({ width, activeElement }) => {
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
 
+	const [type, setType] = useState('text')
+	const [placeholder, setPlaceholder] = useState('placeholder')
+	const [padding, setPadding] = useState('')
+
 	return (
 		<div className='borders input-specific'>
 			<p className='second-heading'>Input Properties</p>
 			<div>
 				<label>Type: </label>
-				<select>
+				<select onChange={e => setType(e.target.value)}>
 					<option value='text'>Text</option>
 					<option value='number'>Number</option>
 					<option value='email'>Email</option>
@@ -38,11 +42,11 @@ const InputProperties = ({ width, activeElement }) => {
 			</div>
 			<div>
 				<label>Placeholder: </label>
-				<input type='text' placeholder='Text' />
+				<input onChange={e => setPlaceholder(e.target.value)} type='text' placeholder='Text' />
 			</div>
 			<div>
 				<label>Inner space: </label>
-				<input type='number' defaultValue='0' min='0' />
+				<input onChange={e => setPadding(`${e.target.value}px`)} type='number' defaultValue='0' min='0' />
 			</div>
 		</div>
 	)
