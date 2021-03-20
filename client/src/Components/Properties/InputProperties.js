@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
+import { PageContext } from '../Contexts/PageContext'
 
-const InputProperties = ({ width, activeElement }) => {
+const InputProperties = () => {
 	const {
 		small,
 		setSmall,
@@ -20,10 +21,25 @@ const InputProperties = ({ width, activeElement }) => {
 		changedXlarge,
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
+	const { width, activePage, activeElement, pages, setPages, render, setRender } = useContext(PageContext)
 
 	const [type, setType] = useState('text')
 	const [placeholder, setPlaceholder] = useState('placeholder')
 	const [padding, setPadding] = useState('')
+
+	//For type change of input
+	useEffect(() => {
+		const temp = Object.assign({}, pages)
+		findElementInPages(temp[activePage], type)
+		setRender(!render)
+	}, [type])
+	//For finding and changing input type
+	const findElementInPages = (arr, InputType) => {
+		arr.forEach(e => {
+			if (e[1].id === activeElement) e[1].type = InputType
+			else if (e[2]) findElementInPages(e[2], InputType)
+		})
+	}
 
 	return (
 		<div className='borders input-specific'>

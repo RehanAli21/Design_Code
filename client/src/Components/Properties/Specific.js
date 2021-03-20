@@ -12,7 +12,7 @@ const Specific = () => {
 	return ele.tagName === 'DIV' ? (
 		<DivProperties width={width} activeElement={activeElement} />
 	) : ele.tagName === 'INPUT' ? (
-		<InputProperties width={width} activeElement={activeElement} />
+		<InputProperties />
 	) : (
 		<div></div>
 	)
