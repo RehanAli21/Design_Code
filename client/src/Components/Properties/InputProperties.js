@@ -128,9 +128,17 @@ const InputProperties = () => {
 					<option value='number'>Number</option>
 					<option value='email'>Email</option>
 					<option value='password'>Password</option>
+					<option value='button'>Button</option>
+					<option value='checkbox'>Checkbox</option>
+					<option value='radio'>Radio</option>
 					<option value='date'>Date</option>
+					<option value='datetime-local'>Date Time local</option>
+					<option value='time'>Time</option>
+					<option value='week'>Week</option>
+					<option value='month'>Month</option>
 					<option value='color'>Color</option>
 					<option value='range'>Range</option>
+					<option value='file'>File</option>
 				</select>
 			</div>
 			<div>
