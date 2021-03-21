@@ -26,6 +26,7 @@ const InputProperties = () => {
 	const [type, setType] = useState('')
 	const [placeholder, setPlaceholder] = useState('')
 	const [padding, setPadding] = useState('')
+	const [maxLength, setMaxLength] = useState(0)
 
 	//For setting default values of type select and placeholder
 	useEffect(() => {
@@ -148,6 +149,10 @@ const InputProperties = () => {
 			<div>
 				<label>Inner space: </label>
 				<input onChange={e => setPadding(`${e.target.value}px`)} type='number' defaultValue='0' min='0' />
+			</div>
+			<div>
+				<label>Max characters</label>
+				<input onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
 			</div>
 		</div>
 	)
