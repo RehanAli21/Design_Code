@@ -52,6 +52,22 @@ const InputProperties = () => {
 		}
 	}
 
+	//For setting padding default values
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const paddingInput = document.getElementById('i-s-paddingInput')
+			if (width < 540) {
+				paddingInput.value = small.padding ? small.padding.split('p')[0] : 0
+			} else if (width < 720) {
+				paddingInput.value = medium.padding ? medium.padding.split('p')[0] : 0
+			} else if (width < 920) {
+				paddingInput.value = large.padding ? large.padding.split('p')[0] : 0
+			} else {
+				paddingInput.value = xlarge.padding ? xlarge.padding.split('p')[0] : 0
+			}
+		}
+	}, [activeElement, small, large, xlarge, medium, width])
+
 	//For type change of input
 	useEffect(() => {
 		if (type !== '') {
@@ -159,10 +175,16 @@ const InputProperties = () => {
 			</div>
 			<div>
 				<label>Inner space: </label>
-				<input onChange={e => setPadding(`${e.target.value}px`)} type='number' defaultValue='0' min='0' />
+				<input
+					id='i-s-paddingInput'
+					onChange={e => setPadding(`${e.target.value}px`)}
+					type='number'
+					defaultValue='0'
+					min='0'
+				/>
 			</div>
 			<div>
-				<label>Max characters</label>
+				<label>Max characters: </label>
 				<input id='i-s-maxLengthInput' onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
 			</div>
 		</div>
