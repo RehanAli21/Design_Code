@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 
-const Align = ({ width }) => {
+const Align = ({ width, activeElement }) => {
 	const {
 		small,
 		setSmall,
@@ -23,6 +23,49 @@ const Align = ({ width }) => {
 
 	const [selfAlign, setSelfAlign] = useState('left')
 	const [textAlign, setTextAlign] = useState('left')
+
+	//For setting default values
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setTextAlign(small.textAlign)
+				if (small.marginLeft === 'auto' && small.marginRight === 'auto') {
+					setSelfAlign('center')
+				} else if (small.marginLeft === '0px' && small.marginRight === 'auto') {
+					setSelfAlign('left')
+				} else if (small.marginLeft === 'auto' && small.marginRight === '0px') {
+					setSelfAlign('right')
+				}
+			} else if (width < 720) {
+				setTextAlign(medium.textAlign)
+				if (medium.marginLeft === 'auto' && medium.marginRight === 'auto') {
+					setSelfAlign('center')
+				} else if (medium.marginLeft === '0px' && medium.marginRight === 'auto') {
+					setSelfAlign('left')
+				} else if (medium.marginLeft === 'auto' && medium.marginRight === '0px') {
+					setSelfAlign('right')
+				}
+			} else if (width < 970) {
+				setTextAlign(large.textAlign)
+				if (large.marginLeft === 'auto' && large.marginRight === 'auto') {
+					setSelfAlign('center')
+				} else if (large.marginLeft === '0px' && large.marginRight === 'auto') {
+					setSelfAlign('left')
+				} else if (large.marginLeft === 'auto' && large.marginRight === '0px') {
+					setSelfAlign('right')
+				}
+			} else {
+				setTextAlign(xlarge.textAlign)
+				if (xlarge.marginLeft === 'auto' && xlarge.marginRight === 'auto') {
+					setSelfAlign('center')
+				} else if (xlarge.marginLeft === '0px' && xlarge.marginRight === 'auto') {
+					setSelfAlign('left')
+				} else if (xlarge.marginLeft === 'auto' && xlarge.marginRight === '0px') {
+					setSelfAlign('right')
+				}
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {

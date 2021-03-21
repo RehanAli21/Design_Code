@@ -95,7 +95,7 @@ const Propertiesbar = () => {
 		<div className='propertybar'>
 			<div className='property'>
 				<Specific />
-				<Align width={width} />
+				<Align width={width} activeElement={activeElement} />
 				<Transform width={width} activeElement={activeElement} />
 				<Appearance width={width} activeElement={activeElement} />
 			</div>
