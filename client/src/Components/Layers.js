@@ -82,7 +82,7 @@ const Layers = () => {
 			//and insert data into array
 			if (a[1].id !== id) {
 				//Checks if there are children by length
-				if (a[2].length > 0) {
+				if (a[2] && a[2].length > 0) {
 					a[2] = deleteHelper(a[2], id, a[1].id)
 				}
 				//inserting data into variable
