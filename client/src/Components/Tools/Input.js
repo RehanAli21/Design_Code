@@ -15,6 +15,7 @@ const Input = ({ activeElement, activePage, findAndInsert, uniqueString, setPage
 				type: 'text',
 				placeholder: 'placeholder',
 				id: uniqueString(),
+				maxLength: 0,
 				styles: {
 					small: inputStyle,
 					medium: inputStyle,

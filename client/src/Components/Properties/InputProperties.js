@@ -32,18 +32,20 @@ const InputProperties = () => {
 	useEffect(() => {
 		const typeSelect = document.getElementById('i-s-typeSelect')
 		const placeholderInput = document.getElementById('i-s-placeholderinput')
+		const maxLengthInput = document.getElementById('i-s-maxLengthInput')
 		const values = findAndReturnAttribues(pages[activePage])
 
 		if (values && typeSelect && placeholderInput) {
 			typeSelect.value = values[0]
 			placeholderInput.value = values[1]
+			maxLengthInput.value = values[2] === 0 ? '' : values[2]
 		}
 	})
 	//for find element and return attributes values
 	const findAndReturnAttribues = arr => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].id === activeElement) {
-				return [arr[i][1].type, arr[i][1].placeholder]
+				return [arr[i][1].type, arr[i][1].placeholder, arr[i][1].maxLength]
 			} else if (arr[i][2]) {
 				findAndReturnAttribues(arr[i][2])
 			}
@@ -67,6 +69,15 @@ const InputProperties = () => {
 			setPages(temp)
 		}
 	}, [placeholder])
+
+	//For MaxLength change of input
+	useEffect(() => {
+		if (maxLength !== 0) {
+			const temp = Object.assign({}, pages)
+			findAndChange(temp[activePage], 'maxLength', maxLength)
+			setPages(temp)
+		}
+	}, [maxLength])
 
 	//For finding element and changing attribute value
 	const findAndChange = (arr, attribute, changedValue) => {
@@ -152,7 +163,7 @@ const InputProperties = () => {
 			</div>
 			<div>
 				<label>Max characters</label>
-				<input onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
+				<input id='i-s-maxLengthInput' onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
 			</div>
 		</div>
 	)
