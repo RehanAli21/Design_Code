@@ -25,12 +25,21 @@ const App = () => {
 			move = true
 		}
 
+		//For reseting zoom and move
+		if (zoom && e.key === 'r') {
+			setScale(0.8)
+			setTX(0)
+			setTY(0)
+		}
+
+		//For Zoom
 		if (zoom && !move && e.key === 'ArrowUp' && scale < 2) {
 			setScale(scale + 0.05)
 		} else if (zoom && !move && e.key === 'ArrowDown' && scale > 0.2) {
 			setScale(scale - 0.05)
 		}
 
+		//For Move
 		if (zoom && move && e.key === 'ArrowUp') {
 			setTY(tY - 10)
 		} else if (zoom && move && e.key === 'ArrowDown') {
