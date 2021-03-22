@@ -644,6 +644,13 @@ nav .TemplateButton:active {
 	outline: none;
 	background-color: var(--second-white);
 }
+.propertybar .btn-specific input {
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	outline: none;
+	background-color: var(--second-white);
+}
 
 /* width */
 ::-webkit-scrollbar {

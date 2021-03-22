@@ -8,7 +8,7 @@ const ButtonProperties = () => {
 
 	//For setting default values of button text
 	useEffect(() => {
-		const textInput = document.getElementById('i-s-typeSelect')
+		const textInput = document.getElementById('btn-textInput')
 		const value = findAndReturnText(pages[activePage])
 		if (value && textInput) {
 			textInput.value = value
@@ -27,9 +27,11 @@ const ButtonProperties = () => {
 
 	//For text change of button
 	useEffect(() => {
-		const temp = Object.assign({}, pages)
-		findAndChange(temp[activePage], 'text', text !== '' ? text : 'button')
-		setPages(temp)
+		if (text !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChange(temp[activePage], 'text', text)
+			setPages(temp)
+		}
 	}, [text])
 
 	//For finding element and changing attribute value
@@ -51,7 +53,7 @@ const ButtonProperties = () => {
 			<p className='second-heading'>Button Properties</p>
 			<div>
 				<label>Text: </label>
-				<input onChange={e => setText(e.target.value)} type='text' placeholder='Text' />
+				<input id='btn-textInput' onChange={e => setText(e.target.value)} type='text' placeholder='Text' />
 			</div>
 		</div>
 	)
