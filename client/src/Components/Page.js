@@ -77,7 +77,7 @@ const Page = ({ scale, tX, tY }) => {
 									? e[1].styles.large
 									: e[1].styles.xlarge,
 						},
-						null
+						e[1].text
 					)
 				)
 			}

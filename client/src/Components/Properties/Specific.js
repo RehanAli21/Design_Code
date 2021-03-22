@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import DivProperties from './DivProperties'
-import InputProperties from './InputProperties'
+import DivProperties from './SpecificProperties/DivProperties'
+import InputProperties from './SpecificProperties/InputProperties'
+import ButtonProperties from './SpecificProperties/ButtonProperties'
 
 const Specific = () => {
 	const { activeElement, activePage, width } = useContext(PageContext)
@@ -13,6 +14,8 @@ const Specific = () => {
 		<DivProperties width={width} activeElement={activeElement} />
 	) : ele.tagName === 'INPUT' ? (
 		<InputProperties />
+	) : ele.tagName === 'BUTTON' ? (
+		<ButtonProperties />
 	) : (
 		<div></div>
 	)

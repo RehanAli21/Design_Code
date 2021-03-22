@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { PropertiesContext } from '../Contexts/PropertiesContext'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const DivProperties = ({ width, activeElement }) => {
 	const {

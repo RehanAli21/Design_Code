@@ -13,6 +13,7 @@ const Button = ({ activeElement, activePage, findAndInsert, uniqueString, setPag
 			'button',
 			{
 				id: uniqueString(),
+				text: 'button',
 				styles: {
 					small: buttonStyle,
 					medium: buttonStyle,

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { PropertiesContext } from '../Contexts/PropertiesContext'
-import { PageContext } from '../Contexts/PageContext'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import { PageContext } from '../../Contexts/PageContext'
 
 const InputProperties = () => {
 	const {
