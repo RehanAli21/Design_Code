@@ -94,7 +94,7 @@ const Page = ({ scale, tX, tY }) => {
 				style={{
 					width: `${width}px`,
 					minWidth: '300px',
-					transform: `scale(${scale}) translate(${tX}, ${tY})`,
+					transform: `scale(${scale}) translate(${tX}px, ${tY}px)`,
 					marginLeft: width < 720 ? '15%' : width < 1000 ? '10%' : width < 1500 ? '5%' : '0%',
 				}}>
 				{showElements(pages[activePage])}

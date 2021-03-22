@@ -17,24 +17,38 @@ const App = () => {
 	const [tX, setTX] = useState(0)
 	const [tY, setTY] = useState(0)
 
-	const scalePage = e => {
+	const scaleTranslatePage = e => {
 		if (e.key === 'z' && zoom === false) {
 			zoom = true
 		}
+		if (e.key === 'x' && move === false) {
+			move = true
+		}
+
 		if (zoom && !move && e.key === 'ArrowUp' && scale < 2) {
 			setScale(scale + 0.05)
 		} else if (zoom && !move && e.key === 'ArrowDown' && scale > 0.2) {
 			setScale(scale - 0.05)
 		}
+
+		if (zoom && move && e.key === 'ArrowUp') {
+			setTY(tY - 10)
+		} else if (zoom && move && e.key === 'ArrowDown') {
+			setTY(tY + 10)
+		} else if (zoom && move && e.key === 'ArrowLeft') {
+			setTX(tX - 10)
+		} else if (zoom && move && e.key === 'ArrowRight') {
+			setTX(tX + 10)
+		}
 	}
 
-	const disable = e => {
+	const disableScaleTranslate = e => {
 		if (e.key === 'z' && zoom) zoom = false
 		if (e.key === 'x' && move) move = false
 	}
 
 	return (
-		<div onKeyUp={disable} onKeyDown={scalePage} tabIndex='0'>
+		<div onKeyUp={disableScaleTranslate} onKeyDown={scaleTranslatePage} tabIndex='0'>
 			<PageProvider>
 				<TemplateProvider>
 					<TemplateValues />

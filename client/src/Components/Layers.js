@@ -50,7 +50,7 @@ const Layers = () => {
 		//Doing recursion on each child on array
 		e.forEach(ele => {
 			//Checking if there is a child by child arr length
-			if (ele[2].length > 0) {
+			if (ele[2] && ele[2].length > 0) {
 				ele[2] = levelUpHelper(ele[2], id)
 			}
 		})
