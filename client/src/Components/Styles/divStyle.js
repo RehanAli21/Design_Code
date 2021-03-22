@@ -1,6 +1,7 @@
 export const divStyle = {
 	width: '',
 	height: '',
+	padding: '',
 	margin: '',
 	marginTop: '',
 	marginLeft: '',

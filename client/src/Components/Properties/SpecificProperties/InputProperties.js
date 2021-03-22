@@ -1,31 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { PageContext } from '../../Contexts/PageContext'
 
 const InputProperties = () => {
-	const {
-		small,
-		setSmall,
-		medium,
-		setMedium,
-		large,
-		setLarge,
-		xlarge,
-		setXlarge,
-		changedSmall,
-		setChangedSmall,
-		changedMedium,
-		setChangedMedium,
-		changedLarge,
-		setChangedLarge,
-		changedXlarge,
-		setChangedXlarge,
-	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [type, setType] = useState('')
 	const [placeholder, setPlaceholder] = useState('')
-	const [padding, setPadding] = useState('')
 	const [maxLength, setMaxLength] = useState(0)
 
 	//For setting default values of type select and placeholder
@@ -51,22 +31,6 @@ const InputProperties = () => {
 			}
 		}
 	}
-
-	//For setting padding default values
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			const paddingInput = document.getElementById('i-s-paddingInput')
-			if (width < 540) {
-				paddingInput.value = small.padding ? small.padding.split('p')[0] : 0
-			} else if (width < 720) {
-				paddingInput.value = medium.padding ? medium.padding.split('p')[0] : 0
-			} else if (width < 920) {
-				paddingInput.value = large.padding ? large.padding.split('p')[0] : 0
-			} else {
-				paddingInput.value = xlarge.padding ? xlarge.padding.split('p')[0] : 0
-			}
-		}
-	}, [activeElement, small, large, xlarge, medium, width])
 
 	//For type change of input
 	useEffect(() => {
@@ -109,43 +73,6 @@ const InputProperties = () => {
 		}
 	}
 
-	//For Changing padding of input
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			if (width < 540) {
-				setChangedPadding(small, setSmall, padding)
-				setChangedSmall(true)
-				if (!changedMedium) setChangedPadding(medium, setMedium, padding)
-				if (!changedLarge) setChangedPadding(large, setLarge, padding)
-				if (!changedXlarge) setChangedPadding(xlarge, setXlarge, padding)
-			} else if (width < 720) {
-				setChangedPadding(medium, setMedium, padding)
-				setChangedMedium(true)
-				if (!changedSmall) setChangedPadding(small, setSmall, padding)
-				if (!changedLarge) setChangedPadding(large, setLarge, padding)
-				if (!changedXlarge) setChangedPadding(xlarge, setXlarge, padding)
-			} else if (width < 970) {
-				setChangedPadding(large, setLarge, padding)
-				setChangedLarge(true)
-				if (!changedSmall) setChangedPadding(small, setSmall, padding)
-				if (!changedMedium) setChangedPadding(medium, setMedium, padding)
-				if (!changedXlarge) setChangedPadding(xlarge, setXlarge, padding)
-			} else {
-				setChangedPadding(xlarge, setXlarge, padding)
-				setChangedXlarge(true)
-				if (!changedSmall) setChangedPadding(small, setSmall, padding)
-				if (!changedMedium) setChangedPadding(medium, setMedium, padding)
-				if (!changedLarge) setChangedPadding(large, setLarge, padding)
-			}
-		}
-	}, [padding])
-	//Helper function for changing padding
-	const setChangedPadding = (obj, setObj, padding) => {
-		const temp = Object.assign({}, obj)
-		temp.padding = padding
-		setObj(temp)
-	}
-
 	return (
 		<div className='borders input-specific'>
 			<p className='second-heading'>Input Properties</p>
@@ -172,16 +99,6 @@ const InputProperties = () => {
 			<div>
 				<label>Placeholder: </label>
 				<input id='i-s-placeholderinput' onChange={e => setPlaceholder(e.target.value)} type='text' placeholder='Text' />
-			</div>
-			<div>
-				<label>Inner space: </label>
-				<input
-					id='i-s-paddingInput'
-					onChange={e => setPadding(`${e.target.value}px`)}
-					type='number'
-					defaultValue='0'
-					min='0'
-				/>
 			</div>
 			<div>
 				<label>Max characters: </label>

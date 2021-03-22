@@ -28,6 +28,7 @@ const Appearance = ({ width, activeElement }) => {
 	const [opacity, setOpacity] = useState(1)
 	const [bgColor, setBgColor] = useState(`#ffffff`)
 	const [customBgColor, setCustomBgColor] = useState(true)
+	const [padding, setPadding] = useState('')
 	const [bColor, setBColor] = useState('#ffffff')
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
@@ -55,6 +56,7 @@ const Appearance = ({ width, activeElement }) => {
 			const sYInput = document.getElementById('a-s-y')
 			const sBlurInput = document.getElementById('a-s-blur')
 			const sColorInput = document.getElementById('a-s-color')
+			const paddingInput = document.getElementById('ap-paddingInput')
 
 			if (large.border) {
 				bActiveInput.checked = true
@@ -113,15 +115,19 @@ const Appearance = ({ width, activeElement }) => {
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor ? RGBToHex(small.backgroundColor) : '#ffffff'
 				bRadiusInput.value = small.borderRadius ? small.borderRadius.split('p')[0] : '0'
+				paddingInput.value = small.padding ? small.padding.split('p')[0] : 0
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor ? RGBToHex(medium.backgroundColor) : '#ffffff'
 				bRadiusInput.value = medium.borderRadius ? medium.borderRadius.split('p')[0] : '0'
+				paddingInput.value = medium.padding ? medium.padding.split('p')[0] : 0
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor ? RGBToHex(large.backgroundColor) : '#ffffff'
 				bRadiusInput.value = large.borderRadius ? large.borderRadius.split('p')[0] : '0'
+				paddingInput.value = large.padding ? large.padding.split('p')[0] : 0
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? RGBToHex(xlarge.backgroundColor) : '#ffffff'
 				bRadiusInput.value = xlarge.borderRadius ? xlarge.borderRadius.split('p')[0] : '0'
+				paddingInput.value = xlarge.padding ? xlarge.padding.split('p')[0] : 0
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
@@ -172,6 +178,37 @@ const Appearance = ({ width, activeElement }) => {
 			setShadowChanged(false)
 		}
 	}, [showShadowSection, sX, sY, sColor, sBlur])
+
+	//For Changing padding
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'padding', padding)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'padding', padding)
+				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'padding', padding)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)
+				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'padding', padding)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)
+				if (!changedMedium) setProperties(medium, setMedium, 'padding', padding)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
+			} else {
+				setProperties(xlarge, setXlarge, 'padding', padding)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)
+				if (!changedMedium) setProperties(medium, setMedium, 'padding', padding)
+				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
+			}
+		}
+	}, [padding])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -523,6 +560,16 @@ const Appearance = ({ width, activeElement }) => {
 						defaultValue='1'
 						min='0'
 						max='1'
+					/>
+				</div>
+				<div className='padding md'>
+					<label>Inner space: </label>
+					<input
+						id='ap-paddingInput'
+						onChange={e => setPadding(`${e.target.value}px`)}
+						type='number'
+						defaultValue='0'
+						min='0'
 					/>
 				</div>
 				<div className='ap-borders md'>

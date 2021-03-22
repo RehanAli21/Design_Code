@@ -525,9 +525,20 @@ nav .TemplateButton:active {
 }
 .propertybar .ap .one {
 	display: grid;
-	grid-template-columns: 1fr 1fr;
-	width: 80%;
-	margin-left: 10%;
+	grid-template-columns: 110px 1fr 5%;
+}
+.propertybar .ap .padding {
+	display: grid;
+	grid-template-columns: 135px 120px;
+}
+.propertybar .ap .padding input[type='number'] {
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	width: 100%;
+	font-size: 15px;
+	outline: none;
+	background-color: var(--second-white);
 }
 .propertybar .ap .ap-borders {
 	width: 80%;
