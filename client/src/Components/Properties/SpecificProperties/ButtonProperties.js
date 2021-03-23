@@ -26,7 +26,7 @@ const ButtonProperties = () => {
 	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [text, setText] = useState('')
-	const [textColor, setTextColor] = useState('rgba(0, 0, 0, 1)')
+	const [textColor, setTextColor] = useState('')
 	const [fontSize, setFontSize] = useState('')
 
 	//For setting default values of button text
@@ -71,8 +71,9 @@ const ButtonProperties = () => {
 		}
 	}
 
+	//For Changing color of button
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && textColor !== '') {
 			if (width < 540) {
 				setProperties(small, setSmall, 'color', textColor)
 				setChangedSmall(true)
@@ -100,6 +101,36 @@ const ButtonProperties = () => {
 			}
 		}
 	}, [textColor])
+
+	useEffect(() => {
+		if (small && medium && large && xlarge && fontSize !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'fontSize', fontSize)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
+				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'fontSize', fontSize)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
+				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'fontSize', fontSize)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+			} else {
+				setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
+				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
+			}
+		}
+	}, [fontSize])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -142,7 +173,7 @@ const ButtonProperties = () => {
 			<div className='three'>
 				<label>Font size: </label>
 				{showTemplateFontSizes()}
-				<input type='number' min='0' id='btn-fontsize' />
+				<input onChange={e => setFontSize(`${e.target.value}px`)} type='number' min='0' id='btn-fontsize' />
 			</div>
 		</div>
 	)
