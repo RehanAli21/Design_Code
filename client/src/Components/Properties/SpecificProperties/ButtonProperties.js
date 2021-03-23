@@ -22,10 +22,12 @@ const ButtonProperties = () => {
 		changedXlarge,
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
-	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [text, setText] = useState('')
+	const [textColor, setTextColor] = useState('rgba(0, 0, 0, 1)')
+	const [fontSize, setFontSize] = useState('')
 
 	//For setting default values of button text
 	useEffect(() => {
@@ -69,6 +71,42 @@ const ButtonProperties = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'color', textColor)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
+				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'color', textColor)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
+				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'color', textColor)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
+				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
+			} else {
+				setProperties(xlarge, setXlarge, 'color', textColor)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
+				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
+				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
+			}
+		}
+	}, [textColor])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
+
 	const showTemplateFontSizes = () => {
 		const temp = []
 		temp.push(<option value='custom'>Custom</option>)
@@ -99,12 +137,12 @@ const ButtonProperties = () => {
 			<div className='three'>
 				<label>Text color: </label>
 				{showTemplateColors()}
-				<input disabled={true} type='color' id='btn-textcolor' />
+				<input onChange={e => setTextColor(e.target.value)} type='color' id='btn-textcolor' />
 			</div>
 			<div className='three'>
 				<label>Font size: </label>
 				{showTemplateFontSizes()}
-				<input disabled={true} type='number' min='0' id='btn-fontsize' />
+				<input type='number' min='0' id='btn-fontsize' />
 			</div>
 		</div>
 	)
