@@ -13,7 +13,8 @@
 	box-sizing: border-box;
 	font-family: 'Segoe UI', sans-serif;
 }
-body input {
+.pages-div input,
+.pages-div button {
 	border: none;
 }
 
@@ -655,7 +656,29 @@ nav .TemplateButton:active {
 	outline: none;
 	background-color: var(--second-white);
 }
-.propertybar .btn-specific input {
+.propertybar .btn-specific > .two {
+	text-align: left;
+	display: grid;
+	grid-template-columns: auto 125px 5%;
+	margin-left: 26px;
+	margin-top: 10px;
+}
+.propertybar .btn-specific > .three {
+	text-align: left;
+	display: grid;
+	grid-template-columns: auto 80px 40px 5px;
+	column-gap: 5px;
+	margin-left: 26px;
+	margin-top: 10px;
+}
+.propertybar .btn-specific input[type='text'] {
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	outline: none;
+	background-color: var(--second-white);
+}
+.propertybar .btn-specific select {
 	border: none;
 	border-bottom: 1px solid var(--text-color);
 	padding: 3px;

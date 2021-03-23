@@ -1,8 +1,29 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const ButtonProperties = () => {
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
 	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [text, setText] = useState('')
 
@@ -48,12 +69,42 @@ const ButtonProperties = () => {
 		}
 	}
 
+	const showTemplateFontSizes = () => {
+		const temp = []
+		temp.push(<option value='custom'>Custom</option>)
+		for (const key in fontSizes) {
+			temp.push(<option value={fontSizes[key]}>{key}</option>)
+		}
+
+		return <select onChange={e => console.log(e.target.value)}>{temp}</select>
+	}
+
+	const showTemplateColors = () => {
+		const temp = []
+		temp.push(<option value='custom'>Custom</option>)
+		for (const key in colors) {
+			temp.push(<option value={colors[key]}>{key}</option>)
+		}
+
+		return <select onChange={e => console.log(e.target.value)}>{temp}</select>
+	}
+
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading'>Button Properties</p>
-			<div>
+			<div className='two'>
 				<label>Text: </label>
 				<input id='btn-textInput' onChange={e => setText(e.target.value)} type='text' placeholder='Text' />
+			</div>
+			<div className='three'>
+				<label>Text color: </label>
+				{showTemplateColors()}
+				<input disabled={true} type='color' id='btn-textcolor' />
+			</div>
+			<div className='three'>
+				<label>Font size: </label>
+				{showTemplateFontSizes()}
+				<input disabled={true} type='number' min='0' id='btn-fontsize' />
 			</div>
 		</div>
 	)

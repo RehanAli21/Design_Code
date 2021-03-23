@@ -5,6 +5,7 @@ export const inputStyle = {
 	marginTop: '',
 	marginLeft: '',
 	marginRight: '',
+	color: '',
 	backgroundColor: '',
 	border: '',
 	borderRadius: '',

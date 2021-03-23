@@ -5,6 +5,7 @@ export const buttonStyle = {
 	marginTop: '',
 	marginLeft: '',
 	marginRight: '',
+	color: '',
 	backgroundColor: '',
 	border: '',
 	borderRadius: '',
