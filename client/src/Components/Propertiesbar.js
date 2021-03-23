@@ -93,7 +93,10 @@ const Propertiesbar = () => {
 
 	return (
 		<div className='propertybar'>
-			<div className='property'>
+			<div style={{ display: activePage !== activeElement ? 'none' : 'block' }}>
+				<h3>Properties</h3>
+			</div>
+			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='property'>
 				<Specific />
 				<Align width={width} activeElement={activeElement} />
 				<Transform width={width} activeElement={activeElement} />

@@ -5,7 +5,7 @@ export const PageContext = createContext()
 export const PageProvider = props => {
 	const [pages, setPages] = useState({ home: [] })
 	const [activePage, setActivePage] = useState('home')
-	const [activeElement, setActiveElement] = useState('')
+	const [activeElement, setActiveElement] = useState('home')
 	const [width, setWidth] = useState(720)
 	const [actionHistory, setActionHistory] = useState({ home: [] })
 	const [render, setRender] = useState(false)
@@ -64,7 +64,7 @@ export const PageProvider = props => {
 				setHistory,
 				undoFunc,
 				render,
-				setRender
+				setRender,
 			}}>
 			{props.children}
 		</PageContext.Provider>
