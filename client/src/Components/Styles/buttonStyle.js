@@ -9,6 +9,7 @@ export const buttonStyle = {
 	backgroundColor: '',
 	border: '',
 	borderRadius: '',
+	fontFamily: '',
 	textAlign: '',
 	boxShadow: '',
 	padding: '',

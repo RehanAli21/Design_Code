@@ -23,7 +23,7 @@ const ButtonProperties = () => {
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
 	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
-	const { colors, fontSizes } = useContext(TemplateContext)
+	const { colors, fontSizes, fonts } = useContext(TemplateContext)
 
 	const [text, setText] = useState('')
 	const [textColor, setTextColor] = useState('')
@@ -193,6 +193,19 @@ const ButtonProperties = () => {
 		)
 	}
 
+	const showTemplateFonts = () => {
+		const temp = []
+		for (const key in fonts) {
+			temp.push(
+				<option key={key} value={fonts[key]}>
+					{key}
+				</option>
+			)
+		}
+
+		return <select>{temp}</select>
+	}
+
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading'>Button Properties</p>
@@ -209,6 +222,10 @@ const ButtonProperties = () => {
 					type='color'
 					id='btn-textcolor'
 				/>
+			</div>
+			<div className='two'>
+				<label>Fonts: </label>
+				{showTemplateFonts()}
 			</div>
 			<div className='three'>
 				<label>Font size: </label>
