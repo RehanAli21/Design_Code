@@ -29,6 +29,9 @@ const ButtonProperties = () => {
 	const [textColor, setTextColor] = useState('')
 	const [fontSize, setFontSize] = useState('')
 
+	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
+	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
+
 	//For setting default values of button text
 	useEffect(() => {
 		const textInput = document.getElementById('btn-textInput')
@@ -140,22 +143,54 @@ const ButtonProperties = () => {
 
 	const showTemplateFontSizes = () => {
 		const temp = []
-		temp.push(<option value='custom'>Custom</option>)
+		temp.push(
+			<option key='custom' value='custom'>
+				Custom
+			</option>
+		)
 		for (const key in fontSizes) {
-			temp.push(<option value={fontSizes[key]}>{key}</option>)
+			temp.push(
+				<option key={key} value={fontSizes[key]}>
+					{key}
+				</option>
+			)
 		}
 
-		return <select onChange={e => console.log(e.target.value)}>{temp}</select>
+		return (
+			<select
+				onChange={e => {
+					setFontSize(e.target.value)
+					setShowCustomFontSize(e.target.value === 'custom')
+				}}>
+				{temp}
+			</select>
+		)
 	}
 
 	const showTemplateColors = () => {
 		const temp = []
-		temp.push(<option value='custom'>Custom</option>)
+		temp.push(
+			<option key='custom' value='custom'>
+				Custom
+			</option>
+		)
 		for (const key in colors) {
-			temp.push(<option value={colors[key]}>{key}</option>)
+			temp.push(
+				<option key={key} value={colors[key]}>
+					{key}
+				</option>
+			)
 		}
 
-		return <select onChange={e => console.log(e.target.value)}>{temp}</select>
+		return (
+			<select
+				onChange={e => {
+					setTextColor(e.target.value)
+					setShowCustomTextColor(e.target.value === 'custom')
+				}}>
+				{temp}
+			</select>
+		)
 	}
 
 	return (
@@ -168,12 +203,23 @@ const ButtonProperties = () => {
 			<div className='three'>
 				<label>Text color: </label>
 				{showTemplateColors()}
-				<input onChange={e => setTextColor(e.target.value)} type='color' id='btn-textcolor' />
+				<input
+					disabled={!showCustomTextColor}
+					onChange={e => setTextColor(e.target.value)}
+					type='color'
+					id='btn-textcolor'
+				/>
 			</div>
 			<div className='three'>
 				<label>Font size: </label>
 				{showTemplateFontSizes()}
-				<input onChange={e => setFontSize(`${e.target.value}px`)} type='number' min='0' id='btn-fontsize' />
+				<input
+					disabled={!showCustomFontSize}
+					onChange={e => setFontSize(`${e.target.value}px`)}
+					type='number'
+					min='0'
+					id='btn-fontsize'
+				/>
 			</div>
 		</div>
 	)
