@@ -27,6 +27,7 @@ const ButtonProperties = () => {
 
 	const [text, setText] = useState('')
 	const [textColor, setTextColor] = useState('')
+	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
@@ -105,6 +106,38 @@ const ButtonProperties = () => {
 		}
 	}, [textColor])
 
+	//For changing font of button
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'fontFamily', font)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
+				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'fontFamily', font)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
+				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'fontFamily', font)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
+			} else {
+				setProperties(xlarge, setXlarge, 'fontFamily', font)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
+				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
+			}
+		}
+	}, [font])
+
+	//For changing fontsize of button
 	useEffect(() => {
 		if (small && medium && large && xlarge && fontSize !== '') {
 			if (width < 540) {
@@ -195,6 +228,7 @@ const ButtonProperties = () => {
 
 	const showTemplateFonts = () => {
 		const temp = []
+		temp.push(<option value='default'>Default</option>)
 		for (const key in fonts) {
 			temp.push(
 				<option key={key} value={fonts[key]}>
@@ -203,7 +237,7 @@ const ButtonProperties = () => {
 			)
 		}
 
-		return <select>{temp}</select>
+		return <select onChange={e => setFont(e.target.value === 'default' ? '' : e.target.value)}>{temp}</select>
 	}
 
 	return (
