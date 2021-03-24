@@ -1,9 +1,28 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const InputProperties = () => {
-	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
+	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 	const { colors, fontSizes, fonts } = useContext(TemplateContext)
 
 	const [type, setType] = useState('')
@@ -79,6 +98,47 @@ const InputProperties = () => {
 				}
 			}
 		}
+	}
+
+	//For changing textColor of input
+	useEffect(() => {
+		if (small && medium && large && xlarge && textColor !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'color', textColor)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
+				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'color', textColor)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
+				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'color', textColor)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
+				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
+			} else {
+				setProperties(xlarge, setXlarge, 'color', textColor)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
+				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
+				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
+			}
+		}
+	}, [textColor])
+
+	//For changing font of input
+
+	//For changing fontSize of input
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
 	}
 
 	const showTemplateFontSizes = () => {
