@@ -59,6 +59,43 @@ const InputProperties = () => {
 		}
 	}
 
+	//For textcolor, font, fontSize default value of input
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const fontSelect = document.getElementById('input-fontselect')
+			const fontSizeInput = document.getElementById('input-fontsize')
+			const fontSizeSelect = document.getElementById('input-fontsizeselect')
+			const textColorInput = document.getElementById('input-textcolor')
+			const textColorSelect = document.getElementById('input-colorselect')
+
+			if (width < 540) {
+				fontSelect.value = small.fontFamily ? small.fontFamily : 'default'
+				fontSizeInput.value = small.fontSize ? small.fontSize : 0
+				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
+				textColorInput.value = small.color ? small.color : '#000000'
+				textColorSelect.value = small.color ? small.color : 'custom'
+			} else if (width < 720) {
+				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
+				fontSizeInput.value = medium.fontSize ? medium.fontSize : 0
+				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
+				textColorInput.value = medium.color ? medium.color : '#000000'
+				textColorSelect.value = medium.color ? medium.color : 'custom'
+			} else if (width < 970) {
+				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
+				fontSizeInput.value = large.fontSize ? large.fontSize : 0
+				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
+				textColorInput.value = large.color ? large.color : '#000000'
+				textColorSelect.value = large.color ? large.color : 'custom'
+			} else {
+				fontSelect.value = xlarge.fontFamily ? xlarge.fontFamily : 'default'
+				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize : 0
+				fontSizeSelect.value = xlarge.fontSize ? xlarge.fontSize : 'custom'
+				textColorInput.value = xlarge.color ? xlarge.color : '#000000'
+				textColorSelect.value = xlarge.color ? xlarge.color : 'custom'
+			}
+		}
+	}, [width, activeElement, small, large, medium, xlarge])
+
 	//For type change of input
 	useEffect(() => {
 		if (type !== '') {
@@ -217,7 +254,7 @@ const InputProperties = () => {
 		return (
 			<select
 				defaultValue='custom'
-				id='btn-fontsizeselect'
+				id='input-fontsizeselect'
 				onChange={e => {
 					setFontSize(e.target.value)
 					setShowCustomFontSize(e.target.value === 'custom')
@@ -245,7 +282,7 @@ const InputProperties = () => {
 		return (
 			<select
 				defaultValue='custom'
-				id='btn-colorselect'
+				id='input-colorselect'
 				onChange={e => {
 					setTextColor(e.target.value)
 					setShowCustomTextColor(e.target.value === 'custom')
@@ -268,7 +305,7 @@ const InputProperties = () => {
 
 		return (
 			<select
-				id='btn-fontselect'
+				id='input-fontselect'
 				defaultValue='default'
 				onChange={e => setFont(e.target.value === 'default' ? '' : e.target.value)}>
 				{temp}
