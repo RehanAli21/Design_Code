@@ -163,6 +163,35 @@ const InputProperties = () => {
 	}, [font])
 
 	//For changing fontSize of input
+	useEffect(() => {
+		if (small && medium && large && xlarge && fontSize !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'fontSize', fontSize)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
+				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'fontSize', fontSize)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
+				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'fontSize', fontSize)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+			} else {
+				setProperties(xlarge, setXlarge, 'fontSize', fontSize)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
+				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
+			}
+		}
+	}, [fontSize])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
