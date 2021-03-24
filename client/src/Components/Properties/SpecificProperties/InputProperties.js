@@ -31,6 +31,7 @@ const InputProperties = () => {
 	const [textColor, setTextColor] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
+	const [fontWeight, setFontWeight] = useState('')
 
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
@@ -67,6 +68,7 @@ const InputProperties = () => {
 			const fontSizeSelect = document.getElementById('input-fontsizeselect')
 			const textColorInput = document.getElementById('input-textcolor')
 			const textColorSelect = document.getElementById('input-colorselect')
+			const fontWeightSelect = document.getElementById('input-fontWeight')
 
 			if (width < 540) {
 				fontSelect.value = small.fontFamily ? small.fontFamily : 'default'
@@ -74,24 +76,28 @@ const InputProperties = () => {
 				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
 				textColorInput.value = small.color ? small.color : '#000000'
 				textColorSelect.value = small.color ? small.color : 'custom'
+				fontWeightSelect.value = small.fontWeight ? small.fontWeight : 'normal'
 			} else if (width < 720) {
 				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
 				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
 				textColorInput.value = medium.color ? medium.color : '#000000'
 				textColorSelect.value = medium.color ? medium.color : 'custom'
+				fontWeightSelect.value = medium.fontWeight ? medium.fontWeight : 'normal'
 			} else if (width < 970) {
 				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
 				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
 				textColorInput.value = large.color ? large.color : '#000000'
 				textColorSelect.value = large.color ? large.color : 'custom'
+				fontWeightSelect.value = large.fontWeight ? large.fontWeight : 'normal'
 			} else {
 				fontSelect.value = xlarge.fontFamily ? xlarge.fontFamily : 'default'
 				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = xlarge.fontSize ? xlarge.fontSize : 'custom'
 				textColorInput.value = xlarge.color ? xlarge.color : '#000000'
 				textColorSelect.value = xlarge.color ? xlarge.color : 'custom'
+				fontWeightSelect.value = xlarge.fontWeight ? xlarge.fontWeight : 'normal'
 			}
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
@@ -229,6 +235,37 @@ const InputProperties = () => {
 			}
 		}
 	}, [fontSize])
+
+	//For changing fontWeight of input
+	useEffect(() => {
+		if (small && medium && large && xlarge && fontWeight !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'fontWeight', fontWeight)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontWeight', fontWeight)
+				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'fontWeight', fontWeight)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
+				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'fontWeight', fontWeight)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontWeight', fontWeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
+			} else {
+				setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontWeight', fontWeight)
+				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
+			}
+		}
+	}, [fontWeight])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -368,6 +405,14 @@ const InputProperties = () => {
 					min='0'
 					id='input-fontsize'
 				/>
+			</div>
+			<div>
+				<label>Font Weight: </label>
+				<select onChange={e => setFontWeight(e.target.value)} id='input-fontWeight'>
+					<option value='normal'>Regular</option>
+					<option value='lighter'>Light</option>
+					<option value='bold'>Bold</option>
+				</select>
 			</div>
 		</div>
 	)
