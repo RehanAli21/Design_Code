@@ -651,7 +651,7 @@ nav .TemplateButton:active {
 .propertybar .input-specific > div {
 	text-align: left;
 	display: grid;
-	grid-template-columns: auto 100px 5%;
+	grid-template-columns: auto 125px 5%;
 	margin-left: 26px;
 	margin-top: 10px;
 }
@@ -661,12 +661,21 @@ nav .TemplateButton:active {
 	border-bottom: 1px solid var(--text-color);
 	padding: 3px;
 }
-.propertybar .input-specific input {
+.propertybar .input-specific input[type='number'],
+.propertybar .input-specific input[type='text'] {
 	border: none;
 	border-bottom: 1px solid var(--text-color);
 	padding: 3px;
 	outline: none;
 	background-color: var(--second-white);
+}
+.propertybar .input-specific > .three {
+	text-align: left;
+	display: grid;
+	grid-template-columns: auto 80px 40px 5px;
+	column-gap: 5px;
+	margin-left: 26px;
+	margin-top: 10px;
 }
 .propertybar .btn-specific > .two {
 	text-align: left;

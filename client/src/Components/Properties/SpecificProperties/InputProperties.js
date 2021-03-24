@@ -1,12 +1,20 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
+import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const InputProperties = () => {
 	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { colors, fontSizes, fonts } = useContext(TemplateContext)
 
 	const [type, setType] = useState('')
 	const [placeholder, setPlaceholder] = useState('')
 	const [maxLength, setMaxLength] = useState(0)
+	const [textColor, setTextColor] = useState('')
+	const [font, setFont] = useState('')
+	const [fontSize, setFontSize] = useState('')
+
+	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
+	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
 	//For setting default values of type select and placeholder
 	useEffect(() => {
@@ -73,6 +81,83 @@ const InputProperties = () => {
 		}
 	}
 
+	const showTemplateFontSizes = () => {
+		const temp = []
+		temp.push(
+			<option key='custom' value='custom'>
+				Custom
+			</option>
+		)
+		for (const key in fontSizes) {
+			temp.push(
+				<option key={key} value={fontSizes[key]}>
+					{key}
+				</option>
+			)
+		}
+
+		return (
+			<select
+				defaultValue='custom'
+				id='btn-fontsizeselect'
+				onChange={e => {
+					setFontSize(e.target.value)
+					setShowCustomFontSize(e.target.value === 'custom')
+				}}>
+				{temp}
+			</select>
+		)
+	}
+
+	const showTemplateColors = () => {
+		const temp = []
+		temp.push(
+			<option key='custom' value='custom'>
+				Custom
+			</option>
+		)
+		for (const key in colors) {
+			temp.push(
+				<option key={key} value={colors[key]}>
+					{key}
+				</option>
+			)
+		}
+
+		return (
+			<select
+				defaultValue='custom'
+				id='btn-colorselect'
+				onChange={e => {
+					setTextColor(e.target.value)
+					setShowCustomTextColor(e.target.value === 'custom')
+				}}>
+				{temp}
+			</select>
+		)
+	}
+
+	const showTemplateFonts = () => {
+		const temp = []
+		temp.push(<option value='default'>Default</option>)
+		for (const key in fonts) {
+			temp.push(
+				<option key={key} value={fonts[key]}>
+					{key}
+				</option>
+			)
+		}
+
+		return (
+			<select
+				id='btn-fontselect'
+				defaultValue='default'
+				onChange={e => setFont(e.target.value === 'default' ? '' : e.target.value)}>
+				{temp}
+			</select>
+		)
+	}
+
 	return (
 		<div className='borders input-specific'>
 			<p className='second-heading'>Input Properties</p>
@@ -101,8 +186,33 @@ const InputProperties = () => {
 				<input id='i-s-placeholderinput' onChange={e => setPlaceholder(e.target.value)} type='text' placeholder='Text' />
 			</div>
 			<div>
-				<label>Max characters: </label>
+				<label>Max chars: </label>
 				<input id='i-s-maxLengthInput' onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
+			</div>
+			<div className='three'>
+				<label>Text color: </label>
+				{showTemplateColors()}
+				<input
+					disabled={!showCustomTextColor}
+					onChange={e => setTextColor(e.target.value)}
+					type='color'
+					id='input-textcolor'
+				/>
+			</div>
+			<div className='two'>
+				<label>Fonts: </label>
+				{showTemplateFonts()}
+			</div>
+			<div className='three'>
+				<label>Font size: </label>
+				{showTemplateFontSizes()}
+				<input
+					disabled={!showCustomFontSize}
+					onChange={e => setFontSize(`${e.target.value}px`)}
+					type='number'
+					min='0'
+					id='input-fontsize'
+				/>
 			</div>
 		</div>
 	)
