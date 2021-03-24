@@ -132,6 +132,35 @@ const InputProperties = () => {
 	}, [textColor])
 
 	//For changing font of input
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'fontFamily', font)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
+				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'fontFamily', font)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
+				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'fontFamily', font)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
+			} else {
+				setProperties(xlarge, setXlarge, 'fontFamily', font)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
+				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
+			}
+		}
+	}, [font])
 
 	//For changing fontSize of input
 
