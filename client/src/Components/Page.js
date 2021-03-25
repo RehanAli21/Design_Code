@@ -1,10 +1,88 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 
+let move = false
+let zoom = false
+let oldx = 0
+let oldy = 0
 //This compoenent controls page.
-const Page = ({ scale, tX, tY }) => {
+const Page = () => {
 	const { pages, activePage, width, render } = useContext(PageContext)
+
+	const [scale, setScale] = useState(0.8)
+	const [tX, setTX] = useState(0)
+	const [tY, setTY] = useState(0)
+
+	const enableMove = () => {
+		if (!move) move = true
+	}
+	const disableMove = () => {
+		if (move) move = false
+	}
+	const moveMe = e => {
+		if (oldx < e.pageX && move) {
+			setTX(tX + 10)
+		} else if (oldx > e.pageX && move) {
+			setTX(tX - 10)
+		}
+
+		if (oldy > e.pageY && move) {
+			setTY(tY - 10)
+		} else if (oldy < e.pageY && move) {
+			setTY(tY + 10)
+		}
+
+		oldx = e.pageX
+		oldy = e.pageY
+	}
+	const zoomMe = e => {
+		if (e.deltaY === -100) {
+			setScale(scale + 0.05)
+		} else if (e.deltaY === 100) {
+			setScale(scale - 0.05)
+		}
+	}
+	const scaleTranslatePage = e => {
+		if (e.key === 'z' && zoom === false) {
+			zoom = true
+		}
+		if (e.key === 'x' && move === false) {
+			move = true
+		}
+
+		//For reseting zoom and move
+		if (zoom && e.key === 'r') {
+			resetMe()
+		}
+
+		//For Zoom
+		if (zoom && !move && e.key === 'ArrowUp' && scale < 2) {
+			setScale(scale + 0.05)
+		} else if (zoom && !move && e.key === 'ArrowDown' && scale > 0.2) {
+			setScale(scale - 0.05)
+		}
+
+		//For Move
+		if (zoom && move && e.key === 'ArrowUp') {
+			setTY(tY - 10)
+		} else if (zoom && move && e.key === 'ArrowDown') {
+			setTY(tY + 10)
+		} else if (zoom && move && e.key === 'ArrowLeft') {
+			setTX(tX - 10)
+		} else if (zoom && move && e.key === 'ArrowRight') {
+			setTX(tX + 10)
+		}
+	}
+	const disableScaleTranslate = e => {
+		if (e.key === 'z' && zoom) zoom = false
+		if (e.key === 'x' && move) move = false
+	}
+	const resetMe = () => {
+		setScale(0.8)
+		setTX(0)
+		setTY(0)
+	}
 
 	//For showing elements into a div which acts
 	//as body element/tag, using recursion
@@ -87,7 +165,16 @@ const Page = ({ scale, tX, tY }) => {
 	}
 
 	return (
-		<div className={render ? 'ok main-div' : 'main-div'}>
+		<div
+			onMouseDown={enableMove}
+			onMouseUp={disableMove}
+			onMouseMove={moveMe}
+			onWheel={zoomMe}
+			onKeyUp={disableScaleTranslate}
+			onKeyDown={scaleTranslatePage}
+			onDoubleClick={resetMe}
+			tabIndex='0'
+			className={render ? 'ok main-div' : 'main-div'}>
 			<div
 				className='pages-div'
 				id={activePage}
