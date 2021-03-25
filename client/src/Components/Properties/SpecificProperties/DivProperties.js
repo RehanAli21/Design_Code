@@ -22,6 +22,7 @@ const DivProperties = ({ width, activeElement }) => {
 	} = useContext(PropertiesContext)
 
 	const [grid, setGrid] = useState(false)
+	const [rowGap, setRowGap] = useState('0px')
 
 	//For applying grid
 	useEffect(() => {
@@ -54,6 +55,37 @@ const DivProperties = ({ width, activeElement }) => {
 		}
 	}, [grid])
 
+	//For Row-Gap
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'rowGap', rowGap)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'rowGap', rowGap)
+				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'rowGap', rowGap)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
+				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'rowGap', rowGap)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'rowGap', rowGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+			} else {
+				setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'rowGap', rowGap)
+				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
+			}
+		}
+	}, [rowGap])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -71,7 +103,13 @@ const DivProperties = ({ width, activeElement }) => {
 				<div className='margins two-rows'>
 					<div className='gap'>
 						<label>Row Gap: </label>
-						<input type='number' defaultValue='0' min='0' id='r-c-rowgap' />
+						<input
+							onChange={e => setRowGap(`${e.target.value}px`)}
+							type='number'
+							defaultValue='0'
+							min='0'
+							id='r-c-rowgap'
+						/>
 					</div>
 					<div className='gap'>
 						<label>Column Gap: </label>
