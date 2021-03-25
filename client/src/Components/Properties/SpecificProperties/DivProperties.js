@@ -25,6 +25,37 @@ const DivProperties = ({ width, activeElement }) => {
 	const [rowGap, setRowGap] = useState('0px')
 	const [columnGap, setColumnGap] = useState('0px')
 
+	//For default values
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const gridCheckbox = document.getElementById('r-c-grid')
+			const rowGapInput = document.getElementById('r-c-rowgap')
+			const colGapInput = document.getElementById('r-c-colgap')
+
+			if (width < 540) {
+				gridCheckbox.checked = small.display === 'grid'
+				setGrid(small.display === 'grid')
+				rowGapInput.value = small.rowGap ? small.rowGap.split('p')[0] : 0
+				colGapInput.value = small.columnGap ? small.columnGap.split('p')[0] : 0
+			} else if (width < 720) {
+				gridCheckbox.checked = medium.display === 'grid'
+				setGrid(medium.display === 'grid')
+				rowGapInput.value = medium.rowGap ? medium.rowGap.split('p')[0] : 0
+				colGapInput.value = medium.columnGap ? medium.columnGap.split('p')[0] : 0
+			} else if (width < 970) {
+				gridCheckbox.checked = large.display === 'grid'
+				setGrid(large.display === 'grid')
+				rowGapInput.value = large.rowGap ? large.rowGap.split('p')[0] : 0
+				colGapInput.value = large.columnGap ? large.columnGap.split('p')[0] : 0
+			} else {
+				gridCheckbox.checked = xlarge.display === 'grid'
+				setGrid(xlarge.display === 'grid')
+				rowGapInput.value = xlarge.rowGap ? xlarge.rowGap.split('p')[0] : 0
+				colGapInput.value = xlarge.columnGap ? xlarge.columnGap.split('p')[0] : 0
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
+
 	//For applying grid
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -128,7 +159,7 @@ const DivProperties = ({ width, activeElement }) => {
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
 			<div className='grid'>
-				<input onChange={e => setGrid(!grid)} id='r-c-grid' type='checkbox' />
+				<input onChange={() => setGrid(!grid)} id='r-c-grid' type='checkbox' />
 				<label>Rows / Columns</label>
 			</div>
 			<div className='row-col-div' style={{ display: grid ? 'grid' : 'none' }}>
