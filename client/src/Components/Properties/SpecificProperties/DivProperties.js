@@ -24,6 +24,35 @@ const DivProperties = ({ width, activeElement }) => {
 	const [grid, setGrid] = useState(false)
 	const [rowGap, setRowGap] = useState('0px')
 	const [columnGap, setColumnGap] = useState('0px')
+	const [rowsNum, setRowsNum] = useState(0)
+	const [gridRows, setGridRows] = useState([
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+		[0, 'px'],
+	])
+	const [gridCols, setGridCols] = useState([
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+		[0, '%'],
+	])
 
 	//For default values
 	useEffect(() => {
@@ -34,22 +63,22 @@ const DivProperties = ({ width, activeElement }) => {
 
 			if (width < 540) {
 				gridCheckbox.checked = small.display === 'grid'
-				setGrid(small.display === 'grid')
+				setGrid(small.display === 'grid' ? true : false)
 				rowGapInput.value = small.rowGap ? small.rowGap.split('p')[0] : 0
 				colGapInput.value = small.columnGap ? small.columnGap.split('p')[0] : 0
 			} else if (width < 720) {
 				gridCheckbox.checked = medium.display === 'grid'
-				setGrid(medium.display === 'grid')
+				setGrid(medium.display === 'grid' ? true : false)
 				rowGapInput.value = medium.rowGap ? medium.rowGap.split('p')[0] : 0
 				colGapInput.value = medium.columnGap ? medium.columnGap.split('p')[0] : 0
 			} else if (width < 970) {
 				gridCheckbox.checked = large.display === 'grid'
-				setGrid(large.display === 'grid')
+				setGrid(large.display === 'grid' ? true : false)
 				rowGapInput.value = large.rowGap ? large.rowGap.split('p')[0] : 0
 				colGapInput.value = large.columnGap ? large.columnGap.split('p')[0] : 0
 			} else {
 				gridCheckbox.checked = xlarge.display === 'grid'
-				setGrid(xlarge.display === 'grid')
+				setGrid(xlarge.display === 'grid' ? true : false)
 				rowGapInput.value = xlarge.rowGap ? xlarge.rowGap.split('p')[0] : 0
 				colGapInput.value = xlarge.columnGap ? xlarge.columnGap.split('p')[0] : 0
 			}
@@ -155,11 +184,18 @@ const DivProperties = ({ width, activeElement }) => {
 		setObj(temp)
 	}
 
+	const setRowsValues = (e, i, j) => {
+		const temp = []
+		gridRows.forEach(ele => temp.push(ele))
+		temp[i][j] = e.target.value
+		setGridRows(temp)
+	}
+
 	return (
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
 			<div className='grid'>
-				<input onChange={() => setGrid(!grid)} id='r-c-grid' type='checkbox' />
+				<input onChange={e => setGrid(e.target.checked)} id='r-c-grid' type='checkbox' />
 				<label>Rows / Columns</label>
 			</div>
 			<div className='row-col-div' style={{ display: grid ? 'grid' : 'none' }}>
@@ -189,7 +225,14 @@ const DivProperties = ({ width, activeElement }) => {
 					<div>
 						<div className='two'>
 							<label>No: Rows</label>
-							<input type='number' min='0' max='12' placeholder='No: rows' id='r-c-row' />
+							<input
+								onChange={e => setRowsNum(e.target.value)}
+								type='number'
+								min='0'
+								max='12'
+								placeholder='No: rows'
+								id='r-c-row'
+							/>
 						</div>
 						<div className='two'>
 							<label>No: Columns</label>
@@ -198,13 +241,122 @@ const DivProperties = ({ width, activeElement }) => {
 					</div>
 					<div className='two'>
 						<div className='rows'>
-							<div className='invalue'>
-								<input type='number' defaultValue='0' />
-								<select>
-									<option>PX</option>
-									<option>VH</option>
-									<option>EM</option>
-									<option>REM</option>
+							<div className='invalue' style={{ display: rowsNum > 0 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput0' onChange={e => setRowsValues(e, 0, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect0' onChange={e => setRowsValues(e, 0, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 1 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput1' onChange={e => setRowsValues(e, 1, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect1' onChange={e => setRowsValues(e, 1, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 2 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput2' onChange={e => setRowsValues(e, 2, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect2' onChange={e => setRowsValues(e, 2, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 3 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput3' onChange={e => setRowsValues(e, 3, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect3' onChange={e => setRowsValues(e, 3, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 4 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput4' onChange={e => setRowsValues(e, 4, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect4' onChange={e => setRowsValues(e, 4, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 5 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput5' onChange={e => setRowsValues(e, 5, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect5' onChange={e => setRowsValues(e, 5, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 6 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput6' onChange={e => setRowsValues(e, 6, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect6' onChange={e => setRowsValues(e, 6, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 7 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput7' onChange={e => setRowsValues(e, 7, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect7' onChange={e => setRowsValues(e, 7, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 8 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput8' onChange={e => setRowsValues(e, 8, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect8' onChange={e => setRowsValues(e, 8, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 9 ? 'grid' : 'none' }}>
+								<input id='r-c-rowInput9' onChange={e => setRowsValues(e, 9, 0)} type='number' defaultValue='0' />
+								<select id='r-c-rowSelect9' onChange={e => setRowsValues(e, 9, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 10 ? 'grid' : 'none' }}>
+								<input
+									id='r-c-rowInput10'
+									onChange={e => setRowsValues(e, 10, 0)}
+									type='number'
+									defaultValue='0'
+								/>
+								<select id='r-c-rowSelect10' onChange={e => setRowsValues(e, 10, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: rowsNum > 11 ? 'grid' : 'none' }}>
+								<input
+									id='r-c-rowInput11'
+									onChange={e => setRowsValues(e, 11, 0)}
+									type='number'
+									defaultValue='0'
+								/>
+								<select id='r-c-rowSelect11' onChange={e => setRowsValues(e, 11, 1)}>
+									<option value='px'>PX</option>
+									<option value='vh'>VH</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
 								</select>
 							</div>
 						</div>
