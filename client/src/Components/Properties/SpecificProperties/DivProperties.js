@@ -61,6 +61,8 @@ const DivProperties = ({ width, activeElement }) => {
 			const gridCheckbox = document.getElementById('r-c-grid')
 			const rowGapInput = document.getElementById('r-c-rowgap')
 			const colGapInput = document.getElementById('r-c-colgap')
+			const rowInput = document.getElementById('r-c-row')
+			const colInput = document.getElementById('r-c-col')
 
 			if (width < 540) {
 				gridCheckbox.checked = small.display === 'grid'
@@ -77,6 +79,71 @@ const DivProperties = ({ width, activeElement }) => {
 				setGrid(large.display === 'grid' ? true : false)
 				rowGapInput.value = large.rowGap ? large.rowGap.split('p')[0] : 0
 				colGapInput.value = large.columnGap ? large.columnGap.split('p')[0] : 0
+
+				if (large.gridTemplateRows) {
+					const rows = large.gridTemplateRows.split(' ')
+					rows.pop()
+					rowInput.value = rows.length
+					setRowsNum(rows.length)
+					for (let i = 0; i < rows.length; i++) {
+						const rowInput = document.getElementById('r-c-rowInput' + i)
+						const rowSelect = document.getElementById('r-c-rowSelect' + i)
+						if (rows[i].search('px') !== -1) {
+							rowInput.value = rows[i].split('p')[0]
+							rowSelect.value = 'px'
+						} else if (rows[i].search('vh') !== -1) {
+							rowInput.value = rows[i].split('v')[0]
+							rowSelect.value = 'vh'
+						} else if (rows[i].search('rem') !== -1) {
+							rowInput.value = rows[i].split('r')[0]
+							rowSelect.value = 'rem'
+						} else if (rows[i].search('em') !== -1) {
+							rowInput.value = rows[i].split('e')[0]
+							rowSelect.value = 'em'
+						} else {
+							rowInput.value = 0
+							rowSelect.value = 'px'
+						}
+					}
+				} else {
+					rowInput.value = 0
+					setRowsNum(0)
+				}
+				if (large.gridTemplateColumns) {
+					const cols = large.gridTemplateColumns.split(' ')
+					cols.pop()
+					colInput.value = cols.length
+					setColsNum(cols.length)
+					for (let i = 0; i < cols.length; i++) {
+						const colInput = document.getElementById('r-c-colInput' + i)
+						const colSelect = document.getElementById('r-c-colSelect' + i)
+						if (cols[i].search('%') !== -1) {
+							colInput.value = cols[i].split('%')[0]
+							colSelect.value = '%'
+						} else if (cols[i].search('fr') !== -1) {
+							colInput.value = cols[i].split('f')[0]
+							colSelect.value = 'fr'
+						} else if (cols[i].search('px') !== -1) {
+							colInput.value = cols[i].split('p')[0]
+							colSelect.value = 'px'
+						} else if (cols[i].search('vw') !== -1) {
+							colInput.value = cols[i].split('v')[0]
+							colSelect.value = 'vw'
+						} else if (cols[i].search('rem') !== -1) {
+							colInput.value = cols[i].split('r')[0]
+							colSelect.value = 'rem'
+						} else if (cols[i].search('em') !== -1) {
+							colInput.value = cols[i].split('e')[0]
+							colSelect.value = 'em'
+						} else {
+							colInput.value = 0
+							colSelect.value = '%'
+						}
+					}
+				} else {
+					colInput.value = 0
+					setColsNum(0)
+				}
 			} else {
 				gridCheckbox.checked = xlarge.display === 'grid'
 				setGrid(xlarge.display === 'grid' ? true : false)

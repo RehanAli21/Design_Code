@@ -1,8 +1,10 @@
-import React, { createContext, useState } from 'react'
-
+import React, { createContext, useState, useEffect, useContext } from 'react'
+import { PageContext } from './PageContext'
 export const PropertiesContext = createContext()
 
 export const PropertiesProvider = props => {
+	const { width, activeElement, activePage, pages, setPages } = useContext(PageContext)
+
 	const [prevElement, setPrevElement] = useState('')
 	const [small, setSmall] = useState({})
 	const [medium, setMedium] = useState({})
@@ -12,6 +14,68 @@ export const PropertiesProvider = props => {
 	const [changedMedium, setChangedMedium] = useState(false)
 	const [changedLarge, setChangedLarge] = useState(false)
 	const [changedXlarge, setChangedXlarge] = useState(false)
+
+	useEffect(() => {
+		const ele = document.getElementById(activeElement)
+
+		if (ele) {
+			if (prevElement !== '' && document.getElementById(prevElement)) {
+				document.getElementById(prevElement).style.outline = ''
+			}
+			ele.style.outline = '2px solid rgb(32, 144, 220)'
+			setPrevElement(activeElement)
+		}
+	}, [activeElement, activePage, small, medium, large, xlarge, pages, width])
+
+	useEffect(() => {
+		setWidthsStates(pages[activePage], activeElement)
+	}, [pages, activePage, activeElement])
+
+	const setWidthsStates = (arr, id) => {
+		arr.forEach(e => {
+			if (e[1].id === id) {
+				setSmall(e[1].styles.small)
+				setMedium(e[1].styles.medium)
+				setLarge(e[1].styles.large)
+				setXlarge(e[1].styles.xlarge)
+				setChangedSmall(e[1].styleWidth.changedSmall)
+				setChangedMedium(e[1].styleWidth.changedMedium)
+				setChangedLarge(e[1].styleWidth.changedLarge)
+				setChangedXlarge(e[1].styleWidth.changeXlarge)
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (setWidthsStates(e[2], id)) return true
+			}
+		})
+	}
+
+	useEffect(() => {
+		const notBlank = small !== {} && medium !== {} && large !== {} && xlarge !== {} && activeElement !== ''
+
+		if (notBlank && activeElement !== activePage) {
+			const temp = Object.assign({}, pages)
+			setProperties(temp[activePage], activeElement)
+			setPages(temp)
+		}
+	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge])
+
+	const setProperties = (arr, id) => {
+		arr.forEach(e => {
+			if (e[1].id === id) {
+				e[1].styles.small = small
+				e[1].styles.medium = medium
+				e[1].styles.large = large
+				e[1].styles.xlarge = xlarge
+				e[1].styleWidth.changedSmall = changedSmall
+				e[1].styleWidth.changedMedium = changedMedium
+				e[1].styleWidth.changedLarge = changedLarge
+				e[1].styleWidth.changeXlarge = changedXlarge
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (setProperties(e[2], id)) return true
+			}
+		})
+	}
 
 	return (
 		<PropertiesContext.Provider
