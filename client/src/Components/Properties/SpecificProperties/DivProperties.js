@@ -179,6 +179,40 @@ const DivProperties = ({ width, activeElement }) => {
 		}
 	}, [columnGap])
 
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid) {
+			let gridTemplateRows = ''
+			for (let i = 0; i < rowsNum; i++) {
+				gridTemplateRows += `${gridRows[i][0]}${gridRows[i][1]} `
+			}
+			if (width < 540) {
+				setProperties(small, setSmall, 'gridTemplateRows', gridTemplateRows)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridTemplateRows)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridTemplateRows)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridTemplateRows)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'gridTemplateRows', gridTemplateRows)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridTemplateRows)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridTemplateRows)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridTemplateRows)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'gridTemplateRows', gridTemplateRows)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridTemplateRows)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridTemplateRows)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridTemplateRows)
+			} else {
+				setProperties(xlarge, setXlarge, 'gridTemplateRows', gridTemplateRows)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridTemplateRows)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridTemplateRows)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridTemplateRows)
+			}
+		}
+	}, [gridRows, rowsNum])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
