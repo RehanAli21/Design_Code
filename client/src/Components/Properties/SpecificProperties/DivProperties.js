@@ -25,6 +25,7 @@ const DivProperties = ({ width, activeElement }) => {
 	const [rowGap, setRowGap] = useState('0px')
 	const [columnGap, setColumnGap] = useState('0px')
 	const [rowsNum, setRowsNum] = useState(0)
+	const [colsNum, setColsNum] = useState(0)
 	const [gridRows, setGridRows] = useState([
 		[0, 'px'],
 		[0, 'px'],
@@ -191,6 +192,13 @@ const DivProperties = ({ width, activeElement }) => {
 		setGridRows(temp)
 	}
 
+	const setColsValues = (e, i, j) => {
+		const temp = []
+		gridCols.forEach(ele => temp.push(ele))
+		temp[i][j] = e.target.value
+		setGridCols(temp)
+	}
+
 	return (
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
@@ -236,7 +244,14 @@ const DivProperties = ({ width, activeElement }) => {
 						</div>
 						<div className='two'>
 							<label>No: Columns</label>
-							<input type='number' min='0' max='12' placeholder='No: cols' id='r-c-col' />
+							<input
+								onChange={e => setColsNum(e.target.value)}
+								type='number'
+								min='0'
+								max='12'
+								placeholder='No: cols'
+								id='r-c-col'
+							/>
 						</div>
 					</div>
 					<div className='two'>
@@ -361,15 +376,146 @@ const DivProperties = ({ width, activeElement }) => {
 							</div>
 						</div>
 						<div className='cols'>
-							<div className='invalue'>
-								<input type='number' defaultValue='0' />
-								<select>
-									<option>%</option>
-									<option>VW</option>
-									<option>FR</option>
-									<option>PX</option>
-									<option>EM</option>
-									<option>REM</option>
+							<div className='invalue' style={{ display: colsNum > 0 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput0' onChange={e => setColsValues(e, 0, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect0' onChange={e => setColsValues(e, 0, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 1 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput1' onChange={e => setColsValues(e, 1, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect1' onChange={e => setColsValues(e, 1, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 2 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput2' onChange={e => setColsValues(e, 2, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect2' onChange={e => setColsValues(e, 2, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 3 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput3' onChange={e => setColsValues(e, 3, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect3' onChange={e => setColsValues(e, 3, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 4 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput4' onChange={e => setColsValues(e, 4, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect4' onChange={e => setColsValues(e, 4, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 5 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput5' onChange={e => setColsValues(e, 5, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect5' onChange={e => setColsValues(e, 5, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 6 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput6' onChange={e => setColsValues(e, 6, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect6' onChange={e => setColsValues(e, 6, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 7 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput7' onChange={e => setColsValues(e, 7, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect7' onChange={e => setColsValues(e, 7, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 8 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput8' onChange={e => setColsValues(e, 8, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect8' onChange={e => setColsValues(e, 8, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 9 ? 'grid' : 'none' }}>
+								<input id='r-c-colInput9' onChange={e => setColsValues(e, 9, 0)} type='number' defaultValue='0' />
+								<select id='r-c-colSelect9' onChange={e => setColsValues(e, 9, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 10 ? 'grid' : 'none' }}>
+								<input
+									id='r-c-colInput10'
+									onChange={e => setColsValues(e, 10, 0)}
+									type='number'
+									defaultValue='0'
+								/>
+								<select id='r-c-colSelect10' onChange={e => setColsValues(e, 10, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
+								</select>
+							</div>
+							<div className='invalue' style={{ display: colsNum > 11 ? 'grid' : 'none' }}>
+								<input
+									id='r-c-colInput11'
+									onChange={e => setColsValues(e, 11, 0)}
+									type='number'
+									defaultValue='0'
+								/>
+								<select id='r-c-colSelect11' onChange={e => setColsValues(e, 11, 1)}>
+									<option value='%'>%</option>
+									<option value='vw'>VW</option>
+									<option value='fr'>FR</option>
+									<option value='px'>PX</option>
+									<option value='em'>EM</option>
+									<option value='rem'>REM</option>
 								</select>
 							</div>
 						</div>
