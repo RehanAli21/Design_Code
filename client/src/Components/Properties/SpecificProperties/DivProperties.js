@@ -23,6 +23,7 @@ const DivProperties = ({ width, activeElement }) => {
 
 	const [grid, setGrid] = useState(false)
 	const [rowGap, setRowGap] = useState('0px')
+	const [columnGap, setColumnGap] = useState('0px')
 
 	//For applying grid
 	useEffect(() => {
@@ -86,6 +87,37 @@ const DivProperties = ({ width, activeElement }) => {
 		}
 	}, [rowGap])
 
+	//For Col-Gap
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'columnGap', columnGap)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'columnGap', columnGap)
+				if (!changedLarge) setProperties(large, setLarge, 'columnGap', columnGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', columnGap)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'columnGap', columnGap)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'columnGap', columnGap)
+				if (!changedLarge) setProperties(large, setLarge, 'columnGap', columnGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', columnGap)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'columnGap', columnGap)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'columnGap', columnGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'columnGap', columnGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', columnGap)
+			} else {
+				setProperties(xlarge, setXlarge, 'columnGap', columnGap)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'columnGap', columnGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'columnGap', columnGap)
+				if (!changedLarge) setProperties(large, setLarge, 'columnGap', columnGap)
+			}
+		}
+	}, [columnGap])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -113,7 +145,13 @@ const DivProperties = ({ width, activeElement }) => {
 					</div>
 					<div className='gap'>
 						<label>Column Gap: </label>
-						<input type='number' defaultValue='0' min='0' id='r-c-colgap' />
+						<input
+							onChange={e => setColumnGap(`${e.target.value}px`)}
+							type='number'
+							defaultValue='0'
+							min='0'
+							id='r-c-colgap'
+						/>
 					</div>
 				</div>
 				<div className='margins'>
