@@ -179,6 +179,7 @@ const DivProperties = ({ width, activeElement }) => {
 		}
 	}, [columnGap])
 
+	//For gridTemplateRows
 	useEffect(() => {
 		if (small && medium && large && xlarge && grid) {
 			let gridTemplateRows = ''
@@ -212,6 +213,41 @@ const DivProperties = ({ width, activeElement }) => {
 			}
 		}
 	}, [gridRows, rowsNum])
+
+	//For gridTemplateColumns
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid) {
+			let gridTemplateColumns = ''
+			for (let i = 0; i < colsNum; i++) {
+				gridTemplateColumns += `${gridCols[i][0]}${gridCols[i][1]} `
+			}
+			if (width < 540) {
+				setProperties(small, setSmall, 'gridTemplateColumns', gridTemplateColumns)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridTemplateColumns)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'gridTemplateColumns', gridTemplateColumns)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridTemplateColumns)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'gridTemplateColumns', gridTemplateColumns)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridTemplateColumns)
+			} else {
+				setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridTemplateColumns)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateColumns', gridTemplateColumns)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridTemplateColumns)
+			}
+		}
+	}, [gridCols, colsNum])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
