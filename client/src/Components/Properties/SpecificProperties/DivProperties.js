@@ -1,16 +1,73 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
-const DivProperties = () => {
-	const [showGrid, setShowGrid] = useState(false)
+const DivProperties = ({ width, activeElement }) => {
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
+
+	const [grid, setGrid] = useState(false)
+
+	//For applying grid
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'display', grid ? 'grid' : '')
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', grid ? 'grid' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', grid ? 'grid' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid ? 'grid' : '')
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'display', grid ? 'grid' : '')
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', grid ? 'grid' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', grid ? 'grid' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid ? 'grid' : '')
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'display', grid ? 'grid' : '')
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', grid ? 'grid' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', grid ? 'grid' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid ? 'grid' : '')
+			} else {
+				setProperties(xlarge, setXlarge, 'display', grid ? 'grid' : '')
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', grid ? 'grid' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', grid ? 'grid' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', grid ? 'grid' : '')
+			}
+		}
+	}, [grid])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
 
 	return (
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
 			<div className='grid'>
-				<input onChange={() => setShowGrid(!showGrid)} id='r-c-grid' type='checkbox' />
+				<input onChange={e => setGrid(!grid)} id='r-c-grid' type='checkbox' />
 				<label>Rows / Columns</label>
 			</div>
-			<div className='row-col-div' style={{ display: showGrid ? 'grid' : 'none' }}>
+			<div className='row-col-div' style={{ display: grid ? 'grid' : 'none' }}>
 				<div className='margins two-rows'>
 					<div className='gap'>
 						<label>Row Gap: </label>
