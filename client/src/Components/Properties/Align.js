@@ -150,12 +150,15 @@ const Align = ({ width, activeElement }) => {
 		}
 	}
 
+	//For getting tagName because selfalign only works for DIV
+	const ele = document.getElementById(activeElement)
+
 	return (
 		<div className='align borders'>
 			<p className='second-heading'>ALIGNMENT</p>
 			<div>
 				<ul className='align-ul'>
-					<li className='one'>
+					<li style={{ display: ele && ele.tagName === 'DIV' ? 'grid' : 'none' }} className='one'>
 						<label>Self Align: </label>
 						<button className={selfAlign === 'left' ? 'bb' : 'none'} onClick={() => setSelfAlign('left')}>
 							L
