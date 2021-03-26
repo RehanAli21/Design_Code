@@ -28,12 +28,12 @@ const InputProperties = () => {
 	const [type, setType] = useState('')
 	const [placeholder, setPlaceholder] = useState('')
 	const [maxLength, setMaxLength] = useState(0)
+	const [min, setMin] = useState('')
+	const [max, setMax] = useState('')
 	const [textColor, setTextColor] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
-	const [min, setMin] = useState('')
-	const [max, setMax] = useState('')
 
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
@@ -139,6 +139,15 @@ const InputProperties = () => {
 			setPages(temp)
 		}
 	}, [min])
+
+	//For Max change of Input
+	useEffect(() => {
+		if (max !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChange(temp[activePage], 'max', max)
+			setPages(temp)
+		}
+	}, [max])
 
 	//For finding element and changing attribute value
 	const findAndChange = (arr, attribute, changedValue) => {
