@@ -32,6 +32,8 @@ const InputProperties = () => {
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
+	const [min, setMin] = useState('')
+	const [max, setMax] = useState('')
 
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
@@ -128,6 +130,15 @@ const InputProperties = () => {
 			setPages(temp)
 		}
 	}, [maxLength])
+
+	//For Min change of Input
+	useEffect(() => {
+		if (min !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChange(temp[activePage], 'min', min)
+			setPages(temp)
+		}
+	}, [min])
 
 	//For finding element and changing attribute value
 	const findAndChange = (arr, attribute, changedValue) => {
@@ -377,11 +388,15 @@ const InputProperties = () => {
 					<option value='file'>File</option>
 				</select>
 			</div>
-			<div style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
+			<div
+				onChange={e => setMin(e.target.value)}
+				style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
 				<label>Min Value: </label>
 				<input id='i-s-minValueInput' type='number' />
 			</div>
-			<div style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
+			<div
+				onChange={e => setMax(e.target.value)}
+				style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
 				<label>Max Value: </label>
 				<input id='i-s-minValueInput' type='number' />
 			</div>

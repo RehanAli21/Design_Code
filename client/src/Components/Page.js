@@ -127,6 +127,8 @@ const Page = () => {
 							type: e[1].type,
 							placeholder: e[1].placeholder,
 							maxLength: e[1].maxLength === 0 ? 1000 : e[1].maxLength,
+							min: e[1].min,
+							max: e[1].max,
 							style:
 								width < 540
 									? e[1].styles.small
