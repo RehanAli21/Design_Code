@@ -30,6 +30,7 @@ const InputProperties = () => {
 	const [maxLength, setMaxLength] = useState(0)
 	const [min, setMin] = useState('')
 	const [max, setMax] = useState('')
+	const [showMinMax, setShowMinMax] = useState(false)
 	const [textColor, setTextColor] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
@@ -43,19 +44,24 @@ const InputProperties = () => {
 		const typeSelect = document.getElementById('i-s-typeSelect')
 		const placeholderInput = document.getElementById('i-s-placeholderinput')
 		const maxLengthInput = document.getElementById('i-s-maxLengthInput')
+		const minInput = document.getElementById('i-s-minValueInput')
+		const maxInput = document.getElementById('i-s-maxValueInput')
 		const values = findAndReturnAttribues(pages[activePage])
 
 		if (values && typeSelect && placeholderInput) {
 			typeSelect.value = values[0]
+			setShowMinMax(values[0] === 'number' || values[0] === 'range')
 			placeholderInput.value = values[1]
 			maxLengthInput.value = values[2] === 0 ? '' : values[2]
+			minInput.value = values[3]
+			maxInput.value = values[4]
 		}
 	})
 	//for find element and return attributes values
 	const findAndReturnAttribues = arr => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].id === activeElement) {
-				return [arr[i][1].type, arr[i][1].placeholder, arr[i][1].maxLength]
+				return [arr[i][1].type, arr[i][1].placeholder, arr[i][1].maxLength, arr[i][1].min, arr[i][1].max]
 			} else if (arr[i][2]) {
 				findAndReturnAttribues(arr[i][2])
 			}
@@ -110,6 +116,7 @@ const InputProperties = () => {
 			const temp = Object.assign({}, pages)
 			findAndChange(temp[activePage], 'type', type)
 			setPages(temp)
+			setShowMinMax(type === 'number' || type === 'range')
 		}
 	}, [type])
 
@@ -397,17 +404,13 @@ const InputProperties = () => {
 					<option value='file'>File</option>
 				</select>
 			</div>
-			<div
-				onChange={e => setMin(e.target.value)}
-				style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
+			<div onChange={e => setMin(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
 				<label>Min Value: </label>
 				<input id='i-s-minValueInput' type='number' />
 			</div>
-			<div
-				onChange={e => setMax(e.target.value)}
-				style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
+			<div onChange={e => setMax(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
 				<label>Max Value: </label>
-				<input id='i-s-minValueInput' type='number' />
+				<input id='i-s-maxValueInput' type='number' />
 			</div>
 			<div>
 				<label>Placeholder: </label>
