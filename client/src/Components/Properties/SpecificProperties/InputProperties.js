@@ -377,6 +377,14 @@ const InputProperties = () => {
 					<option value='file'>File</option>
 				</select>
 			</div>
+			<div style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
+				<label>Min Value: </label>
+				<input id='i-s-minValueInput' type='number' />
+			</div>
+			<div style={{ display: type === 'number' || type === 'range' ? 'grid' : 'none' }}>
+				<label>Max Value: </label>
+				<input id='i-s-minValueInput' type='number' />
+			</div>
 			<div>
 				<label>Placeholder: </label>
 				<input id='i-s-placeholderinput' onChange={e => setPlaceholder(e.target.value)} type='text' placeholder='Text' />
