@@ -331,7 +331,11 @@ const InputProperties = () => {
 
 	const showTemplateFonts = () => {
 		const temp = []
-		temp.push(<option value='default'>Default</option>)
+		temp.push(
+			<option key='default' value='default'>
+				Default
+			</option>
+		)
 		for (const key in fonts) {
 			temp.push(
 				<option key={key} value={fonts[key]}>

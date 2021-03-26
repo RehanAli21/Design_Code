@@ -80,8 +80,6 @@ export const PropertiesProvider = props => {
 	return (
 		<PropertiesContext.Provider
 			value={{
-				prevElement,
-				setPrevElement,
 				small,
 				setSmall,
 				medium,
