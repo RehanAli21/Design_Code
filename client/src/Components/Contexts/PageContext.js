@@ -8,7 +8,7 @@ export const PageProvider = props => {
 	const [activeElement, setActiveElement] = useState('home')
 	const [width, setWidth] = useState(720)
 	const [actionHistory, setActionHistory] = useState({ home: [] })
-	const [pageBC, setPageBC] = useState('#333333')
+	const [pageBC, setPageBC] = useState('#ffffff')
 
 	const setHistory = (parentId, object, index) => {
 		if (parentId && object) {

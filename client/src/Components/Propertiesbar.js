@@ -14,7 +14,7 @@ const Propertiesbar = () => {
 				<h3>Properties</h3>
 				<div style={{ marginTop: '20px' }}>
 					<label>Background Color: </label>
-					<input onChange={e => setPageBC(e.target.value)} type='color' />
+					<input onChange={e => setPageBC(e.target.value)} type='color' defaultValue='#ffffff' />
 				</div>
 			</div>
 			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='property'>
