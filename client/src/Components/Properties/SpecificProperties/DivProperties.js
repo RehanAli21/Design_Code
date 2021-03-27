@@ -69,6 +69,19 @@ const DivProperties = ({ width, activeElement }) => {
 			const colGapInput = document.getElementById('r-c-colgap')
 			const rowInput = document.getElementById('r-c-row')
 			const colInput = document.getElementById('r-c-col')
+			const bgCheckbox = document.getElementById('div-bg-checkbox')
+			const bgSize = document.getElementById('div-bgSize-select')
+			const bgRepeat = document.getElementById('div-bgRepeat-select')
+			const bgAttach = document.getElementById('div-bgAttach-select')
+
+			if (large.backgroundImage) {
+				bgCheckbox.checked = true
+				setbgImg(true)
+			}
+
+			if (large.backgroundSize) bgSize.value = large.backgroundSize
+			if (large.backgroundRepeat) bgRepeat.value = large.backgroundRepeat
+			if (large.backgroundAttachment) bgAttach.value = large.backgroundAttachment
 
 			if (width < 540) {
 				gridCheckbox.checked = small.display === 'grid'
@@ -612,17 +625,17 @@ const DivProperties = ({ width, activeElement }) => {
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
 			<div className='grid'>
-				<input onChange={e => setbgImg(e.target.checked)} type='checkbox' />
+				<input id='div-bg-checkbox' onChange={e => setbgImg(e.target.checked)} type='checkbox' />
 				<label>Background Image: </label>
 			</div>
 			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px' }} className='div-bg-img'>
 				<div className='two'>
 					<label>Image: </label>
-					<input type='file' accept='image/*' onChange={e => changeImg(e)} />
+					<input id='div-bgImg-input' type='file' accept='image/*' onChange={e => changeImg(e)} />
 				</div>
 				<div className='two'>
 					<label>Size: </label>
-					<select onChange={e => setBgSize(e.target.value)}>
+					<select id='div-bgSize-select' onChange={e => setBgSize(e.target.value)}>
 						<option value='auto'>Auto</option>
 						<option value='cover'>Cover</option>
 						<option value='container'>Contain</option>
@@ -630,7 +643,7 @@ const DivProperties = ({ width, activeElement }) => {
 				</div>
 				<div className='two'>
 					<label>Repeat: </label>
-					<select onChange={e => setBgRepeat(e.target.value)}>
+					<select id='div-bgRepeat-select' onChange={e => setBgRepeat(e.target.value)}>
 						<option value='repeat'>Repeat</option>
 						<option value='no-repeat'>No Repeat</option>
 						<option value='repeat-x'>Repeat X</option>
@@ -639,7 +652,7 @@ const DivProperties = ({ width, activeElement }) => {
 				</div>
 				<div className='two'>
 					<label>Attachment: </label>
-					<select onChange={e => setBgAttach(e.target.value)}>
+					<select id='div-bgAttach-select' onChange={e => setBgAttach(e.target.value)}>
 						<option value='scroll'>Scroll</option>
 						<option value='fixed'>Fixed</option>
 					</select>
