@@ -6,12 +6,16 @@ import Specific from './Properties/Specific'
 import Transform from './Properties/Transform'
 
 const Propertiesbar = () => {
-	const { activePage, activeElement, width } = useContext(PageContext)
+	const { activePage, activeElement, width, setPageBC } = useContext(PageContext)
 
 	return (
 		<div className='propertybar'>
 			<div style={{ display: activePage !== activeElement ? 'none' : 'block' }}>
 				<h3>Properties</h3>
+				<div style={{ marginTop: '20px' }}>
+					<label>Background Color: </label>
+					<input onChange={e => setPageBC(e.target.value)} type='color' />
+				</div>
 			</div>
 			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='property'>
 				<Specific />

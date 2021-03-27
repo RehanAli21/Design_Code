@@ -8,7 +8,7 @@ let oldx = 0
 let oldy = 0
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage, width } = useContext(PageContext)
+	const { pages, activePage, width, pageBC } = useContext(PageContext)
 
 	const [scale, setScale] = useState(0.8)
 	const [tX, setTX] = useState(0)
@@ -181,6 +181,7 @@ const Page = () => {
 				className='pages-div'
 				id={activePage}
 				style={{
+					backgroundColor: pageBC,
 					width: `${width}px`,
 					minWidth: '300px',
 					transform: `scale(${scale}) translate(${tX}px, ${tY}px)`,

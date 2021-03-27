@@ -29,7 +29,7 @@ const Appearance = ({ width, activeElement }) => {
 	const [bgColor, setBgColor] = useState(`#ffffff`)
 	const [customBgColor, setCustomBgColor] = useState(true)
 	const [padding, setPadding] = useState('')
-	const [bColor, setBColor] = useState('#ffffff')
+	const [bColor, setBColor] = useState('#000000')
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
 	const [bType, setBtype] = useState('solid')
@@ -89,7 +89,7 @@ const Appearance = ({ width, activeElement }) => {
 				bSizeInput.value = large.borderRight.split(' ')[0].split('p')[0]
 				bTypeInput.selectedIndex = borderTypeIndex(large.borderRight.split(' ')[1])
 			} else {
-				bColorInput.value = '#ffffff'
+				bColorInput.value = '#000000'
 				bSizeInput.value = '0'
 				bTypeInput.selectedIndex = 0
 				bActiveInput.checked = false
@@ -599,7 +599,7 @@ const Appearance = ({ width, activeElement }) => {
 										setBColor(e.target.value)
 									}}
 									type='color'
-									defaultValue='#ffffff'
+									defaultValue='#000000'
 								/>
 							</div>
 							<div className='mds'>
