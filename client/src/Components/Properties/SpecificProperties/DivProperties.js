@@ -517,9 +517,68 @@ const DivProperties = ({ width, activeElement }) => {
 		}
 	}, [gridCols, colsNum])
 
+	//For setting images
+	useEffect(() => {
+		if (small && medium && large && xlarge && bgImg) {
+			setProperties(small, setSmall, 'backgroundImage', img)
+			setProperties(medium, setMedium, 'backgroundImage', img)
+			setProperties(large, setLarge, 'backgroundImage', img)
+			setProperties(xlarge, setXlarge, 'backgroundImage', img)
+		}
+	}, [img])
+
+	//For setting background Size
+	useEffect(() => {
+		if (small && medium && large && xlarge && bgImg) {
+			setProperties(small, setSmall, 'backgroundSize', bgSize)
+			setProperties(medium, setMedium, 'backgroundSize', bgSize)
+			setProperties(large, setLarge, 'backgroundSize', bgSize)
+			setProperties(xlarge, setXlarge, 'backgroundSize', bgSize)
+		}
+	}, [bgSize])
+
+	//For setting background Repeat
+	useEffect(() => {
+		if (small && medium && large && xlarge && bgImg) {
+			setProperties(small, setSmall, 'backgroundRepeat', bgRepeat)
+			setProperties(medium, setMedium, 'backgroundRepeat', bgRepeat)
+			setProperties(large, setLarge, 'backgroundRepeat', bgRepeat)
+			setProperties(xlarge, setXlarge, 'backgroundRepeat', bgRepeat)
+		}
+	}, [bgRepeat])
+
+	//For setting background Attachment
+	useEffect(() => {
+		if (small && medium && large && xlarge && bgImg) {
+			setProperties(small, setSmall, 'backgroundAttachment', bgAttach)
+			setProperties(medium, setMedium, 'backgroundAttachment', bgAttach)
+			setProperties(large, setLarge, 'backgroundAttachment', bgAttach)
+			setProperties(xlarge, setXlarge, 'backgroundAttachment', bgAttach)
+		}
+	}, [bgAttach])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
+		setObj(temp)
+	}
+
+	//For setting background img
+	useEffect(() => {
+		if (small && medium && large && xlarge && bgImg) {
+			setBackground(small, setSmall)
+			setBackground(medium, setMedium)
+			setBackground(large, setLarge)
+			setBackground(xlarge, setXlarge)
+		}
+	}, [bgImg])
+
+	const setBackground = (obj, setObj) => {
+		const temp = Object.assign({}, obj)
+		temp.backgroundImage = img
+		temp.backgroundSize = bgSize
+		temp.backgroundRepeat = bgRepeat
+		temp.backgroundAttachment = bgAttach
 		setObj(temp)
 	}
 
@@ -543,7 +602,7 @@ const DivProperties = ({ width, activeElement }) => {
 
 		reader.onload = () => {
 			if (reader.readyState === 2) {
-				setImg(reader.result)
+				setImg(`url(${reader.result})`)
 			}
 		}
 		reader.readAsDataURL(e.target.files[0])
@@ -579,7 +638,7 @@ const DivProperties = ({ width, activeElement }) => {
 					</select>
 				</div>
 				<div className='two'>
-					<label>Attachement: </label>
+					<label>Attachment: </label>
 					<select onChange={e => setBgAttach(e.target.value)}>
 						<option value='scroll'>Scroll</option>
 						<option value='fixed'>Fixed</option>
