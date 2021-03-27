@@ -55,6 +55,8 @@ const DivProperties = ({ width, activeElement }) => {
 		[0, '%'],
 	])
 
+	const [bgImg, setbgImg] = useState(false)
+
 	//For default values
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -531,15 +533,54 @@ const DivProperties = ({ width, activeElement }) => {
 		setGridCols(temp)
 	}
 
+	//For setting img
+	// const fileHandle = e => {
+	// 	const reader = new FileReader()
+
+	// 	reader.onload = () => {
+	// 		if (reader.readyState === 2) {
+	// 			setImg(reader.result)
+	// 		}
+	// 	}
+	// 	reader.readAsDataURL(e.target.files[0])
+	// }
+
 	return (
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
 			<div className='grid'>
-				<input type='checkbox' />
+				<input onChange={e => setbgImg(e.target.checked)} type='checkbox' />
 				<label>Background Image: </label>
 			</div>
-			<div className='div-bg-img'>
-				<img src={img} />
+			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px' }} className='div-bg-img'>
+				<div className='two'>
+					<label>Image: </label>
+					<input type='file' accept='image/*' />
+				</div>
+				<div className='two'>
+					<label>Size: </label>
+					<select>
+						<option value='auto'>Auto</option>
+						<option value='cover'>Cover</option>
+						<option value='container'>Contain</option>
+					</select>
+				</div>
+				<div className='two'>
+					<label>Repeat: </label>
+					<select>
+						<option value='repeat'>Repeat</option>
+						<option value='no-repeat'>No Repeat</option>
+						<option value='repeat-x'>Repeat X</option>
+						<option value='repeat-y'>Repeat Y</option>
+					</select>
+				</div>
+				<div className='two'>
+					<label>Attachement: </label>
+					<select>
+						<option value='fixed'>Fixed</option>
+						<option value='scroll'>Scroll</option>
+					</select>
+				</div>
 			</div>
 			<div className='grid'>
 				<input onChange={e => setGrid(e.target.checked)} id='r-c-grid' type='checkbox' />
