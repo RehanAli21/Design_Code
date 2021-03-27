@@ -56,6 +56,10 @@ const DivProperties = ({ width, activeElement }) => {
 	])
 
 	const [bgImg, setbgImg] = useState(false)
+	const [img, setImg] = useState('')
+	const [bgSize, setBgSize] = useState('auto')
+	const [bgRepeat, setBgRepeat] = useState('repeat')
+	const [bgAttach, setBgAttach] = useState('scroll')
 
 	//For default values
 	useEffect(() => {
@@ -534,16 +538,16 @@ const DivProperties = ({ width, activeElement }) => {
 	}
 
 	//For setting img
-	// const fileHandle = e => {
-	// 	const reader = new FileReader()
+	const changeImg = e => {
+		const reader = new FileReader()
 
-	// 	reader.onload = () => {
-	// 		if (reader.readyState === 2) {
-	// 			setImg(reader.result)
-	// 		}
-	// 	}
-	// 	reader.readAsDataURL(e.target.files[0])
-	// }
+		reader.onload = () => {
+			if (reader.readyState === 2) {
+				setImg(reader.result)
+			}
+		}
+		reader.readAsDataURL(e.target.files[0])
+	}
 
 	return (
 		<div className='borders r-c'>
@@ -555,11 +559,11 @@ const DivProperties = ({ width, activeElement }) => {
 			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px' }} className='div-bg-img'>
 				<div className='two'>
 					<label>Image: </label>
-					<input type='file' accept='image/*' />
+					<input type='file' accept='image/*' onChange={e => changeImg(e)} />
 				</div>
 				<div className='two'>
 					<label>Size: </label>
-					<select>
+					<select onChange={e => setBgSize(e.target.value)}>
 						<option value='auto'>Auto</option>
 						<option value='cover'>Cover</option>
 						<option value='container'>Contain</option>
@@ -567,7 +571,7 @@ const DivProperties = ({ width, activeElement }) => {
 				</div>
 				<div className='two'>
 					<label>Repeat: </label>
-					<select>
+					<select onChange={e => setBgRepeat(e.target.value)}>
 						<option value='repeat'>Repeat</option>
 						<option value='no-repeat'>No Repeat</option>
 						<option value='repeat-x'>Repeat X</option>
@@ -576,9 +580,9 @@ const DivProperties = ({ width, activeElement }) => {
 				</div>
 				<div className='two'>
 					<label>Attachement: </label>
-					<select>
-						<option value='fixed'>Fixed</option>
+					<select onChange={e => setBgAttach(e.target.value)}>
 						<option value='scroll'>Scroll</option>
+						<option value='fixed'>Fixed</option>
 					</select>
 				</div>
 			</div>
