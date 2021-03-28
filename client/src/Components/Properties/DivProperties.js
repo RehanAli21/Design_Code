@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { PropertiesContext } from '../../Contexts/PropertiesContext'
-import BGImage from '../BGImage'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
+import BGImage from './PropertiesComponenets/BGImage'
 
 const DivProperties = ({ width, activeElement }) => {
 	const {

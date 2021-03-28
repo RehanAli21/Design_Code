@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { PageContext } from './Contexts/PageContext'
-import Align from './Properties/Align'
-import Appearance from './Properties/Appearance'
+import Align from './Properties/PropertiesComponenets/Align'
+import Appearance from './Properties/PropertiesComponenets/Appearance'
+import Transform from './Properties/PropertiesComponenets/Transform'
 import Specific from './Properties/Specific'
-import Transform from './Properties/Transform'
 
 const Propertiesbar = () => {
 	const { activePage, activeElement, width, setPageBC } = useContext(PageContext)

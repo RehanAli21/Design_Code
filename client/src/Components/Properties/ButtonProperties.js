@@ -1,7 +1,7 @@
 import React from 'react'
-import Font from '../Font'
-import Text from '../Text'
-import TextColor from '../TextColor'
+import Font from './PropertiesComponenets/Font'
+import Text from './PropertiesComponenets/Text'
+import TextColor from './PropertiesComponenets/TextColor'
 
 const ButtonProperties = () => {
 	return (

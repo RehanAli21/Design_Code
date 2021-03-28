@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { PropertiesContext } from '../Contexts/PropertiesContext'
-import { TemplateContext } from '../Contexts/TemplateContext'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const Appearance = ({ width, activeElement }) => {
 	const {

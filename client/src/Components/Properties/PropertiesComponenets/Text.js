@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { PageContext } from '../Contexts/PageContext'
+import { PageContext } from '../../Contexts/PageContext'
 
 const Text = () => {
 	const { activePage, activeElement, pages, setPages } = useContext(PageContext)

@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { PropertiesContext } from '../Contexts/PropertiesContext'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const BGImage = ({ width, activeElement }) => {
 	const {

@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import DivProperties from './SpecificProperties/DivProperties'
-import InputProperties from './SpecificProperties/InputProperties'
-import ButtonProperties from './SpecificProperties/ButtonProperties'
+import DivProperties from './DivProperties'
+import InputProperties from './InputProperties'
+import ButtonProperties from './ButtonProperties'
 
 const Specific = () => {
 	const { activeElement, activePage, width } = useContext(PageContext)
