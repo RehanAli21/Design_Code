@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
+import TextColor from '../TextColor'
 
 const ButtonProperties = () => {
 	const {
@@ -23,15 +24,13 @@ const ButtonProperties = () => {
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
 	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
-	const { colors, fontSizes, fonts } = useContext(TemplateContext)
+	const { fontSizes, fonts } = useContext(TemplateContext)
 
 	const [text, setText] = useState('')
-	const [textColor, setTextColor] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
 
-	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
 	//For setting default values of button text
@@ -59,37 +58,27 @@ const ButtonProperties = () => {
 			const fontSelect = document.getElementById('btn-fontselect')
 			const fontSizeInput = document.getElementById('btn-fontsize')
 			const fontSizeSelect = document.getElementById('btn-fontsizeselect')
-			const textColorInput = document.getElementById('btn-textcolor')
-			const textColorSelect = document.getElementById('btn-colorselect')
 			const fontWeightSelect = document.getElementById('btn-fontWeight')
 
 			if (width < 540) {
 				fontSelect.value = small.fontFamily ? small.fontFamily : 'default'
 				fontSizeInput.value = small.fontSize ? small.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
-				textColorInput.value = small.color ? small.color : '#000000'
-				textColorSelect.value = small.color ? small.color : 'custom'
 				fontWeightSelect.value = small.fontWeight ? small.fontWeight : 'normal'
 			} else if (width < 720) {
 				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
 				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
-				textColorInput.value = medium.color ? medium.color : '#000000'
-				textColorSelect.value = medium.color ? medium.color : 'custom'
 				fontWeightSelect.value = medium.fontWeight ? medium.fontWeight : 'normal'
 			} else if (width < 970) {
 				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
 				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
-				textColorInput.value = large.color ? large.color : '#000000'
-				textColorSelect.value = large.color ? large.color : 'custom'
 				fontWeightSelect.value = large.fontWeight ? large.fontWeight : 'normal'
 			} else {
 				fontSelect.value = xlarge.fontFamily ? xlarge.fontFamily : 'default'
 				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = xlarge.fontSize ? xlarge.fontSize : 'custom'
-				textColorInput.value = xlarge.color ? xlarge.color : '#000000'
-				textColorSelect.value = xlarge.color ? xlarge.color : 'custom'
 				fontWeightSelect.value = xlarge.fontWeight ? xlarge.fontWeight : 'normal'
 			}
 		}
@@ -117,37 +106,6 @@ const ButtonProperties = () => {
 			}
 		}
 	}
-
-	//For Changing color of button
-	useEffect(() => {
-		if (small && medium && large && xlarge && textColor !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'color', textColor)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
-				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'color', textColor)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
-				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'color', textColor)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
-				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else {
-				setProperties(xlarge, setXlarge, 'color', textColor)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
-				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
-				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
-			}
-		}
-	}, [textColor])
 
 	//For changing font of button
 	useEffect(() => {
@@ -276,34 +234,6 @@ const ButtonProperties = () => {
 		)
 	}
 
-	const showTemplateColors = () => {
-		const temp = []
-		temp.push(
-			<option key='custom' value='custom'>
-				Custom
-			</option>
-		)
-		for (const key in colors) {
-			temp.push(
-				<option key={key} value={colors[key]}>
-					{key}
-				</option>
-			)
-		}
-
-		return (
-			<select
-				defaultValue='custom'
-				id='btn-colorselect'
-				onChange={e => {
-					setTextColor(e.target.value)
-					setShowCustomTextColor(e.target.value === 'custom')
-				}}>
-				{temp}
-			</select>
-		)
-	}
-
 	const showTemplateFonts = () => {
 		const temp = []
 		temp.push(
@@ -336,16 +266,7 @@ const ButtonProperties = () => {
 				<label>Text: </label>
 				<input id='btn-textInput' onChange={e => setText(e.target.value)} type='text' placeholder='Text' />
 			</div>
-			<div className='three'>
-				<label>Text color: </label>
-				{showTemplateColors()}
-				<input
-					disabled={!showCustomTextColor}
-					onChange={e => setTextColor(e.target.value)}
-					type='color'
-					id='btn-textcolor'
-				/>
-			</div>
+			<TextColor />
 			<div className='two'>
 				<label>Fonts: </label>
 				{showTemplateFonts()}
