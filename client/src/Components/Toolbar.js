@@ -3,6 +3,7 @@ import { PageContext } from './Contexts/PageContext'
 import Div from './Tools/Div'
 import Input from './Tools/Input'
 import Button from './Tools/Button'
+import Text from './Tools/Text'
 
 //This component is for showing list of elemenets,
 //which can be added.
@@ -51,6 +52,14 @@ const Toolbar = () => {
 					uniqueString={uniqueString}
 				/>
 				<Input
+					findAndInsert={findAndInsert}
+					activeElement={activeElement}
+					activePage={activePage}
+					pages={pages}
+					setPages={setPages}
+					uniqueString={uniqueString}
+				/>
+				<Text
 					findAndInsert={findAndInsert}
 					activeElement={activeElement}
 					activePage={activePage}
