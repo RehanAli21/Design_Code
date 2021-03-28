@@ -1,17 +1,17 @@
 import React from 'react'
-import Font from './PropertiesComponenets/Font'
 import Text from './PropertiesComponenets/Text'
+import Font from './PropertiesComponenets/Font'
 import TextColor from './PropertiesComponenets/TextColor'
 
-const ButtonProperties = () => {
+const TextProperties = () => {
 	return (
 		<div className='borders btn-specific'>
-			<p className='second-heading'>Button Properties</p>
-			<Text type='button' />
+			<p className='second-heading'>Text Properties</p>
+			<Text type='text' />
 			<TextColor />
 			<Font />
 		</div>
 	)
 }
 
-export default ButtonProperties
+export default TextProperties

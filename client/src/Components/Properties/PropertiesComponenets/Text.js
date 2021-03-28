@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 
-const Text = () => {
+const Text = ({ type }) => {
 	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [text, setText] = useState('')
@@ -9,9 +9,13 @@ const Text = () => {
 	//For setting default values of button text
 	useEffect(() => {
 		const textInput = document.getElementById('btn-textInput')
+		const textarea = document.getElementById('btn-texttextarea')
+
 		const value = findAndReturnText(pages[activePage])
-		if (value && textInput) {
-			textInput.value = value
+
+		if (value) {
+			if (textInput) textInput.value = value
+			else if (textarea) textarea.value = value
 		}
 	})
 	//for find element and return button text
@@ -51,7 +55,11 @@ const Text = () => {
 	return (
 		<div className='two'>
 			<label>Text: </label>
-			<input id='btn-textInput' onChange={e => setText(e.target.value)} type='text' placeholder='Text' />
+			{type === 'button' ? (
+				<input id='btn-textInput' onChange={e => setText(e.target.value)} type='text' placeholder='Text' />
+			) : (
+				<textarea id='btn-texttextarea' onChange={e => setText(e.target.value)} type='text' placeholder='Text' />
+			)}
 		</div>
 	)
 }
