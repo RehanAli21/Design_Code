@@ -17,7 +17,7 @@ const Specific = () => {
 		<InputProperties />
 	) : ele.tagName === 'BUTTON' ? (
 		<ButtonProperties />
-	) : ele.tagName === 'P' || ele.tagName === 'H1' || ele.tagName === 'H2' || ele.tagName === 'H3' ? (
+	) : ele.tagName === 'P' || ele.tagName === 'H1' || ele.tagName === 'H3' || ele.tagName === 'H5' ? (
 		<TextProperties />
 	) : (
 		<div></div>
