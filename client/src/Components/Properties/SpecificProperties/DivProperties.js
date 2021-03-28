@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import BGImage from '../BGImage'
 
 const DivProperties = ({ width, activeElement }) => {
 	const {
@@ -55,12 +56,6 @@ const DivProperties = ({ width, activeElement }) => {
 		[0, '%'],
 	])
 
-	const [bgImg, setbgImg] = useState(false)
-	const [img, setImg] = useState('')
-	const [bgSize, setBgSize] = useState('auto')
-	const [bgRepeat, setBgRepeat] = useState('repeat')
-	const [bgAttach, setBgAttach] = useState('scroll')
-
 	//For default values
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -69,19 +64,6 @@ const DivProperties = ({ width, activeElement }) => {
 			const colGapInput = document.getElementById('r-c-colgap')
 			const rowInput = document.getElementById('r-c-row')
 			const colInput = document.getElementById('r-c-col')
-			const bgCheckbox = document.getElementById('div-bg-checkbox')
-			const bgSize = document.getElementById('div-bgSize-select')
-			const bgRepeat = document.getElementById('div-bgRepeat-select')
-			const bgAttach = document.getElementById('div-bgAttach-select')
-
-			if (large.backgroundImage) {
-				bgCheckbox.checked = true
-				setbgImg(true)
-			}
-
-			if (large.backgroundSize) bgSize.value = large.backgroundSize
-			if (large.backgroundRepeat) bgRepeat.value = large.backgroundRepeat
-			if (large.backgroundAttachment) bgAttach.value = large.backgroundAttachment
 
 			if (width < 540) {
 				gridCheckbox.checked = small.display === 'grid'
@@ -530,68 +512,9 @@ const DivProperties = ({ width, activeElement }) => {
 		}
 	}, [gridCols, colsNum])
 
-	//For setting images
-	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundImage', img)
-			setProperties(medium, setMedium, 'backgroundImage', img)
-			setProperties(large, setLarge, 'backgroundImage', img)
-			setProperties(xlarge, setXlarge, 'backgroundImage', img)
-		}
-	}, [img])
-
-	//For setting background Size
-	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundSize', bgSize)
-			setProperties(medium, setMedium, 'backgroundSize', bgSize)
-			setProperties(large, setLarge, 'backgroundSize', bgSize)
-			setProperties(xlarge, setXlarge, 'backgroundSize', bgSize)
-		}
-	}, [bgSize])
-
-	//For setting background Repeat
-	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundRepeat', bgRepeat)
-			setProperties(medium, setMedium, 'backgroundRepeat', bgRepeat)
-			setProperties(large, setLarge, 'backgroundRepeat', bgRepeat)
-			setProperties(xlarge, setXlarge, 'backgroundRepeat', bgRepeat)
-		}
-	}, [bgRepeat])
-
-	//For setting background Attachment
-	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundAttachment', bgAttach)
-			setProperties(medium, setMedium, 'backgroundAttachment', bgAttach)
-			setProperties(large, setLarge, 'backgroundAttachment', bgAttach)
-			setProperties(xlarge, setXlarge, 'backgroundAttachment', bgAttach)
-		}
-	}, [bgAttach])
-
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
-		setObj(temp)
-	}
-
-	//For setting background img
-	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setBackground(small, setSmall)
-			setBackground(medium, setMedium)
-			setBackground(large, setLarge)
-			setBackground(xlarge, setXlarge)
-		}
-	}, [bgImg])
-
-	const setBackground = (obj, setObj) => {
-		const temp = Object.assign({}, obj)
-		temp.backgroundImage = img
-		temp.backgroundSize = bgSize
-		temp.backgroundRepeat = bgRepeat
-		temp.backgroundAttachment = bgAttach
 		setObj(temp)
 	}
 
@@ -609,55 +532,10 @@ const DivProperties = ({ width, activeElement }) => {
 		setGridCols(temp)
 	}
 
-	//For setting img
-	const changeImg = e => {
-		const reader = new FileReader()
-
-		reader.onload = () => {
-			if (reader.readyState === 2) {
-				setImg(`url(${reader.result})`)
-			}
-		}
-		reader.readAsDataURL(e.target.files[0])
-	}
-
 	return (
 		<div className='borders r-c'>
 			<p className='second-heading'>Div Properties</p>
-			<div className='grid'>
-				<input id='div-bg-checkbox' onChange={e => setbgImg(e.target.checked)} type='checkbox' />
-				<label>Background Image: </label>
-			</div>
-			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px' }} className='div-bg-img'>
-				<div className='two'>
-					<label>Image: </label>
-					<input id='div-bgImg-input' type='file' accept='image/*' onChange={e => changeImg(e)} />
-				</div>
-				<div className='two'>
-					<label>Size: </label>
-					<select id='div-bgSize-select' onChange={e => setBgSize(e.target.value)}>
-						<option value='auto'>Auto</option>
-						<option value='cover'>Cover</option>
-						<option value='container'>Contain</option>
-					</select>
-				</div>
-				<div className='two'>
-					<label>Repeat: </label>
-					<select id='div-bgRepeat-select' onChange={e => setBgRepeat(e.target.value)}>
-						<option value='repeat'>Repeat</option>
-						<option value='no-repeat'>No Repeat</option>
-						<option value='repeat-x'>Repeat X</option>
-						<option value='repeat-y'>Repeat Y</option>
-					</select>
-				</div>
-				<div className='two'>
-					<label>Attachment: </label>
-					<select id='div-bgAttach-select' onChange={e => setBgAttach(e.target.value)}>
-						<option value='scroll'>Scroll</option>
-						<option value='fixed'>Fixed</option>
-					</select>
-				</div>
-			</div>
+			<BGImage width={width} activeElement={activeElement} />
 			<div className='grid'>
 				<input onChange={e => setGrid(e.target.checked)} id='r-c-grid' type='checkbox' />
 				<label>Rows / Columns</label>
