@@ -4,24 +4,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
 
 const TextColor = () => {
-	const {
-		small,
-		setSmall,
-		medium,
-		setMedium,
-		large,
-		setLarge,
-		xlarge,
-		setXlarge,
-		changedSmall,
-		setChangedSmall,
-		changedMedium,
-		setChangedMedium,
-		changedLarge,
-		setChangedLarge,
-		changedXlarge,
-		setChangedXlarge,
-	} = useContext(PropertiesContext)
+	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
