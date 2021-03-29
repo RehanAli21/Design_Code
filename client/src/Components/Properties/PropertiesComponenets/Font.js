@@ -26,6 +26,7 @@ const Font = ({ type }) => {
 	const { fontSizes, fonts } = useContext(TemplateContext)
 
 	const [lineHeight, setLineHeight] = useState('')
+	const [letterSpace, setLetterSpace] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
@@ -105,6 +106,37 @@ const Font = ({ type }) => {
 			}
 		}
 	}, [lineHeight])
+
+	//For changing lineHeight
+	useEffect(() => {
+		if (small && medium && large && xlarge && letterSpace !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'letterSpacing', letterSpace)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
+				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'letterSpacing', letterSpace)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
+				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'letterSpacing', letterSpace)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
+				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
+			} else {
+				setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
+				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
+				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
+			}
+		}
+	}, [letterSpace])
 
 	//For changing font
 	useEffect(() => {
@@ -330,6 +362,16 @@ const Font = ({ type }) => {
 					<option value='normal'>Normal</option>
 					<option value='italic'>Italic</option>
 				</select>
+			</div>
+			<div className='two'>
+				<label>Letter spacing: </label>
+				<input
+					id='text-letterspace'
+					type='number'
+					defaultValue='0'
+					min='0'
+					onChange={e => setLetterSpace(`${e.target.value}px`)}
+				/>
 			</div>
 		</React.Fragment>
 	)
