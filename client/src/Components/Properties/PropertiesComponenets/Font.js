@@ -27,6 +27,7 @@ const Font = ({ type }) => {
 
 	const [lineHeight, setLineHeight] = useState('')
 	const [letterSpace, setLetterSpace] = useState('')
+	const [textTransform, setTextTransform] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
@@ -107,7 +108,7 @@ const Font = ({ type }) => {
 		}
 	}, [lineHeight])
 
-	//For changing lineHeight
+	//For changing Letter space
 	useEffect(() => {
 		if (small && medium && large && xlarge && letterSpace !== '') {
 			if (width < 540) {
@@ -137,6 +138,37 @@ const Font = ({ type }) => {
 			}
 		}
 	}, [letterSpace])
+
+	//For Text Transform
+	useEffect(() => {
+		if (small && medium && large && xlarge && textTransform !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'textTransform', textTransform)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
+				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'textTransform', textTransform)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
+				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'textTransform', textTransform)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
+				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
+			} else {
+				setProperties(xlarge, setXlarge, 'textTransform', textTransform)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
+				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
+				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
+			}
+		}
+	}, [textTransform])
 
 	//For changing font
 	useEffect(() => {
@@ -372,6 +404,14 @@ const Font = ({ type }) => {
 					min='0'
 					onChange={e => setLetterSpace(`${e.target.value}px`)}
 				/>
+			</div>
+			<div className='two'>
+				<label>Text Transform: </label>
+				<select onChange={e => setTextTransform(e.target.value)} id='btn-fontStyle'>
+					<option value='lowercase'>Lowercase</option>
+					<option value='uppercase'>Uppercase</option>
+					<option value='capitalize'>Capitalize</option>
+				</select>
 			</div>
 		</React.Fragment>
 	)
