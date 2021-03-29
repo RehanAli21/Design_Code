@@ -45,7 +45,7 @@ const TextProperties = () => {
 			</div>
 			<Text type='text' />
 			<TextColor />
-			<Font />
+			<Font type='text' />
 		</div>
 	)
 }

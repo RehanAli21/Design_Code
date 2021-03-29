@@ -3,7 +3,7 @@ import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
-const Font = () => {
+const Font = ({ type }) => {
 	const {
 		small,
 		setSmall,
@@ -25,6 +25,7 @@ const Font = () => {
 	const { width, activeElement } = useContext(PageContext)
 	const { fontSizes, fonts } = useContext(TemplateContext)
 
+	const [lineHeight, setLineHeight] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
@@ -40,26 +41,31 @@ const Font = () => {
 			const fontSizeSelect = document.getElementById('btn-fontsizeselect')
 			const fontWeightSelect = document.getElementById('btn-fontWeight')
 			const fontStyleSelect = document.getElementById('btn-fontStyle')
+			const lineHeight = document.getElementById('btn-lineHeight')
 
 			if (width < 540) {
+				lineHeight.value = small.lineHeight ? small.lineHeight.split('p')[0] : 0
 				fontSelect.value = small.fontFamily ? small.fontFamily : 'default'
 				fontSizeInput.value = small.fontSize ? small.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
 				fontWeightSelect.value = small.fontWeight ? small.fontWeight : 'normal'
 				fontStyleSelect.value = small.fontStyle ? small.fontStyle : 'normal'
 			} else if (width < 720) {
+				lineHeight.value = medium.lineHeight ? medium.lineHeight.split('p')[0] : 0
 				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
 				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
 				fontWeightSelect.value = medium.fontWeight ? medium.fontWeight : 'normal'
 				fontStyleSelect.value = medium.fontStyle ? medium.fontStyle : 'normal'
 			} else if (width < 970) {
+				lineHeight.value = large.lineHeight ? large.lineHeight.split('p')[0] : 0
 				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
 				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
 				fontWeightSelect.value = large.fontWeight ? large.fontWeight : 'normal'
 				fontStyleSelect.value = large.fontStyle ? large.fontStyle : 'normal'
 			} else {
+				lineHeight.value = xlarge.lineHeight ? xlarge.lineHeight.split('p')[0] : 0
 				fontSelect.value = xlarge.fontFamily ? xlarge.fontFamily : 'default'
 				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = xlarge.fontSize ? xlarge.fontSize : 'custom'
@@ -69,7 +75,38 @@ const Font = () => {
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
 
-	//For changing font of button
+	//For changing lineHeight
+	useEffect(() => {
+		if (small && medium && large && xlarge && lineHeight !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'lineHeight', lineHeight)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
+				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'lineHeight', lineHeight)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
+				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'lineHeight', lineHeight)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
+				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
+			} else {
+				setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
+				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
+				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
+			}
+		}
+	}, [lineHeight])
+
+	//For changing font
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			if (width < 540) {
@@ -100,7 +137,7 @@ const Font = () => {
 		}
 	}, [font])
 
-	//For changing fontsize of button
+	//For changing fontsize
 	useEffect(() => {
 		if (small && medium && large && xlarge && fontSize !== '') {
 			if (width < 540) {
@@ -131,7 +168,7 @@ const Font = () => {
 		}
 	}, [fontSize])
 
-	//For changing fontWeight of Button
+	//For changing fontWeight
 	useEffect(() => {
 		if (small && medium && large && xlarge && fontWeight !== '') {
 			if (width < 540) {
@@ -254,6 +291,16 @@ const Font = () => {
 
 	return (
 		<React.Fragment>
+			<div style={{ display: type === 'text' ? 'grid' : 'none' }} className='two'>
+				<label>Line Height: </label>
+				<input
+					id='btn-lineHeight'
+					type='number'
+					defaultValue='0'
+					min='0'
+					onChange={e => setLineHeight(`${e.target.value}px`)}
+				/>
+			</div>
 			<div className='two'>
 				<label>Fonts: </label>
 				{showTemplateFonts()}
