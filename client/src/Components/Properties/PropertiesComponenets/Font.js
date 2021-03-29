@@ -27,6 +27,7 @@ const Font = ({ type }) => {
 
 	const [lineHeight, setLineHeight] = useState('')
 	const [letterSpace, setLetterSpace] = useState('')
+	const [wordSpace, setWordSpace] = useState('')
 	const [textTransform, setTextTransform] = useState('')
 	const [textDecoration, setTextDecoration] = useState('')
 	const [font, setFont] = useState('')
@@ -139,6 +140,37 @@ const Font = ({ type }) => {
 			}
 		}
 	}, [letterSpace])
+
+	//For word spacing
+	useEffect(() => {
+		if (small && medium && large && xlarge && wordSpace !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'wordSpacing', wordSpace)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
+				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'wordSpacing', wordSpace)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
+				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'wordSpacing', wordSpace)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
+				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
+			} else {
+				setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
+				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
+				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
+			}
+		}
+	}, [wordSpace])
 
 	//For Text Transform
 	useEffect(() => {
@@ -438,8 +470,18 @@ const Font = ({ type }) => {
 				/>
 			</div>
 			<div className='two'>
+				<label>Word spacing: </label>
+				<input
+					id='text-letterspace'
+					type='number'
+					defaultValue='0'
+					min='0'
+					onChange={e => setWordSpace(`${e.target.value}px`)}
+				/>
+			</div>
+			<div className='two'>
 				<label>Text Transform: </label>
-				<select onChange={e => setTextTransform(e.target.value)} id='btn-fontStyle'>
+				<select onChange={e => setTextTransform(e.target.value)} id='text-wordspace'>
 					<option value='lowercase'>Lowercase</option>
 					<option value='uppercase'>Uppercase</option>
 					<option value='capitalize'>Capitalize</option>
@@ -447,7 +489,7 @@ const Font = ({ type }) => {
 			</div>
 			<div className='two'>
 				<label>Text Decoration: </label>
-				<select onChange={e => setTextDecoration(e.target.value)} id='btn-fontStyle'>
+				<select onChange={e => setTextDecoration(e.target.value)} id='text-textDecoration'>
 					<option value='none'>None</option>
 					<option value='underline'>underline</option>
 					<option value='overline'>Overline</option>
