@@ -28,6 +28,7 @@ const Font = ({ type }) => {
 	const [lineHeight, setLineHeight] = useState('')
 	const [letterSpace, setLetterSpace] = useState('')
 	const [textTransform, setTextTransform] = useState('')
+	const [textDecoration, setTextDecoration] = useState('')
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
@@ -169,6 +170,37 @@ const Font = ({ type }) => {
 			}
 		}
 	}, [textTransform])
+
+	//For Text Decoration
+	useEffect(() => {
+		if (small && medium && large && xlarge && textDecoration !== '') {
+			if (width < 540) {
+				setProperties(small, setSmall, 'textDecoration', textDecoration)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration)
+				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'textDecoration', textDecoration)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration)
+				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'textDecoration', textDecoration)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration)
+				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+			} else {
+				setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration)
+				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration)
+				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration)
+			}
+		}
+	}, [textDecoration])
 
 	//For changing font
 	useEffect(() => {
@@ -411,6 +443,15 @@ const Font = ({ type }) => {
 					<option value='lowercase'>Lowercase</option>
 					<option value='uppercase'>Uppercase</option>
 					<option value='capitalize'>Capitalize</option>
+				</select>
+			</div>
+			<div className='two'>
+				<label>Text Decoration: </label>
+				<select onChange={e => setTextDecoration(e.target.value)} id='btn-fontStyle'>
+					<option value='none'>None</option>
+					<option value='underline'>underline</option>
+					<option value='overline'>Overline</option>
+					<option value='line-through'>Line through</option>
 				</select>
 			</div>
 		</React.Fragment>
