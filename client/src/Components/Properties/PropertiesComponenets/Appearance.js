@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
-const Appearance = ({ width, activeElement }) => {
+const Appearance = ({ display, width, activeElement }) => {
 	const {
 		small,
 		setSmall,
@@ -536,7 +536,7 @@ const Appearance = ({ width, activeElement }) => {
 	}
 
 	return (
-		<div className='ap borders'>
+		<div style={{ display: display }} className='ap borders'>
 			<p className='second-heading'>APPEARANCE</p>
 			<div>
 				<div className='two md'>

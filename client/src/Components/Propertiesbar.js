@@ -8,6 +8,7 @@ import Specific from './Properties/Specific'
 const Propertiesbar = () => {
 	const { activePage, activeElement, width, setPageBC } = useContext(PageContext)
 
+	const ele = document.getElementById(activeElement)
 	return (
 		<div className='propertybar'>
 			<div style={{ display: activePage !== activeElement ? 'none' : 'block' }}>
@@ -21,7 +22,15 @@ const Propertiesbar = () => {
 				<Specific />
 				<Align width={width} activeElement={activeElement} />
 				<Transform width={width} activeElement={activeElement} />
-				<Appearance width={width} activeElement={activeElement} />
+				<Appearance
+					display={
+						ele && (ele.tagName === 'P' || ele.tagName === 'H1' || ele.tagName === 'H3' || ele.tagName === 'H5')
+							? 'none'
+							: 'grid'
+					}
+					width={width}
+					activeElement={activeElement}
+				/>
 			</div>
 		</div>
 	)
