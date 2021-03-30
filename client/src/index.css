@@ -748,6 +748,26 @@ nav .TemplateButton:active {
 	background-color: #444444;
 	color: white;
 }
+.t-three {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	margin-left: 20px;
+	margin-top: 15px;
+}
+.t-two {
+	display: grid;
+	grid-template-columns: 30% 50% auto;
+	place-items: center;
+}
+.t-two input {
+	width: 100%;
+	font-size: 16px;
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	outline: none;
+	background-color: var(--second-white);
+}
 
 /* width */
 ::-webkit-scrollbar {

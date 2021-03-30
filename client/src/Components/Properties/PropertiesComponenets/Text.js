@@ -224,6 +224,20 @@ const Text = () => {
 					id='btn-textcolor'
 				/>
 			</div>
+			<div className='t-three'>
+				<div className='t-two'>
+					<label>L</label>
+					<input type='number' min='0' defaultValue='0' />
+				</div>
+				<div className='t-two'>
+					<label>W</label>
+					<input type='number' min='0' defaultValue='0' />
+				</div>
+				<div className='t-two'>
+					<label>H</label>
+					<input type='number' min='0' />
+				</div>
+			</div>
 		</div>
 	)
 }
