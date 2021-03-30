@@ -212,7 +212,7 @@ const Text = () => {
 	}
 
 	return (
-		<div className='borders btn-specific'>
+		<div className='borders btn-specific font-specific'>
 			<p className='second-heading'>TEXT</p>
 			<div className='three'>
 				<label>Text color: </label>
@@ -237,6 +237,23 @@ const Text = () => {
 					<label>H</label>
 					<input onChange={e => setLineHeight(`${e.target.value}px`)} type='number' min='0' />
 				</div>
+			</div>
+			<div style={{ width: '80%', marginLeft: '34px' }} className='t-three'>
+				<button
+					onClick={() => setTextTransform('lowercase')}
+					className={textTransform === 'lowercase' ? 'btn-active' : ''}>
+					tt
+				</button>
+				<button
+					onClick={() => setTextTransform('capitalize')}
+					className={textTransform === 'capitalize' ? 'btn-active' : ''}>
+					Tt
+				</button>
+				<button
+					onClick={() => setTextTransform('uppercase')}
+					className={textTransform === 'uppercase' ? 'btn-active' : ''}>
+					TT
+				</button>
 			</div>
 		</div>
 	)
