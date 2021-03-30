@@ -15,14 +15,20 @@ const Text = () => {
 	const [wordSpace, setWordSpace] = useState('')
 	const [textTransform, setTextTransform] = useState('')
 
-	//For textcolor default values
+	//For default values
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const textColorInput = document.getElementById('btn-textcolor')
 			const textColorSelect = document.getElementById('btn-colorselect')
+			const letterInput = document.getElementById('text-letterinput')
+			const wordInput = document.getElementById('text-wordinput')
+			const lineHeightInput = document.getElementById('text-lineheightinput')
 
 			textColorInput.value = large.color ? large.color : '#000000'
 			textColorSelect.value = large.color ? large.color : 'custom'
+			letterInput.value = large.letterSpacing ? large.letterSpacing.split('p')[0] : 0
+			wordInput.value = large.wordSpacing ? large.wordSpacing.split('p')[0] : 0
+			lineHeightInput.value = large.lineHeight ? large.lineHeight.split('p')[0] : 18
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
 
@@ -126,15 +132,27 @@ const Text = () => {
 			<div className='t-three'>
 				<div className='t-two'>
 					<label>L</label>
-					<input onChange={e => setLetterSpace(`${e.target.value}px`)} type='number' min='0' defaultValue='0' />
+					<input
+						id='text-letterinput'
+						onChange={e => setLetterSpace(`${e.target.value}px`)}
+						type='number'
+						min='0'
+						defaultValue='0'
+					/>
 				</div>
 				<div className='t-two'>
 					<label>W</label>
-					<input onChange={e => setWordSpace(`${e.target.value}px`)} type='number' min='0' defaultValue='0' />
+					<input
+						id='text-wordinput'
+						onChange={e => setWordSpace(`${e.target.value}px`)}
+						type='number'
+						min='0'
+						defaultValue='0'
+					/>
 				</div>
 				<div className='t-two'>
 					<label>H</label>
-					<input onChange={e => setLineHeight(`${e.target.value}px`)} type='number' min='0' />
+					<input id='text-lineheightinput' onChange={e => setLineHeight(`${e.target.value}px`)} type='number' min='0' />
 				</div>
 			</div>
 			<div style={{ width: '80%', marginLeft: '34px' }} className='t-three'>
