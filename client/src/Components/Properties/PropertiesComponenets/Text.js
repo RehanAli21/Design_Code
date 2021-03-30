@@ -4,24 +4,7 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const Text = () => {
-	const {
-		small,
-		setSmall,
-		medium,
-		setMedium,
-		large,
-		setLarge,
-		xlarge,
-		setXlarge,
-		changedSmall,
-		setChangedSmall,
-		changedMedium,
-		setChangedMedium,
-		changedLarge,
-		setChangedLarge,
-		changedXlarge,
-		setChangedXlarge,
-	} = useContext(PropertiesContext)
+	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
@@ -56,124 +39,40 @@ const Text = () => {
 	//For changing lineHeight
 	useEffect(() => {
 		if (small && medium && large && xlarge && lineHeight !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'lineHeight', lineHeight)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
-				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'lineHeight', lineHeight)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
-				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-			} else {
-				setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
-				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
-			}
+			setProperties(small, setSmall, 'lineHeight', lineHeight)
+			setProperties(medium, setMedium, 'lineHeight', lineHeight)
+			setProperties(large, setLarge, 'lineHeight', lineHeight)
+			setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
 		}
 	}, [lineHeight])
 
 	//For changing Letter space
 	useEffect(() => {
 		if (small && medium && large && xlarge && letterSpace !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'letterSpacing', letterSpace)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-			} else {
-				setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
-			}
+			setProperties(small, setSmall, 'letterSpacing', letterSpace)
+			setProperties(medium, setMedium, 'letterSpacing', letterSpace)
+			setProperties(large, setLarge, 'letterSpacing', letterSpace)
+			setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
 		}
 	}, [letterSpace])
 
 	//For word spacing
 	useEffect(() => {
 		if (small && medium && large && xlarge && wordSpace !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'wordSpacing', wordSpace)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-			} else {
-				setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
-			}
+			setProperties(small, setSmall, 'wordSpacing', wordSpace)
+			setProperties(medium, setMedium, 'wordSpacing', wordSpace)
+			setProperties(large, setLarge, 'wordSpacing', wordSpace)
+			setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
 		}
 	}, [wordSpace])
 
 	//For Text Transform
 	useEffect(() => {
 		if (small && medium && large && xlarge && textTransform !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'textTransform', textTransform)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
-				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'textTransform', textTransform)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
-				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'textTransform', textTransform)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
-				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-			} else {
-				setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
-				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
-				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
-			}
+			setProperties(small, setSmall, 'textTransform', textTransform)
+			setProperties(medium, setMedium, 'textTransform', textTransform)
+			setProperties(large, setLarge, 'textTransform', textTransform)
+			setProperties(xlarge, setXlarge, 'textTransform', textTransform)
 		}
 	}, [textTransform])
 
