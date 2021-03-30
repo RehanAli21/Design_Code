@@ -25,10 +25,6 @@ const Font = ({ type }) => {
 	const { width, activeElement } = useContext(PageContext)
 	const { fontSizes, fonts } = useContext(TemplateContext)
 
-	const [lineHeight, setLineHeight] = useState('')
-	const [letterSpace, setLetterSpace] = useState('')
-	const [wordSpace, setWordSpace] = useState('')
-	const [textTransform, setTextTransform] = useState('')
 	const [textDecoration, setTextDecoration] = useState(false)
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
@@ -44,159 +40,30 @@ const Font = ({ type }) => {
 			const fontSizeInput = document.getElementById('btn-fontsize')
 			const fontSizeSelect = document.getElementById('btn-fontsizeselect')
 			const fontWeightSelect = document.getElementById('btn-fontWeight')
-			const lineHeight = document.getElementById('btn-lineHeight')
 
 			if (width < 540) {
-				lineHeight.value = small.lineHeight ? small.lineHeight.split('p')[0] : 0
 				fontSelect.value = small.fontFamily ? small.fontFamily : 'default'
-				fontSizeInput.value = small.fontSize ? small.fontSize.split('p')[0] : 0
+				fontSizeInput.value = small.fontSize ? small.fontSize.split('p')[0] : 16
 				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
 				fontWeightSelect.value = small.fontWeight ? small.fontWeight : 'normal'
 			} else if (width < 720) {
-				lineHeight.value = medium.lineHeight ? medium.lineHeight.split('p')[0] : 0
 				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
-				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 0
+				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 16
 				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
 				fontWeightSelect.value = medium.fontWeight ? medium.fontWeight : 'normal'
 			} else if (width < 970) {
-				lineHeight.value = large.lineHeight ? large.lineHeight.split('p')[0] : 0
 				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
-				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 0
+				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 16
 				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
 				fontWeightSelect.value = large.fontWeight ? large.fontWeight : 'normal'
 			} else {
-				lineHeight.value = xlarge.lineHeight ? xlarge.lineHeight.split('p')[0] : 0
 				fontSelect.value = xlarge.fontFamily ? xlarge.fontFamily : 'default'
-				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize.split('p')[0] : 0
+				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize.split('p')[0] : 16
 				fontSizeSelect.value = xlarge.fontSize ? xlarge.fontSize : 'custom'
 				fontWeightSelect.value = xlarge.fontWeight ? xlarge.fontWeight : 'normal'
 			}
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
-
-	//For changing lineHeight
-	useEffect(() => {
-		if (small && medium && large && xlarge && lineHeight !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'lineHeight', lineHeight)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
-				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'lineHeight', lineHeight)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
-				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-			} else {
-				setProperties(xlarge, setXlarge, 'lineHeight', lineHeight)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'lineHeight', lineHeight)
-				if (!changedMedium) setProperties(medium, setMedium, 'lineHeight', lineHeight)
-				if (!changedLarge) setProperties(large, setLarge, 'lineHeight', lineHeight)
-			}
-		}
-	}, [lineHeight])
-
-	//For changing Letter space
-	useEffect(() => {
-		if (small && medium && large && xlarge && letterSpace !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'letterSpacing', letterSpace)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-			} else {
-				setProperties(xlarge, setXlarge, 'letterSpacing', letterSpace)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'letterSpacing', letterSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'letterSpacing', letterSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'letterSpacing', letterSpace)
-			}
-		}
-	}, [letterSpace])
-
-	//For word spacing
-	useEffect(() => {
-		if (small && medium && large && xlarge && wordSpace !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'wordSpacing', wordSpace)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-			} else {
-				setProperties(xlarge, setXlarge, 'wordSpacing', wordSpace)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'wordSpacing', wordSpace)
-				if (!changedMedium) setProperties(medium, setMedium, 'wordSpacing', wordSpace)
-				if (!changedLarge) setProperties(large, setLarge, 'wordSpacing', wordSpace)
-			}
-		}
-	}, [wordSpace])
-
-	//For Text Transform
-	useEffect(() => {
-		if (small && medium && large && xlarge && textTransform !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'textTransform', textTransform)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
-				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'textTransform', textTransform)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
-				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'textTransform', textTransform)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
-				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-			} else {
-				setProperties(xlarge, setXlarge, 'textTransform', textTransform)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textTransform', textTransform)
-				if (!changedMedium) setProperties(medium, setMedium, 'textTransform', textTransform)
-				if (!changedLarge) setProperties(large, setLarge, 'textTransform', textTransform)
-			}
-		}
-	}, [textTransform])
 
 	//For Text Decoration
 	useEffect(() => {
@@ -379,7 +246,7 @@ const Font = ({ type }) => {
 				defaultValue='custom'
 				id='btn-fontsizeselect'
 				onChange={e => {
-					setFontSize(e.target.value)
+					setFontSize(e.target.value === 'custom' ? `16px` : e.target.value)
 					setShowCustomFontSize(e.target.value === 'custom')
 				}}>
 				{temp}
@@ -413,27 +280,25 @@ const Font = ({ type }) => {
 	}
 
 	return (
-		<React.Fragment>
-			<div className='font-setter'>
-				<p>Font</p>
-				<div className='three'>
-					{showTemplateFonts()}
-					<button
-						onClick={() => setFontStyle(!fontStyle)}
-						style={{ fontStyle: 'italic' }}
-						className={fontStyle ? 'font-btns' : ''}>
-						I
-					</button>
-					<button
-						onClick={() => setTextDecoration(!textDecoration)}
-						style={{ textDecoration: 'underline' }}
-						className={textDecoration ? 'font-btns' : ''}>
-						U
-					</button>
-				</div>
+		<div className='btn-specific font-specific borders'>
+			<p className='second-heading'>FONT</p>
+			<div className='font'>
+				{showTemplateFonts()}
+				<button
+					onClick={() => setFontStyle(!fontStyle)}
+					style={{ fontStyle: 'italic' }}
+					className={fontStyle ? 'font-btns' : ''}>
+					I
+				</button>
+				<button
+					onClick={() => setTextDecoration(!textDecoration)}
+					style={{ textDecoration: 'underline' }}
+					className={textDecoration ? 'font-btns' : ''}>
+					U
+				</button>
 			</div>
 			<div className='three'>
-				<label>Font size: </label>
+				<label>Size: </label>
 				{showTemplateFontSizes()}
 				<input
 					disabled={!showCustomFontSize}
@@ -444,52 +309,14 @@ const Font = ({ type }) => {
 				/>
 			</div>
 			<div className='two'>
-				<label>Font Weight: </label>
+				<label>Weight: </label>
 				<select onChange={e => setFontWeight(e.target.value)} id='btn-fontWeight'>
 					<option value='normal'>Regular</option>
 					<option value='lighter'>Light</option>
 					<option value='bold'>Bold</option>
 				</select>
 			</div>
-			<div style={{ display: type === 'text' ? 'grid' : 'none' }} className='two'>
-				<label>Line Height: </label>
-				<input
-					id='btn-lineHeight'
-					type='number'
-					defaultValue='0'
-					min='0'
-					onChange={e => setLineHeight(`${e.target.value}px`)}
-				/>
-			</div>
-			<div className='two'>
-				<label>Letter spacing: </label>
-				<input
-					id='text-letterspace'
-					type='number'
-					defaultValue='0'
-					min='0'
-					onChange={e => setLetterSpace(`${e.target.value}px`)}
-				/>
-			</div>
-			<div className='two'>
-				<label>Word spacing: </label>
-				<input
-					id='text-letterspace'
-					type='number'
-					defaultValue='0'
-					min='0'
-					onChange={e => setWordSpace(`${e.target.value}px`)}
-				/>
-			</div>
-			<div className='two'>
-				<label>Text Transform: </label>
-				<select onChange={e => setTextTransform(e.target.value)} id='text-wordspace'>
-					<option value='lowercase'>Lowercase</option>
-					<option value='uppercase'>Uppercase</option>
-					<option value='capitalize'>Capitalize</option>
-				</select>
-			</div>
-		</React.Fragment>
+		</div>
 	)
 }
 

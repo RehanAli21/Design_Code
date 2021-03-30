@@ -724,31 +724,27 @@ nav .TemplateButton:active {
 	outline: none;
 	background-color: var(--second-white);
 }
-.font-setter {
-	text-align: left;
-	margin-left: 25px;
-	margin-top: 20px;
-}
-.font-setter .three {
+.font-specific .font {
 	margin-top: 10px;
+	margin-left: 25px;
 	display: grid;
 	grid-template-columns: 55% repeat(3, 14%);
 	column-gap: 2px;
 }
-.font-setter button {
+.font-specific .font button {
 	outline: none;
 	border: none;
 	cursor: pointer;
 	font-weight: 500;
 }
-.font-setter button:hover {
+.font-specific .font button:hover {
 	background-color: #777777;
 	color: white;
 }
-.font-setter button:active {
+.font-specific .font button:active {
 	transform: scale(0.9);
 }
-.font-setter .font-btns {
+.font-specific .font .font-btns {
 	background-color: #444444;
 	color: white;
 }

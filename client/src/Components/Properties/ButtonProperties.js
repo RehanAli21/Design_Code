@@ -1,16 +1,18 @@
 import React from 'react'
 import Font from './PropertiesComponenets/Font'
+import TextChange from './PropertiesComponenets/TextChange'
 import Text from './PropertiesComponenets/Text'
-import TextColor from './PropertiesComponenets/TextColor'
 
 const ButtonProperties = () => {
 	return (
-		<div className='borders btn-specific'>
-			<p className='second-heading'>Button Properties</p>
-			<Text type='button' />
-			<TextColor />
+		<React.Fragment>
+			<div className='borders btn-specific'>
+				<p className='second-heading'>PROPERTIES</p>
+				<TextChange type='button' />
+			</div>
+			<Text />
 			<Font />
-		</div>
+		</React.Fragment>
 	)
 }
 
