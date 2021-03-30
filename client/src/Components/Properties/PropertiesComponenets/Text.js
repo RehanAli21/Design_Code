@@ -227,15 +227,15 @@ const Text = () => {
 			<div className='t-three'>
 				<div className='t-two'>
 					<label>L</label>
-					<input type='number' min='0' defaultValue='0' />
+					<input onChange={e => setLetterSpace(`${e.target.value}px`)} type='number' min='0' defaultValue='0' />
 				</div>
 				<div className='t-two'>
 					<label>W</label>
-					<input type='number' min='0' defaultValue='0' />
+					<input onChange={e => setWordSpace(`${e.target.value}px`)} type='number' min='0' defaultValue='0' />
 				</div>
 				<div className='t-two'>
 					<label>H</label>
-					<input type='number' min='0' />
+					<input onChange={e => setLineHeight(`${e.target.value}px`)} type='number' min='0' />
 				</div>
 			</div>
 		</div>
