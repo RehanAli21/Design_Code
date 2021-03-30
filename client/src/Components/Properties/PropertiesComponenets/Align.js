@@ -171,7 +171,7 @@ const Align = ({ width, activeElement }) => {
 						</button>
 					</li>
 					<li className='two'>
-						<label>Text Align: </label>
+						<label>{ele && ele.tagName === 'DIV' ? 'Object Align: ' : 'Text Align: '}</label>
 						<button className={textAlign === 'left' ? 'bb' : 'none'} onClick={() => setTextAlign('left')}>
 							L
 						</button>
@@ -181,7 +181,10 @@ const Align = ({ width, activeElement }) => {
 						<button className={textAlign === 'right' ? 'bb' : 'none'} onClick={() => setTextAlign('right')}>
 							R
 						</button>
-						<button className={textAlign === 'justify' ? 'bb' : 'none'} onClick={() => setTextAlign('justify')}>
+						<button
+							style={{ display: ele && ele.tagName !== 'DIV' ? 'block' : 'none' }}
+							className={textAlign === 'justify' ? 'bb' : 'none'}
+							onClick={() => setTextAlign('justify')}>
 							J
 						</button>
 					</li>
