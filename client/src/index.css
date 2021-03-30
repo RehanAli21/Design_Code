@@ -724,6 +724,34 @@ nav .TemplateButton:active {
 	outline: none;
 	background-color: var(--second-white);
 }
+.font-setter {
+	text-align: left;
+	margin-left: 25px;
+	margin-top: 20px;
+}
+.font-setter .three {
+	margin-top: 10px;
+	display: grid;
+	grid-template-columns: 55% repeat(3, 14%);
+	column-gap: 2px;
+}
+.font-setter button {
+	outline: none;
+	border: none;
+	cursor: pointer;
+	font-weight: 500;
+}
+.font-setter button:hover {
+	background-color: #777777;
+	color: white;
+}
+.font-setter button:active {
+	transform: scale(0.9);
+}
+.font-setter .font-btns {
+	background-color: #444444;
+	color: white;
+}
 
 /* width */
 ::-webkit-scrollbar {

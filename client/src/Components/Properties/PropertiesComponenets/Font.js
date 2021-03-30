@@ -29,11 +29,11 @@ const Font = ({ type }) => {
 	const [letterSpace, setLetterSpace] = useState('')
 	const [wordSpace, setWordSpace] = useState('')
 	const [textTransform, setTextTransform] = useState('')
-	const [textDecoration, setTextDecoration] = useState('')
+	const [textDecoration, setTextDecoration] = useState(false)
 	const [font, setFont] = useState('')
 	const [fontSize, setFontSize] = useState('')
 	const [fontWeight, setFontWeight] = useState('')
-	const [fontStyle, setFontStyle] = useState('')
+	const [fontStyle, setFontStyle] = useState(false)
 
 	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
@@ -44,7 +44,6 @@ const Font = ({ type }) => {
 			const fontSizeInput = document.getElementById('btn-fontsize')
 			const fontSizeSelect = document.getElementById('btn-fontsizeselect')
 			const fontWeightSelect = document.getElementById('btn-fontWeight')
-			const fontStyleSelect = document.getElementById('btn-fontStyle')
 			const lineHeight = document.getElementById('btn-lineHeight')
 
 			if (width < 540) {
@@ -53,28 +52,24 @@ const Font = ({ type }) => {
 				fontSizeInput.value = small.fontSize ? small.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
 				fontWeightSelect.value = small.fontWeight ? small.fontWeight : 'normal'
-				fontStyleSelect.value = small.fontStyle ? small.fontStyle : 'normal'
 			} else if (width < 720) {
 				lineHeight.value = medium.lineHeight ? medium.lineHeight.split('p')[0] : 0
 				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
 				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
 				fontWeightSelect.value = medium.fontWeight ? medium.fontWeight : 'normal'
-				fontStyleSelect.value = medium.fontStyle ? medium.fontStyle : 'normal'
 			} else if (width < 970) {
 				lineHeight.value = large.lineHeight ? large.lineHeight.split('p')[0] : 0
 				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
 				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
 				fontWeightSelect.value = large.fontWeight ? large.fontWeight : 'normal'
-				fontStyleSelect.value = large.fontStyle ? large.fontStyle : 'normal'
 			} else {
 				lineHeight.value = xlarge.lineHeight ? xlarge.lineHeight.split('p')[0] : 0
 				fontSelect.value = xlarge.fontFamily ? xlarge.fontFamily : 'default'
 				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize.split('p')[0] : 0
 				fontSizeSelect.value = xlarge.fontSize ? xlarge.fontSize : 'custom'
 				fontWeightSelect.value = xlarge.fontWeight ? xlarge.fontWeight : 'normal'
-				fontStyleSelect.value = xlarge.fontStyle ? xlarge.fontStyle : 'normal'
 			}
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
@@ -205,31 +200,31 @@ const Font = ({ type }) => {
 
 	//For Text Decoration
 	useEffect(() => {
-		if (small && medium && large && xlarge && textDecoration !== '') {
+		if (small && medium && large && xlarge) {
 			if (width < 540) {
-				setProperties(small, setSmall, 'textDecoration', textDecoration)
+				setProperties(small, setSmall, 'textDecoration', textDecoration ? 'underline' : '')
 				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration)
-				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration ? 'underline' : '')
 			} else if (width < 720) {
-				setProperties(medium, setMedium, 'textDecoration', textDecoration)
+				setProperties(medium, setMedium, 'textDecoration', textDecoration ? 'underline' : '')
 				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration)
-				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration ? 'underline' : '')
 			} else if (width < 970) {
-				setProperties(large, setLarge, 'textDecoration', textDecoration)
+				setProperties(large, setLarge, 'textDecoration', textDecoration ? 'underline' : '')
 				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration)
-				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration ? 'underline' : '')
 			} else {
-				setProperties(xlarge, setXlarge, 'textDecoration', textDecoration)
+				setProperties(xlarge, setXlarge, 'textDecoration', textDecoration ? 'underline' : '')
 				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration)
-				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration)
-				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration)
+				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration ? 'underline' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration ? 'underline' : '')
 			}
 		}
 	}, [textDecoration])
@@ -329,31 +324,31 @@ const Font = ({ type }) => {
 
 	//For changing fontStyle
 	useEffect(() => {
-		if (small && medium && large && xlarge && fontStyle !== '') {
+		if (small && medium && large && xlarge) {
 			if (width < 540) {
-				setProperties(small, setSmall, 'fontStyle', fontStyle)
+				setProperties(small, setSmall, 'fontStyle', fontStyle ? 'italic' : '')
 				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontStyle', fontStyle)
-				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle)
+				if (!changedMedium) setProperties(medium, setMedium, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle ? 'italic' : '')
 			} else if (width < 720) {
-				setProperties(medium, setMedium, 'fontStyle', fontStyle)
+				setProperties(medium, setMedium, 'fontStyle', fontStyle ? 'italic' : '')
 				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle)
-				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle)
+				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle ? 'italic' : '')
 			} else if (width < 970) {
-				setProperties(large, setLarge, 'fontStyle', fontStyle)
+				setProperties(large, setLarge, 'fontStyle', fontStyle ? 'italic' : '')
 				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontStyle', fontStyle)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle)
+				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle ? 'italic' : '')
 			} else {
-				setProperties(xlarge, setXlarge, 'fontStyle', fontStyle)
+				setProperties(xlarge, setXlarge, 'fontStyle', fontStyle ? 'italic' : '')
 				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontStyle', fontStyle)
-				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle)
+				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'fontStyle', fontStyle ? 'italic' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle ? 'italic' : '')
 			}
 		}
 	}, [fontStyle])
@@ -419,19 +414,23 @@ const Font = ({ type }) => {
 
 	return (
 		<React.Fragment>
-			<div style={{ display: type === 'text' ? 'grid' : 'none' }} className='two'>
-				<label>Line Height: </label>
-				<input
-					id='btn-lineHeight'
-					type='number'
-					defaultValue='0'
-					min='0'
-					onChange={e => setLineHeight(`${e.target.value}px`)}
-				/>
-			</div>
-			<div className='two'>
-				<label>Fonts: </label>
-				{showTemplateFonts()}
+			<div className='font-setter'>
+				<p>Font</p>
+				<div className='three'>
+					{showTemplateFonts()}
+					<button
+						onClick={() => setFontStyle(!fontStyle)}
+						style={{ fontStyle: 'italic' }}
+						className={fontStyle ? 'font-btns' : ''}>
+						I
+					</button>
+					<button
+						onClick={() => setTextDecoration(!textDecoration)}
+						style={{ textDecoration: 'underline' }}
+						className={textDecoration ? 'font-btns' : ''}>
+						U
+					</button>
+				</div>
 			</div>
 			<div className='three'>
 				<label>Font size: </label>
@@ -452,12 +451,15 @@ const Font = ({ type }) => {
 					<option value='bold'>Bold</option>
 				</select>
 			</div>
-			<div className='two'>
-				<label>Font Style: </label>
-				<select onChange={e => setFontStyle(e.target.value)} id='btn-fontStyle'>
-					<option value='normal'>Normal</option>
-					<option value='italic'>Italic</option>
-				</select>
+			<div style={{ display: type === 'text' ? 'grid' : 'none' }} className='two'>
+				<label>Line Height: </label>
+				<input
+					id='btn-lineHeight'
+					type='number'
+					defaultValue='0'
+					min='0'
+					onChange={e => setLineHeight(`${e.target.value}px`)}
+				/>
 			</div>
 			<div className='two'>
 				<label>Letter spacing: </label>
@@ -485,15 +487,6 @@ const Font = ({ type }) => {
 					<option value='lowercase'>Lowercase</option>
 					<option value='uppercase'>Uppercase</option>
 					<option value='capitalize'>Capitalize</option>
-				</select>
-			</div>
-			<div className='two'>
-				<label>Text Decoration: </label>
-				<select onChange={e => setTextDecoration(e.target.value)} id='text-textDecoration'>
-					<option value='none'>None</option>
-					<option value='underline'>underline</option>
-					<option value='overline'>Overline</option>
-					<option value='line-through'>Line through</option>
 				</select>
 			</div>
 		</React.Fragment>
