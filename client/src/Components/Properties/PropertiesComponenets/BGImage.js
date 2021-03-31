@@ -35,9 +35,15 @@ const BGImage = ({ width, activeElement }) => {
 			const bgRepeat = document.getElementById('div-bgRepeat-select')
 			const bgAttach = document.getElementById('div-bgAttach-select')
 
-			if (large.backgroundImage || large.backgroundSize) {
+			if (
+				(large.backgroundImage && large.backgroundImage !== '') ||
+				(large.backgroundSize && large.backgroundSize !== '')
+			) {
 				bgCheckbox.checked = true
 				setbgImg(true)
+			} else {
+				bgCheckbox.checked = false
+				setbgImg(false)
 			}
 
 			if (large.backgroundSize) bgSize.value = large.backgroundSize
@@ -48,41 +54,41 @@ const BGImage = ({ width, activeElement }) => {
 
 	//For setting images
 	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundImage', img)
-			setProperties(medium, setMedium, 'backgroundImage', img)
-			setProperties(large, setLarge, 'backgroundImage', img)
-			setProperties(xlarge, setXlarge, 'backgroundImage', img)
+		if (small && medium && large && xlarge) {
+			setProperties(small, setSmall, 'backgroundImage', bgImg ? img : '')
+			setProperties(medium, setMedium, 'backgroundImage', bgImg ? bgSize : '')
+			setProperties(large, setLarge, 'backgroundImage', bgImg ? bgSize : '')
+			setProperties(xlarge, setXlarge, 'backgroundImage', bgImg ? bgSize : '')
 		}
 	}, [img])
 
 	//For setting background Size
 	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundSize', bgSize)
-			setProperties(medium, setMedium, 'backgroundSize', bgSize)
-			setProperties(large, setLarge, 'backgroundSize', bgSize)
-			setProperties(xlarge, setXlarge, 'backgroundSize', bgSize)
+		if (small && medium && large && xlarge) {
+			setProperties(small, setSmall, 'backgroundSize', bgImg ? bgSize : '')
+			setProperties(medium, setMedium, 'backgroundSize', bgImg ? bgSize : '')
+			setProperties(large, setLarge, 'backgroundSize', bgImg ? bgSize : '')
+			setProperties(xlarge, setXlarge, 'backgroundSize', bgImg ? bgSize : '')
 		}
 	}, [bgSize])
 
 	//For setting background Repeat
 	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundRepeat', bgRepeat)
-			setProperties(medium, setMedium, 'backgroundRepeat', bgRepeat)
-			setProperties(large, setLarge, 'backgroundRepeat', bgRepeat)
-			setProperties(xlarge, setXlarge, 'backgroundRepeat', bgRepeat)
+		if (small && medium && large && xlarge) {
+			setProperties(small, setSmall, 'backgroundRepeat', bgImg ? bgRepeat : '')
+			setProperties(medium, setMedium, 'backgroundRepeat', bgImg ? bgRepeat : '')
+			setProperties(large, setLarge, 'backgroundRepeat', bgImg ? bgRepeat : '')
+			setProperties(xlarge, setXlarge, 'backgroundRepeat', bgImg ? bgRepeat : '')
 		}
 	}, [bgRepeat])
 
 	//For setting background Attachment
 	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
-			setProperties(small, setSmall, 'backgroundAttachment', bgAttach)
-			setProperties(medium, setMedium, 'backgroundAttachment', bgAttach)
-			setProperties(large, setLarge, 'backgroundAttachment', bgAttach)
-			setProperties(xlarge, setXlarge, 'backgroundAttachment', bgAttach)
+		if (small && medium && large && xlarge) {
+			setProperties(small, setSmall, 'backgroundAttachment', bgImg ? bgAttach : '')
+			setProperties(medium, setMedium, 'backgroundAttachment', bgImg ? bgAttach : '')
+			setProperties(large, setLarge, 'backgroundAttachment', bgImg ? bgAttach : '')
+			setProperties(xlarge, setXlarge, 'backgroundAttachment', bgImg ? bgAttach : '')
 		}
 	}, [bgAttach])
 
@@ -94,7 +100,7 @@ const BGImage = ({ width, activeElement }) => {
 
 	//For setting background img
 	useEffect(() => {
-		if (small && medium && large && xlarge && bgImg) {
+		if (small && medium && large && xlarge) {
 			setBackground(small, setSmall)
 			setBackground(medium, setMedium)
 			setBackground(large, setLarge)
@@ -116,10 +122,10 @@ const BGImage = ({ width, activeElement }) => {
 
 	const setBackground = (obj, setObj) => {
 		const temp = Object.assign({}, obj)
-		temp.backgroundImage = img
-		temp.backgroundSize = bgSize
-		temp.backgroundRepeat = bgRepeat
-		temp.backgroundAttachment = bgAttach
+		temp.backgroundImage = bgImg ? img : ''
+		temp.backgroundSize = bgImg ? bgSize : ''
+		temp.backgroundRepeat = bgImg ? bgRepeat : ''
+		temp.backgroundAttachment = bgImg ? bgAttach : ''
 		setObj(temp)
 	}
 
