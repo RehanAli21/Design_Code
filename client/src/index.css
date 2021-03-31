@@ -631,6 +631,14 @@ nav .TemplateButton:active {
 	grid-template-columns: 1fr 1fr 1fr 10%;
 	text-align: center;
 }
+.propertybar .shadow .four {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 20px;
+	column-gap: 10px;
+	text-align: center;
+	margin-left: 10px;
+	margin-top: 10px;
+}
 .propertybar .shadow label {
 	padding: 5px;
 }
@@ -689,17 +697,17 @@ nav .TemplateButton:active {
 .propertybar .btn-specific > .two {
 	text-align: left;
 	display: grid;
-	grid-template-columns: auto 125px 5%;
+	grid-template-columns: auto 130px 10%;
 	margin-left: 26px;
-	margin-top: 10px;
+	margin-top: 15px;
 }
 .propertybar .btn-specific > .three {
 	text-align: left;
 	display: grid;
-	grid-template-columns: auto 80px 40px 5px;
+	grid-template-columns: auto 80px 40px 10%;
 	column-gap: 5px;
 	margin-left: 26px;
-	margin-top: 10px;
+	margin-top: 15px;
 }
 .propertybar .btn-specific input[type='text'] {
 	border: none;
@@ -756,6 +764,7 @@ nav .TemplateButton:active {
 	grid-template-columns: repeat(3, auto);
 	margin-left: 20px;
 	margin-top: 15px;
+	margin-bottom: 15px;
 }
 .t-two {
 	display: grid;

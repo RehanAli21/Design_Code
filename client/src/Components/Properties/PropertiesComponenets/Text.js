@@ -14,6 +14,7 @@ const Text = () => {
 	const [letterSpace, setLetterSpace] = useState('')
 	const [wordSpace, setWordSpace] = useState('')
 	const [textTransform, setTextTransform] = useState('')
+	const [textShadow, setTextShadow] = useState(false)
 
 	//For default values
 	useEffect(() => {
@@ -120,7 +121,7 @@ const Text = () => {
 		<div className='borders btn-specific font-specific'>
 			<p className='second-heading'>TEXT</p>
 			<div className='three'>
-				<label>Text color: </label>
+				<label style={{ marginTop: '5px' }}>Text color: </label>
 				{showTemplateColors()}
 				<input
 					disabled={!showCustomTextColor}
@@ -171,6 +172,16 @@ const Text = () => {
 					className={textTransform === 'uppercase' ? 'btn-active' : ''}>
 					TT
 				</button>
+			</div>
+			<div style={{ marginTop: '20px', marginBottom: '20px' }} className='shadow'>
+				<input id='a-s-active' type='checkbox' onChange={e => setTextShadow(e.target.checked)} />
+				<span>Text Shadow</span>
+				<div style={{ display: textShadow ? 'grid' : 'none' }} className='four'>
+					<input id='t-ts-x' type='number' placeholder='X' />
+					<input id='t-ts-y' type='number' placeholder='Y' />
+					<input id='t-ts-blur' type='number' min='0' placeholder='B' />
+					<input id='t-ts-color' type='color' defaultValue='#464646' />
+				</div>
 			</div>
 		</div>
 	)
