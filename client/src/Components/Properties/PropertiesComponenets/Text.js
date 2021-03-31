@@ -15,6 +15,10 @@ const Text = () => {
 	const [wordSpace, setWordSpace] = useState('')
 	const [textTransform, setTextTransform] = useState('')
 	const [textShadow, setTextShadow] = useState(false)
+	const [textX, setTextX] = useState('')
+	const [textY, setTextY] = useState('')
+	const [textBlur, setTextBlur] = useState('')
+	const [textSColor, setTextSColor] = useState('')
 
 	//For default values
 	useEffect(() => {
@@ -82,6 +86,18 @@ const Text = () => {
 			setProperties(xlarge, setXlarge, 'textTransform', textTransform)
 		}
 	}, [textTransform])
+
+	//For Text Shadow
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const tS = `${textX} ${textY} ${textBlur} ${textSColor}`
+
+			setProperties(small, setSmall, 'textShadow', textShadow ? tS : '')
+			setProperties(medium, setMedium, 'textShadow', textShadow ? tS : '')
+			setProperties(large, setLarge, 'textShadow', textShadow ? tS : '')
+			setProperties(xlarge, setXlarge, 'textShadow', textShadow ? tS : '')
+		}
+	}, [textX, textY, textBlur, textSColor, textShadow])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -174,13 +190,19 @@ const Text = () => {
 				</button>
 			</div>
 			<div style={{ marginTop: '20px', marginBottom: '20px' }} className='shadow'>
-				<input id='a-s-active' type='checkbox' onChange={e => setTextShadow(e.target.checked)} />
+				<input id='t-ts-active' type='checkbox' onChange={e => setTextShadow(e.target.checked)} />
 				<span>Text Shadow</span>
 				<div style={{ display: textShadow ? 'grid' : 'none' }} className='four'>
-					<input id='t-ts-x' type='number' placeholder='X' />
-					<input id='t-ts-y' type='number' placeholder='Y' />
-					<input id='t-ts-blur' type='number' min='0' placeholder='B' />
-					<input id='t-ts-color' type='color' defaultValue='#464646' />
+					<input onChange={e => setTextX(`${e.target.value}px`)} id='t-ts-x' type='number' placeholder='X' />
+					<input onChange={e => setTextY(`${e.target.value}px`)} id='t-ts-y' type='number' placeholder='Y' />
+					<input
+						onChange={e => setTextBlur(`${e.target.value}px`)}
+						id='t-ts-blur'
+						type='number'
+						min='0'
+						placeholder='B'
+					/>
+					<input onChange={e => setTextSColor(e.target.value)} id='t-ts-color' type='color' defaultValue='#464646' />
 				</div>
 			</div>
 		</div>
