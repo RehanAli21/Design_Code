@@ -677,50 +677,48 @@ const Appearance = ({ display, width, activeElement }) => {
 						}}
 					/>
 					<span>Shadow</span>
-					<div
-						style={{
-							display: showShadowSection ? 'block' : 'none',
-						}}
-						className='one'>
-						<div>
-							<label>X: </label>
-							<input
-								id='a-s-x'
-								onChange={e => {
-									setShadowChanged(true)
-									setSX(e.target.value + 'px')
-								}}
-								type='number'
-								defaultValue='0'
-							/>
+					<div style={{ display: showShadowSection ? 'grid' : 'none' }}>
+						<div className='three'>
+							<div className='two'>
+								<label>X: </label>
+								<input
+									id='a-s-x'
+									onChange={e => {
+										setShadowChanged(true)
+										setSX(e.target.value + 'px')
+									}}
+									type='number'
+									defaultValue='0'
+								/>
+							</div>
+							<div className='two'>
+								<label>Y: </label>
+								<input
+									id='a-s-y'
+									onChange={e => {
+										setShadowChanged(true)
+										setSY(e.target.value + 'px')
+									}}
+									type='number'
+									defaultValue='0'
+								/>
+							</div>
+							<div className='two'>
+								<label>B: </label>
+								<input
+									id='a-s-blur'
+									onChange={e => {
+										setShadowChanged(true)
+										setSBlur(e.target.value + 'px')
+									}}
+									type='number'
+									min='0'
+									defaultValue='0'
+								/>
+							</div>
 						</div>
-						<div>
-							<label>Y: </label>
-							<input
-								id='a-s-y'
-								onChange={e => {
-									setShadowChanged(true)
-									setSY(e.target.value + 'px')
-								}}
-								type='number'
-								defaultValue='0'
-							/>
-						</div>
-						<div>
-							<label>B: </label>
-							<input
-								id='a-s-blur'
-								onChange={e => {
-									setShadowChanged(true)
-									setSBlur(e.target.value + 'px')
-								}}
-								type='number'
-								min='0'
-								defaultValue='0'
-							/>
-						</div>
-						<div>
-							<label>C: </label>
+						<div className='three'>
+							<label>Color: </label>
 							{showCustomShadowColorOptions()}
 							<input
 								disabled={!customShadowColor}

@@ -612,26 +612,29 @@ nav .TemplateButton:active {
 .propertybar .bb {
 	border-color: var(--main-blue);
 }
-.propertybar .ap .shadow {
-	width: 80%;
+.propertybar .shadow {
 	text-align: left;
 	margin-left: 10%;
 }
-.propertybar .ap .shadow > span {
+.propertybar .shadow > span {
 	margin-left: 10px;
 }
-.propertybar .ap .shadow > .one {
+.propertybar .shadow .two {
 	display: grid;
-	grid-template-columns: 1fr;
+	grid-template-columns: 40% auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
 }
-.propertybar .ap .shadow > .one > div {
+.propertybar .shadow .three {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 10%;
+	text-align: center;
 }
-.propertybar .ap .shadow > .one > div > label {
+.propertybar .shadow label {
 	padding: 5px;
 }
-.propertybar .ap .shadow > .one input[type='number'] {
+.propertybar .shadow input[type='number'] {
 	border: none;
 	border-bottom: 1px solid var(--text-color);
 	padding: 3px;
@@ -640,13 +643,13 @@ nav .TemplateButton:active {
 	outline: none;
 	background-color: var(--second-white);
 }
-.propertybar .ap input[type='color'] {
+.propertybar input[type='color'] {
 	margin: 5px;
 	width: 40px;
 	border: none;
 	box-shadow: 1px 1px 2px grey;
 }
-.propertybar .ap .shadow > .one select {
+.propertybar .shadow select {
 	background-color: var(--second-white);
 	border: none;
 	border-bottom: 1px solid var(--text-color);
