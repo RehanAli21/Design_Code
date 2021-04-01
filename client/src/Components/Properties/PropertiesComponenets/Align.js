@@ -154,7 +154,7 @@ const Align = ({ width, activeElement }) => {
 	const ele = document.getElementById(activeElement)
 
 	return (
-		<div className='align borders' style={{ display: ele && ele.tagName === 'IMAGE' ? 'none' : 'grid' }}>
+		<div className='align borders' style={{ display: ele && ele.tagName === 'IMG' ? 'none' : 'grid' }}>
 			<p className='second-heading'>ALIGNMENT</p>
 			<div>
 				<ul className='align-ul'>

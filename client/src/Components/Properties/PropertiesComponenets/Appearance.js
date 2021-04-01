@@ -58,6 +58,8 @@ const Appearance = ({ display, width, activeElement }) => {
 			const sColorInput = document.getElementById('a-s-color')
 			const paddingInput = document.getElementById('ap-paddingInput')
 
+			bRadiusInput.value = large.borderRadius ? large.borderRadius.split('%')[0] : '0'
+
 			if (large.border) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
@@ -114,19 +116,15 @@ const Appearance = ({ display, width, activeElement }) => {
 
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor ? RGBToHex(small.backgroundColor) : '#ffffff'
-				bRadiusInput.value = small.borderRadius ? small.borderRadius.split('p')[0] : '0'
 				paddingInput.value = small.padding ? small.padding.split('p')[0] : 0
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor ? RGBToHex(medium.backgroundColor) : '#ffffff'
-				bRadiusInput.value = medium.borderRadius ? medium.borderRadius.split('p')[0] : '0'
 				paddingInput.value = medium.padding ? medium.padding.split('p')[0] : 0
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor ? RGBToHex(large.backgroundColor) : '#ffffff'
-				bRadiusInput.value = large.borderRadius ? large.borderRadius.split('p')[0] : '0'
 				paddingInput.value = large.padding ? large.padding.split('p')[0] : 0
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? RGBToHex(xlarge.backgroundColor) : '#ffffff'
-				bRadiusInput.value = xlarge.borderRadius ? xlarge.borderRadius.split('p')[0] : '0'
 				paddingInput.value = xlarge.padding ? xlarge.padding.split('p')[0] : 0
 			}
 		}
@@ -622,12 +620,12 @@ const Appearance = ({ display, width, activeElement }) => {
 									style={{ width: '100%' }}
 									onChange={e => {
 										setBorderChanged(true)
-										setBRdius(`${e.target.value}px`)
+										setBRdius(`${e.target.value}%`)
 									}}
 									type='number'
 									defaultValue='1'
 									min='0'
-									max='50'
+									max='100'
 								/>
 							</div>
 							<div className='mds'>
