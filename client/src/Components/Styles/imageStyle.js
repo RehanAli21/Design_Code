@@ -5,8 +5,5 @@ export const imageStyle = {
 	marginTop: '',
 	marginLeft: '',
 	marginRight: '',
-	color: '',
 	backgroundColor: '',
-	textAlign: '',
-	textShadow: '',
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { imageStyle } from '../Styles/ImageStyle'
+import { imageStyle } from '../Styles/imageStyle'
 
 //This component is for adding image element
 const Image = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {

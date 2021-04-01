@@ -4,6 +4,7 @@ import Div from './Tools/Div'
 import Input from './Tools/Input'
 import Button from './Tools/Button'
 import Text from './Tools/Text'
+import Image from './Tools/Image'
 
 //This component is for showing list of elemenets,
 //which can be added.
@@ -60,6 +61,14 @@ const Toolbar = () => {
 					uniqueString={uniqueString}
 				/>
 				<Text
+					findAndInsert={findAndInsert}
+					activeElement={activeElement}
+					activePage={activePage}
+					pages={pages}
+					setPages={setPages}
+					uniqueString={uniqueString}
+				/>
+				<Image
 					findAndInsert={findAndInsert}
 					activeElement={activeElement}
 					activePage={activePage}

@@ -179,6 +179,27 @@ const Page = () => {
 						e[1].text
 					)
 				)
+			} else if (e[0] === 'image') {
+				temp.push(
+					React.createElement(
+						e[0],
+						{
+							key: uuid(),
+							id: e[1].id,
+							src: e[1].src,
+							alt: e[1].alt,
+							style:
+								width < 540
+									? e[1].styles.small
+									: width < 720
+									? e[1].styles.medium
+									: width < 960
+									? e[1].styles.large
+									: e[1].styles.xlarge,
+						},
+						null
+					)
+				)
 			}
 		})
 
