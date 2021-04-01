@@ -38,16 +38,7 @@ const ImageProperties = () => {
 	}
 
 	//For setting img
-	const changeImg = e => {
-		const reader = new FileReader()
-
-		reader.onload = () => {
-			if (reader.readyState === 2) {
-				setImg(`url(${reader.result})`)
-			}
-		}
-		reader.readAsDataURL(e.target.files[0])
-	}
+	const changeImg = e => setImg(URL.createObjectURL(e.target.files[0]))
 
 	return (
 		<div className='borders btn-specific'>

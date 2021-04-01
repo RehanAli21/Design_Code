@@ -109,16 +109,7 @@ const BGImage = ({ width, activeElement }) => {
 	}, [bgImg])
 
 	//For setting img
-	const changeImg = e => {
-		const reader = new FileReader()
-
-		reader.onload = () => {
-			if (reader.readyState === 2) {
-				setImg(`url(${reader.result})`)
-			}
-		}
-		reader.readAsDataURL(e.target.files[0])
-	}
+	const changeImg = e => setImg(`url(${URL.createObjectURL(e.target.files[0])})`)
 
 	const setBackground = (obj, setObj) => {
 		const temp = Object.assign({}, obj)
