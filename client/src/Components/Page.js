@@ -179,7 +179,7 @@ const Page = () => {
 						e[1].text
 					)
 				)
-			} else if (e[0] === 'image') {
+			} else if (e[0] === 'img') {
 				temp.push(
 					React.createElement(
 						e[0],

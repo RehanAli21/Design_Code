@@ -10,11 +10,11 @@ const Image = ({ activeElement, activePage, findAndInsert, uniqueString, setPage
 		const temp = Object.assign({}, pages)
 		//For holding all data of a image element
 		const image = [
-			'image',
+			'img',
 			{
 				id: uniqueString(),
 				alt: '',
-				src: '',
+				src: 'https://i.ytimg.com/vi/bE31y5HbukA/maxresdefault.jpg',
 				styles: {
 					small: imageStyle,
 					medium: imageStyle,
