@@ -4,6 +4,7 @@ import DivProperties from './DivProperties'
 import InputProperties from './InputProperties'
 import ButtonProperties from './ButtonProperties'
 import TextProperties from './TextProperties'
+import ImageProperties from './ImageProperties'
 
 const Specific = () => {
 	const { activeElement, activePage, width } = useContext(PageContext)
@@ -19,6 +20,8 @@ const Specific = () => {
 		<ButtonProperties />
 	) : ele.tagName === 'P' || ele.tagName === 'H1' || ele.tagName === 'H3' || ele.tagName === 'H5' ? (
 		<TextProperties />
+	) : ele.tagName === 'IMG' ? (
+		<ImageProperties />
 	) : (
 		<div></div>
 	)

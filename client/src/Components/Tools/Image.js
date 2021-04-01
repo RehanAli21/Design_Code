@@ -14,7 +14,7 @@ const Image = ({ activeElement, activePage, findAndInsert, uniqueString, setPage
 			{
 				id: uniqueString(),
 				alt: '',
-				src: 'https://i.ytimg.com/vi/bE31y5HbukA/maxresdefault.jpg',
+				src: '',
 				styles: {
 					small: imageStyle,
 					medium: imageStyle,
