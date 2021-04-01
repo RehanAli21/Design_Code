@@ -10,12 +10,16 @@ const ImageProperties = () => {
 	const [alt, setAlt] = useState('')
 	const [separateLine, setSeparateLine] = useState(false)
 
-	//For alt default value
+	//For default values of img's display(separated line) and alt
 	useEffect(() => {
 		const altinput = document.getElementById('img-altinput')
 		const values = findAndReturnAlt(pages[activePage])
+		const sl = document.getElementById('img-sl-checkbox')
 
 		if (values && altinput) altinput.value = values
+
+		sl.checked = large && large.display === 'block'
+		setSeparateLine(large && large.display === 'block')
 	}, [activeElement])
 
 	//for find element and return img's alt
@@ -90,7 +94,7 @@ const ImageProperties = () => {
 					textAlign: 'center',
 				}}>
 				<input
-					id='img-sl'
+					id='img-sl-checkbox'
 					onChange={e => setSeparateLine(e.target.checked)}
 					style={{ marginTop: '5px' }}
 					type='checkbox'
