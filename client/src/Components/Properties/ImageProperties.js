@@ -10,6 +10,25 @@ const ImageProperties = () => {
 	const [alt, setAlt] = useState('')
 	const [separateLine, setSeparateLine] = useState(false)
 
+	//For alt default value
+	useEffect(() => {
+		const altinput = document.getElementById('img-altinput')
+		const values = findAndReturnAlt(pages[activePage])
+
+		if (values && altinput) altinput.value = values
+	}, [activeElement])
+
+	//for find element and return img's alt
+	const findAndReturnAlt = arr => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				return arr[i][1].alt
+			} else if (arr[i][2]) {
+				findAndReturnAlt(arr[i][2])
+			}
+		}
+	}
+
 	//For setting src of img
 	useEffect(() => {
 		if (img !== '') {
@@ -70,16 +89,21 @@ const ImageProperties = () => {
 					marginTop: '20px',
 					textAlign: 'center',
 				}}>
-				<input onChange={e => setSeparateLine(e.target.checked)} style={{ marginTop: '5px' }} type='checkbox' />
+				<input
+					id='img-sl'
+					onChange={e => setSeparateLine(e.target.checked)}
+					style={{ marginTop: '5px' }}
+					type='checkbox'
+				/>
 				<label>On Separate Line</label>
 			</div>
 			<div className='two'>
 				<label>Img: </label>
-				<input type='file' onChange={e => changeImg(e)} />
+				<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />
 			</div>
 			<div className='two'>
 				<label>Alt: </label>
-				<input type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
+				<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 			</div>
 		</div>
 	)
