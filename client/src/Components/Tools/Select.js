@@ -1,0 +1,44 @@
+import React from 'react'
+import { selectStyle } from '../Styles/selectStyle'
+
+//This component is for adding select element
+const Select = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+	//For adding element into pages data
+	const addSelect = () => {
+		//Assigning new variable pages data,
+		//For inserting select element
+		const temp = Object.assign({}, pages)
+		//For holding all data of a select element
+		const select = [
+			'select',
+			{
+				id: uniqueString(),
+				styles: {
+					small: selectStyle,
+					medium: selectStyle,
+					large: selectStyle,
+					xlarge: selectStyle,
+				},
+				styleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+			},
+			[],
+		]
+		//if inserting select into body
+		if (activeElement === activePage) {
+			temp[activePage].push(select)
+		} else {
+			temp[activePage] = findAndInsert(temp[activePage], activeElement, select)
+		}
+		//Assigning new data into pages data
+		setPages(temp)
+	}
+
+	return <p onClick={addSelect}>Drop Menu</p>
+}
+
+export default Select
