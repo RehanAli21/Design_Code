@@ -3,7 +3,7 @@ import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
-const Font = ({ type }) => {
+const Font = () => {
 	const {
 		small,
 		setSmall,

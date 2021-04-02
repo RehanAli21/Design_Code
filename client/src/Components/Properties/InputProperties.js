@@ -33,6 +33,7 @@ const InputProperties = () => {
 	const [max, setMax] = useState('')
 	const [showMinMax, setShowMinMax] = useState(false)
 	const [textColor, setTextColor] = useState('')
+	const [separateLine, setSeparateLine] = useState(false)
 
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 
@@ -65,11 +66,15 @@ const InputProperties = () => {
 		}
 	}
 
-	//For textcolor default value
+	//For textcolor and separate line(display) default value
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const textColorInput = document.getElementById('input-textcolor')
 			const textColorSelect = document.getElementById('input-colorselect')
+			const sl = document.getElementById('input-sl-checkbox')
+
+			sl.checked = large && large.display === 'block'
+			setSeparateLine(large && large.display === 'block')
 
 			if (width < 540) {
 				textColorInput.value = small.color ? small.color : '#000000'
@@ -86,6 +91,14 @@ const InputProperties = () => {
 			}
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
+
+	//For changing display for separate line
+	useEffect(() => {
+		setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
+		setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
+		setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
+		setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
+	}, [separateLine])
 
 	//For type change of input
 	useEffect(() => {
@@ -216,6 +229,22 @@ const InputProperties = () => {
 		<React.Fragment>
 			<div className='borders btn-specific'>
 				<p className='second-heading'>INPUT PROPERTIES</p>
+				<div
+					style={{
+						display: 'grid',
+						gridTemplateColumns: '20px 130px auto',
+						marginLeft: '25px',
+						marginTop: '20px',
+						textAlign: 'center',
+					}}>
+					<input
+						id='input-sl-checkbox'
+						onChange={e => setSeparateLine(e.target.checked)}
+						style={{ marginTop: '5px' }}
+						type='checkbox'
+					/>
+					<label>On Separate Line</label>
+				</div>
 				<div className='two'>
 					<label>Type: </label>
 					<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>
