@@ -34,7 +34,7 @@ const TextProperties = () => {
 	return (
 		<React.Fragment>
 			<div className='borders btn-specific'>
-				<p className='second-heading'>PROPERTIES</p>
+				<p className='second-heading'>TEXT PROPERTIES</p>
 				<div className='two'>
 					<label>Type: </label>
 					<select onChange={e => setTextType(e.target.value)}>

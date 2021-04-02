@@ -84,7 +84,7 @@ const ImageProperties = () => {
 
 	return (
 		<div className='borders btn-specific'>
-			<p className='second-heading'>PROPERTIES</p>
+			<p className='second-heading'>IMAGE PROPERTIES</p>
 			<div
 				style={{
 					display: 'grid',

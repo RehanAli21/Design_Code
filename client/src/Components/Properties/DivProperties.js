@@ -534,7 +534,7 @@ const DivProperties = ({ width, activeElement }) => {
 
 	return (
 		<div className='borders r-c'>
-			<p className='second-heading'>Div Properties</p>
+			<p className='second-heading'>DIV PROPERTIES</p>
 			<BGImage width={width} activeElement={activeElement} />
 			<div className='grid'>
 				<input onChange={e => setGrid(e.target.checked)} id='r-c-grid' type='checkbox' />

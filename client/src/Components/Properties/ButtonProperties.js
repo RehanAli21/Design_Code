@@ -7,7 +7,7 @@ const ButtonProperties = () => {
 	return (
 		<React.Fragment>
 			<div className='borders btn-specific'>
-				<p className='second-heading'>PROPERTIES</p>
+				<p className='second-heading'>BUTTON PROPERTIES</p>
 				<TextChange type='button' />
 			</div>
 			<Text />
