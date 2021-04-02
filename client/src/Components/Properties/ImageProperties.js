@@ -3,7 +3,7 @@ import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 
 const ImageProperties = () => {
-	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 
 	const [img, setImg] = useState('')
@@ -20,7 +20,7 @@ const ImageProperties = () => {
 
 		sl.checked = large && large.display === 'block'
 		setSeparateLine(large && large.display === 'block')
-	}, [activeElement])
+	}, [width, activeElement, small, large, medium, xlarge])
 
 	//for find element and return img's alt
 	const findAndReturnAlt = arr => {
