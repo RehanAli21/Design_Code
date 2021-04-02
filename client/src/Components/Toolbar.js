@@ -5,6 +5,7 @@ import Input from './Tools/Input'
 import Button from './Tools/Button'
 import Text from './Tools/Text'
 import Image from './Tools/Image'
+import Select from './Tools/Select'
 
 //This component is for showing list of elemenets,
 //which can be added.
@@ -20,7 +21,7 @@ const Toolbar = () => {
 		//Iterating each child in children array
 		children.forEach(child => {
 			//if parent found by id, then insert element into children
-			if (child[2] && child[1].id === id) {
+			if (child[2] && child[0] !== 'select' && child[1].id === id) {
 				child[2].push(element)
 				return children
 			}
@@ -69,6 +70,14 @@ const Toolbar = () => {
 					uniqueString={uniqueString}
 				/>
 				<Image
+					findAndInsert={findAndInsert}
+					activeElement={activeElement}
+					activePage={activePage}
+					pages={pages}
+					setPages={setPages}
+					uniqueString={uniqueString}
+				/>
+				<Select
 					findAndInsert={findAndInsert}
 					activeElement={activeElement}
 					activePage={activePage}
