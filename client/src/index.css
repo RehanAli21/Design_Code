@@ -665,35 +665,6 @@ nav .TemplateButton:active {
 	width: 85px;
 	margin-left: 35px;
 }
-.propertybar .input-specific > div {
-	text-align: left;
-	display: grid;
-	grid-template-columns: auto 125px 5%;
-	margin-left: 26px;
-	margin-top: 10px;
-}
-.propertybar .input-specific select {
-	background-color: var(--second-white);
-	border: none;
-	border-bottom: 1px solid var(--text-color);
-	padding: 3px;
-}
-.propertybar .input-specific input[type='number'],
-.propertybar .input-specific input[type='text'] {
-	border: none;
-	border-bottom: 1px solid var(--text-color);
-	padding: 3px;
-	outline: none;
-	background-color: var(--second-white);
-}
-.propertybar .input-specific > .three {
-	text-align: left;
-	display: grid;
-	grid-template-columns: auto 80px 40px 5px;
-	column-gap: 5px;
-	margin-left: 26px;
-	margin-top: 10px;
-}
 .propertybar .btn-specific > .two {
 	text-align: left;
 	display: grid;
@@ -710,6 +681,13 @@ nav .TemplateButton:active {
 	margin-top: 15px;
 }
 .propertybar .btn-specific input[type='text'] {
+	border: none;
+	border-bottom: 1px solid var(--text-color);
+	padding: 3px;
+	outline: none;
+	background-color: var(--second-white);
+}
+.propertybar .btn-specific .numberinput {
 	border: none;
 	border-bottom: 1px solid var(--text-color);
 	padding: 3px;

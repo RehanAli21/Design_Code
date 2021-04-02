@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
+import Font from './PropertiesComponenets/Font'
 
 const InputProperties = () => {
 	const {
@@ -23,7 +24,7 @@ const InputProperties = () => {
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
 	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
-	const { colors, fontSizes, fonts } = useContext(TemplateContext)
+	const { colors } = useContext(TemplateContext)
 
 	const [type, setType] = useState('')
 	const [placeholder, setPlaceholder] = useState('')
@@ -32,12 +33,8 @@ const InputProperties = () => {
 	const [max, setMax] = useState('')
 	const [showMinMax, setShowMinMax] = useState(false)
 	const [textColor, setTextColor] = useState('')
-	const [font, setFont] = useState('')
-	const [fontSize, setFontSize] = useState('')
-	const [fontWeight, setFontWeight] = useState('')
 
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
-	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
 	//For setting default values of type select and placeholder
 	useEffect(() => {
@@ -68,44 +65,24 @@ const InputProperties = () => {
 		}
 	}
 
-	//For textcolor, font, fontSize default value of input
+	//For textcolor default value
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			const fontSelect = document.getElementById('input-fontselect')
-			const fontSizeInput = document.getElementById('input-fontsize')
-			const fontSizeSelect = document.getElementById('input-fontsizeselect')
 			const textColorInput = document.getElementById('input-textcolor')
 			const textColorSelect = document.getElementById('input-colorselect')
-			const fontWeightSelect = document.getElementById('input-fontWeight')
 
 			if (width < 540) {
-				fontSelect.value = small.fontFamily ? small.fontFamily : 'default'
-				fontSizeInput.value = small.fontSize ? small.fontSize.split('p')[0] : 0
-				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
 				textColorInput.value = small.color ? small.color : '#000000'
 				textColorSelect.value = small.color ? small.color : 'custom'
-				fontWeightSelect.value = small.fontWeight ? small.fontWeight : 'normal'
 			} else if (width < 720) {
-				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
-				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 0
-				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
 				textColorInput.value = medium.color ? medium.color : '#000000'
 				textColorSelect.value = medium.color ? medium.color : 'custom'
-				fontWeightSelect.value = medium.fontWeight ? medium.fontWeight : 'normal'
 			} else if (width < 970) {
-				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
-				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 0
-				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
 				textColorInput.value = large.color ? large.color : '#000000'
 				textColorSelect.value = large.color ? large.color : 'custom'
-				fontWeightSelect.value = large.fontWeight ? large.fontWeight : 'normal'
 			} else {
-				fontSelect.value = xlarge.fontFamily ? xlarge.fontFamily : 'default'
-				fontSizeInput.value = xlarge.fontSize ? xlarge.fontSize.split('p')[0] : 0
-				fontSizeSelect.value = xlarge.fontSize ? xlarge.fontSize : 'custom'
 				textColorInput.value = xlarge.color ? xlarge.color : '#000000'
 				textColorSelect.value = xlarge.color ? xlarge.color : 'custom'
-				fontWeightSelect.value = xlarge.fontWeight ? xlarge.fontWeight : 'normal'
 			}
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
@@ -201,131 +178,10 @@ const InputProperties = () => {
 		}
 	}, [textColor])
 
-	//For changing font of input
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			if (width < 540) {
-				setProperties(small, setSmall, 'fontFamily', font)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
-				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'fontFamily', font)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
-				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'fontFamily', font)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
-			} else {
-				setProperties(xlarge, setXlarge, 'fontFamily', font)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
-				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
-			}
-		}
-	}, [font])
-
-	//For changing fontSize of input
-	useEffect(() => {
-		if (small && medium && large && xlarge && fontSize !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'fontSize', fontSize)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
-				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'fontSize', fontSize)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
-				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'fontSize', fontSize)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
-			} else {
-				setProperties(xlarge, setXlarge, 'fontSize', fontSize)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
-				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
-			}
-		}
-	}, [fontSize])
-
-	//For changing fontWeight of input
-	useEffect(() => {
-		if (small && medium && large && xlarge && fontWeight !== '') {
-			if (width < 540) {
-				setProperties(small, setSmall, 'fontWeight', fontWeight)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontWeight', fontWeight)
-				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
-			} else if (width < 720) {
-				setProperties(medium, setMedium, 'fontWeight', fontWeight)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
-				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
-			} else if (width < 970) {
-				setProperties(large, setLarge, 'fontWeight', fontWeight)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontWeight', fontWeight)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
-			} else {
-				setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
-				if (!changedMedium) setProperties(medium, setMedium, 'fontWeight', fontWeight)
-				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
-			}
-		}
-	}, [fontWeight])
-
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
 		setObj(temp)
-	}
-
-	const showTemplateFontSizes = () => {
-		const temp = []
-		temp.push(
-			<option key='custom' value='custom'>
-				Custom
-			</option>
-		)
-		for (const key in fontSizes) {
-			temp.push(
-				<option key={key} value={fontSizes[key]}>
-					{key}
-				</option>
-			)
-		}
-
-		return (
-			<select
-				defaultValue='custom'
-				id='input-fontsizeselect'
-				onChange={e => {
-					setFontSize(e.target.value)
-					setShowCustomFontSize(e.target.value === 'custom')
-				}}>
-				{temp}
-			</select>
-		)
 	}
 
 	const showTemplateColors = () => {
@@ -356,104 +212,64 @@ const InputProperties = () => {
 		)
 	}
 
-	const showTemplateFonts = () => {
-		const temp = []
-		temp.push(
-			<option key='default' value='default'>
-				Default
-			</option>
-		)
-		for (const key in fonts) {
-			temp.push(
-				<option key={key} value={fonts[key]}>
-					{key}
-				</option>
-			)
-		}
-
-		return (
-			<select
-				id='input-fontselect'
-				defaultValue='default'
-				onChange={e => setFont(e.target.value === 'default' ? '' : e.target.value)}>
-				{temp}
-			</select>
-		)
-	}
-
 	return (
-		<div className='borders input-specific'>
-			<p className='second-heading'>Input Properties</p>
-			<div>
-				<label>Type: </label>
-				<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>
-					<option value='text'>Text</option>
-					<option value='number'>Number</option>
-					<option value='email'>Email</option>
-					<option value='password'>Password</option>
-					<option value='button'>Button</option>
-					<option value='checkbox'>Checkbox</option>
-					<option value='radio'>Radio</option>
-					<option value='date'>Date</option>
-					<option value='datetime-local'>Date Time local</option>
-					<option value='time'>Time</option>
-					<option value='week'>Week</option>
-					<option value='month'>Month</option>
-					<option value='color'>Color</option>
-					<option value='range'>Range</option>
-					<option value='file'>File</option>
-				</select>
+		<React.Fragment>
+			<div className='borders btn-specific'>
+				<p className='second-heading'>INPUT PROPERTIES</p>
+				<div className='two'>
+					<label>Type: </label>
+					<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>
+						<option value='text'>Text</option>
+						<option value='number'>Number</option>
+						<option value='email'>Email</option>
+						<option value='password'>Password</option>
+						<option value='button'>Button</option>
+						<option value='checkbox'>Checkbox</option>
+						<option value='radio'>Radio</option>
+						<option value='date'>Date</option>
+						<option value='datetime-local'>Date Time local</option>
+						<option value='time'>Time</option>
+						<option value='week'>Week</option>
+						<option value='month'>Month</option>
+						<option value='color'>Color</option>
+						<option value='range'>Range</option>
+						<option value='file'>File</option>
+					</select>
+				</div>
+				<div className='two' onChange={e => setMin(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
+					<label>Min Value: </label>
+					<input className='numberinput' id='i-s-minValueInput' type='number' />
+				</div>
+				<div className='two' onChange={e => setMax(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
+					<label>Max Value: </label>
+					<input className='numberinput' id='i-s-maxValueInput' type='number' />
+				</div>
+				<div className='two'>
+					<label>Placeholder: </label>
+					<input
+						id='i-s-placeholderinput'
+						onChange={e => setPlaceholder(e.target.value)}
+						type='text'
+						placeholder='Text'
+					/>
+				</div>
+				<div className='two'>
+					<label>Max chars: </label>
+					<input id='i-s-maxLengthInput' onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
+				</div>
+				<div className='three'>
+					<label style={{ marginTop: '5px' }}>Text color: </label>
+					{showTemplateColors()}
+					<input
+						disabled={!showCustomTextColor}
+						onChange={e => setTextColor(e.target.value)}
+						type='color'
+						id='input-textcolor'
+					/>
+				</div>
 			</div>
-			<div onChange={e => setMin(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
-				<label>Min Value: </label>
-				<input id='i-s-minValueInput' type='number' />
-			</div>
-			<div onChange={e => setMax(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
-				<label>Max Value: </label>
-				<input id='i-s-maxValueInput' type='number' />
-			</div>
-			<div>
-				<label>Placeholder: </label>
-				<input id='i-s-placeholderinput' onChange={e => setPlaceholder(e.target.value)} type='text' placeholder='Text' />
-			</div>
-			<div>
-				<label>Max chars: </label>
-				<input id='i-s-maxLengthInput' onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
-			</div>
-			<div className='three'>
-				<label>Text color: </label>
-				{showTemplateColors()}
-				<input
-					disabled={!showCustomTextColor}
-					onChange={e => setTextColor(e.target.value)}
-					type='color'
-					id='input-textcolor'
-				/>
-			</div>
-			<div className='two'>
-				<label>Fonts: </label>
-				{showTemplateFonts()}
-			</div>
-			<div className='three'>
-				<label>Font size: </label>
-				{showTemplateFontSizes()}
-				<input
-					disabled={!showCustomFontSize}
-					onChange={e => setFontSize(`${e.target.value}px`)}
-					type='number'
-					min='0'
-					id='input-fontsize'
-				/>
-			</div>
-			<div>
-				<label>Font Weight: </label>
-				<select onChange={e => setFontWeight(e.target.value)} id='input-fontWeight'>
-					<option value='normal'>Regular</option>
-					<option value='lighter'>Light</option>
-					<option value='bold'>Bold</option>
-				</select>
-			</div>
-		</div>
+			<Font />
+		</React.Fragment>
 	)
 }
 
