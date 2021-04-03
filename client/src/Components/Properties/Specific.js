@@ -6,6 +6,7 @@ import ButtonProperties from './ButtonProperties'
 import TextProperties from './TextProperties'
 import ImageProperties from './ImageProperties'
 import SelectProperties from './SelectProperties'
+import OptionProperties from './OptionProperties'
 
 const Specific = () => {
 	const { activeElement, activePage, width } = useContext(PageContext)
@@ -25,6 +26,8 @@ const Specific = () => {
 		<ImageProperties />
 	) : ele.tagName === 'SELECT' ? (
 		<SelectProperties />
+	) : ele.tagName === 'OPTION' ? (
+		<OptionProperties />
 	) : (
 		<div></div>
 	)
