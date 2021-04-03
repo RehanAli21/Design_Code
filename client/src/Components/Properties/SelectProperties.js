@@ -40,20 +40,7 @@ const SelectProperties = () => {
 			{
 				id: uniqueString(),
 				text: '',
-				styles: {
-					small: optionStyle,
-					medium: optionStyle,
-					large: optionStyle,
-					xlarge: optionStyle,
-				},
-				styleWidth: {
-					changedSmall: false,
-					changedMedium: false,
-					changedLarge: false,
-					changeXlarge: false,
-				},
 			},
-			[],
 		]
 
 		//inserting option into body
