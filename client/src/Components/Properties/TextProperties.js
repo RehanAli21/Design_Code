@@ -29,6 +29,20 @@ const TextProperties = () => {
 	const [textType, setTextType] = useState('')
 	const [sameLine, setSameLine] = useState(false)
 
+	//For default value of text type
+	useEffect(() => {
+		const typeSelect = document.getElementById('text-type-select')
+
+		const ele = document.getElementById(activeElement)
+
+		if (ele) {
+			if (ele.tagName === 'P') typeSelect.value = 'p'
+			else if (ele.tagName === 'H1') typeSelect.value = 'h1'
+			else if (ele.tagName === 'H3') typeSelect.value = 'h3'
+			else if (ele.tagName === 'H5') typeSelect.value = 'h5'
+		}
+	})
+
 	//For Same line(display) default value
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -131,7 +145,7 @@ const TextProperties = () => {
 				</div>
 				<div className='two'>
 					<label>Type: </label>
-					<select onChange={e => setTextType(e.target.value)}>
+					<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
 						<option value='p'>Paragraph</option>
 						<option value='h1'>Heading 1</option>
 						<option value='h3'>Heading 2</option>
