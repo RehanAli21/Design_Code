@@ -6,24 +6,77 @@ import TextChange from './PropertiesComponenets/TextChange'
 import Text from './PropertiesComponenets/Text'
 
 const ButtonProperties = () => {
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
-	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 	const [separateLine, setSeparateLine] = useState(false)
 
 	//For default values of display(separated line)
 	useEffect(() => {
-		const sl = document.getElementById('button-sl-checkbox')
+		if (small && medium && large && xlarge) {
+			const sl = document.getElementById('button-sl-checkbox')
 
-		sl.checked = large && large.display === 'block'
-		setSeparateLine(large && large.display === 'block')
+			if (width < 540) {
+				sl.checked = small && small.display === 'block'
+				setSeparateLine(small && small.display === 'block')
+			} else if (width < 720) {
+				sl.checked = medium && medium.display === 'block'
+				setSeparateLine(medium && medium.display === 'block')
+			} else if (width < 970) {
+				sl.checked = large && large.display === 'block'
+				setSeparateLine(large && large.display === 'block')
+			} else {
+				sl.checked = xlarge && xlarge.display === 'block'
+				setSeparateLine(xlarge && xlarge.display === 'block')
+			}
+		}
 	}, [width, activeElement, small, large, medium, xlarge])
 
 	//For changing display for separate line
 	useEffect(() => {
-		setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-		setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-		setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-		setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
+			} else {
+				setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
+			}
+		}
 	}, [separateLine])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
