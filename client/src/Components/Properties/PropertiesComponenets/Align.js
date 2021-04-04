@@ -19,6 +19,8 @@ const Align = ({ width, activeElement }) => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showAlignProperties,
+		setShowAlignProperties,
 	} = useContext(PropertiesContext)
 
 	const [selfAlign, setSelfAlign] = useState('left')
@@ -155,8 +157,11 @@ const Align = ({ width, activeElement }) => {
 
 	return (
 		<div className='align borders' style={{ display: ele && ele.tagName === 'IMG' ? 'none' : 'grid' }}>
-			<p className='second-heading'>ALIGNMENT</p>
-			<div>
+			<p className='second-heading' onClick={() => setShowAlignProperties(!showAlignProperties)}>
+				ALIGNMENT <span style={{ display: showAlignProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showAlignProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div style={{ display: showAlignProperties ? 'grid' : 'none' }}>
 				<ul className='align-ul'>
 					<li style={{ display: ele && ele.tagName === 'DIV' ? 'grid' : 'none' }} className='one'>
 						<label>Self Align: </label>

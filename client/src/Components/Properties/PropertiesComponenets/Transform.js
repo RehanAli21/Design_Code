@@ -19,6 +19,8 @@ const Transform = ({ width, activeElement }) => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showTransformProperties,
+		setShowTransformProperties,
 	} = useContext(PropertiesContext)
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
@@ -241,8 +243,11 @@ const Transform = ({ width, activeElement }) => {
 
 	return (
 		<div className='w-h borders'>
-			<p className='second-heading'>TRANSFORM</p>
-			<div className='one'>
+			<p className='second-heading' onClick={() => setShowTransformProperties(!showTransformProperties)}>
+				TRANSFORM <span style={{ display: showTransformProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showTransformProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div style={{ display: showTransformProperties ? 'grid' : 'none' }} className='one'>
 				<div className='w'>
 					<label>W : </label>
 					<input

@@ -49,17 +49,17 @@ const TextProperties = () => {
 			const sl = document.getElementById('text-sameline-checkbox')
 
 			if (width < 540) {
-				sl.checked = small && small.display === 'inline'
-				setSameLine(small && small.display === 'inline')
+				sl.checked = small && small.display === 'inline-block'
+				setSameLine(small && small.display === 'inline-block')
 			} else if (width < 720) {
-				sl.checked = medium && medium.display === 'inline'
-				setSameLine(medium && medium.display === 'inline')
+				sl.checked = medium && medium.display === 'inline-block'
+				setSameLine(medium && medium.display === 'inline-block')
 			} else if (width < 970) {
-				sl.checked = large && large.display === 'inline'
-				setSameLine(large && large.display === 'inline')
+				sl.checked = large && large.display === 'inline-block'
+				setSameLine(large && large.display === 'inline-block')
 			} else {
-				sl.checked = xlarge && xlarge.display === 'inline'
-				setSameLine(xlarge && xlarge.display === 'inline')
+				sl.checked = xlarge && xlarge.display === 'inline-block'
+				setSameLine(xlarge && xlarge.display === 'inline-block')
 			}
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
@@ -90,29 +90,29 @@ const TextProperties = () => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			if (width < 540) {
-				setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
+				setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
 				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
 			} else if (width < 720) {
-				setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
+				setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
 				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
 			} else if (width < 970) {
-				setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
+				setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
 				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
 			} else {
-				setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+				setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
 				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
 			}
 		}
 	}, [sameLine])
@@ -154,8 +154,8 @@ const TextProperties = () => {
 				</div>
 				<TextChange type='text' />
 			</div>
-			<Text />
 			<Font type='text' />
+			<Text />
 		</React.Fragment>
 	)
 }

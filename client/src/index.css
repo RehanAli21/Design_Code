@@ -403,6 +403,7 @@ nav .TemplateButton:active {
 	color: var(--text-color);
 	margin-top: 20px;
 	margin-bottom: 15px;
+	cursor: pointer;
 }
 .propertybar .borders {
 	border: none;

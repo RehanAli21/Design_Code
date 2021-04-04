@@ -14,6 +14,9 @@ export const PropertiesProvider = props => {
 	const [changedMedium, setChangedMedium] = useState(false)
 	const [changedLarge, setChangedLarge] = useState(false)
 	const [changedXlarge, setChangedXlarge] = useState(false)
+	const [showAlignProperties, setShowAlignProperties] = useState(true)
+	const [showAppearanceProperties, setShowAppearanceProperties] = useState(true)
+	const [showTransformProperties, setShowTransformProperties] = useState(true)
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -96,6 +99,12 @@ export const PropertiesProvider = props => {
 				setChangedLarge,
 				changedXlarge,
 				setChangedXlarge,
+				showAlignProperties,
+				setShowAlignProperties,
+				showAppearanceProperties,
+				setShowAppearanceProperties,
+				showTransformProperties,
+				setShowTransformProperties,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>

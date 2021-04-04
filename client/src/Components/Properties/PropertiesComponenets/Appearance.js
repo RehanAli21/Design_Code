@@ -20,6 +20,8 @@ const Appearance = ({ display, width, activeElement }) => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showAppearanceProperties,
+		setShowAppearanceProperties,
 	} = useContext(PropertiesContext)
 	const { colors } = useContext(TemplateContext)
 
@@ -535,8 +537,11 @@ const Appearance = ({ display, width, activeElement }) => {
 
 	return (
 		<div style={{ display: display }} className='ap borders'>
-			<p className='second-heading'>APPEARANCE</p>
-			<div>
+			<p className='second-heading' onClick={() => setShowAppearanceProperties(!showAppearanceProperties)}>
+				APPEARANCE <span style={{ display: showAppearanceProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showAppearanceProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div style={{ display: showAppearanceProperties ? 'grid' : 'none' }}>
 				<div className='two md'>
 					<label>Color: </label>
 					{showCustomBgColorOptions()}
