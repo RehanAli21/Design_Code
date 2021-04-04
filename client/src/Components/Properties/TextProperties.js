@@ -3,11 +3,52 @@ import TextChange from './PropertiesComponenets/TextChange'
 import Font from './PropertiesComponenets/Font'
 import Text from './PropertiesComponenets/Text'
 import { PageContext } from '../Contexts/PageContext'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 
 const TextProperties = () => {
-	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
+	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [textType, setTextType] = useState('')
+	const [sameLine, setSameLine] = useState(false)
+
+	//For Same line(display) default value
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const sl = document.getElementById('text-sameline-checkbox')
+
+			if (width < 540) {
+				sl.checked = small && small.display === 'inline'
+				setSameLine(small && small.display === 'inline')
+			} else if (width < 720) {
+				sl.checked = medium && medium.display === 'inline'
+				setSameLine(medium && medium.display === 'inline')
+			} else if (width < 970) {
+				sl.checked = large && large.display === 'inline'
+				setSameLine(large && large.display === 'inline')
+			} else {
+				sl.checked = xlarge && xlarge.display === 'inline'
+				setSameLine(xlarge && xlarge.display === 'inline')
+			}
+		}
+	}, [width, activeElement, small, large, medium, xlarge])
 
 	useEffect(() => {
 		if (textType !== '') {
@@ -31,10 +72,63 @@ const TextProperties = () => {
 		}
 	}
 
+	//For changing display for same line
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < 540) {
+				setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+			} else {
+				setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline' : '')
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline' : '')
+			}
+		}
+	}, [sameLine])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
+
 	return (
 		<React.Fragment>
 			<div className='borders btn-specific'>
 				<p className='second-heading'>TEXT PROPERTIES</p>
+				<div
+					style={{
+						display: 'grid',
+						gridTemplateColumns: '20px 130px auto',
+						marginLeft: '25px',
+						marginTop: '20px',
+						textAlign: 'center',
+					}}>
+					<input
+						id='text-sameline-checkbox'
+						style={{ marginTop: '5px', marginLeft: '5px' }}
+						type='checkbox'
+						onChange={e => setSameLine(e.target.checked)}
+					/>
+					<label>On Same Line</label>
+				</div>
 				<div className='two'>
 					<label>Type: </label>
 					<select onChange={e => setTextType(e.target.value)}>
