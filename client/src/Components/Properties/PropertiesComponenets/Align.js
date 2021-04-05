@@ -26,6 +26,10 @@ const Align = ({ width, activeElement }) => {
 	const [selfAlign, setSelfAlign] = useState('left')
 	const [textAlign, setTextAlign] = useState('left')
 
+	const [isDiv, setIsDiv] = useState(false)
+	const [isImg, setIsImg] = useState(false)
+	const [isDivGrid, setIsDivGrid] = useState(false)
+
 	//For setting default values
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -152,18 +156,43 @@ const Align = ({ width, activeElement }) => {
 		}
 	}
 
-	//For getting tagName because selfalign only works for DIV
-	const ele = document.getElementById(activeElement)
+	//For setting align properties for different components
+	useEffect(() => {
+		const ele = document.getElementById(activeElement)
+		if (ele) {
+			if (ele.tagName === 'DIV') {
+				setIsDiv(true)
+				if (width < 540) {
+					setIsDivGrid(small.display === 'grid')
+				} else if (width < 720) {
+					setIsDivGrid(medium.display === 'grid')
+				} else if (width < 970) {
+					setIsDivGrid(large.display === 'grid')
+				} else {
+					setIsDivGrid(xlarge.display === 'grid')
+				}
+				setIsImg(false)
+			} else if (ele.tagName === 'IMG') {
+				setIsImg(true)
+				setIsDiv(false)
+				setIsDivGrid(false)
+			} else {
+				setIsImg(false)
+				setIsDiv(false)
+				setIsDivGrid(false)
+			}
+		}
+	}, [activeElement, small, medium, large, xlarge])
 
 	return (
-		<div className='align borders' style={{ display: ele && ele.tagName === 'IMG' ? 'none' : 'grid' }}>
+		<div className='align borders' style={{ display: isImg ? 'none' : 'block' }}>
 			<p className='second-heading' onClick={() => setShowAlignProperties(!showAlignProperties)}>
 				ALIGNMENT <span style={{ display: showAlignProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAlignProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div style={{ display: showAlignProperties ? 'grid' : 'none' }}>
+			<div style={{ display: showAlignProperties ? 'block' : 'none' }}>
 				<ul className='align-ul'>
-					<li style={{ display: ele && ele.tagName === 'DIV' ? 'grid' : 'none' }} className='one'>
+					<li style={{ display: isDiv ? 'grid' : 'none' }} className='one'>
 						<label>Self Align: </label>
 						<button className={selfAlign === 'left' ? 'bb' : 'none'} onClick={() => setSelfAlign('left')}>
 							L
@@ -175,8 +204,8 @@ const Align = ({ width, activeElement }) => {
 							R
 						</button>
 					</li>
-					<li className='two'>
-						<label>{ele && ele.tagName === 'DIV' ? 'Object Align: ' : 'Text Align: '}</label>
+					<li className='two' style={{ display: isDivGrid ? 'none' : 'grid' }}>
+						<label>{isDiv ? 'ObjectAlign: ' : 'Text Align: '}</label>
 						<button className={textAlign === 'left' ? 'bb' : 'none'} onClick={() => setTextAlign('left')}>
 							L
 						</button>
@@ -187,7 +216,7 @@ const Align = ({ width, activeElement }) => {
 							R
 						</button>
 						<button
-							style={{ display: ele && ele.tagName !== 'DIV' ? 'block' : 'none' }}
+							style={{ display: isDiv ? 'none' : 'block' }}
 							className={textAlign === 'justify' ? 'bb' : 'none'}
 							onClick={() => setTextAlign('justify')}>
 							J
