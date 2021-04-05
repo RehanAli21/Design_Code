@@ -21,6 +21,8 @@ const Font = () => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showFontProperties,
+		setShowFontProperties,
 	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const { fontSizes, fonts } = useContext(TemplateContext)
@@ -281,8 +283,11 @@ const Font = () => {
 
 	return (
 		<div className='btn-specific font-specific borders'>
-			<p className='second-heading'>FONT</p>
-			<div className='font'>
+			<p className='second-heading' onClick={() => setShowFontProperties(!showFontProperties)}>
+				FONT <span style={{ display: showFontProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showFontProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div style={{ display: showFontProperties ? 'grid' : 'none' }} className='font'>
 				{showTemplateFonts()}
 				<button
 					onClick={() => setFontStyle(!fontStyle)}
@@ -297,7 +302,7 @@ const Font = () => {
 					U
 				</button>
 			</div>
-			<div className='three'>
+			<div style={{ display: showFontProperties ? 'grid' : 'none' }} className='three'>
 				<label>Size: </label>
 				{showTemplateFontSizes()}
 				<input
@@ -308,7 +313,7 @@ const Font = () => {
 					id='btn-fontsize'
 				/>
 			</div>
-			<div className='two'>
+			<div style={{ display: showFontProperties ? 'grid' : 'none' }} className='two'>
 				<label>Weight: </label>
 				<select onChange={e => setFontWeight(e.target.value)} id='btn-fontWeight'>
 					<option value='normal'>Regular</option>

@@ -4,7 +4,18 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const Text = () => {
-	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		showTextProperties,
+		setShowTextProperties,
+	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
@@ -135,8 +146,11 @@ const Text = () => {
 
 	return (
 		<div className='borders btn-specific font-specific'>
-			<p className='second-heading'>TEXT</p>
-			<div className='three'>
+			<p className='second-heading' onClick={() => setShowTextProperties(!showTextProperties)}>
+				TEXT <span style={{ display: showTextProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showTextProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div style={{ display: showTextProperties ? 'grid' : 'none' }} className='three'>
 				<label style={{ marginTop: '5px' }}>Text color: </label>
 				{showTemplateColors()}
 				<input
@@ -146,7 +160,7 @@ const Text = () => {
 					id='btn-textcolor'
 				/>
 			</div>
-			<div className='t-three'>
+			<div style={{ display: showTextProperties ? 'grid' : 'none' }} className='t-three'>
 				<div className='t-two'>
 					<label>L</label>
 					<input
@@ -172,7 +186,7 @@ const Text = () => {
 					<input id='text-lineheightinput' onChange={e => setLineHeight(`${e.target.value}px`)} type='number' min='0' />
 				</div>
 			</div>
-			<div style={{ width: '80%', marginLeft: '34px' }} className='t-three'>
+			<div style={{ width: '80%', marginLeft: '34px', display: showTextProperties ? 'grid' : 'none' }} className='t-three'>
 				<button
 					onClick={() => setTextTransform('lowercase')}
 					className={textTransform === 'lowercase' ? 'btn-active' : ''}>
@@ -189,7 +203,9 @@ const Text = () => {
 					TT
 				</button>
 			</div>
-			<div style={{ marginTop: '20px', marginBottom: '20px' }} className='shadow'>
+			<div
+				style={{ marginTop: '20px', marginBottom: '20px', display: showTextProperties ? 'grid' : 'none' }}
+				className='shadow'>
 				<input id='t-ts-active' type='checkbox' onChange={e => setTextShadow(e.target.checked)} />
 				<span>Text Shadow</span>
 				<div style={{ display: textShadow ? 'grid' : 'none' }} className='four'>

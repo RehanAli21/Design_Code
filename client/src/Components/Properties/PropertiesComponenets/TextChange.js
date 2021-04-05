@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 
-const TextChange = ({ type }) => {
+const TextChange = ({ type, display }) => {
 	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [text, setText] = useState('')
@@ -53,7 +53,7 @@ const TextChange = ({ type }) => {
 	}
 
 	return (
-		<div className='two'>
+		<div className='two' style={{ display: display }}>
 			<label>Text: </label>
 			{type === 'button' ? (
 				<input id='btn-textInput' onChange={e => setText(e.target.value)} type='text' placeholder='Text' />

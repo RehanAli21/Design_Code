@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
-const BGImage = ({ width, activeElement }) => {
+const BGImage = ({ width, activeElement, display }) => {
 	const {
 		small,
 		setSmall,
@@ -121,7 +121,7 @@ const BGImage = ({ width, activeElement }) => {
 	}
 
 	return (
-		<React.Fragment>
+		<div style={{ display: display }}>
 			<div className='grid'>
 				<input id='div-bg-checkbox' onChange={e => setbgImg(e.target.checked)} type='checkbox' />
 				<label>Background Image: </label>
@@ -156,7 +156,7 @@ const BGImage = ({ width, activeElement }) => {
 					</select>
 				</div>
 			</div>
-		</React.Fragment>
+		</div>
 	)
 }
 

@@ -20,6 +20,8 @@ const DivProperties = ({ width, activeElement }) => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showDivProperties,
+		setShowDivProperties,
 	} = useContext(PropertiesContext)
 
 	const [grid, setGrid] = useState(false)
@@ -534,9 +536,12 @@ const DivProperties = ({ width, activeElement }) => {
 
 	return (
 		<div className='borders r-c'>
-			<p className='second-heading'>DIV PROPERTIES</p>
-			<BGImage width={width} activeElement={activeElement} />
-			<div className='grid'>
+			<p className='second-heading' onClick={() => setShowDivProperties(!showDivProperties)}>
+				DIV PROPERTIES <span style={{ display: showDivProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showDivProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
+			<div style={{ display: showDivProperties ? 'grid' : 'none' }} className='grid'>
 				<input onChange={e => setGrid(e.target.checked)} id='r-c-grid' type='checkbox' />
 				<label>Rows / Columns</label>
 			</div>

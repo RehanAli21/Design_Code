@@ -14,9 +14,14 @@ export const PropertiesProvider = props => {
 	const [changedMedium, setChangedMedium] = useState(false)
 	const [changedLarge, setChangedLarge] = useState(false)
 	const [changedXlarge, setChangedXlarge] = useState(false)
+
 	const [showAlignProperties, setShowAlignProperties] = useState(true)
 	const [showAppearanceProperties, setShowAppearanceProperties] = useState(true)
 	const [showTransformProperties, setShowTransformProperties] = useState(true)
+	const [showDivProperties, setShowDivProperties] = useState(true)
+	const [showFontProperties, setShowFontProperties] = useState(true)
+	const [showTextProperties, setShowTextProperties] = useState(true)
+	const [showBtnProperties, setShowBtnProperties] = useState(true)
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -105,6 +110,14 @@ export const PropertiesProvider = props => {
 				setShowAppearanceProperties,
 				showTransformProperties,
 				setShowTransformProperties,
+				showDivProperties,
+				setShowDivProperties,
+				showFontProperties,
+				setShowFontProperties,
+				showTextProperties,
+				setShowTextProperties,
+				showBtnProperties,
+				setShowBtnProperties,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>

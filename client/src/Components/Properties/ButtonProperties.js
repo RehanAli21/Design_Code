@@ -23,6 +23,8 @@ const ButtonProperties = () => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showBtnProperties,
+		setShowBtnProperties,
 	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const [separateLine, setSeparateLine] = useState(false)
@@ -88,10 +90,13 @@ const ButtonProperties = () => {
 	return (
 		<React.Fragment>
 			<div className='borders btn-specific'>
-				<p className='second-heading'>BUTTON PROPERTIES</p>
+				<p className='second-heading' onClick={() => setShowBtnProperties(!showBtnProperties)}>
+					BUTTON PROPERTIES <span style={{ display: showBtnProperties ? 'inline' : 'none' }}>&#9660;</span>
+					<span style={{ display: showBtnProperties ? 'none' : 'inline' }}>&#9654;</span>
+				</p>
 				<div
 					style={{
-						display: 'grid',
+						display: showBtnProperties ? 'grid' : 'none',
 						gridTemplateColumns: '20px 130px auto',
 						marginLeft: '25px',
 						marginTop: '20px',
@@ -105,7 +110,7 @@ const ButtonProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
-				<TextChange type='button' />
+				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
 			</div>
 			<Text />
 			<Font />
