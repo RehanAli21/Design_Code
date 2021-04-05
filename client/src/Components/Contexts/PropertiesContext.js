@@ -22,6 +22,9 @@ export const PropertiesProvider = props => {
 	const [showFontProperties, setShowFontProperties] = useState(true)
 	const [showTextProperties, setShowTextProperties] = useState(true)
 	const [showBtnProperties, setShowBtnProperties] = useState(true)
+	const [showInputProperties, setShowInputProperties] = useState(true)
+	const [showTextCompProperties, setShowTextCompProperties] = useState(true)
+	const [showImgProperties, setShowImgProperties] = useState(true)
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -118,6 +121,12 @@ export const PropertiesProvider = props => {
 				setShowTextProperties,
 				showBtnProperties,
 				setShowBtnProperties,
+				showInputProperties,
+				setShowInputProperties,
+				showTextCompProperties,
+				setShowTextCompProperties,
+				showImgProperties,
+				setShowImgProperties,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>

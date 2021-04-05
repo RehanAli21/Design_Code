@@ -23,6 +23,8 @@ const TextProperties = () => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showTextCompProperties,
+		setShowTextCompProperties,
 	} = useContext(PropertiesContext)
 	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 
@@ -126,10 +128,13 @@ const TextProperties = () => {
 	return (
 		<React.Fragment>
 			<div className='borders btn-specific'>
-				<p className='second-heading'>TEXT PROPERTIES</p>
+				<p className='second-heading' onClick={() => setShowTextCompProperties(!showTextCompProperties)}>
+					TEXT PROPERTIES <span style={{ display: showTextCompProperties ? 'inline' : 'none' }}>&#9660;</span>
+					<span style={{ display: showTextCompProperties ? 'none' : 'inline' }}>&#9654;</span>
+				</p>
 				<div
 					style={{
-						display: 'grid',
+						display: showTextCompProperties ? 'grid' : 'none',
 						gridTemplateColumns: '20px 130px auto',
 						marginLeft: '25px',
 						marginTop: '20px',
@@ -143,7 +148,7 @@ const TextProperties = () => {
 					/>
 					<label>On Same Line</label>
 				</div>
-				<div className='two'>
+				<div style={{ display: showTextCompProperties ? 'grid' : 'none' }} className='two'>
 					<label>Type: </label>
 					<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
 						<option value='p'>Paragraph</option>
@@ -152,7 +157,7 @@ const TextProperties = () => {
 						<option value='h5'>Heading 3</option>
 					</select>
 				</div>
-				<TextChange type='text' />
+				<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
 			</div>
 			<Font type='text' />
 			<Text />

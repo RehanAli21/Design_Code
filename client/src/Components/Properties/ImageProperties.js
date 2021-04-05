@@ -20,6 +20,8 @@ const ImageProperties = () => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showImgProperties,
+		setShowImgProperties,
 	} = useContext(PropertiesContext)
 	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 
@@ -135,10 +137,13 @@ const ImageProperties = () => {
 
 	return (
 		<div className='borders btn-specific'>
-			<p className='second-heading'>IMAGE PROPERTIES</p>
+			<p className='second-heading' onClick={() => setShowImgProperties(!showImgProperties)}>
+				IMAGE PROPERTIES <span style={{ display: showImgProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showImgProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
 			<div
 				style={{
-					display: 'grid',
+					display: showImgProperties ? 'grid' : 'none',
 					gridTemplateColumns: '20px 130px auto',
 					marginLeft: '25px',
 					marginTop: '20px',
@@ -152,11 +157,11 @@ const ImageProperties = () => {
 				/>
 				<label>On Separate Line</label>
 			</div>
-			<div className='two'>
+			<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
 				<label>Img: </label>
 				<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />
 			</div>
-			<div className='two'>
+			<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
 				<label>Alt: </label>
 				<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 			</div>

@@ -22,6 +22,8 @@ const InputProperties = () => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showInputProperties,
+		setShowInputProperties,
 	} = useContext(PropertiesContext)
 	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
@@ -256,10 +258,13 @@ const InputProperties = () => {
 	return (
 		<React.Fragment>
 			<div className='borders btn-specific'>
-				<p className='second-heading'>INPUT PROPERTIES</p>
+				<p className='second-heading' onClick={() => setShowInputProperties(!showInputProperties)}>
+					INPUT PROPERTIES <span style={{ display: showInputProperties ? 'inline' : 'none' }}>&#9660;</span>
+					<span style={{ display: showInputProperties ? 'none' : 'inline' }}>&#9654;</span>
+				</p>
 				<div
 					style={{
-						display: 'grid',
+						display: showInputProperties ? 'grid' : 'none',
 						gridTemplateColumns: '20px 130px auto',
 						marginLeft: '25px',
 						marginTop: '20px',
@@ -273,7 +278,7 @@ const InputProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
-				<div className='two'>
+				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
 					<label>Type: </label>
 					<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>
 						<option value='text'>Text</option>
@@ -293,15 +298,21 @@ const InputProperties = () => {
 						<option value='file'>File</option>
 					</select>
 				</div>
-				<div className='two' onChange={e => setMin(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
+				<div
+					className='two'
+					onChange={e => setMin(e.target.value)}
+					style={{ display: showMinMax && showInputProperties ? 'grid' : 'none' }}>
 					<label>Min Value: </label>
 					<input className='numberinput' id='i-s-minValueInput' type='number' />
 				</div>
-				<div className='two' onChange={e => setMax(e.target.value)} style={{ display: showMinMax ? 'grid' : 'none' }}>
+				<div
+					className='two'
+					onChange={e => setMax(e.target.value)}
+					style={{ display: showMinMax && showInputProperties ? 'grid' : 'none' }}>
 					<label>Max Value: </label>
 					<input className='numberinput' id='i-s-maxValueInput' type='number' />
 				</div>
-				<div className='two'>
+				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
 					<label>Placeholder: </label>
 					<input
 						id='i-s-placeholderinput'
@@ -310,11 +321,11 @@ const InputProperties = () => {
 						placeholder='Text'
 					/>
 				</div>
-				<div className='two'>
+				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
 					<label>Max chars: </label>
 					<input id='i-s-maxLengthInput' onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
 				</div>
-				<div className='three'>
+				<div className='three' style={{ display: showInputProperties ? 'grid' : 'none' }}>
 					<label style={{ marginTop: '5px' }}>Text color: </label>
 					{showTemplateColors()}
 					<input
