@@ -30,6 +30,7 @@ const TextProperties = () => {
 
 	const [textType, setTextType] = useState('')
 	const [sameLine, setSameLine] = useState(false)
+	const [isAnchor, setIsAnchor] = useState(false)
 
 	//For default value of text type
 	useEffect(() => {
@@ -74,6 +75,7 @@ const TextProperties = () => {
 			const temp = Object.assign({}, pages)
 			findAndChange(temp[activePage], 'type', textType)
 			setPages(temp)
+			setIsAnchor(textType === 'a')
 		}
 	}, [textType])
 
@@ -137,7 +139,7 @@ const TextProperties = () => {
 				</p>
 				<div
 					style={{
-						display: showTextCompProperties ? 'grid' : 'none',
+						display: !isAnchor && showTextCompProperties ? 'grid' : 'none',
 						gridTemplateColumns: '20px 130px auto',
 						marginLeft: '25px',
 						marginTop: '20px',
