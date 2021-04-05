@@ -13,7 +13,6 @@ const List = ({ activeElement, activePage, findAndInsert, uniqueString, setPages
 			'list',
 			{
 				type: 'ul',
-				text: '',
 				id: uniqueString(),
 				styles: {
 					small: listStyle,
@@ -28,6 +27,7 @@ const List = ({ activeElement, activePage, findAndInsert, uniqueString, setPages
 					changeXlarge: false,
 				},
 			},
+			[],
 		]
 		//if inserting list into body
 		if (activeElement === activePage) {
