@@ -26,8 +26,12 @@
 	font-family: 'Segoe UI', sans-serif;
 }
 .pages-div input,
-.pages-div button {
+.pages-div button,
+.pages-div select {
 	border: none;
+}
+.pages-div a {
+	text-decoration: none;
 }
 
 .templateComp {
@@ -373,10 +377,8 @@ nav .TemplateButton:active {
 	height: 100%;
 }
 .main-div .pages-div {
-	background-color: white;
 	min-height: 300px;
 	padding: 0px;
-	background-color: white;
 	box-shadow: 2px 2px 15px grey;
 	outline: none;
 }
@@ -480,7 +482,7 @@ nav .TemplateButton:active {
 	grid-template-columns: auto 40px 40px 40px auto;
 }
 .propertybar .align-ul .two {
-	grid-template-columns: auto 40px 40px 40px 40px auto;
+	grid-template-columns: auto 40px 40px 40px 40px;
 }
 .propertybar .align-ul li button {
 	padding: 2px 4px;

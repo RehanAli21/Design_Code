@@ -206,8 +206,15 @@ const Text = () => {
 			<div
 				style={{ marginTop: '20px', marginBottom: '20px', display: showTextProperties ? 'grid' : 'none' }}
 				className='shadow'>
-				<input id='t-ts-active' type='checkbox' onChange={e => setTextShadow(e.target.checked)} />
-				<span>Text Shadow</span>
+				<div>
+					<input
+						style={{ marginRight: '15px' }}
+						id='t-ts-active'
+						type='checkbox'
+						onChange={e => setTextShadow(e.target.checked)}
+					/>
+					<span>Text Shadow</span>
+				</div>
 				<div style={{ display: textShadow ? 'grid' : 'none' }} className='four'>
 					<input onChange={e => setTextX(`${e.target.value}px`)} id='t-ts-x' type='number' placeholder='X' />
 					<input onChange={e => setTextY(`${e.target.value}px`)} id='t-ts-y' type='number' placeholder='Y' />
