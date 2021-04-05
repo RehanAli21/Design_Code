@@ -40,8 +40,11 @@ const TextProperties = () => {
 		if (ele) {
 			if (ele.tagName === 'P') typeSelect.value = 'p'
 			else if (ele.tagName === 'H1') typeSelect.value = 'h1'
+			else if (ele.tagName === 'H2') typeSelect.value = 'h2'
 			else if (ele.tagName === 'H3') typeSelect.value = 'h3'
+			else if (ele.tagName === 'H4') typeSelect.value = 'h4'
 			else if (ele.tagName === 'H5') typeSelect.value = 'h5'
+			else if (ele.tagName === 'A') typeSelect.value = 'a'
 		}
 	})
 
@@ -153,8 +156,11 @@ const TextProperties = () => {
 					<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
 						<option value='p'>Paragraph</option>
 						<option value='h1'>Heading 1</option>
-						<option value='h3'>Heading 2</option>
-						<option value='h5'>Heading 3</option>
+						<option value='h2'>Heading 2</option>
+						<option value='h3'>Heading 3</option>
+						<option value='h4'>Heading 4</option>
+						<option value='h5'>Heading 5</option>
+						<option value='a'>Anchor</option>
 					</select>
 				</div>
 				<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
