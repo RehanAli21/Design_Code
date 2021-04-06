@@ -126,6 +126,9 @@ const Appearance = ({ display, width, activeElement }) => {
 					const p = small.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
 					paddingXInput.value = p[1].split('p')[0]
+				} else {
+					paddingYInput.value = 0
+					paddingXInput.value = 0
 				}
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor ? RGBToHex(medium.backgroundColor) : '#ffffff'
@@ -133,6 +136,9 @@ const Appearance = ({ display, width, activeElement }) => {
 					const p = medium.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
 					paddingXInput.value = p[1].split('p')[0]
+				} else {
+					paddingYInput.value = 0
+					paddingXInput.value = 0
 				}
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor ? RGBToHex(large.backgroundColor) : '#ffffff'
@@ -140,6 +146,9 @@ const Appearance = ({ display, width, activeElement }) => {
 					const p = large.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
 					paddingXInput.value = p[1].split('p')[0]
+				} else {
+					paddingYInput.value = 0
+					paddingXInput.value = 0
 				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? RGBToHex(xlarge.backgroundColor) : '#ffffff'
@@ -147,6 +156,9 @@ const Appearance = ({ display, width, activeElement }) => {
 					const p = xlarge.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
 					paddingXInput.value = p[1].split('p')[0]
+				} else {
+					paddingYInput.value = 0
+					paddingXInput.value = 0
 				}
 			}
 		}
@@ -204,7 +216,7 @@ const Appearance = ({ display, width, activeElement }) => {
 	//For Changing padding
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			const padding = `${paddingY} ${paddingX}`
+			const padding = `${paddingY === '' ? '0px' : paddingY} ${paddingX === '' ? '0px' : paddingX}`
 			if (width < 540) {
 				setProperties(small, setSmall, 'padding', padding)
 				setChangedSmall(true)
