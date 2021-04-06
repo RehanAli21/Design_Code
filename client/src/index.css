@@ -363,10 +363,20 @@ nav .TemplateButton:active {
 	margin-left: 5px;
 }
 .layers ul li .layer-show:hover {
-	transform: scale(1.1);
+	transform: scale(1.05);
 }
 .layers ul li .layer-show:active {
-	transform: scale(0.9);
+	transform: scale(0.95);
+}
+.layers ul li .no-layer {
+	background-color: var(--text-active-color);
+	color: white;
+	font-weight: bold;
+	font-size: 0.5rem;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	margin-left: 5px;
 }
 
 .main-div {
