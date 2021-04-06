@@ -6,6 +6,18 @@ const ListProperties = () => {
 
 	const [listType, setListType] = useState('')
 
+	//For default value of list type
+	useEffect(() => {
+		const typeSelect = document.getElementById('list-type-select')
+
+		const ele = document.getElementById(activeElement)
+
+		if (ele) {
+			if (ele.tagName === 'UL') typeSelect.value = 'ul'
+			else if (ele.tagName === 'OL') typeSelect.value = 'ol'
+		}
+	})
+
 	//For changing type of list
 	useEffect(() => {
 		if (listType !== '') {
@@ -34,7 +46,7 @@ const ListProperties = () => {
 			<p className='second-heading'>List Properties</p>
 			<div className='two'>
 				<label>Type: </label>
-				<select onChange={e => setListType(e.target.value)}>
+				<select id='list-type-select' onChange={e => setListType(e.target.value)}>
 					<option value='ul'>Unorder List</option>
 					<option value='ol'>Ordered List</option>
 				</select>
