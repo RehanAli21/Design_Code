@@ -30,7 +30,8 @@ const Appearance = ({ display, width, activeElement }) => {
 	const [opacity, setOpacity] = useState(1)
 	const [bgColor, setBgColor] = useState(`#ffffff`)
 	const [customBgColor, setCustomBgColor] = useState(true)
-	const [padding, setPadding] = useState('')
+	const [paddingX, setPaddingX] = useState('')
+	const [paddingY, setPaddingY] = useState('')
 	const [bColor, setBColor] = useState('#000000')
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
@@ -58,10 +59,12 @@ const Appearance = ({ display, width, activeElement }) => {
 			const sYInput = document.getElementById('a-s-y')
 			const sBlurInput = document.getElementById('a-s-blur')
 			const sColorInput = document.getElementById('a-s-color')
-			const paddingInput = document.getElementById('ap-paddingInput')
+			const paddingXInput = document.getElementById('ap-paddingXInput')
+			const paddingYInput = document.getElementById('ap-paddingYInput')
 
 			bRadiusInput.value = large.borderRadius ? large.borderRadius.split('%')[0] : '0'
 
+			//Default value for all borders
 			if (large.border) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
@@ -100,6 +103,7 @@ const Appearance = ({ display, width, activeElement }) => {
 				setShowBorderSection(false)
 			}
 
+			//Default value for Box shadow
 			if (large.boxShadow) {
 				sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
 				sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
@@ -118,16 +122,32 @@ const Appearance = ({ display, width, activeElement }) => {
 
 			if (width < 540) {
 				bgColorInput.value = small.backgroundColor ? RGBToHex(small.backgroundColor) : '#ffffff'
-				paddingInput.value = small.padding ? small.padding.split('p')[0] : 0
+				if (small.padding) {
+					const p = small.padding.split(' ')
+					paddingYInput.value = p[0].split('p')[0]
+					paddingXInput.value = p[1].split('p')[0]
+				}
 			} else if (width < 720) {
 				bgColorInput.value = medium.backgroundColor ? RGBToHex(medium.backgroundColor) : '#ffffff'
-				paddingInput.value = medium.padding ? medium.padding.split('p')[0] : 0
+				if (medium.padding) {
+					const p = medium.padding.split(' ')
+					paddingYInput.value = p[0].split('p')[0]
+					paddingXInput.value = p[1].split('p')[0]
+				}
 			} else if (width < 970) {
 				bgColorInput.value = large.backgroundColor ? RGBToHex(large.backgroundColor) : '#ffffff'
-				paddingInput.value = large.padding ? large.padding.split('p')[0] : 0
+				if (large.padding) {
+					const p = large.padding.split(' ')
+					paddingYInput.value = p[0].split('p')[0]
+					paddingXInput.value = p[1].split('p')[0]
+				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? RGBToHex(xlarge.backgroundColor) : '#ffffff'
-				paddingInput.value = xlarge.padding ? xlarge.padding.split('p')[0] : 0
+				if (xlarge.padding) {
+					const p = xlarge.padding.split(' ')
+					paddingYInput.value = p[0].split('p')[0]
+					paddingXInput.value = p[1].split('p')[0]
+				}
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
@@ -136,6 +156,7 @@ const Appearance = ({ display, width, activeElement }) => {
 		return s === 'solid' ? 0 : s === 'inset' ? 1 : s === 'outset' ? 2 : 3
 	}
 
+	//FOr background color and opacity
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedBgColor = hexToRGB(bgColor, opacity)
@@ -167,6 +188,7 @@ const Appearance = ({ display, width, activeElement }) => {
 		}
 	}, [bgColor, opacity])
 
+	//For Box Shadow
 	useEffect(() => {
 		if (small && medium && large && xlarge && shadowChanged) {
 			const changedShadow = showShadowSection ? `${sX} ${sY} ${sBlur} ${hexToRGB(sColor, 1)}` : ''
@@ -182,6 +204,7 @@ const Appearance = ({ display, width, activeElement }) => {
 	//For Changing padding
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
+			const padding = `${paddingY} ${paddingX}`
 			if (width < 540) {
 				setProperties(small, setSmall, 'padding', padding)
 				setChangedSmall(true)
@@ -208,7 +231,7 @@ const Appearance = ({ display, width, activeElement }) => {
 				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
 			}
 		}
-	}, [padding])
+	}, [paddingX, paddingY])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -216,6 +239,7 @@ const Appearance = ({ display, width, activeElement }) => {
 		setObj(temp)
 	}
 
+	//For changing Border
 	useEffect(() => {
 		if (small && medium && large && xlarge && borderChanged) {
 			const changedBorder = showBorderSection ? `${bSize} ${bType} ${hexToRGB(bColor, 1)}` : ''
@@ -566,10 +590,20 @@ const Appearance = ({ display, width, activeElement }) => {
 					/>
 				</div>
 				<div className='padding md'>
-					<label>Inner space: </label>
+					<label>InnerX space: </label>
 					<input
-						id='ap-paddingInput'
-						onChange={e => setPadding(`${e.target.value}px`)}
+						id='ap-paddingXInput'
+						onChange={e => setPaddingX(`${e.target.value}px`)}
+						type='number'
+						defaultValue='0'
+						min='0'
+					/>
+				</div>
+				<div className='padding md'>
+					<label>InnerY space: </label>
+					<input
+						id='ap-paddingYInput'
+						onChange={e => setPaddingY(`${e.target.value}px`)}
 						type='number'
 						defaultValue='0'
 						min='0'
