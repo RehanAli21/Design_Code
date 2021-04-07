@@ -1,22 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 
 const ListProperties = () => {
+	const { small, medium, large, xlarge, setSmall, setMedium, setLarge, setXlarge } = useContext(PropertiesContext)
 	const { activeElement, activePage, pages, setPages } = useContext(PageContext)
 
 	const [listType, setListType] = useState('')
-
-	//For default value of list type
-	useEffect(() => {
-		const typeSelect = document.getElementById('list-type-select')
-
-		const ele = document.getElementById(activeElement)
-
-		if (ele) {
-			if (ele.tagName === 'UL') typeSelect.value = 'ul'
-			else if (ele.tagName === 'OL') typeSelect.value = 'ol'
-		}
-	})
+	const [listStyle, setListStyle] = useState('')
 
 	//For changing type of list
 	useEffect(() => {
@@ -41,14 +32,43 @@ const ListProperties = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (listStyle !== 'custom') {
+			const isNumberList =
+				listStyle === 'upper-alpha' ||
+				listStyle === 'lower-aplha' ||
+				listStyle === 'upper-roman' ||
+				listStyle === 'lower-aplha'
+
+			if (isNumberList && listStyle !== 'ol') setListType('ol')
+			else if (!isNumberList && listStyle !== 'ul') setListType('ul')
+
+			setProperties(small, setSmall, 'listStyleType', listStyle)
+			setProperties(medium, setMedium, 'listStyleType', listStyle)
+			setProperties(large, setLarge, 'listStyleType', listStyle)
+			setProperties(xlarge, setXlarge, 'listStyleType', listStyle)
+		}
+	}, [listStyle])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
+
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading'>List Properties</p>
 			<div className='two'>
-				<label>Type: </label>
-				<select id='list-type-select' onChange={e => setListType(e.target.value)}>
-					<option value='ul'>Unorder List</option>
-					<option value='ol'>Ordered List</option>
+				<label>Bullets: </label>
+				<select id='list-style-select' onChange={e => setListStyle(e.target.value)}>
+					<option value='upper-alpha'>A</option>
+					<option value='upper-roman'>I</option>
+					<option value='lower-alpha'>a</option>
+					<option value='lower-roman'>i</option>
+					<option value='circle'>Circle</option>
+					<option value='square'>Square</option>
+					<option value='disc'>Disc</option>
 				</select>
 			</div>
 		</div>

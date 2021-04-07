@@ -1,3 +1,3 @@
 export const listStyle = {
-	listStyleType: '',
+	listStyleType: 'circle',
 }
