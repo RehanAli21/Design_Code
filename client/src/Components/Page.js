@@ -277,6 +277,25 @@ const Page = () => {
 						e[2].length > 0 ? showElements(e[2]) : null
 					)
 				)
+			} else if (e[0] === 'list Item') {
+				temp.push(
+					React.createElement(
+						e[1].type,
+						{
+							key: uuid(),
+							id: e[1].id,
+							style:
+								width < 540
+									? e[1].styles.small
+									: width < 720
+									? e[1].styles.medium
+									: width < 960
+									? e[1].styles.large
+									: e[1].styles.xlarge,
+						},
+						e[2].length > 0 ? showElements(e[2]) : null
+					)
+				)
 			}
 		})
 
