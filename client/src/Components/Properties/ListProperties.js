@@ -40,8 +40,8 @@ const ListProperties = () => {
 				listStyle === 'upper-roman' ||
 				listStyle === 'lower-aplha'
 
-			if (isNumberList && listStyle !== 'ol') setListType('ol')
-			else if (!isNumberList && listStyle !== 'ul') setListType('ul')
+			if (isNumberList && listType !== 'ol') setListType('ol')
+			else if (!isNumberList && listType !== 'ul') setListType('ul')
 
 			setProperties(small, setSmall, 'listStyleType', listStyle)
 			setProperties(medium, setMedium, 'listStyleType', listStyle)
