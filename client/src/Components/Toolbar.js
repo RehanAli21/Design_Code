@@ -8,6 +8,7 @@ import Image from './Tools/Image'
 import Select from './Tools/Select'
 import List from './Tools/List'
 import Option from './Tools/Option'
+import ListItem from './Tools/ListItem'
 
 //This component is for showing list of elemenets,
 //which can be added.
@@ -96,6 +97,14 @@ const Toolbar = () => {
 					uniqueString={uniqueString}
 				/>
 				<List
+					findAndInsert={findAndInsert}
+					activeElement={activeElement}
+					activePage={activePage}
+					pages={pages}
+					setPages={setPages}
+					uniqueString={uniqueString}
+				/>
+				<ListItem
 					findAndInsert={findAndInsert}
 					activeElement={activeElement}
 					activePage={activePage}
