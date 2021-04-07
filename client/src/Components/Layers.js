@@ -119,9 +119,9 @@ const Layers = () => {
 				{data.map(e => {
 					return (
 						<li key={uuid()}>
-							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' ? (
+							{e[2] && e[2].length > 0 && (e[0] === 'div' || e[0] === 'select' || e[0] === 'list') ? (
 								<button onClick={e => showAndHideList(e)} className='layer-show'>
-									&#10148;
+									➤
 								</button>
 							) : (
 								<button className='no-layer'></button>
