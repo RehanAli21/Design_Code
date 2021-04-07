@@ -13,6 +13,7 @@ const Select = ({ activeElement, activePage, findAndInsert, uniqueString, setPag
 			'select',
 			{
 				id: uniqueString(),
+				showChildren: true,
 				styles: {
 					small: selectStyle,
 					medium: selectStyle,

@@ -14,6 +14,7 @@ const List = ({ activeElement, activePage, findAndInsert, uniqueString, setPages
 			{
 				type: 'ul',
 				id: uniqueString(),
+				showChildren: true,
 				styles: {
 					small: listStyle,
 					medium: listStyle,

@@ -102,13 +102,22 @@ const Layers = () => {
 	}
 
 	//For hiding feature of elements list
-	const showAndHideList = e => {
-		//targeting four times nextSibling, because fourth sibling
-		//is responsible for showing children list
-		if (e.target.nextSibling.nextSibling.nextSibling.nextSibling.className === 'show-ul') {
-			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className = 'hide-ul'
-		} else {
-			e.target.nextSibling.nextSibling.nextSibling.nextSibling.className = 'show-ul'
+	const showAndHideList = id => {
+		const temp = Object.assign({}, pages)
+		findAndChange(temp[activePage], 'showChildren', id)
+		setPages(temp)
+	}
+	//For finding element and changing attribute value
+	const findAndChange = (arr, attribute, id) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === id) {
+				arr[i][1][attribute] = !arr[i][1][attribute]
+				return true
+			} else if (arr[i][2]) {
+				if (findAndChange(arr[i][2], attribute, id)) {
+					return true
+				}
+			}
 		}
 	}
 
@@ -119,9 +128,9 @@ const Layers = () => {
 				{data.map(e => {
 					return (
 						<li key={uuid()}>
-							{e[2] && e[2].length > 0 && (e[0] === 'div' || e[0] === 'select' || e[0] === 'list') ? (
-								<button onClick={e => showAndHideList(e)} className='layer-show'>
-									➤
+							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' ? (
+								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
+									{e[2] && e[1].showChildren ? '▼' : '▶'}
 								</button>
 							) : (
 								<button className='no-layer'></button>
@@ -137,7 +146,7 @@ const Layers = () => {
 							<button onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
 								X
 							</button>
-							{e[2] ? showLayers(e[2]) : null}
+							{e[2] && e[1].showChildren ? showLayers(e[2]) : null}
 						</li>
 					)
 				})}
