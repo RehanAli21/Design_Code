@@ -85,6 +85,12 @@ const Toolbar = () => {
 					<Option findAndInsert={findAndInsert} uniqueString={uniqueString} />
 				</React.Fragment>
 			)
+		} else if (ele.tagName === 'LI') {
+			return (
+				<React.Fragment>
+					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
+				</React.Fragment>
+			)
 		} else {
 			return
 		}
