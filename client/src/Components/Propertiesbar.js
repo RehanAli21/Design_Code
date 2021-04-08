@@ -20,7 +20,7 @@ const Propertiesbar = () => {
 			</div>
 			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='property'>
 				<Specific />
-				<div style={{ display: ele && ele.tagName === 'OPTION' ? 'none' : 'block' }}>
+				<div style={{ display: activeElement === '' || (ele && ele.tagName === 'OPTION') ? 'none' : 'block' }}>
 					<Align width={width} activeElement={activeElement} />
 					<Transform width={width} activeElement={activeElement} />
 					<Appearance

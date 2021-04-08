@@ -97,6 +97,7 @@ const Layers = () => {
 			//If element found seting History, for undo feature
 			if (a[1].id === id) {
 				setHistory(parentId, a, index)
+				setActiveElement('')
 			}
 			//increamenting index after every child
 			index++
