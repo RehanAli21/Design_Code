@@ -241,8 +241,10 @@ const Transform = ({ width, activeElement }) => {
 		setObj(temp)
 	}
 
+	const ele = document.getElementById(activeElement)
+
 	return (
-		<div className='w-h borders'>
+		<div className='w-h borders' style={{ display: ele && ele.tagName === 'LI' ? 'none' : 'grid' }}>
 			<p className='second-heading' onClick={() => setShowTransformProperties(!showTransformProperties)}>
 				TRANSFORM <span style={{ display: showTransformProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showTransformProperties ? 'none' : 'inline' }}>&#9654;</span>

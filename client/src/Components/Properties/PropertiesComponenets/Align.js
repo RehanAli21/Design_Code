@@ -29,6 +29,7 @@ const Align = ({ width, activeElement }) => {
 	const [isDiv, setIsDiv] = useState(false)
 	const [isImg, setIsImg] = useState(false)
 	const [isDivGrid, setIsDivGrid] = useState(false)
+	const [isList, setIsList] = useState(false)
 
 	//For setting default values
 	useEffect(() => {
@@ -172,20 +173,28 @@ const Align = ({ width, activeElement }) => {
 					setIsDivGrid(xlarge.display === 'grid')
 				}
 				setIsImg(false)
+				setIsList(false)
 			} else if (ele.tagName === 'IMG') {
 				setIsImg(true)
 				setIsDiv(false)
 				setIsDivGrid(false)
+				setIsList(false)
+			} else if (ele.tagName === 'OL' || ele.tagName === 'UL' || ele.tagName === 'LI') {
+				setIsImg(false)
+				setIsDiv(false)
+				setIsDivGrid(false)
+				setIsList(true)
 			} else {
 				setIsImg(false)
 				setIsDiv(false)
 				setIsDivGrid(false)
+				setIsList(false)
 			}
 		}
 	}, [activeElement, small, medium, large, xlarge])
 
 	return (
-		<div className='align borders' style={{ display: isImg ? 'none' : 'block' }}>
+		<div className='align borders' style={{ display: isImg || isList ? 'none' : 'block' }}>
 			<p className='second-heading' onClick={() => setShowAlignProperties(!showAlignProperties)}>
 				ALIGNMENT <span style={{ display: showAlignProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAlignProperties ? 'none' : 'inline' }}>&#9654;</span>
