@@ -33,6 +33,10 @@
 .pages-div a {
 	text-decoration: none;
 }
+.pages-div ul,
+.pages-div ol {
+	padding-left: 25px;
+}
 
 .templateComp {
 	position: absolute;

@@ -33,7 +33,7 @@ const ListProperties = () => {
 	}
 
 	useEffect(() => {
-		if (listStyle !== 'custom') {
+		if (listStyle !== '') {
 			const isNumberList =
 				listStyle === 'upper-alpha' ||
 				listStyle === 'lower-aplha' ||
@@ -69,6 +69,7 @@ const ListProperties = () => {
 					<option value='circle'>Circle</option>
 					<option value='square'>Square</option>
 					<option value='disc'>Disc</option>
+					<option value='none'>None</option>
 				</select>
 			</div>
 		</div>

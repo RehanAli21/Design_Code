@@ -89,6 +89,7 @@ const Toolbar = () => {
 			return (
 				<React.Fragment>
 					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
 				</React.Fragment>
 			)
 		} else {
