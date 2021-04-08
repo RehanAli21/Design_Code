@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { divStyle } from '../Styles/divStyle'
 
 //This component is for adding div element
-const Div = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+const Div = ({ findAndInsert, uniqueString }) => {
+	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addDiv = () => {
 		//Assigning new variable pages data,

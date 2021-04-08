@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { selectStyle } from '../Styles/selectStyle'
 
 //This component is for adding select element
-const Select = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+const Select = ({ findAndInsert, uniqueString }) => {
+	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addSelect = () => {
 		//Assigning new variable pages data,

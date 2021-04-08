@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { listStyle } from '../Styles/listStyle'
 
 //This component is for adding list element
-const List = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+const List = ({ findAndInsert, uniqueString }) => {
+	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addList = () => {
 		//Assigning new variable pages data,

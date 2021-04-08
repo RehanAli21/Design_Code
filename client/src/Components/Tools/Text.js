@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { textStyle } from '../Styles/textStyle'
 
 //This component is for adding input element
-const Text = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+const Text = ({ findAndInsert, uniqueString }) => {
+	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addText = () => {
 		//Assigning new variable pages data,

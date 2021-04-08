@@ -13,10 +13,13 @@ import ListItem from './Tools/ListItem'
 //This component is for showing list of elemenets,
 //which can be added.
 const Toolbar = () => {
-	const { pages, setPages, activePage, activeElement } = useContext(PageContext)
+	const { activePage, activeElement } = useContext(PageContext)
 
 	//For Getting unique string for ids of elements
-	const uniqueString = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+	const uniqueString = () => {
+		let uniqueId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+		return (uniqueId += '|=|element')
+	}
 
 	//For finding the parent element,
 	//in which elements will be added, using recursion
@@ -37,82 +40,59 @@ const Toolbar = () => {
 		return children
 	}
 
+	const showTools = () => {
+		const ele = document.getElementById(activeElement)
+
+		if (!ele) return
+
+		if (ele.id === activePage) {
+			return (
+				<React.Fragment>
+					<Div findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Button findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Input findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
+				</React.Fragment>
+			)
+		}
+
+		if (ele.id.split('|=|')[1] !== 'element') return
+
+		if (ele.tagName === 'DIV') {
+			return (
+				<React.Fragment>
+					<Div findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Button findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Input findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
+				</React.Fragment>
+			)
+		} else if (ele.tagName === 'UL' || ele.tagName === 'OL') {
+			return (
+				<React.Fragment>
+					<ListItem findAndInsert={findAndInsert} uniqueString={uniqueString} />
+				</React.Fragment>
+			)
+		} else if (ele.tagName === 'SELECT') {
+			return (
+				<React.Fragment>
+					<Option findAndInsert={findAndInsert} uniqueString={uniqueString} />
+				</React.Fragment>
+			)
+		} else {
+			return
+		}
+	}
+
 	return (
 		<div className='toolbar'>
-			<div className='tools'>
-				<Div
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<Button
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<Input
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<Text
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<Image
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<Select
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<Option
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<List
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-				<ListItem
-					findAndInsert={findAndInsert}
-					activeElement={activeElement}
-					activePage={activePage}
-					pages={pages}
-					setPages={setPages}
-					uniqueString={uniqueString}
-				/>
-			</div>
+			<div className='tools'>{showTools()}</div>
 		</div>
 	)
 }

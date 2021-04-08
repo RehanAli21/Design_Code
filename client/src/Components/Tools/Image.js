@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { imageStyle } from '../Styles/imageStyle'
 
 //This component is for adding image element
-const Image = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+const Image = ({ findAndInsert, uniqueString }) => {
+	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addImage = () => {
 		//Assigning new variable pages data,

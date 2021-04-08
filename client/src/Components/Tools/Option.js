@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { optionStyle } from '../Styles/optionStyle'
 
 //This component is for adding option element
-const Option = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+const Option = ({ findAndInsert, uniqueString }) => {
+	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addOption = () => {
 		//Assigning new variable pages data,

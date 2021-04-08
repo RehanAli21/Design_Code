@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { buttonStyle } from '../Styles/buttonStyle'
 
 //This component is for adding Button element
-const Button = ({ activeElement, activePage, findAndInsert, uniqueString, setPages, pages }) => {
+const Button = ({ findAndInsert, uniqueString }) => {
+	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addButton = () => {
 		//Assigning new variable pages data,
