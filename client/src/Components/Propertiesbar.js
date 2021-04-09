@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import Align from './Properties/PropertiesComponenets/Align'
 import Appearance from './Properties/PropertiesComponenets/Appearance'
@@ -8,10 +8,22 @@ import Specific from './Properties/Specific'
 
 const Propertiesbar = () => {
 	const { activePage, activeElement, width, setPageBC } = useContext(PageContext)
+	const [state, setState] = useState('normal')
 
 	const ele = document.getElementById(activeElement)
 	return (
 		<div className='propertybar'>
+			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='style-states-button'>
+				<button className={state === 'normal' ? 'active' : ''} onClick={() => setState('normal')}>
+					Normal
+				</button>
+				<button className={state === 'hover' ? 'active' : ''} onClick={() => setState('hover')}>
+					On Hover
+				</button>
+				<button className={state === 'click' ? 'active' : ''} onClick={() => setState('click')}>
+					On Click
+				</button>
+			</div>
 			<div style={{ display: activePage !== activeElement ? 'none' : 'block' }}>
 				<h3>Properties</h3>
 				<div style={{ marginTop: '20px' }}>

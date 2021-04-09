@@ -403,6 +403,21 @@ nav .TemplateButton:active {
 	background-color: var(--second-white);
 	overflow-y: scroll;
 }
+.propertybar .style-states-button button {
+	border: 1px solid var(--text-color);
+	cursor: pointer;
+	padding: 5px 10px;
+	outline: none;
+	margin-bottom: 10px;
+}
+.propertybar .style-states-button button:active {
+	transform: scale(0.9);
+}
+.propertybar .style-states-button .active {
+	background-color: var(--main-blue);
+	border-color: var(--main-blue);
+	color: white;
+}
 .propertybar > .showlayer {
 	margin: 20px auto 0px auto;
 	width: auto;
