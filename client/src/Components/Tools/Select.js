@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { selectStyle } from '../Styles/selectStyle'
 
 //This component is for adding select element
 const Select = ({ findAndInsert, uniqueString }) => {
@@ -17,10 +16,10 @@ const Select = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				showChildren: true,
 				styles: {
-					small: selectStyle,
-					medium: selectStyle,
-					large: selectStyle,
-					xlarge: selectStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -29,10 +28,10 @@ const Select = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: selectStyle,
-					medium: selectStyle,
-					large: selectStyle,
-					xlarge: selectStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -41,10 +40,10 @@ const Select = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: selectStyle,
-					medium: selectStyle,
-					large: selectStyle,
-					xlarge: selectStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				ClickStyleWidth: {
 					changedSmall: false,

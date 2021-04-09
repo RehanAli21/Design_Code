@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { textStyle } from '../Styles/textStyle'
 
 //This component is for adding input element
 const Text = ({ findAndInsert, uniqueString }) => {
@@ -18,10 +17,10 @@ const Text = ({ findAndInsert, uniqueString }) => {
 				text: 'Hello World',
 				id: uniqueString(),
 				styles: {
-					small: textStyle,
-					medium: textStyle,
-					large: textStyle,
-					xlarge: textStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -30,10 +29,10 @@ const Text = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: textStyle,
-					medium: textStyle,
-					large: textStyle,
-					xlarge: textStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -42,10 +41,10 @@ const Text = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: textStyle,
-					medium: textStyle,
-					large: textStyle,
-					xlarge: textStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				ClickStyleWidth: {
 					changedSmall: false,

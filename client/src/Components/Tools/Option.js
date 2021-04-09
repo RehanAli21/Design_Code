@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { optionStyle } from '../Styles/optionStyle'
 
 //This component is for adding option element
 const Option = ({ findAndInsert, uniqueString }) => {
@@ -21,10 +20,10 @@ const Option = ({ findAndInsert, uniqueString }) => {
 				min: '',
 				max: '',
 				styles: {
-					small: optionStyle,
-					medium: optionStyle,
-					large: optionStyle,
-					xlarge: optionStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -33,10 +32,10 @@ const Option = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: optionStyle,
-					medium: optionStyle,
-					large: optionStyle,
-					xlarge: optionStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -45,10 +44,10 @@ const Option = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: optionStyle,
-					medium: optionStyle,
-					large: optionStyle,
-					xlarge: optionStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				ClickStyleWidth: {
 					changedSmall: false,

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { listStyle } from '../Styles/listStyle'
 
 //This component is for adding list element
 const List = ({ findAndInsert, uniqueString }) => {
@@ -18,10 +17,18 @@ const List = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				showChildren: true,
 				styles: {
-					small: listStyle,
-					medium: listStyle,
-					large: listStyle,
-					xlarge: listStyle,
+					small: {
+						listStyleType: 'circle',
+					},
+					medium: {
+						listStyleType: 'circle',
+					},
+					large: {
+						listStyleType: 'circle',
+					},
+					xlarge: {
+						listStyleType: 'circle',
+					},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -30,10 +37,18 @@ const List = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: listStyle,
-					medium: listStyle,
-					large: listStyle,
-					xlarge: listStyle,
+					small: {
+						listStyleType: 'circle',
+					},
+					medium: {
+						listStyleType: 'circle',
+					},
+					large: {
+						listStyleType: 'circle',
+					},
+					xlarge: {
+						listStyleType: 'circle',
+					},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -42,10 +57,18 @@ const List = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: listStyle,
-					medium: listStyle,
-					large: listStyle,
-					xlarge: listStyle,
+					small: {
+						listStyleType: 'circle',
+					},
+					medium: {
+						listStyleType: 'circle',
+					},
+					large: {
+						listStyleType: 'circle',
+					},
+					xlarge: {
+						listStyleType: 'circle',
+					},
 				},
 				ClickStyleWidth: {
 					changedSmall: false,

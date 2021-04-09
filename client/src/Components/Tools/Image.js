@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { imageStyle } from '../Styles/imageStyle'
 
 //This component is for adding image element
 const Image = ({ findAndInsert, uniqueString }) => {
@@ -18,10 +17,10 @@ const Image = ({ findAndInsert, uniqueString }) => {
 				alt: '',
 				src: '',
 				styles: {
-					small: imageStyle,
-					medium: imageStyle,
-					large: imageStyle,
-					xlarge: imageStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -30,10 +29,10 @@ const Image = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: imageStyle,
-					medium: imageStyle,
-					large: imageStyle,
-					xlarge: imageStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -42,10 +41,10 @@ const Image = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: imageStyle,
-					medium: imageStyle,
-					large: imageStyle,
-					xlarge: imageStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				ClickStyleWidth: {
 					changedSmall: false,

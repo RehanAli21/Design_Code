@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { listitemStyle } from '../Styles/listitemStyle'
 
 //This component is for adding list element
 const ListItem = ({ findAndInsert, uniqueString }) => {
@@ -18,10 +17,10 @@ const ListItem = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				showChildren: true,
 				styles: {
-					small: listitemStyle,
-					medium: listitemStyle,
-					large: listitemStyle,
-					xlarge: listitemStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -30,10 +29,10 @@ const ListItem = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: listitemStyle,
-					medium: listitemStyle,
-					large: listitemStyle,
-					xlarge: listitemStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -42,10 +41,10 @@ const ListItem = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: listitemStyle,
-					medium: listitemStyle,
-					large: listitemStyle,
-					xlarge: listitemStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				ClickStyleWidth: {
 					changedSmall: false,

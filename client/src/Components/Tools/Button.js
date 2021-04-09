@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { buttonStyle } from '../Styles/buttonStyle'
 
 //This component is for adding Button element
 const Button = ({ findAndInsert, uniqueString }) => {
@@ -17,10 +16,10 @@ const Button = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				text: 'button',
 				styles: {
-					small: buttonStyle,
-					medium: buttonStyle,
-					large: buttonStyle,
-					xlarge: buttonStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -29,10 +28,10 @@ const Button = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: buttonStyle,
-					medium: buttonStyle,
-					large: buttonStyle,
-					xlarge: buttonStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -41,10 +40,10 @@ const Button = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: buttonStyle,
-					medium: buttonStyle,
-					large: buttonStyle,
-					xlarge: buttonStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				clickStyleWidth: {
 					changedSmall: false,

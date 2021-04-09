@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
-import { divStyle } from '../Styles/divStyle'
 
 //This component is for adding div element
 const Div = ({ findAndInsert, uniqueString }) => {
@@ -17,10 +16,10 @@ const Div = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				showChildren: true,
 				styles: {
-					small: divStyle,
-					medium: divStyle,
-					large: divStyle,
-					xlarge: divStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				styleWidth: {
 					changedSmall: false,
@@ -29,10 +28,10 @@ const Div = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				hoverStyles: {
-					small: divStyle,
-					medium: divStyle,
-					large: divStyle,
-					xlarge: divStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				hoverStyleWidth: {
 					changedSmall: false,
@@ -41,10 +40,10 @@ const Div = ({ findAndInsert, uniqueString }) => {
 					changeXlarge: false,
 				},
 				clickStyles: {
-					small: divStyle,
-					medium: divStyle,
-					large: divStyle,
-					xlarge: divStyle,
+					small: {},
+					medium: {},
+					large: {},
+					xlarge: {},
 				},
 				ClickStyleWidth: {
 					changedSmall: false,
