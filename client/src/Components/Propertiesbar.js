@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import Align from './Properties/PropertiesComponenets/Align'
 import Appearance from './Properties/PropertiesComponenets/Appearance'
+import DsProperties from './Properties/PropertiesComponenets/DsProperties'
 import Transform from './Properties/PropertiesComponenets/Transform'
 import Specific from './Properties/Specific'
 
@@ -40,6 +41,7 @@ const Propertiesbar = () => {
 						width={width}
 						activeElement={activeElement}
 					/>
+					<DsProperties />
 				</div>
 			</div>
 		</div>
