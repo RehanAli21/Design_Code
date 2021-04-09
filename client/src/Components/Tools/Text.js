@@ -29,6 +29,30 @@ const Text = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: textStyle,
+					medium: textStyle,
+					large: textStyle,
+					xlarge: textStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: textStyle,
+					medium: textStyle,
+					large: textStyle,
+					xlarge: textStyle,
+				},
+				ClickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 		]
 		//if inserting text into body

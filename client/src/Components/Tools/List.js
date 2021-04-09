@@ -29,6 +29,30 @@ const List = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: listStyle,
+					medium: listStyle,
+					large: listStyle,
+					xlarge: listStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: listStyle,
+					medium: listStyle,
+					large: listStyle,
+					xlarge: listStyle,
+				},
+				ClickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 			[],
 		]

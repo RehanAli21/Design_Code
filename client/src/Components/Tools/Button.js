@@ -28,6 +28,30 @@ const Button = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: buttonStyle,
+					medium: buttonStyle,
+					large: buttonStyle,
+					xlarge: buttonStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: buttonStyle,
+					medium: buttonStyle,
+					large: buttonStyle,
+					xlarge: buttonStyle,
+				},
+				clickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 		]
 		//if inserting Button into body

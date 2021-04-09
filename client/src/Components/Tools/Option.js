@@ -32,6 +32,30 @@ const Option = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: optionStyle,
+					medium: optionStyle,
+					large: optionStyle,
+					xlarge: optionStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: optionStyle,
+					medium: optionStyle,
+					large: optionStyle,
+					xlarge: optionStyle,
+				},
+				ClickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 		]
 		//if inserting option into body

@@ -29,6 +29,30 @@ const Image = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: imageStyle,
+					medium: imageStyle,
+					large: imageStyle,
+					xlarge: imageStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: imageStyle,
+					medium: imageStyle,
+					large: imageStyle,
+					xlarge: imageStyle,
+				},
+				ClickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 		]
 		//if inserting image into body

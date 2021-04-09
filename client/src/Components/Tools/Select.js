@@ -28,6 +28,30 @@ const Select = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: selectStyle,
+					medium: selectStyle,
+					large: selectStyle,
+					xlarge: selectStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: selectStyle,
+					medium: selectStyle,
+					large: selectStyle,
+					xlarge: selectStyle,
+				},
+				ClickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 			[],
 		]

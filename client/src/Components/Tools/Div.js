@@ -28,6 +28,30 @@ const Div = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: divStyle,
+					medium: divStyle,
+					large: divStyle,
+					xlarge: divStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: divStyle,
+					medium: divStyle,
+					large: divStyle,
+					xlarge: divStyle,
+				},
+				ClickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 			[],
 		]

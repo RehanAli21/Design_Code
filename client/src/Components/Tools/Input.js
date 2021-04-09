@@ -32,6 +32,30 @@ const Input = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
+				hoverStyles: {
+					small: inputStyle,
+					medium: inputStyle,
+					large: inputStyle,
+					xlarge: inputStyle,
+				},
+				hoverStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
+				clickStyles: {
+					small: inputStyle,
+					medium: inputStyle,
+					large: inputStyle,
+					xlarge: inputStyle,
+				},
+				ClickStyleWidth: {
+					changedSmall: false,
+					changedMedium: false,
+					changedLarge: false,
+					changeXlarge: false,
+				},
 			},
 		]
 		//if inserting input into body
