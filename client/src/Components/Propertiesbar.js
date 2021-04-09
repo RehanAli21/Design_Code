@@ -28,7 +28,9 @@ const Propertiesbar = () => {
 							ele &&
 							(ele.tagName === 'P' ||
 								ele.tagName === 'H1' ||
+								ele.tagName === 'H2' ||
 								ele.tagName === 'H3' ||
+								ele.tagName === 'H4' ||
 								ele.tagName === 'H5' ||
 								ele.tagName === 'UL' ||
 								ele.tagName === 'OL')
