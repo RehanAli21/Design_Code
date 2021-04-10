@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Filter = () => {
-	const { small, medium, large, xlarge } = useContext(PropertiesContext)
+	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 
 	const [brightness, setBrightness] = useState('')
 	const [contrast, setContrast] = useState('')
@@ -11,6 +11,24 @@ const Filter = () => {
 	const [hue, setHue] = useState('')
 	const [saturation, setSaturation] = useState('')
 	const [sepia, setSepia] = useState('')
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			let filter = ''
+			if (brightness !== '' && brightness !== '100%') filter += `brightness(${brightness})`
+			if (contrast !== '' && contrast !== '100%') filter += ` contrast(${contrast})`
+			if (blur !== '' && blur !== '0px') filter += ` blur(${blur})`
+			if (grayScale !== '' && grayScale !== '0%') filter += ` grayscale(${grayScale})`
+			if (hue !== '' && hue !== '0deg') filter += ` hue-rotate(${hue})`
+			if (saturation !== '' && saturation !== '100%') filter += ` saturate(${saturation})`
+			if (sepia !== '' && sepia !== '0%') filter += ` sepia(${sepia})`
+
+			setProperties(small, setSmall, 'filter', filter)
+			setProperties(medium, setMedium, 'filter', filter)
+			setProperties(large, setLarge, 'filter', filter)
+			setProperties(xlarge, setXlarge, 'filter', filter)
+		}
+	}, [brightness, contrast, blur, grayScale, hue, saturation, sepia])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
