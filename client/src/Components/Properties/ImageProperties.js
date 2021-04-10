@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
+import Filter from './PropertiesComponenets/Filter'
 
 const ImageProperties = () => {
 	const {
@@ -136,36 +137,39 @@ const ImageProperties = () => {
 	const changeImg = e => setImg(URL.createObjectURL(e.target.files[0]))
 
 	return (
-		<div className='borders btn-specific'>
-			<p className='second-heading' onClick={() => setShowImgProperties(!showImgProperties)}>
-				IMAGE PROPERTIES <span style={{ display: showImgProperties ? 'inline' : 'none' }}>&#9660;</span>
-				<span style={{ display: showImgProperties ? 'none' : 'inline' }}>&#9654;</span>
-			</p>
-			<div
-				style={{
-					display: showImgProperties ? 'grid' : 'none',
-					gridTemplateColumns: '20px 130px auto',
-					marginLeft: '25px',
-					marginTop: '20px',
-					textAlign: 'center',
-				}}>
-				<input
-					id='img-sl-checkbox'
-					onChange={e => setSeparateLine(e.target.checked)}
-					style={{ marginTop: '5px' }}
-					type='checkbox'
-				/>
-				<label>On Separate Line</label>
+		<React.Fragment>
+			<div className='borders btn-specific'>
+				<p className='second-heading' onClick={() => setShowImgProperties(!showImgProperties)}>
+					IMAGE PROPERTIES <span style={{ display: showImgProperties ? 'inline' : 'none' }}>&#9660;</span>
+					<span style={{ display: showImgProperties ? 'none' : 'inline' }}>&#9654;</span>
+				</p>
+				<div
+					style={{
+						display: showImgProperties ? 'grid' : 'none',
+						gridTemplateColumns: '20px 130px auto',
+						marginLeft: '25px',
+						marginTop: '20px',
+						textAlign: 'center',
+					}}>
+					<input
+						id='img-sl-checkbox'
+						onChange={e => setSeparateLine(e.target.checked)}
+						style={{ marginTop: '5px' }}
+						type='checkbox'
+					/>
+					<label>On Separate Line</label>
+				</div>
+				<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
+					<label>Img: </label>
+					<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />
+				</div>
+				<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
+					<label>Alt: </label>
+					<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
+				</div>
 			</div>
-			<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
-				<label>Img: </label>
-				<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />
-			</div>
-			<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
-				<label>Alt: </label>
-				<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
-			</div>
-		</div>
+			<Filter />
+		</React.Fragment>
 	)
 }
 
