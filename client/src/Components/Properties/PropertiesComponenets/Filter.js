@@ -49,36 +49,45 @@ const Filter = () => {
 
 	return (
 		<div className='borders btn-specific' style={{ position: 'relative' }}>
-			<p className='second-heading'>
+			<p className='second-heading' onClick={() => setShowFilterProperties(!showFilterProperties)}>
 				Filters <span style={{ display: showFilterProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showFilterProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<button style={{ padding: '5px 10px', position: 'absolute', top: '0px', right: '30px' }}>Reset</button>
-			<div className='two'>
+			<button
+				style={{
+					display: showFilterProperties ? 'block' : 'none',
+					padding: '5px 10px',
+					position: 'absolute',
+					top: '0px',
+					right: '30px',
+				}}>
+				Reset
+			</button>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Brightness:</label>
 				<input type='range' min='0' max='200' defaultValue='100' onChange={e => setBrightness(`${e.target.value}%`)} />
 			</div>
-			<div className='two'>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Contrast:</label>
 				<input type='range' min='0' max='200' defaultValue='100' onChange={e => setContrast(`${e.target.value}%`)} />
 			</div>
-			<div className='two'>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Blur: </label>
 				<input type='range' min='0' max='10' defaultValue='0' onChange={e => setBlur(`${e.target.value}px`)} />
 			</div>
-			<div className='two'>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>GrayScale: </label>
 				<input type='range' min='0' max='100' defaultValue='0' onChange={e => setGrayScale(`${e.target.value}%`)} />
 			</div>
-			<div className='two'>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Hue: </label>
 				<input type='range' min='0' max='360' defaultValue='0' onChange={e => setHue(`${e.target.value}deg`)} />
 			</div>
-			<div className='two'>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Saturation:</label>
 				<input type='range' min='0' max='200' defaultValue='100' onChange={e => setSaturation(`${e.target.value}%`)} />
 			</div>
-			<div className='two'>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Sepia: </label>
 				<input type='range' min='0' max='100' defaultValue='0' onChange={e => setSepia(`${e.target.value}%`)} />
 			</div>
