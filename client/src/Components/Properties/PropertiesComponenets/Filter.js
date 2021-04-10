@@ -2,7 +2,18 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Filter = () => {
-	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		showFilterProperties,
+		setShowFilterProperties,
+	} = useContext(PropertiesContext)
 
 	const [brightness, setBrightness] = useState('')
 	const [contrast, setContrast] = useState('')
@@ -37,8 +48,12 @@ const Filter = () => {
 	}
 
 	return (
-		<div className='borders btn-specific'>
-			<p className='second-heading'>Filters</p>
+		<div className='borders btn-specific' style={{ position: 'relative' }}>
+			<p className='second-heading'>
+				Filters <span style={{ display: showFilterProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showFilterProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<button style={{ padding: '5px 10px', position: 'absolute', top: '0px', right: '30px' }}>Reset</button>
 			<div className='two'>
 				<label>Brightness:</label>
 				<input type='range' min='0' max='200' defaultValue='100' onChange={e => setBrightness(`${e.target.value}%`)} />
