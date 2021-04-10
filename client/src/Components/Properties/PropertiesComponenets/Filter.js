@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Filter = () => {
@@ -14,6 +15,7 @@ const Filter = () => {
 		showFilterProperties,
 		setShowFilterProperties,
 	} = useContext(PropertiesContext)
+	const { width, activeElement } = useContext(PageContext)
 
 	const [brightness, setBrightness] = useState('')
 	const [contrast, setContrast] = useState('')
@@ -22,6 +24,30 @@ const Filter = () => {
 	const [hue, setHue] = useState('')
 	const [saturation, setSaturation] = useState('')
 	const [sepia, setSepia] = useState('')
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (large.filter) {
+				const filters = large.filter.split(' ')
+				filters.forEach(e => {
+					const filterName = e.split('(')[0]
+					const ele = document.getElementById(`filter-${filterName}-input`)
+					if (ele) {
+						if (filterName === 'blur') {
+							const value = e.split('(')[1].split(')')[0].split('p')[0]
+							ele.value = value
+						} else if (filterName === 'hue-rotate') {
+							const value = e.split('(')[1].split(')')[0].split('d')[0]
+							ele.value = value
+						} else {
+							const value = e.split('(')[1].split(')')[0].split('%')[0]
+							ele.value = value
+						}
+					}
+				})
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
