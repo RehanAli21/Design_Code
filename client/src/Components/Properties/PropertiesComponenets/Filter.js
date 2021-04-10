@@ -26,14 +26,14 @@ const Filter = () => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			let filter = ''
-			if (brightness !== '' && brightness !== '100%') filter += `brightness(${brightness})`
+			if (brightness !== '' && brightness !== '100%') filter += ` brightness(${brightness})`
 			if (contrast !== '' && contrast !== '100%') filter += ` contrast(${contrast})`
 			if (blur !== '' && blur !== '0px') filter += ` blur(${blur})`
 			if (grayScale !== '' && grayScale !== '0%') filter += ` grayscale(${grayScale})`
 			if (hue !== '' && hue !== '0deg') filter += ` hue-rotate(${hue})`
 			if (saturation !== '' && saturation !== '100%') filter += ` saturate(${saturation})`
 			if (sepia !== '' && sepia !== '0%') filter += ` sepia(${sepia})`
-
+			filter = filter.substr(1, filter.length - 1)
 			setProperties(small, setSmall, 'filter', filter)
 			setProperties(medium, setMedium, 'filter', filter)
 			setProperties(large, setLarge, 'filter', filter)
@@ -47,6 +47,24 @@ const Filter = () => {
 		setObj(temp)
 	}
 
+	const reset = () => {
+		setBrightness('')
+		setContrast('')
+		setBlur('')
+		setGrayScale('')
+		setHue('')
+		setSaturation('')
+		setSepia('')
+
+		document.getElementById('filter-brightness-input').value = '100'
+		document.getElementById('filter-contrast-input').value = '100'
+		document.getElementById('filter-blur-input').value = '0'
+		document.getElementById('filter-grayscale-input').value = '0'
+		document.getElementById('filter-hue-rotate-input').value = '0'
+		document.getElementById('filter-saturate-input').value = '100'
+		document.getElementById('filter-sepia-input').value = '0'
+	}
+
 	return (
 		<div className='borders btn-specific' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowFilterProperties(!showFilterProperties)}>
@@ -54,6 +72,7 @@ const Filter = () => {
 				<span style={{ display: showFilterProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
 			<button
+				onClick={reset}
 				style={{
 					display: showFilterProperties ? 'block' : 'none',
 					padding: '5px 10px',
@@ -65,31 +84,80 @@ const Filter = () => {
 			</button>
 			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Brightness:</label>
-				<input type='range' min='0' max='200' defaultValue='100' onChange={e => setBrightness(`${e.target.value}%`)} />
+				<input
+					id='filter-brightness-input'
+					type='range'
+					min='0'
+					max='200'
+					defaultValue='100'
+					onChange={e => setBrightness(`${e.target.value}%`)}
+				/>
 			</div>
 			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Contrast:</label>
-				<input type='range' min='0' max='200' defaultValue='100' onChange={e => setContrast(`${e.target.value}%`)} />
+				<input
+					id='filter-contrast-input'
+					type='range'
+					min='0'
+					max='200'
+					defaultValue='100'
+					onChange={e => setContrast(`${e.target.value}%`)}
+				/>
 			</div>
 			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Blur: </label>
-				<input type='range' min='0' max='10' defaultValue='0' onChange={e => setBlur(`${e.target.value}px`)} />
+				<input
+					id='filter-blur-input'
+					type='range'
+					min='0'
+					max='10'
+					defaultValue='0'
+					onChange={e => setBlur(`${e.target.value}px`)}
+				/>
 			</div>
 			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>GrayScale: </label>
-				<input type='range' min='0' max='100' defaultValue='0' onChange={e => setGrayScale(`${e.target.value}%`)} />
+				<input
+					id='filter-grayscale-input'
+					type='range'
+					min='0'
+					max='100'
+					defaultValue='0'
+					onChange={e => setGrayScale(`${e.target.value}%`)}
+				/>
 			</div>
 			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Hue: </label>
-				<input type='range' min='0' max='360' defaultValue='0' onChange={e => setHue(`${e.target.value}deg`)} />
+				<input
+					id='filter-hue-rotate-input'
+					type='range'
+					min='0'
+					max='360'
+					defaultValue='0'
+					onChange={e => setHue(`${e.target.value}deg`)}
+				/>
 			</div>
 			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Saturation:</label>
-				<input type='range' min='0' max='200' defaultValue='100' onChange={e => setSaturation(`${e.target.value}%`)} />
+				<input
+					id='filter-saturate-input'
+					type='range'
+					min='0'
+					max='200'
+					defaultValue='100'
+					onChange={e => setSaturation(`${e.target.value}%`)}
+				/>
 			</div>
 			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
 				<label>Sepia: </label>
-				<input type='range' min='0' max='100' defaultValue='0' onChange={e => setSepia(`${e.target.value}%`)} />
+				<input
+					id='filter-sepia-input'
+					type='range'
+					min='0'
+					max='100'
+					defaultValue='0'
+					onChange={e => setSepia(`${e.target.value}%`)}
+				/>
 			</div>
 		</div>
 	)
