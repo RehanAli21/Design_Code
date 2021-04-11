@@ -524,14 +524,37 @@ const DivProperties = ({ width, activeElement }) => {
 	const setRowsValues = (e, i, j) => {
 		const temp = []
 		gridRows.forEach(ele => temp.push(ele))
-		temp[i][j] = e.target.value
+		for (let k = 0; k < 12; k++) {
+			if (k === i) {
+				temp[i][j] = e.target.value
+			} else if (k !== i) {
+				const input = document.getElementById(`r-c-rowInput${k}`)
+				const select = document.getElementById(`r-c-rowSelect${k}`)
+				if (input && select) {
+					temp[k][0] = input.value
+					temp[k][1] = select.value
+				}
+			}
+		}
 		setGridRows(temp)
 	}
 
 	const setColsValues = (e, i, j) => {
 		const temp = []
 		gridCols.forEach(ele => temp.push(ele))
-		temp[i][j] = e.target.value
+		for (let k = 0; k < 12; k++) {
+			if (k === i) {
+				temp[i][j] = e.target.value
+			} else if (k !== i) {
+				const input = document.getElementById(`r-c-colInput${k}`)
+				const select = document.getElementById(`r-c-colSelect${k}`)
+				if (input && select) {
+					temp[k][0] = input.value
+					temp[k][1] = select.value
+				}
+			}
+		}
+
 		setGridCols(temp)
 	}
 
@@ -598,7 +621,7 @@ const DivProperties = ({ width, activeElement }) => {
 					<div className='two'>
 						<div className='rows'>
 							<div className='invalue' style={{ display: rowsNum > 0 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput0' onChange={e => setRowsValues(e, 0, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput0' onChange={e => setRowsValues(e, 0, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect0' onChange={e => setRowsValues(e, 0, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -607,7 +630,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 1 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput1' onChange={e => setRowsValues(e, 1, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput1' onChange={e => setRowsValues(e, 1, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect1' onChange={e => setRowsValues(e, 1, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -616,7 +639,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 2 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput2' onChange={e => setRowsValues(e, 2, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput2' onChange={e => setRowsValues(e, 2, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect2' onChange={e => setRowsValues(e, 2, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -625,7 +648,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 3 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput3' onChange={e => setRowsValues(e, 3, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput3' onChange={e => setRowsValues(e, 3, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect3' onChange={e => setRowsValues(e, 3, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -634,7 +657,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 4 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput4' onChange={e => setRowsValues(e, 4, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput4' onChange={e => setRowsValues(e, 4, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect4' onChange={e => setRowsValues(e, 4, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -643,7 +666,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 5 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput5' onChange={e => setRowsValues(e, 5, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput5' onChange={e => setRowsValues(e, 5, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect5' onChange={e => setRowsValues(e, 5, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -652,7 +675,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 6 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput6' onChange={e => setRowsValues(e, 6, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput6' onChange={e => setRowsValues(e, 6, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect6' onChange={e => setRowsValues(e, 6, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -661,7 +684,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 7 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput7' onChange={e => setRowsValues(e, 7, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput7' onChange={e => setRowsValues(e, 7, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect7' onChange={e => setRowsValues(e, 7, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -670,7 +693,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 8 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput8' onChange={e => setRowsValues(e, 8, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput8' onChange={e => setRowsValues(e, 8, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect8' onChange={e => setRowsValues(e, 8, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -679,7 +702,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 9 ? 'grid' : 'none' }}>
-								<input id='r-c-rowInput9' onChange={e => setRowsValues(e, 9, 0)} type='number' defaultValue='0' />
+								<input id='r-c-rowInput9' onChange={e => setRowsValues(e, 9, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect9' onChange={e => setRowsValues(e, 9, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -688,12 +711,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 10 ? 'grid' : 'none' }}>
-								<input
-									id='r-c-rowInput10'
-									onChange={e => setRowsValues(e, 10, 0)}
-									type='number'
-									defaultValue='0'
-								/>
+								<input id='r-c-rowInput10' onChange={e => setRowsValues(e, 10, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect10' onChange={e => setRowsValues(e, 10, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -702,12 +720,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: rowsNum > 11 ? 'grid' : 'none' }}>
-								<input
-									id='r-c-rowInput11'
-									onChange={e => setRowsValues(e, 11, 0)}
-									type='number'
-									defaultValue='0'
-								/>
+								<input id='r-c-rowInput11' onChange={e => setRowsValues(e, 11, 0)} type='number' min='0' />
 								<select id='r-c-rowSelect11' onChange={e => setRowsValues(e, 11, 1)}>
 									<option value='px'>PX</option>
 									<option value='vh'>VH</option>
@@ -718,7 +731,7 @@ const DivProperties = ({ width, activeElement }) => {
 						</div>
 						<div className='cols'>
 							<div className='invalue' style={{ display: colsNum > 0 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput0' onChange={e => setColsValues(e, 0, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput0' onChange={e => setColsValues(e, 0, 0)} type='number' min='0' />
 								<select id='r-c-colSelect0' onChange={e => setColsValues(e, 0, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -729,7 +742,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 1 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput1' onChange={e => setColsValues(e, 1, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput1' onChange={e => setColsValues(e, 1, 0)} type='number' min='0' />
 								<select id='r-c-colSelect1' onChange={e => setColsValues(e, 1, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -740,7 +753,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 2 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput2' onChange={e => setColsValues(e, 2, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput2' onChange={e => setColsValues(e, 2, 0)} type='number' min='0' />
 								<select id='r-c-colSelect2' onChange={e => setColsValues(e, 2, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -751,7 +764,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 3 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput3' onChange={e => setColsValues(e, 3, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput3' onChange={e => setColsValues(e, 3, 0)} type='number' min='0' />
 								<select id='r-c-colSelect3' onChange={e => setColsValues(e, 3, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -762,7 +775,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 4 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput4' onChange={e => setColsValues(e, 4, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput4' onChange={e => setColsValues(e, 4, 0)} type='number' min='0' />
 								<select id='r-c-colSelect4' onChange={e => setColsValues(e, 4, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -773,7 +786,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 5 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput5' onChange={e => setColsValues(e, 5, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput5' onChange={e => setColsValues(e, 5, 0)} type='number' min='0' />
 								<select id='r-c-colSelect5' onChange={e => setColsValues(e, 5, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -784,7 +797,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 6 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput6' onChange={e => setColsValues(e, 6, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput6' onChange={e => setColsValues(e, 6, 0)} type='number' min='0' />
 								<select id='r-c-colSelect6' onChange={e => setColsValues(e, 6, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -795,7 +808,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 7 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput7' onChange={e => setColsValues(e, 7, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput7' onChange={e => setColsValues(e, 7, 0)} type='number' min='0' />
 								<select id='r-c-colSelect7' onChange={e => setColsValues(e, 7, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -806,7 +819,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 8 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput8' onChange={e => setColsValues(e, 8, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput8' onChange={e => setColsValues(e, 8, 0)} type='number' min='0' />
 								<select id='r-c-colSelect8' onChange={e => setColsValues(e, 8, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -817,7 +830,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 9 ? 'grid' : 'none' }}>
-								<input id='r-c-colInput9' onChange={e => setColsValues(e, 9, 0)} type='number' defaultValue='0' />
+								<input id='r-c-colInput9' onChange={e => setColsValues(e, 9, 0)} type='number' min='0' />
 								<select id='r-c-colSelect9' onChange={e => setColsValues(e, 9, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -828,12 +841,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 10 ? 'grid' : 'none' }}>
-								<input
-									id='r-c-colInput10'
-									onChange={e => setColsValues(e, 10, 0)}
-									type='number'
-									defaultValue='0'
-								/>
+								<input id='r-c-colInput10' onChange={e => setColsValues(e, 10, 0)} type='number' min='0' />
 								<select id='r-c-colSelect10' onChange={e => setColsValues(e, 10, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
@@ -844,12 +852,7 @@ const DivProperties = ({ width, activeElement }) => {
 								</select>
 							</div>
 							<div className='invalue' style={{ display: colsNum > 11 ? 'grid' : 'none' }}>
-								<input
-									id='r-c-colInput11'
-									onChange={e => setColsValues(e, 11, 0)}
-									type='number'
-									defaultValue='0'
-								/>
+								<input id='r-c-colInput11' onChange={e => setColsValues(e, 11, 0)} type='number' min='0' />
 								<select id='r-c-colSelect11' onChange={e => setColsValues(e, 11, 1)}>
 									<option value='%'>%</option>
 									<option value='vw'>VW</option>
