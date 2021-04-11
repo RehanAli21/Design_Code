@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import Filter from './PropertiesComponenets/Filter'
+import GridColumn from './PropertiesComponenets/GridColumn'
 
 const ImageProperties = () => {
 	const {
@@ -167,6 +168,7 @@ const ImageProperties = () => {
 					<label>Alt: </label>
 					<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 				</div>
+				<GridColumn activeElement={activeElement} />
 			</div>
 			<Filter />
 		</React.Fragment>
