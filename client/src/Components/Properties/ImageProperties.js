@@ -168,7 +168,7 @@ const ImageProperties = () => {
 					<label>Alt: </label>
 					<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 				</div>
-				<GridColumn activeElement={activeElement} />
+				<GridColumn />
 			</div>
 			<Filter />
 		</React.Fragment>
