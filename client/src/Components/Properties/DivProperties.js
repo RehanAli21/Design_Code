@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import BGImage from './PropertiesComponenets/BGImage'
+import GridColumn from './PropertiesComponenets/GridColumn'
 
 const DivProperties = ({ width, activeElement }) => {
 	const {
@@ -535,11 +536,12 @@ const DivProperties = ({ width, activeElement }) => {
 	}
 
 	return (
-		<div className='borders r-c'>
+		<div className='borders r-c btn-specific'>
 			<p className='second-heading' onClick={() => setShowDivProperties(!showDivProperties)}>
 				DIV PROPERTIES <span style={{ display: showDivProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showDivProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
+			<GridColumn />
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
 			<div style={{ display: showDivProperties ? 'grid' : 'none' }} className='grid'>
 				<input onChange={e => setGrid(e.target.checked)} id='r-c-grid' type='checkbox' />
