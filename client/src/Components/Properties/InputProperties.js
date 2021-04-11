@@ -3,6 +3,7 @@ import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
 import Font from './PropertiesComponenets/Font'
+import GridColumn from './PropertiesComponenets/GridColumn'
 
 const InputProperties = () => {
 	const {
@@ -262,6 +263,7 @@ const InputProperties = () => {
 					INPUT PROPERTIES <span style={{ display: showInputProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showInputProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
+				<GridColumn />
 				<div
 					style={{
 						display: showInputProperties ? 'grid' : 'none',
