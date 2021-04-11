@@ -23,8 +23,29 @@ const GridColumn = () => {
 	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
-	const [colNum, setColNum] = useState('')
+	const [colNum, setColNum] = useState(0)
 	let cols = 0
+
+	//For default values
+	useEffect(() => {
+		const input = document.getElementById('gridcol-input')
+
+		if (width < 540 && small.gridColumn) {
+			const num = small.gridColumn === '' ? 0 : small.gridColumn.split('/')[0]
+			input.value = num
+		} else if (width < 720 && medium.gridColumn) {
+			const num = medium.gridColumn === '' ? 0 : medium.gridColumn.split('/')[0]
+			input.value = num
+		} else if (width < 970 && large.gridColumn) {
+			const num = large.gridColumn === '' ? 0 : large.gridColumn.split('/')[0]
+			input.value = num
+		} else {
+			if (xlarge.gridColumn) {
+				const num = xlarge.gridColumn === '' ? 0 : xlarge.gridColumn.split('/')[0]
+				input.value = num
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
 		if (small && medium && large && xlarge && cols !== 0) {
