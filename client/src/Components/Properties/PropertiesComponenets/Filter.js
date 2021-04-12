@@ -59,7 +59,9 @@ const Filter = () => {
 			if (hue !== '' && hue !== '0deg') filter += ` hue-rotate(${hue})`
 			if (saturation !== '' && saturation !== '100%') filter += ` saturate(${saturation})`
 			if (sepia !== '' && sepia !== '0%') filter += ` sepia(${sepia})`
-			filter = filter.substr(1, filter.length - 1)
+
+			if (filter !== '') filter = filter.substr(1, filter.length - 1)
+
 			setProperties(small, setSmall, 'filter', filter)
 			setProperties(medium, setMedium, 'filter', filter)
 			setProperties(large, setLarge, 'filter', filter)

@@ -39,7 +39,7 @@ const DsProperties = () => {
 			if (translateX !== '' && translateX !== 0) transform += ` translateX(${translateX})`
 			if (translateY !== '' && translateY !== 0) transform += ` translateY(${translateY})`
 
-			transform = transform.substr(1, transform.length - 1)
+			if (transform !== '') transform = transform.substr(1, transform.length - 1)
 
 			if (width < 540) {
 				setProperties(small, setSmall, 'transform', transform)
