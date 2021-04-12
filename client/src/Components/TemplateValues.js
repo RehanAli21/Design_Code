@@ -118,7 +118,7 @@ const TemplateValues = () => {
 							max='10'
 							type='number'
 							id='t-c-Numinput'
-							onChange={e => setColorNum(e.target.value)}
+							onChange={e => setColorNum(e.target.value > 10 ? 10 : e.target.value)}
 						/>
 					</div>
 					<div className='two'>{showColorsOption()}</div>
@@ -132,7 +132,7 @@ const TemplateValues = () => {
 							max='10'
 							type='number'
 							id='t-f-Numinput'
-							onChange={e => setFontSizeNum(e.target.value)}
+							onChange={e => setFontSizeNum(e.target.value > 10 ? 10 : e.target.value)}
 						/>
 					</div>
 					<div className='two'>{showFontsOptions()}</div>
