@@ -29,6 +29,48 @@ const DsProperties = () => {
 	const [translateX, setTranslateX] = useState('')
 	const [translateY, setTranslateY] = useState('')
 
+	//For setting default values
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			let transforms
+			if (small.transform) {
+				transforms = small.transform.split(' ')
+			} else if (medium.transform) {
+				transforms = medium.transform.split(' ')
+			} else if (large.transform) {
+				transforms = large.transform.split(' ')
+			} else if (xlarge.transform) {
+				transforms = xlarge.transform.split(' ')
+			}
+
+			if (transforms) {
+				transforms.forEach(e => {
+					const tranformName = e.split('(')[0]
+					const ele = document.getElementById(`extra-${tranformName}`)
+					if (ele) {
+						if (tranformName === 'scaleX' || tranformName === 'scaleY') {
+							const value = e.split('(')[1].split(')')[0]
+							ele.value = value
+						} else if (tranformName === 'rotate') {
+							const value = e.split('(')[1].split(')')[0].split('d')[0]
+							ele.value = value
+						} else {
+							const value = e.split('(')[1].split(')')[0].split('p')[0]
+							ele.value = value
+						}
+					}
+				})
+			} else {
+				const inputsNames = ['scaleX', 'scaleY', 'rotate', 'translateX', 'translateY']
+
+				inputsNames.forEach(e => {
+					const ele = document.getElementById(`extra-${e}`)
+					if (ele) ele.value = 0
+				})
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
+
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			let transform = ''
@@ -84,6 +126,7 @@ const DsProperties = () => {
 					id='extra-scaleX'
 					min='0'
 					step='0.1'
+					defaultValue='0'
 					className='numberinput'
 					type='number'
 					placeholder='ScaleX'
@@ -96,6 +139,7 @@ const DsProperties = () => {
 					id='extra-scaleY'
 					min='0'
 					step='0.1'
+					defaultValue='0'
 					className='numberinput'
 					type='number'
 					placeholder='ScaleY'
@@ -108,6 +152,7 @@ const DsProperties = () => {
 					id='extra-rotate'
 					min='0'
 					max='360'
+					defaultValue='0'
 					className='numberinput'
 					type='number'
 					placeholder='RotateX'
@@ -119,6 +164,7 @@ const DsProperties = () => {
 				<input
 					id='extra-translateX'
 					min='0'
+					defaultValue='0'
 					className='numberinput'
 					type='number'
 					placeholder='TranslateX'
@@ -130,6 +176,7 @@ const DsProperties = () => {
 				<input
 					id='extra-translateY'
 					min='0'
+					defaultValue='0'
 					className='numberinput'
 					type='number'
 					placeholder='TranslateY'
