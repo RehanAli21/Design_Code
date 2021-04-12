@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { PageContext } from '../../Contexts/PageContext'
 
@@ -6,7 +6,6 @@ const DsProperties = () => {
 	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
-	const [origin, setOrigin] = useState('')
 	const [scaleX, setScaleX] = useState('')
 	const [scaleY, setScaleY] = useState('')
 	const [rotate, setRotate] = useState('')
@@ -16,16 +15,6 @@ const DsProperties = () => {
 	return (
 		<div className='btn-specific'>
 			<p className='second-heading'>EXTRA</p>
-			<div className='two'>
-				<label>Origin:</label>
-				<select onChange={e => setOrigin(e.target.value)}>
-					<option value='center'>Center</option>
-					<option value='left'>Left</option>
-					<option value='right'>Right</option>
-					<option value='top'>Top</option>
-					<option value='bottom'>Bottom</option>
-				</select>
-			</div>
 			<div className='two'>
 				<label>ScaleX: </label>
 				<input
