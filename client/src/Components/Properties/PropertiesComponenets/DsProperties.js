@@ -3,7 +3,24 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { PageContext } from '../../Contexts/PageContext'
 
 const DsProperties = () => {
-	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
 	const [scaleX, setScaleX] = useState('')
@@ -11,6 +28,52 @@ const DsProperties = () => {
 	const [rotate, setRotate] = useState('')
 	const [translateX, setTranslateX] = useState('')
 	const [translateY, setTranslateY] = useState('')
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			let transform = ''
+
+			if (scaleX !== '' && scaleX !== 0) transform += ` scaleX(${scaleX})`
+			if (scaleY !== '' && scaleY !== 0) transform += ` scaleY(${scaleY})`
+			if (rotate !== '' && rotate !== 0) transform += ` rotate(${rotate})`
+			if (translateX !== '' && translateX !== 0) transform += ` translateX(${translateX})`
+			if (translateY !== '' && translateY !== 0) transform += ` translateY(${translateY})`
+
+			transform = transform.substr(1, transform.length - 1)
+
+			if (width < 540) {
+				setProperties(small, setSmall, 'transform', transform)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'transform', transform)
+				if (!changedLarge) setProperties(large, setLarge, 'transform', transform)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transform', transform)
+			} else if (width < 720) {
+				setProperties(medium, setMedium, 'transform', transform)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'transform', transform)
+				if (!changedLarge) setProperties(large, setLarge, 'transform', transform)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transform', transform)
+			} else if (width < 970) {
+				setProperties(large, setLarge, 'transform', transform)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'transform', transform)
+				if (!changedMedium) setProperties(medium, setMedium, 'transform', transform)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transform', transform)
+			} else {
+				setProperties(xlarge, setXlarge, 'transform', transform)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'transform', transform)
+				if (!changedMedium) setProperties(medium, setMedium, 'transform', transform)
+				if (!changedLarge) setProperties(large, setLarge, 'transform', transform)
+			}
+		}
+	}, [scaleX, scaleY, rotate, translateX, translateY])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
 
 	return (
 		<div className='btn-specific'>
