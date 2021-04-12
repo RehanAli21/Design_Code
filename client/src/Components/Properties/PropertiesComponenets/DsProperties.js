@@ -20,6 +20,8 @@ const DsProperties = () => {
 		setChangedLarge,
 		changedXlarge,
 		setChangedXlarge,
+		showExtraProperties,
+		setShowExtraProperties,
 	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
@@ -119,8 +121,11 @@ const DsProperties = () => {
 
 	return (
 		<div className='btn-specific'>
-			<p className='second-heading'>EXTRA</p>
-			<div className='two'>
+			<p className='second-heading' onClick={() => setShowExtraProperties(!showExtraProperties)}>
+				EXTRA <span style={{ display: showExtraProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showExtraProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div className='two' style={{ display: showExtraProperties ? 'grid' : 'none' }}>
 				<label>ScaleX: </label>
 				<input
 					id='extra-scaleX'
@@ -133,7 +138,7 @@ const DsProperties = () => {
 					onChange={e => setScaleX(e.target.value)}
 				/>
 			</div>
-			<div className='two'>
+			<div className='two' style={{ display: showExtraProperties ? 'grid' : 'none' }}>
 				<label>ScaleY: </label>
 				<input
 					id='extra-scaleY'
@@ -146,7 +151,7 @@ const DsProperties = () => {
 					onChange={e => setScaleY(e.target.value)}
 				/>
 			</div>
-			<div className='two'>
+			<div className='two' style={{ display: showExtraProperties ? 'grid' : 'none' }}>
 				<label>Rotate: </label>
 				<input
 					id='extra-rotate'
@@ -159,7 +164,7 @@ const DsProperties = () => {
 					onChange={e => setRotate(`${e.target.value > 360 ? 360 : e.target.value}deg`)}
 				/>
 			</div>
-			<div className='two'>
+			<div className='two' style={{ display: showExtraProperties ? 'grid' : 'none' }}>
 				<label>TranslateX: </label>
 				<input
 					id='extra-translateX'
@@ -171,7 +176,7 @@ const DsProperties = () => {
 					onChange={e => setTranslateX(`${e.target.value}px`)}
 				/>
 			</div>
-			<div className='two'>
+			<div className='two' style={{ display: showExtraProperties ? 'grid' : 'none' }}>
 				<label>TranslateY: </label>
 				<input
 					id='extra-translateY'
