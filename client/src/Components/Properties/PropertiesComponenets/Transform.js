@@ -259,7 +259,12 @@ const Transform = ({ width, activeElement }) => {
 						min='0'
 						max={widthUnit === '%' ? '100' : ''}
 					/>
-					<select id='a-t-ws' onChange={e => setWidthUnit(e.target.value.toLowerCase())}>
+					<select
+						id='a-t-ws'
+						onChange={e => {
+							if (e.target.value === '%' && widths > 100) setWidths(100)
+							setWidthUnit(e.target.value.toLowerCase())
+						}}>
 						<option>PX</option>
 						<option>%</option>
 						<option>REM</option>
@@ -275,7 +280,12 @@ const Transform = ({ width, activeElement }) => {
 						min='0'
 						max={heightUnit === '%' ? '100' : ''}
 					/>
-					<select id='a-t-hs' onChange={e => setHeighthUnit(e.target.value.toLowerCase())}>
+					<select
+						id='a-t-hs'
+						onChange={e => {
+							if (e.target.value === '%' && heights > 100) setHeights(100)
+							setHeighthUnit(e.target.value.toLowerCase())
+						}}>
 						<option>PX</option>
 						<option>VH</option>
 						<option>%</option>
