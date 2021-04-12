@@ -126,7 +126,7 @@ const BGImage = ({ width, activeElement, display }) => {
 				<input id='div-bg-checkbox' onChange={e => setbgImg(e.target.checked)} type='checkbox' />
 				<label>Background Image: </label>
 			</div>
-			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px' }} className='div-bg-img'>
+			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px', marginTop: '10px' }} className='div-bg-img'>
 				<div className='two'>
 					<label>Image: </label>
 					<input id='div-bgImg-input' type='file' accept='image/*' onChange={e => changeImg(e)} />
