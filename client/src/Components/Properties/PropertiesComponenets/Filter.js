@@ -24,6 +24,7 @@ const Filter = () => {
 	const [hue, setHue] = useState('')
 	const [saturation, setSaturation] = useState('')
 	const [sepia, setSepia] = useState('')
+	const [opacity, setOpacity] = useState('')
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -38,6 +39,9 @@ const Filter = () => {
 							ele.value = value
 						} else if (filterName === 'hue-rotate') {
 							const value = e.split('(')[1].split(')')[0].split('d')[0]
+							ele.value = value
+						} else if (filterName === 'opacity') {
+							const value = e.split('(')[1].split(')')[0]
 							ele.value = value
 						} else {
 							const value = e.split('(')[1].split(')')[0].split('%')[0]
@@ -59,6 +63,7 @@ const Filter = () => {
 			if (hue !== '' && hue !== '0deg') filter += ` hue-rotate(${hue})`
 			if (saturation !== '' && saturation !== '100%') filter += ` saturate(${saturation})`
 			if (sepia !== '' && sepia !== '0%') filter += ` sepia(${sepia})`
+			if (opacity !== '' && opacity !== 1) filter += ` opacity(${opacity})`
 
 			if (filter !== '') filter = filter.substr(1, filter.length - 1)
 
@@ -67,7 +72,7 @@ const Filter = () => {
 			setProperties(large, setLarge, 'filter', filter)
 			setProperties(xlarge, setXlarge, 'filter', filter)
 		}
-	}, [brightness, contrast, blur, grayScale, hue, saturation, sepia])
+	}, [brightness, contrast, blur, grayScale, hue, saturation, sepia, opacity])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -83,6 +88,7 @@ const Filter = () => {
 		setHue('')
 		setSaturation('')
 		setSepia('')
+		setOpacity('')
 
 		document.getElementById('filter-brightness-input').value = '100'
 		document.getElementById('filter-contrast-input').value = '100'
@@ -91,6 +97,7 @@ const Filter = () => {
 		document.getElementById('filter-hue-rotate-input').value = '0'
 		document.getElementById('filter-saturate-input').value = '100'
 		document.getElementById('filter-sepia-input').value = '0'
+		document.getElementById('filter-opacity-input').value = '1'
 	}
 
 	return (
@@ -185,6 +192,18 @@ const Filter = () => {
 					max='100'
 					defaultValue='0'
 					onChange={e => setSepia(`${e.target.value}%`)}
+				/>
+			</div>
+			<div style={{ display: showFilterProperties ? 'grid' : 'none' }} className='two'>
+				<label>Opacity: </label>
+				<input
+					id='filter-opacity-input'
+					type='range'
+					min='0'
+					max='1'
+					step='0.1'
+					defaultValue='1'
+					onChange={e => setOpacity(e.target.value)}
 				/>
 			</div>
 		</div>
