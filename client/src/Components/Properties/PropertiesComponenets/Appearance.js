@@ -27,7 +27,6 @@ const Appearance = ({ display, width, activeElement }) => {
 
 	const [showBorderSection, setShowBorderSection] = useState(false)
 	const [showShadowSection, setShowShadowSection] = useState(false)
-	const [opacity, setOpacity] = useState(1)
 	const [bgColor, setBgColor] = useState(`#ffffff`)
 	const [customBgColor, setCustomBgColor] = useState(true)
 	const [paddingX, setPaddingX] = useState('')
@@ -68,31 +67,31 @@ const Appearance = ({ display, width, activeElement }) => {
 			if (large.border) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = RGBToHex(large.border.split(' ')[2])
+				bColorInput.value = large.border.split(' ')[2]
 				bSizeInput.value = large.border.split(' ')[0].split('p')[0]
 				bTypeInput.selectedIndex = borderTypeIndex(large.border.split(' ')[1])
 			} else if (large.borderTop) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = RGBToHex(large.borderTop.split(' ')[2])
+				bColorInput.value = large.borderTop.split(' ')[2]
 				bSizeInput.value = large.borderTop.split(' ')[0].split('p')[0]
 				bTypeInput.selectedIndex = borderTypeIndex(large.borderTop.split(' ')[1])
 			} else if (large.borderBottom) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = RGBToHex(large.borderBottom.split(' ')[2])
+				bColorInput.value = large.borderBottom.split(' ')[2]
 				bSizeInput.value = large.borderBottom.split(' ')[0].split('p')[0]
 				bTypeInput.selectedIndex = borderTypeIndex(large.borderBottom.split(' ')[1])
 			} else if (large.borderLeft) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = RGBToHex(large.borderLeft.split(' ')[2])
+				bColorInput.value = large.borderLeft.split(' ')[2]
 				bSizeInput.value = large.borderLeft.split(' ')[0].split('p')[0]
 				bTypeInput.selectedIndex = borderTypeIndex(large.borderLeft.split(' ')[1])
 			} else if (large.borderRight) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = RGBToHex(large.borderRight.split(' ')[2])
+				bColorInput.value = large.borderRight.split(' ')[2]
 				bSizeInput.value = large.borderRight.split(' ')[0].split('p')[0]
 				bTypeInput.selectedIndex = borderTypeIndex(large.borderRight.split(' ')[1])
 			} else {
@@ -108,7 +107,7 @@ const Appearance = ({ display, width, activeElement }) => {
 				sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
 				sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
 				sBlurInput.value = large.boxShadow.split(' ')[2].split('p')[0]
-				sColorInput.value = RGBToHex(large.boxShadow.split(' ')[3])
+				sColorInput.value = large.boxShadow.split(' ')[3]
 				sActiveInput.checked = true
 				setShowShadowSection(true)
 			} else {
@@ -121,7 +120,7 @@ const Appearance = ({ display, width, activeElement }) => {
 			}
 
 			if (width < 540) {
-				bgColorInput.value = small.backgroundColor ? RGBToHex(small.backgroundColor) : '#ffffff'
+				bgColorInput.value = small.backgroundColor ? small.backgroundColor : '#ffffff'
 				if (small.padding) {
 					const p = small.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -131,7 +130,7 @@ const Appearance = ({ display, width, activeElement }) => {
 					paddingXInput.value = 0
 				}
 			} else if (width < 720) {
-				bgColorInput.value = medium.backgroundColor ? RGBToHex(medium.backgroundColor) : '#ffffff'
+				bgColorInput.value = medium.backgroundColor ? medium.backgroundColor : '#ffffff'
 				if (medium.padding) {
 					const p = medium.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -141,7 +140,7 @@ const Appearance = ({ display, width, activeElement }) => {
 					paddingXInput.value = 0
 				}
 			} else if (width < 970) {
-				bgColorInput.value = large.backgroundColor ? RGBToHex(large.backgroundColor) : '#ffffff'
+				bgColorInput.value = large.backgroundColor ? large.backgroundColor : '#ffffff'
 				if (large.padding) {
 					const p = large.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -151,7 +150,7 @@ const Appearance = ({ display, width, activeElement }) => {
 					paddingXInput.value = 0
 				}
 			} else {
-				bgColorInput.value = xlarge.backgroundColor ? RGBToHex(xlarge.backgroundColor) : '#ffffff'
+				bgColorInput.value = xlarge.backgroundColor ? xlarge.backgroundColor : '#ffffff'
 				if (xlarge.padding) {
 					const p = xlarge.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -171,7 +170,10 @@ const Appearance = ({ display, width, activeElement }) => {
 	//FOr background color and opacity
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			const changedBgColor = hexToRGB(bgColor, opacity)
+			let changedBgColor = ''
+			if (bgColor === 'transparent') changedBgColor = 'rgba(0,0,0,0)'
+			else if (bgColor !== 'custom') changedBgColor = bgColor
+
 			if (width < 540) {
 				setProperties(small, setSmall, 'backgroundColor', changedBgColor)
 				setChangedSmall(true)
@@ -198,12 +200,12 @@ const Appearance = ({ display, width, activeElement }) => {
 				if (!changedLarge) setProperties(large, setLarge, 'backgroundColor', changedBgColor)
 			}
 		}
-	}, [bgColor, opacity])
+	}, [bgColor])
 
 	//For Box Shadow
 	useEffect(() => {
 		if (small && medium && large && xlarge && shadowChanged) {
-			const changedShadow = showShadowSection ? `${sX} ${sY} ${sBlur} ${hexToRGB(sColor, 1)}` : ''
+			const changedShadow = showShadowSection ? `${sX} ${sY} ${sBlur} ${sColor}` : ''
 			setProperties(small, setSmall, 'boxShadow', changedShadow)
 			setProperties(medium, setMedium, 'boxShadow', changedShadow)
 			setProperties(large, setLarge, 'boxShadow', changedShadow)
@@ -254,7 +256,7 @@ const Appearance = ({ display, width, activeElement }) => {
 	//For changing Border
 	useEffect(() => {
 		if (small && medium && large && xlarge && borderChanged) {
-			const changedBorder = showBorderSection ? `${bSize} ${bType} ${hexToRGB(bColor, 1)}` : ''
+			const changedBorder = showBorderSection ? `${bSize} ${bType} ${bColor}` : ''
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
 			if (bSide === 'all') {
@@ -317,24 +319,6 @@ const Appearance = ({ display, width, activeElement }) => {
 		temp.borderRight = b
 		temp.borderRadius = br
 		setObj(temp)
-	}
-
-	const hexToRGB = (hex, o) => {
-		let hex_color = hex.replace('#', ''),
-			r = parseInt(hex_color.substring(0, 2), 16),
-			g = parseInt(hex_color.substring(2, 4), 16),
-			b = parseInt(hex_color.substring(4, 6), 16)
-
-		return `rgba(${r},${g},${b},${o})`
-	}
-
-	const RGBToHex = color => {
-		const rgba = color.replace(/^rgba?\(|s+|\)$/g, '').split(',')
-		const hex = `#${((1 << 24) + (parseInt(rgba[0]) << 16) + (parseInt(rgba[1]) << 8) + parseInt(rgba[2]))
-			.toString(16)
-			.slice(1)}`
-
-		return hex
 	}
 
 	const allBorder = () => {
@@ -496,6 +480,11 @@ const Appearance = ({ display, width, activeElement }) => {
 				Custom
 			</option>
 		)
+		temp.push(
+			<option key='transparent' value='transparent'>
+				Transparent
+			</option>
+		)
 		for (const key in colors) {
 			temp.push(
 				<option key={key} value={colors[key]}>
@@ -572,14 +561,14 @@ const Appearance = ({ display, width, activeElement }) => {
 	}
 
 	return (
-		<div style={{ display: display }} className='ap borders'>
+		<div style={{ display: display }} className='ap borders btn-specific'>
 			<p className='second-heading' onClick={() => setShowAppearanceProperties(!showAppearanceProperties)}>
 				APPEARANCE <span style={{ display: showAppearanceProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAppearanceProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
 			<div style={{ display: showAppearanceProperties ? 'grid' : 'none' }}>
 				<div className='two md'>
-					<label>Color: </label>
+					<label style={{ marginTop: '10px' }}>Color: </label>
 					{showCustomBgColorOptions()}
 					<input
 						disabled={!customBgColor}
@@ -587,18 +576,6 @@ const Appearance = ({ display, width, activeElement }) => {
 						onChange={e => setBgColor(e.target.value)}
 						type='color'
 						defaultValue='#ffffff'
-					/>
-				</div>
-				<div className='one md'>
-					<label>Opacity: </label>
-					<input
-						id='a-bgcolorOpacity'
-						onChange={e => setOpacity(e.target.value)}
-						step='0.1'
-						type='range'
-						defaultValue='1'
-						min='0'
-						max='1'
 					/>
 				</div>
 				<div className='padding md'>
