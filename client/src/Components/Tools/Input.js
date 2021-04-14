@@ -19,6 +19,7 @@ const Input = ({ findAndInsert, uniqueString }) => {
 				maxLength: 0,
 				min: '',
 				max: '',
+				class: '',
 				styles: {
 					small: {},
 					medium: {},

@@ -16,6 +16,7 @@ const List = ({ findAndInsert, uniqueString }) => {
 				type: 'ul',
 				id: uniqueString(),
 				showChildren: true,
+				class: '',
 				styles: {
 					small: {
 						listStyleType: 'circle',

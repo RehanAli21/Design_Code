@@ -16,6 +16,7 @@ const Image = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				alt: '',
 				src: '',
+				class: '',
 				styles: {
 					small: {},
 					medium: {},

@@ -16,6 +16,7 @@ const Text = ({ findAndInsert, uniqueString }) => {
 				type: 'p',
 				text: 'Hello World',
 				id: uniqueString(),
+				class: '',
 				styles: {
 					small: {},
 					medium: {},
