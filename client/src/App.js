@@ -9,12 +9,14 @@ import Layers from './Components/Layers'
 import { PageProvider } from './Components/Contexts/PageContext'
 import { PropertiesProvider } from './Components/Contexts/PropertiesContext'
 import { TemplateProvider } from './Components/Contexts/TemplateContext'
+import BreakPoint from './Components/BreakPoint'
 
 const App = () => {
 	return (
 		<div>
 			<PageProvider>
 				<TemplateProvider>
+					<BreakPoint />
 					<TemplateValues />
 					<Navbar />
 					<div className='three-section'>
