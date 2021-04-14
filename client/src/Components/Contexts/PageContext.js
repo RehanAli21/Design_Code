@@ -9,6 +9,7 @@ export const PageProvider = props => {
 	const [width, setWidth] = useState(720)
 	const [actionHistory, setActionHistory] = useState({ home: [] })
 	const [pageBC, setPageBC] = useState('#ffffff')
+	const [showBreakPoint, setShowBreakPoint] = useState(true)
 	const [sBreakPoint, setSBreakPoint] = useState(540)
 	const [mBreakPoint, setMBreakPoint] = useState(720)
 	const [lBreakPoint, setLBreakPoint] = useState(970)
@@ -68,6 +69,8 @@ export const PageProvider = props => {
 				undoFunc,
 				pageBC,
 				setPageBC,
+				showBreakPoint,
+				setShowBreakPoint,
 				sBreakPoint,
 				setSBreakPoint,
 				mBreakPoint,
