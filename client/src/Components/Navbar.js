@@ -35,7 +35,7 @@ const Navbar = () => {
 	}
 
 	//For deleting the activePage
-	const deletePage = () => {
+	const deletePage = pageName => {
 		//For storing pages data without storing activePage
 		const temp = {}
 		//For checking how many times loop runs
@@ -46,7 +46,7 @@ const Navbar = () => {
 		//Storing all element of pages into temp except,
 		//the page we want to delete
 		for (const key in pages) {
-			if (key !== activePage) {
+			if (key !== pageName) {
 				a = key
 				temp[key] = pages[key]
 			}
@@ -76,8 +76,9 @@ const Navbar = () => {
 		//For inserting list of pages
 		for (let i in pages) {
 			temp.push(
-				<li onClick={changeActivePage} key={uuid()}>
-					{toCapitalize(i)}
+				<li key={uuid()}>
+					<div onClick={changeActivePage}>{toCapitalize(i)}</div>
+					<button onClick={() => deletePage(i)}>Delete</button>
 				</li>
 			)
 		}
@@ -93,9 +94,6 @@ const Navbar = () => {
 					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>&#10148;</span>
 				</p>
 				<ul style={{ display: show ? 'block' : 'none' }}>{showPages()}</ul>
-			</div>
-			<div className='deletepage-div'>
-				<button onClick={deletePage}>Delete page</button>
 			</div>
 			<div className='addpage-input'>
 				<input
