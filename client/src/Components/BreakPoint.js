@@ -7,7 +7,7 @@ const BreakPoint = () => {
 			<button>Done</button>
 			<div className='two'>
 				<label>Small: </label>
-				<input type='number' defaultValue='549' />
+				<input type='number' defaultValue='540' />
 			</div>
 			<div className='two'>
 				<label>Medium: </label>
