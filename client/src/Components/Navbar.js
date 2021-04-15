@@ -4,9 +4,17 @@ import { PageContext } from './Contexts/PageContext'
 import { TemplateContext } from './Contexts/TemplateContext'
 
 const Navbar = () => {
-	const { pages, setPages, activePage, setActivePage, width, setWidth, showBreakPoint, setShowBreakPoint } = useContext(
-		PageContext
-	)
+	const {
+		pages,
+		setPages,
+		activePage,
+		setActivePage,
+		setActiveElement,
+		width,
+		setWidth,
+		showBreakPoint,
+		setShowBreakPoint,
+	} = useContext(PageContext)
 
 	const { showTemplate, setShowTemplate } = useContext(TemplateContext)
 
@@ -68,7 +76,10 @@ const Navbar = () => {
 	//For changing shown pages
 	const changeActivePage = e => {
 		//If page is not already assigned, then change page
-		if (e.target.innerText !== activePage) setActivePage(e.target.innerText.toLowerCase())
+		if (e.target.innerText !== activePage) {
+			setActivePage(e.target.innerText.toLowerCase())
+			setActiveElement('')
+		}
 
 		setShow(!show)
 	}
