@@ -4,7 +4,9 @@ import { PageContext } from './Contexts/PageContext'
 import { TemplateContext } from './Contexts/TemplateContext'
 
 const Navbar = () => {
-	const { pages, setPages, activePage, setActivePage, width, setWidth } = useContext(PageContext)
+	const { pages, setPages, activePage, setActivePage, width, setWidth, showBreakPoint, setShowBreakPoint } = useContext(
+		PageContext
+	)
 
 	const { showTemplate, setShowTemplate } = useContext(TemplateContext)
 
@@ -12,6 +14,8 @@ const Navbar = () => {
 	const [pageName, setPageName] = useState('')
 	//For controlling showing pages menu
 	const [show, setShow] = useState(false)
+	//For controlling the default values (template and breakpoints) comp menu
+	const [showdefault, setShowDefault] = useState(false)
 
 	//For making first character Capital
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -111,10 +115,24 @@ const Navbar = () => {
 				</p>
 				{pageSection()}
 			</div>
-			<div>
-				<button onClick={() => setShowTemplate(!showTemplate)} className='TemplateButton'>
-					Show Template Values
-				</button>
+			<div className='d-v'>
+				<p onClick={() => setShowDefault(!showdefault)}>▼</p>
+				<div style={{ display: showdefault ? 'grid' : 'none' }}>
+					<button
+						onClick={() => {
+							setShowTemplate(!showTemplate)
+							setShowDefault(false)
+						}}>
+						Show Template Values
+					</button>
+					<button
+						onClick={() => {
+							setShowBreakPoint(!showBreakPoint)
+							setShowDefault(false)
+						}}>
+						Show BreakPoint
+					</button>
+				</div>
 			</div>
 			<div>
 				<p style={{ fontWeight: 'normal', fontSize: '0.95rem' }}>
