@@ -189,46 +189,66 @@ nav p {
 	margin-top: 0.9vh;
 	cursor: pointer;
 }
-nav ul {
+nav .page-div {
+	position: relative;
+}
+nav .page-div > div {
 	position: absolute;
-	list-style: none;
+	width: 300px;
+	top: 6vh;
 	z-index: 3;
-	left: 0%;
-	top: 5vh;
-	display: none;
-	box-shadow: 2px 2px 10px grey;
-}
-nav ul li {
-	display: grid;
-	grid-template-columns: 100px 60px;
-	font-size: 1.1rem;
-	font-weight: bolder;
-	width: 160px;
-	cursor: pointer;
-	margin-top: 1px;
-	margin-bottom: 1px;
-}
-nav ul li div {
-	padding: 5px 8px;
 	background-color: white;
+	font-size: 1rem;
+	font-weight: bold;
+	padding: 3px;
+	box-shadow: 2px 2px 10px gray;
+	border-radius: 3px;
 }
-nav ul div:hover {
-	background-color: var(--main-blue);
+nav .page-div > div > div {
+	padding: 5px;
+}
+nav .page-div > div .two-2 {
+	display: grid;
+	column-gap: 2%;
+	grid-template-columns: 68% 30%;
+	padding: 3px 6px;
+}
+nav .page-div .b-hover {
+	cursor: pointer;
+	border-radius: 3px;
+}
+nav .page-div .b-hover:hover {
 	color: white;
+	background-color: var(--main-blue);
 }
-nav ul li button {
+nav .page-div .two-2 button {
+	border-radius: 3px;
 	padding: 5px 8px;
 	background-color: rgb(240, 0, 0);
 	outline: none;
 	border: none;
 	color: white;
 }
-nav ul button:hover {
+nav .page-div .two-2 button:hover {
 	background-color: red;
 	color: white;
 }
-nav ul button:active {
+nav .page-div .two-2 button:active {
 	transform: scale(0.9);
+}
+nav .addpage-input input {
+	border: none;
+	color: var(--text-color);
+	border-bottom: 1px solid var(--text-active-color);
+	padding: 5px;
+	outline: none;
+}
+nav .addpage-input button {
+	background-color: var(--main-blue) !important;
+}
+nav .addpage-input button:hover {
+	color: var(--main-blue);
+	cursor: pointer;
 }
 
 nav .nav-zoom p {
@@ -243,30 +263,6 @@ nav .nav-zoom p:hover {
 }
 nav .nav-zoom p:active {
 	transform: scale(0.95);
-}
-nav .addpage-input input {
-	background-color: var(--second-white);
-	border: none;
-	color: var(--text-color);
-	border-bottom: 1px solid var(--text-active-color);
-	padding: 5px;
-	outline: none;
-}
-nav .addpage-input button {
-	background-color: var(--second-white);
-	border: none;
-	color: var(--text-color);
-	border-bottom: 1px solid var(--text-active-color);
-	padding: 5px;
-	outline: none;
-	font-weight: bold;
-}
-nav .addpage-input button:hover {
-	color: var(--main-blue);
-	cursor: pointer;
-}
-nav .addpage-input button:focus {
-	color: var(--main-blue);
 }
 nav .TemplateButton {
 	background-color: var(--second-white);

@@ -70,19 +70,35 @@ const Navbar = () => {
 	}
 
 	//For showing available pages list
-	const showPages = () => {
+	const pageSection = () => {
 		//For storing list of pages
 		const temp = []
 		//For inserting list of pages
 		for (let i in pages) {
 			temp.push(
-				<li key={uuid()}>
-					<div onClick={changeActivePage}>{toCapitalize(i)}</div>
+				<div className='two-2' key={uuid()}>
+					<div className='b-hover' onClick={changeActivePage}>
+						{toCapitalize(i)}
+					</div>
 					<button onClick={() => deletePage(i)}>Delete</button>
-				</li>
+				</div>
 			)
 		}
-		return temp
+		return (
+			<div style={{ display: show ? 'block' : 'none' }}>
+				<div style={{ borderBottom: '1px solid black' }}>{temp}</div>
+				<div className='addpage-input two-2'>
+					<input
+						onChange={e => setPageName(e.target.value.toLowerCase())}
+						id='addpage-input'
+						type='text'
+						placeholder='Add Page...'
+						autoComplete='off'
+					/>
+					<button onClick={addPage}>ADD</button>
+				</div>
+			</div>
+		)
 	}
 
 	return (
@@ -91,19 +107,9 @@ const Navbar = () => {
 			<div className='page-div'>
 				<p onClick={() => setShow(!show)}>
 					{toCapitalize(activePage)}
-					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>&#10148;</span>
+					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>▼</span>
 				</p>
-				<ul style={{ display: show ? 'block' : 'none' }}>{showPages()}</ul>
-			</div>
-			<div className='addpage-input'>
-				<input
-					onChange={e => setPageName(e.target.value.toLowerCase())}
-					id='addpage-input'
-					type='text'
-					placeholder='Add Page...'
-					autoComplete='off'
-				/>
-				<button onClick={addPage}>ADD</button>
+				{pageSection()}
 			</div>
 			<div>
 				<button onClick={() => setShowTemplate(!showTemplate)} className='TemplateButton'>
