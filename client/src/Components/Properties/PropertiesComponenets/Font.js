@@ -24,7 +24,7 @@ const Font = () => {
 		showFontProperties,
 		setShowFontProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 	const { fontSizes, fonts } = useContext(TemplateContext)
 
 	const [textDecoration, setTextDecoration] = useState(false)
@@ -43,17 +43,17 @@ const Font = () => {
 			const fontSizeSelect = document.getElementById('btn-fontsizeselect')
 			const fontWeightSelect = document.getElementById('btn-fontWeight')
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				fontSelect.value = small.fontFamily ? small.fontFamily : 'default'
 				fontSizeInput.value = small.fontSize ? small.fontSize.split('p')[0] : 16
 				fontSizeSelect.value = small.fontSize ? small.fontSize : 'custom'
 				fontWeightSelect.value = small.fontWeight ? small.fontWeight : 'normal'
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				fontSelect.value = medium.fontFamily ? medium.fontFamily : 'default'
 				fontSizeInput.value = medium.fontSize ? medium.fontSize.split('p')[0] : 16
 				fontSizeSelect.value = medium.fontSize ? medium.fontSize : 'custom'
 				fontWeightSelect.value = medium.fontWeight ? medium.fontWeight : 'normal'
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				fontSelect.value = large.fontFamily ? large.fontFamily : 'default'
 				fontSizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 16
 				fontSizeSelect.value = large.fontSize ? large.fontSize : 'custom'
@@ -70,19 +70,19 @@ const Font = () => {
 	//For Text Decoration
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'textDecoration', textDecoration ? 'underline' : '')
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'textDecoration', textDecoration ? 'underline' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration ? 'underline' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration ? 'underline' : '')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'textDecoration', textDecoration ? 'underline' : '')
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration ? 'underline' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'textDecoration', textDecoration ? 'underline' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'textDecoration', textDecoration ? 'underline' : '')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'textDecoration', textDecoration ? 'underline' : '')
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'textDecoration', textDecoration ? 'underline' : '')
@@ -101,19 +101,19 @@ const Font = () => {
 	//For changing font
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'fontFamily', font)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'fontFamily', font)
 				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'fontFamily', font)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
 				if (!changedLarge) setProperties(large, setLarge, 'fontFamily', font)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontFamily', font)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'fontFamily', font)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontFamily', font)
@@ -132,19 +132,19 @@ const Font = () => {
 	//For changing fontsize
 	useEffect(() => {
 		if (small && medium && large && xlarge && fontSize !== '') {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'fontSize', fontSize)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'fontSize', fontSize)
 				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'fontSize', fontSize)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
 				if (!changedLarge) setProperties(large, setLarge, 'fontSize', fontSize)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontSize', fontSize)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'fontSize', fontSize)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontSize', fontSize)
@@ -163,19 +163,19 @@ const Font = () => {
 	//For changing fontWeight
 	useEffect(() => {
 		if (small && medium && large && xlarge && fontWeight !== '') {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'fontWeight', fontWeight)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'fontWeight', fontWeight)
 				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'fontWeight', fontWeight)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
 				if (!changedLarge) setProperties(large, setLarge, 'fontWeight', fontWeight)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontWeight', fontWeight)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'fontWeight', fontWeight)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontWeight', fontWeight)
@@ -194,19 +194,19 @@ const Font = () => {
 	//For changing fontStyle
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'fontStyle', fontStyle ? 'italic' : '')
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'fontStyle', fontStyle ? 'italic' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle ? 'italic' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle ? 'italic' : '')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'fontStyle', fontStyle ? 'italic' : '')
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle ? 'italic' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'fontStyle', fontStyle ? 'italic' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'fontStyle', fontStyle ? 'italic' : '')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'fontStyle', fontStyle ? 'italic' : '')
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'fontStyle', fontStyle ? 'italic' : '')

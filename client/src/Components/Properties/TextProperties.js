@@ -27,7 +27,7 @@ const TextProperties = () => {
 		showTextCompProperties,
 		setShowTextCompProperties,
 	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { width, activePage, activeElement, pages, setPages, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [textType, setTextType] = useState('')
 	const [sameLine, setSameLine] = useState(false)
@@ -55,13 +55,13 @@ const TextProperties = () => {
 		if (small && medium && large && xlarge) {
 			const sl = document.getElementById('text-sameline-checkbox')
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				sl.checked = small && small.display === 'inline-block'
 				setSameLine(small && small.display === 'inline-block')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				sl.checked = medium && medium.display === 'inline-block'
 				setSameLine(medium && medium.display === 'inline-block')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				sl.checked = large && large.display === 'inline-block'
 				setSameLine(large && large.display === 'inline-block')
 			} else {
@@ -97,19 +97,19 @@ const TextProperties = () => {
 	//For changing display for same line
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')

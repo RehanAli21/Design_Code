@@ -21,7 +21,7 @@ const GridColumn = () => {
 		changedXlarge,
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [colNum, setColNum] = useState(0)
 	let cols = 0
@@ -30,13 +30,13 @@ const GridColumn = () => {
 	useEffect(() => {
 		const input = document.getElementById('gridcol-input')
 
-		if (width < 540 && small.gridColumn) {
+		if (width < sBreakPoint && small.gridColumn) {
 			const num = small.gridColumn === '' ? 0 : small.gridColumn.split('/')[0]
 			input.value = num
-		} else if (width < 720 && medium.gridColumn) {
+		} else if (width < mBreakPoint && medium.gridColumn) {
 			const num = medium.gridColumn === '' ? 0 : medium.gridColumn.split('/')[0]
 			input.value = num
-		} else if (width < 970 && large.gridColumn) {
+		} else if (width < lBreakPoint && large.gridColumn) {
 			const num = large.gridColumn === '' ? 0 : large.gridColumn.split('/')[0]
 			input.value = num
 		} else {
@@ -50,19 +50,19 @@ const GridColumn = () => {
 	useEffect(() => {
 		if (small && medium && large && xlarge && cols !== 0) {
 			const gCol = colNum === 0 ? '' : `${colNum}/${colNum}`
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'gridColumn', gCol)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'gridColumn', gCol)
 				if (!changedLarge) setProperties(large, setLarge, 'gridColumn', gCol)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridColumn', gCol)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'gridColumn', gCol)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'gridColumn', gCol)
 				if (!changedLarge) setProperties(large, setLarge, 'gridColumn', gCol)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridColumn', gCol)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'gridColumn', gCol)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'gridColumn', gCol)

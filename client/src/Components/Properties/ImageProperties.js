@@ -25,7 +25,7 @@ const ImageProperties = () => {
 		showImgProperties,
 		setShowImgProperties,
 	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { width, activePage, activeElement, pages, setPages, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [img, setImg] = useState('')
 	const [alt, setAlt] = useState('')
@@ -39,13 +39,13 @@ const ImageProperties = () => {
 
 		if (values && altinput) altinput.value = values
 
-		if (width < 540) {
+		if (width < sBreakPoint) {
 			sl.checked = small && small.display === 'block'
 			setSeparateLine(small && small.display === 'block')
-		} else if (width < 720) {
+		} else if (width < mBreakPoint) {
 			sl.checked = medium && medium.display === 'block'
 			setSeparateLine(medium && medium.display === 'block')
-		} else if (width < 970) {
+		} else if (width < lBreakPoint) {
 			sl.checked = large && large.display === 'block'
 			setSeparateLine(large && large.display === 'block')
 		} else {
@@ -100,19 +100,19 @@ const ImageProperties = () => {
 	//For changing display for separate line
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')

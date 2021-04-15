@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
@@ -23,6 +24,7 @@ const Appearance = ({ display, width, activeElement }) => {
 		showAppearanceProperties,
 		setShowAppearanceProperties,
 	} = useContext(PropertiesContext)
+	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [showBorderSection, setShowBorderSection] = useState(false)
@@ -119,7 +121,7 @@ const Appearance = ({ display, width, activeElement }) => {
 				setShowShadowSection(false)
 			}
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				bgColorInput.value = small.backgroundColor ? small.backgroundColor : '#ffffff'
 				if (small.padding) {
 					const p = small.padding.split(' ')
@@ -129,7 +131,7 @@ const Appearance = ({ display, width, activeElement }) => {
 					paddingYInput.value = 0
 					paddingXInput.value = 0
 				}
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				bgColorInput.value = medium.backgroundColor ? medium.backgroundColor : '#ffffff'
 				if (medium.padding) {
 					const p = medium.padding.split(' ')
@@ -139,7 +141,7 @@ const Appearance = ({ display, width, activeElement }) => {
 					paddingYInput.value = 0
 					paddingXInput.value = 0
 				}
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				bgColorInput.value = large.backgroundColor ? large.backgroundColor : '#ffffff'
 				if (large.padding) {
 					const p = large.padding.split(' ')
@@ -174,19 +176,19 @@ const Appearance = ({ display, width, activeElement }) => {
 			if (bgColor === 'transparent') changedBgColor = 'rgba(0,0,0,0)'
 			else if (bgColor !== 'custom') changedBgColor = bgColor
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'backgroundColor', changedBgColor)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'backgroundColor', changedBgColor)
 				if (!changedLarge) setProperties(large, setLarge, 'backgroundColor', changedBgColor)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'backgroundColor', changedBgColor)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'backgroundColor', changedBgColor)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'backgroundColor', changedBgColor)
 				if (!changedLarge) setProperties(large, setLarge, 'backgroundColor', changedBgColor)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'backgroundColor', changedBgColor)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'backgroundColor', changedBgColor)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'backgroundColor', changedBgColor)
@@ -219,19 +221,19 @@ const Appearance = ({ display, width, activeElement }) => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const padding = `${paddingY === '' ? '0px' : paddingY} ${paddingX === '' ? '0px' : paddingX}`
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'padding', padding)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'padding', padding)
 				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'padding', padding)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)
 				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'padding', padding)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)

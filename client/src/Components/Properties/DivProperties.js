@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import BGImage from './PropertiesComponenets/BGImage'
 import GridColumn from './PropertiesComponenets/GridColumn'
@@ -24,6 +25,7 @@ const DivProperties = ({ width, activeElement }) => {
 		showDivProperties,
 		setShowDivProperties,
 	} = useContext(PropertiesContext)
+	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [grid, setGrid] = useState(false)
 	const [rowGap, setRowGap] = useState('0px')
@@ -68,7 +70,7 @@ const DivProperties = ({ width, activeElement }) => {
 			const rowInput = document.getElementById('r-c-row')
 			const colInput = document.getElementById('r-c-col')
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				gridCheckbox.checked = small.display === 'grid'
 				setGrid(small.display === 'grid' ? true : false)
 				rowGapInput.value = small.rowGap ? small.rowGap.split('p')[0] : 0
@@ -138,7 +140,7 @@ const DivProperties = ({ width, activeElement }) => {
 					colInput.value = 0
 					setColsNum(0)
 				}
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				gridCheckbox.checked = medium.display === 'grid'
 				setGrid(medium.display === 'grid' ? true : false)
 				rowGapInput.value = medium.rowGap ? medium.rowGap.split('p')[0] : 0
@@ -208,7 +210,7 @@ const DivProperties = ({ width, activeElement }) => {
 					colInput.value = 0
 					setColsNum(0)
 				}
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				gridCheckbox.checked = large.display === 'grid'
 				setGrid(large.display === 'grid' ? true : false)
 				rowGapInput.value = large.rowGap ? large.rowGap.split('p')[0] : 0
@@ -355,19 +357,19 @@ const DivProperties = ({ width, activeElement }) => {
 	//For applying grid
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'display', grid ? 'grid' : '')
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'display', grid ? 'grid' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', grid ? 'grid' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid ? 'grid' : '')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'display', grid ? 'grid' : '')
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', grid ? 'grid' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', grid ? 'grid' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid ? 'grid' : '')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'display', grid ? 'grid' : '')
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', grid ? 'grid' : '')
@@ -386,19 +388,19 @@ const DivProperties = ({ width, activeElement }) => {
 	//For Row-Gap
 	useEffect(() => {
 		if (small && medium && large && xlarge && grid) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'rowGap', rowGap)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'rowGap', rowGap)
 				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'rowGap', rowGap)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
 				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'rowGap', rowGap)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
@@ -417,19 +419,19 @@ const DivProperties = ({ width, activeElement }) => {
 	//For Col-Gap
 	useEffect(() => {
 		if (small && medium && large && xlarge && grid) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'columnGap', columnGap)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'columnGap', columnGap)
 				if (!changedLarge) setProperties(large, setLarge, 'columnGap', columnGap)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', columnGap)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'columnGap', columnGap)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'columnGap', columnGap)
 				if (!changedLarge) setProperties(large, setLarge, 'columnGap', columnGap)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', columnGap)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'columnGap', columnGap)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'columnGap', columnGap)
@@ -452,19 +454,19 @@ const DivProperties = ({ width, activeElement }) => {
 			for (let i = 0; i < rowsNum; i++) {
 				gridTemplateRows += `${gridRows[i][0]}${gridRows[i][1]} `
 			}
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'gridTemplateRows', gridTemplateRows)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridTemplateRows)
 				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridTemplateRows)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridTemplateRows)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'gridTemplateRows', gridTemplateRows)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridTemplateRows)
 				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridTemplateRows)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridTemplateRows)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'gridTemplateRows', gridTemplateRows)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridTemplateRows)
@@ -487,19 +489,19 @@ const DivProperties = ({ width, activeElement }) => {
 			for (let i = 0; i < colsNum; i++) {
 				gridTemplateColumns += `${gridCols[i][0]}${gridCols[i][1]} `
 			}
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'gridTemplateColumns', gridTemplateColumns)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateColumns', gridTemplateColumns)
 				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridTemplateColumns)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridTemplateColumns)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'gridTemplateColumns', gridTemplateColumns)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridTemplateColumns)
 				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridTemplateColumns)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridTemplateColumns)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'gridTemplateColumns', gridTemplateColumns)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridTemplateColumns)

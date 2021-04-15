@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Align = ({ width, activeElement }) => {
@@ -23,6 +24,8 @@ const Align = ({ width, activeElement }) => {
 		setShowAlignProperties,
 	} = useContext(PropertiesContext)
 
+	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+
 	const [selfAlign, setSelfAlign] = useState('left')
 	const [textAlign, setTextAlign] = useState('left')
 
@@ -34,7 +37,7 @@ const Align = ({ width, activeElement }) => {
 	//For setting default values
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setTextAlign(small.textAlign)
 				if (small.marginLeft === 'auto' && small.marginRight === 'auto') {
 					setSelfAlign('center')
@@ -43,7 +46,7 @@ const Align = ({ width, activeElement }) => {
 				} else if (small.marginLeft === 'auto' && small.marginRight === '0px') {
 					setSelfAlign('right')
 				}
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setTextAlign(medium.textAlign)
 				if (medium.marginLeft === 'auto' && medium.marginRight === 'auto') {
 					setSelfAlign('center')
@@ -52,7 +55,7 @@ const Align = ({ width, activeElement }) => {
 				} else if (medium.marginLeft === 'auto' && medium.marginRight === '0px') {
 					setSelfAlign('right')
 				}
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setTextAlign(large.textAlign)
 				if (large.marginLeft === 'auto' && large.marginRight === 'auto') {
 					setSelfAlign('center')
@@ -76,19 +79,19 @@ const Align = ({ width, activeElement }) => {
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setSelfAlignProperty(small, setSmall)
 				setChangedSmall(true)
 				if (!changedMedium) setSelfAlignProperty(medium, setMedium)
 				if (!changedLarge) setSelfAlignProperty(large, setLarge)
 				if (!changedXlarge) setSelfAlignProperty(xlarge, setXlarge)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setSelfAlignProperty(medium, setMedium)
 				setChangedMedium(true)
 				if (!changedSmall) setSelfAlignProperty(small, setSmall)
 				if (!changedLarge) setSelfAlignProperty(large, setLarge)
 				if (!changedXlarge) setSelfAlignProperty(xlarge, setXlarge)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setSelfAlignProperty(large, setLarge)
 				setChangedLarge(true)
 				if (!changedMedium) setSelfAlignProperty(medium, setMedium)
@@ -121,19 +124,19 @@ const Align = ({ width, activeElement }) => {
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setTextAlignProperty(small, setSmall)
 				setChangedSmall(true)
 				if (!changedMedium) setTextAlignProperty(medium, setMedium)
 				if (!changedLarge) setTextAlignProperty(large, setLarge)
 				if (!changedXlarge) setTextAlignProperty(xlarge, setXlarge)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setTextAlignProperty(medium, setMedium)
 				setChangedMedium(true)
 				if (!changedSmall) setTextAlignProperty(small, setSmall)
 				if (!changedLarge) setTextAlignProperty(large, setLarge)
 				if (!changedXlarge) setTextAlignProperty(xlarge, setXlarge)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setTextAlignProperty(large, setLarge)
 				setChangedLarge(true)
 				if (!changedMedium) setTextAlignProperty(medium, setMedium)
@@ -163,11 +166,11 @@ const Align = ({ width, activeElement }) => {
 		if (ele) {
 			if (ele.tagName === 'DIV') {
 				setIsDiv(true)
-				if (width < 540) {
+				if (width < sBreakPoint) {
 					setIsDivGrid(small.display === 'grid')
-				} else if (width < 720) {
+				} else if (width < mBreakPoint) {
 					setIsDivGrid(medium.display === 'grid')
-				} else if (width < 970) {
+				} else if (width < lBreakPoint) {
 					setIsDivGrid(large.display === 'grid')
 				} else {
 					setIsDivGrid(xlarge.display === 'grid')

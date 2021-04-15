@@ -23,7 +23,7 @@ const DsProperties = () => {
 		showExtraProperties,
 		setShowExtraProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [scaleX, setScaleX] = useState('')
 	const [scaleY, setScaleY] = useState('')
@@ -85,19 +85,19 @@ const DsProperties = () => {
 
 			if (transform !== '') transform = transform.substr(1, transform.length - 1)
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'transform', transform)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'transform', transform)
 				if (!changedLarge) setProperties(large, setLarge, 'transform', transform)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transform', transform)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'transform', transform)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'transform', transform)
 				if (!changedLarge) setProperties(large, setLarge, 'transform', transform)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transform', transform)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'transform', transform)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'transform', transform)

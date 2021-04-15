@@ -26,7 +26,7 @@ const InputProperties = () => {
 		showInputProperties,
 		setShowInputProperties,
 	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { width, activePage, activeElement, pages, setPages, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [type, setType] = useState('')
@@ -76,17 +76,17 @@ const InputProperties = () => {
 			const textColorSelect = document.getElementById('input-colorselect')
 			const sl = document.getElementById('input-sl-checkbox')
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				textColorInput.value = small.color ? small.color : '#000000'
 				textColorSelect.value = small.color ? small.color : 'custom'
 				sl.checked = small && small.display === 'block'
 				setSeparateLine(small && small.display === 'block')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				textColorInput.value = medium.color ? medium.color : '#000000'
 				textColorSelect.value = medium.color ? medium.color : 'custom'
 				sl.checked = medium && medium.display === 'block'
 				setSeparateLine(medium && medium.display === 'block')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				textColorInput.value = large.color ? large.color : '#000000'
 				textColorSelect.value = large.color ? large.color : 'custom'
 				sl.checked = large && large.display === 'block'
@@ -103,19 +103,19 @@ const InputProperties = () => {
 	//For changing display for separate line
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
@@ -194,19 +194,19 @@ const InputProperties = () => {
 	//For changing textColor of input
 	useEffect(() => {
 		if (small && medium && large && xlarge && textColor !== '') {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'color', textColor)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
 				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'color', textColor)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
 				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'color', textColor)
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)

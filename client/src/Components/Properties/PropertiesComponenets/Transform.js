@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Transform = ({ width, activeElement }) => {
@@ -22,6 +23,8 @@ const Transform = ({ width, activeElement }) => {
 		showTransformProperties,
 		setShowTransformProperties,
 	} = useContext(PropertiesContext)
+	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
 	const [widths, setWidths] = useState(`0`)
@@ -43,7 +46,7 @@ const Transform = ({ width, activeElement }) => {
 			const marginTopInput = document.getElementById('a-t-mt')
 			const marginTopSelect = document.getElementById('a-t-mtu')
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				widthInput.value = small.width ? small.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = small.height ? small.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = small.marginLeft ? small.marginLeft.replace(/[^\d.-]/g, '') : '0'
@@ -53,7 +56,7 @@ const Transform = ({ width, activeElement }) => {
 				heightSelect.selectedIndex = small.height ? heightTypeIndex(small.height) : 0
 				marginLeftSelect.selectedIndex = small.marginLeft ? marginLeftTypeIndex(small.marginLeft) : 0
 				marginTopSelect.selectedIndex = small.marginTop ? marginTopTypeIndex(small.marginTop) : 0
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				widthInput.value = medium.width ? medium.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = medium.height ? medium.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = medium.marginLeft ? medium.marginLeft.replace(/[^\d.-]/g, '') : '0'
@@ -63,7 +66,7 @@ const Transform = ({ width, activeElement }) => {
 				heightSelect.selectedIndex = medium.height ? heightTypeIndex(medium.height) : 0
 				marginLeftSelect.selectedIndex = medium.marginLeft ? marginLeftTypeIndex(medium.marginLeft) : 0
 				marginTopSelect.selectedIndex = medium.marginTop ? marginTopTypeIndex(medium.marginTop) : 0
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				widthInput.value = large.width ? large.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = large.height ? large.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = large.marginLeft ? large.marginLeft.replace(/[^\d.-]/g, '') : '0'
@@ -104,19 +107,19 @@ const Transform = ({ width, activeElement }) => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedWidth = `${widths}${widthUnit}`
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'width', changedWidth)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'width', changedWidth)
 				if (!changedLarge) setProperties(large, setLarge, 'width', changedWidth)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'width', changedWidth)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'width', changedWidth)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'width', changedWidth)
 				if (!changedLarge) setProperties(large, setLarge, 'width', changedWidth)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'width', changedWidth)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'width', changedWidth)
 				setChangedLarge(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'width', changedWidth)
@@ -136,19 +139,19 @@ const Transform = ({ width, activeElement }) => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedHeight = `${heights}${heightUnit}`
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'height', changedHeight)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'height', changedHeight)
 				if (!changedLarge) setProperties(large, setLarge, 'height', changedHeight)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'height', changedHeight)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'height', changedHeight)
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'height', changedHeight)
 				if (!changedLarge) setProperties(large, setLarge, 'height', changedHeight)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'height', changedHeight)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'height', changedHeight)
 				setChangedLarge(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'height', changedHeight)
@@ -168,20 +171,20 @@ const Transform = ({ width, activeElement }) => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedmarginLeft = `${marginLeft}${mlUnit}`
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'marginLeft', changedmarginLeft)
 				if (!changedLarge) setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginLeft', changedmarginLeft)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'marginLeft', changedmarginLeft)
 				setChangedMedium(true)
 
 				if (!changedSmall) setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
 				if (!changedLarge) setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginLeft', changedmarginLeft)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'marginLeft', changedmarginLeft)
 				setChangedLarge(true)
 
@@ -203,21 +206,21 @@ const Transform = ({ width, activeElement }) => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const changedmarginTop = `${marginTop}${mtUnit}`
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'marginTop', changedmarginTop)
 				setChangedSmall(true)
 
 				if (!changedMedium) setProperties(medium, setMedium, 'marginTop', changedmarginTop)
 				if (!changedLarge) setProperties(large, setLarge, 'marginTop', changedmarginTop)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginTop', changedmarginTop)
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'marginTop', changedmarginTop)
 				setChangedMedium(true)
 
 				if (!changedSmall) setProperties(small, setSmall, 'marginTop', changedmarginTop)
 				if (!changedLarge) setProperties(large, setLarge, 'marginTop', changedmarginTop)
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'marginTop', changedmarginTop)
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'marginTop', changedmarginTop)
 				setChangedLarge(true)
 

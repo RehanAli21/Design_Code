@@ -26,7 +26,7 @@ const ButtonProperties = () => {
 		showBtnProperties,
 		setShowBtnProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 	const [separateLine, setSeparateLine] = useState(false)
 
 	//For default values of display(separated line)
@@ -34,13 +34,13 @@ const ButtonProperties = () => {
 		if (small && medium && large && xlarge) {
 			const sl = document.getElementById('button-sl-checkbox')
 
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				sl.checked = small && small.display === 'block'
 				setSeparateLine(small && small.display === 'block')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				sl.checked = medium && medium.display === 'block'
 				setSeparateLine(medium && medium.display === 'block')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				sl.checked = large && large.display === 'block'
 				setSeparateLine(large && large.display === 'block')
 			} else {
@@ -53,19 +53,19 @@ const ButtonProperties = () => {
 	//For changing display for separate line
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			if (width < 540) {
+			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
 				setChangedSmall(true)
 				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < 720) {
+			} else if (width < mBreakPoint) {
 				setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
 				setChangedMedium(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < 970) {
+			} else if (width < lBreakPoint) {
 				setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
 				setChangedLarge(true)
 				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
