@@ -3,7 +3,7 @@ import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
-const Appearance = ({ display, width, activeElement }) => {
+const Appearance = ({ width, activeElement }) => {
 	const {
 		small,
 		setSmall,
@@ -563,7 +563,7 @@ const Appearance = ({ display, width, activeElement }) => {
 	}
 
 	return (
-		<div style={{ display: display }} className='ap borders btn-specific'>
+		<div className='ap borders btn-specific'>
 			<p className='second-heading' onClick={() => setShowAppearanceProperties(!showAppearanceProperties)}>
 				APPEARANCE <span style={{ display: showAppearanceProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAppearanceProperties ? 'none' : 'inline' }}>&#9654;</span>

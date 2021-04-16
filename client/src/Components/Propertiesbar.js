@@ -36,23 +36,7 @@ const Propertiesbar = () => {
 				<div style={{ display: activeElement === '' || (ele && ele.tagName === 'OPTION') ? 'none' : 'block' }}>
 					<Align width={width} activeElement={activeElement} />
 					<Transform width={width} activeElement={activeElement} />
-					<Appearance
-						display={
-							ele &&
-							(ele.tagName === 'P' ||
-								ele.tagName === 'H1' ||
-								ele.tagName === 'H2' ||
-								ele.tagName === 'H3' ||
-								ele.tagName === 'H4' ||
-								ele.tagName === 'H5' ||
-								ele.tagName === 'UL' ||
-								ele.tagName === 'OL')
-								? 'none'
-								: 'grid'
-						}
-						width={width}
-						activeElement={activeElement}
-					/>
+					<Appearance width={width} activeElement={activeElement} />
 					<DsProperties />
 				</div>
 			</div>
