@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
-const Align = ({ width, activeElement }) => {
+const Align = () => {
 	const {
 		small,
 		setSmall,
@@ -24,7 +24,7 @@ const Align = ({ width, activeElement }) => {
 		setShowAlignProperties,
 	} = useContext(PropertiesContext)
 
-	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [selfAlign, setSelfAlign] = useState('left')
 	const [textAlign, setTextAlign] = useState('left')

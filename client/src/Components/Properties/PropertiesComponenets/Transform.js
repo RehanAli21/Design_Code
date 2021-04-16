@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
-const Transform = ({ width, activeElement }) => {
+const Transform = () => {
 	const {
 		small,
 		setSmall,
@@ -23,7 +23,7 @@ const Transform = ({ width, activeElement }) => {
 		showTransformProperties,
 		setShowTransformProperties,
 	} = useContext(PropertiesContext)
-	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')

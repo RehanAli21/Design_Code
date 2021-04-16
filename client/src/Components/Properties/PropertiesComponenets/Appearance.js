@@ -3,7 +3,7 @@ import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
-const Appearance = ({ width, activeElement }) => {
+const Appearance = () => {
 	const {
 		small,
 		setSmall,
@@ -24,7 +24,7 @@ const Appearance = ({ width, activeElement }) => {
 		showAppearanceProperties,
 		setShowAppearanceProperties,
 	} = useContext(PropertiesContext)
-	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [showBorderSection, setShowBorderSection] = useState(false)

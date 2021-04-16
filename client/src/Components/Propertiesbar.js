@@ -34,9 +34,9 @@ const Propertiesbar = () => {
 			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='property'>
 				<Specific />
 				<div style={{ display: activeElement === '' || (ele && ele.tagName === 'OPTION') ? 'none' : 'block' }}>
-					<Align width={width} activeElement={activeElement} />
-					<Transform width={width} activeElement={activeElement} />
-					<Appearance width={width} activeElement={activeElement} />
+					<Align />
+					<Transform />
+					<Appearance />
 					<DsProperties />
 				</div>
 			</div>
