@@ -50,6 +50,7 @@ const Appearance = () => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const bgColorInput = document.getElementById('a-bgcolor')
+			const bgColorSelect = document.getElementById('bg-color-select')
 			const bActiveInput = document.getElementById('a-b-active')
 			const bRadiusInput = document.getElementById('a-b-radius')
 			const bColorInput = document.getElementById('a-b-color')
@@ -123,6 +124,7 @@ const Appearance = () => {
 
 			if (width < sBreakPoint) {
 				bgColorInput.value = small.backgroundColor ? small.backgroundColor : '#ffffff'
+				bgColorSelect.value = small.backgroundColor ? small.backgroundColor : 'custom'
 				if (small.padding) {
 					const p = small.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -133,6 +135,7 @@ const Appearance = () => {
 				}
 			} else if (width < mBreakPoint) {
 				bgColorInput.value = medium.backgroundColor ? medium.backgroundColor : '#ffffff'
+				bgColorSelect.value = medium.backgroundColor ? medium.backgroundColor : 'custom'
 				if (medium.padding) {
 					const p = medium.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -143,6 +146,7 @@ const Appearance = () => {
 				}
 			} else if (width < lBreakPoint) {
 				bgColorInput.value = large.backgroundColor ? large.backgroundColor : '#ffffff'
+				bgColorSelect.value = large.backgroundColor ? large.backgroundColor : 'custom'
 				if (large.padding) {
 					const p = large.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -153,6 +157,7 @@ const Appearance = () => {
 				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? xlarge.backgroundColor : '#ffffff'
+				bgColorSelect.value = xlarge.backgroundColor ? xlarge.backgroundColor : 'custom'
 				if (xlarge.padding) {
 					const p = xlarge.padding.split(' ')
 					paddingYInput.value = p[0].split('p')[0]
@@ -173,8 +178,7 @@ const Appearance = () => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			let changedBgColor = ''
-			if (bgColor === 'transparent') changedBgColor = 'rgba(0,0,0,0)'
-			else if (bgColor !== 'custom') changedBgColor = bgColor
+			if (bgColor !== 'custom') changedBgColor = bgColor
 
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'backgroundColor', changedBgColor)
@@ -483,7 +487,7 @@ const Appearance = () => {
 			</option>
 		)
 		temp.push(
-			<option key='transparent' value='transparent'>
+			<option key='transparent' value='rgba(0,0,0,0)'>
 				Transparent
 			</option>
 		)
@@ -497,6 +501,7 @@ const Appearance = () => {
 
 		return (
 			<select
+				id='bg-color-select'
 				onChange={e => {
 					setBgColor(e.target.value)
 					setCustomBgColor(e.target.value === 'custom')
