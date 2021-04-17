@@ -4,7 +4,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import BGImage from './PropertiesComponenets/BGImage'
 import GridColumn from './PropertiesComponenets/GridColumn'
 
-const DivProperties = ({ width, activeElement }) => {
+const DivProperties = () => {
 	const {
 		small,
 		setSmall,
@@ -25,7 +25,7 @@ const DivProperties = ({ width, activeElement }) => {
 		showDivProperties,
 		setShowDivProperties,
 	} = useContext(PropertiesContext)
-	const { sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [grid, setGrid] = useState(false)
 	const [rowGap, setRowGap] = useState('0px')

@@ -11,13 +11,13 @@ import ListProperties from './ListProperties'
 import ListItemProperties from './ListItemProperties'
 
 const Specific = () => {
-	const { activeElement, activePage, width } = useContext(PageContext)
+	const { activeElement } = useContext(PageContext)
 	const ele = document.getElementById(activeElement)
 
-	if (activeElement === activePage || !ele) return <div></div>
+	if (!ele) return <div></div>
 
 	return ele.tagName === 'DIV' ? (
-		<DivProperties width={width} activeElement={activeElement} />
+		<DivProperties />
 	) : ele.tagName === 'INPUT' ? (
 		<InputProperties />
 	) : ele.tagName === 'BUTTON' ? (
