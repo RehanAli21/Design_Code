@@ -31,8 +31,10 @@ const Appearance = () => {
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [bgColor, setBgColor] = useState(`#ffffff`)
 	const [customBgColor, setCustomBgColor] = useState(true)
-	const [paddingX, setPaddingX] = useState('')
-	const [paddingY, setPaddingY] = useState('')
+	const [paddingX, setPaddingX] = useState('0')
+	const [paddingXUnit, setPaddingXUnit] = useState('px')
+	const [paddingY, setPaddingY] = useState('0')
+	const [paddingYUnit, setPaddingYUnit] = useState('px')
 	const [bColor, setBColor] = useState('#000000')
 	const [bSize, setBSize] = useState('1px')
 	const [bRadius, setBRdius] = useState('1px')
@@ -63,6 +65,8 @@ const Appearance = () => {
 			const sColorInput = document.getElementById('a-s-color')
 			const paddingXInput = document.getElementById('ap-paddingXInput')
 			const paddingYInput = document.getElementById('ap-paddingYInput')
+			const paddingXSelect = document.getElementById('ap-paddingXSelect')
+			const paddingYSelect = document.getElementById('ap-paddingYSelect')
 
 			bRadiusInput.value = large.borderRadius ? large.borderRadius.split('%')[0] : '0'
 
@@ -127,44 +131,164 @@ const Appearance = () => {
 				bgColorSelect.value = small.backgroundColor ? small.backgroundColor : 'custom'
 				if (small.padding) {
 					const p = small.padding.split(' ')
-					paddingYInput.value = p[0].split('p')[0]
-					paddingXInput.value = p[1].split('p')[0]
+					if (p[0].search('px') !== -1) {
+						paddingYInput.value = p[0].split('p')[0]
+						paddingYSelect.value = 'px'
+					} else if (p[0].search('vh') !== -1) {
+						paddingYInput.value = p[0].split('v')[0]
+						paddingYSelect.value = 'vh'
+					} else if (p[0].search('em') !== -1) {
+						paddingYInput.value = p[0].split('e')[0]
+						paddingYSelect.value = 'em'
+					} else {
+						paddingYInput.value = 0
+						paddingYSelect.value = 'px'
+					}
+
+					if (p[1].search('px') !== -1) {
+						paddingXInput.value = p[1].split('p')[0]
+						paddingXSelect.value = 'px'
+					} else if (p[1].search('%') !== -1) {
+						paddingXInput.value = p[1].split('%')[0]
+						paddingXSelect.value = '%'
+					} else if (p[1].search('vh') !== -1) {
+						paddingXInput.value = p[1].split('v')[0]
+						paddingXSelect.value = 'vh'
+					} else if (p[1].search('em') !== -1) {
+						paddingXInput.value = p[1].split('e')[0]
+						paddingXSelect.value = 'em'
+					} else {
+						paddingXInput.value = 0
+						paddingXSelect.value = 'px'
+					}
 				} else {
 					paddingYInput.value = 0
 					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
+					paddingYSelect.value = 'px'
 				}
 			} else if (width < mBreakPoint) {
 				bgColorInput.value = medium.backgroundColor ? medium.backgroundColor : '#ffffff'
 				bgColorSelect.value = medium.backgroundColor ? medium.backgroundColor : 'custom'
 				if (medium.padding) {
 					const p = medium.padding.split(' ')
-					paddingYInput.value = p[0].split('p')[0]
-					paddingXInput.value = p[1].split('p')[0]
+					if (p[0].search('px') !== -1) {
+						paddingYInput.value = p[0].split('p')[0]
+						paddingYSelect.value = 'px'
+					} else if (p[0].search('vh') !== -1) {
+						paddingYInput.value = p[0].split('v')[0]
+						paddingYSelect.value = 'vh'
+					} else if (p[0].search('em') !== -1) {
+						paddingYInput.value = p[0].split('e')[0]
+						paddingYSelect.value = 'em'
+					} else {
+						paddingYInput.value = 0
+						paddingYSelect.value = 'px'
+					}
+
+					if (p[1].search('px') !== -1) {
+						paddingXInput.value = p[1].split('p')[0]
+						paddingXSelect.value = 'px'
+					} else if (p[1].search('%') !== -1) {
+						paddingXInput.value = p[1].split('%')[0]
+						paddingXSelect.value = '%'
+					} else if (p[1].search('vh') !== -1) {
+						paddingXInput.value = p[1].split('v')[0]
+						paddingXSelect.value = 'vh'
+					} else if (p[1].search('em') !== -1) {
+						paddingXInput.value = p[1].split('e')[0]
+						paddingXSelect.value = 'em'
+					} else {
+						paddingXInput.value = 0
+						paddingXSelect.value = 'px'
+					}
 				} else {
 					paddingYInput.value = 0
 					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
+					paddingYSelect.value = 'px'
 				}
 			} else if (width < lBreakPoint) {
 				bgColorInput.value = large.backgroundColor ? large.backgroundColor : '#ffffff'
 				bgColorSelect.value = large.backgroundColor ? large.backgroundColor : 'custom'
 				if (large.padding) {
 					const p = large.padding.split(' ')
-					paddingYInput.value = p[0].split('p')[0]
-					paddingXInput.value = p[1].split('p')[0]
+					if (p[0].search('px') !== -1) {
+						paddingYInput.value = p[0].split('p')[0]
+						paddingYSelect.value = 'px'
+					} else if (p[0].search('vh') !== -1) {
+						paddingYInput.value = p[0].split('v')[0]
+						paddingYSelect.value = 'vh'
+					} else if (p[0].search('em') !== -1) {
+						paddingYInput.value = p[0].split('e')[0]
+						paddingYSelect.value = 'em'
+					} else {
+						paddingYInput.value = 0
+						paddingYSelect.value = 'px'
+					}
+
+					if (p[1].search('px') !== -1) {
+						paddingXInput.value = p[1].split('p')[0]
+						paddingXSelect.value = 'px'
+					} else if (p[1].search('%') !== -1) {
+						paddingXInput.value = p[1].split('%')[0]
+						paddingXSelect.value = '%'
+					} else if (p[1].search('vh') !== -1) {
+						paddingXInput.value = p[1].split('v')[0]
+						paddingXSelect.value = 'vh'
+					} else if (p[1].search('em') !== -1) {
+						paddingXInput.value = p[1].split('e')[0]
+						paddingXSelect.value = 'em'
+					} else {
+						paddingXInput.value = 0
+						paddingXSelect.value = 'px'
+					}
 				} else {
 					paddingYInput.value = 0
 					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
+					paddingYSelect.value = 'px'
 				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? xlarge.backgroundColor : '#ffffff'
 				bgColorSelect.value = xlarge.backgroundColor ? xlarge.backgroundColor : 'custom'
 				if (xlarge.padding) {
 					const p = xlarge.padding.split(' ')
-					paddingYInput.value = p[0].split('p')[0]
-					paddingXInput.value = p[1].split('p')[0]
+					if (p[0].search('px') !== -1) {
+						paddingYInput.value = p[0].split('p')[0]
+						paddingYSelect.value = 'px'
+					} else if (p[0].search('vh') !== -1) {
+						paddingYInput.value = p[0].split('v')[0]
+						paddingYSelect.value = 'vh'
+					} else if (p[0].search('em') !== -1) {
+						paddingYInput.value = p[0].split('e')[0]
+						paddingYSelect.value = 'em'
+					} else {
+						paddingYInput.value = 0
+						paddingYSelect.value = 'px'
+					}
+
+					if (p[1].search('px') !== -1) {
+						paddingXInput.value = p[1].split('p')[0]
+						paddingXSelect.value = 'px'
+					} else if (p[1].search('%') !== -1) {
+						paddingXInput.value = p[1].split('%')[0]
+						paddingXSelect.value = '%'
+					} else if (p[1].search('vh') !== -1) {
+						paddingXInput.value = p[1].split('v')[0]
+						paddingXSelect.value = 'vh'
+					} else if (p[1].search('em') !== -1) {
+						paddingXInput.value = p[1].split('e')[0]
+						paddingXSelect.value = 'em'
+					} else {
+						paddingXInput.value = 0
+						paddingXSelect.value = 'px'
+					}
 				} else {
 					paddingYInput.value = 0
 					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
+					paddingYSelect.value = 'px'
 				}
 			}
 		}
@@ -224,7 +348,12 @@ const Appearance = () => {
 	//For Changing padding
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			const padding = `${paddingY === '' ? '0px' : paddingY} ${paddingX === '' ? '0px' : paddingX}`
+			const px = `${paddingX === '' ? '0' : paddingX}${paddingXUnit}`
+			console.log(paddingXUnit)
+			const py = `${paddingY === '' ? '0' : paddingY}${paddingYUnit}`
+			console.log(py)
+			const padding = `${py} ${px}`
+			console.log(padding)
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'padding', padding)
 				setChangedSmall(true)
@@ -251,7 +380,7 @@ const Appearance = () => {
 				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
 			}
 		}
-	}, [paddingX, paddingY])
+	}, [paddingX, paddingXUnit, paddingY, paddingYUnit])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -589,12 +718,12 @@ const Appearance = () => {
 					<label>InnerX space: </label>
 					<input
 						id='ap-paddingXInput'
-						onChange={e => setPaddingX(`${e.target.value}px`)}
+						onChange={e => setPaddingX(e.target.value)}
 						type='number'
 						defaultValue='0'
 						min='0'
 					/>
-					<select id='ap-paddingXSelect'>
+					<select id='ap-paddingXSelect' onChange={e => setPaddingXUnit(e.target.value)}>
 						<option value='px'>PX</option>
 						<option value='%'>%</option>
 						<option value='vw'>vw</option>
@@ -605,12 +734,12 @@ const Appearance = () => {
 					<label>InnerY space: </label>
 					<input
 						id='ap-paddingYInput'
-						onChange={e => setPaddingY(`${e.target.value}px`)}
+						onChange={e => setPaddingY(e.target.value)}
 						type='number'
 						defaultValue='0'
 						min='0'
 					/>
-					<select id='ap-paddingYSelect'>
+					<select id='ap-paddingYSelect' onChange={e => setPaddingYUnit(e.target.value)}>
 						<option value='px'>px</option>
 						<option value='vh'>vh</option>
 						<option value='em'>em</option>
