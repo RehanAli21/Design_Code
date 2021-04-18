@@ -594,6 +594,12 @@ const Appearance = () => {
 						defaultValue='0'
 						min='0'
 					/>
+					<select id='ap-paddingXSelect'>
+						<option value='px'>PX</option>
+						<option value='%'>%</option>
+						<option value='vw'>vw</option>
+						<option value='em'>em</option>
+					</select>
 				</div>
 				<div className='padding md'>
 					<label>InnerY space: </label>
@@ -604,6 +610,11 @@ const Appearance = () => {
 						defaultValue='0'
 						min='0'
 					/>
+					<select id='ap-paddingYSelect'>
+						<option value='px'>px</option>
+						<option value='vh'>vh</option>
+						<option value='em'>em</option>
+					</select>
 				</div>
 				<div className='ap-borders md'>
 					<input

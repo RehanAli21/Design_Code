@@ -632,7 +632,8 @@ nav .d-v button:hover {
 }
 .propertybar .ap .padding {
 	display: grid;
-	grid-template-columns: 135px 120px;
+	grid-template-columns: 140px 60px auto 10%;
+	column-gap: 5px;
 }
 .propertybar .ap .padding input[type='number'] {
 	border: none;
