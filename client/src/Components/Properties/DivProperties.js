@@ -28,6 +28,7 @@ const DivProperties = () => {
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [grid, setGrid] = useState(false)
+	const [gridHelper, setGridHelper] = useState(false)
 	const [rowGap, setRowGap] = useState('0px')
 	const [columnGap, setColumnGap] = useState('0px')
 	const [rowsNum, setRowsNum] = useState(0)
@@ -356,7 +357,7 @@ const DivProperties = () => {
 
 	//For applying grid
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && gridHelper) {
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'display', grid ? 'grid' : '')
 				setChangedSmall(true)
@@ -382,6 +383,7 @@ const DivProperties = () => {
 				if (!changedMedium) setProperties(medium, setMedium, 'display', grid ? 'grid' : '')
 				if (!changedLarge) setProperties(large, setLarge, 'display', grid ? 'grid' : '')
 			}
+			setGridHelper(false)
 		}
 	}, [grid])
 
@@ -569,7 +571,14 @@ const DivProperties = () => {
 			<GridColumn />
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
 			<div style={{ display: showDivProperties ? 'grid' : 'none' }} className='grid'>
-				<input onChange={e => setGrid(e.target.checked)} id='r-c-grid' type='checkbox' />
+				<input
+					onChange={e => {
+						setGrid(e.target.checked)
+						setGridHelper(true)
+					}}
+					id='r-c-grid'
+					type='checkbox'
+				/>
 				<label>Rows / Columns</label>
 			</div>
 			<div className='row-col-div' style={{ display: grid ? 'grid' : 'none' }}>
