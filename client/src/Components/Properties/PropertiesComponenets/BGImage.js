@@ -22,6 +22,7 @@ const BGImage = ({ width, activeElement, display }) => {
 	} = useContext(PropertiesContext)
 
 	const [bgImg, setbgImg] = useState(false)
+	const [bgHelper, setBgHelper] = useState(false)
 	const [img, setImg] = useState('')
 	const [bgSize, setBgSize] = useState('auto')
 	const [bgRepeat, setBgRepeat] = useState('repeat')
@@ -100,11 +101,12 @@ const BGImage = ({ width, activeElement, display }) => {
 
 	//For setting background img
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && bgHelper) {
 			setBackground(small, setSmall)
 			setBackground(medium, setMedium)
 			setBackground(large, setLarge)
 			setBackground(xlarge, setXlarge)
+			setBgHelper(true)
 		}
 	}, [bgImg])
 
@@ -123,7 +125,14 @@ const BGImage = ({ width, activeElement, display }) => {
 	return (
 		<div style={{ display: display }}>
 			<div className='grid'>
-				<input id='div-bg-checkbox' onChange={e => setbgImg(e.target.checked)} type='checkbox' />
+				<input
+					id='div-bg-checkbox'
+					onChange={e => {
+						setbgImg(e.target.checked)
+						setBgHelper(true)
+					}}
+					type='checkbox'
+				/>
 				<label>Background Image: </label>
 			</div>
 			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px', marginTop: '10px' }} className='div-bg-img'>
