@@ -18,7 +18,14 @@ export const PageProvider = props => {
 		if (parentId && object) {
 			const temp = Object.assign({}, actionHistory)
 
-			temp[activePage].push([object, parentId, index])
+			try {
+				temp[activePage].push([object, parentId, index])
+			} catch (e) {
+				temp[activePage] = []
+				temp[activePage].push([object, parentId, index])
+			}
+
+			setActionHistory(temp)
 		}
 	}
 
