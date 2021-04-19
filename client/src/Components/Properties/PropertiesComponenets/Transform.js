@@ -52,56 +52,59 @@ const Transform = () => {
 				marginLeftInput.value = small.marginLeft ? small.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = small.marginTop ? small.marginTop.replace(/[^\d.-]/g, '') : '0'
 
-				widthSelect.selectedIndex = small.width ? widthTypeIndex(small.width) : 0
-				heightSelect.selectedIndex = small.height ? heightTypeIndex(small.height) : 0
-				marginLeftSelect.selectedIndex = small.marginLeft ? marginLeftTypeIndex(small.marginLeft) : 0
-				marginTopSelect.selectedIndex = small.marginTop ? marginTopTypeIndex(small.marginTop) : 0
+				widthSelect.value = small.width ? widthUnitFinder(small.width) : 'px'
+				heightSelect.value = small.height ? heightUnitFinder(small.height) : 'px'
+				marginLeftSelect.value = small.marginLeft ? marginUnitFinder(small.marginLeft) : 'em'
+				marginTopSelect.value = small.marginTop ? marginUnitFinder(small.marginTop) : 'em'
 			} else if (width < mBreakPoint) {
 				widthInput.value = medium.width ? medium.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = medium.height ? medium.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = medium.marginLeft ? medium.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = medium.marginTop ? medium.marginTop.replace(/[^\d.-]/g, '') : '0'
 
-				widthSelect.selectedIndex = medium.width ? widthTypeIndex(medium.width) : 0
-				heightSelect.selectedIndex = medium.height ? heightTypeIndex(medium.height) : 0
-				marginLeftSelect.selectedIndex = medium.marginLeft ? marginLeftTypeIndex(medium.marginLeft) : 0
-				marginTopSelect.selectedIndex = medium.marginTop ? marginTopTypeIndex(medium.marginTop) : 0
+				widthSelect.value = medium.width ? widthUnitFinder(medium.width) : 'px'
+				heightSelect.value = medium.height ? heightUnitFinder(medium.height) : 'px'
+				marginLeftSelect.value = medium.marginLeft ? marginUnitFinder(medium.marginLeft) : 'em'
+				marginTopSelect.value = medium.marginTop ? marginUnitFinder(medium.marginTop) : 'em'
 			} else if (width < lBreakPoint) {
 				widthInput.value = large.width ? large.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = large.height ? large.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = large.marginLeft ? large.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = large.marginTop ? large.marginTop.replace(/[^\d.-]/g, '') : '0'
 
-				widthSelect.selectedIndex = large.width ? widthTypeIndex(large.width) : 0
-				heightSelect.selectedIndex = large.height ? heightTypeIndex(large.height) : 0
-				marginLeftSelect.selectedIndex = large.marginLeft ? marginLeftTypeIndex(large.marginLeft) : 0
-				marginTopSelect.selectedIndex = large.marginTop ? marginTopTypeIndex(large.marginTop) : 0
+				widthSelect.value = large.width ? widthUnitFinder(large.width) : 'px'
+				heightSelect.value = large.height ? heightUnitFinder(large.height) : 'px'
+				marginLeftSelect.value = large.marginLeft ? marginUnitFinder(large.marginLeft) : 'em'
+				marginTopSelect.value = large.marginTop ? marginUnitFinder(large.marginTop) : 'em'
 			} else {
 				widthInput.value = xlarge.width ? xlarge.width.replace(/[^\d.-]/g, '') : '0'
 				heightInput.value = xlarge.height ? xlarge.height.replace(/[^\d.-]/g, '') : '0'
 				marginLeftInput.value = xlarge.marginLeft ? xlarge.marginLeft.replace(/[^\d.-]/g, '') : '0'
 				marginTopInput.value = xlarge.marginTop ? xlarge.marginTop.replace(/[^\d.-]/g, '') : '0'
 
-				widthSelect.selectedIndex = xlarge.width ? widthTypeIndex(xlarge.width) : 0
-				heightSelect.selectedIndex = xlarge.height ? heightTypeIndex(xlarge.height) : 0
-				marginLeftSelect.selectedIndex = xlarge.marginLeft ? marginLeftTypeIndex(xlarge.marginLeft) : 0
-				marginTopSelect.selectedIndex = xlarge.marginTop ? marginTopTypeIndex(xlarge.marginTop) : 0
+				widthSelect.value = xlarge.width ? widthUnitFinder(xlarge.width) : 'px'
+				heightSelect.value = xlarge.height ? heightUnitFinder(xlarge.height) : 'px'
+				marginLeftSelect.value = xlarge.marginLeft ? marginUnitFinder(xlarge.marginLeft) : 'em'
+				marginTopSelect.value = xlarge.marginTop ? marginUnitFinder(xlarge.marginTop) : 'em'
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
 
-	const widthTypeIndex = s => {
-		return s.search('px') !== -1 ? 0 : s.search('%') !== -1 ? 1 : s.search('rem') !== -1 ? 2 : 3
-	}
-	const heightTypeIndex = s => {
-		return s.search('px') !== -1 ? 0 : s.search('vh') !== -1 ? 1 : s.search('%') !== -1 ? 2 : s.search('rem') !== -1 ? 3 : 4
-	}
-	const marginLeftTypeIndex = s => {
-		return s.search('em') !== -1 ? 0 : s.search('rem') !== -1 ? 1 : 2
-	}
-	const marginTopTypeIndex = s => {
-		return s.search('em') !== -1 ? 0 : s.search('rem') !== -1 ? 1 : 2
-	}
+	const widthUnitFinder = s =>
+		s.search('px') !== -1 ? 'px' : s.search('%') !== -1 ? '%' : s.search('rem') !== -1 ? 'rem' : 'em'
+
+	const heightUnitFinder = s =>
+		s.search('px') !== -1
+			? 'px'
+			: s.search('vh') !== -1
+			? 'vh'
+			: s.search('%') !== -1
+			? '%'
+			: s.search('rem') !== -1
+			? 'rem'
+			: 'em'
+
+	const marginUnitFinder = s => (s.search('rem') !== -1 ? 'rem' : s.search('em') !== -1 ? 'em' : 'px')
 
 	//For width change from input
 	useEffect(() => {
@@ -266,12 +269,12 @@ const Transform = () => {
 						id='a-t-ws'
 						onChange={e => {
 							if (e.target.value === '%' && widths > 100) setWidths(100)
-							setWidthUnit(e.target.value.toLowerCase())
+							setWidthUnit(e.target.value)
 						}}>
-						<option>PX</option>
-						<option>%</option>
-						<option>REM</option>
-						<option>EM</option>
+						<option value='px'>PX</option>
+						<option value='%'>%</option>
+						<option value='rem'>REM</option>
+						<option value='em'>EM</option>
 					</select>
 				</div>
 				<div className='h'>
@@ -287,31 +290,31 @@ const Transform = () => {
 						id='a-t-hs'
 						onChange={e => {
 							if (e.target.value === '%' && heights > 100) setHeights(100)
-							setHeighthUnit(e.target.value.toLowerCase())
+							setHeighthUnit(e.target.value)
 						}}>
-						<option>PX</option>
-						<option>VH</option>
-						<option>%</option>
-						<option>REM</option>
-						<option>EM</option>
+						<option value='px'>PX</option>
+						<option value='vh'>VH</option>
+						<option value='%'>%</option>
+						<option value='rem'>REM</option>
+						<option value='em'>EM</option>
 					</select>
 				</div>
 				<div className='x'>
 					<label>X : </label>
 					<input id='a-t-ml' onChange={e => setMarginLeft(e.target.value)} type='number' min='0' />
-					<select id='a-t-mlu' onChange={e => setMLUnit(e.target.value.toLowerCase())}>
-						<option>EM</option>
-						<option>REM</option>
-						<option>PX</option>
+					<select id='a-t-mlu' onChange={e => setMLUnit(e.target.value)}>
+						<option value='em'>EM</option>
+						<option value='rem'>REM</option>
+						<option value='px'>PX</option>
 					</select>
 				</div>
 				<div className='y'>
 					<label>Y : </label>
 					<input id='a-t-mt' onChange={e => setMarginTop(e.target.value)} type='number' min='0' />
-					<select id='a-t-mtu' onChange={e => setMTUnit(e.target.value.toLowerCase())}>
-						<option>EM</option>
-						<option>REM</option>
-						<option>PX</option>
+					<select id='a-t-mtu' onChange={e => setMTUnit(e.target.value)}>
+						<option value='em'>EM</option>
+						<option value='rem'>REM</option>
+						<option value='px'>PX</option>
 					</select>
 				</div>
 			</div>
