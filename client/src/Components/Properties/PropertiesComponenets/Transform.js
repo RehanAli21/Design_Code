@@ -27,12 +27,12 @@ const Transform = () => {
 
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
-	const [widths, setWidths] = useState(`0`)
-	const [heights, setHeights] = useState(`0`)
+	const [widths, setWidths] = useState(``)
+	const [heights, setHeights] = useState(``)
 	const [mlUnit, setMLUnit] = useState('em')
 	const [mtUnit, setMTUnit] = useState('em')
-	const [marginLeft, setMarginLeft] = useState(`0`)
-	const [marginTop, setMarginTop] = useState(`0`)
+	const [marginLeft, setMarginLeft] = useState(``)
+	const [marginTop, setMarginTop] = useState(``)
 
 	//For Default input values
 	useEffect(() => {
@@ -105,7 +105,7 @@ const Transform = () => {
 
 	//For width change from input
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && widths !== '') {
 			const changedWidth = `${widths}${widthUnit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'width', changedWidth)
@@ -137,7 +137,7 @@ const Transform = () => {
 
 	//For height change from input
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && heights !== '') {
 			const changedHeight = `${heights}${heightUnit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'height', changedHeight)
@@ -169,7 +169,7 @@ const Transform = () => {
 
 	//For margin left change from input
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && marginLeft !== '') {
 			const changedmarginLeft = `${marginLeft}${mlUnit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
@@ -204,7 +204,7 @@ const Transform = () => {
 
 	//For margin top change from input
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (small && medium && large && xlarge && marginTop !== '') {
 			const changedmarginTop = `${marginTop}${mtUnit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'marginTop', changedmarginTop)
