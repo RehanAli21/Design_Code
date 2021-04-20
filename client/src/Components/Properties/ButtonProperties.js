@@ -4,6 +4,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import Font from './PropertiesComponenets/Font'
 import TextChange from './PropertiesComponenets/TextChange'
 import Text from './PropertiesComponenets/Text'
+import Position from './PropertiesComponenets/Position'
 
 const ButtonProperties = () => {
 	const {
@@ -114,6 +115,7 @@ const ButtonProperties = () => {
 			</div>
 			<Text />
 			<Font />
+			<Position />
 		</React.Fragment>
 	)
 }

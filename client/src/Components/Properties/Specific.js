@@ -9,6 +9,7 @@ import SelectProperties from './SelectProperties'
 import OptionProperties from './OptionProperties'
 import ListProperties from './ListProperties'
 import ListItemProperties from './ListItemProperties'
+import Position from './PropertiesComponenets/Position'
 
 const Specific = () => {
 	const { activeElement } = useContext(PageContext)
@@ -17,7 +18,10 @@ const Specific = () => {
 	if (!ele) return <div></div>
 
 	return ele.tagName === 'DIV' ? (
-		<DivProperties />
+		<React.Fragment>
+			<DivProperties />
+			<Position />
+		</React.Fragment>
 	) : ele.tagName === 'INPUT' ? (
 		<InputProperties />
 	) : ele.tagName === 'BUTTON' ? (

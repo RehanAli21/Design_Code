@@ -3,6 +3,7 @@ import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import Filter from './PropertiesComponenets/Filter'
 import GridColumn from './PropertiesComponenets/GridColumn'
+import Position from './PropertiesComponenets/Position'
 
 const ImageProperties = () => {
 	const {
@@ -171,6 +172,7 @@ const ImageProperties = () => {
 				<GridColumn />
 			</div>
 			<Filter />
+			<Position />
 		</React.Fragment>
 	)
 }
