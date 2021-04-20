@@ -270,7 +270,12 @@ const Appearance = () => {
 	//For Changing paddingX
 	useEffect(() => {
 		if (small && medium && large && xlarge && paddingX !== '') {
-			const padding = `${paddingX}${paddingXUnit}`
+			const ele = document.getElementById('ap-paddingXSelect')
+
+			let punit = paddingYUnit
+			if (ele) punit = ele.value
+
+			const padding = `${paddingX}${punit}`
 
 			if (width < sBreakPoint) {
 				setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
@@ -303,7 +308,12 @@ const Appearance = () => {
 	//For Changing paddingY
 	useEffect(() => {
 		if (small && medium && large && xlarge && paddingY !== '') {
-			const padding = `${paddingY}${paddingYUnit}`
+			const ele = document.getElementById('ap-paddingYSelect')
+
+			let punit = paddingYUnit
+			if (ele) punit = ele.value
+
+			const padding = `${paddingY}${punit}`
 
 			if (width < sBreakPoint) {
 				setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
@@ -337,7 +347,6 @@ const Appearance = () => {
 		const temp = Object.assign({}, obj)
 		temp[p1] = property
 		temp[p2] = property
-		console.log(temp)
 		setObj(temp)
 	}
 
