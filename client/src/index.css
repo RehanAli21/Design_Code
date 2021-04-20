@@ -760,7 +760,7 @@ nav .d-v button:hover {
 .propertybar .btn-specific > .three {
 	text-align: left;
 	display: grid;
-	grid-template-columns: auto 80px 40px 10%;
+	grid-template-columns: auto 77px 43px 10%;
 	column-gap: 5px;
 	margin-left: 26px;
 	margin-top: 15px;
