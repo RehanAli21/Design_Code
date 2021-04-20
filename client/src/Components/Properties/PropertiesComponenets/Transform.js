@@ -109,7 +109,12 @@ const Transform = () => {
 	//For width change from input
 	useEffect(() => {
 		if (small && medium && large && xlarge && widths !== '') {
-			const changedWidth = `${widths}${widthUnit}`
+			const ele = document.getElementById('a-t-ws')
+
+			let wunit = widthUnit
+			if (ele) wunit = ele.value
+
+			const changedWidth = `${widths}${wunit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'width', changedWidth)
 				setChangedSmall(true)
@@ -141,7 +146,12 @@ const Transform = () => {
 	//For height change from input
 	useEffect(() => {
 		if (small && medium && large && xlarge && heights !== '') {
-			const changedHeight = `${heights}${heightUnit}`
+			const ele = document.getElementById('a-t-hs')
+
+			let hunit = heightUnit
+			if (ele) hunit = ele.value
+
+			const changedHeight = `${heights}${hunit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'height', changedHeight)
 				setChangedSmall(true)
@@ -173,7 +183,12 @@ const Transform = () => {
 	//For margin left change from input
 	useEffect(() => {
 		if (small && medium && large && xlarge && marginLeft !== '') {
-			const changedmarginLeft = `${marginLeft}${mlUnit}`
+			const ele = document.getElementById('a-t-mlu')
+
+			let munit = mlUnit
+			if (ele) munit = ele.value
+
+			const changedmarginLeft = `${marginLeft}${munit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'marginLeft', changedmarginLeft)
 				setChangedSmall(true)
@@ -208,7 +223,12 @@ const Transform = () => {
 	//For margin top change from input
 	useEffect(() => {
 		if (small && medium && large && xlarge && marginTop !== '') {
-			const changedmarginTop = `${marginTop}${mtUnit}`
+			const ele = document.getElementById('a-t-mtu')
+
+			let munit = mtUnit
+			if (ele) munit = ele.value
+
+			const changedmarginTop = `${marginTop}${munit}`
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'marginTop', changedmarginTop)
 				setChangedSmall(true)
