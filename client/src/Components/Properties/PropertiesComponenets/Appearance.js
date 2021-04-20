@@ -31,9 +31,9 @@ const Appearance = () => {
 	const [showShadowSection, setShowShadowSection] = useState(false)
 	const [bgColor, setBgColor] = useState(`#ffffff`)
 	const [customBgColor, setCustomBgColor] = useState(true)
-	const [paddingX, setPaddingX] = useState('0')
+	const [paddingX, setPaddingX] = useState('')
 	const [paddingXUnit, setPaddingXUnit] = useState('px')
-	const [paddingY, setPaddingY] = useState('0')
+	const [paddingY, setPaddingY] = useState('')
 	const [paddingYUnit, setPaddingYUnit] = useState('px')
 	const [bColor, setBColor] = useState('#000000')
 	const [bSize, setBSize] = useState('1px')
@@ -129,174 +129,96 @@ const Appearance = () => {
 			if (width < sBreakPoint) {
 				bgColorInput.value = small.backgroundColor ? small.backgroundColor : '#ffffff'
 				bgColorSelect.value = small.backgroundColor ? small.backgroundColor : 'custom'
-				if (small.padding) {
-					const p = small.padding.split(' ')
-					if (p[0].search('px') !== -1) {
-						paddingYInput.value = p[0].split('p')[0]
-						paddingYSelect.value = 'px'
-					} else if (p[0].search('vh') !== -1) {
-						paddingYInput.value = p[0].split('v')[0]
-						paddingYSelect.value = 'vh'
-					} else if (p[0].search('em') !== -1) {
-						paddingYInput.value = p[0].split('e')[0]
-						paddingYSelect.value = 'em'
-					} else {
-						paddingYInput.value = 0
-						paddingYSelect.value = 'px'
-					}
 
-					if (p[1].search('px') !== -1) {
-						paddingXInput.value = p[1].split('p')[0]
-						paddingXSelect.value = 'px'
-					} else if (p[1].search('%') !== -1) {
-						paddingXInput.value = p[1].split('%')[0]
-						paddingXSelect.value = '%'
-					} else if (p[1].search('vh') !== -1) {
-						paddingXInput.value = p[1].split('v')[0]
-						paddingXSelect.value = 'vh'
-					} else if (p[1].search('em') !== -1) {
-						paddingXInput.value = p[1].split('e')[0]
-						paddingXSelect.value = 'em'
-					} else {
-						paddingXInput.value = 0
-						paddingXSelect.value = 'px'
+				if (small.paddingTop && small.paddingBottom) {
+					if (small.paddingTop === small.paddingBottom) {
+						const p = paddingFinder(small.paddingTop)
+						paddingXInput.value = p[0]
+						paddingXSelect.value = p[1]
 					}
-				} else {
-					paddingYInput.value = 0
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
-					paddingYSelect.value = 'px'
+				}
+
+				if (small.paddingLeft && small.paddingRight) {
+					if (small.paddingLeft === small.paddingRight) {
+						const p = paddingFinder(small.paddingLeft)
+						paddingYInput.value = p[0]
+						paddingYSelect.value = p[1]
+					}
 				}
 			} else if (width < mBreakPoint) {
 				bgColorInput.value = medium.backgroundColor ? medium.backgroundColor : '#ffffff'
 				bgColorSelect.value = medium.backgroundColor ? medium.backgroundColor : 'custom'
-				if (medium.padding) {
-					const p = medium.padding.split(' ')
-					if (p[0].search('px') !== -1) {
-						paddingYInput.value = p[0].split('p')[0]
-						paddingYSelect.value = 'px'
-					} else if (p[0].search('vh') !== -1) {
-						paddingYInput.value = p[0].split('v')[0]
-						paddingYSelect.value = 'vh'
-					} else if (p[0].search('em') !== -1) {
-						paddingYInput.value = p[0].split('e')[0]
-						paddingYSelect.value = 'em'
-					} else {
-						paddingYInput.value = 0
-						paddingYSelect.value = 'px'
+				if (medium.paddingTop && medium.paddingBottom) {
+					if (medium.paddingTop === medium.paddingBottom) {
+						const p = paddingFinder(medium.paddingTop)
+						paddingXInput.value = p[0]
+						paddingXSelect.value = p[1]
 					}
+				}
 
-					if (p[1].search('px') !== -1) {
-						paddingXInput.value = p[1].split('p')[0]
-						paddingXSelect.value = 'px'
-					} else if (p[1].search('%') !== -1) {
-						paddingXInput.value = p[1].split('%')[0]
-						paddingXSelect.value = '%'
-					} else if (p[1].search('vh') !== -1) {
-						paddingXInput.value = p[1].split('v')[0]
-						paddingXSelect.value = 'vh'
-					} else if (p[1].search('em') !== -1) {
-						paddingXInput.value = p[1].split('e')[0]
-						paddingXSelect.value = 'em'
-					} else {
-						paddingXInput.value = 0
-						paddingXSelect.value = 'px'
+				if (medium.paddingLeft && medium.paddingRight) {
+					if (medium.paddingLeft === medium.paddingRight) {
+						const p = paddingFinder(medium.paddingLeft)
+						paddingYInput.value = p[0]
+						paddingYSelect.value = p[1]
 					}
-				} else {
-					paddingYInput.value = 0
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
-					paddingYSelect.value = 'px'
 				}
 			} else if (width < lBreakPoint) {
 				bgColorInput.value = large.backgroundColor ? large.backgroundColor : '#ffffff'
 				bgColorSelect.value = large.backgroundColor ? large.backgroundColor : 'custom'
-				if (large.padding) {
-					const p = large.padding.split(' ')
-					if (p[0].search('px') !== -1) {
-						paddingYInput.value = p[0].split('p')[0]
-						paddingYSelect.value = 'px'
-					} else if (p[0].search('vh') !== -1) {
-						paddingYInput.value = p[0].split('v')[0]
-						paddingYSelect.value = 'vh'
-					} else if (p[0].search('em') !== -1) {
-						paddingYInput.value = p[0].split('e')[0]
-						paddingYSelect.value = 'em'
-					} else {
-						paddingYInput.value = 0
-						paddingYSelect.value = 'px'
-					}
 
-					if (p[1].search('px') !== -1) {
-						paddingXInput.value = p[1].split('p')[0]
-						paddingXSelect.value = 'px'
-					} else if (p[1].search('%') !== -1) {
-						paddingXInput.value = p[1].split('%')[0]
-						paddingXSelect.value = '%'
-					} else if (p[1].search('vh') !== -1) {
-						paddingXInput.value = p[1].split('v')[0]
-						paddingXSelect.value = 'vh'
-					} else if (p[1].search('em') !== -1) {
-						paddingXInput.value = p[1].split('e')[0]
-						paddingXSelect.value = 'em'
-					} else {
-						paddingXInput.value = 0
-						paddingXSelect.value = 'px'
+				if (large.paddingTop && large.paddingBottom) {
+					if (large.paddingTop === large.paddingBottom) {
+						const p = paddingFinder(large.paddingTop)
+						paddingXInput.value = p[0]
+						paddingXSelect.value = p[1]
 					}
-				} else {
-					paddingYInput.value = 0
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
-					paddingYSelect.value = 'px'
+				}
+
+				if (large.paddingLeft && large.paddingRight) {
+					if (large.paddingLeft === large.paddingRight) {
+						const p = paddingFinder(large.paddingLeft)
+						paddingYInput.value = p[0]
+						paddingYSelect.value = p[1]
+					}
 				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? xlarge.backgroundColor : '#ffffff'
 				bgColorSelect.value = xlarge.backgroundColor ? xlarge.backgroundColor : 'custom'
-				if (xlarge.padding) {
-					const p = xlarge.padding.split(' ')
-					if (p[0].search('px') !== -1) {
-						paddingYInput.value = p[0].split('p')[0]
-						paddingYSelect.value = 'px'
-					} else if (p[0].search('vh') !== -1) {
-						paddingYInput.value = p[0].split('v')[0]
-						paddingYSelect.value = 'vh'
-					} else if (p[0].search('em') !== -1) {
-						paddingYInput.value = p[0].split('e')[0]
-						paddingYSelect.value = 'em'
-					} else {
-						paddingYInput.value = 0
-						paddingYSelect.value = 'px'
-					}
 
-					if (p[1].search('px') !== -1) {
-						paddingXInput.value = p[1].split('p')[0]
-						paddingXSelect.value = 'px'
-					} else if (p[1].search('%') !== -1) {
-						paddingXInput.value = p[1].split('%')[0]
-						paddingXSelect.value = '%'
-					} else if (p[1].search('vh') !== -1) {
-						paddingXInput.value = p[1].split('v')[0]
-						paddingXSelect.value = 'vh'
-					} else if (p[1].search('em') !== -1) {
-						paddingXInput.value = p[1].split('e')[0]
-						paddingXSelect.value = 'em'
-					} else {
-						paddingXInput.value = 0
-						paddingXSelect.value = 'px'
+				if (xlarge.paddingTop && xlarge.paddingBottom) {
+					if (xlarge.paddingTop === xlarge.paddingBottom) {
+						const p = paddingFinder(xlarge.paddingTop)
+						paddingXInput.value = p[0]
+						paddingXSelect.value = p[1]
 					}
-				} else {
-					paddingYInput.value = 0
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
-					paddingYSelect.value = 'px'
+				}
+
+				if (xlarge.paddingLeft && xlarge.paddingRight) {
+					if (xlarge.paddingLeft === xlarge.paddingRight) {
+						const p = paddingFinder(xlarge.paddingLeft)
+						paddingYInput.value = p[0]
+						paddingYSelect.value = p[1]
+					}
 				}
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
 
-	const borderTypeIndex = s => {
-		return s === 'solid' ? 0 : s === 'inset' ? 1 : s === 'outset' ? 2 : 3
-	}
+	const borderTypeIndex = s => (s === 'solid' ? 0 : s === 'inset' ? 1 : s === 'outset' ? 2 : 3)
+
+	const paddingFinder = s =>
+		s.search('px') !== -1
+			? [s.split('p')[0], 'px']
+			: s.search('%') !== -1
+			? [s.split('%')[0], '%']
+			: s.search('vh') !== -1
+			? [s.split('v')[0], 'vh']
+			: s.search('vw') !== -1
+			? [s.split('v')[0], 'vw']
+			: s.search('em') !== -1
+			? [s.split('e')[0], 'e,']
+			: ['0', 'px']
 
 	//FOr background color and opacity
 	useEffect(() => {
@@ -345,42 +267,79 @@ const Appearance = () => {
 		}
 	}, [showShadowSection, sX, sY, sColor, sBlur])
 
-	//For Changing padding
+	//For Changing paddingX
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			const px = `${paddingX === '' ? '0' : paddingX}${paddingXUnit}`
-			console.log(paddingXUnit)
-			const py = `${paddingY === '' ? '0' : paddingY}${paddingYUnit}`
-			console.log(py)
-			const padding = `${py} ${px}`
-			console.log(padding)
+		if (small && medium && large && xlarge && paddingX !== '') {
+			const padding = `${paddingX}${paddingXUnit}`
+
 			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'padding', padding)
+				setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
 				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'padding', padding)
-				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
+				if (!changedMedium) setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
+				if (!changedLarge) setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
+				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
 			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'padding', padding)
+				setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
 				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)
-				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
+				if (!changedSmall) setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
+				if (!changedLarge) setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
+				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
 			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'padding', padding)
+				setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
 				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)
-				if (!changedMedium) setProperties(medium, setMedium, 'padding', padding)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'padding', padding)
+				if (!changedSmall) setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
+				if (!changedMedium) setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
+				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
 			} else {
-				setProperties(xlarge, setXlarge, 'padding', padding)
+				setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
 				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'padding', padding)
-				if (!changedMedium) setProperties(medium, setMedium, 'padding', padding)
-				if (!changedLarge) setProperties(large, setLarge, 'padding', padding)
+				if (!changedSmall) setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
+				if (!changedMedium) setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
+				if (!changedLarge) setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
 			}
 		}
-	}, [paddingX, paddingXUnit, paddingY, paddingYUnit])
+	}, [paddingX, paddingXUnit])
+
+	//For Changing paddingY
+	useEffect(() => {
+		if (small && medium && large && xlarge && paddingY !== '') {
+			const padding = `${paddingY}${paddingYUnit}`
+
+			if (width < sBreakPoint) {
+				setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
+				setChangedSmall(true)
+				if (!changedMedium) setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
+				if (!changedLarge) setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
+				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
+			} else if (width < mBreakPoint) {
+				setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
+				setChangedMedium(true)
+				if (!changedSmall) setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
+				if (!changedLarge) setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
+				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
+			} else if (width < lBreakPoint) {
+				setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
+				setChangedLarge(true)
+				if (!changedSmall) setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
+				if (!changedMedium) setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
+				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
+			} else {
+				setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
+				setChangedXlarge(true)
+				if (!changedSmall) setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
+				if (!changedMedium) setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
+				if (!changedLarge) setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
+			}
+		}
+	}, [paddingY, paddingYUnit])
+
+	const setPadding = (obj, setObj, p1, p2, property) => {
+		const temp = Object.assign({}, obj)
+		temp[p1] = property
+		temp[p2] = property
+		console.log(temp)
+		setObj(temp)
+	}
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
