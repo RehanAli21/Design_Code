@@ -4,11 +4,29 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import GridColumn from './PropertiesComponenets/GridColumn'
 
 const ListProperties = () => {
-	const { small, medium, large, xlarge, setSmall, setMedium, setLarge, setXlarge } = useContext(PropertiesContext)
-	const { activeElement, activePage, pages, setPages } = useContext(PageContext)
+	const {
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		changedSmall,
+		setChangedSmall,
+		changedMedium,
+		setChangedMedium,
+		changedLarge,
+		setChangedLarge,
+		changedXlarge,
+		setChangedXlarge,
+	} = useContext(PropertiesContext)
+	const { width, activePage, activeElement, pages, setPages, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [listType, setListType] = useState('')
 	const [listStyle, setListStyle] = useState('')
+	const [sameLine, setSameLine] = useState(false)
 
 	//For changing type of list
 	useEffect(() => {
@@ -33,6 +51,27 @@ const ListProperties = () => {
 		}
 	}
 
+	//For Same line(display) default value
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const sl = document.getElementById('text-sameline-checkbox')
+
+			if (width < sBreakPoint) {
+				sl.checked = small && small.display === 'inline-block'
+				setSameLine(small && small.display === 'inline-block')
+			} else if (width < mBreakPoint) {
+				sl.checked = medium && medium.display === 'inline-block'
+				setSameLine(medium && medium.display === 'inline-block')
+			} else if (width < lBreakPoint) {
+				sl.checked = large && large.display === 'inline-block'
+				setSameLine(large && large.display === 'inline-block')
+			} else {
+				sl.checked = xlarge && xlarge.display === 'inline-block'
+				setSameLine(xlarge && xlarge.display === 'inline-block')
+			}
+		}
+	}, [width, activeElement, small, large, medium, xlarge])
+
 	useEffect(() => {
 		if (listStyle !== '') {
 			const isNumberList =
@@ -51,6 +90,37 @@ const ListProperties = () => {
 		}
 	}, [listStyle])
 
+	//For changing display for same line
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
+			} else {
+				setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
+			}
+		}
+	}, [sameLine])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -60,6 +130,22 @@ const ListProperties = () => {
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading'>List Properties</p>
+			<div
+				style={{
+					display: 'grid',
+					gridTemplateColumns: '20px 130px auto',
+					marginLeft: '15px',
+					marginTop: '20px',
+					textAlign: 'center',
+				}}>
+				<input
+					id='text-sameline-checkbox'
+					style={{ marginTop: '5px', marginLeft: '12px' }}
+					type='checkbox'
+					onChange={e => setSameLine(e.target.checked)}
+				/>
+				<label>On Same Line</label>
+			</div>
 			<div className='two'>
 				<label>Bullets: </label>
 				<select id='list-style-select' onChange={e => setListStyle(e.target.value)}>
