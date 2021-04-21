@@ -25,7 +25,7 @@ const Position = () => {
 	} = useContext(PropertiesContext)
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
-	const [postion, setPosition] = useState('')
+	const [position, setPosition] = useState('')
 	const [top, setTop] = useState('')
 	const [topUnit, setTopUnit] = useState('')
 	const [bottom, setBottom] = useState('')
@@ -35,6 +35,47 @@ const Position = () => {
 	const [right, setRight] = useState('')
 	const [rightUnit, setRightUnit] = useState('')
 	const [zIndex, setZIndex] = useState('')
+
+	//For setting Positions
+	useEffect(() => {
+		if (small && medium && large && xlarge && position !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'position', position)
+				setChangedSmall(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'position', position)
+				if (!changedLarge) setProperties(large, setLarge, 'position', position)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', position)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'position', position)
+				setChangedMedium(true)
+
+				if (!changedSmall) setProperties(small, setSmall, 'position', position)
+				if (!changedLarge) setProperties(large, setLarge, 'position', position)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', position)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'position', position)
+				setChangedLarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'position', position)
+				if (!changedSmall) setProperties(small, setSmall, 'position', position)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', position)
+			} else {
+				setProperties(xlarge, setXlarge, 'position', position)
+				setChangedXlarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'position', position)
+				if (!changedLarge) setProperties(large, setLarge, 'position', position)
+				if (!changedSmall) setProperties(small, setSmall, 'position', position)
+			}
+		}
+	}, [position])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
 
 	return (
 		<div className='borders'>
