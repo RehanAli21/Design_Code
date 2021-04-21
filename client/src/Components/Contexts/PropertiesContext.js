@@ -27,6 +27,7 @@ export const PropertiesProvider = props => {
 	const [showImgProperties, setShowImgProperties] = useState(true)
 	const [showFilterProperties, setShowFilterProperties] = useState(true)
 	const [showExtraProperties, setShowExtraProperties] = useState(true)
+	const [showPositionProperties, setShowPositionProperties] = useState(true)
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -133,6 +134,8 @@ export const PropertiesProvider = props => {
 				setShowFilterProperties,
 				showExtraProperties,
 				setShowExtraProperties,
+				showPositionProperties,
+				setShowPositionProperties,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>
