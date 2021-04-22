@@ -439,12 +439,68 @@ const Position = () => {
 		setObj(temp)
 	}
 
+	const reset = () => {
+		if (small && medium && large && xlarge && top !== '') {
+			if (width < sBreakPoint) {
+				resetProperties(small, setSmall)
+				setChangedSmall(true)
+
+				if (!changedMedium) resetProperties(medium, setMedium)
+				if (!changedLarge) resetProperties(large, setLarge)
+				if (!changedXlarge) resetProperties(xlarge, setXlarge)
+			} else if (width < mBreakPoint) {
+				resetProperties(medium, setMedium)
+				setChangedMedium(true)
+
+				if (!changedSmall) resetProperties(small, setSmall)
+				if (!changedLarge) resetProperties(large, setLarge)
+				if (!changedXlarge) resetProperties(xlarge, setXlarge)
+			} else if (width < lBreakPoint) {
+				resetProperties(large, setLarge)
+				setChangedLarge(true)
+
+				if (!changedMedium) resetProperties(medium, setMedium)
+				if (!changedSmall) resetProperties(small, setSmall)
+				if (!changedXlarge) resetProperties(xlarge, setXlarge)
+			} else {
+				resetProperties(xlarge, setXlarge)
+				setChangedXlarge(true)
+
+				if (!changedMedium) resetProperties(medium, setMedium)
+				if (!changedLarge) resetProperties(large, setLarge)
+				if (!changedSmall) resetProperties(small, setSmall)
+			}
+		}
+	}
+
+	const resetProperties = (obj, setObj) => {
+		const temp = Object.assign({}, obj)
+		temp.position = 'static'
+		temp.zIndex = ''
+		temp.top = ''
+		temp.bottom = ''
+		temp.left = ''
+		temp.right = ''
+		setObj(temp)
+	}
+
 	return (
-		<div className='borders'>
+		<div className='borders btn-specific' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowPositionProperties(!showPositionProperties)}>
 				POSITIONS <span style={{ display: showPositionProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showPositionProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
+			<button
+				onClick={reset}
+				style={{
+					display: showPositionProperties ? 'block' : 'none',
+					padding: '5px 10px',
+					position: 'absolute',
+					top: '0px',
+					right: '30px',
+				}}>
+				Reset
+			</button>
 			<div style={{ display: showPositionProperties ? 'block' : 'none' }} className='btn-specific'>
 				<div className='two'>
 					<label>Positions</label>
