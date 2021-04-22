@@ -73,7 +73,7 @@ const Position = () => {
 
 	//For setting Top
 	useEffect(() => {
-		if (small && medium && large && xlarge && position !== '') {
+		if (small && medium && large && xlarge && top !== '') {
 			const ele = document.getElementById('pos-top-select')
 			let unit = topUnit
 			if (ele) unit = ele.value
@@ -112,9 +112,50 @@ const Position = () => {
 		}
 	}, [top, topUnit])
 
+	//For setting Bottom
+	useEffect(() => {
+		if (small && medium && large && xlarge && bottom !== '') {
+			const ele = document.getElementById('pos-bottom-select')
+			let unit = bottomUnit
+			if (ele) unit = ele.value
+
+			let b = `${bottom}${unit}`
+
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'bottom', b)
+				setChangedSmall(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'bottom', b)
+				if (!changedLarge) setProperties(large, setLarge, 'bottom', b)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'bottom', b)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'bottom', b)
+				setChangedMedium(true)
+
+				if (!changedSmall) setProperties(small, setSmall, 'bottom', b)
+				if (!changedLarge) setProperties(large, setLarge, 'bottom', b)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'bottom', b)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'bottom', b)
+				setChangedLarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'bottom', b)
+				if (!changedSmall) setProperties(small, setSmall, 'bottom', b)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'bottom', b)
+			} else {
+				setProperties(xlarge, setXlarge, 'bottom', b)
+				setChangedXlarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'bottom', b)
+				if (!changedLarge) setProperties(large, setLarge, 'bottom', b)
+				if (!changedSmall) setProperties(small, setSmall, 'bottom', b)
+			}
+		}
+	}, [bottom, bottomUnit])
+
 	//For z-index
 	useEffect(() => {
-		if (small && medium && large && xlarge && position !== '') {
+		if (small && medium && large && xlarge && zIndex !== '') {
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'zIndex', zIndex)
 				setChangedSmall(true)
@@ -180,7 +221,7 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
+				<div style={{ display: position === 'static' || position === 'relative' ? 'none' : 'grid' }} className='three'>
 					<label>Bottom: </label>
 					<input
 						onChange={e => setBottom(e.target.value)}
