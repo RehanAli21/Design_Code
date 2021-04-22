@@ -25,7 +25,7 @@ const Position = () => {
 	} = useContext(PropertiesContext)
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
-	const [position, setPosition] = useState('')
+	const [position, setPosition] = useState('static')
 	const [top, setTop] = useState('')
 	const [topUnit, setTopUnit] = useState('px')
 	const [bottom, setBottom] = useState('')
@@ -112,6 +112,41 @@ const Position = () => {
 		}
 	}, [top, topUnit])
 
+	//For z-index
+	useEffect(() => {
+		if (small && medium && large && xlarge && position !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'zIndex', zIndex)
+				setChangedSmall(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'zIndex', zIndex)
+				if (!changedLarge) setProperties(large, setLarge, 'zIndex', zIndex)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'zIndex', zIndex)
+				setChangedMedium(true)
+
+				if (!changedSmall) setProperties(small, setSmall, 'zIndex', zIndex)
+				if (!changedLarge) setProperties(large, setLarge, 'zIndex', zIndex)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'zIndex', zIndex)
+				setChangedLarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'zIndex', zIndex)
+				if (!changedSmall) setProperties(small, setSmall, 'zIndex', zIndex)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+			} else {
+				setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+				setChangedXlarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'zIndex', zIndex)
+				if (!changedLarge) setProperties(large, setLarge, 'zIndex', zIndex)
+				if (!changedSmall) setProperties(small, setSmall, 'zIndex', zIndex)
+			}
+		}
+	}, [zIndex])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -129,13 +164,13 @@ const Position = () => {
 					<label>Positions</label>
 					<select onChange={e => setPosition(e.target.value)} id='pos-input'>
 						<option value='static'>Static</option>
-						<option value='static'>Relative</option>
+						<option value='relative'>Relative</option>
 						<option value='fixed'>Fixed</option>
 						<option value='sticky'>Sticky</option>
 						<option value='absolute'>Absolute</option>
 					</select>
 				</div>
-				<div className='three'>
+				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
 					<label>Top: </label>
 					<input onChange={e => setTop(e.target.value)} id='pos-top-input' type='number' className='numberinput' />
 					<select onChange={e => setTopUnit(e.target.value)} id='pos-top-select'>
@@ -145,7 +180,7 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div className='three'>
+				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
 					<label>Bottom: </label>
 					<input
 						onChange={e => setBottom(e.target.value)}
@@ -160,7 +195,7 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div className='three'>
+				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
 					<label>Left: </label>
 					<input onChange={e => setLeft(e.target.value)} id='pos-left-input' type='number' className='numberinput' />
 					<select onChange={e => setLeftUnit(e.target.value)} id='pos-left-select'>
@@ -170,7 +205,7 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div className='three'>
+				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
 					<label>Right: </label>
 					<input onChange={e => setRight(e.target.value)} id='pos-right-input' type='number' className='numberinput' />
 					<select onChange={e => setRightUnit(e.target.value)} id='pos-right-select'>
