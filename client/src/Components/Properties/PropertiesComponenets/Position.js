@@ -26,6 +26,7 @@ const Position = () => {
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
 	const [position, setPosition] = useState('static')
+	const [posToShowProperties, setPosToShowProperties] = useState('static')
 	const [top, setTop] = useState('')
 	const [topUnit, setTopUnit] = useState('px')
 	const [bottom, setBottom] = useState('')
@@ -35,6 +36,168 @@ const Position = () => {
 	const [right, setRight] = useState('')
 	const [rightUnit, setRightUnit] = useState('px')
 	const [zIndex, setZIndex] = useState('')
+
+	//For setting default values
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const positionInput = document.getElementById('pos-input')
+			const topInput = document.getElementById('pos-top-input')
+			const topSelect = document.getElementById('pos-top-select')
+			const bottomInput = document.getElementById('pos-bottom-input')
+			const bottomSelect = document.getElementById('pos-bottom-select')
+			const leftInput = document.getElementById('pos-left-input')
+			const leftSelect = document.getElementById('pos-left-select')
+			const rightInput = document.getElementById('pos-right-input')
+			const rightSelect = document.getElementById('pos-right-select')
+			const indexInput = document.getElementById('pos-index-input')
+
+			if (width < sBreakPoint) {
+				if (small.position) positionInput.value = small.position
+
+				if (small.zIndex) indexInput.value = small.zIndex
+
+				if (small.top) {
+					const unit = unitFinder(small.top)
+					topSelect.value = unit
+					topInput.value = small.top.split(unitFirstLetter(unit))[0]
+				}
+
+				if (small.bottom) {
+					const unit = unitFinder(small.bottom)
+					bottomSelect.value = unit
+					bottomInput.value = small.bottom.split(unitFirstLetter(unit))[0]
+				}
+
+				if (small.left) {
+					const unit = unitFinder(small.left)
+					leftSelect.value = unit
+					leftInput.value = small.left.split(unitFirstLetter(unit))[0]
+				}
+
+				if (small.right) {
+					const unit = unitFinder(small.right)
+					rightSelect.value = unit
+					rightInput.value = small.right.split(unitFirstLetter(unit))[0]
+				}
+			} else if (width < mBreakPoint) {
+				if (medium.position) positionInput.value = medium.position
+
+				if (medium.zIndex) indexInput.value = medium.zIndex
+
+				if (medium.top) {
+					const unit = unitFinder(medium.top)
+					topSelect.value = unit
+					topInput.value = medium.top.split(unitFirstLetter(unit))[0]
+				}
+
+				if (medium.bottom) {
+					const unit = unitFinder(medium.bottom)
+					bottomSelect.value = unit
+					bottomInput.value = medium.bottom.split(unitFirstLetter(unit))[0]
+				}
+
+				if (medium.left) {
+					const unit = unitFinder(medium.left)
+					leftSelect.value = unit
+					leftInput.value = medium.left.split(unitFirstLetter(unit))[0]
+				}
+
+				if (medium.right) {
+					const unit = unitFinder(medium.right)
+					rightSelect.value = unit
+					rightInput.value = medium.right.split(unitFirstLetter(unit))[0]
+				}
+			} else if (width < lBreakPoint) {
+				positionInput.value = large.position ? large.position : 'static'
+				setPosToShowProperties(large.position ? large.position : 'static')
+
+				indexInput.value = large.zIndex ? large.zIndex : '0'
+
+				if (large.top) {
+					const unit = unitFinder(large.top)
+					topSelect.value = unit
+					topInput.value = large.top.split(unitFirstLetter(unit))[0]
+				} else {
+					setTop('')
+					topSelect.value = 'px'
+					topInput.value = ''
+				}
+
+				if (large.bottom) {
+					const unit = unitFinder(large.bottom)
+					bottomSelect.value = unit
+					bottomInput.value = large.bottom.split(unitFirstLetter(unit))[0]
+				} else {
+					setBottom('')
+					bottomSelect.value = 'px'
+					bottomInput.value = ''
+				}
+
+				if (large.left) {
+					const unit = unitFinder(large.left)
+					leftSelect.value = unit
+					leftInput.value = large.left.split(unitFirstLetter(unit))[0]
+				} else {
+					setLeft('')
+					leftSelect.value = 'px'
+					leftInput.value = ''
+				}
+
+				if (large.right) {
+					const unit = unitFinder(large.right)
+					rightSelect.value = unit
+					rightInput.value = large.right.split(unitFirstLetter(unit))[0]
+				} else {
+					setRight('')
+					rightSelect.value = 'px'
+					rightInput.value = ''
+				}
+			} else {
+				if (xlarge.position) positionInput.value = xlarge.position
+
+				if (xlarge.zIndex) indexInput.value = xlarge.zIndex
+
+				if (xlarge.top) {
+					const unit = unitFinder(xlarge.top)
+					topSelect.value = unit
+					topInput.value = xlarge.top.split(unitFirstLetter(unit))[0]
+				}
+
+				if (xlarge.bottom) {
+					const unit = unitFinder(xlarge.bottom)
+					bottomSelect.value = unit
+					bottomInput.value = xlarge.bottom.split(unitFirstLetter(unit))[0]
+				}
+
+				if (xlarge.left) {
+					const unit = unitFinder(xlarge.left)
+					leftSelect.value = unit
+					leftInput.value = xlarge.left.split(unitFirstLetter(unit))[0]
+				}
+
+				if (xlarge.right) {
+					const unit = unitFinder(xlarge.right)
+					rightSelect.value = unit
+					rightInput.value = xlarge.right.split(unitFirstLetter(unit))[0]
+				}
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
+
+	const unitFinder = s =>
+		s.search('px') !== -1
+			? 'px'
+			: s.search('%') !== -1
+			? '%'
+			: s.search('em') !== -1
+			? 'em'
+			: s.search('vh') !== -1
+			? 'vh'
+			: s.search('vw') !== -1
+			? 'vw'
+			: 'px'
+
+	const unitFirstLetter = s => (s === 'px' ? 'p' : s === '%' ? '%' : s === 'em' ? 'e' : s === 'vh' || s === 'vw' ? 'v' : 'p')
 
 	//For setting Positions
 	useEffect(() => {
@@ -285,7 +448,12 @@ const Position = () => {
 			<div style={{ display: showPositionProperties ? 'block' : 'none' }} className='btn-specific'>
 				<div className='two'>
 					<label>Positions</label>
-					<select onChange={e => setPosition(e.target.value)} id='pos-input'>
+					<select
+						onChange={e => {
+							setPosition(e.target.value)
+							setPosToShowProperties(e.target.value)
+						}}
+						id='pos-input'>
 						<option value='static'>Static</option>
 						<option value='relative'>Relative</option>
 						<option value='fixed'>Fixed</option>
@@ -293,7 +461,7 @@ const Position = () => {
 						<option value='absolute'>Absolute</option>
 					</select>
 				</div>
-				<div style={{ display: position === 'static' || bottom !== '' ? 'none' : 'grid' }} className='three'>
+				<div style={{ display: posToShowProperties === 'static' || bottom !== '' ? 'none' : 'grid' }} className='three'>
 					<label>Top: </label>
 					<input onChange={e => setTop(e.target.value)} id='pos-top-input' type='number' className='numberinput' />
 					<select onChange={e => setTopUnit(e.target.value)} id='pos-top-select'>
@@ -306,7 +474,10 @@ const Position = () => {
 				<div
 					style={{
 						display:
-							position === 'static' || position === 'relative' || position === 'sticky' || top !== ''
+							posToShowProperties === 'static' ||
+							posToShowProperties === 'relative' ||
+							posToShowProperties === 'sticky' ||
+							top !== ''
 								? 'none'
 								: 'grid',
 					}}
@@ -325,7 +496,7 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div style={{ display: position === 'static' || right !== '' ? 'none' : 'grid' }} className='three'>
+				<div style={{ display: posToShowProperties === 'static' || right !== '' ? 'none' : 'grid' }} className='three'>
 					<label>Left: </label>
 					<input onChange={e => setLeft(e.target.value)} id='pos-left-input' type='number' className='numberinput' />
 					<select onChange={e => setLeftUnit(e.target.value)} id='pos-left-select'>
@@ -338,7 +509,10 @@ const Position = () => {
 				<div
 					style={{
 						display:
-							position === 'static' || position === 'relative' || position === 'sticky' || left !== ''
+							posToShowProperties === 'static' ||
+							posToShowProperties === 'relative' ||
+							posToShowProperties === 'sticky' ||
+							left !== ''
 								? 'none'
 								: 'grid',
 					}}
