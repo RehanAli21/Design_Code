@@ -27,13 +27,13 @@ const Position = () => {
 
 	const [position, setPosition] = useState('')
 	const [top, setTop] = useState('')
-	const [topUnit, setTopUnit] = useState('')
+	const [topUnit, setTopUnit] = useState('px')
 	const [bottom, setBottom] = useState('')
-	const [bottomUnit, setBottomUnit] = useState('')
+	const [bottomUnit, setBottomUnit] = useState('px')
 	const [left, setLeft] = useState('')
-	const [leftUnit, setLeftUnit] = useState('')
+	const [leftUnit, setLeftUnit] = useState('px')
 	const [right, setRight] = useState('')
-	const [rightUnit, setRightUnit] = useState('')
+	const [rightUnit, setRightUnit] = useState('px')
 	const [zIndex, setZIndex] = useState('')
 
 	//For setting Positions
@@ -70,6 +70,47 @@ const Position = () => {
 			}
 		}
 	}, [position])
+
+	//For setting Top
+	useEffect(() => {
+		if (small && medium && large && xlarge && position !== '') {
+			const ele = document.getElementById('pos-top-select')
+			let unit = topUnit
+			if (ele) unit = ele.value
+
+			let t = `${top}${unit}`
+
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'top', t)
+				setChangedSmall(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'top', t)
+				if (!changedLarge) setProperties(large, setLarge, 'top', t)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'top', t)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'top', t)
+				setChangedMedium(true)
+
+				if (!changedSmall) setProperties(small, setSmall, 'top', t)
+				if (!changedLarge) setProperties(large, setLarge, 'top', t)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'top', t)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'top', t)
+				setChangedLarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'top', t)
+				if (!changedSmall) setProperties(small, setSmall, 'top', t)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'top', t)
+			} else {
+				setProperties(xlarge, setXlarge, 'top', t)
+				setChangedXlarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'top', t)
+				if (!changedLarge) setProperties(large, setLarge, 'top', t)
+				if (!changedSmall) setProperties(small, setSmall, 'top', t)
+			}
+		}
+	}, [top, topUnit])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
