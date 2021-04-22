@@ -153,6 +153,88 @@ const Position = () => {
 		}
 	}, [bottom, bottomUnit])
 
+	//For setting Left
+	useEffect(() => {
+		if (small && medium && large && xlarge && left !== '') {
+			const ele = document.getElementById('pos-left-select')
+			let unit = leftUnit
+			if (ele) unit = ele.value
+
+			let l = `${left}${unit}`
+
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'left', l)
+				setChangedSmall(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'left', l)
+				if (!changedLarge) setProperties(large, setLarge, 'left', l)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'left', l)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'left', l)
+				setChangedMedium(true)
+
+				if (!changedSmall) setProperties(small, setSmall, 'left', l)
+				if (!changedLarge) setProperties(large, setLarge, 'left', l)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'left', l)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'left', l)
+				setChangedLarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'left', l)
+				if (!changedSmall) setProperties(small, setSmall, 'left', l)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'left', l)
+			} else {
+				setProperties(xlarge, setXlarge, 'left', l)
+				setChangedXlarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'left', l)
+				if (!changedLarge) setProperties(large, setLarge, 'left', l)
+				if (!changedSmall) setProperties(small, setSmall, 'left', l)
+			}
+		}
+	}, [left, leftUnit])
+
+	//For setting Right
+	useEffect(() => {
+		if (small && medium && large && xlarge && right !== '') {
+			const ele = document.getElementById('pos-right-select')
+			let unit = rightUnit
+			if (ele) unit = ele.value
+
+			let r = `${right}${unit}`
+
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'right', r)
+				setChangedSmall(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'right', r)
+				if (!changedLarge) setProperties(large, setLarge, 'right', r)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'right', r)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'right', r)
+				setChangedMedium(true)
+
+				if (!changedSmall) setProperties(small, setSmall, 'right', r)
+				if (!changedLarge) setProperties(large, setLarge, 'right', r)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'right', r)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'right', r)
+				setChangedLarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'right', r)
+				if (!changedSmall) setProperties(small, setSmall, 'right', r)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'right', r)
+			} else {
+				setProperties(xlarge, setXlarge, 'right', r)
+				setChangedXlarge(true)
+
+				if (!changedMedium) setProperties(medium, setMedium, 'right', r)
+				if (!changedLarge) setProperties(large, setLarge, 'right', r)
+				if (!changedSmall) setProperties(small, setSmall, 'right', r)
+			}
+		}
+	}, [right, rightUnit])
+
 	//For z-index
 	useEffect(() => {
 		if (small && medium && large && xlarge && zIndex !== '') {
@@ -211,7 +293,7 @@ const Position = () => {
 						<option value='absolute'>Absolute</option>
 					</select>
 				</div>
-				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
+				<div style={{ display: position === 'static' || bottom !== '' ? 'none' : 'grid' }} className='three'>
 					<label>Top: </label>
 					<input onChange={e => setTop(e.target.value)} id='pos-top-input' type='number' className='numberinput' />
 					<select onChange={e => setTopUnit(e.target.value)} id='pos-top-select'>
@@ -221,7 +303,14 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div style={{ display: position === 'static' || position === 'relative' ? 'none' : 'grid' }} className='three'>
+				<div
+					style={{
+						display:
+							position === 'static' || position === 'relative' || position === 'sticky' || top !== ''
+								? 'none'
+								: 'grid',
+					}}
+					className='three'>
 					<label>Bottom: </label>
 					<input
 						onChange={e => setBottom(e.target.value)}
@@ -236,7 +325,7 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
+				<div style={{ display: position === 'static' || right !== '' ? 'none' : 'grid' }} className='three'>
 					<label>Left: </label>
 					<input onChange={e => setLeft(e.target.value)} id='pos-left-input' type='number' className='numberinput' />
 					<select onChange={e => setLeftUnit(e.target.value)} id='pos-left-select'>
@@ -246,7 +335,14 @@ const Position = () => {
 						<option value='em'>EM</option>
 					</select>
 				</div>
-				<div style={{ display: position === 'static' ? 'none' : 'grid' }} className='three'>
+				<div
+					style={{
+						display:
+							position === 'static' || position === 'relative' || position === 'sticky' || left !== ''
+								? 'none'
+								: 'grid',
+					}}
+					className='three'>
 					<label>Right: </label>
 					<input onChange={e => setRight(e.target.value)} id='pos-right-input' type='number' className='numberinput' />
 					<select onChange={e => setRightUnit(e.target.value)} id='pos-right-select'>
