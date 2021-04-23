@@ -57,9 +57,9 @@ const BGImage = ({ width, activeElement, display }) => {
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			setProperties(small, setSmall, 'backgroundImage', bgImg ? img : '')
-			setProperties(medium, setMedium, 'backgroundImage', bgImg ? bgSize : '')
-			setProperties(large, setLarge, 'backgroundImage', bgImg ? bgSize : '')
-			setProperties(xlarge, setXlarge, 'backgroundImage', bgImg ? bgSize : '')
+			setProperties(medium, setMedium, 'backgroundImage', bgImg ? img : '')
+			setProperties(large, setLarge, 'backgroundImage', bgImg ? img : '')
+			setProperties(xlarge, setXlarge, 'backgroundImage', bgImg ? img : '')
 		}
 	}, [img])
 
@@ -106,7 +106,7 @@ const BGImage = ({ width, activeElement, display }) => {
 			setBackground(medium, setMedium)
 			setBackground(large, setLarge)
 			setBackground(xlarge, setXlarge)
-			setBgHelper(true)
+			setBgHelper(false)
 		}
 	}, [bgImg])
 
