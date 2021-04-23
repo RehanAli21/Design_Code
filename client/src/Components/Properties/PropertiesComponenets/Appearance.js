@@ -136,6 +136,9 @@ const Appearance = () => {
 						paddingXInput.value = p[0]
 						paddingXSelect.value = p[1]
 					}
+				} else {
+					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
 				}
 
 				if (small.paddingLeft && small.paddingRight) {
@@ -144,6 +147,9 @@ const Appearance = () => {
 						paddingYInput.value = p[0]
 						paddingYSelect.value = p[1]
 					}
+				} else {
+					paddingYInput.value = 0
+					paddingYSelect.value = 'px'
 				}
 			} else if (width < mBreakPoint) {
 				bgColorInput.value = medium.backgroundColor ? medium.backgroundColor : '#ffffff'
@@ -154,6 +160,9 @@ const Appearance = () => {
 						paddingXInput.value = p[0]
 						paddingXSelect.value = p[1]
 					}
+				} else {
+					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
 				}
 
 				if (medium.paddingLeft && medium.paddingRight) {
@@ -162,6 +171,9 @@ const Appearance = () => {
 						paddingYInput.value = p[0]
 						paddingYSelect.value = p[1]
 					}
+				} else {
+					paddingYInput.value = 0
+					paddingYSelect.value = 'px'
 				}
 			} else if (width < lBreakPoint) {
 				bgColorInput.value = large.backgroundColor ? large.backgroundColor : '#ffffff'
@@ -173,6 +185,9 @@ const Appearance = () => {
 						paddingXInput.value = p[0]
 						paddingXSelect.value = p[1]
 					}
+				} else {
+					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
 				}
 
 				if (large.paddingLeft && large.paddingRight) {
@@ -181,6 +196,9 @@ const Appearance = () => {
 						paddingYInput.value = p[0]
 						paddingYSelect.value = p[1]
 					}
+				} else {
+					paddingYInput.value = 0
+					paddingYSelect.value = 'px'
 				}
 			} else {
 				bgColorInput.value = xlarge.backgroundColor ? xlarge.backgroundColor : '#ffffff'
@@ -192,6 +210,9 @@ const Appearance = () => {
 						paddingXInput.value = p[0]
 						paddingXSelect.value = p[1]
 					}
+				} else {
+					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
 				}
 
 				if (xlarge.paddingLeft && xlarge.paddingRight) {
@@ -200,6 +221,9 @@ const Appearance = () => {
 						paddingYInput.value = p[0]
 						paddingYSelect.value = p[1]
 					}
+				} else {
+					paddingYInput.value = 0
+					paddingYSelect.value = 'px'
 				}
 			}
 		}
