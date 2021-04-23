@@ -41,9 +41,15 @@ const Specific = () => {
 	) : ele.tagName === 'SELECT' ? (
 		<SelectProperties />
 	) : ele.tagName === 'OPTION' ? (
-		<OptionProperties />
+		<React.Fragment>
+			<OptionProperties />
+			<BackFilter />
+		</React.Fragment>
 	) : ele.tagName === 'UL' || ele.tagName === 'OL' ? (
-		<ListProperties />
+		<React.Fragment>
+			<ListProperties />
+			<BackFilter />
+		</React.Fragment>
 	) : ele.tagName === 'LI' ? (
 		<ListItemProperties />
 	) : (

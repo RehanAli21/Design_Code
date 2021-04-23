@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
+import BackFilter from './PropertiesComponenets/BackFilter'
 import Font from './PropertiesComponenets/Font'
 import GridColumn from './PropertiesComponenets/GridColumn'
 
@@ -339,6 +340,7 @@ const InputProperties = () => {
 				</div>
 			</div>
 			<Font />
+			<BackFilter />
 		</React.Fragment>
 	)
 }
