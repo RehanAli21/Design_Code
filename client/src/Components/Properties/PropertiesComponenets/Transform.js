@@ -114,7 +114,9 @@ const Transform = () => {
 			let wunit = widthUnit
 			if (ele) wunit = ele.value
 
-			const changedWidth = `${widths}${wunit}`
+			let changedWidth = `${widths}${wunit}`
+			if (widths === '-1') changedWidth = ''
+
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'width', changedWidth)
 				setChangedSmall(true)
@@ -151,7 +153,9 @@ const Transform = () => {
 			let hunit = heightUnit
 			if (ele) hunit = ele.value
 
-			const changedHeight = `${heights}${hunit}`
+			let changedHeight = `${heights}${hunit}`
+			if (heights === '-1') changedHeight = ''
+
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'height', changedHeight)
 				setChangedSmall(true)
@@ -282,7 +286,7 @@ const Transform = () => {
 						id='a-t-w'
 						onChange={e => setWidths(e.target.value)}
 						type='number'
-						min='0'
+						min='-1'
 						max={widthUnit === '%' ? '100' : ''}
 					/>
 					<select
@@ -303,7 +307,7 @@ const Transform = () => {
 						id='a-t-h'
 						onChange={e => setHeights(e.target.value)}
 						type='number'
-						min='0'
+						min='-1'
 						max={heightUnit === '%' ? '100' : ''}
 					/>
 					<select
