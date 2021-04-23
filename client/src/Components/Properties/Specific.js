@@ -10,6 +10,7 @@ import OptionProperties from './OptionProperties'
 import ListProperties from './ListProperties'
 import ListItemProperties from './ListItemProperties'
 import Position from './PropertiesComponenets/Position'
+import BackFilter from './PropertiesComponenets/BackFilter'
 
 const Specific = () => {
 	const { activeElement } = useContext(PageContext)
@@ -21,6 +22,7 @@ const Specific = () => {
 		<React.Fragment>
 			<DivProperties />
 			<Position />
+			<BackFilter />
 		</React.Fragment>
 	) : ele.tagName === 'INPUT' ? (
 		<InputProperties />

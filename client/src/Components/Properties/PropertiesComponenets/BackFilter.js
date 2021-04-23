@@ -145,7 +145,7 @@ const BackFilter = () => {
 					id='backfilter-blur-input'
 					type='range'
 					min='0'
-					max='10'
+					max='20'
 					defaultValue='0'
 					onChange={e => setBlur(`${e.target.value}px`)}
 				/>
