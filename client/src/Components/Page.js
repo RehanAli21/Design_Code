@@ -84,6 +84,12 @@ const Page = () => {
 		setTY(0)
 	}
 
+	const onHoverStyle = () => console.log('over')
+	const onHoverLeaveStyle = () => console.log('leaved')
+
+	const onClickStyle = () => console.log('clicked')
+	const onClickLeaveStyle = () => console.log('not clicked')
+
 	//For showing elements into a div which acts
 	//as body element/tag, using recursion
 	const showElements = arr => {
@@ -105,6 +111,10 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -129,6 +139,10 @@ const Page = () => {
 							maxLength: e[1].maxLength === 0 ? 1000 : e[1].maxLength,
 							min: e[1].min,
 							max: e[1].max,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -148,6 +162,10 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -167,6 +185,10 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -187,6 +209,10 @@ const Page = () => {
 							key: uuid(),
 							id: e[1].id,
 							href: '#',
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -208,6 +234,10 @@ const Page = () => {
 							id: e[1].id,
 							src: e[1].src,
 							alt: e[1].alt,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -227,6 +257,10 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -246,6 +280,10 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -265,6 +303,10 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
@@ -284,6 +326,10 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							onMouseOver: onHoverStyle,
+							onMouseLeave: onHoverLeaveStyle,
+							onMouseDown: onClickStyle,
+							onMouseUp: onClickLeaveStyle,
 							style:
 								width < 540
 									? e[1].styles.small
