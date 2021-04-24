@@ -29,30 +29,8 @@ const ListItem = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
-				hoverStyles: {
-					small: {},
-					medium: {},
-					large: {},
-					xlarge: {},
-				},
-				hoverStyleWidth: {
-					changedSmall: false,
-					changedMedium: false,
-					changedLarge: false,
-					changeXlarge: false,
-				},
-				clickStyles: {
-					small: {},
-					medium: {},
-					large: {},
-					xlarge: {},
-				},
-				ClickStyleWidth: {
-					changedSmall: false,
-					changedMedium: false,
-					changedLarge: false,
-					changeXlarge: false,
-				},
+				hoverStyle: {},
+				clickStyle: {},
 			},
 			[],
 		]

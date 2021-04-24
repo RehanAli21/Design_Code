@@ -37,46 +37,8 @@ const List = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
-				hoverStyles: {
-					small: {
-						listStyleType: 'circle',
-					},
-					medium: {
-						listStyleType: 'circle',
-					},
-					large: {
-						listStyleType: 'circle',
-					},
-					xlarge: {
-						listStyleType: 'circle',
-					},
-				},
-				hoverStyleWidth: {
-					changedSmall: false,
-					changedMedium: false,
-					changedLarge: false,
-					changeXlarge: false,
-				},
-				clickStyles: {
-					small: {
-						listStyleType: 'circle',
-					},
-					medium: {
-						listStyleType: 'circle',
-					},
-					large: {
-						listStyleType: 'circle',
-					},
-					xlarge: {
-						listStyleType: 'circle',
-					},
-				},
-				ClickStyleWidth: {
-					changedSmall: false,
-					changedMedium: false,
-					changedLarge: false,
-					changeXlarge: false,
-				},
+				hoverStyle: {},
+				clickStyle: {},
 			},
 			[],
 		]
