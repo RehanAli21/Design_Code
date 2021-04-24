@@ -3,6 +3,7 @@ import Text from './PropertiesComponenets/Text'
 import Font from './PropertiesComponenets/Font'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import BackFilter from './PropertiesComponenets/BackFilter'
+import Animate from './PropertiesComponenets/Animate'
 
 const SelectProperties = () => {
 	return (
@@ -14,6 +15,7 @@ const SelectProperties = () => {
 			<Text />
 			<Font />
 			<BackFilter />
+			<Animate />
 		</React.Fragment>
 	)
 }

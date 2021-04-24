@@ -6,6 +6,7 @@ import TextChange from './PropertiesComponenets/TextChange'
 import Text from './PropertiesComponenets/Text'
 import Position from './PropertiesComponenets/Position'
 import BackFilter from './PropertiesComponenets/BackFilter'
+import Animate from './PropertiesComponenets/Animate'
 
 const ButtonProperties = () => {
 	const {
@@ -118,6 +119,7 @@ const ButtonProperties = () => {
 			<Font />
 			<Position />
 			<BackFilter />
+			<Animate />
 		</React.Fragment>
 	)
 }

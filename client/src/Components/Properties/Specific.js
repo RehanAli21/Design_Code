@@ -11,6 +11,7 @@ import ListProperties from './ListProperties'
 import ListItemProperties from './ListItemProperties'
 import Position from './PropertiesComponenets/Position'
 import BackFilter from './PropertiesComponenets/BackFilter'
+import Animate from './PropertiesComponenets/Animate'
 
 const Specific = () => {
 	const { activeElement } = useContext(PageContext)
@@ -23,6 +24,7 @@ const Specific = () => {
 			<DivProperties />
 			<Position />
 			<BackFilter />
+			<Animate />
 		</React.Fragment>
 	) : ele.tagName === 'INPUT' ? (
 		<InputProperties />
@@ -46,6 +48,7 @@ const Specific = () => {
 		<React.Fragment>
 			<ListProperties />
 			<BackFilter />
+			<Animate />
 		</React.Fragment>
 	) : ele.tagName === 'LI' ? (
 		<ListItemProperties />

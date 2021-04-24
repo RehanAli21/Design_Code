@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
+import Animate from './PropertiesComponenets/Animate'
 import Filter from './PropertiesComponenets/Filter'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Position from './PropertiesComponenets/Position'
@@ -173,6 +174,7 @@ const ImageProperties = () => {
 			</div>
 			<Filter />
 			<Position />
+			<Animate />
 		</React.Fragment>
 	)
 }

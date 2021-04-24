@@ -6,6 +6,7 @@ import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import BackFilter from './PropertiesComponenets/BackFilter'
+import Animate from './PropertiesComponenets/Animate'
 
 const TextProperties = () => {
 	const {
@@ -173,6 +174,7 @@ const TextProperties = () => {
 			<Font type='text' />
 			<Text />
 			<BackFilter />
+			<Animate />
 		</React.Fragment>
 	)
 }
