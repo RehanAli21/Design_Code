@@ -84,8 +84,30 @@ const Page = () => {
 		setTY(0)
 	}
 
-	const onHoverStyle = () => console.log('over')
-	const onHoverLeaveStyle = () => console.log('leaved')
+	//For applying hover styles on elements
+	const onHoverStyle = (id, style) => {
+		const ele = document.getElementById(id)
+
+		if (ele) {
+			for (const e in style) {
+				ele.style[e] = style[e]
+			}
+		}
+	}
+	//For reseting applied hover style on elements
+	const onHoverLeaveStyle = (id, hoverStyle, normalStyle) => {
+		const ele = document.getElementById(id)
+
+		if (ele) {
+			for (const e in hoverStyle) {
+				if (normalStyle[e] !== undefined) {
+					ele.style[e] = normalStyle[e]
+				} else {
+					ele.style[e] = ''
+				}
+			}
+		}
+	}
 
 	const onClickStyle = () => console.log('clicked')
 	const onClickLeaveStyle = () => console.log('not clicked')
@@ -111,8 +133,19 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -139,8 +172,19 @@ const Page = () => {
 							maxLength: e[1].maxLength === 0 ? 1000 : e[1].maxLength,
 							min: e[1].min,
 							max: e[1].max,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -162,8 +206,19 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -185,8 +240,19 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -209,8 +275,19 @@ const Page = () => {
 							key: uuid(),
 							id: e[1].id,
 							href: '#',
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -234,8 +311,19 @@ const Page = () => {
 							id: e[1].id,
 							src: e[1].src,
 							alt: e[1].alt,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -257,8 +345,19 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -280,8 +379,19 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -303,8 +413,19 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
@@ -326,8 +447,19 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
-							onMouseOver: onHoverStyle,
-							onMouseLeave: onHoverLeaveStyle,
+							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
+							onMouseLeave: () =>
+								onHoverLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							onMouseDown: onClickStyle,
 							onMouseUp: onClickLeaveStyle,
 							style:
