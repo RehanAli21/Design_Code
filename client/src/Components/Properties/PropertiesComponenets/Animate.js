@@ -1,8 +1,17 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
+import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Animate = () => {
 	const { showAnimateProperties, setShowAnimateProperties } = useContext(PropertiesContext)
+	const { pages, width, activeElement, setPages } = useContext(PageContext)
+
+	const [animation, setAnimation] = useState('')
+	const [delay, setDelay] = useState('')
+	const [speed, setSpeed] = useState('')
+	const [repeat, setRepeat] = useState('')
+	const [scroll, setScroll] = useState('')
+
 	return (
 		<div className='borders'>
 			<p className='second-heading' onClick={() => setShowAnimateProperties(!showAnimateProperties)}>
@@ -17,12 +26,17 @@ const Animate = () => {
 						marginLeft: '25px',
 						textAlign: 'left',
 					}}>
-					<input id='animate-scroll-checkbox' style={{ marginTop: '5px' }} type='checkbox' />
+					<input
+						id='animate-scroll-checkbox'
+						style={{ marginTop: '5px' }}
+						type='checkbox'
+						onChange={e => setScroll(`${e.target.value}`)}
+					/>
 					<label>On Scroll</label>
 				</div>
 				<div className='two'>
 					<label>Animation:</label>
-					<select id='animate-animation-select'>
+					<select id='animate-animation-select' onChange={e => setAnimation(e.target.value)}>
 						<option value='none'>None</option>
 						<option value='bounce'>Bounce</option>
 						<option value='flash'>Flash</option>
@@ -85,7 +99,7 @@ const Animate = () => {
 				</div>
 				<div className='two'>
 					<label>Delay:</label>
-					<select id='animate-delay-select'>
+					<select id='animate-delay-select' onChange={e => setDelay(e.target.value)}>
 						<option value='no-delay'>No Delay</option>
 						<option value='animate_delay-2s'>2s</option>
 						<option value='animate_delay-3s'>3s</option>
@@ -95,7 +109,7 @@ const Animate = () => {
 				</div>
 				<div className='two'>
 					<label>Speed:</label>
-					<select id='animate-speed-select'>
+					<select id='animate-speed-select' onChange={e => setSpeed(e.target.value)}>
 						<option value='normal'>Normal (1s)</option>
 						<option value='animate_fast'>Fast (800ms)</option>
 						<option value='animate_faster'>Faster (500ms)</option>
@@ -105,7 +119,7 @@ const Animate = () => {
 				</div>
 				<div className='two'>
 					<label>Repeat:</label>
-					<select id='animate-repeat-select'>
+					<select id='animate-repeat-select' onChange={e => setRepeat(e.target.value)}>
 						<option value='no-repeat'>0 time</option>
 						<option value='animate_repeat-1'>1 time</option>
 						<option value='animate_repeat-2'>2 times</option>
