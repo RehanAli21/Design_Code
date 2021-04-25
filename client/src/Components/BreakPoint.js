@@ -11,6 +11,7 @@ const BreakPoint = () => {
 		setMBreakPoint,
 		lBreakPoint,
 		setLBreakPoint,
+		setHeight,
 	} = useContext(PageContext)
 
 	const setSmall = value => {
@@ -58,6 +59,11 @@ const BreakPoint = () => {
 					max='1500'
 					defaultValue='970'
 				/>
+			</div>
+			<h2 style={{ marginTop: '50px' }}>Height of Page</h2>
+			<div className='two'>
+				<label>Height: </label>
+				<input onChange={e => setHeight(e.target.value)} type='number' min='200' defaultValue='500' />
 			</div>
 		</div>
 	)

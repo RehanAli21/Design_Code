@@ -447,6 +447,7 @@ nav .d-v button:hover {
 	padding: 0px;
 	box-shadow: 2px 2px 15px grey;
 	outline: none;
+	overflow: scroll;
 }
 
 .propertybar {
