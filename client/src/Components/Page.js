@@ -133,6 +133,7 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
@@ -172,6 +173,7 @@ const Page = () => {
 							maxLength: e[1].maxLength === 0 ? 1000 : e[1].maxLength,
 							min: e[1].min,
 							max: e[1].max,
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
@@ -206,6 +208,7 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
@@ -240,6 +243,7 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
@@ -275,6 +279,7 @@ const Page = () => {
 							key: uuid(),
 							id: e[1].id,
 							href: '#',
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
@@ -311,6 +316,7 @@ const Page = () => {
 							id: e[1].id,
 							src: e[1].src,
 							alt: e[1].alt,
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
@@ -345,6 +351,7 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
@@ -413,6 +420,7 @@ const Page = () => {
 						{
 							key: uuid(),
 							id: e[1].id,
+							className: e[1].class,
 							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle),
 							onMouseLeave: () =>
 								onHoverLeaveStyle(
