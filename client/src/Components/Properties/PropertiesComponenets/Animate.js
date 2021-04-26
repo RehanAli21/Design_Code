@@ -16,22 +16,69 @@ const Animate = () => {
 	useEffect(() => {
 		if (animation !== '') {
 			const temp = Object.assign({}, pages)
-			animationChange(temp[activePage], animation === 'none' ? animation : `animated__${animation}`)
+			animationChange(temp[activePage], animation === 'none' ? animation : `animate__${animation} `)
 			setPages(temp)
 		}
 	}, [animation])
 
+	//for adding and removing animation classes
 	const animationChange = (arr, value) => {
+		//iterating all arr to find the element
 		for (let i = 0; i < arr.length; i++) {
+			//if element is found
 			if (arr[i][1].id === activeElement) {
-				const classes = arr[i][1].class.split(' ')
+				//for getting all classes separately
+				const temp = arr[i][1].class.split(' ')
+
+				//for removing extra spaces
+				const classes = []
+				for (let l = 0; l < temp.length; l++) {
+					if (temp[l] !== '') classes.push(temp[l])
+				}
+
+				//for storing new classes after adding/removing
 				let newClasses = ''
 
+				//if animation is none
 				if (value === 'none') {
-					for (let l = 0; l < classes.length; l++) {
-						if (classes[l].search('animate__') === -1) {
-							newClasses += classes[l]
+					//if there is a animation applied.
+					if (arr[i][1].class.search('animate__animated') !== -1) {
+						//iterating all classes
+						for (let l = 0; l < classes.length; l++) {
+							//if class is not animation class then add is into newclasses
+							if (classes[l].search('animate__') === -1) {
+								newClasses += `${classes[l]} `
+							}
 						}
+					}
+				} else if (value !== 'none') {
+					//if there is a animation
+					//checking if there is already a animation applied
+					if (arr[i][1].class.search('animate__animated') !== -1) {
+						for (let l = 0; l < classes.length; l++) {
+							//checkng animation classes
+							if (classes[l].search('animate__') !== -1) {
+								//for checking if it is animation type class and not other animation classes
+								const condition =
+									classes[l].search('animated') === -1 &&
+									classes[l].search('delay') === -1 &&
+									classes[l].search('repeat') === -1 &&
+									classes[l].search('fast') === -1 &&
+									classes[l].search('slow') === -1
+
+								//if it is animation type classes, then relpace class with new one
+								if (condition) {
+									newClasses += ` ${value}`
+								} else {
+									newClasses += ` ${classes[l]}`
+								}
+							} else {
+								newClasses += `${classes[l]} `
+							}
+						}
+					} else {
+						//if there is no animation applied already, then just add animation class
+						newClasses = `${arr[i][1].class} animate__animated ${value}`
 					}
 				}
 
