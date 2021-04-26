@@ -15,7 +15,7 @@ const Button = ({ findAndInsert, uniqueString }) => {
 			{
 				id: uniqueString(),
 				text: 'button',
-				class: '',
+				class: 'animate__animated animate__bounce game',
 				styles: {
 					small: {},
 					medium: {},

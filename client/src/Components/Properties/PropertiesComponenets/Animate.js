@@ -1,16 +1,49 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Animate = () => {
 	const { showAnimateProperties, setShowAnimateProperties } = useContext(PropertiesContext)
-	const { pages, width, activeElement, setPages } = useContext(PageContext)
+	const { pages, width, activeElement, activePage, setPages } = useContext(PageContext)
 
 	const [animation, setAnimation] = useState('')
 	const [delay, setDelay] = useState('')
 	const [speed, setSpeed] = useState('')
 	const [repeat, setRepeat] = useState('')
 	const [scroll, setScroll] = useState('')
+
+	//For animation change of button
+	useEffect(() => {
+		if (animation !== '') {
+			const temp = Object.assign({}, pages)
+			animationChange(temp[activePage], animation === 'none' ? animation : `animated__${animation}`)
+			setPages(temp)
+		}
+	}, [animation])
+
+	const animationChange = (arr, value) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				const classes = arr[i][1].class.split(' ')
+				let newClasses = ''
+
+				if (value === 'none') {
+					for (let l = 0; l < classes.length; l++) {
+						if (classes[l].search('animate__') === -1) {
+							newClasses += classes[l]
+						}
+					}
+				}
+
+				arr[i][1].class = newClasses
+				return true
+			} else if (arr[i][2]) {
+				if (animationChange(arr[i][2], value)) {
+					return true
+				}
+			}
+		}
+	}
 
 	return (
 		<div className='borders'>
