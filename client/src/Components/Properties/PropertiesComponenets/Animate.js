@@ -147,6 +147,11 @@ const Animate = () => {
 							}
 							//add delay class in the end of classes
 							newClasses += ` ${value}`
+						} else if (value === 'none') {
+							//adding all the classes
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
 						}
 					}
 
@@ -233,6 +238,11 @@ const Animate = () => {
 							}
 							//add speed class in the end of classes
 							newClasses += ` ${value}`
+						} else if (value === 'none') {
+							//adding all the classes
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
 						}
 					}
 
