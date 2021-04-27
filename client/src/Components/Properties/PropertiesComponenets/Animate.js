@@ -137,7 +137,8 @@ const Animate = () => {
 								}
 							}
 						}
-					} else { // if delay is not applied
+					} else {
+						// if delay is not applied
 						//if value is not none means delay class should be applied
 						if (value !== 'none') {
 							//adding all the classes
@@ -155,6 +156,93 @@ const Animate = () => {
 				return true
 			} else if (arr[i][2]) {
 				if (changeDelay(arr[i][2], value)) return true
+			}
+		}
+	}
+
+	useEffect(() => {
+		if (speed !== '') {
+			const temp = Object.assign({}, pages)
+			changeSpeed(temp[activePage], speed === 'normal' ? 'none' : speed)
+			setPages(temp)
+		}
+	}, [speed])
+
+	const changeSpeed = (arr, value) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				//for getting all classes separately
+				const temp = arr[i][1].class.split(' ')
+
+				//for removing extra spaces
+				const classes = []
+				for (let l = 0; l < temp.length; l++) {
+					if (temp[l] !== '') classes.push(temp[l])
+				}
+
+				//for storing new classes after adding/removing
+				let newClasses = ''
+
+				//checking if animation applied.
+				if (arr[i][1].class.search('animate__animated') !== -1) {
+					//for checking if animation speed class is applied.
+					const condition =
+						arr[i][1].class.search('animate__slow') !== -1 ||
+						arr[i][1].class.search('animate__slower') !== -1 ||
+						arr[i][1].class.search('animate__fast') !== -1 ||
+						arr[i][1].class.search('animate__faster') !== -1
+
+					if (condition) {
+						if (value === 'none') {
+							for (let l = 0; l < classes.length; l++) {
+								//if class is not speed class
+								const condition2 =
+									classes[l].search('animate__slow') !== -1 &&
+									classes[l].search('animate__slower') !== -1 &&
+									classes[l].search('animate__fast') !== -1 &&
+									classes[l].search('animate__faster') !== -1
+
+								if (condition2) {
+									newClasses += ` ${classes[l]}`
+								}
+							}
+						} else {
+							for (let l = 0; l < classes.length; l++) {
+								//if class is speed class, then replace new speed class
+								const condition2 =
+									classes[l].search('animate__slow') !== -1 ||
+									classes[l].search('animate__slower') !== -1 ||
+									classes[l].search('animate__fast') !== -1 ||
+									classes[l].search('animate__faster') !== -1
+
+								if (condition2) {
+									newClasses += ` ${value}`
+								} else {
+									// else add remaining classes
+									newClasses += ` ${classes[l]}`
+								}
+							}
+						}
+					} else {
+						// if speed is not applied
+						//if value is not none means speed class should be applied
+						if (value !== 'none') {
+							//adding all the classes
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
+							//add speed class in the end of classes
+							newClasses += ` ${value}`
+						}
+					}
+
+					//assigning new classes
+					arr[i][1].class = newClasses
+				}
+
+				return true
+			} else if (arr[i][2]) {
+				if (changeSpeed(arr[i][2], value)) return true
 			}
 		}
 	}
@@ -258,19 +346,19 @@ const Animate = () => {
 					<label>Speed:</label>
 					<select id='animate-speed-select' onChange={e => setSpeed(e.target.value)}>
 						<option value='normal'>Normal (1s)</option>
-						<option value='animate_fast'>Fast (800ms)</option>
-						<option value='animate_faster'>Faster (500ms)</option>
-						<option value='animate_slow'>Slow (2s)</option>
-						<option value='animate_slower'>Slower (3s)</option>
+						<option value='animate__fast'>Fast (800ms)</option>
+						<option value='animate__faster'>Faster (500ms)</option>
+						<option value='animate__slow'>Slow (2s)</option>
+						<option value='animate__slower'>Slower (3s)</option>
 					</select>
 				</div>
 				<div className='two'>
 					<label>Repeat:</label>
 					<select id='animate-repeat-select' onChange={e => setRepeat(e.target.value)}>
 						<option value='no-repeat'>0 time</option>
-						<option value='animate_repeat-1'>1 time</option>
-						<option value='animate_repeat-2'>2 times</option>
-						<option value='animate_repeat-3'>3 times</option>
+						<option value='animate__repeat-1'>1 time</option>
+						<option value='animate__repeat-2'>2 times</option>
+						<option value='animate__repeat-3'>3 times</option>
 					</select>
 				</div>
 			</div>
