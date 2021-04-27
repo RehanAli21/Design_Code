@@ -92,6 +92,73 @@ const Animate = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (delay !== '') {
+			const temp = Object.assign({}, pages)
+			changeDelay(temp[activePage], delay === 'no-delay' ? 'none' : delay)
+			setPages(temp)
+		}
+	}, [delay])
+
+	const changeDelay = (arr, value) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				//for getting all classes separately
+				const temp = arr[i][1].class.split(' ')
+
+				//for removing extra spaces
+				const classes = []
+				for (let l = 0; l < temp.length; l++) {
+					if (temp[l] !== '') classes.push(temp[l])
+				}
+
+				//for storing new classes after adding/removing
+				let newClasses = ''
+
+				//checking if animation applied.
+				if (arr[i][1].class.search('animate__animated') !== -1) {
+					//checking if delay applied
+					if (arr[i][1].class.search('animate__delay') !== -1) {
+						if (value === 'none') {
+							for (let l = 0; l < classes.length; l++) {
+								//if class is not delay class
+								if (classes[l].search('animate__delay') === -1) {
+									newClasses += ` ${classes[l]}`
+								}
+							}
+						} else {
+							for (let l = 0; l < classes.length; l++) {
+								//if class is delay class, then replace new delay class
+								if (classes[l].search('animate__delay') !== -1) {
+									newClasses += ` ${value}`
+								} else {
+									// else add remaining classes
+									newClasses += ` ${classes[l]}`
+								}
+							}
+						}
+					} else { // if delay is not applied
+						//if value is not none means delay class should be applied
+						if (value !== 'none') {
+							//adding all the classes
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
+							//add delay class in the end of classes
+							newClasses += ` ${value}`
+						}
+					}
+
+					//assigning new classes
+					arr[i][1].class = newClasses
+				}
+				return true
+			} else if (arr[i][2]) {
+				if (changeDelay(arr[i][2], value)) return true
+			}
+		}
+	}
+
 	return (
 		<div className='borders'>
 			<p className='second-heading' onClick={() => setShowAnimateProperties(!showAnimateProperties)}>
@@ -181,10 +248,10 @@ const Animate = () => {
 					<label>Delay:</label>
 					<select id='animate-delay-select' onChange={e => setDelay(e.target.value)}>
 						<option value='no-delay'>No Delay</option>
-						<option value='animate_delay-2s'>2s</option>
-						<option value='animate_delay-3s'>3s</option>
-						<option value='animate_delay-4s'>4s</option>
-						<option value='animate_delay-5s'>5s</option>
+						<option value='animate__delay-2s'>2s</option>
+						<option value='animate__delay-3s'>3s</option>
+						<option value='animate__delay-4s'>4s</option>
+						<option value='animate__delay-5s'>5s</option>
 					</select>
 				</div>
 				<div className='two'>
