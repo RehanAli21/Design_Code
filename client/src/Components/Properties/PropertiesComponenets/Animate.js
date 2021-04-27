@@ -197,10 +197,10 @@ const Animate = () => {
 							for (let l = 0; l < classes.length; l++) {
 								//if class is not speed class
 								const condition2 =
-									classes[l].search('animate__slow') !== -1 &&
-									classes[l].search('animate__slower') !== -1 &&
-									classes[l].search('animate__fast') !== -1 &&
-									classes[l].search('animate__faster') !== -1
+									classes[l].search('animate__slow') === -1 &&
+									classes[l].search('animate__slower') === -1 &&
+									classes[l].search('animate__fast') === -1 &&
+									classes[l].search('animate__faster') === -1
 
 								if (condition2) {
 									newClasses += ` ${classes[l]}`
