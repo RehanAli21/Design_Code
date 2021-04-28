@@ -257,6 +257,79 @@ const Animate = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (repeat !== '') {
+			const temp = Object.assign({}, pages)
+			changeRepeat(temp[activePage], repeat === 'no-repeat' ? 'none' : repeat)
+			setPages(temp)
+		}
+	}, [repeat])
+
+	const changeRepeat = (arr, value) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				//for getting all classes separately
+				const temp = arr[i][1].class.split(' ')
+
+				//for removing extra spaces
+				const classes = []
+				for (let l = 0; l < temp.length; l++) {
+					if (temp[l] !== '') classes.push(temp[l])
+				}
+
+				//for storing new classes after adding/removing
+				let newClasses = ''
+
+				//checking if animation applied.
+				if (arr[i][1].class.search('animate__animated') !== -1) {
+					//checking if repeat applied
+					if (arr[i][1].class.search('animate__repeat') !== -1) {
+						if (value === 'none') {
+							for (let l = 0; l < classes.length; l++) {
+								//if class is not repeat class
+								if (classes[l].search('animate__repeat') === -1) {
+									newClasses += ` ${classes[l]}`
+								}
+							}
+						} else {
+							for (let l = 0; l < classes.length; l++) {
+								//if class is repeat class, then replace new repeat class
+								if (classes[l].search('animate__repeat') !== -1) {
+									newClasses += ` ${value}`
+								} else {
+									// else add remaining classes
+									newClasses += ` ${classes[l]}`
+								}
+							}
+						}
+					} else {
+						// if repeat is not applied
+						//if value is not none means repeat class should be applied
+						if (value !== 'none') {
+							//adding all the classes
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
+							//add repeat class in the end of classes
+							newClasses += ` ${value}`
+						} else if (value === 'none') {
+							//adding all the classes
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
+						}
+					}
+
+					//assigning new classes
+					arr[i][1].class = newClasses
+				}
+				return true
+			} else if (arr[i][2]) {
+				if (changeRepeat(arr[i][2], value)) return true
+			}
+		}
+	}
+
 	return (
 		<div className='borders'>
 			<p className='second-heading' onClick={() => setShowAnimateProperties(!showAnimateProperties)}>
