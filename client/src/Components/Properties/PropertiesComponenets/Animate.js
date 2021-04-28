@@ -10,6 +10,7 @@ const Animate = () => {
 	const [delay, setDelay] = useState('')
 	const [speed, setSpeed] = useState('')
 	const [repeat, setRepeat] = useState('')
+	const [enableScroll, setEnableScroll] = useState(false)
 	const [scroll, setScroll] = useState('')
 
 	//For animation change of button
@@ -18,6 +19,9 @@ const Animate = () => {
 			const temp = Object.assign({}, pages)
 			animationChange(temp[activePage], animation === 'none' ? animation : `animate__${animation} `)
 			setPages(temp)
+			setEnableScroll(animation !== 'none')
+		} else {
+			setEnableScroll(false)
 		}
 	}, [animation])
 
@@ -54,10 +58,12 @@ const Animate = () => {
 						const delaySelect = document.getElementById('animate-delay-select')
 						const speedSelect = document.getElementById('animate-speed-select')
 						const repeatSelect = document.getElementById('animate-repeat-select')
+						const scrollCheckbox = document.getElementById('animate-scroll-checkbox')
 
 						if (delaySelect && delaySelect.value !== 'no-delay') delaySelect.value = 'no-delay'
 						if (speedSelect && speedSelect.value !== 'normal') speedSelect.value = 'normal'
 						if (repeatSelect && repeatSelect.value !== 'no-repeat') repeatSelect.value = 'no-repeat'
+						if (scrollCheckbox && scrollCheckbox.checked) scrollCheckbox.checked = false
 					}
 				} else if (value !== 'none') {
 					//if there is a animation
@@ -414,6 +420,7 @@ const Animate = () => {
 						textAlign: 'left',
 					}}>
 					<input
+						disabled={!enableScroll}
 						id='animate-scroll-checkbox'
 						style={{ marginTop: '5px' }}
 						type='checkbox'
