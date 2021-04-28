@@ -46,7 +46,7 @@ const Animate = () => {
 						//iterating all classes
 						for (let l = 0; l < classes.length; l++) {
 							//if class is not animation class then add is into newclasses
-							if (classes[l].search('animate__') === -1) {
+							if (classes[l].search('animate__') === -1 && classes[l].search('wow') === -1) {
 								newClasses += `${classes[l]} `
 							}
 						}
@@ -338,6 +338,67 @@ const Animate = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (scroll !== '') {
+			const temp = Object.assign({}, pages)
+			console.log(scroll)
+			changeScroll(temp[activePage], scroll === 'true')
+			setPages(temp)
+		}
+	}, [scroll])
+
+	const changeScroll = (arr, value) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				//for getting all classes separately
+				const temp = arr[i][1].class.split(' ')
+
+				//for removing extra spaces
+				const classes = []
+				for (let l = 0; l < temp.length; l++) {
+					if (temp[l] !== '') classes.push(temp[l])
+				}
+
+				//for storing new classes after adding/removing
+				let newClasses = ''
+
+				//checking if scroll class is applied
+				if (arr[i][1].class.search('animate__animated') !== -1) {
+					if (arr[i][1].class.search('wow') !== -1) {
+						if (value) {
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
+						} else {
+							for (let l = 0; l < classes.length; l++) {
+								if (classes[l] !== 'wow') {
+									newClasses += ` ${classes[l]}`
+								}
+							}
+						}
+					} else {
+						if (value) {
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
+							newClasses += ` wow`
+						} else {
+							for (let l = 0; l < classes.length; l++) {
+								newClasses += ` ${classes[l]}`
+							}
+						}
+					}
+
+					arr[i][1].class = newClasses
+				}
+
+				return true
+			} else if (arr[i][2]) {
+				if (changeScroll(arr[i][2], value)) return true
+			}
+		}
+	}
+
 	return (
 		<div className='borders'>
 			<p className='second-heading' onClick={() => setShowAnimateProperties(!showAnimateProperties)}>
@@ -356,7 +417,7 @@ const Animate = () => {
 						id='animate-scroll-checkbox'
 						style={{ marginTop: '5px' }}
 						type='checkbox'
-						onChange={e => setScroll(`${e.target.value}`)}
+						onChange={e => setScroll(`${e.target.checked}`)}
 					/>
 					<label>On Scroll</label>
 				</div>
