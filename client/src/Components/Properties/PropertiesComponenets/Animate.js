@@ -50,6 +50,14 @@ const Animate = () => {
 								newClasses += `${classes[l]} `
 							}
 						}
+
+						const delaySelect = document.getElementById('animate-delay-select')
+						const speedSelect = document.getElementById('animate-speed-select')
+						const repeatSelect = document.getElementById('animate-repeat-select')
+
+						if (delaySelect && delaySelect.value !== 'no-delay') delaySelect.value = 'no-delay'
+						if (speedSelect && speedSelect.value !== 'normal') speedSelect.value = 'normal'
+						if (repeatSelect && repeatSelect.value !== 'no-repeat') repeatSelect.value = 'no-repeat'
 					}
 				} else if (value !== 'none') {
 					//if there is a animation
@@ -438,8 +446,7 @@ const Animate = () => {
 				<div className='two'>
 					<label>Repeat:</label>
 					<select id='animate-repeat-select' onChange={e => setRepeat(e.target.value)}>
-						<option value='no-repeat'>0 time</option>
-						<option value='animate__repeat-1'>1 time</option>
+						<option value='no-repeat'>1 time</option>
 						<option value='animate__repeat-2'>2 times</option>
 						<option value='animate__repeat-3'>3 times</option>
 					</select>
