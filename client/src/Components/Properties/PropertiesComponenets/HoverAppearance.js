@@ -4,27 +4,8 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const Appearance = () => {
-	const {
-		small,
-		setSmall,
-		medium,
-		setMedium,
-		large,
-		setLarge,
-		xlarge,
-		setXlarge,
-		changedSmall,
-		setChangedSmall,
-		changedMedium,
-		setChangedMedium,
-		changedLarge,
-		setChangedLarge,
-		changedXlarge,
-		setChangedXlarge,
-		apHoverProperties,
-		setApHoverProperties,
-	} = useContext(PropertiesContext)
-	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { hover, setHover, apHoverProperties, setApHoverProperties } = useContext(PropertiesContext)
+	const { width, activeElement } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [showBorderSection, setShowBorderSection] = useState(false)
@@ -50,7 +31,7 @@ const Appearance = () => {
 	const [shadowChanged, setShadowChanged] = useState(false)
 
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (hover) {
 			const bgColorInput = document.getElementById('ahover-bgcolor')
 			const bgColorSelect = document.getElementById('bghover-color-select')
 			const bActiveInput = document.getElementById('ahover-b-active')
@@ -68,39 +49,39 @@ const Appearance = () => {
 			const paddingXSelect = document.getElementById('aphover-paddingXSelect')
 			const paddingYSelect = document.getElementById('aphover-paddingYSelect')
 
-			bRadiusInput.value = large.borderRadius ? large.borderRadius.split('%')[0] : '0'
+			bRadiusInput.value = hover.borderRadius ? hover.borderRadius.split('%')[0] : '0'
 
 			//Default value for all borders
-			if (large.border) {
+			if (hover.border) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = large.border.split(' ')[2]
-				bSizeInput.value = large.border.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(large.border.split(' ')[1])
-			} else if (large.borderTop) {
+				bColorInput.value = hover.border.split(' ')[2]
+				bSizeInput.value = hover.border.split(' ')[0].split('p')[0]
+				bTypeInput.selectedIndex = borderTypeIndex(hover.border.split(' ')[1])
+			} else if (hover.borderTop) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = large.borderTop.split(' ')[2]
-				bSizeInput.value = large.borderTop.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(large.borderTop.split(' ')[1])
-			} else if (large.borderBottom) {
+				bColorInput.value = hover.borderTop.split(' ')[2]
+				bSizeInput.value = hover.borderTop.split(' ')[0].split('p')[0]
+				bTypeInput.selectedIndex = borderTypeIndex(hover.borderTop.split(' ')[1])
+			} else if (hover.borderBottom) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = large.borderBottom.split(' ')[2]
-				bSizeInput.value = large.borderBottom.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(large.borderBottom.split(' ')[1])
-			} else if (large.borderLeft) {
+				bColorInput.value = hover.borderBottom.split(' ')[2]
+				bSizeInput.value = hover.borderBottom.split(' ')[0].split('p')[0]
+				bTypeInput.selectedIndex = borderTypeIndex(hover.borderBottom.split(' ')[1])
+			} else if (hover.borderLeft) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = large.borderLeft.split(' ')[2]
-				bSizeInput.value = large.borderLeft.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(large.borderLeft.split(' ')[1])
-			} else if (large.borderRight) {
+				bColorInput.value = hover.borderLeft.split(' ')[2]
+				bSizeInput.value = hover.borderLeft.split(' ')[0].split('p')[0]
+				bTypeInput.selectedIndex = borderTypeIndex(hover.borderLeft.split(' ')[1])
+			} else if (hover.borderRight) {
 				bActiveInput.checked = true
 				setShowBorderSection(true)
-				bColorInput.value = large.borderRight.split(' ')[2]
-				bSizeInput.value = large.borderRight.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(large.borderRight.split(' ')[1])
+				bColorInput.value = hover.borderRight.split(' ')[2]
+				bSizeInput.value = hover.borderRight.split(' ')[0].split('p')[0]
+				bTypeInput.selectedIndex = borderTypeIndex(hover.borderRight.split(' ')[1])
 			} else {
 				bColorInput.value = '#000000'
 				bSizeInput.value = '0'
@@ -110,11 +91,11 @@ const Appearance = () => {
 			}
 
 			//Default value for Box shadow
-			if (large.boxShadow) {
-				sXInput.value = large.boxShadow.split(' ')[0].split('p')[0]
-				sYInput.value = large.boxShadow.split(' ')[1].split('p')[0]
-				sBlurInput.value = large.boxShadow.split(' ')[2].split('p')[0]
-				sColorInput.value = large.boxShadow.split(' ')[3]
+			if (hover.boxShadow) {
+				sXInput.value = hover.boxShadow.split(' ')[0].split('p')[0]
+				sYInput.value = hover.boxShadow.split(' ')[1].split('p')[0]
+				sBlurInput.value = hover.boxShadow.split(' ')[2].split('p')[0]
+				sColorInput.value = hover.boxShadow.split(' ')[3]
 				sActiveInput.checked = true
 				setShowShadowSection(true)
 			} else {
@@ -126,108 +107,32 @@ const Appearance = () => {
 				setShowShadowSection(false)
 			}
 
-			if (width < sBreakPoint) {
-				bgColorInput.value = small.backgroundColor ? small.backgroundColor : '#ffffff'
-				bgColorSelect.value = small.backgroundColor ? small.backgroundColor : 'custom'
+			bgColorInput.value = hover.backgroundColor ? hover.backgroundColor : '#ffffff'
+			bgColorSelect.value = hover.backgroundColor ? hover.backgroundColor : 'custom'
 
-				if (small.paddingTop && small.paddingBottom) {
-					if (small.paddingTop === small.paddingBottom) {
-						const p = paddingFinder(small.paddingTop)
-						paddingYInput.value = p[0]
-						paddingYSelect.value = p[1]
-					}
-				} else {
-					paddingYInput.value = 0
-					paddingYSelect.value = 'px'
-				}
-
-				if (small.paddingLeft && small.paddingRight) {
-					if (small.paddingLeft === small.paddingRight) {
-						const p = paddingFinder(small.paddingLeft)
-						paddingXInput.value = p[0]
-						paddingXSelect.value = p[1]
-					}
-				} else {
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
-				}
-			} else if (width < mBreakPoint) {
-				bgColorInput.value = medium.backgroundColor ? medium.backgroundColor : '#ffffff'
-				bgColorSelect.value = medium.backgroundColor ? medium.backgroundColor : 'custom'
-				if (medium.paddingTop && medium.paddingBottom) {
-					if (medium.paddingTop === medium.paddingBottom) {
-						const p = paddingFinder(medium.paddingTop)
-						paddingYInput.value = p[0]
-						paddingYSelect.value = p[1]
-					}
-				} else {
-					paddingYInput.value = 0
-					paddingYSelect.value = 'px'
-				}
-
-				if (medium.paddingLeft && medium.paddingRight) {
-					if (medium.paddingLeft === medium.paddingRight) {
-						const p = paddingFinder(medium.paddingLeft)
-						paddingXInput.value = p[0]
-						paddingXSelect.value = p[1]
-					}
-				} else {
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
-				}
-			} else if (width < lBreakPoint) {
-				bgColorInput.value = large.backgroundColor ? large.backgroundColor : '#ffffff'
-				bgColorSelect.value = large.backgroundColor ? large.backgroundColor : 'custom'
-
-				if (large.paddingTop && large.paddingBottom) {
-					if (large.paddingTop === large.paddingBottom) {
-						const p = paddingFinder(large.paddingTop)
-						paddingYInput.value = p[0]
-						paddingYSelect.value = p[1]
-					}
-				} else {
-					paddingYInput.value = 0
-					paddingYSelect.value = 'px'
-				}
-
-				if (large.paddingLeft && large.paddingRight) {
-					if (large.paddingLeft === large.paddingRight) {
-						const p = paddingFinder(large.paddingLeft)
-						paddingXInput.value = p[0]
-						paddingXSelect.value = p[1]
-					}
-				} else {
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
+			if (hover.paddingTop && hover.paddingBottom) {
+				if (hover.paddingTop === hover.paddingBottom) {
+					const p = paddingFinder(hover.paddingTop)
+					paddingYInput.value = p[0]
+					paddingYSelect.value = p[1]
 				}
 			} else {
-				bgColorInput.value = xlarge.backgroundColor ? xlarge.backgroundColor : '#ffffff'
-				bgColorSelect.value = xlarge.backgroundColor ? xlarge.backgroundColor : 'custom'
+				paddingYInput.value = 0
+				paddingYSelect.value = 'px'
+			}
 
-				if (xlarge.paddingTop && xlarge.paddingBottom) {
-					if (xlarge.paddingTop === xlarge.paddingBottom) {
-						const p = paddingFinder(xlarge.paddingTop)
-						paddingYInput.value = p[0]
-						paddingYSelect.value = p[1]
-					}
-				} else {
-					paddingYInput.value = 0
-					paddingYSelect.value = 'px'
+			if (hover.paddingLeft && hover.paddingRight) {
+				if (hover.paddingLeft === hover.paddingRight) {
+					const p = paddingFinder(hover.paddingLeft)
+					paddingXInput.value = p[0]
+					paddingXSelect.value = p[1]
 				}
-
-				if (xlarge.paddingLeft && xlarge.paddingRight) {
-					if (xlarge.paddingLeft === xlarge.paddingRight) {
-						const p = paddingFinder(xlarge.paddingLeft)
-						paddingXInput.value = p[0]
-						paddingXSelect.value = p[1]
-					}
-				} else {
-					paddingXInput.value = 0
-					paddingXSelect.value = 'px'
-				}
+			} else {
+				paddingXInput.value = 0
+				paddingXSelect.value = 'px'
 			}
 		}
-	}, [width, activeElement, small, medium, large, xlarge])
+	}, [width, activeElement, hover])
 
 	const borderTypeIndex = s => (s === 'solid' ? 0 : s === 'inset' ? 1 : s === 'outset' ? 2 : 3)
 
@@ -246,46 +151,20 @@ const Appearance = () => {
 
 	//FOr background color and opacity
 	useEffect(() => {
-		if (small && medium && large && xlarge) {
+		if (hover) {
 			let changedBgColor = ''
 			if (bgColor !== 'custom') changedBgColor = bgColor
 
-			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'backgroundColor', changedBgColor)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'backgroundColor', changedBgColor)
-				if (!changedLarge) setProperties(large, setLarge, 'backgroundColor', changedBgColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'backgroundColor', changedBgColor)
-			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'backgroundColor', changedBgColor)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'backgroundColor', changedBgColor)
-				if (!changedLarge) setProperties(large, setLarge, 'backgroundColor', changedBgColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'backgroundColor', changedBgColor)
-			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'backgroundColor', changedBgColor)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'backgroundColor', changedBgColor)
-				if (!changedMedium) setProperties(medium, setMedium, 'backgroundColor', changedBgColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'backgroundColor', changedBgColor)
-			} else {
-				setProperties(xlarge, setXlarge, 'backgroundColor', changedBgColor)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'backgroundColor', changedBgColor)
-				if (!changedMedium) setProperties(medium, setMedium, 'backgroundColor', changedBgColor)
-				if (!changedLarge) setProperties(large, setLarge, 'backgroundColor', changedBgColor)
-			}
+			setProperties(hover, setHover, 'backgroundColor', changedBgColor)
 		}
 	}, [bgColor])
 
 	//For Box Shadow
 	useEffect(() => {
-		if (small && medium && large && xlarge && shadowChanged) {
+		if (hover && shadowChanged) {
 			const changedShadow = showShadowSection ? `${sX} ${sY} ${sBlur} ${sColor}` : ''
-			setProperties(small, setSmall, 'boxShadow', changedShadow)
-			setProperties(medium, setMedium, 'boxShadow', changedShadow)
-			setProperties(large, setLarge, 'boxShadow', changedShadow)
-			setProperties(xlarge, setXlarge, 'boxShadow', changedShadow)
+
+			setProperties(hover, setHover, 'boxShadow', changedShadow)
 
 			setShadowChanged(false)
 		}
@@ -293,7 +172,7 @@ const Appearance = () => {
 
 	//For Changing paddingX
 	useEffect(() => {
-		if (small && medium && large && xlarge && paddingX !== '') {
+		if (hover && paddingX !== '') {
 			const ele = document.getElementById('aphover-paddingXSelect')
 
 			let punit = paddingYUnit
@@ -301,37 +180,13 @@ const Appearance = () => {
 
 			const padding = `${paddingX}${punit}`
 
-			if (width < sBreakPoint) {
-				setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
-				setChangedSmall(true)
-				if (!changedMedium) setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
-				if (!changedLarge) setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
-				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
-			} else if (width < mBreakPoint) {
-				setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
-				setChangedMedium(true)
-				if (!changedSmall) setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
-				if (!changedLarge) setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
-				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
-			} else if (width < lBreakPoint) {
-				setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
-				setChangedLarge(true)
-				if (!changedSmall) setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
-				if (!changedMedium) setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
-				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
-			} else {
-				setPadding(xlarge, setXlarge, 'paddingLeft', 'paddingRight', padding)
-				setChangedXlarge(true)
-				if (!changedSmall) setPadding(small, setSmall, 'paddingLeft', 'paddingRight', padding)
-				if (!changedMedium) setPadding(medium, setMedium, 'paddingLeft', 'paddingRight', padding)
-				if (!changedLarge) setPadding(large, setLarge, 'paddingLeft', 'paddingRight', padding)
-			}
+			setPadding(hover, setHover, 'paddingLeft', 'paddingRight', padding)
 		}
 	}, [paddingX, paddingXUnit])
 
 	//For Changing paddingY
 	useEffect(() => {
-		if (small && medium && large && xlarge && paddingY !== '') {
+		if (hover && paddingY !== '') {
 			const ele = document.getElementById('aphover-paddingYSelect')
 
 			let punit = paddingYUnit
@@ -339,31 +194,7 @@ const Appearance = () => {
 
 			const padding = `${paddingY}${punit}`
 
-			if (width < sBreakPoint) {
-				setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
-				setChangedSmall(true)
-				if (!changedMedium) setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
-				if (!changedLarge) setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
-				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
-			} else if (width < mBreakPoint) {
-				setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
-				setChangedMedium(true)
-				if (!changedSmall) setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
-				if (!changedLarge) setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
-				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
-			} else if (width < lBreakPoint) {
-				setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
-				setChangedLarge(true)
-				if (!changedSmall) setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
-				if (!changedMedium) setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
-				if (!changedXlarge) setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
-			} else {
-				setPadding(xlarge, setXlarge, 'paddingTop', 'paddingBottom', padding)
-				setChangedXlarge(true)
-				if (!changedSmall) setPadding(small, setSmall, 'paddingTop', 'paddingBottom', padding)
-				if (!changedMedium) setPadding(medium, setMedium, 'paddingTop', 'paddingBottom', padding)
-				if (!changedLarge) setPadding(large, setLarge, 'paddingTop', 'paddingBottom', padding)
-			}
+			setPadding(hover, setHover, 'paddingTop', 'paddingBottom', padding)
 		}
 	}, [paddingY, paddingYUnit])
 
@@ -382,35 +213,20 @@ const Appearance = () => {
 
 	//For changing Border
 	useEffect(() => {
-		if (small && medium && large && xlarge && borderChanged) {
+		if (hover && borderChanged) {
 			const changedBorder = showBorderSection ? `${bSize} ${bType} ${bColor}` : ''
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
 			if (bSide === 'all') {
-				setBorder(small, setSmall, changedBorder, changedBorderRadius)
-				setBorder(medium, setMedium, changedBorder, changedBorderRadius)
-				setBorder(large, setLarge, changedBorder, changedBorderRadius)
-				setBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+				setBorder(hover, setHover, changedBorder, changedBorderRadius)
 			} else if (bSide === 'top') {
-				setTopBorder(small, setSmall, changedBorder, changedBorderRadius)
-				setTopBorder(medium, setMedium, changedBorder, changedBorderRadius)
-				setTopBorder(large, setLarge, changedBorder, changedBorderRadius)
-				setTopBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+				setTopBorder(hover, setHover, changedBorder, changedBorderRadius)
 			} else if (bSide === 'bottom') {
-				setBottomBorder(small, setSmall, changedBorder, changedBorderRadius)
-				setBottomBorder(medium, setMedium, changedBorder, changedBorderRadius)
-				setBottomBorder(large, setLarge, changedBorder, changedBorderRadius)
-				setBottomBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+				setBottomBorder(hover, setHover, changedBorder, changedBorderRadius)
 			} else if (bSide === 'left') {
-				setLeftBorder(small, setSmall, changedBorder, changedBorderRadius)
-				setLeftBorder(medium, setMedium, changedBorder, changedBorderRadius)
-				setLeftBorder(large, setLarge, changedBorder, changedBorderRadius)
-				setLeftBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+				setLeftBorder(hover, setHover, changedBorder, changedBorderRadius)
 			} else if (bSide === 'right') {
-				setRightBorder(small, setSmall, changedBorder, changedBorderRadius)
-				setRightBorder(medium, setMedium, changedBorder, changedBorderRadius)
-				setRightBorder(large, setLarge, changedBorder, changedBorderRadius)
-				setRightBorder(xlarge, setXlarge, changedBorder, changedBorderRadius)
+				setRightBorder(hover, setHover, changedBorder, changedBorderRadius)
 			}
 		}
 
@@ -449,142 +265,82 @@ const Appearance = () => {
 	}
 
 	const allBorder = () => {
-		if (large.borderTop) {
-			changeBorder(small, setSmall, 'border', 'borderTop')
-			changeBorder(medium, setMedium, 'border', 'borderTop')
-			changeBorder(large, setLarge, 'border', 'borderTop')
-			changeBorder(xlarge, setXlarge, 'border', 'borderTop')
+		if (hover.borderTop) {
+			changeBorder(hover, setHover, 'border', 'borderTop')
 		}
-		if (large.borderBottom) {
-			changeBorder(small, setSmall, 'border', 'borderBottom')
-			changeBorder(medium, setMedium, 'border', 'borderBottom')
-			changeBorder(large, setLarge, 'border', 'borderBottom')
-			changeBorder(xlarge, setXlarge, 'border', 'borderBottom')
+		if (hover.borderBottom) {
+			changeBorder(hover, setHover, 'border', 'borderBottom')
 		}
-		if (large.borderLeft) {
-			changeBorder(small, setSmall, 'border', 'borderLeft')
-			changeBorder(medium, setMedium, 'border', 'borderLeft')
-			changeBorder(large, setLarge, 'border', 'borderLeft')
-			changeBorder(xlarge, setXlarge, 'border', 'borderLeft')
+		if (hover.borderLeft) {
+			changeBorder(hover, setHover, 'border', 'borderLeft')
 		}
-		if (large.borderRight) {
-			changeBorder(small, setSmall, 'border', 'borderRight')
-			changeBorder(medium, setMedium, 'border', 'borderRight')
-			changeBorder(large, setLarge, 'border', 'borderRight')
-			changeBorder(xlarge, setXlarge, 'border', 'borderRight')
+		if (hover.borderRight) {
+			changeBorder(hover, setHover, 'border', 'borderRight')
 		}
 
 		setBSide('all')
 	}
 	const topBorder = () => {
-		if (large.border) {
-			changeBorder(small, setSmall, 'borderTop', 'border')
-			changeBorder(medium, setMedium, 'borderTop', 'border')
-			changeBorder(large, setLarge, 'borderTop', 'border')
-			changeBorder(xlarge, setXlarge, 'borderTop', 'border')
+		if (hover.border) {
+			changeBorder(hover, setHover, 'borderTop', 'border')
 		}
-		if (large.borderBottom) {
-			changeBorder(small, setSmall, 'borderTop', 'borderBottom')
-			changeBorder(medium, setMedium, 'borderTop', 'borderBottom')
-			changeBorder(large, setLarge, 'borderTop', 'borderBottom')
-			changeBorder(xlarge, setXlarge, 'borderTop', 'borderBottom')
+		if (hover.borderBottom) {
+			changeBorder(hover, setHover, 'borderTop', 'borderBottom')
 		}
-		if (large.borderLeft) {
-			changeBorder(small, setSmall, 'borderTop', 'borderLeft')
-			changeBorder(medium, setMedium, 'borderTop', 'borderLeft')
-			changeBorder(large, setLarge, 'borderTop', 'borderLeft')
-			changeBorder(xlarge, setXlarge, 'borderTop', 'borderLeft')
+		if (hover.borderLeft) {
+			changeBorder(hover, setHover, 'borderTop', 'borderLeft')
 		}
-		if (large.borderRight) {
-			changeBorder(small, setSmall, 'borderTop', 'borderRight')
-			changeBorder(medium, setMedium, 'borderTop', 'borderRight')
-			changeBorder(large, setLarge, 'borderTop', 'borderRight')
-			changeBorder(xlarge, setXlarge, 'borderTop', 'borderRight')
+		if (hover.borderRight) {
+			changeBorder(hover, setHover, 'borderTop', 'borderRight')
 		}
 
 		setBSide('top')
 	}
 
 	const bottomBorder = () => {
-		if (large.border) {
-			changeBorder(small, setSmall, 'borderBottom', 'border')
-			changeBorder(medium, setMedium, 'borderBottom', 'border')
-			changeBorder(large, setLarge, 'borderBottom', 'border')
-			changeBorder(xlarge, setXlarge, 'borderBottom', 'border')
+		if (hover.border) {
+			changeBorder(hover, setHover, 'borderBottom', 'border')
 		}
-		if (large.borderTop) {
-			changeBorder(small, setSmall, 'borderBottom', 'borderTop')
-			changeBorder(medium, setMedium, 'borderBottom', 'borderTop')
-			changeBorder(large, setLarge, 'borderBottom', 'borderTop')
-			changeBorder(xlarge, setXlarge, 'borderBottom', 'borderTop')
+		if (hover.borderTop) {
+			changeBorder(hover, setHover, 'borderBottom', 'borderTop')
 		}
-		if (large.borderLeft) {
-			changeBorder(small, setSmall, 'borderBottom', 'borderLeft')
-			changeBorder(medium, setMedium, 'borderBottom', 'borderLeft')
-			changeBorder(large, setLarge, 'borderBottom', 'borderLeft')
-			changeBorder(xlarge, setXlarge, 'borderBottom', 'borderLeft')
+		if (hover.borderLeft) {
+			changeBorder(hover, setHover, 'borderBottom', 'borderLeft')
 		}
-		if (large.borderRight) {
-			changeBorder(small, setSmall, 'borderBottom', 'borderRight')
-			changeBorder(medium, setMedium, 'borderBottom', 'borderRight')
-			changeBorder(large, setLarge, 'borderBottom', 'borderRight')
-			changeBorder(xlarge, setXlarge, 'borderBottom', 'borderRight')
+		if (hover.borderRight) {
+			changeBorder(hover, setHover, 'borderBottom', 'borderRight')
 		}
 
 		setBSide('bottom')
 	}
 	const leftBorder = () => {
-		if (large.border) {
-			changeBorder(small, setSmall, 'borderLeft', 'border')
-			changeBorder(medium, setMedium, 'borderLeft', 'border')
-			changeBorder(large, setLarge, 'borderLeft', 'border')
-			changeBorder(xlarge, setXlarge, 'borderLeft', 'border')
+		if (hover.border) {
+			changeBorder(hover, setHover, 'borderLeft', 'border')
 		}
-		if (large.borderTop) {
-			changeBorder(small, setSmall, 'borderLeft', 'borderTop')
-			changeBorder(medium, setMedium, 'borderLeft', 'borderTop')
-			changeBorder(large, setLarge, 'borderLeft', 'borderTop')
-			changeBorder(xlarge, setXlarge, 'borderLeft', 'borderTop')
+		if (hover.borderTop) {
+			changeBorder(hover, setHover, 'borderLeft', 'borderTop')
 		}
-		if (large.borderBottom) {
-			changeBorder(small, setSmall, 'borderLeft', 'borderBottom')
-			changeBorder(medium, setMedium, 'borderLeft', 'borderBottom')
-			changeBorder(large, setLarge, 'borderLeft', 'borderBottom')
-			changeBorder(xlarge, setXlarge, 'borderLeft', 'borderBottom')
+		if (hover.borderBottom) {
+			changeBorder(hover, setHover, 'borderLeft', 'borderBottom')
 		}
-		if (large.borderRight) {
-			changeBorder(small, setSmall, 'borderLeft', 'borderRight')
-			changeBorder(medium, setMedium, 'borderLeft', 'borderRight')
-			changeBorder(large, setLarge, 'borderLeft', 'borderRight')
-			changeBorder(xlarge, setXlarge, 'borderLeft', 'borderRight')
+		if (hover.borderRight) {
+			changeBorder(hover, setHover, 'borderLeft', 'borderRight')
 		}
 
 		setBSide('left')
 	}
 	const rightBorder = () => {
-		if (large.border) {
-			changeBorder(small, setSmall, 'borderRight', 'border')
-			changeBorder(medium, setMedium, 'borderRight', 'border')
-			changeBorder(large, setLarge, 'borderRight', 'border')
-			changeBorder(xlarge, setXlarge, 'borderRight', 'border')
+		if (hover.border) {
+			changeBorder(hover, setHover, 'borderRight', 'border')
 		}
-		if (large.borderTop) {
-			changeBorder(small, setSmall, 'borderRight', 'borderTop')
-			changeBorder(medium, setMedium, 'borderRight', 'borderTop')
-			changeBorder(large, setLarge, 'borderRight', 'borderTop')
-			changeBorder(xlarge, setXlarge, 'borderRight', 'borderTop')
+		if (hover.borderTop) {
+			changeBorder(hover, setHover, 'borderRight', 'borderTop')
 		}
-		if (large.borderBottom) {
-			changeBorder(small, setSmall, 'borderRight', 'borderBottom')
-			changeBorder(medium, setMedium, 'borderRight', 'borderBottom')
-			changeBorder(large, setLarge, 'borderRight', 'borderBottom')
-			changeBorder(xlarge, setXlarge, 'borderRight', 'borderBottom')
+		if (hover.borderBottom) {
+			changeBorder(hover, setHover, 'borderRight', 'borderBottom')
 		}
-		if (large.borderLeft) {
-			changeBorder(small, setSmall, 'borderRight', 'borderLeft')
-			changeBorder(medium, setMedium, 'borderRight', 'borderLeft')
-			changeBorder(large, setLarge, 'borderRight', 'borderLeft')
-			changeBorder(xlarge, setXlarge, 'borderRight', 'borderLeft')
+		if (hover.borderLeft) {
+			changeBorder(hover, setHover, 'borderRight', 'borderLeft')
 		}
 
 		setBSide('right')

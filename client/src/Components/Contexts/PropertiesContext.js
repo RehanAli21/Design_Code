@@ -70,14 +70,12 @@ export const PropertiesProvider = props => {
 	}
 
 	useEffect(() => {
-		const notBlank = small !== {} && medium !== {} && large !== {} && xlarge !== {} && activeElement !== ''
-
-		if (notBlank && activeElement !== activePage) {
+		if (activeElement !== '' && activeElement !== activePage) {
 			const temp = Object.assign({}, pages)
 			setProperties(temp[activePage], activeElement)
 			setPages(temp)
 		}
-	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge])
+	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge, hover])
 
 	const setProperties = (arr, id) => {
 		arr.forEach(e => {
@@ -97,6 +95,8 @@ export const PropertiesProvider = props => {
 			}
 		})
 	}
+
+	console.log(hover)
 
 	return (
 		<PropertiesContext.Provider
