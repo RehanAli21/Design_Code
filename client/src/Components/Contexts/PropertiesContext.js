@@ -97,8 +97,6 @@ export const PropertiesProvider = props => {
 		})
 	}
 
-	console.log(hover)
-
 	return (
 		<PropertiesContext.Provider
 			value={{
