@@ -14,6 +14,7 @@ export const PropertiesProvider = props => {
 	const [changedMedium, setChangedMedium] = useState(false)
 	const [changedLarge, setChangedLarge] = useState(false)
 	const [changedXlarge, setChangedXlarge] = useState(false)
+	const [hover, setHover] = useState({})
 
 	const [showAlignProperties, setShowAlignProperties] = useState(true)
 	const [showAppearanceProperties, setShowAppearanceProperties] = useState(true)
@@ -30,6 +31,8 @@ export const PropertiesProvider = props => {
 	const [showPositionProperties, setShowPositionProperties] = useState(true)
 	const [showBackFilterProperties, setShowBackFilterProperties] = useState(true)
 	const [showAnimateProperties, setShowAnimateProperties] = useState(true)
+
+	const [apHoverProperties, setApHoverProperties] = useState(true)
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -50,6 +53,7 @@ export const PropertiesProvider = props => {
 	const setWidthsStates = (arr, id) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
+				setHover(e[1].hoverStyle)
 				setSmall(e[1].styles.small)
 				setMedium(e[1].styles.medium)
 				setLarge(e[1].styles.large)
@@ -86,6 +90,7 @@ export const PropertiesProvider = props => {
 				e[1].styleWidth.changedMedium = changedMedium
 				e[1].styleWidth.changedLarge = changedLarge
 				e[1].styleWidth.changeXlarge = changedXlarge
+				e[1].hoverStyle = hover
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setProperties(e[2], id)) return true
@@ -112,6 +117,8 @@ export const PropertiesProvider = props => {
 				setChangedLarge,
 				changedXlarge,
 				setChangedXlarge,
+				hover,
+				setHover,
 				showAlignProperties,
 				setShowAlignProperties,
 				showAppearanceProperties,
@@ -142,6 +149,8 @@ export const PropertiesProvider = props => {
 				setShowBackFilterProperties,
 				showAnimateProperties,
 				setShowAnimateProperties,
+				apHoverProperties,
+				setApHoverProperties,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>
