@@ -67,7 +67,7 @@ const DsProperties = () => {
 
 				inputsNames.forEach(e => {
 					const ele = document.getElementById(`extra-${e}`)
-					if (ele) ele.value = 0
+					if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
 				})
 			}
 		}
@@ -131,7 +131,7 @@ const DsProperties = () => {
 					id='extra-scaleX'
 					min='0'
 					step='0.1'
-					defaultValue='0'
+					defaultValue='1'
 					className='numberinput'
 					type='number'
 					placeholder='ScaleX'
@@ -144,7 +144,7 @@ const DsProperties = () => {
 					id='extra-scaleY'
 					min='0'
 					step='0.1'
-					defaultValue='0'
+					defaultValue='1'
 					className='numberinput'
 					type='number'
 					placeholder='ScaleY'
