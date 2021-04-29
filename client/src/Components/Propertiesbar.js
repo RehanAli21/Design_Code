@@ -1,19 +1,19 @@
 import React, { useContext, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
-import Align from './Properties/PropertiesComponenets/Align'
-import Appearance from './Properties/PropertiesComponenets/Appearance'
-import DsProperties from './Properties/PropertiesComponenets/DsProperties'
-import Transform from './Properties/PropertiesComponenets/Transform'
-import Specific from './Properties/Specific'
+import ClickStateProperties from './Properties/ClickStateProperties'
+import HoverStateProperties from './Properties/HoverStateProperties'
+import NormalStateProperties from './Properties/NormalStateProperties'
 
 const Propertiesbar = () => {
-	const { activePage, activeElement, width, setPageBC } = useContext(PageContext)
+	const { activePage, activeElement, setPageBC } = useContext(PageContext)
 	const [state, setState] = useState('normal')
 
 	const ele = document.getElementById(activeElement)
 	return (
 		<div className='propertybar'>
-			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='style-states-button'>
+			<div
+				style={{ display: activePage === activeElement || activeElement === '' ? 'none' : 'block' }}
+				className='style-states-button'>
 				<button className={state === 'normal' ? 'active' : ''} onClick={() => setState('normal')}>
 					Normal
 				</button>
@@ -31,15 +31,9 @@ const Propertiesbar = () => {
 					<input onChange={e => setPageBC(e.target.value)} type='color' defaultValue='#ffffff' />
 				</div>
 			</div>
-			<div style={{ display: activePage === activeElement ? 'none' : 'block' }} className='property'>
-				<Specific />
-				<div style={{ display: activeElement === '' || (ele && ele.tagName === 'OPTION') ? 'none' : 'block' }}>
-					<Align />
-					<Transform />
-					<Appearance />
-					<DsProperties />
-				</div>
-			</div>
+			<NormalStateProperties state={state} activeElement={activeElement} activePage={activePage} ele={ele} />
+			<HoverStateProperties state={state} activeElement={activeElement} activePage={activePage} />
+			<ClickStateProperties state={state} activeElement={activeElement} activePage={activePage} />
 		</div>
 	)
 }
