@@ -1,7 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
+import { PageContext } from '../../Contexts/PageContext'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverPropertiesOne = () => {
+	const { hover, setHover } = useContext(PropertiesContext)
+	const { width, activeElement } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [textColor, setTextColor] = useState('')
@@ -9,6 +13,24 @@ const HoverPropertiesOne = () => {
 	const [fontSize, setFontSize] = useState('')
 	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
+	//for setting TextColor
+	useEffect(() => {
+		if (hover && textColor !== '') {
+			setProperties(hover, setHover, 'color', textColor)
+		}
+	}, [textColor])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
+
+	////////////////////////////////////////////////
+	///UI section
+	////////////////////////////////////////////////
+
+	//For setting template color options
 	const showTemplateColors = () => {
 		const temp = []
 		temp.push(
