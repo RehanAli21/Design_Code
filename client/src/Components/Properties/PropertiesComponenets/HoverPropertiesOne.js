@@ -4,10 +4,13 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverPropertiesOne = () => {
-	const { hover, setHover } = useContext(PropertiesContext)
+	const { hover, setHover, small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(
+		PropertiesContext
+	)
 	const { width, activeElement } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
+	const [duration, setDuration] = useState('')
 	const [textColor, setTextColor] = useState('')
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 	const [fontSize, setFontSize] = useState('')
@@ -26,6 +29,16 @@ const HoverPropertiesOne = () => {
 			setProperties(hover, setHover, 'fontSize', fontSize)
 		}
 	}, [fontSize])
+
+	//For changing hover animation duration
+	useEffect(() => {
+		if (small && medium && large && xlarge && duration !== '') {
+			setProperties(small, setSmall, 'transitionDuration', duration)
+			setProperties(medium, setMedium, 'transitionDuration', duration)
+			setProperties(large, setLarge, 'transitionDuration', duration)
+			setProperties(xlarge, setXlarge, 'transitionDuration', duration)
+		}
+	}, [duration])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -99,7 +112,15 @@ const HoverPropertiesOne = () => {
 			<div className='btn-specific'>
 				<div className='two'>
 					<label>Duration: </label>
-					<input type='number' className='numberinput' min='0' max='5' id='hover-duration-input' />
+					<input
+						type='number'
+						className='numberinput'
+						min='0'
+						step='100'
+						max='5000'
+						id='hover-duration-input'
+						onChange={e => setDuration(`${e.target.value}ms`)}
+					/>
 				</div>
 				<div className='three'>
 					<label style={{ marginTop: '5px' }}>Text color: </label>
