@@ -20,6 +20,13 @@ const HoverPropertiesOne = () => {
 		}
 	}, [textColor])
 
+	//For changing fontsize
+	useEffect(() => {
+		if (hover && fontSize !== '') {
+			setProperties(hover, setHover, 'fontSize', fontSize)
+		}
+	}, [fontSize])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -49,7 +56,7 @@ const HoverPropertiesOne = () => {
 		return (
 			<select
 				defaultValue='custom'
-				id='input-colorselect'
+				id='hover-colorselect'
 				onChange={e => {
 					setTextColor(e.target.value)
 					setShowCustomTextColor(e.target.value === 'custom')
@@ -76,7 +83,7 @@ const HoverPropertiesOne = () => {
 		return (
 			<select
 				defaultValue='custom'
-				id='btn-fontsizeselect'
+				id='hover-fontsizeselect'
 				onChange={e => {
 					setFontSize(e.target.value === 'custom' ? `16px` : e.target.value)
 					setShowCustomFontSize(e.target.value === 'custom')
@@ -101,7 +108,7 @@ const HoverPropertiesOne = () => {
 						disabled={!showCustomTextColor}
 						onChange={e => setTextColor(e.target.value)}
 						type='color'
-						id='input-textcolor'
+						id='hover-textcolor'
 					/>
 				</div>
 				<div className='three'>
@@ -112,7 +119,7 @@ const HoverPropertiesOne = () => {
 						onChange={e => setFontSize(`${e.target.value}px`)}
 						type='number'
 						min='0'
-						id='btn-fontsize'
+						id='hover-fontsize'
 					/>
 				</div>
 			</div>
