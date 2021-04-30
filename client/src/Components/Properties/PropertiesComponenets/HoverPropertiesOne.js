@@ -2,10 +2,12 @@ import React, { useContext, useState } from 'react'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverPropertiesOne = () => {
-	const { colors } = useContext(TemplateContext)
+	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [textColor, setTextColor] = useState('')
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
+	const [fontSize, setFontSize] = useState('')
+	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
 	const showTemplateColors = () => {
 		const temp = []
@@ -34,20 +36,64 @@ const HoverPropertiesOne = () => {
 			</select>
 		)
 	}
+	const showTemplateFontSizes = () => {
+		const temp = []
+		temp.push(
+			<option key='custom' value='custom'>
+				Custom
+			</option>
+		)
+		for (const key in fontSizes) {
+			temp.push(
+				<option key={key} value={fontSizes[key]}>
+					{key}
+				</option>
+			)
+		}
+
+		return (
+			<select
+				defaultValue='custom'
+				id='btn-fontsizeselect'
+				onChange={e => {
+					setFontSize(e.target.value === 'custom' ? `16px` : e.target.value)
+					setShowCustomFontSize(e.target.value === 'custom')
+				}}>
+				{temp}
+			</select>
+		)
+	}
 
 	return (
-		<div className='btn-specific'>
-			<div className='three'>
-				<label style={{ marginTop: '5px' }}>Text color: </label>
-				{showTemplateColors()}
-				<input
-					disabled={!showCustomTextColor}
-					onChange={e => setTextColor(e.target.value)}
-					type='color'
-					id='input-textcolor'
-				/>
+		<div className='borders'>
+			<p className='second-heading'>HOVER PROPERTIES</p>
+			<div className='btn-specific'>
+				<div className='two'>
+					<label>Duration: </label>
+					<input type='number' className='numberinput' min='0' max='5' id='hover-duration-input' />
+				</div>
+				<div className='three'>
+					<label style={{ marginTop: '5px' }}>Text color: </label>
+					{showTemplateColors()}
+					<input
+						disabled={!showCustomTextColor}
+						onChange={e => setTextColor(e.target.value)}
+						type='color'
+						id='input-textcolor'
+					/>
+				</div>
+				<div className='three'>
+					<label>Font size: </label>
+					{showTemplateFontSizes()}
+					<input
+						disabled={!showCustomFontSize}
+						onChange={e => setFontSize(`${e.target.value}px`)}
+						type='number'
+						min='0'
+						id='btn-fontsize'
+					/>
+				</div>
 			</div>
-			<div className='two'></div>
 		</div>
 	)
 }
