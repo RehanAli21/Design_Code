@@ -474,8 +474,8 @@ const Appearance = () => {
 					<select id='aphover-paddingXSelect' onChange={e => setPaddingXUnit(e.target.value)}>
 						<option value='px'>PX</option>
 						<option value='%'>%</option>
-						<option value='vw'>vw</option>
-						<option value='em'>em</option>
+						<option value='vw'>VW</option>
+						<option value='em'>EM</option>
 					</select>
 				</div>
 				<div className='padding md'>
@@ -488,9 +488,9 @@ const Appearance = () => {
 						min='0'
 					/>
 					<select id='aphover-paddingYSelect' onChange={e => setPaddingYUnit(e.target.value)}>
-						<option value='px'>px</option>
-						<option value='vh'>vh</option>
-						<option value='em'>em</option>
+						<option value='px'>PX</option>
+						<option value='vh'>VH</option>
+						<option value='em'>EM</option>
 					</select>
 				</div>
 				<div className='ap-borders md'>

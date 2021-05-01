@@ -411,7 +411,7 @@ const Animate = () => {
 				Animations <span style={{ display: showAnimateProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAnimateProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div className='btn-specific'>
+			<div className='btn-specific' style={{ display: showAnimateProperties ? 'grid' : 'none' }}>
 				<div
 					style={{
 						display: 'grid',
