@@ -74,6 +74,17 @@ const HoverPropertiesOne = () => {
 		setObj(temp)
 	}
 
+	//For reseting all hover styles
+	const resetAll = () => {
+		if (hover) setHover({})
+		if (small && medium && large && xlarge) {
+			setProperties(small, setSmall, 'transitionDuration', '')
+			setProperties(medium, setMedium, 'transitionDuration', '')
+			setProperties(large, setLarge, 'transitionDuration', '')
+			setProperties(xlarge, setXlarge, 'transitionDuration', '')
+		}
+	}
+
 	////////////////////////////////////////////////
 	///UI section
 	////////////////////////////////////////////////
@@ -135,12 +146,23 @@ const HoverPropertiesOne = () => {
 	}
 
 	return (
-		<div className='borders'>
+		<div className='borders' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowHoverPropertiesOne(!showHoverPropertiesOne)}>
 				HOVER PROPERTIES <span style={{ display: showHoverPropertiesOne ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showHoverPropertiesOne ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
 			<div className='btn-specific' style={{ display: showHoverPropertiesOne ? 'block' : 'none' }}>
+				<button
+					onClick={resetAll}
+					style={{
+						display: showHoverPropertiesOne ? 'block' : 'none',
+						position: 'absolute',
+						top: '0px',
+						right: '10px',
+						padding: '5px 10px',
+					}}>
+					Reset All
+				</button>
 				<div className='two'>
 					<label>Duration: </label>
 					<input
