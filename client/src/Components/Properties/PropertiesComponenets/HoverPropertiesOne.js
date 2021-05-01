@@ -16,6 +16,23 @@ const HoverPropertiesOne = () => {
 	const [fontSize, setFontSize] = useState('')
 	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
+	//for setting default values
+	useEffect(() => {
+		if (small && medium && large && xlarge && hover) {
+			const textColorInput = document.getElementById('hover-textcolor')
+			const textColorSelect = document.getElementById('hover-colorselect')
+			const fontSizeInput = document.getElementById('hover-fontsize')
+			const fontSizeSelect = document.getElementById('hover-fontsizeselect')
+			const durationInput = document.getElementById('hover-duration-input')
+
+			durationInput.value = large.transitionDuration ? large.transitionDuration.split('m')[0] : 0
+			textColorInput.value = hover.color ? hover.color : '#000000'
+			textColorSelect.value = hover.color ? hover.color : 'custom'
+			fontSizeInput.value = hover.fontSize ? hover.fontSize.split('p')[0] : 16
+			fontSizeSelect.value = hover.fontSize ? hover.fontSize : 'custom'
+		}
+	}, [width, activeElement, small, medium, large, xlarge, hover])
+
 	//for setting TextColor
 	useEffect(() => {
 		if (hover && textColor !== '') {
