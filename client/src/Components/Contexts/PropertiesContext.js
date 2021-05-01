@@ -34,6 +34,7 @@ export const PropertiesProvider = props => {
 
 	const [apHoverProperties, setApHoverProperties] = useState(true)
 	const [hoverExtraProperties, setHoverExtraProperties] = useState(true)
+	const [showHoverPropertiesOne, setShowHoverPropertiesOne] = useState(true)
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -152,6 +153,8 @@ export const PropertiesProvider = props => {
 				setApHoverProperties,
 				hoverExtraProperties,
 				setHoverExtraProperties,
+				showHoverPropertiesOne,
+				setShowHoverPropertiesOne,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>

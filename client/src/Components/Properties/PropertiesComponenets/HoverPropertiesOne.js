@@ -4,9 +4,20 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverPropertiesOne = () => {
-	const { hover, setHover, small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(
-		PropertiesContext
-	)
+	const {
+		hover,
+		setHover,
+		small,
+		setSmall,
+		medium,
+		setMedium,
+		large,
+		setLarge,
+		xlarge,
+		setXlarge,
+		showHoverPropertiesOne,
+		setShowHoverPropertiesOne,
+	} = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
@@ -125,8 +136,11 @@ const HoverPropertiesOne = () => {
 
 	return (
 		<div className='borders'>
-			<p className='second-heading'>HOVER PROPERTIES</p>
-			<div className='btn-specific'>
+			<p className='second-heading' onClick={() => setShowHoverPropertiesOne(!showHoverPropertiesOne)}>
+				HOVER PROPERTIES <span style={{ display: showHoverPropertiesOne ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showHoverPropertiesOne ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div className='btn-specific' style={{ display: showHoverPropertiesOne ? 'block' : 'none' }}>
 				<div className='two'>
 					<label>Duration: </label>
 					<input
