@@ -109,8 +109,29 @@ const Page = () => {
 		}
 	}
 
-	const onClickStyle = () => console.log('clicked')
-	const onClickLeaveStyle = () => console.log('not clicked')
+	const onClickStyle = (id, style) => {
+		const ele = document.getElementById(id)
+
+		if (ele) {
+			for (const e in style) {
+				ele.style[e] = style[e]
+			}
+		}
+	}
+	//For reseting applied click style on elements
+	const onClickLeaveStyle = (id, hoverStyle, normalStyle) => {
+		const ele = document.getElementById(id)
+
+		if (ele) {
+			for (const e in hoverStyle) {
+				if (normalStyle[e] !== undefined) {
+					ele.style[e] = normalStyle[e]
+				} else {
+					ele.style[e] = ''
+				}
+			}
+		}
+	}
 
 	//For showing elements into a div which acts
 	//as body element/tag, using recursion
@@ -147,8 +168,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -187,8 +219,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -222,8 +265,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -257,8 +311,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -293,8 +358,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -330,8 +406,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -365,8 +452,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -399,8 +497,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -434,8 +543,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small
@@ -468,8 +588,19 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: onClickStyle,
-							onMouseUp: onClickLeaveStyle,
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseUp: () =>
+								onClickLeaveStyle(
+									e[1].id,
+									e[1].hoverStyle,
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge
+								),
 							style:
 								width < 540
 									? e[1].styles.small

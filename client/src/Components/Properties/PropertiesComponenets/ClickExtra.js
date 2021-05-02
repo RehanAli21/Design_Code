@@ -23,7 +23,7 @@ const ClickExtra = () => {
 			if (transforms) {
 				transforms.forEach(e => {
 					const tranformName = e.split('(')[0]
-					const ele = document.getElementById(`extrahover-${tranformName}`)
+					const ele = document.getElementById(`extraclick-${tranformName}`)
 					if (ele) {
 						if (tranformName === 'scaleX' || tranformName === 'scaleY') {
 							const value = e.split('(')[1].split(')')[0]
