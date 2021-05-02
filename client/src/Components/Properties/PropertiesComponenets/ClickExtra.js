@@ -3,7 +3,7 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { PageContext } from '../../Contexts/PageContext'
 
 const ClickExtra = () => {
-	const { hover, setHover, hoverExtraProperties, setHoverExtraProperties } = useContext(PropertiesContext)
+	const { click, setClick, showClickProperties, setShowClickProperties } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
 	const [scaleX, setScaleX] = useState('')
@@ -14,10 +14,10 @@ const ClickExtra = () => {
 
 	//For setting default values
 	useEffect(() => {
-		if (hover) {
+		if (click) {
 			let transforms
-			if (hover.transform) {
-				transforms = hover.transform.split(' ')
+			if (click.transform) {
+				transforms = click.transform.split(' ')
 			}
 
 			if (transforms) {
@@ -46,10 +46,10 @@ const ClickExtra = () => {
 				})
 			}
 		}
-	}, [width, activeElement, hover])
+	}, [width, activeElement, click])
 
 	useEffect(() => {
-		if (hover) {
+		if (click) {
 			let transform = ''
 
 			if (scaleX !== '' && scaleX !== '0') transform += ` scaleX(${scaleX})`
@@ -60,7 +60,7 @@ const ClickExtra = () => {
 
 			if (transform !== '') transform = transform.substr(1, transform.length - 1)
 
-			setProperties(hover, setHover, 'transform', transform)
+			setProperties(click, setClick, 'transform', transform)
 		}
 	}, [scaleX, scaleY, rotate, translateX, translateY])
 
@@ -72,11 +72,11 @@ const ClickExtra = () => {
 
 	return (
 		<div className='borders btn-specific'>
-			<p className='second-heading' onClick={() => setHoverExtraProperties(!hoverExtraProperties)}>
-				CLICK PROPERTIES <span style={{ display: hoverExtraProperties ? 'inline' : 'none' }}>&#9660;</span>
-				<span style={{ display: hoverExtraProperties ? 'none' : 'inline' }}>&#9654;</span>
+			<p className='second-heading' onClick={() => setShowClickProperties(!showClickProperties)}>
+				CLICK PROPERTIES <span style={{ display: showClickProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showClickProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div className='two' style={{ display: hoverExtraProperties ? 'grid' : 'none' }}>
+			<div className='two' style={{ display: showClickProperties ? 'grid' : 'none' }}>
 				<label>ScaleX: </label>
 				<input
 					id='extraclick-scaleX'
@@ -89,7 +89,7 @@ const ClickExtra = () => {
 					onChange={e => setScaleX(e.target.value)}
 				/>
 			</div>
-			<div className='two' style={{ display: hoverExtraProperties ? 'grid' : 'none' }}>
+			<div className='two' style={{ display: showClickProperties ? 'grid' : 'none' }}>
 				<label>ScaleY: </label>
 				<input
 					id='extraclick-scaleY'
@@ -102,7 +102,7 @@ const ClickExtra = () => {
 					onChange={e => setScaleY(e.target.value)}
 				/>
 			</div>
-			<div className='two' style={{ display: hoverExtraProperties ? 'grid' : 'none' }}>
+			<div className='two' style={{ display: showClickProperties ? 'grid' : 'none' }}>
 				<label>Rotate: </label>
 				<input
 					id='extraclick-rotate'
@@ -115,7 +115,7 @@ const ClickExtra = () => {
 					onChange={e => setRotate(`${e.target.value > 360 ? 360 : e.target.value}deg`)}
 				/>
 			</div>
-			<div className='two' style={{ display: hoverExtraProperties ? 'grid' : 'none' }}>
+			<div className='two' style={{ display: showClickProperties ? 'grid' : 'none' }}>
 				<label>TranslateX: </label>
 				<input
 					id='extraclick-translateX'
@@ -127,7 +127,7 @@ const ClickExtra = () => {
 					onChange={e => setTranslateX(`${e.target.value}px`)}
 				/>
 			</div>
-			<div className='two' style={{ display: hoverExtraProperties ? 'grid' : 'none' }}>
+			<div className='two' style={{ display: showClickProperties ? 'grid' : 'none' }}>
 				<label>TranslateY: </label>
 				<input
 					id='extraclick-translateY'
