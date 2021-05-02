@@ -15,6 +15,7 @@ export const PropertiesProvider = props => {
 	const [changedLarge, setChangedLarge] = useState(false)
 	const [changedXlarge, setChangedXlarge] = useState(false)
 	const [hover, setHover] = useState({})
+	const [click, setClick] = useState({})
 
 	const [showAlignProperties, setShowAlignProperties] = useState(true)
 	const [showAppearanceProperties, setShowAppearanceProperties] = useState(true)
@@ -36,6 +37,8 @@ export const PropertiesProvider = props => {
 	const [hoverExtraProperties, setHoverExtraProperties] = useState(true)
 	const [showHoverPropertiesOne, setShowHoverPropertiesOne] = useState(true)
 
+	const [showClickProperties, setShowClickProperties] = useState(true)
+
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
 
@@ -55,6 +58,7 @@ export const PropertiesProvider = props => {
 	const setWidthsStates = (arr, id) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
+				setClick(e[1].clickStyle)
 				setHover(e[1].hoverStyle)
 				setSmall(e[1].styles.small)
 				setMedium(e[1].styles.medium)
@@ -91,6 +95,7 @@ export const PropertiesProvider = props => {
 				e[1].styleWidth.changedLarge = changedLarge
 				e[1].styleWidth.changeXlarge = changedXlarge
 				e[1].hoverStyle = hover
+				e[1].clickStyle = click
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setProperties(e[2], id)) return true
@@ -119,6 +124,8 @@ export const PropertiesProvider = props => {
 				setChangedXlarge,
 				hover,
 				setHover,
+				click,
+				setClick,
 				showAlignProperties,
 				setShowAlignProperties,
 				showAppearanceProperties,
@@ -155,6 +162,8 @@ export const PropertiesProvider = props => {
 				setHoverExtraProperties,
 				showHoverPropertiesOne,
 				setShowHoverPropertiesOne,
+				showClickProperties,
+				setShowClickProperties,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>
