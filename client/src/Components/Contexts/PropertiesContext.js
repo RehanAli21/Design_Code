@@ -81,7 +81,7 @@ export const PropertiesProvider = props => {
 			setProperties(temp[activePage], activeElement)
 			setPages(temp)
 		}
-	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge, hover])
+	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge, hover, click])
 
 	const setProperties = (arr, id) => {
 		arr.forEach(e => {

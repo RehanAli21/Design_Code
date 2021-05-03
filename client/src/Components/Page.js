@@ -119,12 +119,11 @@ const Page = () => {
 		}
 	}
 	//For reseting applied click style on elements
-	const onClickLeaveStyle = (id, hoverStyle, normalStyle) => {
+	const onClickLeaveStyle = (id, clickStyle, normalStyle) => {
 		const ele = document.getElementById(id)
-		console.log(hoverStyle)
 
 		if (ele) {
-			for (const e in hoverStyle) {
+			for (const e in clickStyle) {
 				if (normalStyle[e] !== undefined) {
 					ele.style[e] = normalStyle[e]
 				} else {
