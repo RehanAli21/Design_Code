@@ -121,6 +121,7 @@ const Page = () => {
 	//For reseting applied click style on elements
 	const onClickLeaveStyle = (id, hoverStyle, normalStyle) => {
 		const ele = document.getElementById(id)
+		console.log(hoverStyle)
 
 		if (ele) {
 			for (const e in hoverStyle) {
@@ -172,7 +173,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -223,7 +224,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -269,7 +270,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -315,7 +316,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -362,7 +363,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -410,7 +411,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -456,7 +457,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -501,7 +502,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -547,7 +548,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -592,7 +593,7 @@ const Page = () => {
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
-									e[1].hoverStyle,
+									e[1].clickStyle,
 									width < 540
 										? e[1].styles.small
 										: width < 720
