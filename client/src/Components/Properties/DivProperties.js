@@ -27,6 +27,7 @@ const DivProperties = () => {
 	} = useContext(PropertiesContext)
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
+	const [overflow, setOverflow] = useState('')
 	const [grid, setGrid] = useState(false)
 	const [gridHelper, setGridHelper] = useState(false)
 	const [rowGap, setRowGap] = useState('0px')
@@ -355,6 +356,37 @@ const DivProperties = () => {
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
 
+	//for setting overflow properties
+	useEffect(() => {
+		if (small && medium && large && xlarge && overflow !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'overflow', overflow)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'overflow', overflow)
+				if (!changedLarge) setProperties(large, setLarge, 'overflow', overflow)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'overflow', overflow)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'overflow', overflow)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'overflow', overflow)
+				if (!changedLarge) setProperties(large, setLarge, 'overflow', overflow)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'overflow', overflow)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'overflow', overflow)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'overflow', overflow)
+				if (!changedMedium) setProperties(medium, setMedium, 'overflow', overflow)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'overflow', overflow)
+			} else {
+				setProperties(xlarge, setXlarge, 'overflow', overflow)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'overflow', overflow)
+				if (!changedMedium) setProperties(medium, setMedium, 'overflow', overflow)
+				if (!changedLarge) setProperties(large, setLarge, 'overflow', overflow)
+			}
+		}
+	}, [overflow])
+
 	//For applying grid
 	useEffect(() => {
 		if (small && medium && large && xlarge && gridHelper) {
@@ -571,7 +603,7 @@ const DivProperties = () => {
 			<GridColumn />
 			<div class='two'>
 				<label>Overflow</label>
-				<select id='div-overflow-select'>
+				<select id='div-overflow-select' onChange={e => setOverflow(e.target.value)}>
 					<option value='visible'>Visible</option>
 					<option value='scroll'>Scroll</option>
 					<option value='hidden'>Hidden</option>
