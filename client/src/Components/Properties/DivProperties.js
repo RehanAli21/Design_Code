@@ -71,8 +71,10 @@ const DivProperties = () => {
 			const colGapInput = document.getElementById('r-c-colgap')
 			const rowInput = document.getElementById('r-c-row')
 			const colInput = document.getElementById('r-c-col')
+			const overflowSelect = document.getElementById('div-overflow-select')
 
 			if (width < sBreakPoint) {
+				overflowSelect.value = small.overflow ? small.overflow : 'visible'
 				gridCheckbox.checked = small.display === 'grid'
 				setGrid(small.display === 'grid' ? true : false)
 				rowGapInput.value = small.rowGap ? small.rowGap.split('p')[0] : 0
@@ -143,6 +145,7 @@ const DivProperties = () => {
 					setColsNum(0)
 				}
 			} else if (width < mBreakPoint) {
+				overflowSelect.value = medium.overflow ? medium.overflow : 'visible'
 				gridCheckbox.checked = medium.display === 'grid'
 				setGrid(medium.display === 'grid' ? true : false)
 				rowGapInput.value = medium.rowGap ? medium.rowGap.split('p')[0] : 0
@@ -213,6 +216,8 @@ const DivProperties = () => {
 					setColsNum(0)
 				}
 			} else if (width < lBreakPoint) {
+				overflowSelect.value = large.overflow ? large.overflow : 'visible'
+
 				gridCheckbox.checked = large.display === 'grid'
 				setGrid(large.display === 'grid' ? true : false)
 				rowGapInput.value = large.rowGap ? large.rowGap.split('p')[0] : 0
@@ -283,6 +288,8 @@ const DivProperties = () => {
 					setColsNum(0)
 				}
 			} else {
+				overflowSelect.value = xlarge.overflow ? xlarge.overflow : 'visible'
+
 				gridCheckbox.checked = xlarge.display === 'grid'
 				setGrid(xlarge.display === 'grid' ? true : false)
 				rowGapInput.value = xlarge.rowGap ? xlarge.rowGap.split('p')[0] : 0
