@@ -569,6 +569,14 @@ const DivProperties = () => {
 				<span style={{ display: showDivProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
 			<GridColumn />
+			<div class='two'>
+				<label>Overflow</label>
+				<select id='div-overflow-select'>
+					<option value='visible'>Visible</option>
+					<option value='scroll'>Scroll</option>
+					<option value='hidden'>Hidden</option>
+				</select>
+			</div>
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
 			<div style={{ display: showDivProperties ? 'grid' : 'none' }} className='grid'>
 				<input
