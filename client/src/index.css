@@ -456,12 +456,17 @@ nav .d-v button:hover {
 	background-color: var(--second-white);
 	overflow-y: scroll;
 }
+.propertybar .style-states-button {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+}
 .propertybar .style-states-button button {
 	border: 1px solid var(--text-color);
 	cursor: pointer;
 	padding: 5px 10px;
 	outline: none;
 	margin-bottom: 10px;
+	font-size: 10px;
 }
 .propertybar .style-states-button button:active {
 	transform: scale(0.9);

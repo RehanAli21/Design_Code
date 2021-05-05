@@ -12,16 +12,22 @@ const Propertiesbar = () => {
 	return (
 		<div className='propertybar'>
 			<div
-				style={{ display: activePage === activeElement || activeElement === '' ? 'none' : 'block' }}
+				style={{ display: activePage === activeElement || activeElement === '' ? 'none' : 'grid' }}
 				className='style-states-button'>
 				<button className={state === 'normal' ? 'active' : ''} onClick={() => setState('normal')}>
 					Normal
 				</button>
 				<button className={state === 'hover' ? 'active' : ''} onClick={() => setState('hover')}>
-					On Hover
+					Hover
 				</button>
 				<button className={state === 'click' ? 'active' : ''} onClick={() => setState('click')}>
-					On Click
+					Click
+				</button>
+				<button className={state === 'hoverjs' ? 'active' : ''} onClick={() => setState('hoverjs')}>
+					Hover (ADV)
+				</button>
+				<button className={state === 'clickjs' ? 'active' : ''} onClick={() => setState('clickjs')}>
+					Click (ADV)
 				</button>
 			</div>
 			<div style={{ display: activePage !== activeElement ? 'none' : 'block' }}>
