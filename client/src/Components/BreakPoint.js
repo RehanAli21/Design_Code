@@ -63,7 +63,12 @@ const BreakPoint = () => {
 			<h2 style={{ marginTop: '50px' }}>Height of Page</h2>
 			<div className='two'>
 				<label>Height: </label>
-				<input onChange={e => setHeight(e.target.value)} type='number' min='200' defaultValue='500' />
+				<input
+					onChange={e => setHeight(e.target.value < 200 ? 200 : e.target.value)}
+					type='number'
+					min='200'
+					defaultValue='500'
+				/>
 			</div>
 		</div>
 	)
