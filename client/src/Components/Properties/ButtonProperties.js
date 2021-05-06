@@ -7,6 +7,7 @@ import Text from './PropertiesComponenets/Text'
 import Position from './PropertiesComponenets/Position'
 import BackFilter from './PropertiesComponenets/BackFilter'
 import Animate from './PropertiesComponenets/Animate'
+import Name from './PropertiesComponenets/Name'
 
 const ButtonProperties = () => {
 	const {
@@ -113,6 +114,7 @@ const ButtonProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
+				<Name />
 				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
 			</div>
 			<Text />

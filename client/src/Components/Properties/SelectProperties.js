@@ -4,6 +4,7 @@ import Font from './PropertiesComponenets/Font'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import BackFilter from './PropertiesComponenets/BackFilter'
 import Animate from './PropertiesComponenets/Animate'
+import Name from './PropertiesComponenets/Name'
 
 const SelectProperties = () => {
 	return (
@@ -11,6 +12,7 @@ const SelectProperties = () => {
 			<div className='borders btn-specific'>
 				<p className='second-heading'>DROP_MENU PROPERTIES</p>
 				<GridColumn />
+				<Name />
 			</div>
 			<Text />
 			<Font />

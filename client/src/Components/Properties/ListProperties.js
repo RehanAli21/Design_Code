@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import GridColumn from './PropertiesComponenets/GridColumn'
+import Name from './PropertiesComponenets/Name'
 
 const ListProperties = () => {
 	const {
@@ -146,6 +147,7 @@ const ListProperties = () => {
 				/>
 				<label>On Same Line</label>
 			</div>
+			<Name />
 			<div className='two'>
 				<label>Bullets: </label>
 				<select id='list-style-select' onChange={e => setListStyle(e.target.value)}>

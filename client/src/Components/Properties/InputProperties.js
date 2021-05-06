@@ -6,6 +6,7 @@ import Animate from './PropertiesComponenets/Animate'
 import BackFilter from './PropertiesComponenets/BackFilter'
 import Font from './PropertiesComponenets/Font'
 import GridColumn from './PropertiesComponenets/GridColumn'
+import Name from './PropertiesComponenets/Name'
 
 const InputProperties = () => {
 	const {
@@ -282,6 +283,7 @@ const InputProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
+				<Name />
 				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
 					<label>Type: </label>
 					<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>

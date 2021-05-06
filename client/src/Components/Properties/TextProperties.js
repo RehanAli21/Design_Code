@@ -7,6 +7,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import BackFilter from './PropertiesComponenets/BackFilter'
 import Animate from './PropertiesComponenets/Animate'
+import Name from './PropertiesComponenets/Name'
 
 const TextProperties = () => {
 	const {
@@ -140,6 +141,7 @@ const TextProperties = () => {
 					TEXT PROPERTIES <span style={{ display: showTextCompProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showTextCompProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
+				<Name />
 				<GridColumn />
 				<div
 					style={{

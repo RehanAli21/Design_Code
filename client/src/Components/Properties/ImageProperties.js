@@ -4,6 +4,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import Animate from './PropertiesComponenets/Animate'
 import Filter from './PropertiesComponenets/Filter'
 import GridColumn from './PropertiesComponenets/GridColumn'
+import Name from './PropertiesComponenets/Name'
 import Position from './PropertiesComponenets/Position'
 
 const ImageProperties = () => {
@@ -162,6 +163,7 @@ const ImageProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
+				<Name />
 				<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
 					<label>Img: </label>
 					<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />

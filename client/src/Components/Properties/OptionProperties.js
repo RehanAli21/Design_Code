@@ -3,6 +3,7 @@ import TextChange from './PropertiesComponenets/TextChange'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
+import Name from './PropertiesComponenets/Name'
 
 const OptionProperties = () => {
 	const {
@@ -126,7 +127,7 @@ const OptionProperties = () => {
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading'>OPTION PROPERTIES</p>
-			<TextChange type='text' display='grid' />
+			<Name />
 			<div className='three'>
 				<label style={{ marginTop: '10px' }}>Color: </label>
 				{showCustomBgColorOptions()}
@@ -138,6 +139,7 @@ const OptionProperties = () => {
 					defaultValue='#ffffff'
 				/>
 			</div>
+			<TextChange type='text' display='grid' />
 		</div>
 	)
 }
