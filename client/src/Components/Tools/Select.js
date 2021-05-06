@@ -13,6 +13,7 @@ const Select = ({ findAndInsert, uniqueString }) => {
 		const select = [
 			'select',
 			{
+				name: 'select',
 				id: uniqueString(),
 				showChildren: true,
 				class: '',

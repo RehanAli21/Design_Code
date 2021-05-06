@@ -145,7 +145,7 @@ const Layers = () => {
 							<p
 								className={e[1].id === activeElement ? 'bg-blue ' : ''}
 								onClick={() => changeActiveElement(`${e[1].id}`)}>
-								{e[0]}
+								{e[1].name}
 							</p>
 							<button onClick={() => levelUp(`${e[1].id}`)} className='btn'>
 								^

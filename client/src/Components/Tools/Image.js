@@ -13,6 +13,7 @@ const Image = ({ findAndInsert, uniqueString }) => {
 		const image = [
 			'img',
 			{
+				name: 'img',
 				id: uniqueString(),
 				alt: '',
 				src: '',

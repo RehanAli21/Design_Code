@@ -13,6 +13,7 @@ const Option = ({ findAndInsert, uniqueString }) => {
 		const option = [
 			'option',
 			{
+				name: 'option',
 				text: 'text',
 				placeholder: 'placeholder',
 				id: uniqueString(),

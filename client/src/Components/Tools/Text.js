@@ -13,6 +13,7 @@ const Text = ({ findAndInsert, uniqueString }) => {
 		const text = [
 			'text',
 			{
+				name: 'text',
 				type: 'p',
 				text: 'Hello World',
 				id: uniqueString(),

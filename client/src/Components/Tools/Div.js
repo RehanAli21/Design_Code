@@ -13,6 +13,7 @@ const Div = ({ findAndInsert, uniqueString }) => {
 		const div = [
 			'div',
 			{
+				name: 'div',
 				id: uniqueString(),
 				showChildren: true,
 				class: '',

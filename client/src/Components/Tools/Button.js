@@ -13,6 +13,7 @@ const Button = ({ findAndInsert, uniqueString }) => {
 		const Button = [
 			'button',
 			{
+				name: 'button',
 				id: uniqueString(),
 				text: 'button',
 				class: '',

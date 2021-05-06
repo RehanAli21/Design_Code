@@ -13,6 +13,7 @@ const List = ({ findAndInsert, uniqueString }) => {
 		const list = [
 			'list',
 			{
+				name: 'list',
 				type: 'ul',
 				id: uniqueString(),
 				showChildren: true,

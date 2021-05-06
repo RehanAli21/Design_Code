@@ -13,6 +13,7 @@ const Input = ({ findAndInsert, uniqueString }) => {
 		const input = [
 			'input',
 			{
+				name: 'input',
 				type: 'text',
 				placeholder: 'placeholder',
 				id: uniqueString(),
