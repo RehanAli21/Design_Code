@@ -47,9 +47,10 @@ const Name = () => {
 	}
 
 	return (
-		<div className='two'>
-			<label>Name: </label>
+		<div className='three'>
+			<label>Name:</label>
 			<input type='text' id='name-nameInput' onChange={e => setName(e.target.value)} />
+			<button style={{ fontSize: '10px', padding: '2px 4px' }}>Apply</button>
 		</div>
 	)
 }
