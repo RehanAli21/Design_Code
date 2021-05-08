@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 
+//for unique name
+let counter = 1
 //This component is for adding Button element
 const Button = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
@@ -13,7 +15,7 @@ const Button = ({ findAndInsert, uniqueString }) => {
 		const Button = [
 			'button',
 			{
-				name: 'button',
+				name: `button${counter}`,
 				id: uniqueString(),
 				text: 'button',
 				class: '',
@@ -39,6 +41,9 @@ const Button = ({ findAndInsert, uniqueString }) => {
 		} else {
 			temp[activePage] = findAndInsert(temp[activePage], activeElement, Button)
 		}
+
+		counter++
+
 		//Assigning new data into pages data
 		setPages(temp)
 	}

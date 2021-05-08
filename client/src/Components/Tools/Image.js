@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 
+//for unique name
+let counter = 1
 //This component is for adding image element
 const Image = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
@@ -13,7 +15,7 @@ const Image = ({ findAndInsert, uniqueString }) => {
 		const image = [
 			'img',
 			{
-				name: 'img',
+				name: `img${counter}`,
 				id: uniqueString(),
 				alt: '',
 				src: '',
@@ -40,6 +42,8 @@ const Image = ({ findAndInsert, uniqueString }) => {
 		} else {
 			temp[activePage] = findAndInsert(temp[activePage], activeElement, image)
 		}
+		counter++
+
 		//Assigning new data into pages data
 		setPages(temp)
 	}

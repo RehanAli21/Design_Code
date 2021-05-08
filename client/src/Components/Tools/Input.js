@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 
+//for unique name
+let counter = 1
 //This component is for adding input element
 const Input = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
@@ -13,7 +15,7 @@ const Input = ({ findAndInsert, uniqueString }) => {
 		const input = [
 			'input',
 			{
-				name: 'input',
+				name: `input${counter}`,
 				type: 'text',
 				placeholder: 'placeholder',
 				id: uniqueString(),
@@ -43,6 +45,8 @@ const Input = ({ findAndInsert, uniqueString }) => {
 		} else {
 			temp[activePage] = findAndInsert(temp[activePage], activeElement, input)
 		}
+
+		counter++
 		//Assigning new data into pages data
 		setPages(temp)
 	}

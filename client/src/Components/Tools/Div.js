@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 
+//for unique name
+let counter = 1
 //This component is for adding div element
 const Div = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
@@ -13,7 +15,7 @@ const Div = ({ findAndInsert, uniqueString }) => {
 		const div = [
 			'div',
 			{
-				name: 'div',
+				name: `div${counter}`,
 				id: uniqueString(),
 				showChildren: true,
 				class: '',
@@ -40,6 +42,8 @@ const Div = ({ findAndInsert, uniqueString }) => {
 		} else {
 			temp[activePage] = findAndInsert(temp[activePage], activeElement, div)
 		}
+		counter++
+
 		//Assigning new data into pages data
 		setPages(temp)
 	}

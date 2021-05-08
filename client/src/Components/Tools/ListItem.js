@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 
+//for unique name
+let counter = 1
 //This component is for adding list element
 const ListItem = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
@@ -13,7 +15,7 @@ const ListItem = ({ findAndInsert, uniqueString }) => {
 		const listItem = [
 			'list Item',
 			{
-				name: 'list item',
+				name: `list item${counter}`,
 				type: 'li',
 				id: uniqueString(),
 				showChildren: true,
@@ -40,6 +42,8 @@ const ListItem = ({ findAndInsert, uniqueString }) => {
 		} else {
 			temp[activePage] = findAndInsert(temp[activePage], activeElement, listItem)
 		}
+		counter++
+
 		//Assigning new data into pages data
 		setPages(temp)
 	}

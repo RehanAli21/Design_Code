@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 
+//for unique name
+let counter = 1
 //This component is for adding select element
 const Select = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
@@ -13,7 +15,7 @@ const Select = ({ findAndInsert, uniqueString }) => {
 		const select = [
 			'select',
 			{
-				name: 'select',
+				name: `select${counter}`,
 				id: uniqueString(),
 				showChildren: true,
 				class: '',
@@ -40,6 +42,8 @@ const Select = ({ findAndInsert, uniqueString }) => {
 		} else {
 			temp[activePage] = findAndInsert(temp[activePage], activeElement, select)
 		}
+		counter++
+
 		//Assigning new data into pages data
 		setPages(temp)
 	}

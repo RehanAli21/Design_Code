@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 
+//for unique name
+let counter = 1
 //This component is for adding option element
 const Option = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
@@ -13,7 +15,7 @@ const Option = ({ findAndInsert, uniqueString }) => {
 		const option = [
 			'option',
 			{
-				name: 'option',
+				name: `option${counter}`,
 				text: 'text',
 				placeholder: 'placeholder',
 				id: uniqueString(),
@@ -42,6 +44,8 @@ const Option = ({ findAndInsert, uniqueString }) => {
 		} else {
 			temp[activePage] = findAndInsert(temp[activePage], activeElement, option)
 		}
+		counter++
+
 		//Assigning new data into pages data
 		setPages(temp)
 	}
