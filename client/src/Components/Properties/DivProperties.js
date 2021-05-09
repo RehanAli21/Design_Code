@@ -610,7 +610,7 @@ const DivProperties = () => {
 			</p>
 			<Name />
 			<GridColumn />
-			<div class='two'>
+			<div className='two'>
 				<label>Overflow</label>
 				<select id='div-overflow-select' onChange={e => setOverflow(e.target.value)}>
 					<option value='visible'>Visible</option>

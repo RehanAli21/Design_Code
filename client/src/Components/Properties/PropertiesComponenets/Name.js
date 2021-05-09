@@ -6,7 +6,26 @@ const Name = () => {
 
 	const [name, setName] = useState('')
 
-	//for chaning element name
+	//for default name
+	useEffect(() => {
+		defaultvalue(pages[activePage])
+	})
+
+	//helper for default value
+	const defaultvalue = arr => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				const nameInput = document.getElementById('namecomp_NameInput')
+				if (nameInput) nameInput.value = arr[i][1].name
+
+				return true
+			} else if (arr[i][2]) {
+				if (defaultvalue(arr[i][2])) return true
+			}
+		}
+	}
+
+	//for changing element name
 	useEffect(() => {
 		if (name !== '') {
 			const found = nameFinder(pages[activePage], name)
@@ -48,7 +67,7 @@ const Name = () => {
 	return (
 		<div className='two'>
 			<label>Name: </label>
-			<input type='text' id='name-nameinput' onChange={e => setName(e.target.value)} />
+			<input type='text' id='namecomp_NameInput' onChange={e => setName(e.target.value)} />
 		</div>
 	)
 }
