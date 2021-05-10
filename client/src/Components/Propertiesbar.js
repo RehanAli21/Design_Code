@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
+import ClickAStateProperties from './Properties/ClickAStateProperties'
 import ClickStateProperties from './Properties/ClickStateProperties'
+import HoverAStateProperties from './Properties/HoverAStateProperties'
 import HoverStateProperties from './Properties/HoverStateProperties'
 import NormalStateProperties from './Properties/NormalStateProperties'
 
@@ -40,6 +42,8 @@ const Propertiesbar = () => {
 			<NormalStateProperties state={state} activeElement={activeElement} activePage={activePage} ele={ele} />
 			<HoverStateProperties state={state} activeElement={activeElement} activePage={activePage} />
 			<ClickStateProperties state={state} activeElement={activeElement} activePage={activePage} />
+			<ClickAStateProperties state={state} activeElement={activeElement} activePage={activePage} />
+			<HoverAStateProperties state={state} activeElement={activeElement} activePage={activePage} />
 		</div>
 	)
 }
