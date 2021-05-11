@@ -25,6 +25,7 @@ const DsProperties = () => {
 	} = useContext(PropertiesContext)
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 
+	const [origin, setOrigin] = useState('')
 	const [scaleX, setScaleX] = useState('')
 	const [scaleY, setScaleY] = useState('')
 	const [rotate, setRotate] = useState('')
@@ -70,9 +71,23 @@ const DsProperties = () => {
 					if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
 				})
 			}
+
+			//For origin default value
+			const originSelect = document.getElementById('extra-origin-select')
+
+			if (width < sBreakPoint) {
+				originSelect.value = small.transformOrigin ? small.transformOrigin : 'center'
+			} else if (width < mBreakPoint) {
+				originSelect.value = medium.transformOrigin ? medium.transformOrigin : 'center'
+			} else if (width < lBreakPoint) {
+				originSelect.value = large.transformOrigin ? large.transformOrigin : 'center'
+			} else {
+				originSelect.value = xlarge.transformOrigin ? xlarge.transformOrigin : 'center'
+			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
 
+	//for setting transform values
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			let transform = ''
@@ -113,6 +128,37 @@ const DsProperties = () => {
 		}
 	}, [scaleX, scaleY, rotate, translateX, translateY])
 
+	//for setting tranform origin
+	useEffect(() => {
+		if (small && medium && large && xlarge && origin !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'transformOrigin', origin)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'transformOrigin', origin)
+				if (!changedLarge) setProperties(large, setLarge, 'transformOrigin', origin)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transformOrigin', origin)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'transformOrigin', origin)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'transformOrigin', origin)
+				if (!changedLarge) setProperties(large, setLarge, 'transformOrigin', origin)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transformOrigin', origin)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'transformOrigin', origin)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'transformOrigin', origin)
+				if (!changedMedium) setProperties(medium, setMedium, 'transformOrigin', origin)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'transformOrigin', origin)
+			} else {
+				setProperties(xlarge, setXlarge, 'transformOrigin', origin)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'transformOrigin', origin)
+				if (!changedMedium) setProperties(medium, setMedium, 'transformOrigin', origin)
+				if (!changedLarge) setProperties(large, setLarge, 'transformOrigin', origin)
+			}
+		}
+	}, [origin])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -127,7 +173,7 @@ const DsProperties = () => {
 			</p>
 			<div className='two'>
 				<label>Origin</label>
-				<select id='extra-origin-select'>
+				<select id='extra-origin-select' onChange={e => setOrigin(e.target.value)}>
 					<option value='center'>Center</option>
 					<option value='top'>Top</option>
 					<option value='bottom'>Bottom</option>
