@@ -125,6 +125,16 @@ const DsProperties = () => {
 				EXTRA <span style={{ display: showExtraProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showExtraProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
+			<div className='two'>
+				<label>Origin</label>
+				<select id='extra-origin-select'>
+					<option value='center'>Center</option>
+					<option value='top'>Top</option>
+					<option value='bottom'>Bottom</option>
+					<option value='left'>Left</option>
+					<option value='right'>Right</option>
+				</select>
+			</div>
 			<div className='two' style={{ display: showExtraProperties ? 'grid' : 'none' }}>
 				<label>ScaleX: </label>
 				<input
