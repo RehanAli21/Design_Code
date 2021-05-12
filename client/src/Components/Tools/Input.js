@@ -23,6 +23,10 @@ const Input = ({ findAndInsert, uniqueString }) => {
 				min: '',
 				max: '',
 				class: '',
+				hoverTarget: '',
+				clickTarget: '',
+				hTargetStyle: {},
+				cTargetStyle: {},
 				styles: {
 					small: {},
 					medium: {},

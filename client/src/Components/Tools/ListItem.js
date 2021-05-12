@@ -19,6 +19,10 @@ const ListItem = ({ findAndInsert, uniqueString }) => {
 				type: 'li',
 				id: uniqueString(),
 				showChildren: true,
+				hoverTarget: '',
+				clickTarget: '',
+				hTargetStyle: {},
+				cTargetStyle: {},
 				styles: {
 					small: {},
 					medium: {},

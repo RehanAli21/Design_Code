@@ -19,6 +19,10 @@ const Button = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				text: 'button',
 				class: '',
+				hoverTarget: '',
+				clickTarget: '',
+				hTargetStyle: {},
+				cTargetStyle: {},
 				styles: {
 					small: {},
 					medium: {},

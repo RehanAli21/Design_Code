@@ -20,6 +20,10 @@ const Text = ({ findAndInsert, uniqueString }) => {
 				text: 'Hello World',
 				id: uniqueString(),
 				class: '',
+				hoverTarget: '',
+				clickTarget: '',
+				hTargetStyle: {},
+				cTargetStyle: {},
 				styles: {
 					small: {},
 					medium: {},

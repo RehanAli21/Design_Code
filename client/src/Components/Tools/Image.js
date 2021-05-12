@@ -20,6 +20,10 @@ const Image = ({ findAndInsert, uniqueString }) => {
 				alt: '',
 				src: '',
 				class: '',
+				hoverTarget: '',
+				clickTarget: '',
+				hTargetStyle: {},
+				cTargetStyle: {},
 				styles: {
 					small: {},
 					medium: {},

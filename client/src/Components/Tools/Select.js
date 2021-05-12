@@ -19,6 +19,10 @@ const Select = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				showChildren: true,
 				class: '',
+				hoverTarget: '',
+				clickTarget: '',
+				hTargetStyle: {},
+				cTargetStyle: {},
 				styles: {
 					small: {},
 					medium: {},
