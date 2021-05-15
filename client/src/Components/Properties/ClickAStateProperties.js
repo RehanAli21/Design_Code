@@ -1,15 +1,22 @@
 import React, { useContext, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
+import ClickAdvOne from './PropertiesComponenets/ClickAdvOne'
 
 const ClickAStateProperties = ({ state }) => {
 	const { pages, activePage, activeElement, setPages } = useContext(PageContext)
 
 	const [name, setName] = useState('')
+	const [duration, setDuration] = useState('')
+	const [textColor, setTextColor] = useState('')
+	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
+	const [fontSize, setFontSize] = useState('')
+	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
 	const ApplyStyle = () => {
 		if (name !== '') {
-			console.log(name)
-			console.log(helperFunction(pages[activePage]))
+			if (!helperFunction(pages[activePage])) {
+				alert('element name is incorrect, no matching name found')
+			}
 		} else if (name === '') {
 			alert('Element Name is empty')
 		}
@@ -25,6 +32,8 @@ const ClickAStateProperties = ({ state }) => {
 		}
 	}
 
+	const resetAll = () => {}
+
 	return (
 		<div className='btn-specific' style={{ display: activePage !== activeElement && state === 'clickjs' ? 'block' : 'none' }}>
 			<p className='second-heading'>CLICK(ADVANCE) PROPERTIES</p>
@@ -32,9 +41,19 @@ const ClickAStateProperties = ({ state }) => {
 				<label>Element Name</label>
 				<input type='text' placeholder='Ele name' id='clickjs-name-input' onChange={e => setName(e.target.value)} />
 			</div>
-			<button onClick={ApplyStyle} style={{ padding: '10px 20px', marginTop: '20px' }}>
-				Apply Style
-			</button>
+			<ClickAdvOne
+				setDuration={setDuration}
+				setTextColor={setTextColor}
+				setFontSize={setFontSize}
+				showCustomFontSize={showCustomFontSize}
+				setShowCustomFontSize={setShowCustomFontSize}
+				showCustomTextColor={showCustomTextColor}
+				setShowCustomTextColor={setShowCustomTextColor}
+			/>
+			<div className='two'>
+				<button onClick={resetAll}>Reset All</button>
+				<button onClick={ApplyStyle}>Apply Style</button>
+			</div>
 		</div>
 	)
 }
