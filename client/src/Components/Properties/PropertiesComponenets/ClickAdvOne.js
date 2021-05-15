@@ -32,7 +32,7 @@ const ClickAdvOne = ({
 		return (
 			<select
 				defaultValue='custom'
-				id='hover-colorselect'
+				id='clickadv-colorselect'
 				onChange={e => {
 					setTextColor(e.target.value)
 					setShowCustomTextColor(e.target.value === 'custom')
@@ -59,7 +59,7 @@ const ClickAdvOne = ({
 		return (
 			<select
 				defaultValue='custom'
-				id='hover-fontsizeselect'
+				id='clickadv-fontsizeselect'
 				onChange={e => {
 					setFontSize(e.target.value === 'custom' ? `16px` : e.target.value)
 					setShowCustomFontSize(e.target.value === 'custom')
@@ -72,7 +72,7 @@ const ClickAdvOne = ({
 	return (
 		<div className='borders' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setClickAEP(!clickAEP)}>
-				HOVER PROPERTIES <span style={{ display: clickAEP ? 'inline' : 'none' }}>&#9660;</span>
+				PROPERTIES <span style={{ display: clickAEP ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: clickAEP ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
 			<div className='btn-specific' style={{ display: clickAEP ? 'block' : 'none' }}>
