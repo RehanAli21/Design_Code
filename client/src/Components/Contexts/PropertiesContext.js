@@ -36,7 +36,6 @@ export const PropertiesProvider = props => {
 	const [apHoverProperties, setApHoverProperties] = useState(true)
 	const [hoverExtraProperties, setHoverExtraProperties] = useState(true)
 	const [showHoverPropertiesOne, setShowHoverPropertiesOne] = useState(true)
-	const [clickAEP, setClickAEP] = useState(true) //for clickadvExtraProperties
 
 	const [showClickProperties, setShowClickProperties] = useState(true)
 
@@ -165,8 +164,6 @@ export const PropertiesProvider = props => {
 				setShowHoverPropertiesOne,
 				showClickProperties,
 				setShowClickProperties,
-				clickAEP,
-				setClickAEP,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>
