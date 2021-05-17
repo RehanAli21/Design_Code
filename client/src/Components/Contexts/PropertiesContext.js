@@ -16,6 +16,10 @@ export const PropertiesProvider = props => {
 	const [changedXlarge, setChangedXlarge] = useState(false)
 	const [hover, setHover] = useState({})
 	const [click, setClick] = useState({})
+	const [clickadv, setClickadv] = useState({})
+	const [hoveradv, setHoveradv] = useState({})
+	const [clickTarget, setClickTarget] = useState('')
+	const [hoverTarget, setHoverTarget] = useState('')
 
 	const [showAlignProperties, setShowAlignProperties] = useState(true)
 	const [showAppearanceProperties, setShowAppearanceProperties] = useState(true)
@@ -68,6 +72,10 @@ export const PropertiesProvider = props => {
 				setChangedMedium(e[1].styleWidth.changedMedium)
 				setChangedLarge(e[1].styleWidth.changedLarge)
 				setChangedXlarge(e[1].styleWidth.changeXlarge)
+				setClickadv(e[1].cTargetStyle)
+				setHoveradv(e[1].hTargetStyle)
+				setClickTarget(e[1].clickTarget)
+				setHoverTarget(e[1].hoverTarget)
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setWidthsStates(e[2], id)) return true
@@ -81,7 +89,22 @@ export const PropertiesProvider = props => {
 			setProperties(temp[activePage], activeElement)
 			setPages(temp)
 		}
-	}, [small, medium, large, xlarge, changedSmall, changedMedium, changedLarge, changedXlarge, hover, click])
+	}, [
+		small,
+		medium,
+		large,
+		xlarge,
+		changedSmall,
+		changedMedium,
+		changedLarge,
+		changedXlarge,
+		hover,
+		click,
+		hoverTarget,
+		clickTarget,
+		clickadv,
+		hoveradv,
+	])
 
 	const setProperties = (arr, id) => {
 		arr.forEach(e => {
@@ -96,6 +119,10 @@ export const PropertiesProvider = props => {
 				e[1].styleWidth.changeXlarge = changedXlarge
 				e[1].hoverStyle = hover
 				e[1].clickStyle = click
+				e[1].hoverTarget = hoverTarget
+				e[1].clickTarget = clickTarget
+				e[1].cTargetStyle = clickadv
+				e[1].hTargetStyle = hoveradv
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setProperties(e[2], id)) return true
@@ -126,6 +153,14 @@ export const PropertiesProvider = props => {
 				setHover,
 				click,
 				setClick,
+				hoverTarget,
+				setHoverTarget,
+				clickTarget,
+				setClickTarget,
+				clickadv,
+				setClickadv,
+				hoveradv,
+				setHoveradv,
 				showAlignProperties,
 				setShowAlignProperties,
 				showAppearanceProperties,
