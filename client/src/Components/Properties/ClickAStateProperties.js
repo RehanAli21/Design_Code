@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { PageContext } from '../Contexts/PageContext'
 import ClickAdvOne from './PropertiesComponenets/ClickAdvOne'
 
 const ClickAStateProperties = ({ state }) => {
+	const { setClickTarget } = useContext(PropertiesContext)
 	const { pages, activePage, activeElement } = useContext(PageContext)
 
 	const [name, setName] = useState('')
@@ -16,6 +18,7 @@ const ClickAStateProperties = ({ state }) => {
 				setShowProperties(true)
 			} else if (!nameFound) {
 				setShowProperties(false)
+				setClickTarget('')
 			}
 		}
 	}, [name])
@@ -23,6 +26,7 @@ const ClickAStateProperties = ({ state }) => {
 	const NameFinder = arr => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].name === name) {
+				setClickTarget(arr[i][1].id)
 				return true
 			} else if (arr[i][2]) {
 				if (NameFinder(arr[i][2])) return true
