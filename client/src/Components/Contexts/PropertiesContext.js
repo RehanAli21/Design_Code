@@ -43,6 +43,7 @@ export const PropertiesProvider = props => {
 
 	const [showClickProperties, setShowClickProperties] = useState(true)
 	const [showCAP, setShowCAP] = useState(true) //showClickAdvProperties
+	const [showCAAP, setShowCAAP] = useState(true) //showClickAdvAppearanceProperties
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -202,6 +203,8 @@ export const PropertiesProvider = props => {
 				setShowClickProperties,
 				showCAP,
 				setShowCAP,
+				showCAAP,
+				setShowCAAP,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>

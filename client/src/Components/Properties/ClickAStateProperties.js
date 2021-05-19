@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { PageContext } from '../Contexts/PageContext'
 import ClickAdvOne from './PropertiesComponenets/ClickAdvOne'
+import ClickAdvAppearance from './PropertiesComponenets/ClickAdvAppearance'
 
 const ClickAStateProperties = ({ state }) => {
 	const { setClickTarget } = useContext(PropertiesContext)
@@ -43,6 +44,7 @@ const ClickAStateProperties = ({ state }) => {
 			</div>
 			<div style={{ display: showProperties ? 'block' : 'none' }}>
 				<ClickAdvOne />
+				<ClickAdvAppearance />
 			</div>
 		</div>
 	)
