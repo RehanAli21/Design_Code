@@ -42,6 +42,7 @@ export const PropertiesProvider = props => {
 	const [showHoverPropertiesOne, setShowHoverPropertiesOne] = useState(true)
 
 	const [showClickProperties, setShowClickProperties] = useState(true)
+	const [showCAP, setShowCAP] = useState(true) //showClickAdvProperties
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -199,6 +200,8 @@ export const PropertiesProvider = props => {
 				setShowHoverPropertiesOne,
 				showClickProperties,
 				setShowClickProperties,
+				showCAP,
+				setShowCAP,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>
