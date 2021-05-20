@@ -3,6 +3,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { PageContext } from '../Contexts/PageContext'
 import ClickAdvOne from './PropertiesComponenets/ClickAdvOne'
 import ClickAdvAppearance from './PropertiesComponenets/ClickAdvAppearance'
+import ClickAdvExtra from './PropertiesComponenets/ClickAdvExtra'
 
 const ClickAStateProperties = ({ state }) => {
 	const { setClickTarget } = useContext(PropertiesContext)
@@ -45,6 +46,7 @@ const ClickAStateProperties = ({ state }) => {
 			<div style={{ display: showProperties ? 'block' : 'none' }}>
 				<ClickAdvOne />
 				<ClickAdvAppearance />
+				<ClickAdvExtra />
 			</div>
 		</div>
 	)
