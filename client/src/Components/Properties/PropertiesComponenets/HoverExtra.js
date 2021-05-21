@@ -6,6 +6,7 @@ const HoverExtra = () => {
 	const { hover, setHover, hoverExtraProperties, setHoverExtraProperties } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
+	const [origin, setOrigin] = useState('')
 	const [scaleX, setScaleX] = useState('')
 	const [scaleY, setScaleY] = useState('')
 	const [rotate, setRotate] = useState('')
@@ -45,6 +46,11 @@ const HoverExtra = () => {
 					if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
 				})
 			}
+
+			//For origin default value
+			const originSelect = document.getElementById('extrahover-origin-select')
+
+			originSelect.value = hover.transformOrigin ? hover.transformOrigin : 'center'
 		}
 	}, [width, activeElement, hover])
 
@@ -64,6 +70,13 @@ const HoverExtra = () => {
 		}
 	}, [scaleX, scaleY, rotate, translateX, translateY])
 
+	//for setting tranform origin
+	useEffect(() => {
+		if (hover && origin !== '') {
+			setProperties(hover, setHover, 'transformOrigin', origin)
+		}
+	}, [origin])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -76,6 +89,16 @@ const HoverExtra = () => {
 				EXTRA <span style={{ display: hoverExtraProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: hoverExtraProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
+			<div className='two'>
+				<label>Origin</label>
+				<select id='extrahover-origin-select' onChange={e => setOrigin(e.target.value)}>
+					<option value='center'>Center</option>
+					<option value='top'>Top</option>
+					<option value='bottom'>Bottom</option>
+					<option value='left'>Left</option>
+					<option value='right'>Right</option>
+				</select>
+			</div>
 			<div className='two' style={{ display: hoverExtraProperties ? 'grid' : 'none' }}>
 				<label>ScaleX: </label>
 				<input

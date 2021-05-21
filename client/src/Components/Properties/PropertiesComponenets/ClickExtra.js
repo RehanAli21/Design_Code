@@ -6,6 +6,7 @@ const ClickExtra = () => {
 	const { click, setClick, showClickProperties, setShowClickProperties } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
+	const [origin, setOrigin] = useState('')
 	const [scaleX, setScaleX] = useState('')
 	const [scaleY, setScaleY] = useState('')
 	const [rotate, setRotate] = useState('')
@@ -45,6 +46,11 @@ const ClickExtra = () => {
 					if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
 				})
 			}
+
+			//For origin default value
+			const originSelect = document.getElementById('extraclick-origin-select')
+
+			originSelect.value = click.transformOrigin ? click.transformOrigin : 'center'
 		}
 	}, [width, activeElement, click])
 
@@ -64,6 +70,13 @@ const ClickExtra = () => {
 		}
 	}, [scaleX, scaleY, rotate, translateX, translateY])
 
+	//for setting tranform origin
+	useEffect(() => {
+		if (click && origin !== '') {
+			setProperties(click, setClick, 'transformOrigin', origin)
+		}
+	}, [origin])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -76,6 +89,16 @@ const ClickExtra = () => {
 				CLICK PROPERTIES <span style={{ display: showClickProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showClickProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
+			<div className='two'>
+				<label>Origin</label>
+				<select id='extraclick-origin-select' onChange={e => setOrigin(e.target.value)}>
+					<option value='center'>Center</option>
+					<option value='top'>Top</option>
+					<option value='bottom'>Bottom</option>
+					<option value='left'>Left</option>
+					<option value='right'>Right</option>
+				</select>
+			</div>
 			<div className='two' style={{ display: showClickProperties ? 'grid' : 'none' }}>
 				<label>ScaleX: </label>
 				<input
