@@ -109,7 +109,15 @@ const Page = () => {
 		}
 	}
 
-	const onClickStyle = (id, style) => {
+	const onClickStyle = (id, style, targetId, targetStyle) => {
+		//for own click style
+		clickStyle(id, style)
+		//for target click style
+		clickStyle(targetId, targetStyle)
+	}
+
+	//for click style
+	const clickStyle = (id, style) => {
 		const ele = document.getElementById(id)
 
 		if (ele) {
@@ -118,6 +126,7 @@ const Page = () => {
 			}
 		}
 	}
+
 	//For reseting applied click style on elements
 	const onClickLeaveStyle = (id, clickStyle, normalStyle) => {
 		const ele = document.getElementById(id)
@@ -168,7 +177,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -219,7 +228,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -265,7 +274,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -311,7 +320,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -358,7 +367,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -406,7 +415,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -452,7 +461,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -497,7 +506,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -543,7 +552,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
@@ -588,7 +597,7 @@ const Page = () => {
 										? e[1].styles.large
 										: e[1].styles.xlarge
 								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle),
+							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
 								onClickLeaveStyle(
 									e[1].id,
