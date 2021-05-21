@@ -21,6 +21,8 @@ const Div = ({ findAndInsert, uniqueString }) => {
 				class: '',
 				hoverTarget: '',
 				clickTarget: '',
+				hoverTargetName: '',
+				clickTargetName: '',
 				hTargetStyle: {},
 				cTargetStyle: {},
 				styles: {

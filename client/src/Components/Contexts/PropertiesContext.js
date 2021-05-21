@@ -19,7 +19,9 @@ export const PropertiesProvider = props => {
 	const [clickadv, setClickadv] = useState({})
 	const [hoveradv, setHoveradv] = useState({})
 	const [clickTarget, setClickTarget] = useState('')
+	const [clickTargetName, setClickTargetName] = useState('')
 	const [hoverTarget, setHoverTarget] = useState('')
+	const [hoverTargetName, setHoverTargetName] = useState('')
 
 	const [showAlignProperties, setShowAlignProperties] = useState(true)
 	const [showAppearanceProperties, setShowAppearanceProperties] = useState(true)
@@ -79,6 +81,8 @@ export const PropertiesProvider = props => {
 				setHoveradv(e[1].hTargetStyle)
 				setClickTarget(e[1].clickTarget)
 				setHoverTarget(e[1].hoverTarget)
+				setClickTargetName(e[1].clickTargetName)
+				setHoverTargetName(e[1].hoverTargetName)
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setWidthsStates(e[2], id)) return true
@@ -124,6 +128,8 @@ export const PropertiesProvider = props => {
 				e[1].clickStyle = click
 				e[1].hoverTarget = hoverTarget
 				e[1].clickTarget = clickTarget
+				e[1].hoverTargetName = hoverTargetName
+				e[1].clickTargetName = clickTargetName
 				e[1].cTargetStyle = clickadv
 				e[1].hTargetStyle = hoveradv
 				return true
@@ -158,6 +164,10 @@ export const PropertiesProvider = props => {
 				setClick,
 				hoverTarget,
 				setHoverTarget,
+				clickTargetName,
+				setClickTargetName,
+				hoverTargetName,
+				setHoverTargetName,
 				clickTarget,
 				setClickTarget,
 				clickadv,
