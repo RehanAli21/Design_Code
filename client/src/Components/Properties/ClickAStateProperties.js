@@ -18,6 +18,9 @@ const ClickAStateProperties = ({ state }) => {
 		if (nameInput) {
 			nameInput.value = clickTargetName
 		}
+
+		if (clickTargetName !== '') setShowProperties(true)
+		else if (clickTargetName === '') setShowProperties(false)
 	}, [activeElement, width, clickTargetName])
 
 	useEffect(() => {
