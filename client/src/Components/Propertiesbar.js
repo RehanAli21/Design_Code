@@ -47,11 +47,19 @@ const Propertiesbar = () => {
 					<input onChange={e => setPageBC(e.target.value)} type='color' defaultValue='#ffffff' />
 				</div>
 			</div>
-			<NormalStateProperties state={state} activeElement={activeElement} activePage={activePage} ele={ele} />
-			<HoverStateProperties state={state} activeElement={activeElement} activePage={activePage} />
-			<ClickStateProperties state={state} activeElement={activeElement} activePage={activePage} />
-			<ClickAStateProperties state={state} />
-			<HoverAStateProperties state={state} activeElement={activeElement} activePage={activePage} />
+			{state === 'normal' ? (
+				<NormalStateProperties activeElement={activeElement} activePage={activePage} ele={ele} />
+			) : state === 'hover' ? (
+				<HoverStateProperties activeElement={activeElement} activePage={activePage} />
+			) : state === 'click' ? (
+				<ClickStateProperties activeElement={activeElement} activePage={activePage} />
+			) : state === 'hoverjs' ? (
+				<HoverAStateProperties activeElement={activeElement} activePage={activePage} />
+			) : state === 'clickjs' ? (
+				<ClickAStateProperties />
+			) : (
+				<div></div>
+			)}
 		</div>
 	)
 }

@@ -1,9 +1,9 @@
 import React from 'react'
 import ClickExtra from './PropertiesComponenets/ClickExtra'
 
-const ClickStateProperties = ({ state, activePage, activeElement }) => {
+const ClickStateProperties = ({ activePage, activeElement }) => {
 	return (
-		<div style={{ display: activePage !== activeElement && state === 'click' ? 'block' : 'none' }}>
+		<div style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
 			<ClickExtra />
 		</div>
 	)

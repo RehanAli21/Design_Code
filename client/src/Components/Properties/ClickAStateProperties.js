@@ -5,7 +5,7 @@ import ClickAdvOne from './PropertiesComponenets/ClickAdvOne'
 import ClickAdvAppearance from './PropertiesComponenets/ClickAdvAppearance'
 import ClickAdvExtra from './PropertiesComponenets/ClickAdvExtra'
 
-const ClickAStateProperties = ({ state }) => {
+const ClickAStateProperties = () => {
 	const { setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
 	const { width, pages, activePage, activeElement } = useContext(PageContext)
 
@@ -52,7 +52,7 @@ const ClickAStateProperties = ({ state }) => {
 	}
 
 	return (
-		<div className='btn-specific' style={{ display: activePage !== activeElement && state === 'clickjs' ? 'block' : 'none' }}>
+		<div className='btn-specific' style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
 			<p className='second-heading'>CLICK(ADVANCE) PROPERTIES</p>
 			<div className='two'>
 				<label>Element Name</label>

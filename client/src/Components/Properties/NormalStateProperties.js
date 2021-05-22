@@ -5,9 +5,9 @@ import DsProperties from './PropertiesComponenets/DsProperties'
 import Transform from './PropertiesComponenets/Transform'
 import Specific from './Specific'
 
-const NormalStateProperties = ({ activePage, activeElement, ele, state }) => {
+const NormalStateProperties = ({ activePage, activeElement, ele }) => {
 	return (
-		<div style={{ display: activePage !== activeElement && state === 'normal' ? 'block' : 'none' }} className='property'>
+		<div style={{ display: activePage !== activeElement ? 'block' : 'none' }} className='property'>
 			<Specific />
 			<div style={{ display: activeElement === '' || (ele && ele.tagName === 'OPTION') ? 'none' : 'block' }}>
 				<Align />

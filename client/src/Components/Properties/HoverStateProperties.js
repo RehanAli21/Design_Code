@@ -3,9 +3,9 @@ import HoverAppearance from './PropertiesComponenets/HoverAppearance'
 import HoverExtra from './PropertiesComponenets/HoverExtra'
 import HoverPropertiesOne from './PropertiesComponenets/HoverPropertiesOne'
 
-const HoverStateProperties = ({ state, activePage, activeElement }) => {
+const HoverStateProperties = ({ activePage, activeElement }) => {
 	return (
-		<div style={{ display: activePage !== activeElement && state === 'hover' ? 'block' : 'none' }}>
+		<div style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
 			<HoverPropertiesOne />`
 			<HoverAppearance />
 			<HoverExtra />
