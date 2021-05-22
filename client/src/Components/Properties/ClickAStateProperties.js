@@ -41,8 +41,10 @@ const ClickAStateProperties = ({ state }) => {
 	const NameFinder = arr => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].name === name) {
-				setClickTarget(arr[i][1].id)
-				return true
+				if (arr[i][0] !== 'option') {
+					setClickTarget(arr[i][1].id)
+					return true
+				}
 			} else if (arr[i][2]) {
 				if (NameFinder(arr[i][2])) return true
 			}
