@@ -11,10 +11,18 @@ const Propertiesbar = () => {
 	const [state, setState] = useState('normal')
 
 	const ele = document.getElementById(activeElement)
+
+	if (ele && ele.tagName === 'OPTION' && state !== 'normal') setState('normal')
+
 	return (
 		<div className='propertybar'>
 			<div
-				style={{ display: activePage === activeElement || activeElement === '' ? 'none' : 'grid' }}
+				style={{
+					display:
+						(ele && ele.tagName === 'OPTION') || activePage === activeElement || activeElement === ''
+							? 'none'
+							: 'grid',
+				}}
 				className='style-states-button'>
 				<button className={state === 'normal' ? 'active' : ''} onClick={() => setState('normal')}>
 					Normal
