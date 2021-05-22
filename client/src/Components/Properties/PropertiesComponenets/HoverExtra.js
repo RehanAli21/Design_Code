@@ -89,7 +89,7 @@ const HoverExtra = () => {
 				EXTRA <span style={{ display: hoverExtraProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: hoverExtraProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div className='two'>
+			<div className='two' style={{ display: hoverExtraProperties ? 'grid' : 'none' }}>
 				<label>Origin</label>
 				<select id='extrahover-origin-select' onChange={e => setOrigin(e.target.value)}>
 					<option value='center'>Center</option>

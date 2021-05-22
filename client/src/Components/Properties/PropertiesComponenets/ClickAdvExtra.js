@@ -89,7 +89,7 @@ const ClickAdvExtra = () => {
 				EXTRA <span style={{ display: showCAEP ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showCAEP ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div className='two'>
+			<div className='two' style={{ display: showCAEP ? 'grid' : 'none' }}>
 				<label>Origin</label>
 				<select id='extraclickadv-origin-select' onChange={e => setOrigin(e.target.value)}>
 					<option value='center'>Center</option>

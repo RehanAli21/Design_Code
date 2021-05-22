@@ -171,7 +171,7 @@ const DsProperties = () => {
 				EXTRA <span style={{ display: showExtraProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showExtraProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div className='two'>
+			<div className='two' style={{ display: showExtraProperties ? 'grid' : 'none' }}>
 				<label>Origin</label>
 				<select id='extra-origin-select' onChange={e => setOrigin(e.target.value)}>
 					<option value='center'>Center</option>

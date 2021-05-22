@@ -89,7 +89,7 @@ const ClickExtra = () => {
 				CLICK PROPERTIES <span style={{ display: showClickProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showClickProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div className='two'>
+			<div className='two' style={{ display: showClickProperties ? 'grid' : 'none' }}>
 				<label>Origin</label>
 				<select id='extraclick-origin-select' onChange={e => setOrigin(e.target.value)}>
 					<option value='center'>Center</option>
