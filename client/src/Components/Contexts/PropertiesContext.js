@@ -42,11 +42,12 @@ export const PropertiesProvider = props => {
 	const [apHoverProperties, setApHoverProperties] = useState(true)
 	const [hoverExtraProperties, setHoverExtraProperties] = useState(true)
 	const [showHoverPropertiesOne, setShowHoverPropertiesOne] = useState(true)
-
 	const [showClickProperties, setShowClickProperties] = useState(true)
+
 	const [showCAP, setShowCAP] = useState(true) //showClickAdvProperties
 	const [showCAAP, setShowCAAP] = useState(true) //showClickAdvAppearanceProperties
 	const [showCAEP, setShowCAEP] = useState(true) //showClickAdvExtraProperties
+	const [showHAAP, setShowHAAP] = useState(true) //showHoverAdvAppearanceProperties
 
 	useEffect(() => {
 		const ele = document.getElementById(activeElement)
@@ -218,6 +219,8 @@ export const PropertiesProvider = props => {
 				setShowCAAP,
 				showCAEP,
 				setShowCAEP,
+				showHAAP,
+				setShowHAAP,
 			}}>
 			{props.children}
 		</PropertiesContext.Provider>
