@@ -107,7 +107,14 @@ const Page = () => {
 	}
 
 	//For reseting applied hover style on elements
-	const onHoverLeaveStyle = (id, hoverStyle, normalStyle) => {
+	const onHoverLeaveStyle = (id, hoverStyle, normalStyle, targetId, targetHoverStyle) => {
+		hoverLeaveStyle(id, hoverStyle, normalStyle) //for own hoverLeave
+		//For Target element hoverleave
+		const returnArr = findTargetStyle(pages[activePage], targetId)
+		hoverLeaveStyle(targetId, targetHoverStyle, returnArr[1])
+	}
+	//helper function for abovee function
+	const hoverLeaveStyle = (id, hoverStyle, normalStyle) => {
 		const ele = document.getElementById(id)
 
 		if (ele) {
@@ -119,6 +126,27 @@ const Page = () => {
 				}
 			}
 		}
+	}
+	const findTargetStyle = (arr, id) => {
+		const found = [false, {}]
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === id) {
+				return [
+					true,
+					width < 540
+						? arr[i][1].styles.small
+						: width < 720
+						? arr[i][1].styles.medium
+						: width < 960
+						? arr[i][1].styles.large
+						: arr[i][1].styles.xlarge,
+				]
+			} else if (arr[i][2]) {
+				const temp = findTargetStyle(arr[i][2], id)
+				if (temp[0]) return temp
+			}
+		}
+		return found
 	}
 
 	//For reseting applied click style on elements
@@ -169,7 +197,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -220,7 +250,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -266,7 +298,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -312,7 +346,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -359,7 +395,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -407,7 +445,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -453,7 +493,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -518,7 +560,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
@@ -563,7 +607,9 @@ const Page = () => {
 										? e[1].styles.medium
 										: width < 960
 										? e[1].styles.large
-										: e[1].styles.xlarge
+										: e[1].styles.xlarge,
+									e[1].hoverTarget,
+									e[1].hTargetStyle
 								),
 							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
 							onMouseUp: () =>
