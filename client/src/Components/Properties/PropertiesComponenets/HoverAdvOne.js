@@ -3,8 +3,8 @@ import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
-const ClickAdvOne = () => {
-	const { clickadv, setClickadv, showCAP, setShowCAP } = useContext(PropertiesContext)
+const HoverAdvOne = () => {
+	const { hoveradv, setHoveradv, showHAP, setShowHAP } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
@@ -16,39 +16,39 @@ const ClickAdvOne = () => {
 
 	//for setting default values
 	useEffect(() => {
-		if (clickadv) {
-			const textColorInput = document.getElementById('clickadv-textcolor')
-			const textColorSelect = document.getElementById('clickadv-colorselect')
-			const fontSizeInput = document.getElementById('clickadv-fontsize')
-			const fontSizeSelect = document.getElementById('clickadv-fontsizeselect')
-			const durationInput = document.getElementById('clickadv-duration-input')
+		if (hoveradv) {
+			const textColorInput = document.getElementById('hoveradv-textcolor')
+			const textColorSelect = document.getElementById('hoveradv-colorselect')
+			const fontSizeInput = document.getElementById('hoveradv-fontsize')
+			const fontSizeSelect = document.getElementById('hoveradv-fontsizeselect')
+			const durationInput = document.getElementById('hoveradv-duration-input')
 
-			durationInput.value = clickadv.transitionDuration ? clickadv.transitionDuration.split('m')[0] : 0
-			textColorInput.value = clickadv.color ? clickadv.color : '#000000'
-			textColorSelect.value = clickadv.color ? clickadv.color : 'custom'
-			fontSizeInput.value = clickadv.fontSize ? clickadv.fontSize.split('p')[0] : 16
-			fontSizeSelect.value = clickadv.fontSize ? clickadv.fontSize : 'custom'
+			durationInput.value = hoveradv.transitionDuration ? hoveradv.transitionDuration.split('m')[0] : 0
+			textColorInput.value = hoveradv.color ? hoveradv.color : '#000000'
+			textColorSelect.value = hoveradv.color ? hoveradv.color : 'custom'
+			fontSizeInput.value = hoveradv.fontSize ? hoveradv.fontSize.split('p')[0] : 16
+			fontSizeSelect.value = hoveradv.fontSize ? hoveradv.fontSize : 'custom'
 		}
-	}, [width, activeElement, clickadv])
+	}, [width, activeElement, hoveradv])
 
 	//for setting TextColor
 	useEffect(() => {
-		if (clickadv && textColor !== '') {
-			setProperties(clickadv, setClickadv, 'color', textColor)
+		if (hoveradv && textColor !== '') {
+			setProperties(hoveradv, setHoveradv, 'color', textColor)
 		}
 	}, [textColor])
 
 	//For changing fontsize
 	useEffect(() => {
-		if (clickadv && fontSize !== '') {
-			setProperties(clickadv, setClickadv, 'fontSize', fontSize)
+		if (hoveradv && fontSize !== '') {
+			setProperties(hoveradv, setHoveradv, 'fontSize', fontSize)
 		}
 	}, [fontSize])
 
 	//For changing click(adv) animation duration
 	useEffect(() => {
-		if (clickadv && duration !== '') {
-			setProperties(clickadv, setClickadv, 'transitionDuration', duration)
+		if (hoveradv && duration !== '') {
+			setProperties(hoveradv, setHoveradv, 'transitionDuration', duration)
 		}
 	}, [duration])
 
@@ -60,7 +60,7 @@ const ClickAdvOne = () => {
 
 	//For reseting all click(adv) styles
 	const resetAll = () => {
-		if (clickadv) setClickadv({})
+		if (hoveradv) setHoveradv({})
 	}
 
 	////////////////////////////////////////////////
@@ -86,7 +86,7 @@ const ClickAdvOne = () => {
 		return (
 			<select
 				defaultValue='custom'
-				id='clickadv-colorselect'
+				id='hoveradv-colorselect'
 				onChange={e => {
 					setTextColor(e.target.value)
 					setShowCustomTextColor(e.target.value === 'custom')
@@ -113,7 +113,7 @@ const ClickAdvOne = () => {
 		return (
 			<select
 				defaultValue='custom'
-				id='clickadv-fontsizeselect'
+				id='hoveradv-fontsizeselect'
 				onChange={e => {
 					setFontSize(e.target.value === 'custom' ? `16px` : e.target.value)
 					setShowCustomFontSize(e.target.value === 'custom')
@@ -125,15 +125,15 @@ const ClickAdvOne = () => {
 
 	return (
 		<div className='borders' style={{ position: 'relative' }}>
-			<p className='second-heading' onClick={() => setShowCAP(!showCAP)}>
-				PROPERTIES <span style={{ display: showCAP ? 'inline' : 'none' }}>&#9660;</span>
-				<span style={{ display: showCAP ? 'none' : 'inline' }}>&#9654;</span>
+			<p className='second-heading' onClick={() => setShowHAP(!showHAP)}>
+				PROPERTIES <span style={{ display: showHAP ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showHAP ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div className='btn-specific' style={{ display: showCAP ? 'block' : 'none' }}>
+			<div className='btn-specific' style={{ display: showHAP ? 'block' : 'none' }}>
 				<button
 					onClick={resetAll}
 					style={{
-						display: showCAP ? 'block' : 'none',
+						display: showHAP ? 'block' : 'none',
 						position: 'absolute',
 						top: '0px',
 						right: '10px',
@@ -149,7 +149,7 @@ const ClickAdvOne = () => {
 						min='0'
 						step='100'
 						max='5000'
-						id='clickadv-duration-input'
+						id='hoveradv-duration-input'
 						onChange={e => setDuration(`${e.target.value}ms`)}
 					/>
 				</div>
@@ -160,7 +160,7 @@ const ClickAdvOne = () => {
 						disabled={!showCustomTextColor}
 						onChange={e => setTextColor(e.target.value)}
 						type='color'
-						id='clickadv-textcolor'
+						id='hoveradv-textcolor'
 					/>
 				</div>
 				<div className='three'>
@@ -171,7 +171,7 @@ const ClickAdvOne = () => {
 						onChange={e => setFontSize(`${e.target.value}px`)}
 						type='number'
 						min='0'
-						id='clickadv-fontsize'
+						id='hoveradv-fontsize'
 					/>
 				</div>
 			</div>
@@ -179,4 +179,4 @@ const ClickAdvOne = () => {
 	)
 }
 
-export default ClickAdvOne
+export default HoverAdvOne
