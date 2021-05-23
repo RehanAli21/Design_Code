@@ -12,16 +12,13 @@ const Propertiesbar = () => {
 
 	const ele = document.getElementById(activeElement)
 
-	if (ele && ele.tagName === 'OPTION' && state !== 'normal') setState('normal')
+	const isOptionElement = ele && ele.tagName === 'OPTION'
 
 	return (
 		<div className='propertybar'>
 			<div
 				style={{
-					display:
-						(ele && ele.tagName === 'OPTION') || activePage === activeElement || activeElement === ''
-							? 'none'
-							: 'grid',
+					display: activePage === activeElement || activeElement === '' ? 'none' : 'grid',
 				}}
 				className='style-states-button'>
 				<button className={state === 'normal' ? 'active' : ''} onClick={() => setState('normal')}>
@@ -49,13 +46,13 @@ const Propertiesbar = () => {
 			</div>
 			{state === 'normal' ? (
 				<NormalStateProperties activeElement={activeElement} activePage={activePage} ele={ele} />
-			) : state === 'hover' ? (
+			) : state === 'hover' && !isOptionElement ? (
 				<HoverStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'click' ? (
+			) : state === 'click' && !isOptionElement ? (
 				<ClickStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'hoverjs' ? (
+			) : state === 'hoverjs' && !isOptionElement ? (
 				<HoverAStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'clickjs' ? (
+			) : state === 'clickjs' && !isOptionElement ? (
 				<ClickAStateProperties />
 			) : (
 				<div></div>
