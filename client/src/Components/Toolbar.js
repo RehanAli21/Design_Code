@@ -16,10 +16,7 @@ const Toolbar = () => {
 	const { activePage, activeElement } = useContext(PageContext)
 
 	//For Getting unique string for ids of elements
-	const uniqueString = () => {
-		let uniqueId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-		return (uniqueId += '|=|element')
-	}
+	const uniqueString = () => Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
 	//For finding the parent element,
 	//in which elements will be added, using recursion
