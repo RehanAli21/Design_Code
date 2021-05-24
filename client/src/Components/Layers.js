@@ -3,13 +3,14 @@ import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
-	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc } = useContext(PageContext)
+	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc, inPageActiveElement } =
+		useContext(PageContext)
 
-	//For activating element by clicking on it
-	document.addEventListener('click', e => {
-		const element = e.path[0].id.split('|=|')
-		if (element[1] === 'element') setActiveElement(e.path[0].id)
-	})
+	// //For activating element by clicking on it
+	// document.addEventListener('click', e => {
+	// 	const element = e.path[0].id.split('|=|')
+	// 	if (element[1] === 'element' && inPageActiveElement === true) setActiveElement(e.path[0].id)
+	// })
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)

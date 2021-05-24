@@ -8,7 +8,7 @@ let oldx = 0
 let oldy = 0
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage, width, height, pageBC } = useContext(PageContext)
+	const { pages, activePage, setActiveElement, width, height, pageBC, inPageActiveElement } = useContext(PageContext)
 
 	const [scale, setScale] = useState(0.8)
 	const [tX, setTX] = useState(0)
@@ -93,6 +93,7 @@ const Page = () => {
 	const onClickStyle = (id, style, targetId, targetStyle) => {
 		setStyle(id, style) //for own click style
 		setStyle(targetId, targetStyle) //for target click style
+		if (inPageActiveElement) setActiveElement(id)
 	}
 
 	//for click and hover style

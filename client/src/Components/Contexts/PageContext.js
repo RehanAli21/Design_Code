@@ -14,6 +14,7 @@ export const PageProvider = props => {
 	const [sBreakPoint, setSBreakPoint] = useState(540)
 	const [mBreakPoint, setMBreakPoint] = useState(720)
 	const [lBreakPoint, setLBreakPoint] = useState(970)
+	const [inPageActiveElement, setInPageActiveElement] = useState(true)
 
 	const setHistory = (parentId, object, index) => {
 		if (parentId && object) {
@@ -87,6 +88,8 @@ export const PageProvider = props => {
 				setMBreakPoint,
 				lBreakPoint,
 				setLBreakPoint,
+				inPageActiveElement,
+				setInPageActiveElement,
 			}}>
 			{props.children}
 		</PageContext.Provider>

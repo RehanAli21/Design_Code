@@ -14,6 +14,8 @@ const Navbar = () => {
 		setWidth,
 		showBreakPoint,
 		setShowBreakPoint,
+		inPageActiveElement,
+		setInPageActiveElement,
 	} = useContext(PageContext)
 
 	const { showTemplate, setShowTemplate } = useContext(TemplateContext)
@@ -144,6 +146,15 @@ const Navbar = () => {
 						Show BreakPoint
 					</button>
 				</div>
+			</div>
+			<div>
+				<input
+					checked={inPageActiveElement}
+					onChange={e => setInPageActiveElement(e.target.checked)}
+					type='checkbox'
+					id='nav-inpage-input'
+				/>
+				<label style={{ marginLeft: '10px', fontSize: '1rem' }}>In Page Selection</label>
 			</div>
 			<div>
 				<p style={{ fontWeight: 'normal', fontSize: '0.95rem' }}>
