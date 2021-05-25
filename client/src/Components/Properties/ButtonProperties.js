@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
+import GridColumn from './PropertiesComponenets/GridColumn'
 import Font from './PropertiesComponenets/Font'
 import TextChange from './PropertiesComponenets/TextChange'
 import Text from './PropertiesComponenets/Text'
@@ -116,6 +117,7 @@ const ButtonProperties = () => {
 				</div>
 				<Name />
 				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
+				<GridColumn />
 			</div>
 			<Text />
 			<Font />

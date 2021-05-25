@@ -56,8 +56,6 @@ const Toolbar = () => {
 			)
 		}
 
-		if (ele.id.split('|=|')[1] !== 'element') return
-
 		if (ele.tagName === 'DIV') {
 			return (
 				<React.Fragment>
