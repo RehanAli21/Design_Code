@@ -241,7 +241,7 @@ const Appearance = () => {
 			: s.search('vw') !== -1
 			? [s.split('v')[0], 'vw']
 			: s.search('em') !== -1
-			? [s.split('e')[0], 'e,']
+			? [s.split('e')[0], 'em']
 			: ['0', 'px']
 
 	//FOr background color and opacity
