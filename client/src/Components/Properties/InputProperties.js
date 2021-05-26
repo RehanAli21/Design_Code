@@ -4,6 +4,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
 import Animate from './PropertiesComponenets/Animate'
 import BackFilter from './PropertiesComponenets/BackFilter'
+import Cursor from './PropertiesComponenets/Cursor'
 import Font from './PropertiesComponenets/Font'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
@@ -341,6 +342,7 @@ const InputProperties = () => {
 						id='input-textcolor'
 					/>
 				</div>
+				<Cursor />
 			</div>
 			<Font />
 			<BackFilter />

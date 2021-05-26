@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
+import Cursor from './PropertiesComponenets/Cursor'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
 
@@ -161,6 +162,7 @@ const ListProperties = () => {
 					<option value='none'>None</option>
 				</select>
 			</div>
+			<Cursor />
 			<GridColumn />
 		</div>
 	)

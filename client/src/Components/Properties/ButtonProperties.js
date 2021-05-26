@@ -9,6 +9,7 @@ import Position from './PropertiesComponenets/Position'
 import BackFilter from './PropertiesComponenets/BackFilter'
 import Animate from './PropertiesComponenets/Animate'
 import Name from './PropertiesComponenets/Name'
+import Cursor from './PropertiesComponenets/Cursor'
 
 const ButtonProperties = () => {
 	const {
@@ -118,6 +119,7 @@ const ButtonProperties = () => {
 				<Name />
 				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
 				<GridColumn />
+				<Cursor />
 			</div>
 			<Text />
 			<Font />
