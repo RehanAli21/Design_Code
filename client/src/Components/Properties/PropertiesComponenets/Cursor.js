@@ -1,11 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react'
+import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Cursor = () => {
 	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
+	const { width, activeElement } = useContext(PageContext)
 
 	const [cursor, setCursor] = useState('')
 
+	//For default value
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const ele = document.getElementById('cursor-change-select')
+
+			if (ele) ele.value = large.cursor ? large.cursor : 'default'
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
+
+	//For changing cursor
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			setProperties(small, setSmall, 'cursor', cursor)
