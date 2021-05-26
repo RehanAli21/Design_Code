@@ -1,12 +1,30 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
 const Cursor = () => {
+	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
+
 	const [cursor, setCursor] = useState('')
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			setProperties(small, setSmall, 'cursor', cursor)
+			setProperties(medium, setMedium, 'cursor', cursor)
+			setProperties(large, setLarge, 'cursor', cursor)
+			setProperties(xlarge, setXlarge, 'cursor', cursor)
+		}
+	}, [cursor])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
 
 	return (
 		<div className='two'>
 			<label>Cursor:</label>
-			<select id='cursor-input' onChange={e => setCursor(e.target.value)}>
+			<select id='cursor-change-select' onChange={e => setCursor(e.target.value)}>
 				<option value='default'>default</option>
 				<option value='pointer'>pointer</option>
 				<option value='none'>none</option>
