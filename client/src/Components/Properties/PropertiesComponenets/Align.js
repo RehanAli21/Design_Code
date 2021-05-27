@@ -201,6 +201,12 @@ const Align = () => {
 			<p className='second-heading' onClick={() => setShowAlignProperties(!showAlignProperties)}>
 				ALIGNMENT <span style={{ display: showAlignProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAlignProperties ? 'none' : 'inline' }}>&#9654;</span>
+				<span class='tipDiv'>
+					<span class='tipQ'>?</span>
+					<span class='tipText'>
+						This component is for alignment of the elements it changes according to element and it's style
+					</span>
+				</span>
 			</p>
 			<div style={{ display: showAlignProperties ? 'block' : 'none' }}>
 				<ul className='align-ul'>

@@ -866,6 +866,33 @@ nav .d-v button:hover {
 	color: white;
 }
 
+/* for Tip/Help */
+.tipDiv {
+	margin-left: 10px;
+	position: relative;
+	font-family: sans-serif;
+	cursor: help;
+}
+.tipQ {
+	background-color: var(--text-color);
+	border-radius: 100%;
+	padding: 2px 8px;
+	color: white;
+}
+.tipText {
+	background-color: var(--main-blue);
+	color: white;
+	display: none;
+	width: 200px;
+	padding: 10px;
+	position: absolute;
+	letter-spacing: 1px;
+	border-radius: 5px;
+}
+.tipDiv:hover .tipText {
+	display: block;
+}
+/* for scrollbar */
 /* width */
 ::-webkit-scrollbar {
 	width: 7.5px;
