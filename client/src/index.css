@@ -886,8 +886,12 @@ nav .d-v button:hover {
 	width: 200px;
 	padding: 10px;
 	position: absolute;
-	letter-spacing: 1px;
+	letter-spacing: 0.1px;
 	border-radius: 5px;
+}
+.tipHr {
+	margin: 5px 0px;
+	border-color: white;
 }
 .tipDiv:hover .tipText {
 	display: block;
