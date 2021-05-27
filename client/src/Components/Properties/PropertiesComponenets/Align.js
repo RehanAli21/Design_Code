@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
+import Tip from './Tip'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
@@ -201,12 +202,7 @@ const Align = () => {
 			<p className='second-heading' onClick={() => setShowAlignProperties(!showAlignProperties)}>
 				ALIGNMENT <span style={{ display: showAlignProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAlignProperties ? 'none' : 'inline' }}>&#9654;</span>
-				<span class='tipDiv'>
-					<span class='tipQ'>?</span>
-					<span class='tipText'>
-						This component is for alignment of the elements it changes according to element and it's style
-					</span>
-				</span>
+				<Tip msg={"This component is for alignment of the elements it changes according to element and it's style"} />
 			</p>
 			<div style={{ display: showAlignProperties ? 'block' : 'none' }}>
 				<ul className='align-ul'>
