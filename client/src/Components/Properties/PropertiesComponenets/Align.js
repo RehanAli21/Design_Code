@@ -200,17 +200,21 @@ const Align = () => {
 	return (
 		<div className='align borders' style={{ display: isImg || isList ? 'none' : 'block' }}>
 			<p className='second-heading' onClick={() => setShowAlignProperties(!showAlignProperties)}>
-				ALIGNMENT <span style={{ display: showAlignProperties ? 'inline' : 'none' }}>&#9660;</span>
-				<span style={{ display: showAlignProperties ? 'none' : 'inline' }}>&#9654;</span>
 				<Tip
 					msg={[
 						"This component is for alignment of the elements it changes according to element and it's style.",
+						<hr className='tipHr' style={{ display: isDiv ? 'block' : 'none' }} />,
+						isDiv ? "Self Align is for element's own alignment, and " : '',
 						<hr className='tipHr' />,
-						"Self Align is for element's own alignment, and ",
-						<hr className='tipHr' />,
-						"Object Align is for element's children (inner elements) alignment",
+						isDiv && !isDivGrid
+							? "Object Align is for element's children (inner elements) alignment"
+							: isDivGrid
+							? ''
+							: 'Text Align is for text alignment',
 					]}
 				/>
+				ALIGNMENT <span style={{ display: showAlignProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showAlignProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
 			<div style={{ display: showAlignProperties ? 'block' : 'none' }}>
 				<ul className='align-ul'>

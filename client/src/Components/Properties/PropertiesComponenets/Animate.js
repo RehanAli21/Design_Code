@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import Tip from './Tip'
 
 const Animate = () => {
 	const { showAnimateProperties, setShowAnimateProperties } = useContext(PropertiesContext)
@@ -408,6 +409,21 @@ const Animate = () => {
 	return (
 		<div className='borders'>
 			<p className='second-heading' onClick={() => setShowAnimateProperties(!showAnimateProperties)}>
+				<Tip
+					msg={[
+						'This component apply animations on elements',
+						<hr className='tipHr' />,
+						'If on-scroll is activated, element will animate on page scroll',
+						<hr className='tipHr' />,
+						'Animation has all the available animations',
+						<hr className='tipHr' />,
+						'Delay for time before animation is activated',
+						<hr className='tipHr' />,
+						'Speed for animation speed',
+						<hr className='tipHr' />,
+						'Repeat for how many time animation repeats',
+					]}
+				/>
 				Animations <span style={{ display: showAnimateProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAnimateProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

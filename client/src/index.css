@@ -868,15 +868,15 @@ nav .d-v button:hover {
 
 /* for Tip/Help */
 .tipDiv {
-	margin-left: 10px;
+	margin-right: 10px;
 	position: relative;
 	font-family: sans-serif;
 	cursor: help;
 }
 .tipQ {
-	background-color: var(--text-color);
+	background-color: rgba(103, 103, 103, 0.8);
 	border-radius: 100%;
-	padding: 2px 8px;
+	padding: 1px 8px;
 	color: white;
 }
 .tipText {
@@ -888,6 +888,7 @@ nav .d-v button:hover {
 	position: absolute;
 	letter-spacing: 0.1px;
 	border-radius: 5px;
+	z-index: 9;
 }
 .tipHr {
 	margin: 5px 0px;
