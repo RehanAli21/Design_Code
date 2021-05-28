@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
+import Tip from './Tip'
 
 const Appearance = () => {
 	const {
@@ -691,6 +692,19 @@ const Appearance = () => {
 	return (
 		<div className='ap borders btn-specific'>
 			<p className='second-heading' onClick={() => setShowAppearanceProperties(!showAppearanceProperties)}>
+				<Tip
+					msg={[
+						'Color controls background color',
+						<hr className='tipHr' />,
+						'InnerX control horizontal inner space',
+						<hr className='tipHr' />,
+						'InnerY control vertical inner space',
+						<hr className='tipHr' />,
+						'Border controls border of element',
+						<hr className='tipHr' />,
+						'Shadow controls shadow of element',
+					]}
+				/>
 				APPEARANCE <span style={{ display: showAppearanceProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showAppearanceProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

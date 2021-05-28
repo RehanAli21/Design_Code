@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import Tip from './Tip'
 
 const Transform = () => {
 	const {
@@ -276,6 +277,17 @@ const Transform = () => {
 	return (
 		<div className='w-h borders' style={{ display: ele && ele.tagName === 'LI' ? 'none' : 'grid' }}>
 			<p className='second-heading' onClick={() => setShowTransformProperties(!showTransformProperties)}>
+				<Tip
+					msg={[
+						'W controls the width with different units',
+						<hr className='tipHr' />,
+						'H controls the height with different units',
+						<hr className='tipHr' />,
+						'X controls space on left side with different units',
+						<hr className='tipHr' />,
+						'Y controls space on Upper side with different units',
+					]}
+				/>
 				TRANSFORM <span style={{ display: showTransformProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showTransformProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
