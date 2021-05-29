@@ -8,6 +8,8 @@ import GridColumn from './PropertiesComponenets/GridColumn'
 import BackFilter from './PropertiesComponenets/BackFilter'
 import Animate from './PropertiesComponenets/Animate'
 import Name from './PropertiesComponenets/Name'
+import Tip from './PropertiesComponenets/Tip'
+import Cursor from './PropertiesComponenets/Cursor'
 
 const TextProperties = () => {
 	const {
@@ -138,10 +140,39 @@ const TextProperties = () => {
 		<React.Fragment>
 			<div className='borders btn-specific'>
 				<p className='second-heading' onClick={() => setShowTextCompProperties(!showTextCompProperties)}>
+					<Tip
+						msg={[
+							'Name is an unique identity for this element',
+							<hr className='tipHr' />,
+							'Type sets different type of text',
+							<hr className='tipHr' />,
+							'Cursor for changing mouse icon/poiniter',
+							<hr className='tipHr' />,
+							'Text for write text',
+							<hr className='tipHr' />,
+							'Same Line: if you want text on same row as other element then activate it.',
+							<hr className='tipHr' />,
+							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+						]}
+					/>
 					TEXT PROPERTIES <span style={{ display: showTextCompProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showTextCompProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
 				<Name />
+				<div style={{ display: showTextCompProperties ? 'grid' : 'none' }} className='two'>
+					<label>Type: </label>
+					<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
+						<option value='p'>Paragraph</option>
+						<option value='h1'>Heading 1</option>
+						<option value='h2'>Heading 2</option>
+						<option value='h3'>Heading 3</option>
+						<option value='h4'>Heading 4</option>
+						<option value='h5'>Heading 5</option>
+						<option value='a'>Anchor</option>
+					</select>
+				</div>
+				<Cursor />
+				<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
 				<GridColumn />
 				<div
 					style={{
@@ -159,19 +190,6 @@ const TextProperties = () => {
 					/>
 					<label>On Same Line</label>
 				</div>
-				<div style={{ display: showTextCompProperties ? 'grid' : 'none' }} className='two'>
-					<label>Type: </label>
-					<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
-						<option value='p'>Paragraph</option>
-						<option value='h1'>Heading 1</option>
-						<option value='h2'>Heading 2</option>
-						<option value='h3'>Heading 3</option>
-						<option value='h4'>Heading 4</option>
-						<option value='h5'>Heading 5</option>
-						<option value='a'>Anchor</option>
-					</select>
-				</div>
-				<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
 			</div>
 			<Font type='text' />
 			<Text />

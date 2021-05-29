@@ -8,6 +8,7 @@ import Cursor from './PropertiesComponenets/Cursor'
 import Font from './PropertiesComponenets/Font'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
+import Tip from './PropertiesComponenets/Tip'
 
 const InputProperties = () => {
 	const {
@@ -264,10 +265,26 @@ const InputProperties = () => {
 		<React.Fragment>
 			<div className='borders btn-specific'>
 				<p className='second-heading' onClick={() => setShowInputProperties(!showInputProperties)}>
+					<Tip
+						msg={[
+							'Separete Line will send input on different row',
+							<hr className='tipHr' />,
+							'Type sets different type of input',
+							<hr className='tipHr' />,
+							'Placeholder is a text user can see and when user type on it the text will be gone',
+							<hr className='tipHr' />,
+							'Max Char sets maximum characters allowed to type',
+							<hr className='tipHr' />,
+							'Text Color for changing color of text',
+							<hr className='tipHr' />,
+							'Cursor for changing mouse icon/poiniter',
+							<hr className='tipHr' />,
+							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+						]}
+					/>
 					INPUT PROPERTIES <span style={{ display: showInputProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showInputProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
-				<GridColumn />
 				<div
 					style={{
 						display: showInputProperties ? 'grid' : 'none',
@@ -330,7 +347,14 @@ const InputProperties = () => {
 				</div>
 				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
 					<label>Max chars: </label>
-					<input id='i-s-maxLengthInput' onChange={e => setMaxLength(e.target.value)} type='number' min='0' />
+					<input
+						className='numberinput'
+						id='i-s-maxLengthInput'
+						onChange={e => setMaxLength(e.target.value)}
+						type='number'
+						min='-1'
+						placeholder='Maximum characters'
+					/>
 				</div>
 				<div className='three' style={{ display: showInputProperties ? 'grid' : 'none' }}>
 					<label style={{ marginTop: '5px' }}>Text color: </label>
@@ -343,6 +367,7 @@ const InputProperties = () => {
 					/>
 				</div>
 				<Cursor />
+				<GridColumn />
 			</div>
 			<Font />
 			<BackFilter />

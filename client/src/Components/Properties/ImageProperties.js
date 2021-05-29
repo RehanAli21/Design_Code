@@ -7,6 +7,7 @@ import Filter from './PropertiesComponenets/Filter'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
 import Position from './PropertiesComponenets/Position'
+import Tip from './PropertiesComponenets/Tip'
 
 const ImageProperties = () => {
 	const {
@@ -145,6 +146,21 @@ const ImageProperties = () => {
 		<React.Fragment>
 			<div className='borders btn-specific'>
 				<p className='second-heading' onClick={() => setShowImgProperties(!showImgProperties)}>
+					<Tip
+						msg={[
+							'Separete Line will send button on different row',
+							<hr className='tipHr' />,
+							'Name is an unique identity for this element',
+							<hr className='tipHr' />,
+							'Img for choosing image from your computer',
+							<hr className='tipHr' />,
+							'Cursor for changing mouse icon/poiniter',
+							<hr className='tipHr' />,
+							'Alt text will be shown to user if img is not available',
+							<hr className='tipHr' />,
+							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+						]}
+					/>
 					IMAGE PROPERTIES <span style={{ display: showImgProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showImgProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
@@ -173,8 +189,8 @@ const ImageProperties = () => {
 					<label>Alt: </label>
 					<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 				</div>
-				<GridColumn />
 				<Cursor />
+				<GridColumn />
 			</div>
 			<Filter />
 			<Position />

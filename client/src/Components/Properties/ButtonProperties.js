@@ -10,6 +10,7 @@ import BackFilter from './PropertiesComponenets/BackFilter'
 import Animate from './PropertiesComponenets/Animate'
 import Name from './PropertiesComponenets/Name'
 import Cursor from './PropertiesComponenets/Cursor'
+import Tip from './PropertiesComponenets/Tip'
 
 const ButtonProperties = () => {
 	const {
@@ -97,9 +98,26 @@ const ButtonProperties = () => {
 		<React.Fragment>
 			<div className='borders btn-specific'>
 				<p className='second-heading' onClick={() => setShowBtnProperties(!showBtnProperties)}>
+					<Tip
+						msg={[
+							'Name is an unique identity for this element',
+							<hr className='tipHr' />,
+							'Text for text of button',
+							<hr className='tipHr' />,
+							'Cursor for changing mouse icon/poiniter',
+							<hr className='tipHr' />,
+							'Separete Line will send button on different row',
+							<hr className='tipHr' />,
+							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+						]}
+					/>
 					BUTTON PROPERTIES <span style={{ display: showBtnProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showBtnProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
+				<Name />
+				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
+				<Cursor />
+				<GridColumn />
 				<div
 					style={{
 						display: showBtnProperties ? 'grid' : 'none',
@@ -116,10 +134,6 @@ const ButtonProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
-				<Name />
-				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
-				<GridColumn />
-				<Cursor />
 			</div>
 			<Text />
 			<Font />

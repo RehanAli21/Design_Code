@@ -5,6 +5,7 @@ import BGImage from './PropertiesComponenets/BGImage'
 import Cursor from './PropertiesComponenets/Cursor'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
+import Tip from './PropertiesComponenets/Tip'
 
 const DivProperties = () => {
 	const {
@@ -606,11 +607,25 @@ const DivProperties = () => {
 	return (
 		<div className='borders r-c btn-specific'>
 			<p className='second-heading' onClick={() => setShowDivProperties(!showDivProperties)}>
+				<Tip
+					msg={[
+						'Name is an unique identity for this element',
+						<hr className='tipHr' />,
+						'Overflow for showing or hiding elements which are going out of div boundries',
+						<hr className='tipHr' />,
+						'Cursor for changing mouse icon/poiniter',
+						<hr className='tipHr' />,
+						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+						<hr className='tipHr' />,
+						'Background Img is for applying image on background',
+						<hr className='tipHr' />,
+						'Rows/Columns for applying layout by adding rows and columns',
+					]}
+				/>
 				DIV PROPERTIES <span style={{ display: showDivProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showDivProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
 			<Name />
-			<GridColumn />
 			<div className='two'>
 				<label>Overflow</label>
 				<select id='div-overflow-select' onChange={e => setOverflow(e.target.value)}>
@@ -620,6 +635,7 @@ const DivProperties = () => {
 				</select>
 			</div>
 			<Cursor />
+			<GridColumn />
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
 			<div style={{ display: showDivProperties ? 'grid' : 'none' }} className='grid'>
 				<input
