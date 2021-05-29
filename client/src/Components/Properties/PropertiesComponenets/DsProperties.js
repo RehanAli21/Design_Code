@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { PageContext } from '../../Contexts/PageContext'
+import Tip from './Tip'
 
 const DsProperties = () => {
 	const {
@@ -168,6 +169,7 @@ const DsProperties = () => {
 	return (
 		<div className='btn-specific'>
 			<p className='second-heading' onClick={() => setShowExtraProperties(!showExtraProperties)}>
+				<Tip msg={["This component's properties only affect element, not layout"]} />
 				EXTRA <span style={{ display: showExtraProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showExtraProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

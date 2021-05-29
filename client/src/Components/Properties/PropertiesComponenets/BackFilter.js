@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import Tip from './Tip'
 
 const BackFilter = () => {
 	const {
@@ -103,6 +104,7 @@ const BackFilter = () => {
 	return (
 		<div className='borders btn-specific' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowBackFilterProperties(!showBackFilterProperties)}>
+				<Tip msg={['This component properties only works, when background color is transparent']} />
 				Background Filters <span style={{ display: showBackFilterProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showBackFilterProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
@@ -113,7 +115,7 @@ const BackFilter = () => {
 					padding: '5px 10px',
 					position: 'absolute',
 					top: '0px',
-					right: '30px',
+					right: '12px',
 				}}>
 				Reset
 			</button>

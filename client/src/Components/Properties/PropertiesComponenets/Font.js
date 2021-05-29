@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
+import Tip from './Tip'
 
 const Font = () => {
 	const {
@@ -284,6 +285,7 @@ const Font = () => {
 	return (
 		<div className='btn-specific font-specific borders'>
 			<p className='second-heading' onClick={() => setShowFontProperties(!showFontProperties)}>
+				<Tip msg={['This component controls fonts properties']} />
 				FONT <span style={{ display: showFontProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showFontProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

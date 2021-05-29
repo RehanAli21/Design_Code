@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import Tip from './Tip'
 
 const Filter = () => {
 	const {
@@ -103,6 +104,7 @@ const Filter = () => {
 	return (
 		<div className='borders btn-specific' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowFilterProperties(!showFilterProperties)}>
+				<Tip msg={['This component apply filters on image']} />
 				Filters <span style={{ display: showFilterProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showFilterProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

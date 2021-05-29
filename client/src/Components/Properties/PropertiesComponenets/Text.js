@@ -2,20 +2,11 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
+import Tip from './Tip'
 
 const Text = () => {
-	const {
-		small,
-		setSmall,
-		medium,
-		setMedium,
-		large,
-		setLarge,
-		xlarge,
-		setXlarge,
-		showTextProperties,
-		setShowTextProperties,
-	} = useContext(PropertiesContext)
+	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge, showTextProperties, setShowTextProperties } =
+		useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
@@ -147,6 +138,19 @@ const Text = () => {
 	return (
 		<div className='borders btn-specific font-specific'>
 			<p className='second-heading' onClick={() => setShowTextProperties(!showTextProperties)}>
+				<Tip
+					msg={[
+						'text color for applying color on text',
+						<hr className='tipHr' />,
+						'L for letter spacing',
+						<hr className='tipHr' />,
+						'W for word spacing',
+						<hr className='tipHr' />,
+						'H for line height',
+						<hr className='tipHr' />,
+						'Text Shadow for applying shadow on text',
+					]}
+				/>
 				TEXT <span style={{ display: showTextProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showTextProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

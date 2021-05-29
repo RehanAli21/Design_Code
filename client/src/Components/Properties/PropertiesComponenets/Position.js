@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
+import Tip from './Tip'
 
 const Position = () => {
 	const {
@@ -487,6 +488,13 @@ const Position = () => {
 	return (
 		<div className='borders btn-specific' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowPositionProperties(!showPositionProperties)}>
+				<Tip
+					msg={[
+						'Position for applying different positions',
+						<hr className='tipHr' />,
+						'Z-Index for bring element forword or backword',
+					]}
+				/>
 				POSITIONS <span style={{ display: showPositionProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showPositionProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
