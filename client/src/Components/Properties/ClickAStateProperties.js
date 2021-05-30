@@ -41,7 +41,7 @@ const ClickAStateProperties = () => {
 
 	const NameFinder = arr => {
 		for (let i = 0; i < arr.length; i++) {
-			if (arr[i][1].name === name) {
+			if (arr[i][1].name === name && arr[i][1].id !== activeElement) {
 				if (arr[i][0] !== 'option') {
 					setClickTarget(arr[i][1].id)
 					return true
@@ -60,6 +60,8 @@ const ClickAStateProperties = () => {
 						'These properties will apply on the selected element, when this element is clicked',
 						<hr className='tipHr' />,
 						"Element can be selected by it's name",
+						<hr className='tipHr' />,
+						'Note: you can not select elements own name',
 					]}
 				/>
 				CLICK ELEMENT PROPERTIES
