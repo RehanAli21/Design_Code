@@ -4,6 +4,7 @@ import { PageContext } from '../Contexts/PageContext'
 import ClickAdvOne from './PropertiesComponenets/ClickAdvOne'
 import ClickAdvAppearance from './PropertiesComponenets/ClickAdvAppearance'
 import ClickAdvExtra from './PropertiesComponenets/ClickAdvExtra'
+import Tip from './PropertiesComponenets/Tip'
 
 const ClickAStateProperties = () => {
 	const { setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
@@ -53,7 +54,16 @@ const ClickAStateProperties = () => {
 
 	return (
 		<div className='btn-specific' style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
-			<p className='second-heading'>CLICK(ADVANCE) PROPERTIES</p>
+			<p className='second-heading'>
+				<Tip
+					msg={[
+						'These properties will apply on the selected element, when this element is clicked',
+						<hr className='tipHr' />,
+						"Element can be selected by it's name",
+					]}
+				/>
+				CLICK ELEMENT PROPERTIES
+			</p>
 			<div className='two'>
 				<label>Element Name</label>
 				<input type='text' placeholder='Ele name' id='clickadv-name-input' onChange={e => setName(e.target.value)} />

@@ -4,6 +4,7 @@ import { PageContext } from '../Contexts/PageContext'
 import HoverAdvOne from './PropertiesComponenets/HoverAdvOne'
 import HoverAdvAppearance from './PropertiesComponenets/HoverAdvAppearance'
 import HoverAdvExtra from './PropertiesComponenets/HoverAdvExtra'
+import Tip from './PropertiesComponenets/Tip'
 
 const HoverAStateProperties = () => {
 	const { setHoverTarget, hoverTargetName, setHoverTargetName } = useContext(PropertiesContext)
@@ -53,7 +54,16 @@ const HoverAStateProperties = () => {
 
 	return (
 		<div className='btn-specific' style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
-			<p className='second-heading'>HOVER(ADVANCE) PROPERTIES</p>
+			<p className='second-heading'>
+				<Tip
+					msg={[
+						'These properties will apply on the selected element, when mouse is on this element',
+						<hr className='tipHr' />,
+						"Element can be selected by it's name",
+					]}
+				/>
+				HOVER ELEMENT PROPERTIES
+			</p>
 			<div className='two'>
 				<label>Element Name</label>
 				<input type='text' placeholder='Ele name' id='hoveradv-name-input' onChange={e => setName(e.target.value)} />

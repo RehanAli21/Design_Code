@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
+import Tip from './Tip'
 
 const HoverPropertiesOne = () => {
 	const {
@@ -148,6 +149,7 @@ const HoverPropertiesOne = () => {
 	return (
 		<div className='borders' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowHoverPropertiesOne(!showHoverPropertiesOne)}>
+				<Tip msg={['These properties will applied, when mouse is on the element']} />
 				HOVER PROPERTIES <span style={{ display: showHoverPropertiesOne ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showHoverPropertiesOne ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

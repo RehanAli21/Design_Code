@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { PageContext } from '../../Contexts/PageContext'
+import Tip from './Tip'
 
 const ClickExtra = () => {
 	const { click, setClick, showClickProperties, setShowClickProperties } = useContext(PropertiesContext)
@@ -86,6 +87,7 @@ const ClickExtra = () => {
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading' onClick={() => setShowClickProperties(!showClickProperties)}>
+				<Tip msg={['These properties will apply on click']} />
 				CLICK PROPERTIES <span style={{ display: showClickProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showClickProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
