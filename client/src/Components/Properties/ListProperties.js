@@ -4,6 +4,7 @@ import { PropertiesContext } from '../Contexts/PropertiesContext'
 import Cursor from './PropertiesComponenets/Cursor'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
+import Tip from './PropertiesComponenets/Tip'
 
 const ListProperties = () => {
 	const {
@@ -131,7 +132,22 @@ const ListProperties = () => {
 
 	return (
 		<div className='borders btn-specific'>
-			<p className='second-heading'>List Properties</p>
+			<p className='second-heading'>
+				<Tip
+					msg={[
+						'Same Line: if you want list on same row as other element then activate it.',
+						<hr className='tipHr' />,
+						'Name is an unique identity for this element',
+						<hr className='tipHr' />,
+						'Bullets for changing list bullet type',
+						<hr className='tipHr' />,
+						'Cursor for changing mouse icon/poiniter',
+						<hr className='tipHr' />,
+						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+					]}
+				/>
+				List Properties
+			</p>
 			<div
 				style={{
 					display: 'grid',
@@ -152,11 +168,11 @@ const ListProperties = () => {
 			<div className='two'>
 				<label>Bullets: </label>
 				<select id='list-style-select' onChange={e => setListStyle(e.target.value)}>
+					<option value='circle'>Circle</option>
 					<option value='upper-alpha'>A</option>
 					<option value='upper-roman'>I</option>
 					<option value='lower-alpha'>a</option>
 					<option value='lower-roman'>i</option>
-					<option value='circle'>Circle</option>
 					<option value='square'>Square</option>
 					<option value='disc'>Disc</option>
 					<option value='none'>None</option>

@@ -4,6 +4,7 @@ import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
 import Name from './PropertiesComponenets/Name'
+import Tip from './PropertiesComponenets/Tip'
 
 const OptionProperties = () => {
 	const {
@@ -126,7 +127,20 @@ const OptionProperties = () => {
 	}
 	return (
 		<div className='borders btn-specific'>
-			<p className='second-heading'>OPTION PROPERTIES</p>
+			<p className='second-heading'>
+				<Tip
+					msg={[
+						'Name is an unique identity for this element',
+						<hr className='tipHr' />,
+						'Color for changing background color',
+						<hr className='tipHr' />,
+						'Text for changing text of option',
+						<hr className='tipHr' />,
+						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+					]}
+				/>
+				OPTION PROPERTIES
+			</p>
 			<Name />
 			<div className='three'>
 				<label style={{ marginTop: '10px' }}>Color: </label>
