@@ -180,7 +180,7 @@ const ImageProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
-				<Name />
+				<Name style={showImgProperties ? 'grid' : 'none'} />
 				<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
 					<label>Img: </label>
 					<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />
@@ -189,8 +189,8 @@ const ImageProperties = () => {
 					<label>Alt: </label>
 					<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 				</div>
-				<Cursor />
-				<GridColumn />
+				<Cursor style={showImgProperties ? 'grid' : 'none'} />
+				<GridColumn style={showImgProperties ? 'grid' : 'none'} />
 			</div>
 			<Filter />
 			<Position />

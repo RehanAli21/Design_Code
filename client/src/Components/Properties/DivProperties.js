@@ -625,8 +625,8 @@ const DivProperties = () => {
 				DIV PROPERTIES <span style={{ display: showDivProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showDivProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<Name />
-			<div className='two'>
+			<Name style={showDivProperties ? 'grid' : 'none'} />
+			<div style={{ display: showDivProperties ? 'grid' : 'none' }} className='two'>
 				<label>Overflow</label>
 				<select id='div-overflow-select' onChange={e => setOverflow(e.target.value)}>
 					<option value='visible'>Visible</option>
@@ -634,8 +634,8 @@ const DivProperties = () => {
 					<option value='hidden'>Hidden</option>
 				</select>
 			</div>
-			<Cursor />
-			<GridColumn />
+			<Cursor style={showDivProperties ? 'grid' : 'none'} />
+			<GridColumn style={showDivProperties ? 'grid' : 'none'} />
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
 			<div style={{ display: showDivProperties ? 'grid' : 'none' }} className='grid'>
 				<input
@@ -648,7 +648,7 @@ const DivProperties = () => {
 				/>
 				<label>Rows / Columns</label>
 			</div>
-			<div className='row-col-div' style={{ display: grid ? 'grid' : 'none' }}>
+			<div className='row-col-div' style={{ display: showDivProperties && grid ? 'grid' : 'none' }}>
 				<div className='margins two-rows'>
 					<div className='gap'>
 						<label>Row Gap: </label>

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
-const Cursor = () => {
+const Cursor = ({ style }) => {
 	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 	const { width, activeElement } = useContext(PageContext)
 
@@ -34,7 +34,7 @@ const Cursor = () => {
 	}
 
 	return (
-		<div className='two'>
+		<div style={{ display: style }} className='two'>
 			<label>Cursor:</label>
 			<select id='cursor-change-select' onChange={e => setCursor(e.target.value)}>
 				<option value='default'>default</option>

@@ -114,10 +114,10 @@ const ButtonProperties = () => {
 					BUTTON PROPERTIES <span style={{ display: showBtnProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showBtnProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
-				<Name />
+				<Name style={showBtnProperties ? 'grid' : 'none'} />
 				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
-				<Cursor />
-				<GridColumn />
+				<Cursor style={showBtnProperties ? 'grid' : 'none'} />
+				<GridColumn style={showBtnProperties ? 'grid' : 'none'} />
 				<div
 					style={{
 						display: showBtnProperties ? 'grid' : 'none',

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
 
-const GridColumn = () => {
+const GridColumn = ({ style }) => {
 	const {
 		small,
 		setSmall,
@@ -92,7 +92,7 @@ const GridColumn = () => {
 	}
 
 	return (
-		<div className='two' style={{ display: show ? 'grid' : 'none' }}>
+		<div className='two' style={{ display: show && style === 'grid' ? 'grid' : 'none' }}>
 			<label>Col No: </label>
 			<input
 				onChange={e => setColNum(e.target.value)}

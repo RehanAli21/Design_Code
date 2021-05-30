@@ -158,7 +158,7 @@ const TextProperties = () => {
 					TEXT PROPERTIES <span style={{ display: showTextCompProperties ? 'inline' : 'none' }}>&#9660;</span>
 					<span style={{ display: showTextCompProperties ? 'none' : 'inline' }}>&#9654;</span>
 				</p>
-				<Name />
+				<Name style={showTextCompProperties ? 'grid' : 'none'} />
 				<div style={{ display: showTextCompProperties ? 'grid' : 'none' }} className='two'>
 					<label>Type: </label>
 					<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
@@ -171,9 +171,9 @@ const TextProperties = () => {
 						<option value='a'>Anchor</option>
 					</select>
 				</div>
-				<Cursor />
+				<Cursor style={showTextCompProperties ? 'grid' : 'none'} />
 				<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
-				<GridColumn />
+				<GridColumn style={showTextCompProperties ? 'grid' : 'none'} />
 				<div
 					style={{
 						display: !isAnchor && showTextCompProperties ? 'grid' : 'none',

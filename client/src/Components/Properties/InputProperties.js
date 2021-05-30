@@ -301,7 +301,7 @@ const InputProperties = () => {
 					/>
 					<label>On Separate Line</label>
 				</div>
-				<Name />
+				<Name style={showInputProperties ? 'grid' : 'none'} />
 				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
 					<label>Type: </label>
 					<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>
@@ -366,8 +366,8 @@ const InputProperties = () => {
 						id='input-textcolor'
 					/>
 				</div>
-				<Cursor />
-				<GridColumn />
+				<Cursor style={showInputProperties ? 'grid' : 'none'} />
+				<GridColumn style={showInputProperties ? 'grid' : 'none'} />
 			</div>
 			<Font />
 			<BackFilter />

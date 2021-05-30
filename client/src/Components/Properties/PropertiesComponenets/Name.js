@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 
-const Name = () => {
+const Name = ({ style }) => {
 	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [name, setName] = useState('')
@@ -65,7 +65,7 @@ const Name = () => {
 	}
 
 	return (
-		<div className='two'>
+		<div style={{ display: style }} className='two'>
 			<label>Name: </label>
 			<input type='text' id='namecomp_NameInput' onChange={e => setName(e.target.value)} />
 		</div>

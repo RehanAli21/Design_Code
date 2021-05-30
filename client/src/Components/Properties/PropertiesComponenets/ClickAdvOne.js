@@ -129,18 +129,17 @@ const ClickAdvOne = () => {
 				PROPERTIES <span style={{ display: showCAP ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showCAP ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
+			<button
+				onClick={resetAll}
+				style={{
+					position: 'absolute',
+					top: '0px',
+					right: '10px',
+					padding: '5px 10px',
+				}}>
+				Reset All
+			</button>
 			<div className='btn-specific' style={{ display: showCAP ? 'block' : 'none' }}>
-				<button
-					onClick={resetAll}
-					style={{
-						display: showCAP ? 'block' : 'none',
-						position: 'absolute',
-						top: '0px',
-						right: '10px',
-						padding: '5px 10px',
-					}}>
-					Reset All
-				</button>
 				<div className='two'>
 					<label>Duration: </label>
 					<input
