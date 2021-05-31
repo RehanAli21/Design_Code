@@ -10,6 +10,7 @@ import { PageProvider } from './Components/Contexts/PageContext'
 import { PropertiesProvider } from './Components/Contexts/PropertiesContext'
 import { TemplateProvider } from './Components/Contexts/TemplateContext'
 import BreakPoint from './Components/BreakPoint'
+import MessageBox from './Components/MessageBox'
 
 const App = () => {
 	return (
@@ -18,6 +19,7 @@ const App = () => {
 				<TemplateProvider>
 					<BreakPoint />
 					<TemplateValues />
+					<MessageBox />
 					<Navbar />
 					<div className='three-section'>
 						<Toolbar />
