@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { PageContext } from './Contexts/PageContext'
 
 const MessageBox = () => {
+	const { showMsgBox, setShowMsgBox, msgBoxMsg } = useContext(PageContext)
+
 	return (
-		<div className='msgBox'>
-			<p>THis is message box for showing warnings, restrictions and errors</p>
-			<button>Ok</button>
+		<div className={showMsgBox ? 'msgBox msgBoxActive' : 'msgBox'}>
+			<p>{msgBoxMsg}</p>
+			<button onClick={() => setShowMsgBox(false)}>OK</button>
 		</div>
 	)
 }

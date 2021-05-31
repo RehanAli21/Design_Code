@@ -866,6 +866,50 @@ nav .d-v button:hover {
 	color: white;
 }
 
+/* For MessageBox */
+.msgBox {
+	position: absolute;
+	left: 50%;
+	margin-left: -150px;
+	top: 50%;
+	margin-top: -180px;
+	z-index: 9;
+	background-color: white;
+	width: 300px;
+	height: 180px;
+	padding: 20px;
+	box-shadow: 1px 1px 10px grey;
+	border-radius: 2px;
+	transform: scaleY(0);
+	transform-origin: top;
+	transition-duration: 50ms;
+}
+.msgBoxActive {
+	transform: scaleY(1);
+	transition-duration: 200ms;
+}
+.msgBox > p {
+	color: var(--main-blue);
+	font-size: 20px;
+}
+.msgBox > button {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	padding: 5px 15px;
+	color: white;
+	background-color: var(--main-blue);
+	border: none;
+	border-radius: 2px;
+	cursor: pointer;
+}
+.msgBox > button:hover {
+	transform: scale(1.05);
+}
+.msgBox > button:active {
+	transform: scale(0.95);
+}
+
 /* for Tip/Help */
 .tipDiv {
 	margin-right: 10px;
