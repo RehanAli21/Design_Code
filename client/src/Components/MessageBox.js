@@ -5,9 +5,11 @@ const MessageBox = () => {
 	const { showMsgBox, setShowMsgBox, msgBoxMsg } = useContext(PageContext)
 
 	return (
-		<div className={showMsgBox ? 'msgBox msgBoxActive' : 'msgBox'}>
-			<p>{msgBoxMsg}</p>
-			<button onClick={() => setShowMsgBox(false)}>OK</button>
+		<div className={showMsgBox ? 'msgBoxBack msgBoxBackVisible' : 'msgBoxBack'}>
+			<div className='msgBox'>
+				<p>{msgBoxMsg}</p>
+				<button onClick={() => setShowMsgBox(false)}>OK</button>
+			</div>
 		</div>
 	)
 }

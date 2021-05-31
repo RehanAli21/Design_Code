@@ -867,6 +867,18 @@ nav .d-v button:hover {
 }
 
 /* For MessageBox */
+.msgBoxBack {
+	position: absolute;
+	z-index: 9;
+	width: 100vw;
+	height: 100vh;
+	background-color: transparent;
+	backdrop-filter: blur(2px);
+	display: none;
+}
+.msgBoxBackVisible {
+	display: block;
+}
 .msgBox {
 	position: absolute;
 	left: 50%;
@@ -880,13 +892,6 @@ nav .d-v button:hover {
 	padding: 20px;
 	box-shadow: 1px 1px 10px grey;
 	border-radius: 2px;
-	transform: scaleY(0);
-	transform-origin: top;
-	transition-duration: 50ms;
-}
-.msgBoxActive {
-	transform: scaleY(1);
-	transition-duration: 200ms;
 }
 .msgBox > p {
 	color: var(--main-blue);

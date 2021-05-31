@@ -25,7 +25,7 @@ const Appearance = () => {
 		showAppearanceProperties,
 		setShowAppearanceProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [showBorderSection, setShowBorderSection] = useState(false)
@@ -724,7 +724,13 @@ const Appearance = () => {
 					<label>InnerX space: </label>
 					<input
 						id='ap-paddingXInput'
-						onChange={e => setPaddingX(e.target.value)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg("Negative value won't work for InnerX")
+								setShowMsgBox(true)
+							}
+							setPaddingX(e.target.value)
+						}}
 						type='number'
 						defaultValue='0'
 						min='0'
@@ -740,7 +746,13 @@ const Appearance = () => {
 					<label>InnerY space: </label>
 					<input
 						id='ap-paddingYInput'
-						onChange={e => setPaddingY(e.target.value)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg("Negative value won't work for InnerY")
+								setShowMsgBox(true)
+							}
+							setPaddingY(e.target.value)
+						}}
 						type='number'
 						defaultValue='0'
 						min='0'
