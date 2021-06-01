@@ -5,7 +5,7 @@ import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverAdvAppearance = () => {
 	const { hoveradv, setHoveradv, showHAAP, setShowHAAP } = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { width, activeElement, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [showBorderSection, setShowBorderSection] = useState(false)
@@ -466,7 +466,14 @@ const HoverAdvAppearance = () => {
 					<label>InnerX space: </label>
 					<input
 						id='aphoveradv-paddingXInput'
-						onChange={e => setPaddingX(e.target.value)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg("Negative value won't work for InnerX")
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) {
+								setPaddingX(e.target.value)
+							}
+						}}
 						type='number'
 						defaultValue='0'
 						min='0'
@@ -482,7 +489,14 @@ const HoverAdvAppearance = () => {
 					<label>InnerY space: </label>
 					<input
 						id='aphoveradv-paddingYInput'
-						onChange={e => setPaddingY(e.target.value)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg("Negative value won't work for InnerY")
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) {
+								setPaddingY(e.target.value)
+							}
+						}}
 						type='number'
 						defaultValue='0'
 						min='0'
@@ -528,8 +542,13 @@ const HoverAdvAppearance = () => {
 								<input
 									id='ahoveradv-b-size'
 									onChange={e => {
-										setBorderChanged(true)
-										setBSize(`${e.target.value}px`)
+										if (e.target.value < 0) {
+											setMsgBoxMsg('Border size can not be negative')
+											setShowMsgBox(true)
+										} else if (e.target.value >= 0) {
+											setBorderChanged(true)
+											setBSize(`${e.target.value}px`)
+										}
 									}}
 									type='number'
 									defaultValue='1'
@@ -542,8 +561,13 @@ const HoverAdvAppearance = () => {
 									id='ahoveradv-b-radius'
 									style={{ width: '100%' }}
 									onChange={e => {
-										setBorderChanged(true)
-										setBRdius(`${e.target.value}%`)
+										if (e.target.value < 0 || e.target.value > 100) {
+											setMsgBoxMsg('Border radius can only sets between 0 to 100')
+											setShowMsgBox(true)
+										} else if (e.target.value >= 0) {
+											setBorderChanged(true)
+											setBRdius(`${e.target.value}%`)
+										}
 									}}
 									type='number'
 									defaultValue='1'
@@ -629,8 +653,13 @@ const HoverAdvAppearance = () => {
 								<input
 									id='ahoveradv-s-blur'
 									onChange={e => {
-										setShadowChanged(true)
-										setSBlur(e.target.value + 'px')
+										if (e.target.value < 0) {
+											setMsgBoxMsg('Shadow blur can not be negative')
+											setShowMsgBox(true)
+										} else if (e.target.value >= 0) {
+											setShadowChanged(true)
+											setSBlur(e.target.value + 'px')
+										}
 									}}
 									type='number'
 									min='0'

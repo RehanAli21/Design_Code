@@ -728,8 +728,9 @@ const Appearance = () => {
 							if (e.target.value < 0) {
 								setMsgBoxMsg("Negative value won't work for InnerX")
 								setShowMsgBox(true)
+							} else if (e.target.value >= 0) {
+								setPaddingX(e.target.value)
 							}
-							setPaddingX(e.target.value)
 						}}
 						type='number'
 						defaultValue='0'
@@ -750,8 +751,9 @@ const Appearance = () => {
 							if (e.target.value < 0) {
 								setMsgBoxMsg("Negative value won't work for InnerY")
 								setShowMsgBox(true)
+							} else if (e.target.value >= 0) {
+								setPaddingY(e.target.value)
 							}
-							setPaddingY(e.target.value)
 						}}
 						type='number'
 						defaultValue='0'
@@ -798,8 +800,13 @@ const Appearance = () => {
 								<input
 									id='a-b-size'
 									onChange={e => {
-										setBorderChanged(true)
-										setBSize(`${e.target.value}px`)
+										if (e.target.value < 0) {
+											setMsgBoxMsg('Border size can not be negative')
+											setShowMsgBox(true)
+										} else if (e.target.value >= 0) {
+											setBorderChanged(true)
+											setBSize(`${e.target.value}px`)
+										}
 									}}
 									type='number'
 									defaultValue='1'
@@ -812,8 +819,13 @@ const Appearance = () => {
 									id='a-b-radius'
 									style={{ width: '100%' }}
 									onChange={e => {
-										setBorderChanged(true)
-										setBRdius(`${e.target.value}%`)
+										if (e.target.value < 0 || e.target.value > 100) {
+											setMsgBoxMsg('Border radius can only sets between 0 to 100')
+											setShowMsgBox(true)
+										} else if (e.target.value >= 0) {
+											setBorderChanged(true)
+											setBRdius(`${e.target.value}%`)
+										}
 									}}
 									type='number'
 									defaultValue='1'
@@ -899,8 +911,13 @@ const Appearance = () => {
 								<input
 									id='a-s-blur'
 									onChange={e => {
-										setShadowChanged(true)
-										setSBlur(e.target.value + 'px')
+										if (e.target.value < 0) {
+											setMsgBoxMsg('Shadow blur can not be negative')
+											setShowMsgBox(true)
+										} else if (e.target.value >= 0) {
+											setShadowChanged(true)
+											setSBlur(e.target.value + 'px')
+										}
 									}}
 									type='number'
 									min='0'
