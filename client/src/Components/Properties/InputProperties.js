@@ -31,7 +31,18 @@ const InputProperties = () => {
 		showInputProperties,
 		setShowInputProperties,
 	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const {
+		width,
+		activePage,
+		activeElement,
+		pages,
+		setPages,
+		sBreakPoint,
+		mBreakPoint,
+		lBreakPoint,
+		setShowMsgBox,
+		setMsgBoxMsg,
+	} = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [type, setType] = useState('')
@@ -350,7 +361,12 @@ const InputProperties = () => {
 					<input
 						className='numberinput'
 						id='i-s-maxLengthInput'
-						onChange={e => setMaxLength(e.target.value)}
+						onChange={e => {
+							if (e.target.value < -1) {
+								setMsgBoxMsg('Max Character Length can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= -1) setMaxLength(e.target.value)
+						}}
 						type='number'
 						min='-1'
 						placeholder='Maximum characters'

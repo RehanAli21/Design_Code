@@ -880,18 +880,24 @@ nav .d-v button:hover {
 	left: 50%;
 	margin-left: -150px;
 	top: 50%;
-	margin-top: -180px;
+	margin-top: -150px;
 	z-index: 9;
 	background-color: white;
 	width: 300px;
-	height: 180px;
-	padding: 20px;
-	box-shadow: 1px 1px 10px grey;
+	height: 150px;
+	padding: 20px 15px;
+	box-shadow: 1px 1px 7px grey;
 	border-radius: 2px;
 }
 .msgBox > p {
 	color: var(--main-blue);
 	font-size: 20px;
+	text-transform: capitalize;
+	font-weight: bold;
+}
+.msgBox > hr {
+	border: 1px solid var(--main-blue);
+	margin-top: 10px;
 }
 .msgBox > button {
 	position: absolute;
@@ -906,7 +912,7 @@ nav .d-v button:hover {
 	outline: none;
 }
 .msgBox > button:focus {
-	outline: 2px solid #777777;
+	border: 2px solid #777777;
 }
 .msgBox > button:hover {
 	transform: scale(1.05);

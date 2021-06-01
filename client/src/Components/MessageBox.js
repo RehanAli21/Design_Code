@@ -8,6 +8,7 @@ const MessageBox = () => {
 		<div className='msgBoxBack'>
 			<div className='msgBox'>
 				<p>{msgBoxMsg}</p>
+				<hr />
 				<button autoFocus={true} onClick={() => setShowMsgBox(false)}>
 					OK
 				</button>

@@ -7,7 +7,7 @@ import Tip from './Tip'
 const Text = () => {
 	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge, showTextProperties, setShowTextProperties } =
 		useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { width, activeElement, setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [textColor, setTextColor] = useState('')
@@ -169,7 +169,12 @@ const Text = () => {
 					<label>L</label>
 					<input
 						id='text-letterinput'
-						onChange={e => setLetterSpace(`${e.target.value}px`)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg('L (Letter Space) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) setLetterSpace(`${e.target.value}px`)
+						}}
 						type='number'
 						min='0'
 						defaultValue='0'
@@ -179,7 +184,12 @@ const Text = () => {
 					<label>W</label>
 					<input
 						id='text-wordinput'
-						onChange={e => setWordSpace(`${e.target.value}px`)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg('W (Word Space) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) setWordSpace(`${e.target.value}px`)
+						}}
 						type='number'
 						min='0'
 						defaultValue='0'
@@ -187,7 +197,17 @@ const Text = () => {
 				</div>
 				<div className='t-two'>
 					<label>H</label>
-					<input id='text-lineheightinput' onChange={e => setLineHeight(`${e.target.value}px`)} type='number' min='0' />
+					<input
+						id='text-lineheightinput'
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg('H (Line Height) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) setLineHeight(`${e.target.value}px`)
+						}}
+						type='number'
+						min='0'
+					/>
 				</div>
 			</div>
 			<div style={{ width: '80%', marginLeft: '34px', display: showTextProperties ? 'grid' : 'none' }} className='t-three'>
@@ -223,7 +243,12 @@ const Text = () => {
 					<input onChange={e => setTextX(`${e.target.value}px`)} id='t-ts-x' type='number' placeholder='X' />
 					<input onChange={e => setTextY(`${e.target.value}px`)} id='t-ts-y' type='number' placeholder='Y' />
 					<input
-						onChange={e => setTextBlur(`${e.target.value}px`)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg('B (Text Blur) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) setTextBlur(`${e.target.value}px`)
+						}}
 						id='t-ts-blur'
 						type='number'
 						min='0'

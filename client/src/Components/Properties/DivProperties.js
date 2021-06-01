@@ -28,7 +28,7 @@ const DivProperties = () => {
 		showDivProperties,
 		setShowDivProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 
 	const [overflow, setOverflow] = useState('')
 	const [grid, setGrid] = useState(false)
@@ -568,6 +568,11 @@ const DivProperties = () => {
 	}
 
 	const setRowsValues = (e, i, j) => {
+		if (e.target.value < 0) {
+			setMsgBoxMsg('Row value can not be negative')
+			setShowMsgBox(true)
+			return
+		}
 		const temp = []
 		gridRows.forEach(ele => temp.push(ele))
 		for (let k = 0; k < 12; k++) {
@@ -586,6 +591,11 @@ const DivProperties = () => {
 	}
 
 	const setColsValues = (e, i, j) => {
+		if (e.target.value < 0) {
+			setMsgBoxMsg('Column value can not be negative')
+			setShowMsgBox(true)
+			return
+		}
 		const temp = []
 		gridCols.forEach(ele => temp.push(ele))
 		for (let k = 0; k < 12; k++) {
@@ -653,7 +663,12 @@ const DivProperties = () => {
 					<div className='gap'>
 						<label>Row Gap: </label>
 						<input
-							onChange={e => setRowGap(`${e.target.value}px`)}
+							onChange={e => {
+								if (e.target.value < 0) {
+									setMsgBoxMsg('Row Gap can not be negative')
+									setShowMsgBox(true)
+								} else if (e.target.value >= 0) setRowGap(`${e.target.value}px`)
+							}}
 							type='number'
 							defaultValue='0'
 							min='0'
@@ -663,7 +678,12 @@ const DivProperties = () => {
 					<div className='gap'>
 						<label>Column Gap: </label>
 						<input
-							onChange={e => setColumnGap(`${e.target.value}px`)}
+							onChange={e => {
+								if (e.target.value < 0) {
+									setMsgBoxMsg('Column Gap can not be negative')
+									setShowMsgBox(true)
+								} else if (e.target.value >= 0) setColumnGap(`${e.target.value}px`)
+							}}
 							type='number'
 							defaultValue='0'
 							min='0'
@@ -676,7 +696,12 @@ const DivProperties = () => {
 						<div className='two'>
 							<label>No: Rows</label>
 							<input
-								onChange={e => setRowsNum(e.target.value)}
+								onChange={e => {
+									if (e.target.value < 0) {
+										setMsgBoxMsg('No: Of Rows can only be sets from 0 to 12')
+										setShowMsgBox(true)
+									} else if (e.target.value >= 0) setRowsNum(e.target.value)
+								}}
 								type='number'
 								min='0'
 								max='12'
@@ -687,7 +712,12 @@ const DivProperties = () => {
 						<div className='two'>
 							<label>No: Columns</label>
 							<input
-								onChange={e => setColsNum(e.target.value)}
+								onChange={e => {
+									if (e.target.value < 0) {
+										setMsgBoxMsg('No: Of Columns can only be sets from 0 to 12')
+										setShowMsgBox(true)
+									} else if (e.target.value >= 0) setColsNum(e.target.value)
+								}}
 								type='number'
 								min='0'
 								max='12'

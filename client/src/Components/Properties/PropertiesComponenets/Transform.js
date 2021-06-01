@@ -24,7 +24,7 @@ const Transform = () => {
 		showTransformProperties,
 		setShowTransformProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 
 	const [widthUnit, setWidthUnit] = useState('px')
 	const [heightUnit, setHeighthUnit] = useState('px')
@@ -296,7 +296,14 @@ const Transform = () => {
 					<label>W : </label>
 					<input
 						id='a-t-w'
-						onChange={e => setWidths(e.target.value)}
+						onChange={e => {
+							if (e.target.value < -1) {
+								setMsgBoxMsg('W (Width) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= -1) {
+								setWidths(e.target.value)
+							}
+						}}
 						type='number'
 						min='-1'
 						max={widthUnit === '%' ? '100' : ''}
@@ -317,7 +324,14 @@ const Transform = () => {
 					<label>H : </label>
 					<input
 						id='a-t-h'
-						onChange={e => setHeights(e.target.value)}
+						onChange={e => {
+							if (e.target.value < -1) {
+								setMsgBoxMsg('H (Height) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= -1) {
+								setHeights(e.target.value)
+							}
+						}}
 						type='number'
 						min='-1'
 						max={heightUnit === '%' ? '100' : ''}
@@ -337,7 +351,20 @@ const Transform = () => {
 				</div>
 				<div className='x'>
 					<label>X : </label>
-					<input id='a-t-ml' onChange={e => setMarginLeft(e.target.value)} type='number' min='0' />
+					<input
+						id='a-t-ml'
+						type='number'
+						min='0'
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg('X (Left space) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) {
+								setMarginLeft(e.target.value)
+							}
+						}}
+						
+					/>
 					<select id='a-t-mlu' onChange={e => setMLUnit(e.target.value)}>
 						<option value='em'>EM</option>
 						<option value='rem'>REM</option>
@@ -346,7 +373,20 @@ const Transform = () => {
 				</div>
 				<div className='y'>
 					<label>Y : </label>
-					<input id='a-t-mt' onChange={e => setMarginTop(e.target.value)} type='number' min='0' />
+					<input
+						id='a-t-mt'
+						type='number'
+						min='0'
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg('Y (Top space) can not be negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) {
+								setMarginTop(e.target.value)
+							}
+						}}
+						
+					/>
 					<select id='a-t-mtu' onChange={e => setMTUnit(e.target.value)}>
 						<option value='em'>EM</option>
 						<option value='rem'>REM</option>
