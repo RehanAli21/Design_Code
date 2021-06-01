@@ -5,7 +5,7 @@ import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverAdvOne = () => {
 	const { hoveradv, setHoveradv, showHAP, setShowHAP } = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { width, activeElement, setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [duration, setDuration] = useState('')
@@ -149,7 +149,12 @@ const HoverAdvOne = () => {
 						step='100'
 						max='5000'
 						id='hoveradv-duration-input'
-						onChange={e => setDuration(`${e.target.value}ms`)}
+						onChange={e => {
+							if (e.target.value < 0 || e.target.value < 5000) {
+								setMsgBoxMsg('Duration can only be set from 0 to 5000')
+								setShowMsgBox(true)
+							} else if (e.target.value > 0) setDuration(`${e.target.value}ms`)
+						}}
 					/>
 				</div>
 				<div className='three'>
@@ -167,7 +172,12 @@ const HoverAdvOne = () => {
 					{showTemplateFontSizes()}
 					<input
 						disabled={!showCustomFontSize}
-						onChange={e => setFontSize(`${e.target.value}px`)}
+						onChange={e => {
+							if (e.target.value < 0) {
+								setMsgBoxMsg('Font Size can not be Negative')
+								setShowMsgBox(true)
+							} else if (e.target.value >= 0) setFontSize(`${e.target.value}px`)
+						}}
 						type='number'
 						min='0'
 						id='hoveradv-fontsize'

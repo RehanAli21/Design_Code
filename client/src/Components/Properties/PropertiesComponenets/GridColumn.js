@@ -21,7 +21,7 @@ const GridColumn = ({ style }) => {
 		changedXlarge,
 		setChangedXlarge,
 	} = useContext(PropertiesContext)
-	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint, setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
 
 	const [colNum, setColNum] = useState(0)
 	let cols = 0
@@ -95,7 +95,14 @@ const GridColumn = ({ style }) => {
 		<div className='two' style={{ display: show && style === 'grid' ? 'grid' : 'none' }}>
 			<label>Col No: </label>
 			<input
-				onChange={e => setColNum(e.target.value)}
+				onChange={e => {
+					if (e.target.value < 0 || e.target.value > cols) {
+						setMsgBoxMsg(`Cols number can only between 0 to ${cols}`)
+						setShowMsgBox(true)
+					} else if (e.target.value >= 0) {
+						setColNum(e.target.value)
+					}
+				}}
 				className='numberinput'
 				type='number'
 				placeholder='col number'

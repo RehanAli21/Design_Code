@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../../Contexts/PageContext'
 
 const Name = ({ style }) => {
-	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { activePage, activeElement, pages, setPages, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 
 	const [name, setName] = useState('')
 
@@ -67,7 +67,16 @@ const Name = ({ style }) => {
 	return (
 		<div style={{ display: style }} className='two'>
 			<label>Name: </label>
-			<input type='text' id='namecomp_NameInput' onChange={e => setName(e.target.value)} />
+			<input
+				type='text'
+				id='namecomp_NameInput'
+				onChange={e => {
+					if (e.target.value === '') {
+						setMsgBoxMsg('Name can not be empty. Please type a unique Name')
+						setShowMsgBox(true)
+					} else if (e.target.value !== '') setName(e.target.value)
+				}}
+			/>
 		</div>
 	)
 }

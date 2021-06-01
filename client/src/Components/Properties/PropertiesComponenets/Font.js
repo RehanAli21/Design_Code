@@ -25,7 +25,7 @@ const Font = () => {
 		showFontProperties,
 		setShowFontProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 	const { fontSizes, fonts } = useContext(TemplateContext)
 
 	const [textDecoration, setTextDecoration] = useState(false)
@@ -309,7 +309,12 @@ const Font = () => {
 				{showTemplateFontSizes()}
 				<input
 					disabled={!showCustomFontSize}
-					onChange={e => setFontSize(`${e.target.value}px`)}
+					onChange={e => {
+						if (e.target.value < 0) {
+							setMsgBoxMsg('Font Size can not be Negative')
+							setShowMsgBox(true)
+						} else if (e.target.value >= 0) setFontSize(`${e.target.value}px`)
+					}}
 					type='number'
 					min='0'
 					id='btn-fontsize'
