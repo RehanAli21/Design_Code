@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
+	let oldDragOverElement = ''
 	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc } = useContext(PageContext)
 	const [dragedElement, setDragedElement] = useState('')
-	const [dragedOverElement, setDragedOverElement] = useState('')
-	const [changeElementOrder, setChangedElementOrder] = useState(false)
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -124,19 +123,31 @@ const Layers = () => {
 			}
 		}
 	}
-	//For setting elementId which has element over it
-	const overMe = e => {
-		const id = e.target.parentElement.id
 
-		if (id && id.search('---li')) {
-			const temp = id.split('---')
-			if (temp[0] !== dragedOverElement) {
-				setDragedOverElement(temp[0])
-			}
-		} else if (dragedElement !== '') setDragedElement('')
+	//For setting elementId which has element over it (this element will be parent)
+	const overMe = id => {
+		//the condition is dragElement should not be empty
+		//current hover element should not be drageELement
+		//current hover element should not be same as previous hoverd element
+		if (dragedElement !== '' && dragedElement !== id && id !== oldDragOverElement) {
+			console.log(dragedElement, id)
+			oldDragOverElement = id
+		}
 	}
-	//For setting elementId which is dragged
+	//For setting elementId which is dragged (this element will be child)
 	const dragged = id => (id !== dragedElement ? setDragedElement(id) : null)
+
+	const findChild = (arr, id) => {
+		arr.forEach(e => {
+			if (e[1].id === id) {
+				return e
+			} else if (e[2]) {
+				const ele = findChild(e[2], id)
+				if (ele) return ele
+			}
+		})
+		return false
+	}
 
 	//For making list of elements, and showing the list
 	const showLayers = data => {
@@ -148,9 +159,8 @@ const Layers = () => {
 							id={e[1].id + '---li'}
 							key={uuid()}
 							draggable={true}
-							onDragOver={overMe}
-							onDragEnd={() => dragged(e[1].id)}
-							onDragLeave={() => setChangedElementOrder(true)}>
+							onDragOver={() => overMe(e[1].id)}
+							onDragStart={() => dragged(e[1].id)}>
 							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' || e[0] === 'list Item' ? (
 								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
 									{e[2] && e[1].showChildren ? '▼' : '▶'}
