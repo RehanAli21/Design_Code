@@ -1,9 +1,12 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
 	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc } = useContext(PageContext)
+	const [dragedElement, setDragedElement] = useState('')
+	const [dragedOverElement, setDragedOverElement] = useState('')
+	const [changeElementOrder, setChangedElementOrder] = useState(false)
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -121,6 +124,19 @@ const Layers = () => {
 			}
 		}
 	}
+	//For setting elementId which has element over it
+	const overMe = e => {
+		const id = e.target.parentElement.id
+
+		if (id && id.search('---li')) {
+			const temp = id.split('---')
+			if (temp[0] !== dragedOverElement) {
+				setDragedOverElement(temp[0])
+			}
+		} else if (dragedElement !== '') setDragedElement('')
+	}
+	//For setting elementId which is dragged
+	const dragged = id => (id !== dragedElement ? setDragedElement(id) : null)
 
 	//For making list of elements, and showing the list
 	const showLayers = data => {
@@ -128,7 +144,13 @@ const Layers = () => {
 			<ul className='show-ul'>
 				{data.map(e => {
 					return (
-						<li key={uuid()}>
+						<li
+							id={e[1].id + '---li'}
+							key={uuid()}
+							draggable={true}
+							onDragOver={overMe}
+							onDragEnd={() => dragged(e[1].id)}
+							onDragLeave={() => setChangedElementOrder(true)}>
 							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' || e[0] === 'list Item' ? (
 								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
 									{e[2] && e[1].showChildren ? '▼' : '▶'}
