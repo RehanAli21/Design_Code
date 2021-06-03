@@ -5,7 +5,9 @@ import { PageContext } from './Contexts/PageContext'
 const Layers = () => {
 	let oldDragOverElement = ''
 	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc } = useContext(PageContext)
-	const [dragedElement, setDragedElement] = useState('')
+	let dragedElement = ''
+	let overDragElement = ''
+	const [ele, setEle] = useState([])
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -126,27 +128,75 @@ const Layers = () => {
 
 	//For setting elementId which has element over it (this element will be parent)
 	const overMe = id => {
-		//the condition is dragElement should not be empty
-		//current hover element should not be drageELement
 		//current hover element should not be same as previous hoverd element
-		if (dragedElement !== '' && dragedElement !== id && id !== oldDragOverElement) {
-			console.log(dragedElement, id)
+		if (id !== oldDragOverElement) {
+			overDragElement = id
+			console.log(dragedElement, overDragElement, 'over')
 			oldDragOverElement = id
 		}
 	}
 	//For setting elementId which is dragged (this element will be child)
-	const dragged = id => (id !== dragedElement ? setDragedElement(id) : null)
+	const dragged = id => (id !== dragedElement ? (dragedElement = id) : null)
+
+	const makeParentChild = () => {
+		if (dragedElement !== '' && overDragElement !== '' && dragedElement !== overDragElement) {
+			const temp = Object.assign({}, pages)
+
+			findChild(temp[activePage], dragedElement)
+
+			if (ele.length > 0) {
+				temp[activePage] = removeChild(temp[activePage], dragedElement)
+
+				temp[activePage] = findAndInsert(temp[activePage], overDragElement, ele)
+
+				setPages(temp)
+			}
+		}
+	}
 
 	const findChild = (arr, id) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
-				return e
+				setEle(e)
+				return true
 			} else if (e[2]) {
 				const ele = findChild(e[2], id)
 				if (ele) return ele
 			}
 		})
 		return false
+	}
+
+	const removeChild = (arr, id) => {
+		const data = []
+
+		arr.forEach(e => {
+			if (e[2]) {
+				removeChild(e[2], id)
+			}
+			if (e[1].id !== id) {
+				data.push(e)
+			}
+		})
+
+		return data
+	}
+
+	const findAndInsert = (children, id, element) => {
+		//Iterating each child in children array
+		children.forEach(child => {
+			//if parent found by id, then insert element into children
+			if (child[2] && child[1].id === id) {
+				child[2].push(element)
+				return children
+			}
+			//else if there is children, then find into children recusively
+			else if (child[2] && child[2].length > 0) {
+				findAndInsert(child[2], id, element)
+			}
+		})
+
+		return children
 	}
 
 	//For making list of elements, and showing the list
@@ -156,11 +206,12 @@ const Layers = () => {
 				{data.map(e => {
 					return (
 						<li
-							id={e[1].id + '---li'}
-							key={uuid()}
 							draggable={true}
 							onDragOver={() => overMe(e[1].id)}
-							onDragStart={() => dragged(e[1].id)}>
+							onDragStart={() => dragged(e[1].id)}
+							onDragEnd={makeParentChild}
+							id={e[1].id + '---li'}
+							key={uuid()}>
 							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' || e[0] === 'list Item' ? (
 								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
 									{e[2] && e[1].showChildren ? '▼' : '▶'}
