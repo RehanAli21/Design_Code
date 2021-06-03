@@ -279,17 +279,11 @@ const InputProperties = () => {
 					<Tip
 						msg={[
 							'Separete Line will send input on different row',
-							<hr className='tipHr' />,
 							'Type sets different type of input',
-							<hr className='tipHr' />,
 							'Placeholder is a text user can see and when user type on it the text will be gone',
-							<hr className='tipHr' />,
 							'Max Char sets maximum characters allowed to type',
-							<hr className='tipHr' />,
 							'Text Color for changing color of text',
-							<hr className='tipHr' />,
 							'Cursor for changing mouse icon/poiniter',
-							<hr className='tipHr' />,
 							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
 						]}
 					/>

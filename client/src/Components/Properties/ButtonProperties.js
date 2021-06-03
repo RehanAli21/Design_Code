@@ -101,13 +101,9 @@ const ButtonProperties = () => {
 					<Tip
 						msg={[
 							'Name is an unique identity for this element',
-							<hr className='tipHr' />,
 							'Text for text of button',
-							<hr className='tipHr' />,
 							'Cursor for changing mouse icon/poiniter',
-							<hr className='tipHr' />,
 							'Separete Line will send button on different row',
-							<hr className='tipHr' />,
 							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
 						]}
 					/>

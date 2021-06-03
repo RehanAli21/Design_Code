@@ -945,9 +945,11 @@ nav .d-v button:hover {
 	border-radius: 5px;
 	z-index: 9;
 }
-.tipHr {
-	margin: 5px 0px;
-	border-color: white;
+.tipbb {
+	padding: 5px 0px;
+	border: none;
+	border-bottom: 2px solid white;
+	display: block;
 }
 .tipDiv:hover .tipText {
 	display: block;

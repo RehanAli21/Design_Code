@@ -491,7 +491,6 @@ const Position = () => {
 				<Tip
 					msg={[
 						'Position for applying different positions',
-						<hr className='tipHr' />,
 						'Z-Index for bring element forword or backword',
 					]}
 				/>

@@ -58,9 +58,7 @@ const ClickAStateProperties = () => {
 				<Tip
 					msg={[
 						'These properties will apply on the selected element, when this element is clicked',
-						<hr className='tipHr' />,
 						"Element can be selected by it's name",
-						<hr className='tipHr' />,
 						'Note: you can not select elements own name',
 					]}
 				/>

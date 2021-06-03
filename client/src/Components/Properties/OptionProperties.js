@@ -131,11 +131,8 @@ const OptionProperties = () => {
 				<Tip
 					msg={[
 						'Name is an unique identity for this element',
-						<hr className='tipHr' />,
 						'Color for changing background color',
-						<hr className='tipHr' />,
 						'Text for changing text of option',
-						<hr className='tipHr' />,
 						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
 					]}
 				/>

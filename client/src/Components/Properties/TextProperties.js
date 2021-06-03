@@ -143,15 +143,10 @@ const TextProperties = () => {
 					<Tip
 						msg={[
 							'Name is an unique identity for this element',
-							<hr className='tipHr' />,
 							'Type sets different type of text',
-							<hr className='tipHr' />,
 							'Cursor for changing mouse icon/poiniter',
-							<hr className='tipHr' />,
 							'Text for write text',
-							<hr className='tipHr' />,
 							'Same Line: if you want text on same row as other element then activate it.',
-							<hr className='tipHr' />,
 							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
 						]}
 					/>

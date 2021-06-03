@@ -149,15 +149,10 @@ const ImageProperties = () => {
 					<Tip
 						msg={[
 							'Separete Line will send button on different row',
-							<hr className='tipHr' />,
 							'Name is an unique identity for this element',
-							<hr className='tipHr' />,
 							'Img for choosing image from your computer',
-							<hr className='tipHr' />,
 							'Cursor for changing mouse icon/poiniter',
-							<hr className='tipHr' />,
 							'Alt text will be shown to user if img is not available',
-							<hr className='tipHr' />,
 							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
 						]}
 					/>

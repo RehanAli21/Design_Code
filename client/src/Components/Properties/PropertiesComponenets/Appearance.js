@@ -695,13 +695,9 @@ const Appearance = () => {
 				<Tip
 					msg={[
 						'Color controls background color',
-						<hr className='tipHr' />,
 						'InnerX control horizontal inner space',
-						<hr className='tipHr' />,
 						'InnerY control vertical inner space',
-						<hr className='tipHr' />,
 						'Border controls border of element',
-						<hr className='tipHr' />,
 						'Shadow controls shadow of element',
 					]}
 				/>

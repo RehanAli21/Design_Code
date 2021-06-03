@@ -141,13 +141,9 @@ const Text = () => {
 				<Tip
 					msg={[
 						'text color for applying color on text',
-						<hr className='tipHr' />,
 						'L for letter spacing',
-						<hr className='tipHr' />,
 						'W for word spacing',
-						<hr className='tipHr' />,
 						'H for line height',
-						<hr className='tipHr' />,
 						'Text Shadow for applying shadow on text',
 					]}
 				/>

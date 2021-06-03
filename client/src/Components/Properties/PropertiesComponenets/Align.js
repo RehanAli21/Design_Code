@@ -203,9 +203,7 @@ const Align = () => {
 				<Tip
 					msg={[
 						"This component is for alignment of the elements it changes according to element and it's style.",
-						<hr className='tipHr' style={{ display: isDiv ? 'block' : 'none' }} />,
 						isDiv ? "Self Align is for element's own alignment, and " : '',
-						<hr className='tipHr' />,
 						isDiv && !isDivGrid
 							? "Object Align is for element's children (inner elements) alignment"
 							: isDivGrid

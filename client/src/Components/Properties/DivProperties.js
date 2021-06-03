@@ -620,15 +620,10 @@ const DivProperties = () => {
 				<Tip
 					msg={[
 						'Name is an unique identity for this element',
-						<hr className='tipHr' />,
 						'Overflow for showing or hiding elements which are going out of div boundries',
-						<hr className='tipHr' />,
 						'Cursor for changing mouse icon/poiniter',
-						<hr className='tipHr' />,
 						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
-						<hr className='tipHr' />,
 						'Background Img is for applying image on background',
-						<hr className='tipHr' />,
 						'Rows/Columns for applying layout by adding rows and columns',
 					]}
 				/>

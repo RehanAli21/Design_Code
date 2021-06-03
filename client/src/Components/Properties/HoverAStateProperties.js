@@ -58,9 +58,7 @@ const HoverAStateProperties = () => {
 				<Tip
 					msg={[
 						'These properties will apply on the selected element, when mouse is on this element',
-						<hr className='tipHr' />,
 						"Element can be selected by it's name",
-						<hr className='tipHr' />,
 						'Note: you can not select elements own name',
 					]}
 				/>

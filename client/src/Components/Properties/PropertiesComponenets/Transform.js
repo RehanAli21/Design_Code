@@ -280,11 +280,8 @@ const Transform = () => {
 				<Tip
 					msg={[
 						'W controls the width with different units',
-						<hr className='tipHr' />,
 						'H controls the height with different units',
-						<hr className='tipHr' />,
 						'X controls space on left side with different units',
-						<hr className='tipHr' />,
 						'Y controls space on Upper side with different units',
 					]}
 				/>
@@ -363,7 +360,6 @@ const Transform = () => {
 								setMarginLeft(e.target.value)
 							}
 						}}
-						
 					/>
 					<select id='a-t-mlu' onChange={e => setMLUnit(e.target.value)}>
 						<option value='em'>EM</option>
@@ -385,7 +381,6 @@ const Transform = () => {
 								setMarginTop(e.target.value)
 							}
 						}}
-						
 					/>
 					<select id='a-t-mtu' onChange={e => setMTUnit(e.target.value)}>
 						<option value='em'>EM</option>

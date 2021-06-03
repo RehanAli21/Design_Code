@@ -136,13 +136,9 @@ const ListProperties = () => {
 				<Tip
 					msg={[
 						'Same Line: if you want list on same row as other element then activate it.',
-						<hr className='tipHr' />,
 						'Name is an unique identity for this element',
-						<hr className='tipHr' />,
 						'Bullets for changing list bullet type',
-						<hr className='tipHr' />,
 						'Cursor for changing mouse icon/poiniter',
-						<hr className='tipHr' />,
 						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
 					]}
 				/>
