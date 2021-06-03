@@ -7,7 +7,7 @@ const Layers = () => {
 	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc } = useContext(PageContext)
 	let dragedElement = ''
 	let overDragElement = ''
-	const [ele, setEle] = useState([])
+	let ele = []
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -149,6 +149,8 @@ const Layers = () => {
 
 				temp[activePage] = findAndInsert(temp[activePage], overDragElement, ele)
 
+				ele = []
+
 				setPages(temp)
 			}
 		}
@@ -157,7 +159,7 @@ const Layers = () => {
 	const findChild = (arr, id) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
-				setEle(e)
+				ele = e
 				return true
 			} else if (e[2]) {
 				const ele = findChild(e[2], id)
