@@ -144,15 +144,25 @@ const Layers = () => {
 	//This event trigger when an element is over another element
 	document.addEventListener('dragover', e => {
 		const id = e.target.id
+
 		//checking if this element is the element which uses drag and makeChild funtionality
 		//by special identifier which is putting in the elemnt's id
 		if (id && id.search('---')) {
 			const temp = id.split('---')
 			//for indicating the hovered element
-			document.getElementById(temp[0] + '---li').style.backgroundColor = 'red'
-			document.getElementById(temp[0] + '---p').style.backgroundColor = 'red'
-			document.getElementById(temp[0] + '---arrow').style.backgroundColor = 'red'
-			document.getElementById(temp[0] + '---x').style.backgroundColor = 'red'
+			if (temp[0] !== activePage) {
+				document.getElementById(temp[0] + '---li').style.backgroundColor = 'red'
+				document.getElementById(temp[0] + '---p').style.backgroundColor = 'red'
+				document.getElementById(temp[0] + '---arrow').style.backgroundColor = 'red'
+				document.getElementById(temp[0] + '---x').style.backgroundColor = 'red'
+				document.getElementById(temp[0] + '---li').style.color = 'white'
+				document.getElementById(temp[0] + '---p').style.color = 'white'
+				document.getElementById(temp[0] + '---arrow').style.color = 'white'
+				document.getElementById(temp[0] + '---x').style.color = 'white'
+			} else if (temp[0] === activePage) {
+				document.getElementById(temp[0] + '---').style.backgroundColor = 'red'
+				document.getElementById(temp[0] + '---').style.color = 'white'
+			}
 			//for setting dragedElement
 			//checking if this element is not already active with the help of oldDragOverElement
 			if (temp[0] !== oldDragOverElement) {
@@ -169,16 +179,49 @@ const Layers = () => {
 		if (id && id.search('---')) {
 			const temp = id.split('---')
 			//for normalize the style, which was changed by dragOver Event
-			document.getElementById(temp[0] + '---li').style.backgroundColor = ''
-			document.getElementById(temp[0] + '---p').style.backgroundColor = ''
-			document.getElementById(temp[0] + '---arrow').style.backgroundColor = ''
-			document.getElementById(temp[0] + '---x').style.backgroundColor = ''
+			if (temp[0] !== activePage) {
+				document.getElementById(temp[0] + '---li').style.backgroundColor = ''
+				document.getElementById(temp[0] + '---p').style.backgroundColor = ''
+				document.getElementById(temp[0] + '---arrow').style.backgroundColor = ''
+				document.getElementById(temp[0] + '---x').style.backgroundColor = ''
+				document.getElementById(temp[0] + '---li').style.color = ''
+				document.getElementById(temp[0] + '---p').style.color = ''
+				document.getElementById(temp[0] + '---arrow').style.color = ''
+				document.getElementById(temp[0] + '---x').style.color = ''
+			} else if (temp[0] === activePage) {
+				document.getElementById(temp[0] + '---').style.backgroundColor = ''
+				document.getElementById(temp[0] + '---').style.color = ''
+			}
 		}
 	})
 
 	const makeParentChild = () => {
 		//checking dragedElement and overDragElement is not empty and small to each other
 		if (dragedElement !== '' && overDragElement !== '' && dragedElement !== overDragElement) {
+			const child = document.getElementById(dragedElement)
+			const parent = document.getElementById(overDragElement)
+
+			if (parent && child) {
+				if (parent.tagName === 'SELECT' && child.tagName !== 'OPTION') return
+				if ((parent.tagName === 'OL' || parent.tagName === 'UL') && child.tagName !== 'LI') return
+			}
+			if (parent) {
+				if (
+					parent.tagName === 'BUTTON' ||
+					parent.tagName === 'INPUT' ||
+					parent.tagName === 'H1' ||
+					parent.tagName === 'H2' ||
+					parent.tagName === 'H3' ||
+					parent.tagName === 'H4' ||
+					parent.tagName === 'H5' ||
+					parent.tagName === 'A' ||
+					parent.tagName === 'P' ||
+					parent.tagName === 'IMG'
+				) {
+					return
+				}
+			}
+
 			//using function for checking, weather the dragedElement is not parent element
 			const found = findIfChildIsParent()
 			//if found is false then dragedElement is not parent Element
@@ -187,12 +230,20 @@ const Layers = () => {
 				const temp = Object.assign({}, pages)
 				//using function to find dragedElement in temp
 				findChild(temp[activePage], dragedElement)
+
 				//checking if element is found
 				if (ele.length > 0) {
 					//using function for filtering temp's children
 					temp[activePage] = removeChild(temp[activePage], dragedElement)
-					//using function for inserting the element to it's position
-					findAndInsert(temp[activePage], overDragElement, ele)
+
+					//if overDragElement(parent element) is top level element,
+					//then simply add it into top level children
+					if (overDragElement === activePage) {
+						temp[activePage].push(ele)
+					} else if (overDragElement !== activePage) {
+						//using function for inserting the element to it's position
+						findAndInsert(temp[activePage], overDragElement, ele)
+					}
 					//ele become empty after using element in it
 					ele = []
 					//now setting pages new data
@@ -257,6 +308,8 @@ const Layers = () => {
 				temp[2] = children
 				//storing in main array
 				data.push(temp)
+			} else if (e[1].id !== id) {
+				data.push(e)
 			}
 		})
 		//return the filtered array
@@ -315,7 +368,11 @@ const Layers = () => {
 	return (
 		<div className='layers'>
 			<div>
-				<p className={activePage === activeElement ? 'bg-blue ' : ''} onClick={() => setActiveElement(activePage)}>
+				<p
+					draggable={true}
+					id={activePage + '---'}
+					className={activePage === activeElement ? 'bg-blue ' : ''}
+					onClick={() => setActiveElement(activePage)}>
 					{toCapitalize(activePage)}
 				</p>
 				<button onClick={undoFunc}>U</button>
