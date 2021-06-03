@@ -4,6 +4,7 @@ import { PageContext } from './Contexts/PageContext'
 
 const Layers = () => {
 	let oldDragOverElement = ''
+	let oldDragElement = ''
 	const { pages, setPages, activePage, activeElement, setActiveElement, setHistory, undoFunc } = useContext(PageContext)
 	let dragedElement = ''
 	let overDragElement = ''
@@ -126,17 +127,41 @@ const Layers = () => {
 		}
 	}
 
-	//For setting elementId which has element over it (this element will be parent)
-	const overMe = id => {
-		//current hover element should not be same as previous hoverd element
-		if (id !== oldDragOverElement) {
-			overDragElement = id
-			console.log(dragedElement, overDragElement, 'over')
-			oldDragOverElement = id
+	document.addEventListener('dragstart', e => {
+		const id = e.target.id
+		if (id && id.search('---li')) {
+			const temp = id.split('---')
+			if (oldDragElement !== temp[0]) {
+				dragedElement = temp[0]
+				oldDragElement = temp[0]
+			}
 		}
-	}
-	//For setting elementId which is dragged (this element will be child)
-	const dragged = id => (id !== dragedElement ? (dragedElement = id) : null)
+	})
+
+	document.addEventListener('dragover', e => {
+		const id = e.target.id
+		if (id && id.search('---')) {
+			const temp = id.split('---')
+			document.getElementById(temp[0] + '---li').style.backgroundColor = 'red'
+			document.getElementById(temp[0] + '---p').style.backgroundColor = 'red'
+			document.getElementById(temp[0] + '---arrow').style.backgroundColor = 'red'
+			document.getElementById(temp[0] + '---x').style.backgroundColor = 'red'
+			if (temp[0] !== oldDragOverElement) {
+				overDragElement = temp[0]
+				oldDragOverElement = temp[0]
+			}
+		}
+	})
+	document.addEventListener('dragleave', e => {
+		const id = e.target.id
+		if (id && id.search('---')) {
+			const temp = id.split('---')
+			document.getElementById(temp[0] + '---li').style.backgroundColor = ''
+			document.getElementById(temp[0] + '---p').style.backgroundColor = ''
+			document.getElementById(temp[0] + '---arrow').style.backgroundColor = ''
+			document.getElementById(temp[0] + '---x').style.backgroundColor = ''
+		}
+	})
 
 	const makeParentChild = () => {
 		if (dragedElement !== '' && overDragElement !== '' && dragedElement !== overDragElement) {
@@ -152,6 +177,8 @@ const Layers = () => {
 				ele = []
 
 				setPages(temp)
+				dragedElement = ''
+				overDragElement = ''
 			}
 		}
 	}
@@ -173,10 +200,8 @@ const Layers = () => {
 		const data = []
 
 		arr.forEach(e => {
-			if (e[2]) {
+			if (e[1].id !== id && e[2]) {
 				removeChild(e[2], id)
-			}
-			if (e[1].id !== id) {
 				data.push(e)
 			}
 		})
@@ -209,8 +234,8 @@ const Layers = () => {
 					return (
 						<li
 							draggable={true}
-							onDragOver={() => overMe(e[1].id)}
-							onDragStart={() => dragged(e[1].id)}
+							// onDragOver={() => overMe(e[1].id)}
+							// onDragStart={() => dragged(e[1].id)}
 							onDragEnd={makeParentChild}
 							id={e[1].id + '---li'}
 							key={uuid()}>
@@ -222,14 +247,15 @@ const Layers = () => {
 								<button className='no-layer'></button>
 							)}
 							<p
+								id={e[1].id + '---p'}
 								className={e[1].id === activeElement ? 'bg-blue ' : ''}
 								onClick={() => changeActiveElement(`${e[1].id}`)}>
 								{e[1].name}
 							</p>
-							<button onClick={() => levelUp(`${e[1].id}`)} className='btn'>
+							<button id={e[1].id + '---arrow'} onClick={() => levelUp(`${e[1].id}`)} className='btn'>
 								^
 							</button>
-							<button onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
+							<button id={e[1].id + '---x'} onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
 								X
 							</button>
 							{e[2] && e[1].showChildren ? showLayers(e[2]) : null}

@@ -363,9 +363,9 @@ nav .d-v button:hover {
 	list-style: none;
 }
 .layers ul li {
-	padding: 2px 0px;
 	margin-left: 10px;
 	width: 130px;
+	padding: 2px 0px;
 	color: var(--text-active-color);
 	font-weight: bold;
 	display: grid;
