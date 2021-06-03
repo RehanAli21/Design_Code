@@ -127,8 +127,12 @@ const Layers = () => {
 		}
 	}
 
+	//Adding event listeners for drag and makechild funtionality
+	//This event trigger when user drag an element
 	document.addEventListener('dragstart', e => {
 		const id = e.target.id
+		//checking if this element is the element which uses drag and makeChild funtionality
+		//by special identifier which is putting in the elemnt's id
 		if (id && id.search('---li')) {
 			const temp = id.split('---')
 			if (oldDragElement !== temp[0]) {
@@ -137,25 +141,34 @@ const Layers = () => {
 			}
 		}
 	})
-
+	//This event trigger when an element is over another element
 	document.addEventListener('dragover', e => {
 		const id = e.target.id
+		//checking if this element is the element which uses drag and makeChild funtionality
+		//by special identifier which is putting in the elemnt's id
 		if (id && id.search('---')) {
 			const temp = id.split('---')
+			//for indicating the hovered element
 			document.getElementById(temp[0] + '---li').style.backgroundColor = 'red'
 			document.getElementById(temp[0] + '---p').style.backgroundColor = 'red'
 			document.getElementById(temp[0] + '---arrow').style.backgroundColor = 'red'
 			document.getElementById(temp[0] + '---x').style.backgroundColor = 'red'
+			//for setting dragedElement
+			//checking if this element is not already active with the help of oldDragOverElement
 			if (temp[0] !== oldDragOverElement) {
 				overDragElement = temp[0]
 				oldDragOverElement = temp[0]
 			}
 		}
 	})
+	//This event triggers when an element leave the hovering
 	document.addEventListener('dragleave', e => {
 		const id = e.target.id
+		//checking if this element is the element which uses drag and makeChild funtionality
+		//by special identifier which is putting in the elemnt's id
 		if (id && id.search('---')) {
 			const temp = id.split('---')
+			//for normalize the style, which was changed by dragOver Event
 			document.getElementById(temp[0] + '---li').style.backgroundColor = ''
 			document.getElementById(temp[0] + '---p').style.backgroundColor = ''
 			document.getElementById(temp[0] + '---arrow').style.backgroundColor = ''
@@ -164,48 +177,89 @@ const Layers = () => {
 	})
 
 	const makeParentChild = () => {
+		//checking dragedElement and overDragElement is not empty and small to each other
 		if (dragedElement !== '' && overDragElement !== '' && dragedElement !== overDragElement) {
-			const temp = Object.assign({}, pages)
-
-			findChild(temp[activePage], dragedElement)
-
-			if (ele.length > 0) {
-				temp[activePage] = removeChild(temp[activePage], dragedElement)
-
-				temp[activePage] = findAndInsert(temp[activePage], overDragElement, ele)
-
-				ele = []
-
-				setPages(temp)
-				dragedElement = ''
-				overDragElement = ''
+			//using function for checking, weather the dragedElement is not parent element
+			const found = findIfChildIsParent()
+			//if found is false then dragedElement is not parent Element
+			if (!found) {
+				//storing pages data into temp variable
+				const temp = Object.assign({}, pages)
+				//using function to find dragedElement in temp
+				findChild(temp[activePage], dragedElement)
+				//checking if element is found
+				if (ele.length > 0) {
+					//using function for filtering temp's children
+					temp[activePage] = removeChild(temp[activePage], dragedElement)
+					//using function for inserting the element to it's position
+					findAndInsert(temp[activePage], overDragElement, ele)
+					//ele become empty after using element in it
+					ele = []
+					//now setting pages new data
+					setPages(temp)
+					//empty the dragedElement and overDrageElement after using them
+					dragedElement = ''
+					overDragElement = ''
+				}
 			}
 		}
 	}
 
+	//for checking if the child is not hover by it's parent
+	const findIfChildIsParent = () => {
+		//finding element by it's id which is stored in overDragElement
+		const ele = document.getElementById(overDragElement)
+		//checking if there is a element
+		if (ele) {
+			//setting parent of the child
+			let parent = ele.parentElement
+			//iterating over parent and it's parent
+			while (parent && parent.id !== activePage && parent.id !== '') {
+				//if dragedElement is the parent element then return true
+				if (parent.id === dragedElement) return true
+				//if parent element has a parent then setting it's parent
+				if (parent.parentElement) parent = parent.parentElement
+			}
+		}
+		//returning false if child is not hovered by it's parent
+		return false
+	}
+
+	//for finding the child
 	const findChild = (arr, id) => {
+		//iterating over elements
 		arr.forEach(e => {
+			//if element's id = id, then it's the element we are finding
 			if (e[1].id === id) {
-				ele = e
+				ele = e //storing element into global variable ele
 				return true
 			} else if (e[2]) {
-				const ele = findChild(e[2], id)
-				if (ele) return ele
+				const found = findChild(e[2], id)
+				if (found) return true
 			}
 		})
 		return false
 	}
 
+	//for removing child
 	const removeChild = (arr, id) => {
-		const data = []
-
+		const data = [] //for storing elements
+		//iterating over elements
 		arr.forEach(e => {
+			//if element's id is not the param id and
+			//if there is children of this element
 			if (e[1].id !== id && e[2]) {
-				removeChild(e[2], id)
-				data.push(e)
+				//storing children after filtering
+				const children = removeChild(e[2], id)
+				//storing elmenet
+				const temp = e
+				//chaning stored element's children to new children
+				temp[2] = children
+				//storing in main array
+				data.push(temp)
 			}
 		})
-
+		//return the filtered array
 		return data
 	}
 
@@ -215,15 +269,13 @@ const Layers = () => {
 			//if parent found by id, then insert element into children
 			if (child[2] && child[1].id === id) {
 				child[2].push(element)
-				return children
+				return true
 			}
 			//else if there is children, then find into children recusively
 			else if (child[2] && child[2].length > 0) {
-				findAndInsert(child[2], id, element)
+				if (findAndInsert(child[2], id, element)) return true
 			}
 		})
-
-		return children
 	}
 
 	//For making list of elements, and showing the list
@@ -232,13 +284,7 @@ const Layers = () => {
 			<ul className='show-ul'>
 				{data.map(e => {
 					return (
-						<li
-							draggable={true}
-							// onDragOver={() => overMe(e[1].id)}
-							// onDragStart={() => dragged(e[1].id)}
-							onDragEnd={makeParentChild}
-							id={e[1].id + '---li'}
-							key={uuid()}>
+						<li draggable={true} onDragEnd={makeParentChild} id={e[1].id + '---li'} key={uuid()}>
 							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' || e[0] === 'list Item' ? (
 								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
 									{e[2] && e[1].showChildren ? '▼' : '▶'}
