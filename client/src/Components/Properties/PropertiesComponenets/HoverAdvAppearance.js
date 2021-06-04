@@ -593,19 +593,19 @@ const HoverAdvAppearance = () => {
 								<p>Sides: </p>
 								<div style={{ marginTop: '5px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
 									<button className={bSide === 'all' ? 'bb' : ''} onClick={allBorder}>
-										A
+										<span className={'gg-border-all ' + (bSide === 'all' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'top' ? 'bb' : ''} onClick={topBorder}>
-										T
+										<span className={'gg-border-top ' + (bSide === 'top' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'bottom' ? 'bb' : ''} onClick={bottomBorder}>
-										B
+										<span className={'gg-border-bottom ' + (bSide === 'bottom' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'left' ? 'bb' : ''} onClick={leftBorder}>
-										L
+										<span className={'gg-border-left ' + (bSide === 'left' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'right' ? 'bb' : ''} onClick={rightBorder}>
-										R
+										<span className={'gg-border-right ' + (bSide === 'right' ? 'activespan' : null)}></span>
 									</button>
 								</div>
 							</div>

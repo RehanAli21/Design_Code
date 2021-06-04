@@ -293,15 +293,15 @@ const Font = () => {
 				{showTemplateFonts()}
 				<button
 					onClick={() => setFontStyle(!fontStyle)}
-					style={{ fontStyle: 'italic' }}
+					style={{ paddingLeft: '15px' }}
 					className={fontStyle ? 'font-btns' : ''}>
-					I
+					<span className='gg-format-italic'></span>
 				</button>
 				<button
 					onClick={() => setTextDecoration(!textDecoration)}
-					style={{ textDecoration: 'underline' }}
+					style={{ paddingLeft: '12px' }}
 					className={textDecoration ? 'font-btns' : ''}>
-					U
+					<span className='gg-format-underline'></span>
 				</button>
 			</div>
 			<div style={{ display: showFontProperties ? 'grid' : 'none' }} className='three'>

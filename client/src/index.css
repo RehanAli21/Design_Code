@@ -571,8 +571,17 @@ nav .d-v button:hover {
 	grid-template-columns: auto 40px 40px 40px 40px;
 }
 .propertybar .align-ul li button {
-	padding: 2px 4px;
+	padding: 10px 4px;
+	padding-top: 15px;
+	height: 27px;
+	text-align: center;
 	outline: none;
+}
+.propertybar .align-ul li button span {
+	margin-left: 5px;
+}
+.propertybar .align-ul li button .activespan {
+	color: var(--main-blue);
 }
 .propertybar .div-property .one > button {
 	float: right;
@@ -698,6 +707,15 @@ nav .d-v button:hover {
 }
 .propertybar .ap .ap-borders .b button {
 	outline: none;
+	padding-left: 10px;
+}
+.propertybar .ap .ap-borders .b button:hover {
+	background-color: var(--main-blue);
+	color: white !important;
+	border-color: var(--main-blue);
+}
+.propertybar .ap .ap-borders .b button .activespan {
+	color: var(--main-blue);
 }
 .propertybar .bb {
 	border-color: var(--main-blue);

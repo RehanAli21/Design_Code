@@ -218,32 +218,41 @@ const Align = () => {
 				<ul className='align-ul'>
 					<li style={{ display: isDiv ? 'grid' : 'none' }} className='one'>
 						<label>Self Align: </label>
-						<button className={selfAlign === 'left' ? 'bb' : 'none'} onClick={() => setSelfAlign('left')}>
-							L
+						<button
+							style={{ paddingTop: '5px' }}
+							className={selfAlign === 'left' ? 'bb' : 'none'}
+							onClick={() => setSelfAlign('left')}>
+							<span className={'gg-align-left ' + (selfAlign === 'left' ? 'activespan' : null)}></span>
 						</button>
-						<button className={selfAlign === 'center' ? 'bb' : 'none'} onClick={() => setSelfAlign('center')}>
-							C
+						<button
+							style={{ paddingTop: '5px' }}
+							className={selfAlign === 'center' ? 'bb' : 'none'}
+							onClick={() => setSelfAlign('center')}>
+							<span className={'gg-align-center ' + (selfAlign === 'center' ? 'activespan' : null)}></span>
 						</button>
-						<button className={selfAlign === 'right' ? 'bb' : 'none'} onClick={() => setSelfAlign('right')}>
-							R
+						<button
+							style={{ paddingTop: '5px' }}
+							className={selfAlign === 'right' ? 'bb' : 'none'}
+							onClick={() => setSelfAlign('right')}>
+							<span className={'gg-align-right ' + (selfAlign === 'right' ? 'activespan' : null)}></span>
 						</button>
 					</li>
 					<li className='two' style={{ display: isDivGrid ? 'none' : 'grid' }}>
 						<label>{isDiv ? 'ObjectAlign: ' : 'Text Align: '}</label>
 						<button className={textAlign === 'left' ? 'bb' : 'none'} onClick={() => setTextAlign('left')}>
-							L
+							<span className={'gg-format-left ' + (textAlign === 'left' ? 'activespan' : null)}></span>
 						</button>
 						<button className={textAlign === 'center' ? 'bb' : 'none'} onClick={() => setTextAlign('center')}>
-							C
+							<span className={'gg-format-center ' + (textAlign === 'center' ? 'activespan' : null)}></span>
 						</button>
 						<button className={textAlign === 'right' ? 'bb' : 'none'} onClick={() => setTextAlign('right')}>
-							R
+							<span className={'gg-format-right ' + (textAlign === 'right' ? 'activespan' : null)}></span>
 						</button>
 						<button
 							style={{ display: isDiv ? 'none' : 'block' }}
 							className={textAlign === 'justify' ? 'bb' : 'none'}
 							onClick={() => setTextAlign('justify')}>
-							J
+							<span className={'gg-format-justify ' + (textAlign === 'justify' ? 'activespan' : null)}></span>
 						</button>
 					</li>
 				</ul>
