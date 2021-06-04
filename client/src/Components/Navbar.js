@@ -120,7 +120,9 @@ const Navbar = () => {
 
 	return (
 		<nav>
-			<h1>{'<'}</h1>
+			<h1>
+				<i className='gg-arrow-left-o'></i>
+			</h1>
 			<div className='page-div'>
 				<p onClick={() => setShow(!show)}>
 					{toCapitalize(activePage)}
@@ -129,7 +131,9 @@ const Navbar = () => {
 				{pageSection()}
 			</div>
 			<div className='d-v'>
-				<p onClick={() => setShowDefault(!showdefault)}>▼</p>
+				<p onClick={() => setShowDefault(!showdefault)}>
+					<span class='material-icons'>settings</span>
+				</p>
 				<div style={{ display: showdefault ? 'grid' : 'none' }}>
 					<button
 						onClick={() => {

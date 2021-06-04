@@ -116,7 +116,7 @@ const Layers = () => {
 	//For finding element and changing attribute value
 	const findAndChange = (arr, attribute, id) => {
 		for (let i = 0; i < arr.length; i++) {
-			if (arr[i][1].id === id) {
+			if (arr[i][1].id === id && arr[i][2] && arr[i][2].length > 0) {
 				arr[i][1][attribute] = !arr[i][1][attribute]
 				return true
 			} else if (arr[i][2]) {
@@ -340,7 +340,7 @@ const Layers = () => {
 						<li draggable={true} onDragEnd={makeParentChild} id={e[1].id + '---li'} key={uuid()}>
 							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' || e[0] === 'list Item' ? (
 								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
-									{e[2] && e[1].showChildren ? '▼' : '▶'}
+									{e[2] && e[1].showChildren && e[2].length > 0 ? '▼' : '▶'}
 								</button>
 							) : (
 								<button className='no-layer'></button>
