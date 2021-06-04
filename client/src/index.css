@@ -277,7 +277,7 @@ nav .d-v button:hover {
 
 .three-section {
 	display: grid;
-	grid-template-columns: 225px auto 280px;
+	grid-template-columns: 235px auto 280px;
 	height: 92.5vh;
 }
 
@@ -286,7 +286,7 @@ nav .d-v button:hover {
 	z-index: 1;
 	width: 140px;
 	height: 92.5vh;
-	left: 225px;
+	left: 235px;
 	background-color: var(--main-white);
 }
 .tools {
@@ -317,7 +317,7 @@ nav .d-v button:hover {
 	width: 100%;
 	overflow: scroll;
 	background-color: white;
-	margin-left: 15px;
+	padding-left: 15px;
 }
 .layers > div {
 	display: grid;
@@ -352,6 +352,9 @@ nav .d-v button:hover {
 	color: var(--main-blue);
 	border: 2px solid var(--main-blue);
 }
+.layers > ul {
+	margin-left: 0px !important;
+}
 .layers .show-ul {
 	display: block;
 }
@@ -361,11 +364,12 @@ nav .d-v button:hover {
 .layers ul {
 	width: 100%;
 	list-style: none;
+	border-left: 3px solid var(--main-blue);
+	margin-left: 10px;
 }
 .layers ul li {
-	margin-left: 10px;
 	width: 130px;
-	padding: 2px 0px;
+	margin: 2px 0px;
 	color: var(--text-active-color);
 	font-weight: bold;
 	display: grid;
@@ -376,16 +380,13 @@ nav .d-v button:hover {
 	padding: 2px 0px;
 	padding-left: 5px;
 	width: 100%;
-	border-left: 2px solid black;
 }
 .layers ul li p:hover {
 	cursor: pointer;
 	background-color: var(--main-blue);
 	color: white;
 }
-.layers ul li p:active {
-	transform: scale(0.95);
-}
+
 .bg-blue {
 	padding: 2px 0px;
 	padding-left: 4px;
@@ -399,7 +400,7 @@ nav .d-v button:hover {
 	font-size: 0.75rem;
 	border: none;
 	outline: none;
-	border-radius: 50%;
+	border-radius: 3px;
 	cursor: pointer;
 	margin-left: 5px;
 }
@@ -417,7 +418,6 @@ nav .d-v button:hover {
 	border: none;
 	outline: none;
 	cursor: pointer;
-	margin-left: 5px;
 }
 .layers ul li .layer-show:hover {
 	transform: scale(1.05);
@@ -433,7 +433,6 @@ nav .d-v button:hover {
 	border: none;
 	outline: none;
 	cursor: pointer;
-	margin-left: 5px;
 }
 
 .main-div {
