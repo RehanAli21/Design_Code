@@ -133,7 +133,9 @@ const BGImage = ({ width, activeElement, display }) => {
 					}}
 					type='checkbox'
 				/>
-				<label>Background Image: </label>
+				<label>
+					<span className='icon-n-s bi-image'></span> Background Image:{' '}
+				</label>
 			</div>
 			<div style={{ display: bgImg ? 'block' : 'none', marginBottom: '20px', marginTop: '10px' }} className='div-bg-img'>
 				<div className='two'>

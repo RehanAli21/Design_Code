@@ -651,7 +651,9 @@ const DivProperties = () => {
 					id='r-c-grid'
 					type='checkbox'
 				/>
-				<label>Rows / Columns</label>
+				<label>
+					<span className='icon-n-s bi-columns'></span> Rows / Columns
+				</label>
 			</div>
 			<div className='row-col-div' style={{ display: showDivProperties && grid ? 'grid' : 'none' }}>
 				<div className='margins two-rows'>

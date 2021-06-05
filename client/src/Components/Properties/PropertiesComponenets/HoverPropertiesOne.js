@@ -166,7 +166,9 @@ const HoverPropertiesOne = () => {
 					Reset All
 				</button>
 				<div className='two'>
-					<label>Duration: </label>
+					<label>
+						<span className='bi-stopwatch icon-n-s'></span> Duration:
+					</label>
 					<input
 						type='number'
 						className='numberinput'
@@ -183,7 +185,9 @@ const HoverPropertiesOne = () => {
 					/>
 				</div>
 				<div className='three'>
-					<label style={{ marginTop: '5px' }}>Text color: </label>
+					<label style={{ marginTop: '5px' }}>
+						<span className='bi-paint-bucket icon-n-s'></span> Text:
+					</label>
 					{showTemplateColors()}
 					<input
 						disabled={!showCustomTextColor}

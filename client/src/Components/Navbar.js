@@ -121,7 +121,7 @@ const Navbar = () => {
 	return (
 		<nav>
 			<h1>
-				<i className='gg-arrow-left-o'></i>
+				<i className='bi-arrow-left-circle'></i>
 			</h1>
 			<div className='page-div'>
 				<p onClick={() => setShow(!show)}>
@@ -132,7 +132,7 @@ const Navbar = () => {
 			</div>
 			<div className='d-v'>
 				<p onClick={() => setShowDefault(!showdefault)}>
-					<span class='material-icons'>settings</span>
+					<span className='bi-gear-fill'></span>
 				</p>
 				<div style={{ display: showdefault ? 'grid' : 'none' }}>
 					<button

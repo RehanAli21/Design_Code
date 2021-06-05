@@ -717,7 +717,9 @@ const Appearance = () => {
 					/>
 				</div>
 				<div className='padding md'>
-					<label>InnerX space: </label>
+					<label>
+						<span className='icon-n-s bi-distribute-horizontal'></span> Inner space:
+					</label>
 					<input
 						id='ap-paddingXInput'
 						onChange={e => {
@@ -740,7 +742,9 @@ const Appearance = () => {
 					</select>
 				</div>
 				<div className='padding md'>
-					<label>InnerY space: </label>
+					<label>
+						<span className='icon-n-s bi-distribute-vertical'></span> Inner space:
+					</label>
 					<input
 						id='ap-paddingYInput'
 						onChange={e => {
@@ -770,7 +774,7 @@ const Appearance = () => {
 							setShowBorderSection(e.target.checked)
 						}}
 					/>
-					<span>Border</span>
+					<span className='bi-border-all'> Border</span>
 					<div
 						style={{
 							display: showBorderSection ? 'block' : 'none',
@@ -792,7 +796,9 @@ const Appearance = () => {
 								/>
 							</div>
 							<div className='mds'>
-								<label>Size: </label>
+								<label>
+									<span className='bi-border-width'></span> Size:
+								</label>
 								<input
 									id='a-b-size'
 									onChange={e => {
@@ -810,7 +816,9 @@ const Appearance = () => {
 								/>
 							</div>
 							<div className='mds'>
-								<label>Radius: </label>
+								<label>
+									<span className='bi-app'></span> Radius:
+								</label>
 								<input
 									id='a-b-radius'
 									style={{ width: '100%' }}
@@ -830,7 +838,9 @@ const Appearance = () => {
 								/>
 							</div>
 							<div className='mds'>
-								<label>Type: </label>
+								<label>
+									<span style={{ fontSize: '16px' }} className='bi-border-style'></span> Styles:
+								</label>
 								<select
 									id='a-b-type'
 									onChange={e => {
@@ -847,19 +857,19 @@ const Appearance = () => {
 								<p>Sides: </p>
 								<div style={{ marginTop: '5px', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)' }}>
 									<button className={bSide === 'all' ? 'bb' : ''} onClick={allBorder}>
-										<span className={'gg-border-all ' + (bSide === 'all' ? 'activespan' : null)}></span>
+										<span className={'bi-border-outer ' + (bSide === 'all' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'top' ? 'bb' : ''} onClick={topBorder}>
-										<span className={'gg-border-top ' + (bSide === 'top' ? 'activespan' : null)}></span>
+										<span className={'bi-border-top ' + (bSide === 'top' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'bottom' ? 'bb' : ''} onClick={bottomBorder}>
-										<span className={'gg-border-bottom ' + (bSide === 'bottom' ? 'activespan' : null)}></span>
+										<span className={'bi-border-bottom ' + (bSide === 'bottom' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'left' ? 'bb' : ''} onClick={leftBorder}>
-										<span className={'gg-border-left ' + (bSide === 'left' ? 'activespan' : null)}></span>
+										<span className={'bi-border-left ' + (bSide === 'left' ? 'activespan' : null)}></span>
 									</button>
 									<button className={bSide === 'right' ? 'bb' : ''} onClick={rightBorder}>
-										<span className={'gg-border-right ' + (bSide === 'right' ? 'activespan' : null)}></span>
+										<span className={'bi-border-right ' + (bSide === 'right' ? 'activespan' : null)}></span>
 									</button>
 								</div>
 							</div>
@@ -875,7 +885,7 @@ const Appearance = () => {
 							setShowShadowSection(!showShadowSection)
 						}}
 					/>
-					<span>Shadow</span>
+					<span className='bi-back'> Shadow</span>
 					<div style={{ display: showShadowSection ? 'grid' : 'none' }}>
 						<div className='three'>
 							<div className='two'>

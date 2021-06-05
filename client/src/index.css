@@ -570,14 +570,10 @@ nav .d-v button:hover {
 	grid-template-columns: auto 40px 40px 40px 40px;
 }
 .propertybar .align-ul li button {
-	padding: 10px 4px;
-	padding-top: 15px;
-	height: 27px;
+	padding: 4px;
 	text-align: center;
 	outline: none;
-}
-.propertybar .align-ul li button span {
-	margin-left: 5px;
+	font-size: 16px;
 }
 .propertybar .align-ul li button .activespan {
 	color: var(--main-blue);
@@ -706,7 +702,7 @@ nav .d-v button:hover {
 }
 .propertybar .ap .ap-borders .b button {
 	outline: none;
-	padding-left: 10px;
+	font-size: 16px;
 }
 .propertybar .ap .ap-borders .b button:hover {
 	background-color: var(--main-blue);
@@ -936,6 +932,10 @@ nav .d-v button:hover {
 }
 .msgBox > button:active {
 	transform: scale(0.95);
+}
+/* for icons */
+.icon-n-s {
+	font-size: 18px !important;
 }
 
 /* for Tip/Help */

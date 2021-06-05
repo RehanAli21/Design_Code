@@ -35,7 +35,9 @@ const Cursor = ({ style }) => {
 
 	return (
 		<div style={{ display: style }} className='two'>
-			<label>Cursor:</label>
+			<label style={{ marginLeft: '-5px' }}>
+				<span className='bi-cursor icon-n-s'></span> Cursor
+			</label>
 			<select id='cursor-change-select' onChange={e => setCursor(e.target.value)}>
 				<option value='default'>default</option>
 				<option value='pointer'>pointer</option>

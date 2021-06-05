@@ -218,41 +218,42 @@ const Align = () => {
 				<ul className='align-ul'>
 					<li style={{ display: isDiv ? 'grid' : 'none' }} className='one'>
 						<label>Self Align: </label>
-						<button
-							style={{ paddingTop: '5px' }}
-							className={selfAlign === 'left' ? 'bb' : 'none'}
-							onClick={() => setSelfAlign('left')}>
-							<span className={'gg-align-left ' + (selfAlign === 'left' ? 'activespan' : null)}></span>
+						<button className={selfAlign === 'left' ? 'bb' : 'none'} onClick={() => setSelfAlign('left')}>
+							<span className={'bi-align-start ' + (selfAlign === 'left' ? 'activespan' : null)}></span>
 						</button>
-						<button
-							style={{ paddingTop: '5px' }}
-							className={selfAlign === 'center' ? 'bb' : 'none'}
-							onClick={() => setSelfAlign('center')}>
-							<span className={'gg-align-center ' + (selfAlign === 'center' ? 'activespan' : null)}></span>
+						<button className={selfAlign === 'center' ? 'bb' : 'none'} onClick={() => setSelfAlign('center')}>
+							<span className={'bi-align-middle ' + (selfAlign === 'center' ? 'activespan' : null)}></span>
 						</button>
-						<button
-							style={{ paddingTop: '5px' }}
-							className={selfAlign === 'right' ? 'bb' : 'none'}
-							onClick={() => setSelfAlign('right')}>
-							<span className={'gg-align-right ' + (selfAlign === 'right' ? 'activespan' : null)}></span>
+						<button className={selfAlign === 'right' ? 'bb' : 'none'} onClick={() => setSelfAlign('right')}>
+							<span className={'bi-align-end ' + (selfAlign === 'right' ? 'activespan' : null)}></span>
 						</button>
 					</li>
 					<li className='two' style={{ display: isDivGrid ? 'none' : 'grid' }}>
 						<label>{isDiv ? 'ObjectAlign: ' : 'Text Align: '}</label>
 						<button className={textAlign === 'left' ? 'bb' : 'none'} onClick={() => setTextAlign('left')}>
-							<span className={'gg-format-left ' + (textAlign === 'left' ? 'activespan' : null)}></span>
+							<span
+								className={
+									(isDiv ? 'bi-align-start ' : 'bi-text-left ') + (textAlign === 'left' ? 'activespan' : null)
+								}></span>
 						</button>
 						<button className={textAlign === 'center' ? 'bb' : 'none'} onClick={() => setTextAlign('center')}>
-							<span className={'gg-format-center ' + (textAlign === 'center' ? 'activespan' : null)}></span>
+							<span
+								className={
+									(isDiv ? 'bi-align-middle ' : 'bi-text-center ') +
+									(textAlign === 'center' ? 'activespan' : null)
+								}></span>
 						</button>
 						<button className={textAlign === 'right' ? 'bb' : 'none'} onClick={() => setTextAlign('right')}>
-							<span className={'gg-format-right ' + (textAlign === 'right' ? 'activespan' : null)}></span>
+							<span
+								className={
+									(isDiv ? 'bi-align-end ' : 'bi-text-right ') + (textAlign === 'right' ? 'activespan' : null)
+								}></span>
 						</button>
 						<button
 							style={{ display: isDiv ? 'none' : 'block' }}
 							className={textAlign === 'justify' ? 'bb' : 'none'}
 							onClick={() => setTextAlign('justify')}>
-							<span className={'gg-format-justify ' + (textAlign === 'justify' ? 'activespan' : null)}></span>
+							<span className={'bi-justify ' + (textAlign === 'justify' ? 'activespan' : null)}></span>
 						</button>
 					</li>
 				</ul>
