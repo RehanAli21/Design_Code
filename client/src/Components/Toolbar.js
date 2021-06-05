@@ -9,6 +9,7 @@ import Select from './Tools/Select'
 import List from './Tools/List'
 import Option from './Tools/Option'
 import ListItem from './Tools/ListItem'
+import Icon from './Tools/Icon'
 
 //This component is for showing list of elemenets,
 //which can be added.
@@ -66,6 +67,7 @@ const Toolbar = () => {
 					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} />
 					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} />
 					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} />
 				</React.Fragment>
 			)
 		} else if (ele.tagName === 'UL' || ele.tagName === 'OL') {
@@ -85,6 +87,7 @@ const Toolbar = () => {
 				<React.Fragment>
 					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
 					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} />
 				</React.Fragment>
 			)
 		} else {

@@ -3,21 +3,22 @@ import { PageContext } from '../Contexts/PageContext'
 
 //for unique name
 let counter = 1
-//This component is for adding option element
-const Option = ({ findAndInsert, uniqueString }) => {
+//This component is for adding Icon element
+const Icon = ({ findAndInsert, uniqueString }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
-	const addOption = () => {
+	const addIcon = () => {
 		//Assigning new variable pages data,
-		//For inserting option element
+		//For inserting Icon element
 		const temp = Object.assign({}, pages)
-		//For holding all data of a option element
-		const option = [
-			'option',
+		//For holding all data of a Icon element
+		const Icon = [
+			'i',
 			{
-				name: `option${counter}`,
-				text: 'text',
+				name: `icon${counter}`,
 				id: uniqueString(),
+				text: '',
+				class: '',
 				styles: {
 					small: {},
 					medium: {},
@@ -34,19 +35,20 @@ const Option = ({ findAndInsert, uniqueString }) => {
 				clickStyle: {},
 			},
 		]
-		//if inserting option into body
+		//if inserting Icon into body
 		if (activeElement === activePage) {
-			temp[activePage].push(option)
+			temp[activePage].push(Icon)
 		} else {
-			temp[activePage] = findAndInsert(temp[activePage], activeElement, option)
+			temp[activePage] = findAndInsert(temp[activePage], activeElement, Icon)
 		}
+
 		counter++
 
 		//Assigning new data into pages data
 		setPages(temp)
 	}
 
-	return <p onClick={addOption}>Option</p>
+	return <p onClick={addIcon}>Icon</p>
 }
 
-export default Option
+export default Icon
