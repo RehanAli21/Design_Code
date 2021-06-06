@@ -33,8 +33,38 @@ const ButtonProperties = () => {
 		showBtnProperties,
 		setShowBtnProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { width, activeElement, pages, setPages, activePage, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 	const [separateLine, setSeparateLine] = useState(false)
+	const [indexOfText, setIndexOfText] = useState(1)
+	let maxTextIndex = 0
+
+	useEffect(() => {
+		const properties = FindProperties(pages[activePage], activeElement)
+
+		if (properties) {
+			maxTextIndex = properties[1]
+			const ele = document.getElementById('button-textIndex-input')
+			if (ele) {
+				//for setting max in input by button children length
+				ele.max = properties[1]
+				//for setting value by button indexOfText
+				ele.value = properties[0] + 1
+			}
+		}
+	})
+
+	//For finding IndexOfText and Children length
+	const FindProperties = (arr, id) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === id) {
+				return [arr[i][1].indexOfText, arr[i][2].length]
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				const properties = FindProperties(arr[i][2], id)
+				if (properties) return properties
+			}
+		}
+		return false
+	}
 
 	//For default values of display(separated line)
 	useEffect(() => {
@@ -112,6 +142,10 @@ const ButtonProperties = () => {
 				</p>
 				<Name style={showBtnProperties ? 'grid' : 'none'} />
 				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
+				<div className='two'>
+					<label>Text Index:</label>
+					<input type='number' id='button-textIndex-input' className='numberinput' min='0' />
+				</div>
 				<Cursor style={showBtnProperties ? 'grid' : 'none'} />
 				<GridColumn style={showBtnProperties ? 'grid' : 'none'} />
 				<div
