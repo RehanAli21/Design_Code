@@ -90,6 +90,12 @@ const Toolbar = () => {
 					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} />
 				</React.Fragment>
 			)
+		} else if (ele.tagName === 'BUTTON') {
+			return (
+				<React.Fragment>
+					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} />
+				</React.Fragment>
+			)
 		} else {
 			return
 		}

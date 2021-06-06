@@ -17,7 +17,6 @@ const Icon = ({ findAndInsert, uniqueString }) => {
 			{
 				name: `icon${counter}`,
 				id: uniqueString(),
-				text: '',
 				class: '',
 				styles: {
 					small: {},
@@ -31,8 +30,6 @@ const Icon = ({ findAndInsert, uniqueString }) => {
 					changedLarge: false,
 					changeXlarge: false,
 				},
-				hoverStyle: {},
-				clickStyle: {},
 			},
 		]
 		//if inserting Icon into body

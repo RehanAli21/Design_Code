@@ -19,6 +19,7 @@ const Button = ({ findAndInsert, uniqueString }) => {
 				id: uniqueString(),
 				text: 'button',
 				class: '',
+				indexOfText: 0,
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',
@@ -40,6 +41,7 @@ const Button = ({ findAndInsert, uniqueString }) => {
 				hoverStyle: {},
 				clickStyle: {},
 			},
+			[],
 		]
 		//if inserting Button into body
 		if (activeElement === activePage) {

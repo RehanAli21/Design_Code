@@ -172,26 +172,60 @@ const Page = () => {
 		const temp = []
 		//Iterating each element
 		arr.forEach(e => {
-			/**
-			 * Inserting elements into variable.
-			 * Using React.createElement func for creating elements
-			 * first parameter is element type
-			 * second parameter giving attributes for elements
-			 * third parameter for children, if there is children do recursion
-			 */
-			if (e[0] === 'div') {
-				temp.push(
-					React.createElement(
-						e[0],
-						{
-							key: uuid(),
-							id: e[1].id,
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
+			//checking if element is array or not (for button's text)
+			if (!Array.isArray(e)) temp.push(e)
+			else {
+				if (e[0] === 'div') {
+					temp.push(showElementsHelper(e, 'noType', 'children', 'class'))
+				} else if (e[0] === 'input') {
+					temp.push(showElementsHelper(e, 'noType', 'noChildren', 'class'))
+				} else if (e[0] === 'button') {
+					//This logic applied to add icons in the button
+					let children = [] //for storing children of button element
+					//checking if there is children of button element
+					if (e[2].length > 0) {
+						//assigning greater length to children for adding text
+						children = new Array(e[2].length + 1)
+						//iterating each element
+						for (let i = 0, j = 0; i < children.length; i++) {
+							//for adding text w.r.t indexOfText
+							if (i === e[1].indexOfText) {
+								children[i] = e[1].text
+							} else {
+								children[i] = e[2][j]
+								j++
+							}
+						}
+					} else if (e[2].length <= 0) {
+						//if no children, then add text only
+						children.push(e[1].text)
+					}
+					//new array to store element
+					const newElement = []
+					//copying element data into new Array
+					e.forEach(e => newElement.push(e))
+					//changing children of new Array
+					newElement[2] = children
+
+					temp.push(showElementsHelper(newElement, 'noType', 'children', 'class'))
+				} else if (e[0] === 'text' && e[1].type !== 'a') {
+					temp.push(showElementsHelper(e, 'type', 'text', 'class'))
+				} else if (e[0] === 'text' && e[1].type === 'a') {
+					temp.push(showElementsHelper(e, 'type', 'text', 'class'))
+				} else if (e[0] === 'img') {
+					temp.push(showElementsHelper(e, 'noType', 'noChildren', 'class'))
+				} else if (e[0] === 'select') {
+					temp.push(showElementsHelper(e, 'noType', 'children', 'class'))
+				} else if (e[0] === 'option') {
+					//The showElementsHelper does not used because,
+					//this is different and small
+					temp.push(
+						React.createElement(
+							e[0],
+							{
+								key: uuid(),
+								id: e[1].id,
+								style:
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -199,52 +233,21 @@ const Page = () => {
 										: width < 960
 										? e[1].styles.large
 										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[2].length > 0 ? showElements(e[2]) : null
+							},
+							e[1].text
+						)
 					)
-				)
-			} else if (e[0] === 'input') {
-				temp.push(
-					React.createElement(
-						e[0],
-						{
-							key: uuid(),
-							id: e[1].id,
-							type: e[1].type,
-							placeholder: e[1].placeholder,
-							maxLength: e[1].maxLength === 0 ? 1000 : e[1].maxLength,
-							min: e[1].min,
-							max: e[1].max,
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
+				} else if (e[0] === 'i') {
+					//The showElementsHelper does not used because,
+					//this is different and small
+					temp.push(
+						React.createElement(
+							e[0],
+							{
+								key: uuid(),
+								id: e[1].id,
+								className: e[1].class,
+								style:
 									width < 540
 										? e[1].styles.small
 										: width < 720
@@ -252,395 +255,74 @@ const Page = () => {
 										: width < 960
 										? e[1].styles.large
 										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						null
+							},
+							null
+						)
 					)
-				)
-			} else if (e[0] === 'button') {
-				temp.push(
-					React.createElement(
-						e[0],
-						{
-							key: uuid(),
-							id: e[1].id,
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[1].text
-					)
-				)
-			} else if (e[0] === 'text' && e[1].type !== 'a') {
-				temp.push(
-					React.createElement(
-						e[1].type,
-						{
-							key: uuid(),
-							id: e[1].id,
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[1].text
-					)
-				)
-			} else if (e[0] === 'text' && e[1].type === 'a') {
-				temp.push(
-					React.createElement(
-						e[1].type,
-						{
-							key: uuid(),
-							id: e[1].id,
-							href: '#',
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[1].text
-					)
-				)
-			} else if (e[0] === 'img') {
-				temp.push(
-					React.createElement(
-						e[0],
-						{
-							key: uuid(),
-							id: e[1].id,
-							src: e[1].src,
-							alt: e[1].alt,
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						null
-					)
-				)
-			} else if (e[0] === 'select') {
-				temp.push(
-					React.createElement(
-						e[0],
-						{
-							key: uuid(),
-							id: e[1].id,
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[2].length > 0 ? showElements(e[2]) : null
-					)
-				)
-			} else if (e[0] === 'option') {
-				temp.push(
-					React.createElement(
-						e[0],
-						{
-							key: uuid(),
-							id: e[1].id,
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[1].text
-					)
-				)
-			} else if (e[0] === 'list') {
-				temp.push(
-					React.createElement(
-						e[1].type,
-						{
-							key: uuid(),
-							id: e[1].id,
-							className: e[1].class,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[2].length > 0 ? showElements(e[2]) : null
-					)
-				)
-			} else if (e[0] === 'list Item') {
-				temp.push(
-					React.createElement(
-						e[1].type,
-						{
-							key: uuid(),
-							id: e[1].id,
-							onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
-							onMouseLeave: () =>
-								onHoverLeaveStyle(
-									e[1].id,
-									e[1].hoverStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-									e[1].hoverTarget,
-									e[1].hTargetStyle
-								),
-							onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
-							onMouseUp: () =>
-								onClickLeaveStyle(
-									e[1].id,
-									e[1].clickStyle,
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge
-								),
-							style:
-								width < 540
-									? e[1].styles.small
-									: width < 720
-									? e[1].styles.medium
-									: width < 960
-									? e[1].styles.large
-									: e[1].styles.xlarge,
-						},
-						e[2].length > 0 ? showElements(e[2]) : null
-					)
-				)
+				} else if (e[0] === 'list') {
+					temp.push(showElementsHelper(e, 'type', 'children', 'class'))
+				} else if (e[0] === 'list Item') {
+					temp.push(showElementsHelper(e, 'type', 'children', 'noclass'))
+				}
 			}
 		})
 
 		return temp
+	}
+	//This function used for reducing code
+	const showElementsHelper = (e, type, choice, className) => {
+		/**
+		 * Inserting elements into variable.
+		 * Using React.createElement func for creating elements
+		 * first parameter is element type
+		 * second parameter giving attributes for elements
+		 * third parameter for children, if there is children do recursion
+		 */
+		return React.createElement(
+			type === 'type' ? e[1].type : e[0],
+			{
+				key: uuid(),
+				id: e[1].id,
+				className: className === 'class' ? e[1].class : '',
+				onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
+				onMouseLeave: () =>
+					onHoverLeaveStyle(
+						e[1].id,
+						e[1].hoverStyle,
+						width < 540
+							? e[1].styles.small
+							: width < 720
+							? e[1].styles.medium
+							: width < 960
+							? e[1].styles.large
+							: e[1].styles.xlarge,
+						e[1].hoverTarget,
+						e[1].hTargetStyle
+					),
+				onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
+				onMouseUp: () =>
+					onClickLeaveStyle(
+						e[1].id,
+						e[1].clickStyle,
+						width < 540
+							? e[1].styles.small
+							: width < 720
+							? e[1].styles.medium
+							: width < 960
+							? e[1].styles.large
+							: e[1].styles.xlarge
+					),
+				style:
+					width < 540
+						? e[1].styles.small
+						: width < 720
+						? e[1].styles.medium
+						: width < 960
+						? e[1].styles.large
+						: e[1].styles.xlarge,
+			},
+			choice === 'children' && e[2].length > 0 ? showElements(e[2]) : choice === 'text' ? e[1].text : null
+		)
 	}
 
 	return (

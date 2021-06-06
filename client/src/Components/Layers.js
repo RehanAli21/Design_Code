@@ -338,7 +338,11 @@ const Layers = () => {
 				{data.map(e => {
 					return (
 						<li draggable={true} onDragEnd={makeParentChild} id={e[1].id + '---li'} key={uuid()}>
-							{e[0] === 'div' || e[0] === 'select' || e[0] === 'list' || e[0] === 'list Item' ? (
+							{e[0] === 'button' ||
+							e[0] === 'div' ||
+							e[0] === 'select' ||
+							e[0] === 'list' ||
+							e[0] === 'list Item' ? (
 								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
 									{e[2] && e[1].showChildren && e[2].length > 0 ? '▼' : '▶'}
 								</button>
