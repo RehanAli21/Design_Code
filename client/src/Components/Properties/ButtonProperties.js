@@ -33,7 +33,18 @@ const ButtonProperties = () => {
 		showBtnProperties,
 		setShowBtnProperties,
 	} = useContext(PropertiesContext)
-	const { width, activeElement, pages, setPages, activePage, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const {
+		width,
+		activeElement,
+		pages,
+		setPages,
+		activePage,
+		sBreakPoint,
+		mBreakPoint,
+		lBreakPoint,
+		setShowMsgBox,
+		setMsgBoxMsg,
+	} = useContext(PageContext)
 	const [separateLine, setSeparateLine] = useState(false)
 	const [indexOfText, setIndexOfText] = useState(1)
 	let maxTextIndex = 0
@@ -144,7 +155,20 @@ const ButtonProperties = () => {
 				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
 				<div className='two'>
 					<label>Text Index:</label>
-					<input type='number' id='button-textIndex-input' className='numberinput' min='0' />
+					<input
+						type='number'
+						id='button-textIndex-input'
+						className='numberinput'
+						min='1'
+						onChange={e => {
+							if (e.target.value <= maxTextIndex && e.target.value > 1) {
+								setIndexOfText(e.target.value)
+							} else if (e.target.value > maxTextIndex || e.target.value < 1) {
+								setMsgBoxMsg(`Text Tndex Can Only Sets Between 1 To ${maxTextIndex}`)
+								setShowMsgBox(true)
+							}
+						}}
+					/>
 				</div>
 				<Cursor style={showBtnProperties ? 'grid' : 'none'} />
 				<GridColumn style={showBtnProperties ? 'grid' : 'none'} />
