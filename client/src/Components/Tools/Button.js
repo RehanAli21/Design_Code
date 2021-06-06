@@ -18,6 +18,7 @@ const Button = ({ findAndInsert, uniqueString }) => {
 				name: `button${counter}`,
 				id: uniqueString(),
 				text: 'button',
+				showChildren: true,
 				class: '',
 				indexOfText: 0,
 				hoverTarget: '',
