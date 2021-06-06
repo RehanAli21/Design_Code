@@ -14,6 +14,8 @@ const Propertiesbar = () => {
 
 	const isOptionElement = ele && ele.tagName === 'OPTION'
 
+	const isIcon = ele && ele.tagName === 'I'
+
 	return (
 		<div className='propertybar'>
 			<div
@@ -46,13 +48,13 @@ const Propertiesbar = () => {
 			</div>
 			{state === 'normal' ? (
 				<NormalStateProperties activeElement={activeElement} activePage={activePage} ele={ele} />
-			) : state === 'hover' && !isOptionElement ? (
+			) : state === 'hover' && !isOptionElement && !isIcon ? (
 				<HoverStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'click' && !isOptionElement ? (
+			) : state === 'click' && !isOptionElement && !isIcon ? (
 				<ClickStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'hoverjs' && !isOptionElement ? (
+			) : state === 'hoverjs' && !isOptionElement && !isIcon ? (
 				<HoverAStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'clickjs' && !isOptionElement ? (
+			) : state === 'clickjs' && !isOptionElement && !isIcon ? (
 				<ClickAStateProperties />
 			) : (
 				<div></div>

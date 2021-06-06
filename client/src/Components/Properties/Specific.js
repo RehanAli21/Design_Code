@@ -12,6 +12,7 @@ import ListItemProperties from './ListItemProperties'
 import Position from './PropertiesComponenets/Position'
 import BackFilter from './PropertiesComponenets/BackFilter'
 import Animate from './PropertiesComponenets/Animate'
+import IconProperties from './IconProperties'
 
 const Specific = () => {
 	const { activeElement } = useContext(PageContext)
@@ -52,6 +53,8 @@ const Specific = () => {
 		</React.Fragment>
 	) : ele.tagName === 'LI' ? (
 		<ListItemProperties />
+	) : ele.tagName === 'I' ? (
+		<IconProperties />
 	) : (
 		<div></div>
 	)
