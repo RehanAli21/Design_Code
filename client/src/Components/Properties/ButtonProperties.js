@@ -75,6 +75,7 @@ const ButtonProperties = () => {
 
 	useEffect(() => {
 		if (indexOfText !== 0) {
+			console.log(indexOfText)
 			const temp = Object.assign({}, pages)
 			changeTextIndex(temp[activePage], activeElement)
 			setPages(temp)
@@ -178,7 +179,7 @@ const ButtonProperties = () => {
 						className='numberinput'
 						min='1'
 						onChange={e => {
-							if (e.target.value <= maxTextIndex && e.target.value > 1) {
+							if (e.target.value <= maxTextIndex && e.target.value >= 1) {
 								setIndexOfText(e.target.value)
 							} else if (e.target.value > maxTextIndex || e.target.value < 1) {
 								setMsgBoxMsg(`Text Tndex Can Only Sets Between 1 To ${maxTextIndex}`)

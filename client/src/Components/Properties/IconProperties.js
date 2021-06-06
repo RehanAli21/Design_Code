@@ -1,10 +1,33 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import Name from './PropertiesComponenets/Name'
 
 const IconProperties = () => {
-	const { page, setPage, activeElement } = useContext(PageContext)
+	const { pages, setPages, activeElement, activePage } = useContext(PageContext)
 	const [icon, setIcon] = useState('')
+
+	useEffect(() => {
+		if (icon !== '') {
+			const temp = Object.assign({}, pages)
+			const splitedIcon = icon.toLowerCase().split(' ')
+			let iconClass = 'bi'
+			splitedIcon.forEach(e => (iconClass += `-${e}`))
+			changeIcon(temp[activePage], activeElement, iconClass)
+			setPages(temp)
+		}
+	}, [icon])
+
+	const changeIcon = (arr, id, iconName) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === id) {
+				arr[i][1].class = iconName
+				return true
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				if (changeIcon(arr[i][2], id, iconName)) return true
+			}
+		}
+		return false
+	}
 
 	return (
 		<div className='borders btn-specific'>
