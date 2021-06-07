@@ -1,18 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
-import { TemplateContext } from '../Contexts/TemplateContext'
 import Name from './PropertiesComponenets/Name'
 
 const IconProperties = () => {
 	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
-	const { pages, setPages, activeElement, activePage, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
-	const { colors, fontSizes } = useContext(TemplateContext)
+	const { width, pages, setPages, activeElement, activePage, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 	const [icon, setIcon] = useState('')
 	const [textColor, setTextColor] = useState('')
-	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 	const [fontSize, setFontSize] = useState('')
-	const [showCustomFontSize, setShowCustomFontSize] = useState(true)
 
 	//For default value of icon name
 	useEffect(() => {
@@ -68,6 +64,17 @@ const IconProperties = () => {
 		return false
 	}
 
+	//For textColor and size default values
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const textColorInput = document.getElementById('icon-textColor')
+			const sizeInput = document.getElementById('icon-fontsize')
+
+			textColorInput.value = large.color ? large.color : '#000000'
+			sizeInput.value = large.fontSize ? large.fontSize.split('p')[0] : 16
+		}
+	}, [width, activeElement, small, large, medium, xlarge])
+
 	//For Changing color of button
 	useEffect(() => {
 		if (small && medium && large && xlarge && textColor !== '') {
@@ -94,62 +101,6 @@ const IconProperties = () => {
 		setObj(temp)
 	}
 
-	const showTemplateColors = () => {
-		const temp = []
-		temp.push(
-			<option key='custom' value='custom'>
-				Custom
-			</option>
-		)
-		for (const key in colors) {
-			temp.push(
-				<option key={key} value={colors[key]}>
-					{key}
-				</option>
-			)
-		}
-
-		return (
-			<select
-				defaultValue='custom'
-				id='icon-colorselect'
-				onChange={e => {
-					setTextColor(e.target.value)
-					setShowCustomTextColor(e.target.value === 'custom')
-				}}>
-				{temp}
-			</select>
-		)
-	}
-
-	const showTemplateFontSizes = () => {
-		const temp = []
-		temp.push(
-			<option key='custom' value='custom'>
-				Custom
-			</option>
-		)
-		for (const key in fontSizes) {
-			temp.push(
-				<option key={key} value={fontSizes[key]}>
-					{key}
-				</option>
-			)
-		}
-
-		return (
-			<select
-				defaultValue='custom'
-				id='icon-fontsizeselect'
-				onChange={e => {
-					setFontSize(e.target.value === 'custom' ? `16px` : e.target.value)
-					setShowCustomFontSize(e.target.value === 'custom')
-				}}>
-				{temp}
-			</select>
-		)
-	}
-
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading'>ICON PROPERTIES</p>
@@ -171,21 +122,13 @@ const IconProperties = () => {
 					icon Name field
 				</p>
 			</div>
-			<div className='three'>
-				<label style={{ marginTop: '5px' }}>Text color: </label>
-				{showTemplateColors()}
-				<input
-					disabled={!showCustomTextColor}
-					onChange={e => setTextColor(e.target.value)}
-					type='color'
-					id='icon-textcolor'
-				/>
+			<div className='two'>
+				<label style={{ marginTop: '5px' }}>Color: </label>
+				<input onChange={e => setTextColor(e.target.value)} type='color' id='icon-textColor' />
 			</div>
 			<div className='three'>
 				<label>Size: </label>
-				{showTemplateFontSizes()}
 				<input
-					disabled={!showCustomFontSize}
 					onChange={e => {
 						if (e.target.value < 0) {
 							setMsgBoxMsg('Font Size can not be Negative')
@@ -194,6 +137,7 @@ const IconProperties = () => {
 					}}
 					type='number'
 					min='0'
+					className='numberinput'
 					id='icon-fontsize'
 				/>
 			</div>

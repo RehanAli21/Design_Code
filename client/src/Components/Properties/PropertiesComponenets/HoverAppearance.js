@@ -498,7 +498,7 @@ const Appearance = () => {
 								setMsgBoxMsg("Negative value won't work for InnerY")
 								setShowMsgBox(true)
 							} else if (e.target.value >= 0) {
-								setPaddingX(e.target.value)
+								setPaddingY(e.target.value)
 							}
 						}}
 						type='number'
