@@ -18,6 +18,12 @@ const Option = ({ findAndInsert, uniqueString }) => {
 				name: `option${counter}`,
 				text: 'text',
 				id: uniqueString(),
+				hoverTarget: '',
+				clickTarget: '',
+				hoverTargetName: '',
+				clickTargetName: '',
+				hTargetStyle: {},
+				cTargetStyle: {},
 				styles: {
 					small: {},
 					medium: {},

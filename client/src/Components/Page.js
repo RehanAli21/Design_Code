@@ -247,6 +247,7 @@ const Page = () => {
 								key: uuid(),
 								id: e[1].id,
 								className: e[1].class,
+								onMouseDown: () => (inPageActiveElement ? setActiveElement(e[1].id) : null),
 								style:
 									width < 540
 										? e[1].styles.small

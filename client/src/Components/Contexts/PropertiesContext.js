@@ -65,7 +65,7 @@ export const PropertiesProvider = props => {
 
 	useEffect(() => {
 		setWidthsStates(pages[activePage], activeElement)
-	}, [pages, activePage, activeElement])
+	}, [activePage, activeElement])
 
 	const setWidthsStates = (arr, id) => {
 		arr.forEach(e => {
