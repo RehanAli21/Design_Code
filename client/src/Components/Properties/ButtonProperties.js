@@ -75,7 +75,6 @@ const ButtonProperties = () => {
 
 	useEffect(() => {
 		if (indexOfText !== 0) {
-			console.log(indexOfText)
 			const temp = Object.assign({}, pages)
 			changeTextIndex(temp[activePage], activeElement)
 			setPages(temp)

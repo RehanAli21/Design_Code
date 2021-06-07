@@ -7,16 +7,46 @@ const IconProperties = () => {
 	const [icon, setIcon] = useState('')
 
 	useEffect(() => {
+		findIconClass(pages[activePage], activeElement)
+	})
+
+	const findIconClass = (arr, id) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === id) {
+				const ele = document.getElementById('icon-class-name')
+
+				if (ele) {
+					let className = ''
+					for (let k = 0; k < arr[i][1].class.length; k++) {
+						arr[i][1].class[k] === '-' ? (className += ' ') : (className = arr[i][1].class[k])
+					}
+
+					className = className.substring(2, className.length)
+					if (className !== '') ele.value = className
+				}
+
+				return true
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				if (findIconClass(arr[i][2], id)) return true
+			}
+		}
+		return false
+	}
+
+	//for setting icons
+	useEffect(() => {
 		if (icon !== '') {
 			const temp = Object.assign({}, pages)
+			//below logic is for converting name into bootstrap icon class
 			const splitedIcon = icon.toLowerCase().split(' ')
 			let iconClass = 'bi'
-			splitedIcon.forEach(e => (iconClass += `-${e}`))
+			splitedIcon.forEach(e => (e !== '' ? (iconClass += `-${e}`) : null))
+			//////////////////////////////
 			changeIcon(temp[activePage], activeElement, iconClass)
 			setPages(temp)
 		}
 	}, [icon])
-
+	//for find and set class
 	const changeIcon = (arr, id, iconName) => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].id === id) {
