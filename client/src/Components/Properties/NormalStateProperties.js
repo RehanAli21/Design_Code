@@ -6,15 +6,30 @@ import Transform from './PropertiesComponenets/Transform'
 import Specific from './Specific'
 
 const NormalStateProperties = ({ activePage, activeElement, ele }) => {
+	const comps = () => {
+		if (activeElement !== '') {
+			if (ele && ele.tagName === 'I') {
+				return (
+					<React.Fragment>
+						<Appearance />
+					</React.Fragment>
+				)
+			} else if (ele && ele.tagName !== 'OPTION') {
+				return (
+					<React.Fragment>
+						<Align />
+						<Transform />
+						<Appearance />
+						<DsProperties />
+					</React.Fragment>
+				)
+			}
+		}
+	}
 	return (
 		<div style={{ display: activePage !== activeElement ? 'block' : 'none' }} className='property'>
 			<Specific />
-			<div style={{ display: activeElement === '' || (ele && ele.tagName === 'OPTION') ? 'none' : 'block' }}>
-				<Align />
-				<Transform />
-				<Appearance />
-				<DsProperties />
-			</div>
+			{comps()}
 		</div>
 	)
 }
