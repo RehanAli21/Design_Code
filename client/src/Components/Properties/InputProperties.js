@@ -50,7 +50,6 @@ const InputProperties = () => {
 	const [max, setMax] = useState('')
 	const [showMinMax, setShowMinMax] = useState(false)
 	const [textColor, setTextColor] = useState('')
-	const [separateLine, setSeparateLine] = useState(false)
 
 	const [showCustomTextColor, setShowCustomTextColor] = useState(true)
 
@@ -83,67 +82,16 @@ const InputProperties = () => {
 		}
 	}
 
-	//For textcolor and separate line(display) default value
+	//For textcolor default value
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const textColorInput = document.getElementById('input-textcolor')
 			const textColorSelect = document.getElementById('input-colorselect')
-			const sl = document.getElementById('input-sl-checkbox')
 
-			if (width < sBreakPoint) {
-				textColorInput.value = small.color ? small.color : '#000000'
-				textColorSelect.value = small.color ? small.color : 'custom'
-				sl.checked = small && small.display === 'block'
-				setSeparateLine(small && small.display === 'block')
-			} else if (width < mBreakPoint) {
-				textColorInput.value = medium.color ? medium.color : '#000000'
-				textColorSelect.value = medium.color ? medium.color : 'custom'
-				sl.checked = medium && medium.display === 'block'
-				setSeparateLine(medium && medium.display === 'block')
-			} else if (width < lBreakPoint) {
-				textColorInput.value = large.color ? large.color : '#000000'
-				textColorSelect.value = large.color ? large.color : 'custom'
-				sl.checked = large && large.display === 'block'
-				setSeparateLine(large && large.display === 'block')
-			} else {
-				textColorInput.value = xlarge.color ? xlarge.color : '#000000'
-				textColorSelect.value = xlarge.color ? xlarge.color : 'custom'
-				sl.checked = xlarge && xlarge.display === 'block'
-				setSeparateLine(xlarge && xlarge.display === 'block')
-			}
+			textColorInput.value = large.color ? large.color : '#000000'
+			textColorSelect.value = large.color ? large.color : 'custom'
 		}
 	}, [width, activeElement, small, large, medium, xlarge])
-
-	//For changing display for separate line
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else {
-				setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-			}
-		}
-	}, [separateLine])
 
 	//For type change of input
 	useEffect(() => {
@@ -208,31 +156,10 @@ const InputProperties = () => {
 	//For changing textColor of input
 	useEffect(() => {
 		if (small && medium && large && xlarge && textColor !== '') {
-			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'color', textColor)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
-				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'color', textColor)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
-				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'color', textColor)
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
-				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'color', textColor)
-			} else {
-				setProperties(xlarge, setXlarge, 'color', textColor)
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'color', textColor)
-				if (!changedMedium) setProperties(medium, setMedium, 'color', textColor)
-				if (!changedLarge) setProperties(large, setLarge, 'color', textColor)
-			}
+			setProperties(small, setSmall, 'color', textColor)
+			setProperties(medium, setMedium, 'color', textColor)
+			setProperties(large, setLarge, 'color', textColor)
+			setProperties(xlarge, setXlarge, 'color', textColor)
 		}
 	}, [textColor])
 
@@ -287,22 +214,6 @@ const InputProperties = () => {
 				INPUT PROPERTIES <span style={{ display: showInputProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showInputProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div
-				style={{
-					display: showInputProperties ? 'grid' : 'none',
-					gridTemplateColumns: '20px 130px auto',
-					marginLeft: '25px',
-					marginTop: '20px',
-					textAlign: 'center',
-				}}>
-				<input
-					id='input-sl-checkbox'
-					onChange={e => setSeparateLine(e.target.checked)}
-					style={{ marginTop: '5px' }}
-					type='checkbox'
-				/>
-				<label>On Separate Line</label>
-			</div>
 			<Name style={showInputProperties ? 'grid' : 'none'} />
 			<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
 				<label>Type: </label>
@@ -368,7 +279,7 @@ const InputProperties = () => {
 					id='input-textcolor'
 				/>
 			</div>
-			<Display />
+			<Display type={'separateLine'} />
 			<Cursor style={showInputProperties ? 'grid' : 'none'} />
 			<GridColumn style={showInputProperties ? 'grid' : 'none'} />
 		</div>

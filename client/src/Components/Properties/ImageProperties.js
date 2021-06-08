@@ -8,54 +8,19 @@ import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
 
 const ImageProperties = () => {
-	const {
-		small,
-		setSmall,
-		medium,
-		setMedium,
-		large,
-		setLarge,
-		xlarge,
-		setXlarge,
-		changedSmall,
-		setChangedSmall,
-		changedMedium,
-		setChangedMedium,
-		changedLarge,
-		setChangedLarge,
-		changedXlarge,
-		setChangedXlarge,
-		showImgProperties,
-		setShowImgProperties,
-	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { showImgProperties, setShowImgProperties } = useContext(PropertiesContext)
+	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [img, setImg] = useState('')
 	const [alt, setAlt] = useState('')
-	const [separateLine, setSeparateLine] = useState(false)
 
 	//For default values of img's display(separated line) and alt
 	useEffect(() => {
 		const altinput = document.getElementById('img-altinput')
 		const values = findAndReturnAlt(pages[activePage])
-		const sl = document.getElementById('img-sl-checkbox')
 
 		if (values && altinput) altinput.value = values
-
-		if (width < sBreakPoint) {
-			sl.checked = small && small.display === 'block'
-			setSeparateLine(small && small.display === 'block')
-		} else if (width < mBreakPoint) {
-			sl.checked = medium && medium.display === 'block'
-			setSeparateLine(medium && medium.display === 'block')
-		} else if (width < lBreakPoint) {
-			sl.checked = large && large.display === 'block'
-			setSeparateLine(large && large.display === 'block')
-		} else {
-			sl.checked = xlarge && xlarge.display === 'block'
-			setSeparateLine(xlarge && xlarge.display === 'block')
-		}
-	}, [width, activeElement, small, large, medium, xlarge])
+	}, [activeElement])
 
 	//for find element and return img's alt
 	const findAndReturnAlt = arr => {
@@ -100,43 +65,6 @@ const ImageProperties = () => {
 		}
 	}
 
-	//For changing display for separate line
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-			} else {
-				setProperties(xlarge, setXlarge, 'display', separateLine ? 'block' : '')
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', separateLine ? 'block' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', separateLine ? 'block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', separateLine ? 'block' : '')
-			}
-		}
-	}, [separateLine])
-
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
-	}
-
 	//For setting img
 	const changeImg = e => setImg(URL.createObjectURL(e.target.files[0]))
 
@@ -156,22 +84,6 @@ const ImageProperties = () => {
 				IMAGE PROPERTIES <span style={{ display: showImgProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showImgProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div
-				style={{
-					display: showImgProperties ? 'grid' : 'none',
-					gridTemplateColumns: '20px 130px auto',
-					marginLeft: '25px',
-					marginTop: '20px',
-					textAlign: 'center',
-				}}>
-				<input
-					id='img-sl-checkbox'
-					onChange={e => setSeparateLine(e.target.checked)}
-					style={{ marginTop: '5px' }}
-					type='checkbox'
-				/>
-				<label>On Separate Line</label>
-			</div>
 			<Name style={showImgProperties ? 'grid' : 'none'} />
 			<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
 				<label>Img: </label>
@@ -181,7 +93,7 @@ const ImageProperties = () => {
 				<label>Alt: </label>
 				<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 			</div>
-			<Display />
+			<Display type={'separateLine'} />
 			<Cursor style={showImgProperties ? 'grid' : 'none'} />
 			<GridColumn style={showImgProperties ? 'grid' : 'none'} />
 		</div>

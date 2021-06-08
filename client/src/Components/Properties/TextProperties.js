@@ -9,30 +9,10 @@ import Cursor from './PropertiesComponenets/Cursor'
 import Display from './PropertiesComponenets/Display'
 
 const TextProperties = () => {
-	const {
-		small,
-		setSmall,
-		medium,
-		setMedium,
-		large,
-		setLarge,
-		xlarge,
-		setXlarge,
-		changedSmall,
-		setChangedSmall,
-		changedMedium,
-		setChangedMedium,
-		changedLarge,
-		setChangedLarge,
-		changedXlarge,
-		setChangedXlarge,
-		showTextCompProperties,
-		setShowTextCompProperties,
-	} = useContext(PropertiesContext)
-	const { width, activePage, activeElement, pages, setPages, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const { showTextCompProperties, setShowTextCompProperties } = useContext(PropertiesContext)
+	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
 
 	const [textType, setTextType] = useState('')
-	const [sameLine, setSameLine] = useState(false)
 	const [isAnchor, setIsAnchor] = useState(false)
 
 	//For default value of text type
@@ -51,27 +31,6 @@ const TextProperties = () => {
 			else if (ele.tagName === 'A') typeSelect.value = 'a'
 		}
 	})
-
-	//For Same line(display) default value
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			const sl = document.getElementById('text-sameline-checkbox')
-
-			if (width < sBreakPoint) {
-				sl.checked = small && small.display === 'inline-block'
-				setSameLine(small && small.display === 'inline-block')
-			} else if (width < mBreakPoint) {
-				sl.checked = medium && medium.display === 'inline-block'
-				setSameLine(medium && medium.display === 'inline-block')
-			} else if (width < lBreakPoint) {
-				sl.checked = large && large.display === 'inline-block'
-				setSameLine(large && large.display === 'inline-block')
-			} else {
-				sl.checked = xlarge && xlarge.display === 'inline-block'
-				setSameLine(xlarge && xlarge.display === 'inline-block')
-			}
-		}
-	}, [width, activeElement, small, large, medium, xlarge])
 
 	useEffect(() => {
 		if (textType !== '') {
@@ -94,43 +53,6 @@ const TextProperties = () => {
 				}
 			}
 		}
-	}
-
-	//For changing display for same line
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
-			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
-			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
-				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
-			} else {
-				setProperties(xlarge, setXlarge, 'display', sameLine ? 'inline-block' : '')
-				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', sameLine ? 'inline-block' : '')
-				if (!changedMedium) setProperties(medium, setMedium, 'display', sameLine ? 'inline-block' : '')
-				if (!changedLarge) setProperties(large, setLarge, 'display', sameLine ? 'inline-block' : '')
-			}
-		}
-	}, [sameLine])
-
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
 	}
 
 	return (
@@ -162,26 +84,10 @@ const TextProperties = () => {
 					<option value='a'>Anchor</option>
 				</select>
 			</div>
-			<Display />
+			<Display type={'sameLine'} />
 			<Cursor style={showTextCompProperties ? 'grid' : 'none'} />
 			<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
 			<GridColumn style={showTextCompProperties ? 'grid' : 'none'} />
-			<div
-				style={{
-					display: !isAnchor && showTextCompProperties ? 'grid' : 'none',
-					gridTemplateColumns: '20px 130px auto',
-					marginLeft: '25px',
-					marginTop: '20px',
-					textAlign: 'center',
-				}}>
-				<input
-					id='text-sameline-checkbox'
-					style={{ marginTop: '5px', marginLeft: '5px' }}
-					type='checkbox'
-					onChange={e => setSameLine(e.target.checked)}
-				/>
-				<label>On Same Line</label>
-			</div>
 		</div>
 	)
 }
