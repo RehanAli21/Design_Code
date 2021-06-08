@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import Name from './PropertiesComponenets/Name'
+import Tip from './PropertiesComponenets/Tip'
 
 const IconProperties = () => {
 	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
@@ -103,7 +104,17 @@ const IconProperties = () => {
 
 	return (
 		<div className='borders btn-specific'>
-			<p className='second-heading'>ICON PROPERTIES</p>
+			<p className='second-heading'>
+				<Tip
+					msg={[
+						'Name is an unique identity for this element',
+						'Icon Name is for setting icon',
+						'Color is for icon color',
+						'Size is for icon size',
+					]}
+				/>
+				ICON PROPERTIES
+			</p>
 			<Name />
 			<div className='two'>
 				<label>Icon Name</label>
@@ -113,13 +124,13 @@ const IconProperties = () => {
 				<a
 					target='_blank'
 					rel='noreferrer'
-					href='https://www.google.com'
+					href='https://icons.getbootstrap.com'
 					style={{ textDecoration: 'none', color: 'rgb(32, 144, 220)', fontWeight: 'bold' }}>
 					<i className='bi-arrow-right-circle-fill'></i> For Icons List click on ME
 				</a>
 				<p style={{ marginTop: '10px', textAlign: 'left' }}>
-					<strong>Instructions:</strong> Choice icon from the link above, then copy full name of icon and paste it on
-					icon Name field
+					<strong>Instructions:</strong> Choice icon from the link above, then copy full name (with spaces) of icon and
+					paste it on icon Name field
 				</p>
 			</div>
 			<div className='two'>

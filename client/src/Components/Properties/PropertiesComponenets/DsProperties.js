@@ -167,7 +167,7 @@ const DsProperties = () => {
 	}
 
 	return (
-		<div className='btn-specific'>
+		<div className='borders btn-specific'>
 			<p className='second-heading' onClick={() => setShowExtraProperties(!showExtraProperties)}>
 				<Tip msg={["This component's properties only affect element, not layout"]} />
 				EXTRA <span style={{ display: showExtraProperties ? 'inline' : 'none' }}>&#9660;</span>

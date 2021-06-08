@@ -291,17 +291,11 @@ const Font = () => {
 			</p>
 			<div style={{ display: showFontProperties ? 'grid' : 'none' }} className='font'>
 				{showTemplateFonts()}
-				<button
-					onClick={() => setFontStyle(!fontStyle)}
-					style={{ paddingLeft: '15px' }}
-					className={fontStyle ? 'font-btns' : ''}>
-					<span className='gg-format-italic'></span>
+				<button onClick={() => setFontStyle(!fontStyle)} className={fontStyle ? 'font-btns' : ''}>
+					<i className='bi-type-italic icon-n-s'></i>
 				</button>
-				<button
-					onClick={() => setTextDecoration(!textDecoration)}
-					style={{ paddingLeft: '12px' }}
-					className={textDecoration ? 'font-btns' : ''}>
-					<span className='gg-format-underline'></span>
+				<button onClick={() => setTextDecoration(!textDecoration)} className={textDecoration ? 'font-btns' : ''}>
+					<i className='bi-type-underline icon-n-s'></i>
 				</button>
 			</div>
 			<div style={{ display: showFontProperties ? 'grid' : 'none' }} className='three'>
