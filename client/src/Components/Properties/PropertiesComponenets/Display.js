@@ -25,38 +25,56 @@ const Display = ({ type }) => {
 	const [display, setDisplay] = useState('')
 
 	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const displaySelect = document.getElementById('display-show-select')
+
+			if (displaySelect) {
+				if (width < sBreakPoint) {
+					displaySelect.value = small.display && small.display !== '' ? small.display : 'normal'
+				} else if (width < mBreakPoint) {
+					displaySelect.value = medium.display && medium.display !== '' ? medium.display : 'normal'
+				} else if (width < lBreakPoint) {
+					displaySelect.value = large.display && large.display !== '' ? large.display : 'normal'
+				} else {
+					displaySelect.value = xlarge.display && xlarge.display !== '' ? xlarge.display : 'normal'
+				}
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
+
+	useEffect(() => {
 		if (small && medium && large && xlarge && display !== '') {
 			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'display', display === 'normal' ? '' : display)
+				setProperties(small, setSmall, 'display', display)
 				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'display', display === 'normal' ? '' : display)
-				if (!changedLarge) setProperties(large, setLarge, 'display', display === 'normal' ? '' : display)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', display === 'normal' ? '' : display)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', display)
+				if (!changedLarge) setProperties(large, setLarge, 'display', display)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', display)
 			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'display', display === 'normal' ? '' : display)
+				setProperties(medium, setMedium, 'display', display)
 				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', display === 'normal' ? '' : display)
-				if (!changedLarge) setProperties(large, setLarge, 'display', display === 'normal' ? '' : display)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', display === 'normal' ? '' : display)
+				if (!changedSmall) setProperties(small, setSmall, 'display', display)
+				if (!changedLarge) setProperties(large, setLarge, 'display', display)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', display)
 			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'display', display === 'normal' ? '' : display)
+				setProperties(large, setLarge, 'display', display)
 				setChangedLarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', display === 'normal' ? '' : display)
-				if (!changedMedium) setProperties(medium, setMedium, 'display', display === 'normal' ? '' : display)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', display === 'normal' ? '' : display)
+				if (!changedSmall) setProperties(small, setSmall, 'display', display)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', display)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', display)
 			} else {
-				setProperties(xlarge, setXlarge, 'display', display === 'normal' ? '' : display)
+				setProperties(xlarge, setXlarge, 'display', display)
 				setChangedXlarge(true)
-				if (!changedSmall) setProperties(small, setSmall, 'display', display === 'normal' ? '' : display)
-				if (!changedMedium) setProperties(medium, setMedium, 'display', display === 'normal' ? '' : display)
-				if (!changedLarge) setProperties(large, setLarge, 'display', display === 'normal' ? '' : display)
+				if (!changedSmall) setProperties(small, setSmall, 'display', display)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', display)
+				if (!changedLarge) setProperties(large, setLarge, 'display', display)
 			}
 		}
 	}, [display])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
+		temp[propertyName] = property === 'normal' ? '' : property
 		setObj(temp)
 	}
 
