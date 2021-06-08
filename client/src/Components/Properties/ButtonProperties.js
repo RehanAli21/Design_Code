@@ -2,12 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import GridColumn from './PropertiesComponenets/GridColumn'
-import Font from './PropertiesComponenets/Font'
 import TextChange from './PropertiesComponenets/TextChange'
-import Text from './PropertiesComponenets/Text'
-import Position from './PropertiesComponenets/Position'
-import BackFilter from './PropertiesComponenets/BackFilter'
-import Animate from './PropertiesComponenets/Animate'
 import Name from './PropertiesComponenets/Name'
 import Cursor from './PropertiesComponenets/Cursor'
 import Tip from './PropertiesComponenets/Tip'
@@ -153,65 +148,58 @@ const ButtonProperties = () => {
 	}
 
 	return (
-		<React.Fragment>
-			<div className='borders btn-specific'>
-				<p className='second-heading' onClick={() => setShowBtnProperties(!showBtnProperties)}>
-					<Tip
-						msg={[
-							'Name is an unique identity for this element',
-							'Text for text of button',
-							'Cursor for changing mouse icon/poiniter',
-							'Separete Line will send button on different row',
-							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
-						]}
-					/>
-					BUTTON PROPERTIES <span style={{ display: showBtnProperties ? 'inline' : 'none' }}>&#9660;</span>
-					<span style={{ display: showBtnProperties ? 'none' : 'inline' }}>&#9654;</span>
-				</p>
-				<Name style={showBtnProperties ? 'grid' : 'none'} />
-				<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
-				<div className='two'>
-					<label>Text Index:</label>
-					<input
-						type='number'
-						id='button-textIndex-input'
-						className='numberinput'
-						min='1'
-						onChange={e => {
-							if (e.target.value <= maxTextIndex && e.target.value >= 1) {
-								setIndexOfText(e.target.value)
-							} else if (e.target.value > maxTextIndex || e.target.value < 1) {
-								setMsgBoxMsg(`Text Tndex Can Only Sets Between 1 To ${maxTextIndex}`)
-								setShowMsgBox(true)
-							}
-						}}
-					/>
-				</div>
-				<Cursor style={showBtnProperties ? 'grid' : 'none'} />
-				<GridColumn style={showBtnProperties ? 'grid' : 'none'} />
-				<div
-					style={{
-						display: showBtnProperties ? 'grid' : 'none',
-						gridTemplateColumns: '20px 130px auto',
-						marginLeft: '25px',
-						marginTop: '20px',
-						textAlign: 'center',
-					}}>
-					<input
-						id='button-sl-checkbox'
-						onChange={e => setSeparateLine(e.target.checked)}
-						style={{ marginTop: '5px' }}
-						type='checkbox'
-					/>
-					<label>On Separate Line</label>
-				</div>
+		<div className='borders btn-specific'>
+			<p className='second-heading' onClick={() => setShowBtnProperties(!showBtnProperties)}>
+				<Tip
+					msg={[
+						'Name is an unique identity for this element',
+						'Text for text of button',
+						'Cursor for changing mouse icon/poiniter',
+						'Separete Line will send button on different row',
+						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+					]}
+				/>
+				BUTTON PROPERTIES <span style={{ display: showBtnProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showBtnProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<Name style={showBtnProperties ? 'grid' : 'none'} />
+			<TextChange type='button' display={showBtnProperties ? 'grid' : 'none'} />
+			<div className='two'>
+				<label>Text Index:</label>
+				<input
+					type='number'
+					id='button-textIndex-input'
+					className='numberinput'
+					min='1'
+					onChange={e => {
+						if (e.target.value <= maxTextIndex && e.target.value >= 1) {
+							setIndexOfText(e.target.value)
+						} else if (e.target.value > maxTextIndex || e.target.value < 1) {
+							setMsgBoxMsg(`Text Tndex Can Only Sets Between 1 To ${maxTextIndex}`)
+							setShowMsgBox(true)
+						}
+					}}
+				/>
 			</div>
-			<Text />
-			<Font />
-			<Position />
-			<BackFilter />
-			<Animate />
-		</React.Fragment>
+			<Cursor style={showBtnProperties ? 'grid' : 'none'} />
+			<GridColumn style={showBtnProperties ? 'grid' : 'none'} />
+			<div
+				style={{
+					display: showBtnProperties ? 'grid' : 'none',
+					gridTemplateColumns: '20px 130px auto',
+					marginLeft: '25px',
+					marginTop: '20px',
+					textAlign: 'center',
+				}}>
+				<input
+					id='button-sl-checkbox'
+					onChange={e => setSeparateLine(e.target.checked)}
+					style={{ marginTop: '5px' }}
+					type='checkbox'
+				/>
+				<label>On Separate Line</label>
+			</div>
+		</div>
 	)
 }
 

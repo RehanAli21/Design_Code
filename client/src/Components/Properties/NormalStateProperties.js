@@ -28,8 +28,9 @@ const NormalStateProperties = ({ activePage, activeElement, ele }) => {
 	}
 	return (
 		<div style={{ display: activePage !== activeElement ? 'block' : 'none' }} className='property'>
-			<Specific />
+			<Specific section='main' />
 			{comps()}
+			<Specific section='other' />
 		</div>
 	)
 }

@@ -2,10 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
-import Animate from './PropertiesComponenets/Animate'
-import BackFilter from './PropertiesComponenets/BackFilter'
 import Cursor from './PropertiesComponenets/Cursor'
-import Font from './PropertiesComponenets/Font'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
@@ -273,116 +270,106 @@ const InputProperties = () => {
 	}
 
 	return (
-		<React.Fragment>
-			<div className='borders btn-specific'>
-				<p className='second-heading' onClick={() => setShowInputProperties(!showInputProperties)}>
-					<Tip
-						msg={[
-							'Separete Line will send input on different row',
-							'Type sets different type of input',
-							'Placeholder is a text user can see and when user type on it the text will be gone',
-							'Max Char sets maximum characters allowed to type',
-							'Text Color for changing color of text',
-							'Cursor for changing mouse icon/poiniter',
-							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
-						]}
-					/>
-					INPUT PROPERTIES <span style={{ display: showInputProperties ? 'inline' : 'none' }}>&#9660;</span>
-					<span style={{ display: showInputProperties ? 'none' : 'inline' }}>&#9654;</span>
-				</p>
-				<div
-					style={{
-						display: showInputProperties ? 'grid' : 'none',
-						gridTemplateColumns: '20px 130px auto',
-						marginLeft: '25px',
-						marginTop: '20px',
-						textAlign: 'center',
-					}}>
-					<input
-						id='input-sl-checkbox'
-						onChange={e => setSeparateLine(e.target.checked)}
-						style={{ marginTop: '5px' }}
-						type='checkbox'
-					/>
-					<label>On Separate Line</label>
-				</div>
-				<Name style={showInputProperties ? 'grid' : 'none'} />
-				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
-					<label>Type: </label>
-					<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>
-						<option value='text'>Text</option>
-						<option value='number'>Number</option>
-						<option value='email'>Email</option>
-						<option value='password'>Password</option>
-						<option value='button'>Button</option>
-						<option value='checkbox'>Checkbox</option>
-						<option value='radio'>Radio</option>
-						<option value='date'>Date</option>
-						<option value='datetime-local'>Date Time local</option>
-						<option value='time'>Time</option>
-						<option value='week'>Week</option>
-						<option value='month'>Month</option>
-						<option value='color'>Color</option>
-						<option value='range'>Range</option>
-						<option value='file'>File</option>
-					</select>
-				</div>
-				<div
-					className='two'
-					onChange={e => setMin(e.target.value)}
-					style={{ display: showMinMax && showInputProperties ? 'grid' : 'none' }}>
-					<label>Min Value: </label>
-					<input className='numberinput' id='i-s-minValueInput' type='number' />
-				</div>
-				<div
-					className='two'
-					onChange={e => setMax(e.target.value)}
-					style={{ display: showMinMax && showInputProperties ? 'grid' : 'none' }}>
-					<label>Max Value: </label>
-					<input className='numberinput' id='i-s-maxValueInput' type='number' />
-				</div>
-				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
-					<label>Placeholder: </label>
-					<input
-						id='i-s-placeholderinput'
-						onChange={e => setPlaceholder(e.target.value)}
-						type='text'
-						placeholder='Text'
-					/>
-				</div>
-				<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
-					<label>Max chars: </label>
-					<input
-						className='numberinput'
-						id='i-s-maxLengthInput'
-						onChange={e => {
-							if (e.target.value < -1) {
-								setMsgBoxMsg('Max Character Length can not be negative')
-								setShowMsgBox(true)
-							} else if (e.target.value >= -1) setMaxLength(e.target.value)
-						}}
-						type='number'
-						min='-1'
-						placeholder='Maximum characters'
-					/>
-				</div>
-				<div className='three' style={{ display: showInputProperties ? 'grid' : 'none' }}>
-					<label style={{ marginTop: '5px' }}>Text color: </label>
-					{showTemplateColors()}
-					<input
-						disabled={!showCustomTextColor}
-						onChange={e => setTextColor(e.target.value)}
-						type='color'
-						id='input-textcolor'
-					/>
-				</div>
-				<Cursor style={showInputProperties ? 'grid' : 'none'} />
-				<GridColumn style={showInputProperties ? 'grid' : 'none'} />
+		<div className='borders btn-specific'>
+			<p className='second-heading' onClick={() => setShowInputProperties(!showInputProperties)}>
+				<Tip
+					msg={[
+						'Separete Line will send input on different row',
+						'Type sets different type of input',
+						'Placeholder is a text user can see and when user type on it the text will be gone',
+						'Max Char sets maximum characters allowed to type',
+						'Text Color for changing color of text',
+						'Cursor for changing mouse icon/poiniter',
+						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+					]}
+				/>
+				INPUT PROPERTIES <span style={{ display: showInputProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showInputProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div
+				style={{
+					display: showInputProperties ? 'grid' : 'none',
+					gridTemplateColumns: '20px 130px auto',
+					marginLeft: '25px',
+					marginTop: '20px',
+					textAlign: 'center',
+				}}>
+				<input
+					id='input-sl-checkbox'
+					onChange={e => setSeparateLine(e.target.checked)}
+					style={{ marginTop: '5px' }}
+					type='checkbox'
+				/>
+				<label>On Separate Line</label>
 			</div>
-			<Font />
-			<BackFilter />
-			<Animate />
-		</React.Fragment>
+			<Name style={showInputProperties ? 'grid' : 'none'} />
+			<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
+				<label>Type: </label>
+				<select id='i-s-typeSelect' onChange={e => setType(e.target.value)}>
+					<option value='text'>Text</option>
+					<option value='number'>Number</option>
+					<option value='email'>Email</option>
+					<option value='password'>Password</option>
+					<option value='button'>Button</option>
+					<option value='checkbox'>Checkbox</option>
+					<option value='radio'>Radio</option>
+					<option value='date'>Date</option>
+					<option value='datetime-local'>Date Time local</option>
+					<option value='time'>Time</option>
+					<option value='week'>Week</option>
+					<option value='month'>Month</option>
+					<option value='color'>Color</option>
+					<option value='range'>Range</option>
+					<option value='file'>File</option>
+				</select>
+			</div>
+			<div
+				className='two'
+				onChange={e => setMin(e.target.value)}
+				style={{ display: showMinMax && showInputProperties ? 'grid' : 'none' }}>
+				<label>Min Value: </label>
+				<input className='numberinput' id='i-s-minValueInput' type='number' />
+			</div>
+			<div
+				className='two'
+				onChange={e => setMax(e.target.value)}
+				style={{ display: showMinMax && showInputProperties ? 'grid' : 'none' }}>
+				<label>Max Value: </label>
+				<input className='numberinput' id='i-s-maxValueInput' type='number' />
+			</div>
+			<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
+				<label>Placeholder: </label>
+				<input id='i-s-placeholderinput' onChange={e => setPlaceholder(e.target.value)} type='text' placeholder='Text' />
+			</div>
+			<div style={{ display: showInputProperties ? 'grid' : 'none' }} className='two'>
+				<label>Max chars: </label>
+				<input
+					className='numberinput'
+					id='i-s-maxLengthInput'
+					onChange={e => {
+						if (e.target.value < -1) {
+							setMsgBoxMsg('Max Character Length can not be negative')
+							setShowMsgBox(true)
+						} else if (e.target.value >= -1) setMaxLength(e.target.value)
+					}}
+					type='number'
+					min='-1'
+					placeholder='Maximum characters'
+				/>
+			</div>
+			<div className='three' style={{ display: showInputProperties ? 'grid' : 'none' }}>
+				<label style={{ marginTop: '5px' }}>Text color: </label>
+				{showTemplateColors()}
+				<input
+					disabled={!showCustomTextColor}
+					onChange={e => setTextColor(e.target.value)}
+					type='color'
+					id='input-textcolor'
+				/>
+			</div>
+			<Cursor style={showInputProperties ? 'grid' : 'none'} />
+			<GridColumn style={showInputProperties ? 'grid' : 'none'} />
+		</div>
 	)
 }
 

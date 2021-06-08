@@ -1,12 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react'
 import TextChange from './PropertiesComponenets/TextChange'
-import Font from './PropertiesComponenets/Font'
-import Text from './PropertiesComponenets/Text'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import GridColumn from './PropertiesComponenets/GridColumn'
-import BackFilter from './PropertiesComponenets/BackFilter'
-import Animate from './PropertiesComponenets/Animate'
 import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
 import Cursor from './PropertiesComponenets/Cursor'
@@ -137,60 +133,54 @@ const TextProperties = () => {
 	}
 
 	return (
-		<React.Fragment>
-			<div className='borders btn-specific'>
-				<p className='second-heading' onClick={() => setShowTextCompProperties(!showTextCompProperties)}>
-					<Tip
-						msg={[
-							'Name is an unique identity for this element',
-							'Type sets different type of text',
-							'Cursor for changing mouse icon/poiniter',
-							'Text for write text',
-							'Same Line: if you want text on same row as other element then activate it.',
-							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
-						]}
-					/>
-					TEXT PROPERTIES <span style={{ display: showTextCompProperties ? 'inline' : 'none' }}>&#9660;</span>
-					<span style={{ display: showTextCompProperties ? 'none' : 'inline' }}>&#9654;</span>
-				</p>
-				<Name style={showTextCompProperties ? 'grid' : 'none'} />
-				<div style={{ display: showTextCompProperties ? 'grid' : 'none' }} className='two'>
-					<label>Type: </label>
-					<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
-						<option value='p'>Paragraph</option>
-						<option value='h1'>Heading 1</option>
-						<option value='h2'>Heading 2</option>
-						<option value='h3'>Heading 3</option>
-						<option value='h4'>Heading 4</option>
-						<option value='h5'>Heading 5</option>
-						<option value='a'>Anchor</option>
-					</select>
-				</div>
-				<Cursor style={showTextCompProperties ? 'grid' : 'none'} />
-				<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
-				<GridColumn style={showTextCompProperties ? 'grid' : 'none'} />
-				<div
-					style={{
-						display: !isAnchor && showTextCompProperties ? 'grid' : 'none',
-						gridTemplateColumns: '20px 130px auto',
-						marginLeft: '25px',
-						marginTop: '20px',
-						textAlign: 'center',
-					}}>
-					<input
-						id='text-sameline-checkbox'
-						style={{ marginTop: '5px', marginLeft: '5px' }}
-						type='checkbox'
-						onChange={e => setSameLine(e.target.checked)}
-					/>
-					<label>On Same Line</label>
-				</div>
+		<div className='borders btn-specific'>
+			<p className='second-heading' onClick={() => setShowTextCompProperties(!showTextCompProperties)}>
+				<Tip
+					msg={[
+						'Name is an unique identity for this element',
+						'Type sets different type of text',
+						'Cursor for changing mouse icon/poiniter',
+						'Text for write text',
+						'Same Line: if you want text on same row as other element then activate it.',
+						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+					]}
+				/>
+				TEXT PROPERTIES <span style={{ display: showTextCompProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showTextCompProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<Name style={showTextCompProperties ? 'grid' : 'none'} />
+			<div style={{ display: showTextCompProperties ? 'grid' : 'none' }} className='two'>
+				<label>Type: </label>
+				<select id='text-type-select' onChange={e => setTextType(e.target.value)}>
+					<option value='p'>Paragraph</option>
+					<option value='h1'>Heading 1</option>
+					<option value='h2'>Heading 2</option>
+					<option value='h3'>Heading 3</option>
+					<option value='h4'>Heading 4</option>
+					<option value='h5'>Heading 5</option>
+					<option value='a'>Anchor</option>
+				</select>
 			</div>
-			<Font type='text' />
-			<Text />
-			<BackFilter />
-			<Animate />
-		</React.Fragment>
+			<Cursor style={showTextCompProperties ? 'grid' : 'none'} />
+			<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
+			<GridColumn style={showTextCompProperties ? 'grid' : 'none'} />
+			<div
+				style={{
+					display: !isAnchor && showTextCompProperties ? 'grid' : 'none',
+					gridTemplateColumns: '20px 130px auto',
+					marginLeft: '25px',
+					marginTop: '20px',
+					textAlign: 'center',
+				}}>
+				<input
+					id='text-sameline-checkbox'
+					style={{ marginTop: '5px', marginLeft: '5px' }}
+					type='checkbox'
+					onChange={e => setSameLine(e.target.checked)}
+				/>
+				<label>On Same Line</label>
+			</div>
+		</div>
 	)
 }
 

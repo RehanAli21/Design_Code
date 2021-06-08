@@ -1,12 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
-import Animate from './PropertiesComponenets/Animate'
 import Cursor from './PropertiesComponenets/Cursor'
-import Filter from './PropertiesComponenets/Filter'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
-import Position from './PropertiesComponenets/Position'
 import Tip from './PropertiesComponenets/Tip'
 
 const ImageProperties = () => {
@@ -143,54 +140,49 @@ const ImageProperties = () => {
 	const changeImg = e => setImg(URL.createObjectURL(e.target.files[0]))
 
 	return (
-		<React.Fragment>
-			<div className='borders btn-specific'>
-				<p className='second-heading' onClick={() => setShowImgProperties(!showImgProperties)}>
-					<Tip
-						msg={[
-							'Separete Line will send button on different row',
-							'Name is an unique identity for this element',
-							'Img for choosing image from your computer',
-							'Cursor for changing mouse icon/poiniter',
-							'Alt text will be shown to user if img is not available',
-							'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
-						]}
-					/>
-					IMAGE PROPERTIES <span style={{ display: showImgProperties ? 'inline' : 'none' }}>&#9660;</span>
-					<span style={{ display: showImgProperties ? 'none' : 'inline' }}>&#9654;</span>
-				</p>
-				<div
-					style={{
-						display: showImgProperties ? 'grid' : 'none',
-						gridTemplateColumns: '20px 130px auto',
-						marginLeft: '25px',
-						marginTop: '20px',
-						textAlign: 'center',
-					}}>
-					<input
-						id='img-sl-checkbox'
-						onChange={e => setSeparateLine(e.target.checked)}
-						style={{ marginTop: '5px' }}
-						type='checkbox'
-					/>
-					<label>On Separate Line</label>
-				</div>
-				<Name style={showImgProperties ? 'grid' : 'none'} />
-				<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
-					<label>Img: </label>
-					<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />
-				</div>
-				<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
-					<label>Alt: </label>
-					<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
-				</div>
-				<Cursor style={showImgProperties ? 'grid' : 'none'} />
-				<GridColumn style={showImgProperties ? 'grid' : 'none'} />
+		<div className='borders btn-specific'>
+			<p className='second-heading' onClick={() => setShowImgProperties(!showImgProperties)}>
+				<Tip
+					msg={[
+						'Separete Line will send button on different row',
+						'Name is an unique identity for this element',
+						'Img for choosing image from your computer',
+						'Cursor for changing mouse icon/poiniter',
+						'Alt text will be shown to user if img is not available',
+						'Grid Column is for setting column number in layout, gridColumn will only be shown, when button is inside div and div row/column is checked',
+					]}
+				/>
+				IMAGE PROPERTIES <span style={{ display: showImgProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: showImgProperties ? 'none' : 'inline' }}>&#9654;</span>
+			</p>
+			<div
+				style={{
+					display: showImgProperties ? 'grid' : 'none',
+					gridTemplateColumns: '20px 130px auto',
+					marginLeft: '25px',
+					marginTop: '20px',
+					textAlign: 'center',
+				}}>
+				<input
+					id='img-sl-checkbox'
+					onChange={e => setSeparateLine(e.target.checked)}
+					style={{ marginTop: '5px' }}
+					type='checkbox'
+				/>
+				<label>On Separate Line</label>
 			</div>
-			<Filter />
-			<Position />
-			<Animate />
-		</React.Fragment>
+			<Name style={showImgProperties ? 'grid' : 'none'} />
+			<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
+				<label>Img: </label>
+				<input id='img-fileinput' type='file' onChange={e => changeImg(e)} />
+			</div>
+			<div className='two' style={{ display: showImgProperties ? 'grid' : 'none' }}>
+				<label>Alt: </label>
+				<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
+			</div>
+			<Cursor style={showImgProperties ? 'grid' : 'none'} />
+			<GridColumn style={showImgProperties ? 'grid' : 'none'} />
+		</div>
 	)
 }
 

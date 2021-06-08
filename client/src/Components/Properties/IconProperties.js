@@ -123,7 +123,9 @@ const IconProperties = () => {
 				</p>
 			</div>
 			<div className='two'>
-				<label style={{ marginTop: '5px' }}>Color: </label>
+				<label style={{ marginTop: '5px' }}>
+					<i className='bi-paint-bucket icon-n-s'></i> Color:
+				</label>
 				<input onChange={e => setTextColor(e.target.value)} type='color' id='icon-textColor' />
 			</div>
 			<div className='three'>
