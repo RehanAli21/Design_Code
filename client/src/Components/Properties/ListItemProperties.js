@@ -1,5 +1,6 @@
 import React from 'react'
 import Cursor from './PropertiesComponenets/Cursor'
+import Display from './PropertiesComponenets/Display'
 import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
 
@@ -11,6 +12,7 @@ const ListItemProperties = () => {
 				List Item Properties
 			</p>
 			<Name />
+			<Display />
 			<Cursor />
 		</div>
 	)

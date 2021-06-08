@@ -3,6 +3,7 @@ import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
 import Cursor from './PropertiesComponenets/Cursor'
 import Tip from './PropertiesComponenets/Tip'
+import Display from './PropertiesComponenets/Display'
 
 const SelectProperties = () => {
 	return (
@@ -18,6 +19,7 @@ const SelectProperties = () => {
 				DROP_MENU PROPERTIES
 			</p>
 			<Name />
+			<Display />
 			<Cursor />
 			<GridColumn />
 		</div>

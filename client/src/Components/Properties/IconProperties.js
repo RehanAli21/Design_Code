@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
+import Display from './PropertiesComponenets/Display'
 import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
 

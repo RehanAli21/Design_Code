@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import Cursor from './PropertiesComponenets/Cursor'
+import Display from './PropertiesComponenets/Display'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
@@ -180,6 +181,7 @@ const ImageProperties = () => {
 				<label>Alt: </label>
 				<input id='img-altinput' type='text' placeholder='text for img' onChange={e => setAlt(e.target.value)} />
 			</div>
+			<Display />
 			<Cursor style={showImgProperties ? 'grid' : 'none'} />
 			<GridColumn style={showImgProperties ? 'grid' : 'none'} />
 		</div>

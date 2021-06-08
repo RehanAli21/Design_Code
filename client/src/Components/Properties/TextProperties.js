@@ -6,6 +6,7 @@ import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
 import Cursor from './PropertiesComponenets/Cursor'
+import Display from './PropertiesComponenets/Display'
 
 const TextProperties = () => {
 	const {
@@ -161,6 +162,7 @@ const TextProperties = () => {
 					<option value='a'>Anchor</option>
 				</select>
 			</div>
+			<Display />
 			<Cursor style={showTextCompProperties ? 'grid' : 'none'} />
 			<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
 			<GridColumn style={showTextCompProperties ? 'grid' : 'none'} />

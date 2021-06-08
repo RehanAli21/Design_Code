@@ -3,6 +3,7 @@ import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import { TemplateContext } from '../Contexts/TemplateContext'
 import Cursor from './PropertiesComponenets/Cursor'
+import Display from './PropertiesComponenets/Display'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
 import Tip from './PropertiesComponenets/Tip'
@@ -367,6 +368,7 @@ const InputProperties = () => {
 					id='input-textcolor'
 				/>
 			</div>
+			<Display />
 			<Cursor style={showInputProperties ? 'grid' : 'none'} />
 			<GridColumn style={showInputProperties ? 'grid' : 'none'} />
 		</div>

@@ -6,6 +6,7 @@ import TextChange from './PropertiesComponenets/TextChange'
 import Name from './PropertiesComponenets/Name'
 import Cursor from './PropertiesComponenets/Cursor'
 import Tip from './PropertiesComponenets/Tip'
+import Display from './PropertiesComponenets/Display'
 
 const ButtonProperties = () => {
 	const {
@@ -181,6 +182,7 @@ const ButtonProperties = () => {
 					}}
 				/>
 			</div>
+			<Display />
 			<Cursor style={showBtnProperties ? 'grid' : 'none'} />
 			<GridColumn style={showBtnProperties ? 'grid' : 'none'} />
 			<div

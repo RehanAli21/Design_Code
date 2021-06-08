@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import { PropertiesContext } from '../Contexts/PropertiesContext'
 import BGImage from './PropertiesComponenets/BGImage'
+import Display from './PropertiesComponenets/Display'
 import Cursor from './PropertiesComponenets/Cursor'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Name from './PropertiesComponenets/Name'
@@ -639,6 +640,7 @@ const DivProperties = () => {
 					<option value='hidden'>Hidden</option>
 				</select>
 			</div>
+			<Display />
 			<Cursor style={showDivProperties ? 'grid' : 'none'} />
 			<GridColumn style={showDivProperties ? 'grid' : 'none'} />
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
