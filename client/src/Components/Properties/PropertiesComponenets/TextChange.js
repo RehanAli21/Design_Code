@@ -30,7 +30,7 @@ const TextChange = ({ type, display }) => {
 	useEffect(() => {
 		if (text !== '') {
 			const temp = Object.assign({}, pages)
-			findAndChange(temp[activePage], 'text', text)
+			findAndChange(temp[activePage], 'text', text === '(none)' ? '' : text)
 			setPages(temp)
 		}
 	}, [text])

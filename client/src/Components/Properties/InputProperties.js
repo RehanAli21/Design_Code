@@ -18,34 +18,15 @@ const InputProperties = () => {
 		setLarge,
 		xlarge,
 		setXlarge,
-		changedSmall,
-		setChangedSmall,
-		changedMedium,
-		setChangedMedium,
-		changedLarge,
-		setChangedLarge,
-		changedXlarge,
-		setChangedXlarge,
 		showInputProperties,
 		setShowInputProperties,
 	} = useContext(PropertiesContext)
-	const {
-		width,
-		activePage,
-		activeElement,
-		pages,
-		setPages,
-		sBreakPoint,
-		mBreakPoint,
-		lBreakPoint,
-		setShowMsgBox,
-		setMsgBoxMsg,
-	} = useContext(PageContext)
+	const { width, activePage, activeElement, pages, setPages, setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [type, setType] = useState('')
 	const [placeholder, setPlaceholder] = useState('')
-	const [maxLength, setMaxLength] = useState(0)
+	const [maxLength, setMaxLength] = useState('')
 	const [min, setMin] = useState('')
 	const [max, setMax] = useState('')
 	const [showMinMax, setShowMinMax] = useState(false)
@@ -66,7 +47,7 @@ const InputProperties = () => {
 			typeSelect.value = values[0]
 			setShowMinMax(values[0] === 'number' || values[0] === 'range')
 			placeholderInput.value = values[1]
-			maxLengthInput.value = values[2] === 0 ? '' : values[2]
+			maxLengthInput.value = values[2] === -1 ? '' : values[2]
 			minInput.value = values[3]
 			maxInput.value = values[4]
 		}
@@ -114,7 +95,7 @@ const InputProperties = () => {
 
 	//For MaxLength change of input
 	useEffect(() => {
-		if (maxLength !== 0) {
+		if (maxLength !== '') {
 			const temp = Object.assign({}, pages)
 			findAndChange(temp[activePage], 'maxLength', maxLength)
 			setPages(temp)

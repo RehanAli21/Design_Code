@@ -178,7 +178,58 @@ const Page = () => {
 				if (e[0] === 'div') {
 					temp.push(showElementsHelper(e, 'noType', 'children', 'class'))
 				} else if (e[0] === 'input') {
-					temp.push(showElementsHelper(e, 'noType', 'noChildren', 'class'))
+					temp.push(
+						React.createElement(
+							e[0],
+							{
+								key: uuid(),
+								id: e[1].id,
+								type: e[1].type,
+								placeholder: e[1].placeholder,
+								maxLength: e[1].maxLength === -1 ? 9999 : e[1].maxLength,
+								min: e[1].min,
+								max: e[1].max,
+								className: e[1].class,
+								onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
+								onMouseLeave: () =>
+									onHoverLeaveStyle(
+										e[1].id,
+										e[1].hoverStyle,
+										width < 540
+											? e[1].styles.small
+											: width < 720
+											? e[1].styles.medium
+											: width < 960
+											? e[1].styles.large
+											: e[1].styles.xlarge,
+										e[1].hoverTarget,
+										e[1].hTargetStyle
+									),
+								onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
+								onMouseUp: () =>
+									onClickLeaveStyle(
+										e[1].id,
+										e[1].clickStyle,
+										width < 540
+											? e[1].styles.small
+											: width < 720
+											? e[1].styles.medium
+											: width < 960
+											? e[1].styles.large
+											: e[1].styles.xlarge
+									),
+								style:
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge,
+							},
+							null
+						)
+					)
 				} else if (e[0] === 'button') {
 					//This logic applied to add icons in the button
 					let children = [] //for storing children of button element
