@@ -87,7 +87,7 @@ const ClickExtra = () => {
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading' onClick={() => setShowClickProperties(!showClickProperties)}>
-				<Tip msg={['These properties will apply on click']} />
+				<Tip msg={['These properties will apply on click and when user leave click the styles will reset']} />
 				CLICK PROPERTIES <span style={{ display: showClickProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showClickProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>

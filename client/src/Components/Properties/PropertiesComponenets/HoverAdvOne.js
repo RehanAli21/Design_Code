@@ -152,10 +152,10 @@ const HoverAdvOne = () => {
 						max='5000'
 						id='hoveradv-duration-input'
 						onChange={e => {
-							if (e.target.value < 0 || e.target.value < 5000) {
+							if (e.target.value < 0 || e.target.value > 5000) {
 								setMsgBoxMsg('Duration can only be set from 0 to 5000')
 								setShowMsgBox(true)
-							} else if (e.target.value > 0) setDuration(`${e.target.value}ms`)
+							} else if (e.target.value >= 0) setDuration(`${e.target.value}ms`)
 						}}
 					/>
 				</div>

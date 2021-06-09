@@ -58,11 +58,11 @@ const HoverAdvExtra = () => {
 		if (hoveradv) {
 			let transform = ''
 
-			if (scaleX !== '' && scaleX !== '0') transform += ` scaleX(${scaleX})`
-			if (scaleY !== '' && scaleY !== '0') transform += ` scaleY(${scaleY})`
-			if (rotate !== '' && rotate !== '0') transform += ` rotate(${rotate})`
-			if (translateX !== '' && translateX !== '0') transform += ` translateX(${translateX})`
-			if (translateY !== '' && translateY !== '0') transform += ` translateY(${translateY})`
+			if (scaleX !== '') transform += ` scaleX(${scaleX})`
+			if (scaleY !== '') transform += ` scaleY(${scaleY})`
+			if (rotate !== '') transform += ` rotate(${rotate})`
+			if (translateX !== '') transform += ` translateX(${translateX})`
+			if (translateY !== '') transform += ` translateY(${translateY})`
 
 			if (transform !== '') transform = transform.substr(1, transform.length - 1)
 
@@ -138,6 +138,7 @@ const HoverAdvExtra = () => {
 					onChange={e => setRotate(`${e.target.value > 360 ? 360 : e.target.value}deg`)}
 				/>
 			</div>
+
 			<div className='two' style={{ display: showHAEP ? 'grid' : 'none' }}>
 				<label>TranslateX: </label>
 				<input
