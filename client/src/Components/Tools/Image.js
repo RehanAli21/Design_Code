@@ -4,13 +4,17 @@ import { PageContext } from '../Contexts/PageContext'
 //for unique name
 let counter = 1
 //This component is for adding image element
-const Image = ({ findAndInsert, uniqueString }) => {
+const Image = ({ findAndInsert, uniqueString, findName }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addImage = () => {
 		//Assigning new variable pages data,
 		//For inserting image element
 		const temp = Object.assign({}, pages)
+		//checking if name already exists, then counter increament and that make name unique
+		while (findName(temp[activePage], `img${counter}`)) {
+			counter++
+		}
 		//For holding all data of a image element
 		const image = [
 			'img',

@@ -35,7 +35,8 @@ const Name = ({ style }) => {
 				changeName(temp[activePage], name)
 				setPages(temp)
 			} else {
-				alert('Name should be unique from other elements')
+				setMsgBoxMsg('Name should be unique from other elements')
+				setShowMsgBox(true)
 			}
 		}
 	}, [name])

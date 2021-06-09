@@ -4,13 +4,17 @@ import { PageContext } from '../Contexts/PageContext'
 //for unique name
 let counter = 1
 //This component is for adding option element
-const Option = ({ findAndInsert, uniqueString }) => {
+const Option = ({ findAndInsert, uniqueString, findName }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addOption = () => {
 		//Assigning new variable pages data,
 		//For inserting option element
 		const temp = Object.assign({}, pages)
+		//checking if name already exists, then counter increament and that make name unique
+		while (findName(temp[activePage], `option${counter}`)) {
+			counter++
+		}
 		//For holding all data of a option element
 		const option = [
 			'option',

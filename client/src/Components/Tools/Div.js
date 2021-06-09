@@ -4,13 +4,18 @@ import { PageContext } from '../Contexts/PageContext'
 //for unique name
 let counter = 1
 //This component is for adding div element
-const Div = ({ findAndInsert, uniqueString }) => {
+const Div = ({ findAndInsert, uniqueString, findName }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
+
 	//For adding element into pages data
 	const addDiv = () => {
 		//Assigning new variable pages data,
 		//For inserting div element
 		const temp = Object.assign({}, pages)
+		//checking if name already exists, then counter increament and that make name unique
+		while (findName(temp[activePage], `div${counter}`)) {
+			counter++
+		}
 		//For holding all data of a div element
 		const div = [
 			'div',

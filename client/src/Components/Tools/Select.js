@@ -4,13 +4,17 @@ import { PageContext } from '../Contexts/PageContext'
 //for unique name
 let counter = 1
 //This component is for adding select element
-const Select = ({ findAndInsert, uniqueString }) => {
+const Select = ({ findAndInsert, uniqueString, findName }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addSelect = () => {
 		//Assigning new variable pages data,
 		//For inserting select element
 		const temp = Object.assign({}, pages)
+		//checking if name already exists, then counter increament and that make name unique
+		while (findName(temp[activePage], `select${counter}`)) {
+			counter++
+		}
 		//For holding all data of a select element
 		const select = [
 			'select',

@@ -4,13 +4,17 @@ import { PageContext } from '../Contexts/PageContext'
 //for unique name
 let counter = 1
 //This component is for adding list element
-const ListItem = ({ findAndInsert, uniqueString }) => {
+const ListItem = ({ findAndInsert, uniqueString, findName }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addListItem = () => {
 		//Assigning new variable pages data,
 		//For inserting listItem element
 		const temp = Object.assign({}, pages)
+		//checking if name already exists, then counter increament and that make name unique
+		while (findName(temp[activePage], `list item${counter}`)) {
+			counter++
+		}
 		//For holding all data of a listItem element
 		const listItem = [
 			'list Item',

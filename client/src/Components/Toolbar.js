@@ -38,6 +38,18 @@ const Toolbar = () => {
 		return children
 	}
 
+	const findName = (arr, name) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].name === name) {
+				return true
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				if (findName(arr[i][2], name)) return true
+			}
+		}
+
+		return false
+	}
+
 	const showTools = () => {
 		const ele = document.getElementById(activeElement)
 
@@ -46,13 +58,13 @@ const Toolbar = () => {
 		if (ele.id === activePage) {
 			return (
 				<React.Fragment>
-					<Div findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Button findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Input findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Div findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Button findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Input findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<List findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
 				</React.Fragment>
 			)
 		}
@@ -60,40 +72,40 @@ const Toolbar = () => {
 		if (ele.tagName === 'DIV') {
 			return (
 				<React.Fragment>
-					<Div findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Button findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Input findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Div findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Button findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Input findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<List findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
 				</React.Fragment>
 			)
 		} else if (ele.tagName === 'UL' || ele.tagName === 'OL') {
 			return (
 				<React.Fragment>
-					<ListItem findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<ListItem findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
 				</React.Fragment>
 			)
 		} else if (ele.tagName === 'SELECT') {
 			return (
 				<React.Fragment>
-					<Option findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Option findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
 				</React.Fragment>
 			)
 		} else if (ele.tagName === 'LI') {
 			return (
 				<React.Fragment>
-					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<List findAndInsert={findAndInsert} uniqueString={uniqueString} />
-					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<List findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
 				</React.Fragment>
 			)
 		} else if (ele.tagName === 'BUTTON') {
 			return (
 				<React.Fragment>
-					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} />
+					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
 				</React.Fragment>
 			)
 		} else {

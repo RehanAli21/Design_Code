@@ -4,13 +4,17 @@ import { PageContext } from '../Contexts/PageContext'
 //for unique name
 let counter = 1
 //This component is for adding Button element
-const Button = ({ findAndInsert, uniqueString }) => {
+const Button = ({ findAndInsert, uniqueString, findName }) => {
 	const { activeElement, activePage, setPages, pages } = useContext(PageContext)
 	//For adding element into pages data
 	const addButton = () => {
 		//Assigning new variable pages data,
 		//For inserting Button element
 		const temp = Object.assign({}, pages)
+		//checking if name already exists, then counter increament and that make name unique
+		while (findName(temp[activePage], `button${counter}`)) {
+			counter++
+		}
 		//For holding all data of a Button element
 		const Button = [
 			'button',
