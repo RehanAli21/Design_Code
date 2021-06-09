@@ -204,10 +204,10 @@ const Layers = () => {
 			if (parent && child) {
 				if (parent.tagName === 'SELECT' && child.tagName !== 'OPTION') return
 				if ((parent.tagName === 'OL' || parent.tagName === 'UL') && child.tagName !== 'LI') return
+				if (parent.tagName === 'BUTTON' && child.tagName !== 'I') return
 			}
 			if (parent) {
 				if (
-					parent.tagName === 'BUTTON' ||
 					parent.tagName === 'INPUT' ||
 					parent.tagName === 'H1' ||
 					parent.tagName === 'H2' ||
@@ -216,7 +216,8 @@ const Layers = () => {
 					parent.tagName === 'H5' ||
 					parent.tagName === 'A' ||
 					parent.tagName === 'P' ||
-					parent.tagName === 'IMG'
+					parent.tagName === 'IMG' ||
+					parent.tagName === 'I'
 				) {
 					return
 				}

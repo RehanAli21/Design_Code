@@ -52,9 +52,9 @@ const Propertiesbar = () => {
 				<HoverStateProperties activeElement={activeElement} activePage={activePage} />
 			) : state === 'click' && !isOptionElement && !isIcon ? (
 				<ClickStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'hoverjs' && !isOptionElement && !isIcon ? (
+			) : state === 'hoverjs' && !isOptionElement ? (
 				<HoverAStateProperties activeElement={activeElement} activePage={activePage} />
-			) : state === 'clickjs' && !isOptionElement && !isIcon ? (
+			) : state === 'clickjs' && !isOptionElement ? (
 				<ClickAStateProperties />
 			) : (
 				<div></div>

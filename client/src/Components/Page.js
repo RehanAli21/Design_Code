@@ -238,28 +238,7 @@ const Page = () => {
 						)
 					)
 				} else if (e[0] === 'i') {
-					//The showElementsHelper does not used because,
-					//this is different and small
-					temp.push(
-						React.createElement(
-							e[0],
-							{
-								key: uuid(),
-								id: e[1].id,
-								className: e[1].class,
-								onMouseDown: () => (inPageActiveElement ? setActiveElement(e[1].id) : null),
-								style:
-									width < 540
-										? e[1].styles.small
-										: width < 720
-										? e[1].styles.medium
-										: width < 960
-										? e[1].styles.large
-										: e[1].styles.xlarge,
-							},
-							null
-						)
-					)
+					temp.push(showElementsHelper(e, 'noType', 'noChildren', 'class'))
 				} else if (e[0] === 'list') {
 					temp.push(showElementsHelper(e, 'type', 'children', 'class'))
 				} else if (e[0] === 'list Item') {
