@@ -118,40 +118,24 @@ const Position = () => {
 					const unit = unitFinder(large.top)
 					topSelect.value = unit
 					topInput.value = large.top.split(unitFirstLetter(unit))[0]
-				} else {
-					setTop('')
-					topSelect.value = 'px'
-					topInput.value = ''
 				}
 
 				if (large.bottom) {
 					const unit = unitFinder(large.bottom)
 					bottomSelect.value = unit
 					bottomInput.value = large.bottom.split(unitFirstLetter(unit))[0]
-				} else {
-					setBottom('')
-					bottomSelect.value = 'px'
-					bottomInput.value = ''
 				}
 
 				if (large.left) {
 					const unit = unitFinder(large.left)
 					leftSelect.value = unit
 					leftInput.value = large.left.split(unitFirstLetter(unit))[0]
-				} else {
-					setLeft('')
-					leftSelect.value = 'px'
-					leftInput.value = ''
 				}
 
 				if (large.right) {
 					const unit = unitFinder(large.right)
 					rightSelect.value = unit
 					rightInput.value = large.right.split(unitFirstLetter(unit))[0]
-				} else {
-					setRight('')
-					rightSelect.value = 'px'
-					rightInput.value = ''
 				}
 			} else {
 				if (xlarge.position) positionInput.value = xlarge.position
@@ -441,7 +425,7 @@ const Position = () => {
 	}
 
 	const reset = () => {
-		if (small && medium && large && xlarge && top !== '') {
+		if (small && medium && large && xlarge) {
 			if (width < sBreakPoint) {
 				resetProperties(small, setSmall)
 				setChangedSmall(true)
@@ -488,12 +472,7 @@ const Position = () => {
 	return (
 		<div className='borders btn-specific' style={{ position: 'relative' }}>
 			<p className='second-heading' onClick={() => setShowPositionProperties(!showPositionProperties)}>
-				<Tip
-					msg={[
-						'Position for applying different positions',
-						'Z-Index for bring element forword or backword',
-					]}
-				/>
+				<Tip msg={['Position for applying different positions', 'Z-Index for bring element forword or backword']} />
 				POSITIONS <span style={{ display: showPositionProperties ? 'inline' : 'none' }}>&#9660;</span>
 				<span style={{ display: showPositionProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
@@ -536,13 +515,7 @@ const Position = () => {
 				</div>
 				<div
 					style={{
-						display:
-							posToShowProperties === 'static' ||
-							posToShowProperties === 'relative' ||
-							posToShowProperties === 'sticky' ||
-							top !== ''
-								? 'none'
-								: 'grid',
+						display: posToShowProperties === 'static' || top !== '' ? 'none' : 'grid',
 					}}
 					className='three'>
 					<label>Bottom: </label>
@@ -571,13 +544,7 @@ const Position = () => {
 				</div>
 				<div
 					style={{
-						display:
-							posToShowProperties === 'static' ||
-							posToShowProperties === 'relative' ||
-							posToShowProperties === 'sticky' ||
-							left !== ''
-								? 'none'
-								: 'grid',
+						display: posToShowProperties === 'static' || left !== '' ? 'none' : 'grid',
 					}}
 					className='three'>
 					<label>Right: </label>

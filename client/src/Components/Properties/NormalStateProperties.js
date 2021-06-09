@@ -12,6 +12,7 @@ const NormalStateProperties = ({ activePage, activeElement, ele }) => {
 				return (
 					<React.Fragment>
 						<Appearance />
+						<Specific section='other' />
 					</React.Fragment>
 				)
 			} else if (ele && ele.tagName !== 'OPTION') {
@@ -20,6 +21,7 @@ const NormalStateProperties = ({ activePage, activeElement, ele }) => {
 						<Align />
 						<Transform />
 						<Appearance />
+						<Specific section='other' />
 						<DsProperties />
 					</React.Fragment>
 				)
@@ -30,7 +32,6 @@ const NormalStateProperties = ({ activePage, activeElement, ele }) => {
 		<div style={{ display: activePage !== activeElement ? 'block' : 'none' }} className='property'>
 			<Specific section='main' />
 			{comps()}
-			<Specific section='other' />
 		</div>
 	)
 }
