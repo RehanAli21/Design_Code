@@ -41,7 +41,7 @@ const HoverAStateProperties = () => {
 
 	const NameFinder = arr => {
 		for (let i = 0; i < arr.length; i++) {
-			if (arr[i][1].name === name && arr[i][1].id !== activeElement) {
+			if (arr[i][1].name === name) {
 				if (arr[i][0] !== 'option') {
 					setHoverTarget(arr[i][1].id)
 					return true
@@ -59,7 +59,7 @@ const HoverAStateProperties = () => {
 					msg={[
 						'These properties will apply on the selected element, when mouse is on this element',
 						"Element can be selected by it's name",
-						'Note: you can not select elements own name',
+						'Note: If you select this element, then hover state properties will be mixed with it',
 					]}
 				/>
 				HOVER ELEMENT PROPERTIES

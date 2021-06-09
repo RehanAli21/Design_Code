@@ -89,7 +89,7 @@ const Page = () => {
 		setStyle(id, style) //for own hover style
 		setStyle(targetId, targetStyle) //for target hover style
 	}
-
+	//For applying click styles on elements
 	const onClickStyle = (id, style, targetId, targetStyle) => {
 		setStyle(id, style) //for own click style
 		setStyle(targetId, targetStyle) //for target click style

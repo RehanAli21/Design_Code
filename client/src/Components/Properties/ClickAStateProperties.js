@@ -41,7 +41,7 @@ const ClickAStateProperties = () => {
 
 	const NameFinder = arr => {
 		for (let i = 0; i < arr.length; i++) {
-			if (arr[i][1].name === name && arr[i][1].id !== activeElement) {
+			if (arr[i][1].name === name) {
 				if (arr[i][0] !== 'option') {
 					setClickTarget(arr[i][1].id)
 					return true
@@ -59,7 +59,7 @@ const ClickAStateProperties = () => {
 					msg={[
 						'These properties will apply on the selected element, when this element is clicked',
 						"Element can be selected by it's name",
-						'Note: you can not select elements own name',
+						'Note: If you select this element, then click states propertise would not work',
 					]}
 				/>
 				CLICK ELEMENT PROPERTIES
@@ -67,6 +67,13 @@ const ClickAStateProperties = () => {
 			<div className='two'>
 				<label>Element Name</label>
 				<input type='text' placeholder='Ele name' id='clickadv-name-input' onChange={e => setName(e.target.value)} />
+			</div>
+			<div style={{ margin: '15px 20px 5px 20px' }}>
+				<label>Reset selected element's styles on even clicks</label>
+				<select style={{ fontSize: '16px', fontWeight: 'bold', marginLeft: '10px' }}>
+					<option value='no'>No</option>
+					<option value='yes'>Yes</option>
+				</select>
 			</div>
 			<div style={{ display: showProperties ? 'block' : 'none' }}>
 				<ClickAdvOne />
