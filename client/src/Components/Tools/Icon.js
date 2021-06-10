@@ -21,7 +21,7 @@ const Icon = ({ findAndInsert, uniqueString, findName }) => {
 			{
 				name: `icon${counter}`,
 				id: uniqueString(),
-				class: '',
+				class: ' clickTargetNotApplied ',
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',

@@ -23,7 +23,7 @@ const Button = ({ findAndInsert, uniqueString, findName }) => {
 				id: uniqueString(),
 				text: 'button',
 				showChildren: true,
-				class: '',
+				class: ' clickTargetNotApplied ',
 				indexOfText: 0,
 				hoverTarget: '',
 				clickTarget: '',

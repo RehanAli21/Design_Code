@@ -90,9 +90,39 @@ const Page = () => {
 		setStyle(targetId, targetStyle) //for target hover style
 	}
 	//For applying click styles on elements
-	const onClickStyle = (id, style, targetId, targetStyle) => {
+	const onClickStyle = (id, style, targetId, targetStyle, targetReClickRemover) => {
 		setStyle(id, style) //for own click style
-		setStyle(targetId, targetStyle) //for target click style
+		if (targetReClickRemover === 'yes') {
+			const ele = document.getElementById(targetId)
+
+			if (ele) {
+				const classes = ele.classList
+				let isApplied = ''
+
+				classes.forEach(e => {
+					if (e === 'clickTargetNotApplied') isApplied = 'notApplied'
+					else if (e === 'clickTargetApplied') isApplied = 'applied'
+				})
+
+				if (isApplied === 'applied') {
+					ele.classList.remove('clickTargetApplied')
+					ele.classList.add('clickTargetNotApplied')
+				} else if (isApplied === 'notApplied') {
+					ele.classList.remove('clickTargetNotApplied')
+					ele.classList.add('clickTargetApplied')
+				}
+
+				if (isApplied === 'applied') {
+					for (const e in targetStyle) {
+						if (e !== 'transitionDuration') ele.style[e] = ''
+					}
+				} else if (isApplied === 'notApplied') {
+					setStyle(targetId, targetStyle)
+				}
+			}
+		} else if (targetReClickRemover === 'no') {
+			setStyle(targetId, targetStyle) //for target click style
+		}
 		if (inPageActiveElement) setActiveElement(id)
 	}
 
@@ -176,7 +206,7 @@ const Page = () => {
 			if (!Array.isArray(e)) temp.push(e)
 			else {
 				if (e[0] === 'div') {
-					temp.push(showElementsHelper(e, 'noType', 'children', 'class'))
+					temp.push(showElementsHelper(e, 'noType', 'children'))
 				} else if (e[0] === 'input') {
 					temp.push(
 						React.createElement(
@@ -205,7 +235,14 @@ const Page = () => {
 										e[1].hoverTarget,
 										e[1].hTargetStyle
 									),
-								onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
+								onMouseDown: () =>
+									onClickStyle(
+										e[1].id,
+										e[1].clickStyle,
+										e[1].clickTarget,
+										e[1].cTargetStyle,
+										e[1].evenClickStyleRemover
+									),
 								onMouseUp: () =>
 									onClickLeaveStyle(
 										e[1].id,
@@ -258,15 +295,15 @@ const Page = () => {
 					//changing children of new Array
 					newElement[2] = children
 
-					temp.push(showElementsHelper(newElement, 'noType', 'children', 'class'))
+					temp.push(showElementsHelper(newElement, 'noType', 'children'))
 				} else if (e[0] === 'text' && e[1].type !== 'a') {
-					temp.push(showElementsHelper(e, 'type', 'text', 'class'))
+					temp.push(showElementsHelper(e, 'type', 'text'))
 				} else if (e[0] === 'text' && e[1].type === 'a') {
-					temp.push(showElementsHelper(e, 'type', 'text', 'class'))
+					temp.push(showElementsHelper(e, 'type', 'text'))
 				} else if (e[0] === 'img') {
-					temp.push(showElementsHelper(e, 'noType', 'noChildren', 'class'))
+					temp.push(showElementsHelper(e, 'noType', 'noChildren'))
 				} else if (e[0] === 'select') {
-					temp.push(showElementsHelper(e, 'noType', 'children', 'class'))
+					temp.push(showElementsHelper(e, 'noType', 'children'))
 				} else if (e[0] === 'option') {
 					//The showElementsHelper does not used because,
 					//this is different and small
@@ -289,11 +326,11 @@ const Page = () => {
 						)
 					)
 				} else if (e[0] === 'i') {
-					temp.push(showElementsHelper(e, 'noType', 'noChildren', 'class'))
+					temp.push(showElementsHelper(e, 'noType', 'noChildren'))
 				} else if (e[0] === 'list') {
-					temp.push(showElementsHelper(e, 'type', 'children', 'class'))
+					temp.push(showElementsHelper(e, 'type', 'children'))
 				} else if (e[0] === 'list Item') {
-					temp.push(showElementsHelper(e, 'type', 'children', 'noclass'))
+					temp.push(showElementsHelper(e, 'type', 'children'))
 				}
 			}
 		})
@@ -301,7 +338,7 @@ const Page = () => {
 		return temp
 	}
 	//This function used for reducing code
-	const showElementsHelper = (e, type, choice, className) => {
+	const showElementsHelper = (e, type, choice) => {
 		/**
 		 * Inserting elements into variable.
 		 * Using React.createElement func for creating elements
@@ -314,7 +351,7 @@ const Page = () => {
 			{
 				key: uuid(),
 				id: e[1].id,
-				className: className === 'class' ? e[1].class : '',
+				className: e[1].class,
 				onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
 				onMouseLeave: () =>
 					onHoverLeaveStyle(
@@ -330,7 +367,8 @@ const Page = () => {
 						e[1].hoverTarget,
 						e[1].hTargetStyle
 					),
-				onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle),
+				onMouseDown: () =>
+					onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle, e[1].evenClickStyleRemover),
 				onMouseUp: () =>
 					onClickLeaveStyle(
 						e[1].id,

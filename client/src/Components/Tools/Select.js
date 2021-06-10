@@ -22,7 +22,7 @@ const Select = ({ findAndInsert, uniqueString, findName }) => {
 				name: `select${counter}`,
 				id: uniqueString(),
 				showChildren: true,
-				class: '',
+				class: ' clickTargetNotApplied ',
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',

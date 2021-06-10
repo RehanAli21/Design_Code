@@ -23,7 +23,7 @@ const List = ({ findAndInsert, uniqueString, findName }) => {
 				type: 'ul',
 				id: uniqueString(),
 				showChildren: true,
-				class: '',
+				class: ' clickTargetNotApplied ',
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',

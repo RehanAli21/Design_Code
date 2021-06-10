@@ -22,6 +22,7 @@ const ListItem = ({ findAndInsert, uniqueString, findName }) => {
 				name: `list item${counter}`,
 				type: 'li',
 				id: uniqueString(),
+				class: ' clickTargetNotApplied ',
 				showChildren: true,
 				hoverTarget: '',
 				clickTarget: '',

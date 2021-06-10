@@ -22,6 +22,7 @@ const Option = ({ findAndInsert, uniqueString, findName }) => {
 				name: `option${counter}`,
 				text: 'text',
 				id: uniqueString(),
+				class: ' clickTargetNotApplied ',
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',

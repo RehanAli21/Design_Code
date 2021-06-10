@@ -23,7 +23,7 @@ const Div = ({ findAndInsert, uniqueString, findName }) => {
 				name: `div${counter}`,
 				id: uniqueString(),
 				showChildren: true,
-				class: '',
+				class: ' clickTargetNotApplied ',
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',
