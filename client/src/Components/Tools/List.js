@@ -30,6 +30,7 @@ const List = ({ findAndInsert, uniqueString, findName }) => {
 				clickTargetName: '',
 				hTargetStyle: {},
 				cTargetStyle: {},
+				evenClickStyleRemover: 'no',
 				styles: {
 					small: {
 						listStyleType: 'circle',

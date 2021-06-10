@@ -31,6 +31,7 @@ const Input = ({ findAndInsert, uniqueString, findName }) => {
 				clickTarget: '',
 				hoverTargetName: '',
 				clickTargetName: '',
+				evenClickStyleRemover: 'no',
 				hTargetStyle: {},
 				cTargetStyle: {},
 				styles: {

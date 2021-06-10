@@ -8,10 +8,11 @@ import Tip from './PropertiesComponenets/Tip'
 
 const ClickAStateProperties = () => {
 	const { setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
-	const { width, pages, activePage, activeElement } = useContext(PageContext)
+	const { width, pages, setPages, activePage, activeElement } = useContext(PageContext)
 
 	const [name, setName] = useState('')
 	const [showProperties, setShowProperties] = useState(false)
+	const [evenClick, setEvenClick] = useState('')
 
 	useEffect(() => {
 		const nameInput = document.getElementById('clickadv-name-input')
@@ -52,6 +53,26 @@ const ClickAStateProperties = () => {
 		}
 	}
 
+	useEffect(() => {
+		if (evenClick !== '') {
+			const temp = Object.assign({}, pages)
+			findEvenClickProperty(temp[activePage])
+			setPages(temp)
+		}
+	}, [evenClick])
+
+	const findEvenClickProperty = arr => {
+		arr.forEach(e => {
+			if (e[1].id === activeElement) {
+				e[1].evenClickStyleRemover = evenClick
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (findEvenClickProperty(e[2])) return true
+			}
+		})
+		return false
+	}
+
 	return (
 		<div className='btn-specific' style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
 			<p className='second-heading'>
@@ -68,9 +89,12 @@ const ClickAStateProperties = () => {
 				<label>Element Name</label>
 				<input type='text' placeholder='Ele name' id='clickadv-name-input' onChange={e => setName(e.target.value)} />
 			</div>
-			<div style={{ margin: '15px 20px 5px 20px' }}>
+			<div style={{ margin: '15px 20px 5px 20px', display: showProperties ? 'block' : 'none' }}>
 				<label>Reset selected element's styles on even clicks</label>
-				<select style={{ fontSize: '16px', fontWeight: 'bold', marginLeft: '10px' }}>
+				<select
+					id='clickadv-evenRemove-select'
+					onChange={e => setEvenClick(e.target.value)}
+					style={{ fontSize: '16px', fontWeight: 'bold', marginLeft: '10px' }}>
 					<option value='no'>No</option>
 					<option value='yes'>Yes</option>
 				</select>

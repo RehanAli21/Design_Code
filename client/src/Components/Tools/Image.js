@@ -30,6 +30,7 @@ const Image = ({ findAndInsert, uniqueString, findName }) => {
 				clickTargetName: '',
 				hTargetStyle: {},
 				cTargetStyle: {},
+				evenClickStyleRemover: 'no',
 				styles: {
 					small: {},
 					medium: {},
