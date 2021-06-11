@@ -7,7 +7,7 @@ import ClickAdvExtra from './PropertiesComponenets/ClickAdvExtra'
 import Tip from './PropertiesComponenets/Tip'
 
 const ClickAStateProperties = () => {
-	const { setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
+	const { clickTargets, setClickTargets, setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
 	const { width, pages, setPages, activePage, activeElement } = useContext(PageContext)
 
 	const [name, setName] = useState('')
@@ -73,6 +73,19 @@ const ClickAStateProperties = () => {
 		return false
 	}
 
+	const printElementsNames = () => {
+		const arr = []
+		for (const e in clickTargets) {
+			arr.push(
+				<option key={clickTargets[e]} value={clickTargets[e]}>
+					{clickTargets[e]}
+				</option>
+			)
+		}
+
+		return arr
+	}
+
 	return (
 		<div className='btn-specific' style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
 			<p className='second-heading'>
@@ -85,6 +98,11 @@ const ClickAStateProperties = () => {
 				/>
 				CLICK ELEMENT PROPERTIES
 			</p>
+			<div style={{ display: 'grid', gridTemplateColumns: '70px 90px 50px', columnGap: '10px', margin: '10px 22px' }}>
+				<label style={{ paddingTop: '5px' }}>Elements</label>
+				<select id='clickadv-elementNames-select'>{printElementsNames()}</select>
+				<button style={{ padding: '5px 10px' }}>Add</button>
+			</div>
 			<div className='two'>
 				<label>Element Name</label>
 				<input type='text' placeholder='Ele name' id='clickadv-name-input' onChange={e => setName(e.target.value)} />

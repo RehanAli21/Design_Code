@@ -25,6 +25,7 @@ const Button = ({ findAndInsert, uniqueString, findName }) => {
 				showChildren: true,
 				class: ' clickTargetNotApplied ',
 				indexOfText: 0,
+				clickTargets: {},
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',

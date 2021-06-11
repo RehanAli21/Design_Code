@@ -24,6 +24,7 @@ const ListItem = ({ findAndInsert, uniqueString, findName }) => {
 				id: uniqueString(),
 				class: ' clickTargetNotApplied ',
 				showChildren: true,
+				clickTargets: {},
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',

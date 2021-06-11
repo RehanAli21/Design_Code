@@ -16,6 +16,7 @@ export const PropertiesProvider = props => {
 	const [changedXlarge, setChangedXlarge] = useState(false)
 	const [hover, setHover] = useState({})
 	const [click, setClick] = useState({})
+	const [clickTargets, setClickTargets] = useState({})
 	const [clickadv, setClickadv] = useState({})
 	const [hoveradv, setHoveradv] = useState({})
 	const [clickTarget, setClickTarget] = useState('')
@@ -80,6 +81,7 @@ export const PropertiesProvider = props => {
 				setChangedMedium(e[1].styleWidth.changedMedium)
 				setChangedLarge(e[1].styleWidth.changedLarge)
 				setChangedXlarge(e[1].styleWidth.changeXlarge)
+				setClickTargets(e[1].clickTargets)
 				setClickadv(e[1].cTargetStyle)
 				setHoveradv(e[1].hTargetStyle)
 				setClickTarget(e[1].clickTarget)
@@ -135,6 +137,7 @@ export const PropertiesProvider = props => {
 				e[1].clickTargetName = clickTargetName
 				e[1].cTargetStyle = clickadv
 				e[1].hTargetStyle = hoveradv
+				e[1].clickTargets = clickTargets
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setProperties(e[2], id)) return true
@@ -165,6 +168,8 @@ export const PropertiesProvider = props => {
 				setHover,
 				click,
 				setClick,
+				clickTargets,
+				setClickTargets,
 				hoverTarget,
 				setHoverTarget,
 				clickTargetName,

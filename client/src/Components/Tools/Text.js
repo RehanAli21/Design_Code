@@ -24,6 +24,7 @@ const Text = ({ findAndInsert, uniqueString, findName }) => {
 				text: 'Hello World',
 				id: uniqueString(),
 				class: ' clickTargetNotApplied ',
+				clickTargets: {},
 				hoverTarget: '',
 				clickTarget: '',
 				hoverTargetName: '',
