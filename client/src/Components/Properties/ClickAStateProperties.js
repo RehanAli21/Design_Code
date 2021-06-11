@@ -18,13 +18,13 @@ const ClickAStateProperties = () => {
 	useEffect(() => {
 		const nameInput = document.getElementById('clickadv-name-input')
 
-		if (nameInput) {
-			nameInput.value = clickTargetName
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				nameInput.value = e
+				setShowProperties(true)
+			}
 		}
-
-		if (clickTargetName !== '') setShowProperties(true)
-		else if (clickTargetName === '') setShowProperties(false)
-	}, [activeElement, width, clickTargetName])
+	}, [clickTargets])
 
 	useEffect(() => {
 		if (name !== '') {
@@ -98,6 +98,14 @@ const ClickAStateProperties = () => {
 		setClickTargets(temp)
 	}
 
+	const selectElement = e => {
+		const temp = Object.assign({}, clickTargets)
+
+		for (const ele in temp) temp[ele].selected = ele === e.target.value
+
+		setClickTargets(temp)
+	}
+
 	return (
 		<div className='btn-specific' style={{ display: activePage !== activeElement ? 'block' : 'none' }}>
 			<p className='second-heading'>
@@ -112,7 +120,9 @@ const ClickAStateProperties = () => {
 			</p>
 			<div style={{ display: 'grid', gridTemplateColumns: '70px 90px 50px', columnGap: '10px', margin: '10px 22px' }}>
 				<label style={{ paddingTop: '5px' }}>Elements</label>
-				<select id='clickadv-elementNames-select'>{printElementsNames()}</select>
+				<select onChange={selectElement} id='clickadv-elementNames-select'>
+					{printElementsNames()}
+				</select>
 				<button style={{ padding: '5px 10px' }} onClick={addElement}>
 					Add
 				</button>
