@@ -6,6 +6,7 @@ import ClickAdvAppearance from './PropertiesComponenets/ClickAdvAppearance'
 import ClickAdvExtra from './PropertiesComponenets/ClickAdvExtra'
 import Tip from './PropertiesComponenets/Tip'
 
+let counter = 1
 const ClickAStateProperties = () => {
 	const { clickTargets, setClickTargets, setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
 	const { width, pages, setPages, activePage, activeElement } = useContext(PageContext)
@@ -77,13 +78,24 @@ const ClickAStateProperties = () => {
 		const arr = []
 		for (const e in clickTargets) {
 			arr.push(
-				<option key={clickTargets[e]} value={clickTargets[e]}>
-					{clickTargets[e]}
+				<option key={e} value={e}>
+					{e}
 				</option>
 			)
 		}
 
 		return arr
+	}
+
+	const addElement = () => {
+		const temp = Object.assign({}, clickTargets)
+		temp[`E${counter}`] = {
+			selected: false,
+			style: {},
+			id: '',
+		}
+		counter++
+		setClickTargets(temp)
 	}
 
 	return (
@@ -101,7 +113,9 @@ const ClickAStateProperties = () => {
 			<div style={{ display: 'grid', gridTemplateColumns: '70px 90px 50px', columnGap: '10px', margin: '10px 22px' }}>
 				<label style={{ paddingTop: '5px' }}>Elements</label>
 				<select id='clickadv-elementNames-select'>{printElementsNames()}</select>
-				<button style={{ padding: '5px 10px' }}>Add</button>
+				<button style={{ padding: '5px 10px' }} onClick={addElement}>
+					Add
+				</button>
 			</div>
 			<div className='two'>
 				<label>Element Name</label>
