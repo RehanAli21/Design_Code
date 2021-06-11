@@ -9,39 +9,51 @@ import Tip from './PropertiesComponenets/Tip'
 let counter = 1
 const ClickAStateProperties = () => {
 	const { clickTargets, setClickTargets, setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
-	const { width, pages, setPages, activePage, activeElement } = useContext(PageContext)
+	const { width, setMsgBoxMsg, setShowMsgBox, pages, setPages, activePage, activeElement } = useContext(PageContext)
 
 	const [name, setName] = useState('')
 	const [showProperties, setShowProperties] = useState(false)
 	const [evenClick, setEvenClick] = useState('')
 
 	useEffect(() => {
+		setName('')
 		const nameInput = document.getElementById('clickadv-name-input')
+		const elementNameSelect = document.getElementById('clickadv-elementNames-select')
 
 		for (const e in clickTargets) {
 			if (clickTargets[e].selected) {
+				//setting current selected element's name
 				nameInput.value = e
-				setShowProperties(true)
+				elementNameSelect.value = e
+				//if name is legit, then show properties
+				setShowProperties(NameFinder(pages[activePage], e))
 			}
 		}
 	}, [clickTargets])
 
-	useEffect(() => {
+	const changeName = () => {
 		if (name !== '') {
-			const nameFound = NameFinder(pages[activePage])
-
-			if (nameFound) {
-				setShowProperties(true)
-				setClickTargetName(name)
-			} else if (!nameFound) {
-				setShowProperties(false)
-				setClickTarget('')
-				setClickTargetName('')
+			for (const e in clickTargets) {
+				if (e === name) {
+					setMsgBoxMsg(`${name} is already selected, change it`)
+					setShowMsgBox(true)
+					return
+				}
 			}
-		}
-	}, [name])
 
-	const NameFinder = arr => {
+			const nameFound = NameFinder(pages[activePage], name)
+
+			setShowProperties(nameFound)
+
+			const temp = {}
+			for (const e in clickTargets) {
+				temp[clickTargets[e].selected ? name : e] = clickTargets[e]
+			}
+			setClickTargets(temp)
+		}
+	}
+
+	const NameFinder = (arr, name) => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].name === name) {
 				if (arr[i][0] !== 'option') {
@@ -49,7 +61,7 @@ const ClickAStateProperties = () => {
 					return true
 				}
 			} else if (arr[i][2]) {
-				if (NameFinder(arr[i][2])) return true
+				if ((NameFinder(arr[i][2]), name)) return true
 			}
 		}
 	}
@@ -89,8 +101,11 @@ const ClickAStateProperties = () => {
 
 	const addElement = () => {
 		const temp = Object.assign({}, clickTargets)
+
+		for (const e in temp) temp[e].selected = false
+
 		temp[`E${counter}`] = {
-			selected: false,
+			selected: true,
 			style: {},
 			id: '',
 		}
@@ -127,9 +142,12 @@ const ClickAStateProperties = () => {
 					Add
 				</button>
 			</div>
-			<div className='two'>
-				<label>Element Name</label>
+			<div style={{ display: 'grid', gridTemplateColumns: '70px 90px 60px', columnGap: '10px', margin: '10px 22px' }}>
+				<label style={{ paddingTop: '5px' }}>Name: </label>
 				<input type='text' placeholder='Ele name' id='clickadv-name-input' onChange={e => setName(e.target.value)} />
+				<button onClick={changeName} style={{ padding: '5px 10px' }}>
+					Apply
+				</button>
 			</div>
 			<div style={{ margin: '15px 20px 5px 20px', display: showProperties ? 'block' : 'none' }}>
 				<label>Reset selected element's styles on even clicks</label>
