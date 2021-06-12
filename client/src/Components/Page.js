@@ -90,39 +90,43 @@ const Page = () => {
 		setStyle(targetId, targetStyle) //for target hover style
 	}
 	//For applying click styles on elements
-	const onClickStyle = (id, style, targetId, targetStyle, targetReClickRemover) => {
+	const onClickStyle = (id, style, clickTargets) => {
 		setStyle(id, style) //for own click style
-		if (targetReClickRemover === 'yes') {
-			const ele = document.getElementById(targetId)
 
-			if (ele) {
-				const classes = ele.classList
-				let isApplied = ''
+		for (const e in clickTargets) {
+			if (clickTargets[e].evenClickStyleRemover === 'yes') {
+				const ele = document.getElementById(clickTargets[e].id)
 
-				classes.forEach(e => {
-					if (e === 'clickTargetNotApplied') isApplied = 'notApplied'
-					else if (e === 'clickTargetApplied') isApplied = 'applied'
-				})
+				if (ele) {
+					const classes = ele.classList
+					let isApplied = ''
 
-				if (isApplied === 'applied') {
-					ele.classList.remove('clickTargetApplied')
-					ele.classList.add('clickTargetNotApplied')
-				} else if (isApplied === 'notApplied') {
-					ele.classList.remove('clickTargetNotApplied')
-					ele.classList.add('clickTargetApplied')
-				}
+					classes.forEach(e => {
+						if (e === 'clickTargetNotApplied') isApplied = 'notApplied'
+						else if (e === 'clickTargetApplied') isApplied = 'applied'
+					})
 
-				if (isApplied === 'applied') {
-					for (const e in targetStyle) {
-						if (e !== 'transitionDuration') ele.style[e] = ''
+					if (isApplied === 'applied') {
+						ele.classList.remove('clickTargetApplied')
+						ele.classList.add('clickTargetNotApplied')
+					} else if (isApplied === 'notApplied') {
+						ele.classList.remove('clickTargetNotApplied')
+						ele.classList.add('clickTargetApplied')
 					}
-				} else if (isApplied === 'notApplied') {
-					setStyle(targetId, targetStyle)
+
+					if (isApplied === 'applied') {
+						for (const s in clickTargets[e].style) {
+							if (s !== 'transitionDuration') ele.style[s] = ''
+						}
+					} else if (isApplied === 'notApplied') {
+						setStyle(clickTargets[e].id, clickTargets[e].style)
+					}
 				}
+			} else if (clickTargets[e].evenClickStyleRemover === 'no') {
+				setStyle(clickTargets[e].id, clickTargets[e].style) //for target click style
 			}
-		} else if (targetReClickRemover === 'no') {
-			setStyle(targetId, targetStyle) //for target click style
 		}
+
 		if (inPageActiveElement) setActiveElement(id)
 	}
 
@@ -235,14 +239,7 @@ const Page = () => {
 										e[1].hoverTarget,
 										e[1].hTargetStyle
 									),
-								onMouseDown: () =>
-									onClickStyle(
-										e[1].id,
-										e[1].clickStyle,
-										e[1].clickTarget,
-										e[1].cTargetStyle,
-										e[1].evenClickStyleRemover
-									),
+								onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTargets),
 								onMouseUp: () =>
 									onClickLeaveStyle(
 										e[1].id,
@@ -367,8 +364,7 @@ const Page = () => {
 						e[1].hoverTarget,
 						e[1].hTargetStyle
 					),
-				onMouseDown: () =>
-					onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTarget, e[1].cTargetStyle, e[1].evenClickStyleRemover),
+				onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTargets),
 				onMouseUp: () =>
 					onClickLeaveStyle(
 						e[1].id,
