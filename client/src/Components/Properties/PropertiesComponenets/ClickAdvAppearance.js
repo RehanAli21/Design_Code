@@ -4,7 +4,7 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const ClickAdvAppearance = () => {
-	const { clickadv, setClickadv, showCAAP, setShowCAAP } = useContext(PropertiesContext)
+	const { clickTargets, setClickTargets, showCAAP, setShowCAAP } = useContext(PropertiesContext)
 	const { width, activeElement, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
@@ -31,108 +31,110 @@ const ClickAdvAppearance = () => {
 	const [shadowChanged, setShadowChanged] = useState(false)
 
 	useEffect(() => {
-		if (clickadv) {
-			const bgColorInput = document.getElementById('aclickadv-bgcolor')
-			const bgColorSelect = document.getElementById('bgclickadv-color-select')
-			const bActiveInput = document.getElementById('aclickadv-b-active')
-			const bRadiusInput = document.getElementById('aclickadv-b-radius')
-			const bColorInput = document.getElementById('aclickadv-b-color')
-			const bSizeInput = document.getElementById('aclickadv-b-size')
-			const bTypeInput = document.getElementById('aclickadv-b-type')
-			const sActiveInput = document.getElementById('aclickadv-s-active')
-			const sXInput = document.getElementById('aclickadv-s-x')
-			const sYInput = document.getElementById('aclickadv-s-y')
-			const sBlurInput = document.getElementById('aclickadv-s-blur')
-			const sColorInput = document.getElementById('aclickadv-s-color')
-			const paddingXInput = document.getElementById('apclickadv-paddingXInput')
-			const paddingYInput = document.getElementById('apclickadv-paddingYInput')
-			const paddingXSelect = document.getElementById('apclickadv-paddingXSelect')
-			const paddingYSelect = document.getElementById('apclickadv-paddingYSelect')
+		const bgColorInput = document.getElementById('aclickadv-bgcolor')
+		const bgColorSelect = document.getElementById('bgclickadv-color-select')
+		const bActiveInput = document.getElementById('aclickadv-b-active')
+		const bRadiusInput = document.getElementById('aclickadv-b-radius')
+		const bColorInput = document.getElementById('aclickadv-b-color')
+		const bSizeInput = document.getElementById('aclickadv-b-size')
+		const bTypeInput = document.getElementById('aclickadv-b-type')
+		const sActiveInput = document.getElementById('aclickadv-s-active')
+		const sXInput = document.getElementById('aclickadv-s-x')
+		const sYInput = document.getElementById('aclickadv-s-y')
+		const sBlurInput = document.getElementById('aclickadv-s-blur')
+		const sColorInput = document.getElementById('aclickadv-s-color')
+		const paddingXInput = document.getElementById('apclickadv-paddingXInput')
+		const paddingYInput = document.getElementById('apclickadv-paddingYInput')
+		const paddingXSelect = document.getElementById('apclickadv-paddingXSelect')
+		const paddingYSelect = document.getElementById('apclickadv-paddingYSelect')
 
-			bRadiusInput.value = clickadv.borderRadius ? clickadv.borderRadius.split('%')[0] : '0'
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				bRadiusInput.value = clickTargets[e].style.borderRadius ? clickTargets[e].style.borderRadius.split('%')[0] : '0'
 
-			//Default value for all borders
-			if (clickadv.border) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = clickadv.border.split(' ')[2]
-				bSizeInput.value = clickadv.border.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(clickadv.border.split(' ')[1])
-			} else if (clickadv.borderTop) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = clickadv.borderTop.split(' ')[2]
-				bSizeInput.value = clickadv.borderTop.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(clickadv.borderTop.split(' ')[1])
-			} else if (clickadv.borderBottom) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = clickadv.borderBottom.split(' ')[2]
-				bSizeInput.value = clickadv.borderBottom.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(clickadv.borderBottom.split(' ')[1])
-			} else if (clickadv.borderLeft) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = clickadv.borderLeft.split(' ')[2]
-				bSizeInput.value = clickadv.borderLeft.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(clickadv.borderLeft.split(' ')[1])
-			} else if (clickadv.borderRight) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = clickadv.borderRight.split(' ')[2]
-				bSizeInput.value = clickadv.borderRight.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(clickadv.borderRight.split(' ')[1])
-			} else {
-				bColorInput.value = '#000000'
-				bSizeInput.value = '0'
-				bTypeInput.selectedIndex = 0
-				bActiveInput.checked = false
-				setShowBorderSection(false)
-			}
-
-			//Default value for Box shadow
-			if (clickadv.boxShadow) {
-				sXInput.value = clickadv.boxShadow.split(' ')[0].split('p')[0]
-				sYInput.value = clickadv.boxShadow.split(' ')[1].split('p')[0]
-				sBlurInput.value = clickadv.boxShadow.split(' ')[2].split('p')[0]
-				sColorInput.value = clickadv.boxShadow.split(' ')[3]
-				sActiveInput.checked = true
-				setShowShadowSection(true)
-			} else {
-				sXInput.value = '0'
-				sYInput.value = '0'
-				sBlurInput.value = '0'
-				sColorInput.value = '#464646'
-				sActiveInput.checked = false
-				setShowShadowSection(false)
-			}
-
-			bgColorInput.value = clickadv.backgroundColor ? clickadv.backgroundColor : '#ffffff'
-			bgColorSelect.value = clickadv.backgroundColor ? clickadv.backgroundColor : 'custom'
-
-			if (clickadv.paddingTop && clickadv.paddingBottom) {
-				if (clickadv.paddingTop === clickadv.paddingBottom) {
-					const p = paddingFinder(clickadv.paddingTop)
-					paddingYInput.value = p[0]
-					paddingYSelect.value = p[1]
+				//Default value for all borders
+				if (clickTargets[e].style.border) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = clickTargets[e].style.border.split(' ')[2]
+					bSizeInput.value = clickTargets[e].style.border.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(clickTargets[e].style.border.split(' ')[1])
+				} else if (clickTargets[e].style.borderTop) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = clickTargets[e].style.borderTop.split(' ')[2]
+					bSizeInput.value = clickTargets[e].style.borderTop.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(clickTargets[e].style.borderTop.split(' ')[1])
+				} else if (clickTargets[e].style.borderBottom) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = clickTargets[e].style.borderBottom.split(' ')[2]
+					bSizeInput.value = clickTargets[e].style.borderBottom.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(clickTargets[e].style.borderBottom.split(' ')[1])
+				} else if (clickTargets[e].style.borderLeft) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = clickTargets[e].style.borderLeft.split(' ')[2]
+					bSizeInput.value = clickTargets[e].style.borderLeft.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(clickTargets[e].style.borderLeft.split(' ')[1])
+				} else if (clickTargets[e].style.borderRight) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = clickTargets[e].style.borderRight.split(' ')[2]
+					bSizeInput.value = clickTargets[e].style.borderRight.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(clickTargets[e].style.borderRight.split(' ')[1])
+				} else {
+					bColorInput.value = '#000000'
+					bSizeInput.value = '0'
+					bTypeInput.selectedIndex = 0
+					bActiveInput.checked = false
+					setShowBorderSection(false)
 				}
-			} else {
-				paddingYInput.value = 0
-				paddingYSelect.value = 'px'
-			}
 
-			if (clickadv.paddingLeft && clickadv.paddingRight) {
-				if (clickadv.paddingLeft === clickadv.paddingRight) {
-					const p = paddingFinder(clickadv.paddingLeft)
-					paddingXInput.value = p[0]
-					paddingXSelect.value = p[1]
+				//Default value for Box shadow
+				if (clickTargets[e].style.boxShadow) {
+					sXInput.value = clickTargets[e].style.boxShadow.split(' ')[0].split('p')[0]
+					sYInput.value = clickTargets[e].style.boxShadow.split(' ')[1].split('p')[0]
+					sBlurInput.value = clickTargets[e].style.boxShadow.split(' ')[2].split('p')[0]
+					sColorInput.value = clickTargets[e].style.boxShadow.split(' ')[3]
+					sActiveInput.checked = true
+					setShowShadowSection(true)
+				} else {
+					sXInput.value = '0'
+					sYInput.value = '0'
+					sBlurInput.value = '0'
+					sColorInput.value = '#464646'
+					sActiveInput.checked = false
+					setShowShadowSection(false)
 				}
-			} else {
-				paddingXInput.value = 0
-				paddingXSelect.value = 'px'
+
+				bgColorInput.value = clickTargets[e].style.backgroundColor ? clickTargets[e].style.backgroundColor : '#ffffff'
+				bgColorSelect.value = clickTargets[e].style.backgroundColor ? clickTargets[e].style.backgroundColor : 'custom'
+
+				if (clickTargets[e].style.paddingTop && clickTargets[e].style.paddingBottom) {
+					if (clickTargets[e].style.paddingTop === clickTargets[e].style.paddingBottom) {
+						const p = paddingFinder(clickTargets[e].style.paddingTop)
+						paddingYInput.value = p[0]
+						paddingYSelect.value = p[1]
+					}
+				} else {
+					paddingYInput.value = 0
+					paddingYSelect.value = 'px'
+				}
+
+				if (clickTargets[e].style.paddingLeft && clickTargets[e].style.paddingRight) {
+					if (clickTargets[e].style.paddingLeft === clickTargets[e].style.paddingRight) {
+						const p = paddingFinder(clickTargets[e].style.paddingLeft)
+						paddingXInput.value = p[0]
+						paddingXSelect.value = p[1]
+					}
+				} else {
+					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
+				}
 			}
 		}
-	}, [width, activeElement, clickadv])
+	}, [clickTargets])
 
 	const borderTypeIndex = s => (s === 'solid' ? 0 : s === 'inset' ? 1 : s === 'outset' ? 2 : 3)
 
@@ -151,20 +153,18 @@ const ClickAdvAppearance = () => {
 
 	//FOr background color and opacity
 	useEffect(() => {
-		if (clickadv) {
-			let changedBgColor = ''
-			if (bgColor !== 'custom') changedBgColor = bgColor
+		let changedBgColor = ''
+		if (bgColor !== 'custom') changedBgColor = bgColor
 
-			setProperties(clickadv, setClickadv, 'backgroundColor', changedBgColor)
-		}
+		setProperties('backgroundColor', changedBgColor)
 	}, [bgColor])
 
 	//For Box Shadow
 	useEffect(() => {
-		if (clickadv && shadowChanged) {
+		if (shadowChanged) {
 			const changedShadow = showShadowSection ? `${sX} ${sY} ${sBlur} ${sColor}` : ''
 
-			setProperties(clickadv, setClickadv, 'boxShadow', changedShadow)
+			setProperties('boxShadow', changedShadow)
 
 			setShadowChanged(false)
 		}
@@ -172,7 +172,7 @@ const ClickAdvAppearance = () => {
 
 	//For Changing paddingX
 	useEffect(() => {
-		if (clickadv && paddingX !== '') {
+		if (paddingX !== '') {
 			const ele = document.getElementById('apclickadv-paddingXSelect')
 
 			let punit = paddingYUnit
@@ -180,13 +180,13 @@ const ClickAdvAppearance = () => {
 
 			const padding = `${paddingX}${punit}`
 
-			setPadding(clickadv, setClickadv, 'paddingLeft', 'paddingRight', padding)
+			setPadding('paddingLeft', 'paddingRight', padding)
 		}
 	}, [paddingX, paddingXUnit])
 
 	//For Changing paddingY
 	useEffect(() => {
-		if (clickadv && paddingY !== '') {
+		if (paddingY !== '') {
 			const ele = document.getElementById('apclickadv-paddingYSelect')
 
 			let punit = paddingYUnit
@@ -194,165 +194,221 @@ const ClickAdvAppearance = () => {
 
 			const padding = `${paddingY}${punit}`
 
-			setPadding(clickadv, setClickadv, 'paddingTop', 'paddingBottom', padding)
+			setPadding('paddingTop', 'paddingBottom', padding)
 		}
 	}, [paddingY, paddingYUnit])
 
-	const setPadding = (obj, setObj, p1, p2, property) => {
-		const temp = Object.assign({}, obj)
-		temp[p1] = property
-		temp[p2] = property
-		setObj(temp)
+	const setPadding = (p1, p2, property) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style[p1] = property
+				temp[e].style[p2] = property
+			}
+		}
+		setClickTargets(temp)
 	}
 
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
+	const setProperties = (propertyName, property) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style[propertyName] = property
+			}
+		}
+		setClickTargets(temp)
 	}
 
 	//For changing Border
 	useEffect(() => {
-		if (clickadv && borderChanged) {
+		if (borderChanged) {
 			const changedBorder = showBorderSection ? `${bSize} ${bType} ${bColor}` : ''
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
 			if (bSide === 'all') {
-				setBorder(clickadv, setClickadv, changedBorder, changedBorderRadius)
+				setBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'top') {
-				setTopBorder(clickadv, setClickadv, changedBorder, changedBorderRadius)
+				setTopBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'bottom') {
-				setBottomBorder(clickadv, setClickadv, changedBorder, changedBorderRadius)
+				setBottomBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'left') {
-				setLeftBorder(clickadv, setClickadv, changedBorder, changedBorderRadius)
+				setLeftBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'right') {
-				setRightBorder(clickadv, setClickadv, changedBorder, changedBorderRadius)
+				setRightBorder(changedBorder, changedBorderRadius)
 			}
 		}
 
 		setBorderChanged(false)
 	}, [showBorderSection, bSize, bType, bColor, bRadius, bSide])
 
-	const setBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.border = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setBorder = (b, br) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.border = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setClickTargets(temp)
 	}
-	const setTopBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderTop = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setTopBorder = (b, br) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderTop = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setClickTargets(temp)
 	}
-	const setBottomBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderBottom = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setBottomBorder = (b, br) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderBottom = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setClickTargets(temp)
 	}
-	const setLeftBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderLeft = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setLeftBorder = (b, br) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderLeft = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setClickTargets(temp)
 	}
-	const setRightBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderRight = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setRightBorder = (b, br) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderRight = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setClickTargets(temp)
 	}
 
 	const allBorder = () => {
-		if (clickadv.borderTop) {
-			changeBorder(clickadv, setClickadv, 'border', 'borderTop')
-		}
-		if (clickadv.borderBottom) {
-			changeBorder(clickadv, setClickadv, 'border', 'borderBottom')
-		}
-		if (clickadv.borderLeft) {
-			changeBorder(clickadv, setClickadv, 'border', 'borderLeft')
-		}
-		if (clickadv.borderRight) {
-			changeBorder(clickadv, setClickadv, 'border', 'borderRight')
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				if (clickTargets[e].style.borderTop) {
+					changeBorder('border', 'borderTop')
+				}
+				if (clickTargets[e].style.borderBottom) {
+					changeBorder('border', 'borderBottom')
+				}
+				if (clickTargets[e].style.borderLeft) {
+					changeBorder('border', 'borderLeft')
+				}
+				if (clickTargets[e].style.borderRight) {
+					changeBorder('border', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('all')
 	}
 	const topBorder = () => {
-		if (clickadv.border) {
-			changeBorder(clickadv, setClickadv, 'borderTop', 'border')
-		}
-		if (clickadv.borderBottom) {
-			changeBorder(clickadv, setClickadv, 'borderTop', 'borderBottom')
-		}
-		if (clickadv.borderLeft) {
-			changeBorder(clickadv, setClickadv, 'borderTop', 'borderLeft')
-		}
-		if (clickadv.borderRight) {
-			changeBorder(clickadv, setClickadv, 'borderTop', 'borderRight')
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				if (clickTargets[e].style.border) {
+					changeBorder('borderTop', 'border')
+				}
+				if (clickTargets[e].style.borderBottom) {
+					changeBorder('borderTop', 'borderBottom')
+				}
+				if (clickTargets[e].style.borderLeft) {
+					changeBorder('borderTop', 'borderLeft')
+				}
+				if (clickTargets[e].style.borderRight) {
+					changeBorder('borderTop', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('top')
 	}
 
 	const bottomBorder = () => {
-		if (clickadv.border) {
-			changeBorder(clickadv, setClickadv, 'borderBottom', 'border')
-		}
-		if (clickadv.borderTop) {
-			changeBorder(clickadv, setClickadv, 'borderBottom', 'borderTop')
-		}
-		if (clickadv.borderLeft) {
-			changeBorder(clickadv, setClickadv, 'borderBottom', 'borderLeft')
-		}
-		if (clickadv.borderRight) {
-			changeBorder(clickadv, setClickadv, 'borderBottom', 'borderRight')
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				if (clickTargets[e].style.border) {
+					changeBorder('borderBottom', 'border')
+				}
+				if (clickTargets[e].style.borderTop) {
+					changeBorder('borderBottom', 'borderTop')
+				}
+				if (clickTargets[e].style.borderLeft) {
+					changeBorder('borderBottom', 'borderLeft')
+				}
+				if (clickTargets[e].style.borderRight) {
+					changeBorder('borderBottom', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('bottom')
 	}
 	const leftBorder = () => {
-		if (clickadv.border) {
-			changeBorder(clickadv, setClickadv, 'borderLeft', 'border')
-		}
-		if (clickadv.borderTop) {
-			changeBorder(clickadv, setClickadv, 'borderLeft', 'borderTop')
-		}
-		if (clickadv.borderBottom) {
-			changeBorder(clickadv, setClickadv, 'borderLeft', 'borderBottom')
-		}
-		if (clickadv.borderRight) {
-			changeBorder(clickadv, setClickadv, 'borderLeft', 'borderRight')
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				if (clickTargets[e].style.border) {
+					changeBorder('borderLeft', 'border')
+				}
+				if (clickTargets[e].style.borderTop) {
+					changeBorder('borderLeft', 'borderTop')
+				}
+				if (clickTargets[e].style.borderBottom) {
+					changeBorder('borderLeft', 'borderBottom')
+				}
+				if (clickTargets[e].style.borderRight) {
+					changeBorder('borderLeft', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('left')
 	}
 	const rightBorder = () => {
-		if (clickadv.border) {
-			changeBorder(clickadv, setClickadv, 'borderRight', 'border')
-		}
-		if (clickadv.borderTop) {
-			changeBorder(clickadv, setClickadv, 'borderRight', 'borderTop')
-		}
-		if (clickadv.borderBottom) {
-			changeBorder(clickadv, setClickadv, 'borderRight', 'borderBottom')
-		}
-		if (clickadv.borderLeft) {
-			changeBorder(clickadv, setClickadv, 'borderRight', 'borderLeft')
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				if (clickTargets[e].style.border) {
+					changeBorder('borderRight', 'border')
+				}
+				if (clickTargets[e].style.borderTop) {
+					changeBorder('borderRight', 'borderTop')
+				}
+				if (clickTargets[e].style.borderBottom) {
+					changeBorder('borderRight', 'borderBottom')
+				}
+				if (clickTargets[e].style.borderLeft) {
+					changeBorder('borderRight', 'borderLeft')
+				}
+			}
 		}
 
 		setBSide('right')
 	}
 
 	const changeBorder = (obj, setObj, bAdd, bDelete) => {
-		const temp = {}
-		for (const key in obj) {
-			if (key === bDelete) temp[bAdd] = obj[key]
-			else temp[key] = obj[key]
+		const clickTemp = Object.assign({}, clickTargets)
+
+		for (const e in clickTemp) {
+			if (clickTemp[e].selected) {
+				const temp = {}
+				for (const key in clickTemp[e].style) {
+					if (key === bDelete) temp[bAdd] = clickTemp[e].style[key]
+					else temp[key] = clickTemp[e].style[key]
+				}
+				clickTemp[e].style = temp
+			}
 		}
-		setObj(temp)
+
+		setClickTargets(clickTemp)
 	}
 
 	const showCustomBgColorOptions = () => {

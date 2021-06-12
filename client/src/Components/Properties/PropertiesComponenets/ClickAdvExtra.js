@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
-import { PageContext } from '../../Contexts/PageContext'
 
 const ClickAdvExtra = () => {
-	const { clickadv, setClickadv, showCAEP, setShowCAEP } = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { clickTargets, setClickTargets, showCAEP, setShowCAEP } = useContext(PropertiesContext)
 
 	const [origin, setOrigin] = useState('')
 	const [scaleX, setScaleX] = useState('')
@@ -15,72 +13,76 @@ const ClickAdvExtra = () => {
 
 	//For setting default values
 	useEffect(() => {
-		if (clickadv) {
-			let transforms
-			if (clickadv.transform) {
-				transforms = clickadv.transform.split(' ')
-			}
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				let transforms
+				if (clickTargets[e].style.transform) {
+					transforms = clickTargets[e].style.transform.split(' ')
+				}
 
-			if (transforms) {
-				transforms.forEach(e => {
-					const tranformName = e.split('(')[0]
-					const ele = document.getElementById(`extraclickadv-${tranformName}`)
-					if (ele) {
-						if (tranformName === 'scaleX' || tranformName === 'scaleY') {
-							const value = e.split('(')[1].split(')')[0]
-							ele.value = value
-						} else if (tranformName === 'rotate') {
-							const value = e.split('(')[1].split(')')[0].split('d')[0]
-							ele.value = value
-						} else {
-							const value = e.split('(')[1].split(')')[0].split('p')[0]
-							ele.value = value
+				if (transforms) {
+					transforms.forEach(e => {
+						const tranformName = e.split('(')[0]
+						const ele = document.getElementById(`extraclickadv-${tranformName}`)
+						if (ele) {
+							if (tranformName === 'scaleX' || tranformName === 'scaleY') {
+								const value = e.split('(')[1].split(')')[0]
+								ele.value = value
+							} else if (tranformName === 'rotate') {
+								const value = e.split('(')[1].split(')')[0].split('d')[0]
+								ele.value = value
+							} else {
+								const value = e.split('(')[1].split(')')[0].split('p')[0]
+								ele.value = value
+							}
 						}
-					}
-				})
-			} else {
-				const inputsNames = ['scaleX', 'scaleY', 'rotate', 'translateX', 'translateY']
+					})
+				} else {
+					const inputsNames = ['scaleX', 'scaleY', 'rotate', 'translateX', 'translateY']
 
-				inputsNames.forEach(e => {
-					const ele = document.getElementById(`extraclickadv-${e}`)
-					if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
-				})
+					inputsNames.forEach(e => {
+						const ele = document.getElementById(`extraclickadv-${e}`)
+						if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
+					})
+				}
+
+				//For origin default value
+				const originSelect = document.getElementById('extraclickadv-origin-select')
+
+				originSelect.value = clickTargets[e].style.transformOrigin ? clickTargets[e].style.transformOrigin : 'center'
 			}
-
-			//For origin default value
-			const originSelect = document.getElementById('extraclickadv-origin-select')
-
-			originSelect.value = clickadv.transformOrigin ? clickadv.transformOrigin : 'center'
 		}
-	}, [width, activeElement, clickadv])
+	}, [clickTargets])
 
 	useEffect(() => {
-		if (clickadv) {
-			let transform = ''
+		let transform = ''
 
-			if (scaleX !== '') transform += ` scaleX(${scaleX})`
-			if (scaleY !== '') transform += ` scaleY(${scaleY})`
-			if (rotate !== '') transform += ` rotate(${rotate})`
-			if (translateX !== '') transform += ` translateX(${translateX})`
-			if (translateY !== '') transform += ` translateY(${translateY})`
+		if (scaleX !== '') transform += ` scaleX(${scaleX})`
+		if (scaleY !== '') transform += ` scaleY(${scaleY})`
+		if (rotate !== '') transform += ` rotate(${rotate})`
+		if (translateX !== '') transform += ` translateX(${translateX})`
+		if (translateY !== '') transform += ` translateY(${translateY})`
 
-			if (transform !== '') transform = transform.substr(1, transform.length - 1)
+		if (transform !== '') transform = transform.substr(1, transform.length - 1)
 
-			setProperties(clickadv, setClickadv, 'transform', transform)
-		}
+		setProperties('transform', transform)
 	}, [scaleX, scaleY, rotate, translateX, translateY])
 
 	//for setting tranform origin
 	useEffect(() => {
-		if (clickadv && origin !== '') {
-			setProperties(clickadv, setClickadv, 'transformOrigin', origin)
+		if (origin !== '') {
+			setProperties('transformOrigin', origin)
 		}
 	}, [origin])
 
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
+	const setProperties = (propertyName, property) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				temp[e].style[propertyName] = property
+			}
+		}
+		setClickTargets(temp)
 	}
 
 	return (
