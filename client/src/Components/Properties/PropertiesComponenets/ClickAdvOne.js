@@ -4,8 +4,8 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const ClickAdvOne = () => {
-	const { clickadv, setClickadv, showCAP, setShowCAP } = useContext(PropertiesContext)
-	const { width, activeElement, setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
+	const { clickTargets, setClickTargets, showCAP, setShowCAP } = useContext(PropertiesContext)
+	const { setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [duration, setDuration] = useState('')
@@ -16,51 +16,65 @@ const ClickAdvOne = () => {
 
 	//for setting default values
 	useEffect(() => {
-		if (clickadv) {
-			const textColorInput = document.getElementById('clickadv-textcolor')
-			const textColorSelect = document.getElementById('clickadv-colorselect')
-			const fontSizeInput = document.getElementById('clickadv-fontsize')
-			const fontSizeSelect = document.getElementById('clickadv-fontsizeselect')
-			const durationInput = document.getElementById('clickadv-duration-input')
+		const textColorInput = document.getElementById('clickadv-textcolor')
+		const textColorSelect = document.getElementById('clickadv-colorselect')
+		const fontSizeInput = document.getElementById('clickadv-fontsize')
+		const fontSizeSelect = document.getElementById('clickadv-fontsizeselect')
+		const durationInput = document.getElementById('clickadv-duration-input')
 
-			durationInput.value = clickadv.transitionDuration ? clickadv.transitionDuration.split('m')[0] : 0
-			textColorInput.value = clickadv.color ? clickadv.color : '#000000'
-			textColorSelect.value = clickadv.color ? clickadv.color : 'custom'
-			fontSizeInput.value = clickadv.fontSize ? clickadv.fontSize.split('p')[0] : 16
-			fontSizeSelect.value = clickadv.fontSize ? clickadv.fontSize : 'custom'
+		for (const e in clickTargets) {
+			if (clickTargets[e].selected) {
+				durationInput.value = clickTargets[e].style.transitionDuration
+					? clickTargets[e].style.transitionDuration.split('m')[0]
+					: 0
+				textColorInput.value = clickTargets[e].style.color ? clickTargets[e].style.color : '#000000'
+				textColorSelect.value = clickTargets[e].style.color ? clickTargets[e].style.color : 'custom'
+				fontSizeInput.value = clickTargets[e].style.fontSize ? clickTargets[e].style.fontSize.split('p')[0] : 16
+				fontSizeSelect.value = clickTargets[e].style.fontSize ? clickTargets[e].style.fontSize : 'custom'
+			}
 		}
-	}, [width, activeElement, clickadv])
+	}, [clickTargets])
 
 	//for setting TextColor
 	useEffect(() => {
-		if (clickadv && textColor !== '') {
-			setProperties(clickadv, setClickadv, 'color', textColor)
+		if (textColor !== '') {
+			setProperties('color', textColor)
 		}
 	}, [textColor])
 
 	//For changing fontsize
 	useEffect(() => {
-		if (clickadv && fontSize !== '') {
-			setProperties(clickadv, setClickadv, 'fontSize', fontSize)
+		if (fontSize !== '') {
+			setProperties('fontSize', fontSize)
 		}
 	}, [fontSize])
 
 	//For changing click(adv) animation duration
 	useEffect(() => {
-		if (clickadv && duration !== '') {
-			setProperties(clickadv, setClickadv, 'transitionDuration', duration)
+		if (duration !== '') {
+			setProperties('transitionDuration', duration)
 		}
 	}, [duration])
 
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
+	const setProperties = (propertyName, property) => {
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style[propertyName] = property
+			}
+		}
+		setClickTargets(temp)
 	}
 
 	//For reseting all click(adv) styles
 	const resetAll = () => {
-		if (clickadv) setClickadv({})
+		const temp = Object.assign({}, clickTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style = {}
+			}
+		}
+		setClickTargets(temp)
 	}
 
 	////////////////////////////////////////////////

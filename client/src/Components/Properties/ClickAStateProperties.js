@@ -25,7 +25,8 @@ const ClickAStateProperties = () => {
 				nameInput.value = e
 				elementNameSelect.value = e
 				//if name is legit, then show properties
-				setShowProperties(NameFinder(pages[activePage], e))
+				const nameFound = NameFinder(pages[activePage], e)
+				setShowProperties(nameFound)
 			}
 		}
 	}, [clickTargets])
@@ -60,9 +61,10 @@ const ClickAStateProperties = () => {
 					return true
 				}
 			} else if (arr[i][2]) {
-				if ((NameFinder(arr[i][2]), name)) return true
+				if ((NameFinder(arr[i][2]), name) === true) return true
 			}
 		}
+		return false
 	}
 
 	const printElementsNames = () => {
@@ -124,7 +126,13 @@ const ClickAStateProperties = () => {
 				/>
 				CLICK ELEMENT PROPERTIES
 			</p>
-			<div style={{ display: 'grid', gridTemplateColumns: '70px 90px 50px', columnGap: '10px', margin: '10px 22px' }}>
+			<div
+				style={{
+					display: 'grid',
+					gridTemplateColumns: '70px 90px 50px',
+					columnGap: '10px',
+					margin: '10px 22px',
+				}}>
 				<label style={{ paddingTop: '5px' }}>Elements</label>
 				<select onChange={selectElement} id='clickadv-elementNames-select'>
 					{printElementsNames()}
@@ -133,7 +141,13 @@ const ClickAStateProperties = () => {
 					Add
 				</button>
 			</div>
-			<div style={{ display: 'grid', gridTemplateColumns: '70px 90px 60px', columnGap: '10px', margin: '10px 22px' }}>
+			<div
+				style={{
+					display: Object.keys(clickTargets).length > 0 ? 'grid' : 'none',
+					gridTemplateColumns: '70px 90px 60px',
+					columnGap: '10px',
+					margin: '10px 22px',
+				}}>
 				<label style={{ paddingTop: '5px' }}>Name: </label>
 				<input type='text' placeholder='Ele name' id='clickadv-name-input' onChange={e => setName(e.target.value)} />
 				<button onClick={changeName} style={{ padding: '5px 10px' }}>
