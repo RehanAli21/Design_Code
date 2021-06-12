@@ -8,12 +8,11 @@ import Tip from './PropertiesComponenets/Tip'
 
 let counter = 1
 const ClickAStateProperties = () => {
-	const { clickTargets, setClickTargets, setClickTarget, clickTargetName, setClickTargetName } = useContext(PropertiesContext)
-	const { width, setMsgBoxMsg, setShowMsgBox, pages, setPages, activePage, activeElement } = useContext(PageContext)
+	const { clickTargets, setClickTargets, setClickTarget } = useContext(PropertiesContext)
+	const { setMsgBoxMsg, setShowMsgBox, pages, activePage, activeElement } = useContext(PageContext)
 
 	const [name, setName] = useState('')
 	const [showProperties, setShowProperties] = useState(false)
-	const [evenClick, setEvenClick] = useState('')
 
 	useEffect(() => {
 		setName('')
@@ -66,26 +65,6 @@ const ClickAStateProperties = () => {
 		}
 	}
 
-	useEffect(() => {
-		if (evenClick !== '') {
-			const temp = Object.assign({}, pages)
-			findEvenClickProperty(temp[activePage])
-			setPages(temp)
-		}
-	}, [evenClick])
-
-	const findEvenClickProperty = arr => {
-		arr.forEach(e => {
-			if (e[1].id === activeElement) {
-				e[1].evenClickStyleRemover = evenClick
-				return true
-			} else if (e[2] && e[2].length > 0) {
-				if (findEvenClickProperty(e[2])) return true
-			}
-		})
-		return false
-	}
-
 	const printElementsNames = () => {
 		const arr = []
 		for (const e in clickTargets) {
@@ -108,6 +87,7 @@ const ClickAStateProperties = () => {
 			selected: true,
 			style: {},
 			id: '',
+			evenClickStyleRemover: 'no',
 		}
 		counter++
 		setClickTargets(temp)
@@ -118,6 +98,17 @@ const ClickAStateProperties = () => {
 
 		for (const ele in temp) temp[ele].selected = ele === e.target.value
 
+		setClickTargets(temp)
+	}
+
+	const evenClick = e => {
+		const temp = Object.assign({}, clickTargets)
+		for (const ele in temp) {
+			if (temp[ele].selected) {
+				temp[ele].evenClickStyleRemover = e.target.value
+				return
+			}
+		}
 		setClickTargets(temp)
 	}
 
@@ -153,7 +144,7 @@ const ClickAStateProperties = () => {
 				<label>Reset selected element's styles on even clicks</label>
 				<select
 					id='clickadv-evenRemove-select'
-					onChange={e => setEvenClick(e.target.value)}
+					onChange={evenClick}
 					style={{ fontSize: '16px', fontWeight: 'bold', marginLeft: '10px' }}>
 					<option value='no'>No</option>
 					<option value='yes'>Yes</option>
