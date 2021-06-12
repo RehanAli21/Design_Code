@@ -25,7 +25,7 @@ const ClickAStateProperties = () => {
 				nameInput.value = e
 				elementNameSelect.value = e
 				//if name is legit, then show properties
-				const nameFound = NameFinder(pages[activePage], e)
+				const nameFound = NameFinder(pages[activePage], e, 'notId')
 				setShowProperties(nameFound)
 			}
 		}
@@ -41,26 +41,31 @@ const ClickAStateProperties = () => {
 				}
 			}
 
-			const nameFound = NameFinder(pages[activePage], name)
-
+			const nameFound = NameFinder(pages[activePage], name, 'id')
 			setShowProperties(nameFound)
-
-			const temp = {}
-			for (const e in clickTargets) {
-				temp[clickTargets[e].selected ? name : e] = clickTargets[e]
-			}
-			setClickTargets(temp)
 		}
 	}
 
-	const NameFinder = (arr, name) => {
+	const NameFinder = (arr, name, id) => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].name === name) {
 				if (arr[i][0] !== 'option') {
+					if (id === 'id') {
+						const temp = {}
+						for (const e in clickTargets) {
+							if (clickTargets[e].selected) {
+								temp[name] = clickTargets[e]
+								temp[name].id = arr[i][1].id
+							} else {
+								temp[e] = clickTargets[e]
+							}
+						}
+						setClickTargets(temp)
+					}
 					return true
 				}
 			} else if (arr[i][2]) {
-				if ((NameFinder(arr[i][2]), name) === true) return true
+				if ((NameFinder(arr[i][2]), name, id) === true) return true
 			}
 		}
 		return false
