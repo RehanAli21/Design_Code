@@ -27,12 +27,8 @@ const Button = ({ findAndInsert, uniqueString, findName }) => {
 				indexOfText: 0,
 				clickTargets: {},
 				hoverTarget: '',
-				clickTarget: '',
 				hoverTargetName: '',
-				clickTargetName: '',
 				hTargetStyle: {},
-				cTargetStyle: {},
-				evenClickStyleRemover: 'no',
 				styles: {
 					small: {},
 					medium: {},

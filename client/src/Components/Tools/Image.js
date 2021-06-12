@@ -26,12 +26,8 @@ const Image = ({ findAndInsert, uniqueString, findName }) => {
 				class: ' clickTargetNotApplied ',
 				clickTargets: {},
 				hoverTarget: '',
-				clickTarget: '',
 				hoverTargetName: '',
-				clickTargetName: '',
 				hTargetStyle: {},
-				cTargetStyle: {},
-				evenClickStyleRemover: 'no',
 				styles: {
 					small: {},
 					medium: {},

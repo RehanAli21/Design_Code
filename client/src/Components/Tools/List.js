@@ -26,12 +26,8 @@ const List = ({ findAndInsert, uniqueString, findName }) => {
 				class: ' clickTargetNotApplied ',
 				clickTargets: {},
 				hoverTarget: '',
-				clickTarget: '',
 				hoverTargetName: '',
-				clickTargetName: '',
 				hTargetStyle: {},
-				cTargetStyle: {},
-				evenClickStyleRemover: 'no',
 				styles: {
 					small: {
 						listStyleType: 'circle',

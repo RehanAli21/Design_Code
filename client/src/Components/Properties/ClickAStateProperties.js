@@ -8,7 +8,7 @@ import Tip from './PropertiesComponenets/Tip'
 
 let counter = 1
 const ClickAStateProperties = () => {
-	const { clickTargets, setClickTargets, setClickTarget } = useContext(PropertiesContext)
+	const { clickTargets, setClickTargets } = useContext(PropertiesContext)
 	const { setMsgBoxMsg, setShowMsgBox, pages, activePage, activeElement } = useContext(PageContext)
 
 	const [name, setName] = useState('')
@@ -57,7 +57,6 @@ const ClickAStateProperties = () => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].name === name) {
 				if (arr[i][0] !== 'option') {
-					setClickTarget(arr[i][1].id)
 					return true
 				}
 			} else if (arr[i][2]) {

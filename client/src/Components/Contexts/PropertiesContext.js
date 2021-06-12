@@ -17,10 +17,7 @@ export const PropertiesProvider = props => {
 	const [hover, setHover] = useState({})
 	const [click, setClick] = useState({})
 	const [clickTargets, setClickTargets] = useState({})
-	const [clickadv, setClickadv] = useState({})
 	const [hoveradv, setHoveradv] = useState({})
-	const [clickTarget, setClickTarget] = useState('')
-	const [clickTargetName, setClickTargetName] = useState('')
 	const [hoverTarget, setHoverTarget] = useState('')
 	const [hoverTargetName, setHoverTargetName] = useState('')
 
@@ -82,11 +79,8 @@ export const PropertiesProvider = props => {
 				setChangedLarge(e[1].styleWidth.changedLarge)
 				setChangedXlarge(e[1].styleWidth.changeXlarge)
 				setClickTargets(e[1].clickTargets)
-				setClickadv(e[1].cTargetStyle)
 				setHoveradv(e[1].hTargetStyle)
-				setClickTarget(e[1].clickTarget)
 				setHoverTarget(e[1].hoverTarget)
-				setClickTargetName(e[1].clickTargetName)
 				setHoverTargetName(e[1].hoverTargetName)
 				return true
 			} else if (e[2] && e[2].length > 0) {
@@ -113,8 +107,7 @@ export const PropertiesProvider = props => {
 		hover,
 		click,
 		hoverTarget,
-		clickTarget,
-		clickadv,
+		clickTargets,
 		hoveradv,
 	])
 
@@ -132,10 +125,7 @@ export const PropertiesProvider = props => {
 				e[1].hoverStyle = hover
 				e[1].clickStyle = click
 				e[1].hoverTarget = hoverTarget
-				e[1].clickTarget = clickTarget
 				e[1].hoverTargetName = hoverTargetName
-				e[1].clickTargetName = clickTargetName
-				e[1].cTargetStyle = clickadv
 				e[1].hTargetStyle = hoveradv
 				e[1].clickTargets = clickTargets
 				return true
@@ -172,14 +162,8 @@ export const PropertiesProvider = props => {
 				setClickTargets,
 				hoverTarget,
 				setHoverTarget,
-				clickTargetName,
-				setClickTargetName,
 				hoverTargetName,
 				setHoverTargetName,
-				clickTarget,
-				setClickTarget,
-				clickadv,
-				setClickadv,
 				hoveradv,
 				setHoveradv,
 				showAlignProperties,
