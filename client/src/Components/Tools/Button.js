@@ -26,9 +26,7 @@ const Button = ({ findAndInsert, uniqueString, findName }) => {
 				class: ' clickTargetNotApplied ',
 				indexOfText: 0,
 				clickTargets: {},
-				hoverTarget: '',
-				hoverTargetName: '',
-				hTargetStyle: {},
+				hoverTargets: {},
 				styles: {
 					small: {},
 					medium: {},

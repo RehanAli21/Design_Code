@@ -17,9 +17,7 @@ export const PropertiesProvider = props => {
 	const [hover, setHover] = useState({})
 	const [click, setClick] = useState({})
 	const [clickTargets, setClickTargets] = useState({})
-	const [hoveradv, setHoveradv] = useState({})
-	const [hoverTarget, setHoverTarget] = useState('')
-	const [hoverTargetName, setHoverTargetName] = useState('')
+	const [hoverTargets, setHoverTargets] = useState({})
 
 	const [showAlignProperties, setShowAlignProperties] = useState(true)
 	const [showAppearanceProperties, setShowAppearanceProperties] = useState(true)
@@ -79,9 +77,7 @@ export const PropertiesProvider = props => {
 				setChangedLarge(e[1].styleWidth.changedLarge)
 				setChangedXlarge(e[1].styleWidth.changeXlarge)
 				setClickTargets(e[1].clickTargets)
-				setHoveradv(e[1].hTargetStyle)
-				setHoverTarget(e[1].hoverTarget)
-				setHoverTargetName(e[1].hoverTargetName)
+				setHoverTargets(e[1].hoverTargets)
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setWidthsStates(e[2], id)) return true
@@ -106,9 +102,8 @@ export const PropertiesProvider = props => {
 		changedXlarge,
 		hover,
 		click,
-		hoverTarget,
 		clickTargets,
-		hoveradv,
+		hoverTargets,
 	])
 
 	const setProperties = (arr, id) => {
@@ -124,10 +119,8 @@ export const PropertiesProvider = props => {
 				e[1].styleWidth.changeXlarge = changedXlarge
 				e[1].hoverStyle = hover
 				e[1].clickStyle = click
-				e[1].hoverTarget = hoverTarget
-				e[1].hoverTargetName = hoverTargetName
-				e[1].hTargetStyle = hoveradv
 				e[1].clickTargets = clickTargets
+				e[1].hoverTargets = hoverTargets
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (setProperties(e[2], id)) return true
@@ -160,12 +153,8 @@ export const PropertiesProvider = props => {
 				setClick,
 				clickTargets,
 				setClickTargets,
-				hoverTarget,
-				setHoverTarget,
-				hoverTargetName,
-				setHoverTargetName,
-				hoveradv,
-				setHoveradv,
+				hoverTargets,
+				setHoverTargets,
 				showAlignProperties,
 				setShowAlignProperties,
 				showAppearanceProperties,

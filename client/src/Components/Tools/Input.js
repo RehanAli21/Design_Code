@@ -28,9 +28,7 @@ const Input = ({ findAndInsert, uniqueString, findName }) => {
 				max: '',
 				class: ' clickTargetNotApplied ',
 				clickTargets: {},
-				hoverTarget: '',
-				hoverTargetName: '',
-				hTargetStyle: {},
+				hoverTargets: {},
 				styles: {
 					small: {},
 					medium: {},

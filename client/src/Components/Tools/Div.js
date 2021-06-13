@@ -25,10 +25,7 @@ const Div = ({ findAndInsert, uniqueString, findName }) => {
 				showChildren: true,
 				class: ' clickTargetNotApplied ',
 				clickTargets: {},
-				hoverTarget: '',
-				hoverTargetName: '',
-				hTargetStyle: {},
-				evenClickStyleRemover: 'no',
+				hoverTargets: {},
 				styles: {
 					small: {},
 					medium: {},

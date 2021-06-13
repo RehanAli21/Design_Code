@@ -25,9 +25,7 @@ const List = ({ findAndInsert, uniqueString, findName }) => {
 				showChildren: true,
 				class: ' clickTargetNotApplied ',
 				clickTargets: {},
-				hoverTarget: '',
-				hoverTargetName: '',
-				hTargetStyle: {},
+				hoverTargets: {},
 				styles: {
 					small: {
 						listStyleType: 'circle',
