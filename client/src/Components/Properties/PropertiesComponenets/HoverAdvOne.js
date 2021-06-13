@@ -4,8 +4,8 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverAdvOne = () => {
-	const { hoveradv, setHoveradv, showHAP, setShowHAP } = useContext(PropertiesContext)
-	const { width, activeElement, setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
+	const { hoverTargets, setHoverTargets, showHAP, setShowHAP } = useContext(PropertiesContext)
+	const { setShowMsgBox, setMsgBoxMsg } = useContext(PageContext)
 	const { colors, fontSizes } = useContext(TemplateContext)
 
 	const [duration, setDuration] = useState('')
@@ -16,51 +16,65 @@ const HoverAdvOne = () => {
 
 	//for setting default values
 	useEffect(() => {
-		if (hoveradv) {
-			const textColorInput = document.getElementById('hoveradv-textcolor')
-			const textColorSelect = document.getElementById('hoveradv-colorselect')
-			const fontSizeInput = document.getElementById('hoveradv-fontsize')
-			const fontSizeSelect = document.getElementById('hoveradv-fontsizeselect')
-			const durationInput = document.getElementById('hoveradv-duration-input')
+		const textColorInput = document.getElementById('hoveradv-textcolor')
+		const textColorSelect = document.getElementById('hoveradv-colorselect')
+		const fontSizeInput = document.getElementById('hoveradv-fontsize')
+		const fontSizeSelect = document.getElementById('hoveradv-fontsizeselect')
+		const durationInput = document.getElementById('hoveradv-duration-input')
 
-			durationInput.value = hoveradv.transitionDuration ? hoveradv.transitionDuration.split('m')[0] : 0
-			textColorInput.value = hoveradv.color ? hoveradv.color : '#000000'
-			textColorSelect.value = hoveradv.color ? hoveradv.color : 'custom'
-			fontSizeInput.value = hoveradv.fontSize ? hoveradv.fontSize.split('p')[0] : 16
-			fontSizeSelect.value = hoveradv.fontSize ? hoveradv.fontSize : 'custom'
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				durationInput.value = hoverTargets[e].style.transitionDuration
+					? hoverTargets[e].style.transitionDuration.split('m')[0]
+					: 0
+				textColorInput.value = hoverTargets[e].style.color ? hoverTargets[e].style.color : '#000000'
+				textColorSelect.value = hoverTargets[e].style.color ? hoverTargets[e].style.color : 'custom'
+				fontSizeInput.value = hoverTargets[e].style.fontSize ? hoverTargets[e].style.fontSize.split('p')[0] : 16
+				fontSizeSelect.value = hoverTargets[e].style.fontSize ? hoverTargets[e].style.fontSize : 'custom'
+			}
 		}
-	}, [width, activeElement, hoveradv])
+	}, [hoverTargets])
 
 	//for setting TextColor
 	useEffect(() => {
-		if (hoveradv && textColor !== '') {
-			setProperties(hoveradv, setHoveradv, 'color', textColor)
+		if (textColor !== '') {
+			setProperties('color', textColor)
 		}
 	}, [textColor])
 
 	//For changing fontsize
 	useEffect(() => {
-		if (hoveradv && fontSize !== '') {
-			setProperties(hoveradv, setHoveradv, 'fontSize', fontSize)
+		if (fontSize !== '') {
+			setProperties('fontSize', fontSize)
 		}
 	}, [fontSize])
 
-	//For changing click(adv) animation duration
+	//For changing hover(adv) animation duration
 	useEffect(() => {
-		if (hoveradv && duration !== '') {
-			setProperties(hoveradv, setHoveradv, 'transitionDuration', duration)
+		if (duration !== '') {
+			setProperties('transitionDuration', duration)
 		}
 	}, [duration])
 
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
+	const setProperties = (propertyName, property) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style[propertyName] = property
+			}
+		}
+		setHoverTargets(temp)
 	}
 
-	//For reseting all click(adv) styles
+	//For reseting all hover(adv) styles
 	const resetAll = () => {
-		if (hoveradv) setHoveradv({})
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style = {}
+			}
+		}
+		setHoverTargets(temp)
 	}
 
 	////////////////////////////////////////////////

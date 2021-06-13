@@ -1,10 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PropertiesContext } from '../../Contexts/PropertiesContext'
-import { PageContext } from '../../Contexts/PageContext'
 
 const HoverAdvExtra = () => {
-	const { hoveradv, setHoveradv, showHAEP, setShowHAEP } = useContext(PropertiesContext)
-	const { width, activeElement } = useContext(PageContext)
+	const { hoverTargets, setHoverTargets, showHAEP, setShowHAEP } = useContext(PropertiesContext)
 
 	const [origin, setOrigin] = useState('')
 	const [scaleX, setScaleX] = useState('')
@@ -15,72 +13,76 @@ const HoverAdvExtra = () => {
 
 	//For setting default values
 	useEffect(() => {
-		if (hoveradv) {
-			let transforms
-			if (hoveradv.transform) {
-				transforms = hoveradv.transform.split(' ')
-			}
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				let transforms
+				if (hoverTargets[e].style.transform) {
+					transforms = hoverTargets[e].style.transform.split(' ')
+				}
 
-			if (transforms) {
-				transforms.forEach(e => {
-					const tranformName = e.split('(')[0]
-					const ele = document.getElementById(`extrahoveradv-${tranformName}`)
-					if (ele) {
-						if (tranformName === 'scaleX' || tranformName === 'scaleY') {
-							const value = e.split('(')[1].split(')')[0]
-							ele.value = value
-						} else if (tranformName === 'rotate') {
-							const value = e.split('(')[1].split(')')[0].split('d')[0]
-							ele.value = value
-						} else {
-							const value = e.split('(')[1].split(')')[0].split('p')[0]
-							ele.value = value
+				if (transforms) {
+					transforms.forEach(e => {
+						const tranformName = e.split('(')[0]
+						const ele = document.getElementById(`extrahoveradv-${tranformName}`)
+						if (ele) {
+							if (tranformName === 'scaleX' || tranformName === 'scaleY') {
+								const value = e.split('(')[1].split(')')[0]
+								ele.value = value
+							} else if (tranformName === 'rotate') {
+								const value = e.split('(')[1].split(')')[0].split('d')[0]
+								ele.value = value
+							} else {
+								const value = e.split('(')[1].split(')')[0].split('p')[0]
+								ele.value = value
+							}
 						}
-					}
-				})
-			} else {
-				const inputsNames = ['scaleX', 'scaleY', 'rotate', 'translateX', 'translateY']
+					})
+				} else {
+					const inputsNames = ['scaleX', 'scaleY', 'rotate', 'translateX', 'translateY']
 
-				inputsNames.forEach(e => {
-					const ele = document.getElementById(`extrahoveradv-${e}`)
-					if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
-				})
+					inputsNames.forEach(e => {
+						const ele = document.getElementById(`extrahoveradv-${e}`)
+						if (ele) ele.value = e === 'scaleX' || e === 'scaleY' ? 1 : 0
+					})
+				}
+
+				//For origin default value
+				const originSelect = document.getElementById('extrahoveradv-origin-select')
+
+				originSelect.value = hoverTargets[e].style.transformOrigin ? hoverTargets[e].style.transformOrigin : 'center'
 			}
-
-			//For origin default value
-			const originSelect = document.getElementById('extrahoveradv-origin-select')
-
-			originSelect.value = hoveradv.transformOrigin ? hoveradv.transformOrigin : 'center'
 		}
-	}, [width, activeElement, hoveradv])
+	}, [hoverTargets])
 
 	useEffect(() => {
-		if (hoveradv) {
-			let transform = ''
+		let transform = ''
 
-			if (scaleX !== '') transform += ` scaleX(${scaleX})`
-			if (scaleY !== '') transform += ` scaleY(${scaleY})`
-			if (rotate !== '') transform += ` rotate(${rotate})`
-			if (translateX !== '') transform += ` translateX(${translateX})`
-			if (translateY !== '') transform += ` translateY(${translateY})`
+		if (scaleX !== '') transform += ` scaleX(${scaleX})`
+		if (scaleY !== '') transform += ` scaleY(${scaleY})`
+		if (rotate !== '') transform += ` rotate(${rotate})`
+		if (translateX !== '') transform += ` translateX(${translateX})`
+		if (translateY !== '') transform += ` translateY(${translateY})`
 
-			if (transform !== '') transform = transform.substr(1, transform.length - 1)
+		if (transform !== '') transform = transform.substr(1, transform.length - 1)
 
-			setProperties(hoveradv, setHoveradv, 'transform', transform)
-		}
+		setProperties('transform', transform)
 	}, [scaleX, scaleY, rotate, translateX, translateY])
 
 	//for setting tranform origin
 	useEffect(() => {
-		if (hoveradv && origin !== '') {
-			setProperties(hoveradv, setHoveradv, 'transformOrigin', origin)
+		if (origin !== '') {
+			setProperties('transformOrigin', origin)
 		}
 	}, [origin])
 
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
+	const setProperties = (propertyName, property) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style[propertyName] = property
+			}
+		}
+		setHoverTargets(temp)
 	}
 
 	return (
