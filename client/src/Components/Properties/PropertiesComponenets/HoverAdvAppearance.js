@@ -4,8 +4,8 @@ import { PropertiesContext } from '../../Contexts/PropertiesContext'
 import { TemplateContext } from '../../Contexts/TemplateContext'
 
 const HoverAdvAppearance = () => {
-	const { hoveradv, setHoveradv, showHAAP, setShowHAAP } = useContext(PropertiesContext)
-	const { width, activeElement, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
+	const { hoverTargets, setHoverTargets, apHoverProperties, setApHoverProperties } = useContext(PropertiesContext)
+	const { setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 	const { colors } = useContext(TemplateContext)
 
 	const [showBorderSection, setShowBorderSection] = useState(false)
@@ -31,108 +31,110 @@ const HoverAdvAppearance = () => {
 	const [shadowChanged, setShadowChanged] = useState(false)
 
 	useEffect(() => {
-		if (hoveradv) {
-			const bgColorInput = document.getElementById('ahoveradv-bgcolor')
-			const bgColorSelect = document.getElementById('bghoveradv-color-select')
-			const bActiveInput = document.getElementById('ahovereadv-b-active')
-			const bRadiusInput = document.getElementById('ahoveradv-b-radius')
-			const bColorInput = document.getElementById('ahoveradv-b-color')
-			const bSizeInput = document.getElementById('ahoveradv-b-size')
-			const bTypeInput = document.getElementById('ahoveradv-b-type')
-			const sActiveInput = document.getElementById('ahoveradv-s-active')
-			const sXInput = document.getElementById('ahoveradv-s-x')
-			const sYInput = document.getElementById('ahoveradv-s-y')
-			const sBlurInput = document.getElementById('ahoveradv-s-blur')
-			const sColorInput = document.getElementById('ahoveradv-s-color')
-			const paddingXInput = document.getElementById('aphoveradv-paddingXInput')
-			const paddingYInput = document.getElementById('aphoveradv-paddingYInput')
-			const paddingXSelect = document.getElementById('aphoveradv-paddingXSelect')
-			const paddingYSelect = document.getElementById('aphoveradv-paddingYSelect')
+		const bgColorInput = document.getElementById('ahoveradv-bgcolor')
+		const bgColorSelect = document.getElementById('bghoveradv-color-select')
+		const bActiveInput = document.getElementById('ahoveradv-b-active')
+		const bRadiusInput = document.getElementById('ahoveradv-b-radius')
+		const bColorInput = document.getElementById('ahoveradv-b-color')
+		const bSizeInput = document.getElementById('ahoveradv-b-size')
+		const bTypeInput = document.getElementById('ahoveradv-b-type')
+		const sActiveInput = document.getElementById('ahoveradv-s-active')
+		const sXInput = document.getElementById('ahoveradv-s-x')
+		const sYInput = document.getElementById('ahoveradv-s-y')
+		const sBlurInput = document.getElementById('ahoveradv-s-blur')
+		const sColorInput = document.getElementById('ahoveradv-s-color')
+		const paddingXInput = document.getElementById('aphoveradv-paddingXInput')
+		const paddingYInput = document.getElementById('aphoveradv-paddingYInput')
+		const paddingXSelect = document.getElementById('aphoveradv-paddingXSelect')
+		const paddingYSelect = document.getElementById('aphoveradv-paddingYSelect')
 
-			bRadiusInput.value = hoveradv.borderRadius ? hoveradv.borderRadius.split('%')[0] : '0'
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				bRadiusInput.value = hoverTargets[e].style.borderRadius ? hoverTargets[e].style.borderRadius.split('%')[0] : '0'
 
-			//Default value for all borders
-			if (hoveradv.border) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = hoveradv.border.split(' ')[2]
-				bSizeInput.value = hoveradv.border.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(hoveradv.border.split(' ')[1])
-			} else if (hoveradv.borderTop) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = hoveradv.borderTop.split(' ')[2]
-				bSizeInput.value = hoveradv.borderTop.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(hoveradv.borderTop.split(' ')[1])
-			} else if (hoveradv.borderBottom) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = hoveradv.borderBottom.split(' ')[2]
-				bSizeInput.value = hoveradv.borderBottom.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(hoveradv.borderBottom.split(' ')[1])
-			} else if (hoveradv.borderLeft) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = hoveradv.borderLeft.split(' ')[2]
-				bSizeInput.value = hoveradv.borderLeft.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(hoveradv.borderLeft.split(' ')[1])
-			} else if (hoveradv.borderRight) {
-				bActiveInput.checked = true
-				setShowBorderSection(true)
-				bColorInput.value = hoveradv.borderRight.split(' ')[2]
-				bSizeInput.value = hoveradv.borderRight.split(' ')[0].split('p')[0]
-				bTypeInput.selectedIndex = borderTypeIndex(hoveradv.borderRight.split(' ')[1])
-			} else {
-				bColorInput.value = '#000000'
-				bSizeInput.value = '0'
-				bTypeInput.selectedIndex = 0
-				bActiveInput.checked = false
-				setShowBorderSection(false)
-			}
-
-			//Default value for Box shadow
-			if (hoveradv.boxShadow) {
-				sXInput.value = hoveradv.boxShadow.split(' ')[0].split('p')[0]
-				sYInput.value = hoveradv.boxShadow.split(' ')[1].split('p')[0]
-				sBlurInput.value = hoveradv.boxShadow.split(' ')[2].split('p')[0]
-				sColorInput.value = hoveradv.boxShadow.split(' ')[3]
-				sActiveInput.checked = true
-				setShowShadowSection(true)
-			} else {
-				sXInput.value = '0'
-				sYInput.value = '0'
-				sBlurInput.value = '0'
-				sColorInput.value = '#464646'
-				sActiveInput.checked = false
-				setShowShadowSection(false)
-			}
-
-			bgColorInput.value = hoveradv.backgroundColor ? hoveradv.backgroundColor : '#ffffff'
-			bgColorSelect.value = hoveradv.backgroundColor ? hoveradv.backgroundColor : 'custom'
-
-			if (hoveradv.paddingTop && hoveradv.paddingBottom) {
-				if (hoveradv.paddingTop === hoveradv.paddingBottom) {
-					const p = paddingFinder(hoveradv.paddingTop)
-					paddingYInput.value = p[0]
-					paddingYSelect.value = p[1]
+				//Default value for all borders
+				if (hoverTargets[e].style.border) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = hoverTargets[e].style.border.split(' ')[2]
+					bSizeInput.value = hoverTargets[e].style.border.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(hoverTargets[e].style.border.split(' ')[1])
+				} else if (hoverTargets[e].style.borderTop) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = hoverTargets[e].style.borderTop.split(' ')[2]
+					bSizeInput.value = hoverTargets[e].style.borderTop.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(hoverTargets[e].style.borderTop.split(' ')[1])
+				} else if (hoverTargets[e].style.borderBottom) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = hoverTargets[e].style.borderBottom.split(' ')[2]
+					bSizeInput.value = hoverTargets[e].style.borderBottom.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(hoverTargets[e].style.borderBottom.split(' ')[1])
+				} else if (hoverTargets[e].style.borderLeft) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = hoverTargets[e].style.borderLeft.split(' ')[2]
+					bSizeInput.value = hoverTargets[e].style.borderLeft.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(hoverTargets[e].style.borderLeft.split(' ')[1])
+				} else if (hoverTargets[e].style.borderRight) {
+					bActiveInput.checked = true
+					setShowBorderSection(true)
+					bColorInput.value = hoverTargets[e].style.borderRight.split(' ')[2]
+					bSizeInput.value = hoverTargets[e].style.borderRight.split(' ')[0].split('p')[0]
+					bTypeInput.selectedIndex = borderTypeIndex(hoverTargets[e].style.borderRight.split(' ')[1])
+				} else {
+					bColorInput.value = '#000000'
+					bSizeInput.value = '0'
+					bTypeInput.selectedIndex = 0
+					bActiveInput.checked = false
+					setShowBorderSection(false)
 				}
-			} else {
-				paddingYInput.value = 0
-				paddingYSelect.value = 'px'
-			}
 
-			if (hoveradv.paddingLeft && hoveradv.paddingRight) {
-				if (hoveradv.paddingLeft === hoveradv.paddingRight) {
-					const p = paddingFinder(hoveradv.paddingLeft)
-					paddingXInput.value = p[0]
-					paddingXSelect.value = p[1]
+				//Default value for Box shadow
+				if (hoverTargets[e].style.boxShadow) {
+					sXInput.value = hoverTargets[e].style.boxShadow.split(' ')[0].split('p')[0]
+					sYInput.value = hoverTargets[e].style.boxShadow.split(' ')[1].split('p')[0]
+					sBlurInput.value = hoverTargets[e].style.boxShadow.split(' ')[2].split('p')[0]
+					sColorInput.value = hoverTargets[e].style.boxShadow.split(' ')[3]
+					sActiveInput.checked = true
+					setShowShadowSection(true)
+				} else {
+					sXInput.value = '0'
+					sYInput.value = '0'
+					sBlurInput.value = '0'
+					sColorInput.value = '#464646'
+					sActiveInput.checked = false
+					setShowShadowSection(false)
 				}
-			} else {
-				paddingXInput.value = 0
-				paddingXSelect.value = 'px'
+
+				bgColorInput.value = hoverTargets[e].style.backgroundColor ? hoverTargets[e].style.backgroundColor : '#ffffff'
+				bgColorSelect.value = hoverTargets[e].style.backgroundColor ? hoverTargets[e].style.backgroundColor : 'custom'
+
+				if (hoverTargets[e].style.paddingTop && hoverTargets[e].style.paddingBottom) {
+					if (hoverTargets[e].style.paddingTop === hoverTargets[e].style.paddingBottom) {
+						const p = paddingFinder(hoverTargets[e].style.paddingTop)
+						paddingYInput.value = p[0]
+						paddingYSelect.value = p[1]
+					}
+				} else {
+					paddingYInput.value = 0
+					paddingYSelect.value = 'px'
+				}
+
+				if (hoverTargets[e].style.paddingLeft && hoverTargets[e].style.paddingRight) {
+					if (hoverTargets[e].style.paddingLeft === hoverTargets[e].style.paddingRight) {
+						const p = paddingFinder(hoverTargets[e].style.paddingLeft)
+						paddingXInput.value = p[0]
+						paddingXSelect.value = p[1]
+					}
+				} else {
+					paddingXInput.value = 0
+					paddingXSelect.value = 'px'
+				}
 			}
 		}
-	}, [width, activeElement, hoveradv])
+	}, [hoverTargets])
 
 	const borderTypeIndex = s => (s === 'solid' ? 0 : s === 'inset' ? 1 : s === 'outset' ? 2 : 3)
 
@@ -151,20 +153,18 @@ const HoverAdvAppearance = () => {
 
 	//FOr background color and opacity
 	useEffect(() => {
-		if (hoveradv) {
-			let changedBgColor = ''
-			if (bgColor !== 'custom') changedBgColor = bgColor
+		let changedBgColor = ''
+		if (bgColor !== 'custom') changedBgColor = bgColor
 
-			setProperties(hoveradv, setHoveradv, 'backgroundColor', changedBgColor)
-		}
+		setProperties('backgroundColor', changedBgColor)
 	}, [bgColor])
 
 	//For Box Shadow
 	useEffect(() => {
-		if (hoveradv && shadowChanged) {
+		if (shadowChanged) {
 			const changedShadow = showShadowSection ? `${sX} ${sY} ${sBlur} ${sColor}` : ''
 
-			setProperties(hoveradv, setHoveradv, 'boxShadow', changedShadow)
+			setProperties('boxShadow', changedShadow)
 
 			setShadowChanged(false)
 		}
@@ -172,7 +172,7 @@ const HoverAdvAppearance = () => {
 
 	//For Changing paddingX
 	useEffect(() => {
-		if (hoveradv && paddingX !== '') {
+		if (paddingX !== '') {
 			const ele = document.getElementById('aphoveradv-paddingXSelect')
 
 			let punit = paddingYUnit
@@ -180,13 +180,13 @@ const HoverAdvAppearance = () => {
 
 			const padding = `${paddingX}${punit}`
 
-			setPadding(hoveradv, setHoveradv, 'paddingLeft', 'paddingRight', padding)
+			setPadding('paddingLeft', 'paddingRight', padding)
 		}
 	}, [paddingX, paddingXUnit])
 
 	//For Changing paddingY
 	useEffect(() => {
-		if (hoveradv && paddingY !== '') {
+		if (paddingY !== '') {
 			const ele = document.getElementById('aphoveradv-paddingYSelect')
 
 			let punit = paddingYUnit
@@ -194,165 +194,221 @@ const HoverAdvAppearance = () => {
 
 			const padding = `${paddingY}${punit}`
 
-			setPadding(hoveradv, setHoveradv, 'paddingTop', 'paddingBottom', padding)
+			setPadding('paddingTop', 'paddingBottom', padding)
 		}
 	}, [paddingY, paddingYUnit])
 
-	const setPadding = (obj, setObj, p1, p2, property) => {
-		const temp = Object.assign({}, obj)
-		temp[p1] = property
-		temp[p2] = property
-		setObj(temp)
+	const setPadding = (p1, p2, property) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style[p1] = property
+				temp[e].style[p2] = property
+			}
+		}
+		setHoverTargets(temp)
 	}
 
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
+	const setProperties = (propertyName, property) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style[propertyName] = property
+			}
+		}
+		setHoverTargets(temp)
 	}
 
 	//For changing Border
 	useEffect(() => {
-		if (hoveradv && borderChanged) {
+		if (borderChanged) {
 			const changedBorder = showBorderSection ? `${bSize} ${bType} ${bColor}` : ''
 			const changedBorderRadius = showBorderSection ? bRadius : ''
 
 			if (bSide === 'all') {
-				setBorder(hoveradv, setHoveradv, changedBorder, changedBorderRadius)
+				setBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'top') {
-				setTopBorder(hoveradv, setHoveradv, changedBorder, changedBorderRadius)
+				setTopBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'bottom') {
-				setBottomBorder(hoveradv, setHoveradv, changedBorder, changedBorderRadius)
+				setBottomBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'left') {
-				setLeftBorder(hoveradv, setHoveradv, changedBorder, changedBorderRadius)
+				setLeftBorder(changedBorder, changedBorderRadius)
 			} else if (bSide === 'right') {
-				setRightBorder(hoveradv, setHoveradv, changedBorder, changedBorderRadius)
+				setRightBorder(changedBorder, changedBorderRadius)
 			}
 		}
 
 		setBorderChanged(false)
 	}, [showBorderSection, bSize, bType, bColor, bRadius, bSide])
 
-	const setBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.border = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setBorder = (b, br) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.border = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setHoverTargets(temp)
 	}
-	const setTopBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderTop = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setTopBorder = (b, br) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderTop = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setHoverTargets(temp)
 	}
-	const setBottomBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderBottom = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setBottomBorder = (b, br) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderBottom = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setHoverTargets(temp)
 	}
-	const setLeftBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderLeft = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setLeftBorder = (b, br) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderLeft = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setHoverTargets(temp)
 	}
-	const setRightBorder = (obj, setObj, b, br) => {
-		const temp = Object.assign({}, obj)
-		temp.borderRight = b
-		temp.borderRadius = br
-		setObj(temp)
+	const setRightBorder = (b, br) => {
+		const temp = Object.assign({}, hoverTargets)
+		for (const e in temp) {
+			if (temp[e].selected) {
+				temp[e].style.borderRight = b
+				temp[e].style.borderRadius = br
+			}
+		}
+		setHoverTargets(temp)
 	}
 
 	const allBorder = () => {
-		if (hoveradv.borderTop) {
-			changeBorder(hoveradv, setHoveradv, 'border', 'borderTop')
-		}
-		if (hoveradv.borderBottom) {
-			changeBorder(hoveradv, setHoveradv, 'border', 'borderBottom')
-		}
-		if (hoveradv.borderLeft) {
-			changeBorder(hoveradv, setHoveradv, 'border', 'borderLeft')
-		}
-		if (hoveradv.borderRight) {
-			changeBorder(hoveradv, setHoveradv, 'border', 'borderRight')
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				if (hoverTargets[e].style.borderTop) {
+					changeBorder('border', 'borderTop')
+				}
+				if (hoverTargets[e].style.borderBottom) {
+					changeBorder('border', 'borderBottom')
+				}
+				if (hoverTargets[e].style.borderLeft) {
+					changeBorder('border', 'borderLeft')
+				}
+				if (hoverTargets[e].style.borderRight) {
+					changeBorder('border', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('all')
 	}
 	const topBorder = () => {
-		if (hoveradv.border) {
-			changeBorder(hoveradv, setHoveradv, 'borderTop', 'border')
-		}
-		if (hoveradv.borderBottom) {
-			changeBorder(hoveradv, setHoveradv, 'borderTop', 'borderBottom')
-		}
-		if (hoveradv.borderLeft) {
-			changeBorder(hoveradv, setHoveradv, 'borderTop', 'borderLeft')
-		}
-		if (hoveradv.borderRight) {
-			changeBorder(hoveradv, setHoveradv, 'borderTop', 'borderRight')
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				if (hoverTargets[e].style.border) {
+					changeBorder('borderTop', 'border')
+				}
+				if (hoverTargets[e].style.borderBottom) {
+					changeBorder('borderTop', 'borderBottom')
+				}
+				if (hoverTargets[e].style.borderLeft) {
+					changeBorder('borderTop', 'borderLeft')
+				}
+				if (hoverTargets[e].style.borderRight) {
+					changeBorder('borderTop', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('top')
 	}
 
 	const bottomBorder = () => {
-		if (hoveradv.border) {
-			changeBorder(hoveradv, setHoveradv, 'borderBottom', 'border')
-		}
-		if (hoveradv.borderTop) {
-			changeBorder(hoveradv, setHoveradv, 'borderBottom', 'borderTop')
-		}
-		if (hoveradv.borderLeft) {
-			changeBorder(hoveradv, setHoveradv, 'borderBottom', 'borderLeft')
-		}
-		if (hoveradv.borderRight) {
-			changeBorder(hoveradv, setHoveradv, 'borderBottom', 'borderRight')
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				if (hoverTargets[e].style.border) {
+					changeBorder('borderBottom', 'border')
+				}
+				if (hoverTargets[e].style.borderTop) {
+					changeBorder('borderBottom', 'borderTop')
+				}
+				if (hoverTargets[e].style.borderLeft) {
+					changeBorder('borderBottom', 'borderLeft')
+				}
+				if (hoverTargets[e].style.borderRight) {
+					changeBorder('borderBottom', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('bottom')
 	}
 	const leftBorder = () => {
-		if (hoveradv.border) {
-			changeBorder(hoveradv, setHoveradv, 'borderLeft', 'border')
-		}
-		if (hoveradv.borderTop) {
-			changeBorder(hoveradv, setHoveradv, 'borderLeft', 'borderTop')
-		}
-		if (hoveradv.borderBottom) {
-			changeBorder(hoveradv, setHoveradv, 'borderLeft', 'borderBottom')
-		}
-		if (hoveradv.borderRight) {
-			changeBorder(hoveradv, setHoveradv, 'borderLeft', 'borderRight')
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				if (hoverTargets[e].style.border) {
+					changeBorder('borderLeft', 'border')
+				}
+				if (hoverTargets[e].style.borderTop) {
+					changeBorder('borderLeft', 'borderTop')
+				}
+				if (hoverTargets[e].style.borderBottom) {
+					changeBorder('borderLeft', 'borderBottom')
+				}
+				if (hoverTargets[e].style.borderRight) {
+					changeBorder('borderLeft', 'borderRight')
+				}
+			}
 		}
 
 		setBSide('left')
 	}
 	const rightBorder = () => {
-		if (hoveradv.border) {
-			changeBorder(hoveradv, setHoveradv, 'borderRight', 'border')
-		}
-		if (hoveradv.borderTop) {
-			changeBorder(hoveradv, setHoveradv, 'borderRight', 'borderTop')
-		}
-		if (hoveradv.borderBottom) {
-			changeBorder(hoveradv, setHoveradv, 'borderRight', 'borderBottom')
-		}
-		if (hoveradv.borderLeft) {
-			changeBorder(hoveradv, setHoveradv, 'borderRight', 'borderLeft')
+		for (const e in hoverTargets) {
+			if (hoverTargets[e].selected) {
+				if (hoverTargets[e].style.border) {
+					changeBorder('borderRight', 'border')
+				}
+				if (hoverTargets[e].style.borderTop) {
+					changeBorder('borderRight', 'borderTop')
+				}
+				if (hoverTargets[e].style.borderBottom) {
+					changeBorder('borderRight', 'borderBottom')
+				}
+				if (hoverTargets[e].style.borderLeft) {
+					changeBorder('borderRight', 'borderLeft')
+				}
+			}
 		}
 
 		setBSide('right')
 	}
 
 	const changeBorder = (obj, setObj, bAdd, bDelete) => {
-		const temp = {}
-		for (const key in obj) {
-			if (key === bDelete) temp[bAdd] = obj[key]
-			else temp[key] = obj[key]
+		const hoverTemp = Object.assign({}, hoverTargets)
+
+		for (const e in hoverTemp) {
+			if (hoverTemp[e].selected) {
+				const temp = {}
+				for (const key in hoverTemp[e].style) {
+					if (key === bDelete) temp[bAdd] = hoverTemp[e].style[key]
+					else temp[key] = hoverTemp[e].style[key]
+				}
+				hoverTemp[e].style = temp
+			}
 		}
-		setObj(temp)
+
+		setHoverTargets(hoverTemp)
 	}
 
 	const showCustomBgColorOptions = () => {
@@ -446,11 +502,11 @@ const HoverAdvAppearance = () => {
 
 	return (
 		<div className='ap borders btn-specific'>
-			<p className='second-heading' onClick={() => setShowHAAP(!showHAAP)}>
-				APPEARANCE <span style={{ display: showHAAP ? 'inline' : 'none' }}>&#9660;</span>
-				<span style={{ display: showHAAP ? 'none' : 'inline' }}>&#9654;</span>
+			<p className='second-heading' onClick={() => setApHoverProperties(!apHoverProperties)}>
+				APPEARANCE <span style={{ display: apHoverProperties ? 'inline' : 'none' }}>&#9660;</span>
+				<span style={{ display: apHoverProperties ? 'none' : 'inline' }}>&#9654;</span>
 			</p>
-			<div style={{ display: showHAAP ? 'grid' : 'none' }}>
+			<div style={{ display: apHoverProperties ? 'grid' : 'none' }}>
 				<div className='two md'>
 					<label style={{ marginTop: '10px' }}>Color: </label>
 					{showCustomBgColorOptions()}
@@ -513,7 +569,7 @@ const HoverAdvAppearance = () => {
 				</div>
 				<div className='ap-borders md'>
 					<input
-						id='ahovereadv-b-active'
+						id='ahoveradv-b-active'
 						type='checkbox'
 						onChange={e => {
 							setBorderChanged(true)

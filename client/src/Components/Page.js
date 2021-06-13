@@ -85,9 +85,12 @@ const Page = () => {
 	}
 
 	//For applying hover styles on elements
-	const onHoverStyle = (id, style, targetId, targetStyle) => {
+	const onHoverStyle = (id, style, hoverTargets) => {
 		setStyle(id, style) //for own hover style
-		setStyle(targetId, targetStyle) //for target hover style
+		//for target hover style
+		for (const e in hoverTargets) {
+			setStyle(hoverTargets[e].id, hoverTargets[e].style)
+		}
 	}
 	//For applying click styles on elements
 	const onClickStyle = (id, style, clickTargets) => {
@@ -142,11 +145,13 @@ const Page = () => {
 	}
 
 	//For reseting applied hover style on elements
-	const onHoverLeaveStyle = (id, hoverStyle, normalStyle, targetId, targetHoverStyle) => {
+	const onHoverLeaveStyle = (id, hoverStyle, normalStyle, hoverTargets) => {
 		hoverLeaveStyle(id, hoverStyle, normalStyle) //for own hoverLeave
 		//For Target element hoverleave
-		const returnArr = findTargetStyle(pages[activePage], targetId)
-		hoverLeaveStyle(targetId, targetHoverStyle, returnArr[1])
+		for (const e in hoverTargets) {
+			const returnArr = findTargetStyle(pages[activePage], hoverTargets[e].id)
+			if (returnArr[0] === true) hoverLeaveStyle(hoverTargets[e].id, hoverTargets[e].style, returnArr[1])
+		}
 	}
 	//helper function for abovee function
 	const hoverLeaveStyle = (id, hoverStyle, normalStyle) => {
@@ -224,7 +229,7 @@ const Page = () => {
 								min: e[1].min,
 								max: e[1].max,
 								className: e[1].class,
-								onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
+								onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTargets),
 								onMouseLeave: () =>
 									onHoverLeaveStyle(
 										e[1].id,
@@ -236,8 +241,7 @@ const Page = () => {
 											: width < 960
 											? e[1].styles.large
 											: e[1].styles.xlarge,
-										e[1].hoverTarget,
-										e[1].hTargetStyle
+										e[1].hoverTargets
 									),
 								onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTargets),
 								onMouseUp: () =>
@@ -349,7 +353,7 @@ const Page = () => {
 				key: uuid(),
 				id: e[1].id,
 				className: e[1].class,
-				onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTarget, e[1].hTargetStyle),
+				onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTargets),
 				onMouseLeave: () =>
 					onHoverLeaveStyle(
 						e[1].id,
@@ -361,8 +365,7 @@ const Page = () => {
 							: width < 960
 							? e[1].styles.large
 							: e[1].styles.xlarge,
-						e[1].hoverTarget,
-						e[1].hTargetStyle
+						e[1].hoverTargets
 					),
 				onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTargets),
 				onMouseUp: () =>
