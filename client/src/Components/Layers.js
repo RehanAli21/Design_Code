@@ -9,6 +9,10 @@ const Layers = () => {
 	let dragedElement = ''
 	let overDragElement = ''
 	let ele = []
+	const [rightClickId, setRightClickId] = useState('')
+	const [copyElement, setCopyElement] = useState('')
+	const [cutElement, setCutElement] = useState('')
+	const [copyStyle, setCopyStyle] = useState('')
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -332,6 +336,7 @@ const Layers = () => {
 		})
 	}
 
+	//For setting position and showing menu
 	const showOptionMenu = e => {
 		e.preventDefault()
 		const ele = document.getElementById('layersMenu')
@@ -340,15 +345,28 @@ const Layers = () => {
 			ele.style.display = 'block'
 			ele.style.top = `${e.pageY}px`
 			ele.style.left = `${e.pageX}px`
+			setRightClickId(e.target.id.split('---')[0])
 		}
 	}
-	document.addEventListener('click', () => {
+	//For disappearing the menu
+	document.addEventListener('click', e => {
+		if (rightClickId) {
+			if (e.target.id === 'layersMenuCopyElement') {
+				setCopyElement(rightClickId)
+				setCutElement('')
+			} else if (e.target.id === 'layersMenuCutElement') {
+				setCutElement(rightClickId)
+				setCopyElement('')
+			} else if (e.target.id === 'layersMenuCopyStyle') {
+				setCopyStyle(rightClickId)
+			}
+		}
+
 		const ele = document.getElementById('layersMenu')
 
 		if (ele) {
 			ele.style.display = 'none'
-			ele.style.top = `0px`
-			ele.style.left = `0px`
+			setRightClickId('')
 		}
 	})
 
@@ -358,12 +376,7 @@ const Layers = () => {
 			<ul className='show-ul'>
 				{data.map(e => {
 					return (
-						<li
-							onContextMenu={showOptionMenu}
-							draggable={true}
-							onDragEnd={makeParentChild}
-							id={e[1].id + '---li'}
-							key={uuid()}>
+						<li draggable={true} onDragEnd={makeParentChild} id={e[1].id + '---li'} key={uuid()}>
 							{e[0] === 'button' ||
 							e[0] === 'div' ||
 							e[0] === 'select' ||
@@ -376,6 +389,7 @@ const Layers = () => {
 								<button className='no-layer'></button>
 							)}
 							<p
+								onContextMenu={showOptionMenu}
 								id={e[1].id + '---p'}
 								className={e[1].id === activeElement ? 'bg-blue ' : ''}
 								onClick={() => changeActiveElement(`${e[1].id}`)}>
@@ -409,11 +423,15 @@ const Layers = () => {
 			</div>
 			{showLayers(pages[activePage])}
 			<div className='menu' id='layersMenu'>
-				<p>Cut</p>
-				<p>Copy</p>
-				<p>Paste</p>
-				<p>Copy styles</p>
-				<p>Paste styles</p>
+				<p id='layersMenuCutElement'>Cut</p>
+				<p id='layersMenuCopyElement'>Copy</p>
+				<p id='layersMenuPasteElement' style={{ display: cutElement !== '' || copyElement !== '' ? 'block' : 'none' }}>
+					Paste
+				</p>
+				<p id='layersMenuCopyStyle'>Copy styles</p>
+				<p id='layersMenuPasteStyle' style={{ display: copyStyle !== '' ? 'block' : 'none' }}>
+					Paste styles
+				</p>
 			</div>
 		</div>
 	)
