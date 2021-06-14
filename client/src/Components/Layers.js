@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
+let counter = 1
 const Layers = () => {
 	let oldDragOverElement = ''
 	let oldDragElement = ''
@@ -13,6 +14,7 @@ const Layers = () => {
 	const [copyElement, setCopyElement] = useState('')
 	const [cutElement, setCutElement] = useState('')
 	const [copyStyle, setCopyStyle] = useState('')
+	let copiedElement, cutedElement, copiedStyle
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -366,9 +368,76 @@ const Layers = () => {
 
 		if (ele) {
 			ele.style.display = 'none'
-			setRightClickId('')
+			if (e.target.id !== 'layersMenuPasteStyle' || e.target.id !== 'layersMenuPasteElement') setRightClickId('')
 		}
 	})
+	//for finding element or element's style
+	const findElement = (arr, id, find) => {
+		for (const e of arr) {
+			if (e[1].id === id) {
+				if (find === 'copyElement') {
+					copiedElement = e
+				} else if (find === 'cutElement') {
+					cutedElement = e
+				} else if (find === 'copyStyle') {
+					copiedStyle = e[1].styles
+				}
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (findElement(e[2], id, find)) return true
+			}
+		}
+		return false
+	}
+
+	const pasteElement = () => {
+		if (rightClickId) {
+			if (copyElement !== '') {
+				console.log('copy---parent: ', rightClickId, 'child: ', copyElement)
+				const temp = Object.assign({}, pages)
+				findElement(temp[activePage], copyElement, 'copyElement')
+				pasteCopiedElement(temp[activePage], rightClickId)
+				setPages(temp)
+			} else if (cutElement !== '') {
+				console.log('cut---parent: ', rightClickId, 'child: ', copyElement)
+			}
+		}
+	}
+
+	const pasteCopiedElement = (arr, id) => {
+		for (const e of arr) {
+			if (e[1].id === id && e[2]) {
+				const child = document.getElementById(copyElement)
+				const parent = document.getElementById(id)
+
+				if (parent && child) {
+					if (parent.tagName === 'SELECT' && child.tagName !== 'OPTION') return true
+					if ((parent.tagName === 'OL' || parent.tagName === 'UL') && child.tagName !== 'LI') return true
+					if (parent.tagName === 'BUTTON' && child.tagName !== 'I') return true
+				}
+				if (parent) {
+					if (
+						parent.tagName === 'INPUT' ||
+						parent.tagName === 'H1' ||
+						parent.tagName === 'H2' ||
+						parent.tagName === 'H3' ||
+						parent.tagName === 'H4' ||
+						parent.tagName === 'H5' ||
+						parent.tagName === 'A' ||
+						parent.tagName === 'P' ||
+						parent.tagName === 'IMG' ||
+						parent.tagName === 'I'
+					) {
+						return true
+					}
+				}
+				e[2].push(copiedElement)
+			} else if (e[2] && e[2].length > 0) {
+				if (pasteCopiedElement(e[2], id)) return true
+			}
+		}
+		return true
+	}
 
 	//For making list of elements, and showing the list
 	const showLayers = data => {
@@ -425,7 +494,10 @@ const Layers = () => {
 			<div className='menu' id='layersMenu'>
 				<p id='layersMenuCutElement'>Cut</p>
 				<p id='layersMenuCopyElement'>Copy</p>
-				<p id='layersMenuPasteElement' style={{ display: cutElement !== '' || copyElement !== '' ? 'block' : 'none' }}>
+				<p
+					onClick={pasteElement}
+					id='layersMenuPasteElement'
+					style={{ display: cutElement !== '' || copyElement !== '' ? 'block' : 'none' }}>
 					Paste
 				</p>
 				<p id='layersMenuCopyStyle'>Copy styles</p>
