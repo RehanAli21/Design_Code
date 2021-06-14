@@ -434,7 +434,19 @@ nav .d-v button:hover {
 	outline: none;
 	cursor: pointer;
 }
-
+.layers .menu {
+	display: none;
+	position: absolute;
+	background-color: white;
+	width: 100px;
+	box-shadow: 1px 1px 8px grey;
+	padding: 0px;
+}
+.layers .menu p {
+	text-align: left;
+	padding: 5px;
+	font-size: 12px;
+}
 .main-div {
 	background-color: var(--third-white);
 	outline: none;

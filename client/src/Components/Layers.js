@@ -332,13 +332,38 @@ const Layers = () => {
 		})
 	}
 
+	const showOptionMenu = e => {
+		e.preventDefault()
+		const ele = document.getElementById('layersMenu')
+
+		if (ele) {
+			ele.style.display = 'block'
+			ele.style.top = `${e.pageY}px`
+			ele.style.left = `${e.pageX}px`
+		}
+	}
+	document.addEventListener('click', () => {
+		const ele = document.getElementById('layersMenu')
+
+		if (ele) {
+			ele.style.display = 'none'
+			ele.style.top = `0px`
+			ele.style.left = `0px`
+		}
+	})
+
 	//For making list of elements, and showing the list
 	const showLayers = data => {
 		return (
 			<ul className='show-ul'>
 				{data.map(e => {
 					return (
-						<li draggable={true} onDragEnd={makeParentChild} id={e[1].id + '---li'} key={uuid()}>
+						<li
+							onContextMenu={showOptionMenu}
+							draggable={true}
+							onDragEnd={makeParentChild}
+							id={e[1].id + '---li'}
+							key={uuid()}>
 							{e[0] === 'button' ||
 							e[0] === 'div' ||
 							e[0] === 'select' ||
@@ -383,6 +408,13 @@ const Layers = () => {
 				<button onClick={undoFunc}>U</button>
 			</div>
 			{showLayers(pages[activePage])}
+			<div className='menu' id='layersMenu'>
+				<p>Cut</p>
+				<p>Copy</p>
+				<p>Paste</p>
+				<p>Copy styles</p>
+				<p>Paste styles</p>
+			</div>
 		</div>
 	)
 }
