@@ -68,6 +68,55 @@ const Layers = () => {
 		return e
 	}
 
+	//For moving elements down in siblings
+	const levelDown = id => {
+		//Assigning pages data into new variable
+		const temp = Object.assign({}, pages)
+		//calling function to move element up
+		temp[activePage] = levelDownHelper(temp[activePage], id)
+		//Assigning new data to pages data after moving element
+		setPages(temp)
+	}
+
+	//Helper Function For moving elements up, using recursion
+	const levelDownHelper = (arr, id) => {
+		//For assigning data into varible
+		const e = []
+		//Array length > 1, then element can move down
+		if (arr.length > 1) {
+			let swap = false
+			//Iterating each element
+			for (let i = 0; i < arr.length - 1; i++) {
+				//if element found, then swape with the element
+				//which is above the element.
+				if (arr[i][1].id === id && !swap) {
+					let t = arr[i]
+					arr[i] = arr[i + 1]
+					arr[i + 1] = t
+					swap = true
+				}
+				//inserting data into array
+				e.push(arr[i])
+			}
+			//above code does'nt insert last element,
+			//so inserting last element.
+			e.push(arr[arr.length - 1])
+		} else {
+			//if Array length < 1, then insert that element
+			arr.forEach(a => e.push(a))
+		}
+
+		//Doing recursion on each child on array
+		e.forEach(ele => {
+			//Checking if there is a child by child arr length
+			if (ele[2] && ele[2].length > 0) {
+				ele[2] = levelDownHelper(ele[2], id)
+			}
+		})
+
+		return e
+	}
+
 	//For deleting elements
 	const deleteMe = id => {
 		//Assigning pages data into new variable
@@ -503,7 +552,7 @@ const Layers = () => {
 									className='btn bi-chevron-up'></button>
 								<button
 									id={e[1].id + '---arrow1'}
-									onClick={() => levelUp(`${e[1].id}`)}
+									onClick={() => levelDown(`${e[1].id}`)}
 									className='btn bi-chevron-down'></button>
 							</div>
 							<button id={e[1].id + '---x'} onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
