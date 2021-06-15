@@ -532,11 +532,13 @@ const Layers = () => {
 							e[0] === 'select' ||
 							e[0] === 'list' ||
 							e[0] === 'list Item' ? (
-								<button onClick={() => showAndHideList(e[1].id)} className='layer-show'>
-									{e[2] && e[1].showChildren && e[2].length > 0 ? '▼' : '▶'}
-								</button>
+								<button
+									onClick={() => showAndHideList(e[1].id)}
+									className={`layer-show ${
+										e[2] && e[1].showChildren && e[2].length > 0 ? 'bi-chevron-down' : 'bi-chevron-right'
+									}`}></button>
 							) : (
-								<button className='no-layer'></button>
+								<button className='no-layer bi-dash-lg'></button>
 							)}
 							<p
 								onContextMenu={showOptionMenu}
@@ -555,9 +557,7 @@ const Layers = () => {
 									onClick={() => levelDown(`${e[1].id}`)}
 									className='btn bi-chevron-down'></button>
 							</div>
-							<button id={e[1].id + '---x'} onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
-								X
-							</button>
+							<button id={e[1].id + '---x'} onClick={() => deleteMe(`${e[1].id}`)} className='btn bi-x-lg'></button>
 							{e[2] && e[1].showChildren ? showLayers(e[2]) : null}
 						</li>
 					)

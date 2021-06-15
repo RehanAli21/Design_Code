@@ -400,7 +400,7 @@ nav .d-v button:hover {
 	background-color: var(--main-blue);
 	color: white;
 	font-weight: bold;
-	font-size: 0.75rem;
+	font-size: 0.6rem;
 	border: none;
 	outline: none;
 	border-radius: 3px;
@@ -417,8 +417,6 @@ nav .d-v button:hover {
 .layers ul li .layer-show {
 	background-color: var(--text-active-color);
 	color: white;
-	font-weight: bold;
-	font-size: 0.5rem;
 	border: none;
 	outline: none;
 	cursor: pointer;
