@@ -438,6 +438,35 @@ const Layers = () => {
 		})
 	}
 
+	const pasteStyle = () => {
+		if (rightClickId !== '' && copyStyle !== '') {
+			const temp = Object.assign({}, pages)
+
+			const elementForStyle = findElement(temp[activePage], copyStyle)
+
+			if (elementForStyle) {
+				const styles = [elementForStyle[1].styles, elementForStyle[1].hoverStyle, elementForStyle[1].clickStyle]
+				findAndInsertStyle(temp[activePage], rightClickId, styles)
+				setPages(temp)
+				setCopyStyle('')
+			}
+		}
+	}
+
+	const findAndInsertStyle = (arr, id, styles) => {
+		arr.forEach(e => {
+			if (e[1].id === id) {
+				e[1].styles = styles[0]
+				e[1].hoverStyle = styles[1]
+				e[1].clickStyle = styles[2]
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (findAndInsertStyle(e[2], id, styles)) return true
+			}
+		})
+		return false
+	}
+
 	//For making list of elements, and showing the list
 	const showLayers = data => {
 		return (
@@ -526,7 +555,7 @@ const Layers = () => {
 					id='layersMenuCopyStyle'>
 					Copy styles
 				</p>
-				<p id='layersMenuPasteStyle' style={{ display: copyStyle !== '' ? 'block' : 'none' }}>
+				<p onClick={pasteStyle} id='layersMenuPasteStyle' style={{ display: copyStyle !== '' ? 'block' : 'none' }}>
 					Paste styles
 				</p>
 			</div>
