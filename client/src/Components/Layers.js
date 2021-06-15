@@ -14,7 +14,6 @@ const Layers = () => {
 	const [copyElement, setCopyElement] = useState('')
 	const [cutElement, setCutElement] = useState('')
 	const [copyStyle, setCopyStyle] = useState('')
-	let copiedElement, cutedElement, copiedStyle
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -204,30 +203,8 @@ const Layers = () => {
 	const makeParentChild = () => {
 		//checking dragedElement and overDragElement is not empty and small to each other
 		if (dragedElement !== '' && overDragElement !== '' && dragedElement !== overDragElement) {
-			const child = document.getElementById(dragedElement)
-			const parent = document.getElementById(overDragElement)
-
-			if (parent && child) {
-				if (parent.tagName === 'SELECT' && child.tagName !== 'OPTION') return
-				if ((parent.tagName === 'OL' || parent.tagName === 'UL') && child.tagName !== 'LI') return
-				if (parent.tagName === 'BUTTON' && child.tagName !== 'I') return
-			}
-			if (parent) {
-				if (
-					parent.tagName === 'INPUT' ||
-					parent.tagName === 'H1' ||
-					parent.tagName === 'H2' ||
-					parent.tagName === 'H3' ||
-					parent.tagName === 'H4' ||
-					parent.tagName === 'H5' ||
-					parent.tagName === 'A' ||
-					parent.tagName === 'P' ||
-					parent.tagName === 'IMG' ||
-					parent.tagName === 'I'
-				) {
-					return
-				}
-			}
+			//for checking relations
+			if (parentChildChecker(overDragElement, dragedElement)) return
 
 			//using function for checking, weather the dragedElement is not parent element
 			const found = findIfChildIsParent()
@@ -259,6 +236,33 @@ const Layers = () => {
 					dragedElement = ''
 					overDragElement = ''
 				}
+			}
+		}
+	}
+	//For checking relation between parent and child
+	const parentChildChecker = (parentId, childId) => {
+		const child = document.getElementById(childId)
+		const parent = document.getElementById(parentId)
+
+		if (parent && child) {
+			if (parent.tagName === 'SELECT' && child.tagName !== 'OPTION') return true
+			if ((parent.tagName === 'OL' || parent.tagName === 'UL') && child.tagName !== 'LI') return true
+			if (parent.tagName === 'BUTTON' && child.tagName !== 'I') return true
+		}
+		if (parent) {
+			if (
+				parent.tagName === 'INPUT' ||
+				parent.tagName === 'H1' ||
+				parent.tagName === 'H2' ||
+				parent.tagName === 'H3' ||
+				parent.tagName === 'H4' ||
+				parent.tagName === 'H5' ||
+				parent.tagName === 'A' ||
+				parent.tagName === 'P' ||
+				parent.tagName === 'IMG' ||
+				parent.tagName === 'I'
+			) {
+				return true
 			}
 		}
 	}
@@ -363,6 +367,8 @@ const Layers = () => {
 	const pasteElement = () => {
 		if (rightClickId !== '') {
 			if (copyElement !== '') {
+				if (parentChildChecker(rightClickId, copyElement)) return
+
 				const temp = Object.assign({}, pages)
 				//finding the element which has to be copied
 				const copiedElement = findElement(temp[activePage], copyElement)
@@ -378,6 +384,19 @@ const Layers = () => {
 					setPages(temp)
 				}
 			} else if (cutElement !== '') {
+				if (parentChildChecker(rightClickId, cutElement)) return
+
+				const temp = Object.assign({}, pages)
+				//finding the element which has to be copied
+				const cutedElement = findElement(temp[activePage], cutElement)
+
+				if (cutedElement) {
+					temp[activePage] = removeChild(temp[activePage], cutElement)
+
+					findAndInsert(temp[activePage], rightClickId, cutedElement)
+					setPages(temp)
+					setCutElement('')
+				}
 			}
 		}
 	}
