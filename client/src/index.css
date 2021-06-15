@@ -364,21 +364,20 @@ nav .d-v button:hover {
 .layers ul {
 	width: 100%;
 	list-style: none;
-	border-left: 3px solid var(--main-blue);
+	border-left: 3px solid red;
 	margin-left: 10px;
 }
 .layers ul li {
 	width: 130px;
-	margin: 2px 0px;
+	margin-top: 4px;
 	color: var(--text-active-color);
 	font-weight: bold;
 	display: grid;
-	grid-template-columns: 30px 100px 30px 30px;
+	grid-template-columns: 22px 108px 30px 30px;
 }
 .layers ul li p {
 	text-align: left;
-	padding: 2px 0px;
-	padding-left: 5px;
+	padding: 4px 0px 2px 5px;
 	width: 100%;
 }
 .layers ul li p:hover {
@@ -393,6 +392,10 @@ nav .d-v button:hover {
 	background-color: var(--main-blue);
 	color: white;
 }
+.layers ul li .btn-div {
+	display: grid;
+	grid-template-rows: 50% 50%;
+}
 .layers ul li .btn {
 	background-color: var(--main-blue);
 	color: white;
@@ -405,10 +408,11 @@ nav .d-v button:hover {
 	margin-left: 5px;
 }
 .layers ul li .btn:hover {
-	transform: scale(1.1);
+	background-color: red;
+	transform: scale(1.05);
 }
 .layers ul li .btn:active {
-	transform: scale(0.9);
+	transform: scale(0.95);
 }
 .layers ul li .layer-show {
 	background-color: var(--text-active-color);

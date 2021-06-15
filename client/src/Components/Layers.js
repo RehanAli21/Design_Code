@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState } from 'react'
 import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
@@ -159,10 +159,12 @@ const Layers = () => {
 				document.getElementById(temp[0] + '---li').style.backgroundColor = 'red'
 				document.getElementById(temp[0] + '---p').style.backgroundColor = 'red'
 				document.getElementById(temp[0] + '---arrow').style.backgroundColor = 'red'
+				document.getElementById(temp[0] + '---arrow1').style.backgroundColor = 'red'
 				document.getElementById(temp[0] + '---x').style.backgroundColor = 'red'
 				document.getElementById(temp[0] + '---li').style.color = 'white'
 				document.getElementById(temp[0] + '---p').style.color = 'white'
 				document.getElementById(temp[0] + '---arrow').style.color = 'white'
+				document.getElementById(temp[0] + '---arrow1').style.color = 'white'
 				document.getElementById(temp[0] + '---x').style.color = 'white'
 			} else if (temp[0] === activePage) {
 				document.getElementById(temp[0] + '---').style.backgroundColor = 'red'
@@ -188,10 +190,12 @@ const Layers = () => {
 				document.getElementById(temp[0] + '---li').style.backgroundColor = ''
 				document.getElementById(temp[0] + '---p').style.backgroundColor = ''
 				document.getElementById(temp[0] + '---arrow').style.backgroundColor = ''
+				document.getElementById(temp[0] + '---arrow1').style.backgroundColor = ''
 				document.getElementById(temp[0] + '---x').style.backgroundColor = ''
 				document.getElementById(temp[0] + '---li').style.color = ''
 				document.getElementById(temp[0] + '---p').style.color = ''
 				document.getElementById(temp[0] + '---arrow').style.color = ''
+				document.getElementById(temp[0] + '---arrow1').style.color = ''
 				document.getElementById(temp[0] + '---x').style.color = ''
 			} else if (temp[0] === activePage) {
 				document.getElementById(temp[0] + '---').style.backgroundColor = ''
@@ -492,9 +496,16 @@ const Layers = () => {
 								onClick={() => changeActiveElement(`${e[1].id}`)}>
 								{e[1].name}
 							</p>
-							<button id={e[1].id + '---arrow'} onClick={() => levelUp(`${e[1].id}`)} className='btn'>
-								^
-							</button>
+							<div className='btn-div'>
+								<button
+									id={e[1].id + '---arrow'}
+									onClick={() => levelUp(`${e[1].id}`)}
+									className='btn bi-chevron-up'></button>
+								<button
+									id={e[1].id + '---arrow1'}
+									onClick={() => levelUp(`${e[1].id}`)}
+									className='btn bi-chevron-down'></button>
+							</div>
 							<button id={e[1].id + '---x'} onClick={() => deleteMe(`${e[1].id}`)} className='btn'>
 								X
 							</button>
