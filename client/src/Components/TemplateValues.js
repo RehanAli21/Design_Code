@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import { TemplateContext } from './Contexts/TemplateContext'
 
 const TemplateValues = () => {
-	const { setColors, setFontSizes, showTemplate, setShowTemplate } = useContext(TemplateContext)
+	const { setColors, setFontSizes, setFonts, showTemplate, setShowTemplate } = useContext(TemplateContext)
 
 	const [fontNum, setFontNum] = useState(0)
 	const [colorNum, setColorNum] = useState(0)
@@ -31,7 +31,7 @@ const TemplateValues = () => {
 		['', ''],
 		['', ''],
 	])
-	const [fonts, setFonts] = useState(['', '', '', '', ''])
+	const [fontNames, setFontNames] = useState(['', '', '', '', ''])
 
 	useEffect(() => {
 		const temp = {}
@@ -48,6 +48,14 @@ const TemplateValues = () => {
 		}
 		setFontSizes(temp)
 	}, [fontValue, fontSizeNum])
+
+	useEffect(() => {
+		const temp = []
+		for (let i = 0; i < fontNum; i++) {
+			if (fontNames[i] !== '') temp.push(fontNames[i])
+		}
+		setFonts(temp)
+	}, [fontNames, fontNum])
 
 	const changeColorColor = (e, i) => {
 		const temp = []
@@ -106,13 +114,20 @@ const TemplateValues = () => {
 		return temp
 	}
 
+	const changeFontNames = (e, i) => {
+		const temp = []
+		fontNames.forEach(e => temp.push(e))
+		temp[i] = e.target.value
+		setFontNames(temp)
+	}
+
 	const showFontsOptions = () => {
 		const temp = []
 
 		for (let i = 0; i < fontNum; i++) {
 			temp.push(
 				<div key={i} className='fontinputs'>
-					<input type='text' placeholder='Enter Font Name...' onChange={e => changeFontName(e, i)} />
+					<input type='text' placeholder='Enter Font Name...' onChange={e => changeFontNames(e, i)} />
 				</div>
 			)
 		}

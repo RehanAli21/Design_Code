@@ -261,13 +261,13 @@ const Font = () => {
 		const temp = []
 		temp.push(
 			<option key={'default'} value='default'>
-				Default
+				Default{' '}
 			</option>
 		)
-		for (const key in fonts) {
+		for (const e of fonts) {
 			temp.push(
-				<option key={key} value={fonts[key]}>
-					{key}
+				<option key={e} value={e}>
+					{e}
 				</option>
 			)
 		}
