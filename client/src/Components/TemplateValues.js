@@ -4,6 +4,7 @@ import { TemplateContext } from './Contexts/TemplateContext'
 const TemplateValues = () => {
 	const { setColors, setFontSizes, showTemplate, setShowTemplate } = useContext(TemplateContext)
 
+	const [fontNum, setFontNum] = useState(0)
 	const [colorNum, setColorNum] = useState(0)
 	const [fontSizeNum, setFontSizeNum] = useState(0)
 	const [colorValue, setColoValue] = useState([
@@ -30,6 +31,7 @@ const TemplateValues = () => {
 		['', ''],
 		['', ''],
 	])
+	const [fonts, setFonts] = useState(['', '', '', '', ''])
 
 	useEffect(() => {
 		const temp = {}
@@ -89,14 +91,28 @@ const TemplateValues = () => {
 		setFontValue(temp)
 	}
 
-	const showFontsOptions = () => {
+	const showFontSizesOptions = () => {
 		const temp = []
 
 		for (let i = 0; i < fontSizeNum; i++) {
 			temp.push(
-				<div key={i} className='fontinputs'>
+				<div key={i} className='fontSizeinputs'>
 					<input type='number' onChange={e => changeFontSize(e, i)} />
 					<input type='text' placeholder='FontSize Name' onChange={e => changeFontName(e, i)} />
+				</div>
+			)
+		}
+
+		return temp
+	}
+
+	const showFontsOptions = () => {
+		const temp = []
+
+		for (let i = 0; i < fontNum; i++) {
+			temp.push(
+				<div key={i} className='fontinputs'>
+					<input type='text' placeholder='Enter Font Name...' onChange={e => changeFontName(e, i)} />
 				</div>
 			)
 		}
@@ -123,6 +139,20 @@ const TemplateValues = () => {
 					</div>
 					<div className='two'>{showColorsOption()}</div>
 				</div>
+				<div className='t-fonts'>
+					<div className='one'>
+						<label>Number of Fonts: </label>
+						<input
+							defaultValue='0'
+							min='0'
+							max='5'
+							type='number'
+							id='t-f-Numinput'
+							onChange={e => setFontNum(e.target.value > 5 ? 5 : e.target.value)}
+						/>
+					</div>
+					<div className='one'>{showFontsOptions()}</div>
+				</div>
 				<div className='t-fontSizes'>
 					<div className='one'>
 						<label>Number of Font Sizes: </label>
@@ -135,7 +165,7 @@ const TemplateValues = () => {
 							onChange={e => setFontSizeNum(e.target.value > 10 ? 10 : e.target.value)}
 						/>
 					</div>
-					<div className='two'>{showFontsOptions()}</div>
+					<div className='two'>{showFontSizesOptions()}</div>
 				</div>
 			</div>
 		</div>

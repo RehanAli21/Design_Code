@@ -1,15 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Alegreya&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Prata&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Vidaloka&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=PT+Mono&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Major+Mono+Display&family=VT323&display=swap');
 :root {
 	--main-white: rgb(245, 245, 245);
 	--second-white: rgb(245, 245, 245, 0.9);
@@ -87,15 +75,15 @@
 	padding: 5vh 0;
 }
 .templateComp > div {
-	margin-left: 200px;
 	display: grid;
-	grid-template-columns: 35% 35%;
-	column-gap: 80px;
+	grid-template-columns: repeat(3, 20%);
+	column-gap: 10%;
 	margin-top: 30px;
-	font-size: 20px;
+	margin-left: 10%;
 }
 .templateComp input {
 	font-size: 1em;
+	margin-top: 10px;
 	border: none;
 	border-radius: 5px;
 	border-bottom: 1px solid var(--text-color);
@@ -120,7 +108,7 @@
 	column-gap: 20px;
 }
 
-.templateComp .fontinputs {
+.templateComp .fontSizeinputs {
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 10px;
@@ -128,6 +116,16 @@
 	display: grid;
 	grid-template-columns: 35% auto;
 	column-gap: 20px;
+}
+
+.templateComp .fontinputs {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px;
+	width: 200px;
+	/* display: grid;
+	grid-template-columns: 35% auto;
+	column-gap: 20px; */
 }
 
 .templateComp > button {
