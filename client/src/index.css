@@ -76,10 +76,13 @@
 }
 .templateComp > div {
 	display: grid;
-	grid-template-columns: repeat(3, 20%);
+	grid-template-columns: repeat(3, 22%);
 	column-gap: 10%;
 	margin-top: 30px;
 	margin-left: 10%;
+}
+.templateComp .tipDiv {
+	text-align: left;
 }
 .templateComp input {
 	font-size: 1em;
@@ -123,9 +126,6 @@
 	margin-right: auto;
 	margin-top: 10px;
 	width: 200px;
-	/* display: grid;
-	grid-template-columns: 35% auto;
-	column-gap: 20px; */
 }
 
 .templateComp > button {

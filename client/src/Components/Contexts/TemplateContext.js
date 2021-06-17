@@ -16,12 +16,17 @@ export const TemplateProvider = props => {
 				if (e.search(' ') !== -1) {
 					const a = e.split(' ')
 					a.forEach(i => {
-						name += `${i.charAt(0).toUpperCase() + i.slice(1, i.length).substr(0, i.length - 1)}+`
+						name += `${
+							i.charAt(0).toUpperCase() +
+							i
+								.slice(1, i.length)
+								.substr(0, i.length - 1)
+								.toLowerCase()
+						}+`
 					})
 					name = name.substr(0, name.length - 1)
-					console.log(name)
 				} else {
-					name = e.charAt(0).toUpperCase() + e.slice(1, e.length)
+					name = e.charAt(0).toUpperCase() + e.slice(1, e.length).toLowerCase()
 				}
 				font += `family=${name}&`
 			})

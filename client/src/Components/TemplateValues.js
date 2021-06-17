@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { TemplateContext } from './Contexts/TemplateContext'
+import Tip from './Properties/PropertiesComponenets/Tip'
 
 const TemplateValues = () => {
 	const { setColors, setFontSizes, setFonts, showTemplate, setShowTemplate } = useContext(TemplateContext)
@@ -31,7 +32,7 @@ const TemplateValues = () => {
 		['', ''],
 		['', ''],
 	])
-	const [fontNames, setFontNames] = useState(['', '', '', '', ''])
+	const [fontNames, setFontNames] = useState(['', '', '', '', '', '', '', '', '', ''])
 
 	useEffect(() => {
 		const temp = {}
@@ -142,7 +143,15 @@ const TemplateValues = () => {
 			<div>
 				<div className='t-colors'>
 					<div className='one'>
-						<label>Number of Colors: </label>
+						<label>
+							<Tip
+								msg={[
+									'These colors can be used as color scheme, these colors will be shown on text color, border color, shadow color and background color.',
+									'Note: Maximum 10 colors can be added.',
+								]}
+							/>
+							Number of Colors:{' '}
+						</label>
 						<input
 							defaultValue='0'
 							min='0'
@@ -156,21 +165,36 @@ const TemplateValues = () => {
 				</div>
 				<div className='t-fonts'>
 					<div className='one'>
-						<label>Number of Fonts: </label>
+						<label>
+							<Tip
+								msg={[
+									'INSTRUCTIONS: GO to https://fonts.google.com/, copy font name and paste it in Font Name',
+									'These font will be imported from google fonts.',
+									'If no fonts added, there will be only one font available',
+									'Note: Maximum 10 fonts can be added.',
+								]}
+							/>
+							Number of Fonts:{' '}
+						</label>
 						<input
 							defaultValue='0'
 							min='0'
-							max='5'
+							max='10'
 							type='number'
 							id='t-f-Numinput'
-							onChange={e => setFontNum(e.target.value > 5 ? 5 : e.target.value)}
+							onChange={e => setFontNum(e.target.value > 10 ? 10 : e.target.value)}
 						/>
 					</div>
 					<div className='one'>{showFontsOptions()}</div>
 				</div>
 				<div className='t-fontSizes'>
 					<div className='one'>
-						<label>Number of Font Sizes: </label>
+						<label>
+							<Tip
+								msg={['These fontsizes can be used for typography', 'Note: Maximum 10 fontSizes can be added.']}
+							/>
+							Number of Font Sizes:{' '}
+						</label>
 						<input
 							defaultValue='0'
 							min='0'
