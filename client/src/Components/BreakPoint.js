@@ -37,11 +37,15 @@ const BreakPoint = () => {
 			<h1>Responsive BreakPoints for pages</h1>
 			<button onClick={() => setShowBreakPoint(!showBreakPoint)}>Done</button>
 			<div className='two'>
-				<label>Small: </label>
+				<label>
+					<i className='bi-phone-fill'></i> Small:
+				</label>
 				<input onChange={e => setSmall(e.target.value)} type='number' min='0' max={mBreakPoint - 1} defaultValue='540' />
 			</div>
 			<div className='two'>
-				<label>Medium: </label>
+				<label>
+					<i className='bi-tablet-fill'></i> Medium:
+				</label>
 				<input
 					onChange={e => setMedium(e.target.value)}
 					type='number'
@@ -51,7 +55,9 @@ const BreakPoint = () => {
 				/>
 			</div>
 			<div className='two'>
-				<label>Large: </label>
+				<label>
+					<i className='bi-display-fill'></i> Large:{' '}
+				</label>
 				<input
 					onChange={e => setLarge(e.target.value)}
 					type='number'

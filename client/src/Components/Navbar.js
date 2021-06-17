@@ -102,7 +102,7 @@ const Navbar = () => {
 			)
 		}
 		return (
-			<div style={{ display: show ? 'block' : 'none' }}>
+			<div style={{ transform: show ? 'scaleY(1)' : 'scaleY(0)' }}>
 				<div style={{ borderBottom: '1px solid black' }}>{temp}</div>
 				<div className='addpage-input two-2'>
 					<input
@@ -126,15 +126,15 @@ const Navbar = () => {
 			<div className='page-div'>
 				<p onClick={() => setShow(!show)}>
 					{toCapitalize(activePage)}
-					<span style={{ fontSize: '1rem', marginLeft: '5px' }}>▼</span>
+					<span className='bi-chevron-down' style={{ fontSize: '1rem', marginLeft: '5px' }}></span>
 				</p>
 				{pageSection()}
 			</div>
 			<div className='d-v'>
 				<p onClick={() => setShowDefault(!showdefault)}>
-					<span className='bi-gear-fill'></span>
+					<span className='bi-menu-app'></span>
 				</p>
-				<div style={{ display: showdefault ? 'grid' : 'none' }}>
+				<div style={{ transform: showdefault ? 'scaleY(1)' : 'scaleY(0)' }}>
 					<button
 						onClick={() => {
 							setShowTemplate(!showTemplate)

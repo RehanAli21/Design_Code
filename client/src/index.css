@@ -202,6 +202,12 @@ nav .page-div > div {
 	padding: 3px;
 	box-shadow: 2px 2px 10px gray;
 	border-radius: 3px;
+	transition-duration: 100ms;
+	transform-origin: top;
+}
+nav .page-div > p:hover {
+	color: var(--main-blue);
+	font-weight: bold;
 }
 nav .page-div > div > div {
 	padding: 5px;
@@ -250,6 +256,19 @@ nav .addpage-input button:hover {
 	cursor: pointer;
 }
 
+nav .d-v p span {
+	padding: 1px 5px;
+	border-radius: 3px;
+	font-size: 20px;
+	transition-duration: 50ms;
+}
+nav .d-v p span:hover {
+	font-size: 22px;
+}
+nav .d-v p :hover {
+	background-color: var(--main-blue);
+	color: white;
+}
 nav .d-v > div {
 	position: absolute;
 	top: 6vh;
@@ -258,6 +277,8 @@ nav .d-v > div {
 	background-color: white;
 	font-size: 1rem;
 	box-shadow: 2px 2px 10px gray;
+	transition-duration: 100ms;
+	transform-origin: top;
 }
 nav .d-v button {
 	padding: 10px 15px;
