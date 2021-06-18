@@ -14,6 +14,7 @@ const Layers = () => {
 	const [copyElement, setCopyElement] = useState('')
 	const [cutElement, setCutElement] = useState('')
 	const [copyStyle, setCopyStyle] = useState('')
+	let copiedStyle = []
 
 	//For making first character capital of string
 	const toCapitalize = s => s.charAt(0).toUpperCase() + s.slice(1, s.length)
@@ -495,23 +496,38 @@ const Layers = () => {
 		if (rightClickId !== '' && copyStyle !== '') {
 			const temp = Object.assign({}, pages)
 
-			const elementForStyle = findElement(temp[activePage], copyStyle)
+			findElementStyle(temp[activePage], copyStyle)
 
-			if (elementForStyle) {
-				const styles = [elementForStyle[1].styles, elementForStyle[1].hoverStyle, elementForStyle[1].clickStyle]
-				findAndInsertStyle(temp[activePage], rightClickId, styles)
+			if (copiedStyle) {
+				findAndInsertStyle(temp[activePage], rightClickId, copiedStyle)
 				setPages(temp)
 				setCopyStyle('')
 			}
 		}
 	}
 
+	const findElementStyle = (arr, id) => {
+		arr.forEach(e => {
+			if (e[1].id === id) {
+				copiedStyle = [
+					Object.assign({}, e[1].styles),
+					Object.assign({}, e[1].hoverStyle),
+					Object.assign({}, e[1].clickStyle),
+				]
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (findElementStyle(e[2], id)) return true
+			}
+		})
+		return false
+	}
+
 	const findAndInsertStyle = (arr, id, styles) => {
 		arr.forEach(e => {
 			if (e[1].id === id) {
-				e[1].styles = styles[0]
-				e[1].hoverStyle = styles[1]
-				e[1].clickStyle = styles[2]
+				e[1].styles = Object.assign({}, styles[0])
+				e[1].hoverStyle = Object.assign({}, styles[1])
+				e[1].clickStyle = Object.assign({}, styles[2])
 				return true
 			} else if (e[2] && e[2].length > 0) {
 				if (findAndInsertStyle(e[2], id, styles)) return true
