@@ -427,7 +427,7 @@ const Page = () => {
 				<div style={{ paddingTop: '0.1px' }}></div>
 				{showElements(pages[activePage])}
 			</div>
-			{showFullScreen && <FullScreen showElements={showElements} />}
+			<FullScreen showElements={showElements} />
 		</div>
 	)
 }
