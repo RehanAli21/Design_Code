@@ -23,6 +23,7 @@ const Display = ({ type }) => {
 	} = useContext(PropertiesContext)
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
 	const [display, setDisplay] = useState('')
+	const [change, setChange] = useState(false)
 
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
@@ -43,7 +44,7 @@ const Display = ({ type }) => {
 	}, [width, activeElement, small, medium, large, xlarge])
 
 	useEffect(() => {
-		if (small && medium && large && xlarge && display !== '') {
+		if (small && medium && large && xlarge && change && display !== '') {
 			if (width < sBreakPoint) {
 				setProperties(small, setSmall, 'display', display)
 				setChangedSmall(true)
@@ -69,8 +70,9 @@ const Display = ({ type }) => {
 				if (!changedMedium) setProperties(medium, setMedium, 'display', display)
 				if (!changedLarge) setProperties(large, setLarge, 'display', display)
 			}
+			setChange(false)
 		}
-	}, [display])
+	}, [display, change])
 
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
@@ -81,24 +83,21 @@ const Display = ({ type }) => {
 	return (
 		<div className='two'>
 			<label>Display:</label>
-			{type === 'separateLine' ? (
-				<select id='display-show-select' onChange={e => setDisplay(e.target.value)}>
-					<option value='normal'>Normal</option>
-					<option value='block'>Separate Line</option>
-					<option value='none'>Hide</option>
-				</select>
-			) : type === 'sameLine' ? (
-				<select id='display-show-select' onChange={e => setDisplay(e.target.value)}>
-					<option value='normal'>Normal</option>
-					<option value='inline-block'>Same Line</option>
-					<option value='none'>Hide</option>
-				</select>
-			) : (
-				<select id='display-show-select' onChange={e => setDisplay(e.target.value)}>
-					<option value='normal'>Show</option>
-					<option value='none'>Hide</option>
-				</select>
-			)}
+			<select
+				id='display-show-select'
+				onChange={e => {
+					setDisplay(e.target.value)
+					setChange(true)
+				}}>
+				<option value='normal'>Normal</option>
+				<option style={{ display: type === 'separateLine' ? 'block' : 'none' }} value='block'>
+					Separate Line
+				</option>
+				<option style={{ display: type === 'sameLine' ? 'block' : 'none' }} value='inline-block'>
+					Same Line
+				</option>
+				<option value='none'>Hide</option>
+			</select>
 		</div>
 	)
 }
