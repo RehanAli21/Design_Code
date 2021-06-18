@@ -131,7 +131,7 @@ const Navbar = () => {
 				{pageSection()}
 			</div>
 			<div className='d-v'>
-				<p onClick={() => setShowDefault(!showdefault)}>
+				<p className='icon' onClick={() => setShowDefault(!showdefault)}>
 					<span className='bi-menu-app'></span>
 				</p>
 				<div style={{ transform: showdefault ? 'scaleY(1)' : 'scaleY(0)' }}>
@@ -151,6 +151,9 @@ const Navbar = () => {
 					</button>
 				</div>
 			</div>
+			<p className='icon' style={{ marginTop: '2vh' }}>
+				<span className='bi-fullscreen'></span>
+			</p>
 			<div>
 				<input
 					checked={inPageActiveElement}

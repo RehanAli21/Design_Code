@@ -148,7 +148,7 @@ nav {
 	background-color: var(--main-white);
 	color: var(--text-active-color);
 	display: grid;
-	grid-template-columns: 200px 150px 170px auto auto;
+	grid-template-columns: 200px 150px 170px 30px auto auto;
 	text-align: center;
 	border-bottom: 1px solid silver;
 }
@@ -256,18 +256,13 @@ nav .addpage-input button:hover {
 	cursor: pointer;
 }
 
-nav .d-v p span {
-	padding: 1px 5px;
+nav .icon span {
 	border-radius: 3px;
-	font-size: 20px;
-	transition-duration: 50ms;
+	font-size: 1.1rem;
 }
-nav .d-v p span:hover {
-	font-size: 22px;
-}
-nav .d-v p :hover {
-	background-color: var(--main-blue);
-	color: white;
+nav .icon :hover {
+	font-size: 1.2rem;
+	color: var(--main-blue);
 }
 nav .d-v > div {
 	position: absolute;
