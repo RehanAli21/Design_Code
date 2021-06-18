@@ -4,7 +4,7 @@ export const PageContext = createContext()
 
 export const PageProvider = props => {
 	const [pages, setPages] = useState({ home: [] })
-	const [showFullScreen, setShowFullScreen] = useState(true)
+	const [showFullScreen, setShowFullScreen] = useState(false)
 	const [activePage, setActivePage] = useState('home')
 	const [activeElement, setActiveElement] = useState('')
 	const [width, setWidth] = useState(720)

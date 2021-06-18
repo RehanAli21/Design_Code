@@ -471,9 +471,19 @@ nav .d-v button:hover {
 	height: 100%;
 }
 .main-div .pages-div {
+	position: relative;
 	padding: 0px;
 	box-shadow: 2px 2px 15px grey;
 	outline: none;
+}
+
+.fullScreenPage {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100vw;
+	height: 100vh;
+	z-index: 99;
 }
 
 .propertybar {

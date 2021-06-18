@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
+import FullScreen from './FullScreen'
 
 let move = false
 let zoom = false
@@ -8,7 +9,15 @@ let oldx = 0
 let oldy = 0
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage, setActiveElement, width, height, pageBC, inPageActiveElement } = useContext(PageContext)
+	const { pages, activePage, setActiveElement, width, height, pageBC, inPageActiveElement, showFullScreen, setShowFullScreen } =
+		useContext(PageContext)
+
+	//for show / hide fullscreen
+	document.addEventListener('keypress', e => {
+		if (e.key === 'f' || e.key === 'F') {
+			setShowFullScreen(!showFullScreen)
+		}
+	})
 
 	const [scale, setScale] = useState(0.8)
 	const [tX, setTX] = useState(0)
@@ -418,6 +427,7 @@ const Page = () => {
 				<div style={{ paddingTop: '0.1px' }}></div>
 				{showElements(pages[activePage])}
 			</div>
+			{showFullScreen && <FullScreen showElements={showElements} />}
 		</div>
 	)
 }

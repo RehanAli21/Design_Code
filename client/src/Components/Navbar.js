@@ -16,6 +16,7 @@ const Navbar = () => {
 		setShowBreakPoint,
 		inPageActiveElement,
 		setInPageActiveElement,
+		setShowFullScreen,
 	} = useContext(PageContext)
 
 	const { showTemplate, setShowTemplate } = useContext(TemplateContext)
@@ -151,7 +152,7 @@ const Navbar = () => {
 					</button>
 				</div>
 			</div>
-			<p className='icon' style={{ marginTop: '2vh' }}>
+			<p onClick={() => setShowFullScreen(true)} className='icon' style={{ marginTop: '2vh' }}>
 				<span className='bi-fullscreen'></span>
 			</p>
 			<div>
