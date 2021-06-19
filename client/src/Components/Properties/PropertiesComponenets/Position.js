@@ -44,6 +44,7 @@ const Position = () => {
 	const [y, setY] = useState('')
 	const [yUnit, setYUnit] = useState('px')
 
+	//for setting postion
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
 			const pos = position === 'fp' ? 'absolute' : position === 'static' ? '' : position
@@ -79,49 +80,25 @@ const Position = () => {
 			}
 		}
 	}, [position])
-
+	//when position is free(parent), then this function executed
 	const freeWithParent = (arr, id) => {
 		arr.forEach(e => {
 			if (e[2] && e[2].length > 0) {
 				e[2].forEach(ele => {
 					if (ele[1].id === id) {
+						const newStyles = Object.assign({}, e[1].styles)
+
 						if (width < sBreakPoint) {
-							if (e[1].styles.small.position && e[1].styles.small.position !== '') {
-								setShowMsgBox(true)
-								setMsgBoxMsg(
-									`This element's parent element(${e[1].name}) already has position on small Breakpoint!`
-								)
-							} else if (e[1].styles.small.position) {
-								e[1].styles.small['position'] = 'relative'
-							}
+							freeWithParentHelper(newStyles.small, e, 'small')
 						} else if (width < mBreakPoint) {
-							if (e[1].styles.medium.position && e[1].styles.medium.position !== '') {
-								setShowMsgBox(true)
-								setMsgBoxMsg(
-									`This element's parent element(${e[1].name}) already has position on medium Breakpoint!`
-								)
-							} else if (e[1].styles.medium.position) {
-								e[1].styles.medium['position'] = 'relative'
-							}
+							freeWithParentHelper(newStyles.medium, e, 'medium')
 						} else if (width < lBreakPoint) {
-							if (e[1].styles.large.position && e[1].styles.large.position !== '') {
-								setShowMsgBox(true)
-								setMsgBoxMsg(
-									`This element's parent element(${e[1].name}) already has position on large Breakpoint!`
-								)
-							} else if (e[1].styles.large.position) {
-								e[1].styles.large['position'] = 'relative'
-							}
+							freeWithParentHelper(newStyles.large, e, 'large')
 						} else {
-							if (e[1].styles.xlarge.position && e[1].styles.xlarge.position !== '') {
-								setShowMsgBox(true)
-								setMsgBoxMsg(
-									`This element's parent element(${e[1].name}) already has position on xlarge Breakpoint!`
-								)
-							} else if (e[1].styles.xlarge.position) {
-								e[1].styles.xlarge['position'] = 'relative'
-							}
+							freeWithParentHelper(newStyles.xlarge, e, 'xlarge')
 						}
+
+						e[1].styles = Object.assign({}, newStyles)
 						return true
 					}
 				})
@@ -136,7 +113,17 @@ const Position = () => {
 
 		return false
 	}
+	//for making code small, for above function
+	const freeWithParentHelper = (obj, e, breakPoint) => {
+		if (obj.position && obj.position !== '' && obj.position !== 'relative') {
+			setShowMsgBox(true)
+			setMsgBoxMsg(`This element's parent element(${e[1].name}) already has position on ${breakPoint} Breakpoint!`)
+		} else {
+			obj = Object.assign({ position: 'relative' }, obj)
+		}
+	}
 
+	//for setting zIndex
 	useEffect(() => {
 		if (small && medium && large && xlarge && zIndex !== '') {
 			if (width < sBreakPoint) {
@@ -167,6 +154,7 @@ const Position = () => {
 		}
 	}, [zIndex])
 
+	//for setting x
 	useEffect(() => {
 		if (small && medium && large && xlarge && x !== '') {
 			const left = `${x}${xUnit}`
@@ -198,6 +186,7 @@ const Position = () => {
 		}
 	}, [x, xUnit])
 
+	//for setting y
 	useEffect(() => {
 		if (small && medium && large && xlarge && y !== '') {
 			const top = `${y}${yUnit}`
