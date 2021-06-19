@@ -24,7 +24,18 @@ const Position = () => {
 		showPositionProperties,
 		setShowPositionProperties,
 	} = useContext(PropertiesContext)
-	const { width, pages, setPages, activeElement, sBreakPoint, mBreakPoint, lBreakPoint } = useContext(PageContext)
+	const {
+		width,
+		pages,
+		setPages,
+		activeElement,
+		activePage,
+		sBreakPoint,
+		mBreakPoint,
+		lBreakPoint,
+		setMsgBoxMsg,
+		setShowMsgBox,
+	} = useContext(PageContext)
 
 	const [position, setPosition] = useState('static')
 	const [zIndex, setZIndex] = useState('')
@@ -32,6 +43,105 @@ const Position = () => {
 	const [xUnit, setXUnit] = useState('px')
 	const [y, setY] = useState('')
 	const [yUnit, setYUnit] = useState('px')
+
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const pos = position === 'fp' ? 'absolute' : position === 'static' ? '' : position
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'position', pos)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'position', pos)
+				if (!changedLarge) setProperties(large, setLarge, 'position', pos)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', pos)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'position', pos)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'position', pos)
+				if (!changedLarge) setProperties(large, setLarge, 'position', pos)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', pos)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'position', pos)
+				setChangedLarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'position', pos)
+				if (!changedSmall) setProperties(small, setSmall, 'position', pos)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', pos)
+			} else {
+				setProperties(xlarge, setXlarge, 'position', pos)
+				setChangedXlarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'position', pos)
+				if (!changedLarge) setProperties(large, setLarge, 'position', pos)
+				if (!changedSmall) setProperties(small, setSmall, 'position', pos)
+			}
+			if (position === 'fp') {
+				const temp = Object.assign({}, pages)
+				freeWithParent(temp[activePage], activeElement)
+				setPages(temp)
+			}
+		}
+	}, [position])
+
+	const freeWithParent = (arr, id) => {
+		arr.forEach(e => {
+			if (e[2] && e[2].length > 0) {
+				e[2].forEach(ele => {
+					if (ele[1].id === id) {
+						if (width < sBreakPoint) {
+							if (e[1].styles.small.position && e[1].styles.small.position !== '') {
+								setShowMsgBox(true)
+								setMsgBoxMsg(
+									`This element's parent element(${e[1].name}) already has position on small Breakpoint!`
+								)
+							} else if (e[1].styles.small.position) {
+								e[1].styles.small['position'] = 'relative'
+							}
+						} else if (width < mBreakPoint) {
+							if (e[1].styles.medium.position && e[1].styles.medium.position !== '') {
+								setShowMsgBox(true)
+								setMsgBoxMsg(
+									`This element's parent element(${e[1].name}) already has position on medium Breakpoint!`
+								)
+							} else if (e[1].styles.medium.position) {
+								e[1].styles.medium['position'] = 'relative'
+							}
+						} else if (width < lBreakPoint) {
+							if (e[1].styles.large.position && e[1].styles.large.position !== '') {
+								setShowMsgBox(true)
+								setMsgBoxMsg(
+									`This element's parent element(${e[1].name}) already has position on large Breakpoint!`
+								)
+							} else if (e[1].styles.large.position) {
+								e[1].styles.large['position'] = 'relative'
+							}
+						} else {
+							if (e[1].styles.xlarge.position && e[1].styles.xlarge.position !== '') {
+								setShowMsgBox(true)
+								setMsgBoxMsg(
+									`This element's parent element(${e[1].name}) already has position on xlarge Breakpoint!`
+								)
+							} else if (e[1].styles.xlarge.position) {
+								e[1].styles.xlarge['position'] = 'relative'
+							}
+						}
+						return true
+					}
+				})
+			}
+		})
+
+		arr.forEach(e => {
+			if (e[2] && e[2].length > 0) {
+				if (freeWithParent(e[2], id)) return true
+			}
+		})
+
+		return false
+	}
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
 
 	return (
 		<div className='borders btn-specific'>
@@ -46,8 +156,8 @@ const Position = () => {
 					<option value='static'>Normal</option>
 					<option value='absolute'>Free (Page)</option>
 					<option value='fp'>Free (Parent)</option>
-					<option value='sticky'>Sticky (Page)</option>
-					<option value='fixed'>Sticky (Parent)</option>
+					<option value='fixed'>Sticky (Page)</option>
+					<option value='sticky'>Sticky (Parent)</option>
 				</select>
 			</div>
 			<div className='two'>
