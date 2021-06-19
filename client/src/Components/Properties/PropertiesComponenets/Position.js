@@ -38,48 +38,153 @@ const Position = () => {
 	} = useContext(PageContext)
 
 	const [position, setPosition] = useState('static')
+	const [changePosition, setChangePosition] = useState(false)
 	const [zIndex, setZIndex] = useState('')
 	const [x, setX] = useState('')
 	const [xUnit, setXUnit] = useState('px')
 	const [y, setY] = useState('')
 	const [yUnit, setYUnit] = useState('px')
 
-	//for setting postion
 	useEffect(() => {
 		if (small && medium && large && xlarge) {
-			const pos = position === 'fp' ? 'absolute' : position === 'static' ? '' : position
+			const positionSelect = document.getElementById('pos-position-select')
+			const zIndexInput = document.getElementById('pos-zIndex-input')
+			const xInput = document.getElementById('pos-x-input')
+			const xUnitSelect = document.getElementById('pos-xUnit-select')
+			const yInput = document.getElementById('pos-y-input')
+			const yUnitSelect = document.getElementById('pos-yUnit-select')
+
 			if (width < sBreakPoint) {
-				setProperties(small, setSmall, 'position', pos)
-				setChangedSmall(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'position', pos)
-				if (!changedLarge) setProperties(large, setLarge, 'position', pos)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', pos)
+				setPosition(small.position && small.position !== 'static' ? small.position : 'static')
+
+				positionSelect.value = small.positionValue ? small.positionValue : 'static'
+				zIndexInput.value = small.zIndex ? small.zIndex : '0'
+				if (small.left) {
+					const xValues = unitFinder(small.left)
+					xInput.value = xValues[0]
+					xUnitSelect.value = xValues[1]
+				}
+
+				if (small.top) {
+					const yValues = unitFinder(small.top)
+					yInput.value = yValues[0]
+					yUnitSelect.value = yValues[1]
+				}
 			} else if (width < mBreakPoint) {
-				setProperties(medium, setMedium, 'position', pos)
-				setChangedMedium(true)
-				if (!changedSmall) setProperties(small, setSmall, 'position', pos)
-				if (!changedLarge) setProperties(large, setLarge, 'position', pos)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', pos)
+				setPosition(medium.position && medium.position !== 'static' ? medium.position : 'static')
+
+				positionSelect.value = medium.positionValue ? medium.positionValue : 'static'
+				zIndexInput.value = medium.zIndex ? medium.zIndex : '0'
+				if (medium.left) {
+					const xValues = unitFinder(medium.left)
+					xInput.value = xValues[0]
+					xUnitSelect.value = xValues[1]
+				}
+
+				if (medium.top) {
+					const yValues = unitFinder(medium.top)
+					yInput.value = yValues[0]
+					yUnitSelect.value = yValues[1]
+				}
 			} else if (width < lBreakPoint) {
-				setProperties(large, setLarge, 'position', pos)
-				setChangedLarge(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'position', pos)
-				if (!changedSmall) setProperties(small, setSmall, 'position', pos)
-				if (!changedXlarge) setProperties(xlarge, setXlarge, 'position', pos)
+				setPosition(large.position && large.position !== 'static' ? large.position : 'static')
+
+				positionSelect.value = large.positionValue ? large.positionValue : 'static'
+				zIndexInput.value = large.zIndex ? large.zIndex : '0'
+				if (large.left) {
+					const xValues = unitFinder(large.left)
+					xInput.value = xValues[0]
+					xUnitSelect.value = xValues[1]
+				}
+
+				if (large.top) {
+					const yValues = unitFinder(large.top)
+					yInput.value = yValues[0]
+					yUnitSelect.value = yValues[1]
+				}
 			} else {
-				setProperties(xlarge, setXlarge, 'position', pos)
-				setChangedXlarge(true)
-				if (!changedMedium) setProperties(medium, setMedium, 'position', pos)
-				if (!changedLarge) setProperties(large, setLarge, 'position', pos)
-				if (!changedSmall) setProperties(small, setSmall, 'position', pos)
+				setPosition(xlarge.position && xlarge.position !== 'static' ? xlarge.position : 'static')
+
+				positionSelect.value = xlarge.positionValue ? xlarge.positionValue : 'static'
+				zIndexInput.value = xlarge.zIndex ? xlarge.zIndex : '0'
+				if (xlarge.left) {
+					const xValues = unitFinder(xlarge.left)
+					xInput.value = xValues[0]
+					xUnitSelect.value = xValues[1]
+				}
+
+				if (xlarge.top) {
+					const yValues = unitFinder(xlarge.top)
+					yInput.value = yValues[0]
+					yUnitSelect.value = yValues[1]
+				}
+			}
+		}
+	}, [width, activeElement, small, medium, large, xlarge])
+
+	const unitFinder = s =>
+		s.search('px') !== -1
+			? [s.split('p')[0], 'px']
+			: s.search('%') !== -1
+			? [s.split('%')[0], '%']
+			: s.search('vh') !== -1
+			? [s.split('v')[0], 'vh']
+			: s.search('vw') !== -1
+			? [s.split('v')[0], 'vw']
+			: s.search('em') !== -1
+			? [s.split('e')[0], 'em']
+			: ['0', 'px']
+
+	//for setting postion
+	useEffect(() => {
+		if (small && medium && large && xlarge && changePosition) {
+			const pos = position === 'fp' ? 'absolute' : position === 'static' ? '' : position
+			if (position !== 'fp') {
+				if (width < sBreakPoint) {
+					setPositionProperty(small, setSmall, 'position', pos, position)
+					setChangedSmall(true)
+					if (!changedMedium) setPositionProperty(medium, setMedium, 'position', pos, position)
+					if (!changedLarge) setPositionProperty(large, setLarge, 'position', pos, position)
+					if (!changedXlarge) setPositionProperty(xlarge, setXlarge, 'position', pos, position)
+				} else if (width < mBreakPoint) {
+					setPositionProperty(medium, setMedium, 'position', pos, position)
+					setChangedMedium(true)
+					if (!changedSmall) setPositionProperty(small, setSmall, 'position', pos, position)
+					if (!changedLarge) setPositionProperty(large, setLarge, 'position', pos, position)
+					if (!changedXlarge) setPositionProperty(xlarge, setXlarge, 'position', pos, position)
+				} else if (width < lBreakPoint) {
+					setPositionProperty(large, setLarge, 'position', pos, position)
+					setChangedLarge(true)
+					if (!changedMedium) setPositionProperty(medium, setMedium, 'position', pos, position)
+					if (!changedSmall) setPositionProperty(small, setSmall, 'position', pos, position)
+					if (!changedXlarge) setPositionProperty(xlarge, setXlarge, 'position', pos, position)
+				} else {
+					setPositionProperty(xlarge, setXlarge, 'position', pos, position)
+					setChangedXlarge(true)
+					if (!changedMedium) setPositionProperty(medium, setMedium, 'position', pos, position)
+					if (!changedLarge) setPositionProperty(large, setLarge, 'position', pos, position)
+					if (!changedSmall) setPositionProperty(small, setSmall, 'position', pos, position)
+				}
 			}
 			if (position === 'fp') {
 				const temp = Object.assign({}, pages)
-				freeWithParent(temp[activePage], activeElement)
+				if (!freeWithParent(temp[activePage], activeElement)) {
+					setPosition('static')
+					const ele = document.getElementById('pos-position-select')
+					if (ele) ele.value = 'static'
+				}
 				setPages(temp)
 			}
+			setChangePosition(false)
 		}
-	}, [position])
+	}, [changePosition])
+
+	const setPositionProperty = (obj, setObj, propertyName, property, position) => {
+		const temp = Object.assign({ positionValue: position }, obj)
+		temp[propertyName] = property
+		setObj(temp)
+	}
+
 	//when position is free(parent), then this function executed
 	const freeWithParent = (arr, id) => {
 		arr.forEach(e => {
@@ -89,13 +194,13 @@ const Position = () => {
 						const newStyles = Object.assign({}, e[1].styles)
 
 						if (width < sBreakPoint) {
-							freeWithParentHelper(newStyles.small, e, 'small')
+							freeWithParentHelper(newStyles.small, e, 'small', 'fp')
 						} else if (width < mBreakPoint) {
-							freeWithParentHelper(newStyles.medium, e, 'medium')
+							freeWithParentHelper(newStyles.medium, e, 'medium', 'fp')
 						} else if (width < lBreakPoint) {
-							freeWithParentHelper(newStyles.large, e, 'large')
+							freeWithParentHelper(newStyles.large, e, 'large', 'fp')
 						} else {
-							freeWithParentHelper(newStyles.xlarge, e, 'xlarge')
+							freeWithParentHelper(newStyles.xlarge, e, 'xlarge', 'fp')
 						}
 
 						e[1].styles = Object.assign({}, newStyles)
@@ -114,12 +219,12 @@ const Position = () => {
 		return false
 	}
 	//for making code small, for above function
-	const freeWithParentHelper = (obj, e, breakPoint) => {
+	const freeWithParentHelper = (obj, e, breakPoint, pos) => {
 		if (obj.position && obj.position !== '' && obj.position !== 'relative') {
 			setShowMsgBox(true)
 			setMsgBoxMsg(`This element's parent element(${e[1].name}) already has position on ${breakPoint} Breakpoint!`)
 		} else {
-			obj = Object.assign({ position: 'relative' }, obj)
+			obj = Object.assign({ position: 'relative', positionValue: pos }, obj)
 		}
 	}
 
@@ -233,7 +338,12 @@ const Position = () => {
 			</p>
 			<div className='two'>
 				<label>Position</label>
-				<select id='pos-position-select' onChange={e => setPosition(e.target.value)}>
+				<select
+					id='pos-position-select'
+					onChange={e => {
+						setPosition(e.target.value)
+						setChangePosition(true)
+					}}>
 					<option value='static'>Normal</option>
 					<option value='absolute'>Free (Page)</option>
 					<option value='fp'>Free (Parent)</option>
