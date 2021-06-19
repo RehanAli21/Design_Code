@@ -137,6 +137,98 @@ const Position = () => {
 		return false
 	}
 
+	useEffect(() => {
+		if (small && medium && large && xlarge && zIndex !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'zIndex', zIndex)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'zIndex', zIndex)
+				if (!changedLarge) setProperties(large, setLarge, 'zIndex', zIndex)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'zIndex', zIndex)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'zIndex', zIndex)
+				if (!changedLarge) setProperties(large, setLarge, 'zIndex', zIndex)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'zIndex', zIndex)
+				setChangedLarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'zIndex', zIndex)
+				if (!changedSmall) setProperties(small, setSmall, 'zIndex', zIndex)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+			} else {
+				setProperties(xlarge, setXlarge, 'zIndex', zIndex)
+				setChangedXlarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'zIndex', zIndex)
+				if (!changedLarge) setProperties(large, setLarge, 'zIndex', zIndex)
+				if (!changedSmall) setProperties(small, setSmall, 'zIndex', zIndex)
+			}
+		}
+	}, [zIndex])
+
+	useEffect(() => {
+		if (small && medium && large && xlarge && x !== '') {
+			const left = `${x}${xUnit}`
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'left', left)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'left', left)
+				if (!changedLarge) setProperties(large, setLarge, 'left', left)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'left', left)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'left', left)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'left', left)
+				if (!changedLarge) setProperties(large, setLarge, 'left', left)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'left', left)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'left', left)
+				setChangedLarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'left', left)
+				if (!changedSmall) setProperties(small, setSmall, 'left', left)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'left', left)
+			} else {
+				setProperties(xlarge, setXlarge, 'left', left)
+				setChangedXlarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'left', left)
+				if (!changedLarge) setProperties(large, setLarge, 'left', left)
+				if (!changedSmall) setProperties(small, setSmall, 'left', left)
+			}
+		}
+	}, [x, xUnit])
+
+	useEffect(() => {
+		if (small && medium && large && xlarge && y !== '') {
+			const top = `${y}${yUnit}`
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'top', top)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'top', top)
+				if (!changedLarge) setProperties(large, setLarge, 'top', top)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'top', top)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'top', top)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'top', top)
+				if (!changedLarge) setProperties(large, setLarge, 'top', top)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'top', top)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'top', top)
+				setChangedLarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'top', top)
+				if (!changedSmall) setProperties(small, setSmall, 'top', top)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'top', top)
+			} else {
+				setProperties(xlarge, setXlarge, 'top', top)
+				setChangedXlarge(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'top', top)
+				if (!changedLarge) setProperties(large, setLarge, 'top', top)
+				if (!changedSmall) setProperties(small, setSmall, 'top', top)
+			}
+		}
+	}, [y, yUnit])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -160,17 +252,17 @@ const Position = () => {
 					<option value='sticky'>Sticky (Parent)</option>
 				</select>
 			</div>
-			<div className='two'>
-				<label>Z-index: </label>
-				<input
-					id='pos-zIndex-input'
-					onChange={e => setZIndex(e.target.value)}
-					type='number'
-					className='numberinput'
-					defaultValue='0'
-				/>
-			</div>
 			<div style={{ display: position === 'static' ? 'none' : 'block' }} className='btn-specific'>
+				<div className='two'>
+					<label>Z-index: </label>
+					<input
+						id='pos-zIndex-input'
+						onChange={e => setZIndex(e.target.value)}
+						type='number'
+						className='numberinput'
+						defaultValue='0'
+					/>
+				</div>
 				<div className='three'>
 					<label>
 						<i className='bi-code'></i> X:
@@ -178,6 +270,7 @@ const Position = () => {
 					<input
 						type='number'
 						className='numberinput'
+						min='0'
 						defaultValue='0'
 						id='pos-x-input'
 						onChange={e => setX(e.target.value)}
@@ -196,6 +289,7 @@ const Position = () => {
 					<input
 						type='number'
 						className='numberinput'
+						min='0'
 						defaultValue='0'
 						id='pos-y-input'
 						onChange={e => setY(e.target.value)}
