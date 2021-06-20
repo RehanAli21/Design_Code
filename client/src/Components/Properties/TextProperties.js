@@ -14,6 +14,7 @@ const TextProperties = () => {
 
 	const [textType, setTextType] = useState('')
 	const [isAnchor, setIsAnchor] = useState(false)
+	const [target, setTarget] = useState('')
 
 	//For default value of text type
 	useEffect(() => {
@@ -87,6 +88,16 @@ const TextProperties = () => {
 			<Display type={'sameLine'} />
 			<Cursor style={showTextCompProperties ? 'grid' : 'none'} />
 			<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
+			<div style={{ display: showTextCompProperties && isAnchor ? 'grid' : 'none' }} className='three'>
+				<label>Target</label>
+				<input
+					type='text'
+					id='text-target-input'
+					placeholder='Element Name...'
+					onChange={e => setTarget(e.target.value)}
+				/>
+				<button style={{ padding: '1px 0px', border: 'none', fontWeight: 'bold' }}>Apply</button>
+			</div>
 			<GridColumn style={showTextCompProperties ? 'grid' : 'none'} />
 		</div>
 	)
