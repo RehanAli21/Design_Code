@@ -309,7 +309,53 @@ const Page = () => {
 				} else if (e[0] === 'text' && e[1].type !== 'a') {
 					temp.push(showElementsHelper(e, 'type', 'text'))
 				} else if (e[0] === 'text' && e[1].type === 'a') {
-					temp.push(showElementsHelper(e, 'type', 'text'))
+					temp.push(
+						React.createElement(
+							e[1].type,
+							{
+								key: uuid(),
+								id: e[1].id,
+								className: e[1].class,
+								href: e[1].target,
+								onMouseOver: () => onHoverStyle(e[1].id, e[1].hoverStyle, e[1].hoverTargets),
+								onMouseLeave: () =>
+									onHoverLeaveStyle(
+										e[1].id,
+										e[1].hoverStyle,
+										width < 540
+											? e[1].styles.small
+											: width < 720
+											? e[1].styles.medium
+											: width < 960
+											? e[1].styles.large
+											: e[1].styles.xlarge,
+										e[1].hoverTargets
+									),
+								onMouseDown: () => onClickStyle(e[1].id, e[1].clickStyle, e[1].clickTargets),
+								onMouseUp: () =>
+									onClickLeaveStyle(
+										e[1].id,
+										e[1].clickStyle,
+										width < 540
+											? e[1].styles.small
+											: width < 720
+											? e[1].styles.medium
+											: width < 960
+											? e[1].styles.large
+											: e[1].styles.xlarge
+									),
+								style:
+									width < 540
+										? e[1].styles.small
+										: width < 720
+										? e[1].styles.medium
+										: width < 960
+										? e[1].styles.large
+										: e[1].styles.xlarge,
+							},
+							e[1].text
+						)
+					)
 				} else if (e[0] === 'img') {
 					temp.push(showElementsHelper(e, 'noType', 'noChildren'))
 				} else if (e[0] === 'select') {

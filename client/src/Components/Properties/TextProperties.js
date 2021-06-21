@@ -66,8 +66,6 @@ const TextProperties = () => {
 
 			found = findElement(temp[activePage], target)
 
-			console.log(found)
-
 			if (found) {
 				findAndChange(temp[activePage], 'target', `#${found}`)
 				setPages(temp)
