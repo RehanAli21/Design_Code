@@ -10,7 +10,7 @@ import Display from './PropertiesComponenets/Display'
 
 const TextProperties = () => {
 	const { showTextCompProperties, setShowTextCompProperties } = useContext(PropertiesContext)
-	const { activePage, activeElement, pages, setPages } = useContext(PageContext)
+	const { activePage, activeElement, pages, setPages, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 
 	const [textType, setTextType] = useState('')
 	const [isAnchor, setIsAnchor] = useState(false)
@@ -56,6 +56,43 @@ const TextProperties = () => {
 		}
 	}
 
+	const setAnchorTarget = () => {
+		if (target !== '') {
+			let found = false
+
+			for (const e in pages) if (target === e) found = true
+
+			const temp = Object.assign({}, pages)
+
+			found = findElement(temp[activePage], target)
+
+			console.log(found)
+
+			if (found) {
+				findAndChange(temp[activePage], 'target', `#${found}`)
+				setPages(temp)
+			} else {
+				setMsgBoxMsg(`${target} not found`)
+				setShowMsgBox(true)
+			}
+		} else {
+			setMsgBoxMsg('Please enter target name')
+			setShowMsgBox(true)
+		}
+	}
+
+	const findElement = (arr, name) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].name === name) {
+				return arr[i][1].id
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				const found = findElement(arr[i][2], name)
+				if (found) return found
+			}
+		}
+		return false
+	}
+
 	return (
 		<div className='borders btn-specific'>
 			<p className='second-heading' onClick={() => setShowTextCompProperties(!showTextCompProperties)}>
@@ -96,7 +133,9 @@ const TextProperties = () => {
 					placeholder='Element Name...'
 					onChange={e => setTarget(e.target.value)}
 				/>
-				<button style={{ padding: '1px 0px', border: 'none', fontWeight: 'bold' }}>Apply</button>
+				<button onClick={setAnchorTarget} style={{ padding: '1px 0px', border: 'none', fontWeight: 'bold' }}>
+					Apply
+				</button>
 			</div>
 			<GridColumn style={showTextCompProperties ? 'grid' : 'none'} />
 		</div>
