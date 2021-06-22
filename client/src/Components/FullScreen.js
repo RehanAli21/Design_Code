@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { PageContext } from './Contexts/PageContext'
 
 const FullScreen = ({ showElements }) => {
@@ -18,18 +18,21 @@ const FullScreen = ({ showElements }) => {
 		transitionDuration: '500ms',
 	}
 
-	const removeElement = () => {
+	const changeElementStyle = show => {
 		const ele = document.getElementById('fullscreenF')
 		if (ele) {
-			ele.style.transform = 'scaleY(0)'
+			ele.style.transform = show ? 'scaleY(1)' : 'scaleY(0)'
 		}
 	}
 
-	setTimeout(removeElement, 2000)
+	useEffect(() => {
+		changeElementStyle(showFullScreen)
+		setTimeout(() => changeElementStyle(false), 2000)
+	}, [showFullScreen])
 
 	return (
 		<div style={{ display: showFullScreen ? 'block' : 'none', backgroundColor: pageBC }} className='fullScreenPage'>
-			<div id='fullscreenF' onMouseEnter={removeElement} style={style}>
+			<div id='fullscreenF' onMouseEnter={() => changeElementStyle(false)} style={style}>
 				Press F to exit Full Screen
 			</div>
 			{showElements(pages[activePage])}

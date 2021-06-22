@@ -26,7 +26,7 @@ const Page = () => {
 
 	//for show / hide fullscreen
 	document.addEventListener('keypress', e => {
-		if (e.key === 'f' || e.key === 'F') {
+		if (showFullScreen && (e.key === 'f' || e.key === 'F')) {
 			setShowFullScreen(!showFullScreen)
 		}
 	})

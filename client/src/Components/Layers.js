@@ -631,7 +631,9 @@ const Layers = () => {
 					onClick={() => setActiveElement(activePage)}>
 					{toCapitalize(activePage)}
 				</p>
-				<button onClick={undoFunc}>U</button>
+				<button onClick={undoFunc}>
+					<i className='bi-arrow-counterclockwise'></i>
+				</button>
 			</div>
 			{showLayers(pages[activePage])}
 			<div className='menu' id='layersMenu'>

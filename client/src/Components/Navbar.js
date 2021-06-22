@@ -153,7 +153,7 @@ const Navbar = () => {
 				</div>
 			</div>
 			<p onClick={() => setShowFullScreen(true)} className='icon' style={{ marginTop: '2vh' }}>
-				<span className='bi-fullscreen'></span>
+				<span className='bi-arrows-fullscreen'></span>
 			</p>
 			<div>
 				<input
