@@ -445,6 +445,7 @@ const Layers = () => {
 						copiedElement[2][0] === 'noChild' ? [copiedElement[0], copiedElement[1]] : copiedElement
 					)
 					setPages(temp)
+					return
 				}
 
 				if (copiedElement) {
@@ -474,6 +475,7 @@ const Layers = () => {
 				if (isPage && cutedElement) {
 					temp[activePage].push(cutedElement[2][0] === 'noChild' ? [cutedElement[0], cutedElement[1]] : cutedElement)
 					setPages(temp)
+					return
 				}
 
 				if (cutedElement) {

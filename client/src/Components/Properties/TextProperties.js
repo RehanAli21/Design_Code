@@ -13,7 +13,7 @@ const TextProperties = () => {
 	const { activePage, activeElement, pages, setPages, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 
 	const [textType, setTextType] = useState('')
-	const [isAnchor, setIsAnchor] = useState(false)
+	const [isAnchor, setIsAnchor] = useState('no')
 	const [target, setTarget] = useState('')
 
 	//For default value of text type
@@ -29,16 +29,34 @@ const TextProperties = () => {
 			else if (ele.tagName === 'H3') typeSelect.value = 'h3'
 			else if (ele.tagName === 'H4') typeSelect.value = 'h4'
 			else if (ele.tagName === 'H5') typeSelect.value = 'h5'
-			else if (ele.tagName === 'A') typeSelect.value = 'a'
+			else if (ele.tagName === 'A') {
+				typeSelect.value = 'a'
+				findTarget(pages[activePage])
+			}
+
+			setIsAnchor(ele.tagName === 'A' ? 'yes' : 'no')
 		}
-	})
+	}, [activeElement])
+
+	const findTarget = arr => {
+		arr.forEach(e => {
+			if (e[1].id === activeElement) {
+				const targetEle = document.getElementById('text-target-input')
+				targetEle.value = e[1].target
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (findTarget(e[2])) return true
+			}
+		})
+		return false
+	}
 
 	useEffect(() => {
 		if (textType !== '') {
 			const temp = Object.assign({}, pages)
 			findAndChange(temp[activePage], 'type', textType)
 			setPages(temp)
-			setIsAnchor(textType === 'a')
+			setIsAnchor(textType === 'a' ? 'yes' : 'no')
 		}
 	}, [textType])
 
@@ -123,7 +141,7 @@ const TextProperties = () => {
 			<Display type={'sameLine'} />
 			<Cursor style={showTextCompProperties ? 'grid' : 'none'} />
 			<TextChange type='text' display={showTextCompProperties ? 'grid' : 'none'} />
-			<div style={{ display: showTextCompProperties && isAnchor ? 'grid' : 'none' }} className='three'>
+			<div style={{ display: showTextCompProperties && isAnchor === 'yes' ? 'grid' : 'none' }} className='three'>
 				<label>Target</label>
 				<input
 					type='text'
