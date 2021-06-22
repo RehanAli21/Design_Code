@@ -405,7 +405,16 @@ const Layers = () => {
 			ele.style.display = 'block'
 			ele.style.top = `${e.pageY}px`
 			ele.style.left = `${e.pageX}px`
+
+			let found = false
+			for (const i in pages) if (i === e.target.id.split('---')[0]) found = true
+
 			setRightClickId(e.target.id.split('---')[0])
+
+			document.getElementById('layersMenuCopyStyle').style.display = found ? 'none' : 'block'
+			document.getElementById('layersMenuPasteStyle').style.display = found ? 'none' : 'block'
+			document.getElementById('layersMenuCopyElement').style.display = found ? 'none' : 'block'
+			document.getElementById('layersMenuCutElement').style.display = found ? 'none' : 'block'
 		}
 	}
 	//For disappearing the menu
@@ -428,14 +437,28 @@ const Layers = () => {
 				//finding the element which has to be copied
 				const copiedElement = findElement(temp[copyElement[1]], copyElement[0])
 
+				let isPage = false
+				for (const e in pages) if (e === rightClickId) isPage = true
+
+				if (isPage && copiedElement) {
+					temp[activePage].push(
+						copiedElement[2][0] === 'noChild' ? [copiedElement[0], copiedElement[1]] : copiedElement
+					)
+					setPages(temp)
+				}
+
 				if (copiedElement) {
 					copiedElement[1].name += counter
 					copiedElement[1].id += counter
 
-					if (copiedElement[2] && copiedElement[2].length > 0) changeNameandId(copiedElement[2])
+					if (copiedElement[2][0] !== 'noChild') changeNameandId(copiedElement[2])
 					counter++
 
-					findAndInsert(temp[activePage], rightClickId, copiedElement)
+					findAndInsert(
+						temp[activePage],
+						rightClickId,
+						copiedElement[2][0] === 'noChild' ? [copiedElement[0], copiedElement[1]] : copiedElement
+					)
 					setPages(temp)
 				}
 			} else if (cutElement !== '') {
@@ -445,10 +468,22 @@ const Layers = () => {
 				//finding the element which has to be copied
 				const cutedElement = findElement(temp[cutElement[1]], cutElement[0])
 
+				let isPage = false
+				for (const e in pages) if (e === rightClickId) isPage = true
+
+				if (isPage && cutedElement) {
+					temp[activePage].push(cutedElement[2][0] === 'noChild' ? [cutedElement[0], cutedElement[1]] : cutedElement)
+					setPages(temp)
+				}
+
 				if (cutedElement) {
 					temp[cutElement[1]] = removeChild(temp[cutElement[1]], cutElement[0])
 
-					findAndInsert(temp[activePage], rightClickId, cutedElement)
+					findAndInsert(
+						temp[activePage],
+						rightClickId,
+						cutedElement[2][0] === 'noChild' ? [cutedElement[0], cutedElement[1]] : cutedElement
+					)
 					setPages(temp)
 					cutElement = ''
 				}
@@ -461,7 +496,7 @@ const Layers = () => {
 			if (arr[i][1].id === id) {
 				const elementName = arr[i][0]
 				const elementProperties = Object.assign({}, arr[i][1])
-				const elementChildren = returnChildren(arr[i][2])
+				const elementChildren = arr[i][2] ? returnChildren(arr[i][2]) : ['noChild']
 
 				return [elementName, elementProperties, elementChildren]
 			} else if (arr[i][2] && arr[i][2].length > 0) {
