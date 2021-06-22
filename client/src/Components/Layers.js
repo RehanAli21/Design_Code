@@ -3,6 +3,9 @@ import uuid from 'react-uuid'
 import { PageContext } from './Contexts/PageContext'
 
 let counter = 1
+let copyElement = ''
+let cutElement = ''
+let copyStyle = ''
 const Layers = () => {
 	let oldDragOverElement = ''
 	let oldDragElement = ''
@@ -11,9 +14,6 @@ const Layers = () => {
 	let overDragElement = ''
 	let ele = []
 	const [rightClickId, setRightClickId] = useState('')
-	const [copyElement, setCopyElement] = useState('')
-	const [cutElement, setCutElement] = useState('')
-	const [copyStyle, setCopyStyle] = useState('')
 	let copiedStyle = []
 
 	//For making first character capital of string
@@ -421,11 +421,12 @@ const Layers = () => {
 	const pasteElement = () => {
 		if (rightClickId !== '') {
 			if (copyElement !== '') {
-				if (parentChildChecker(rightClickId, copyElement)) return
+				if (parentChildChecker(rightClickId, copyElement[0])) return
 
 				const temp = Object.assign({}, pages)
+
 				//finding the element which has to be copied
-				const copiedElement = findElement(temp[activePage], copyElement)
+				const copiedElement = findElement(temp[copyElement[1]], copyElement[0])
 
 				if (copiedElement) {
 					copiedElement[1].name += counter
@@ -438,18 +439,18 @@ const Layers = () => {
 					setPages(temp)
 				}
 			} else if (cutElement !== '') {
-				if (parentChildChecker(rightClickId, cutElement)) return
+				if (parentChildChecker(rightClickId, cutElement[0])) return
 
 				const temp = Object.assign({}, pages)
 				//finding the element which has to be copied
-				const cutedElement = findElement(temp[activePage], cutElement)
+				const cutedElement = findElement(temp[cutElement[1]], cutElement[0])
 
 				if (cutedElement) {
-					temp[activePage] = removeChild(temp[activePage], cutElement)
+					temp[cutElement[1]] = removeChild(temp[cutElement[1]], cutElement[0])
 
 					findAndInsert(temp[activePage], rightClickId, cutedElement)
 					setPages(temp)
-					setCutElement('')
+					cutElement = ''
 				}
 			}
 		}
@@ -496,12 +497,12 @@ const Layers = () => {
 		if (rightClickId !== '' && copyStyle !== '') {
 			const temp = Object.assign({}, pages)
 
-			findElementStyle(temp[activePage], copyStyle)
+			findElementStyle(temp[copyStyle[1]], copyStyle[0])
 
 			if (copiedStyle) {
 				findAndInsertStyle(temp[activePage], rightClickId, copiedStyle)
 				setPages(temp)
-				setCopyStyle('')
+				copyStyle = ''
 			}
 		}
 	}
@@ -586,6 +587,7 @@ const Layers = () => {
 		<div className='layers'>
 			<div>
 				<p
+					onContextMenu={showOptionMenu}
 					draggable={true}
 					id={activePage + '---'}
 					className={activePage === activeElement ? 'bg-blue ' : ''}
@@ -599,8 +601,8 @@ const Layers = () => {
 				<p
 					onClick={() => {
 						if (rightClickId !== '') {
-							setCutElement(rightClickId)
-							setCopyElement('')
+							cutElement = [rightClickId, activePage]
+							copyElement = ''
 						}
 					}}
 					id='layersMenuCutElement'>
@@ -609,8 +611,8 @@ const Layers = () => {
 				<p
 					onClick={() => {
 						if (rightClickId !== '') {
-							setCopyElement(rightClickId)
-							setCutElement('')
+							copyElement = [rightClickId, activePage]
+							cutElement = ''
 						}
 					}}
 					id='layersMenuCopyElement'>
@@ -625,7 +627,7 @@ const Layers = () => {
 				<p
 					onClick={() => {
 						if (rightClickId !== '') {
-							setCopyStyle(rightClickId)
+							copyStyle = [rightClickId, activePage]
 						}
 					}}
 					id='layersMenuCopyStyle'>
