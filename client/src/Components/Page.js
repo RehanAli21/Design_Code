@@ -9,8 +9,20 @@ let oldx = 0
 let oldy = 0
 //This compoenent controls page.
 const Page = () => {
-	const { pages, activePage, setActiveElement, width, height, pageBC, inPageActiveElement, showFullScreen, setShowFullScreen } =
-		useContext(PageContext)
+	const {
+		pages,
+		activePage,
+		sBreakPoint,
+		mBreakPoint,
+		lBreakPoint,
+		setActiveElement,
+		width,
+		height,
+		pageBC,
+		inPageActiveElement,
+		showFullScreen,
+		setShowFullScreen,
+	} = useContext(PageContext)
 
 	//for show / hide fullscreen
 	document.addEventListener('keypress', e => {
@@ -182,11 +194,11 @@ const Page = () => {
 			if (arr[i][1].id === id) {
 				return [
 					true,
-					width < 540
+					width < sBreakPoint
 						? arr[i][1].styles.small
-						: width < 720
+						: width < mBreakPoint
 						? arr[i][1].styles.medium
-						: width < 960
+						: width < lBreakPoint
 						? arr[i][1].styles.large
 						: arr[i][1].styles.xlarge,
 				]
@@ -243,11 +255,11 @@ const Page = () => {
 									onHoverLeaveStyle(
 										e[1].id,
 										e[1].hoverStyle,
-										width < 540
+										width < sBreakPoint
 											? e[1].styles.small
-											: width < 720
+											: width < mBreakPoint
 											? e[1].styles.medium
-											: width < 960
+											: width < lBreakPoint
 											? e[1].styles.large
 											: e[1].styles.xlarge,
 										e[1].hoverTargets
@@ -257,20 +269,20 @@ const Page = () => {
 									onClickLeaveStyle(
 										e[1].id,
 										e[1].clickStyle,
-										width < 540
+										width < sBreakPoint
 											? e[1].styles.small
-											: width < 720
+											: width < mBreakPoint
 											? e[1].styles.medium
-											: width < 960
+											: width < lBreakPoint
 											? e[1].styles.large
 											: e[1].styles.xlarge
 									),
 								style:
-									width < 540
+									width < sBreakPoint
 										? e[1].styles.small
-										: width < 720
+										: width < mBreakPoint
 										? e[1].styles.medium
-										: width < 960
+										: width < lBreakPoint
 										? e[1].styles.large
 										: e[1].styles.xlarge,
 							},
@@ -322,11 +334,11 @@ const Page = () => {
 									onHoverLeaveStyle(
 										e[1].id,
 										e[1].hoverStyle,
-										width < 540
+										width < sBreakPoint
 											? e[1].styles.small
-											: width < 720
+											: width < mBreakPoint
 											? e[1].styles.medium
-											: width < 960
+											: width < lBreakPoint
 											? e[1].styles.large
 											: e[1].styles.xlarge,
 										e[1].hoverTargets
@@ -336,20 +348,20 @@ const Page = () => {
 									onClickLeaveStyle(
 										e[1].id,
 										e[1].clickStyle,
-										width < 540
+										width < sBreakPoint
 											? e[1].styles.small
-											: width < 720
+											: width < mBreakPoint
 											? e[1].styles.medium
-											: width < 960
+											: width < lBreakPoint
 											? e[1].styles.large
 											: e[1].styles.xlarge
 									),
 								style:
-									width < 540
+									width < sBreakPoint
 										? e[1].styles.small
-										: width < 720
+										: width < mBreakPoint
 										? e[1].styles.medium
-										: width < 960
+										: width < lBreakPoint
 										? e[1].styles.large
 										: e[1].styles.xlarge,
 							},
@@ -370,11 +382,11 @@ const Page = () => {
 								key: uuid(),
 								id: e[1].id,
 								style:
-									width < 540
+									width < sBreakPoint
 										? e[1].styles.small
-										: width < 720
+										: width < mBreakPoint
 										? e[1].styles.medium
-										: width < 960
+										: width < lBreakPoint
 										? e[1].styles.large
 										: e[1].styles.xlarge,
 							},
@@ -413,11 +425,11 @@ const Page = () => {
 					onHoverLeaveStyle(
 						e[1].id,
 						e[1].hoverStyle,
-						width < 540
+						width < sBreakPoint
 							? e[1].styles.small
-							: width < 720
+							: width < mBreakPoint
 							? e[1].styles.medium
-							: width < 960
+							: width < lBreakPoint
 							? e[1].styles.large
 							: e[1].styles.xlarge,
 						e[1].hoverTargets
@@ -427,20 +439,20 @@ const Page = () => {
 					onClickLeaveStyle(
 						e[1].id,
 						e[1].clickStyle,
-						width < 540
+						width < sBreakPoint
 							? e[1].styles.small
-							: width < 720
+							: width < mBreakPoint
 							? e[1].styles.medium
-							: width < 960
+							: width < lBreakPoint
 							? e[1].styles.large
 							: e[1].styles.xlarge
 					),
 				style:
-					width < 540
+					width < sBreakPoint
 						? e[1].styles.small
-						: width < 720
+						: width < mBreakPoint
 						? e[1].styles.medium
-						: width < 960
+						: width < lBreakPoint
 						? e[1].styles.large
 						: e[1].styles.xlarge,
 			},
@@ -468,7 +480,7 @@ const Page = () => {
 					minHeight: `${height}px`,
 					minWidth: '300px',
 					transform: `scale(${scale}) translate(${tX}px, ${tY}px)`,
-					marginLeft: width < 720 ? '15%' : width < 1000 ? '10%' : width < 1500 ? '5%' : '0%',
+					marginLeft: width < mBreakPoint ? '15%' : width < 1000 ? '10%' : width < 1500 ? '5%' : '0%',
 				}}>
 				<div style={{ paddingTop: '0.1px' }}></div>
 				{showElements(pages[activePage])}
