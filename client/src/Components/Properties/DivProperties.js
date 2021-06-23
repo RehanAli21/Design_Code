@@ -188,8 +188,8 @@ const DivProperties = () => {
 		for (let i = 0; i < rowNum; i++) {
 			temp.push(
 				<div key={`row${i}`} className='invalue'>
-					<input id={`r-c-row${i}`} type='number' />
-					<select id={`r-c-rowU${i}`}>
+					<input id={`r-c-row${i}`} type='number' onChange={applyRows} defaultValue='0' />
+					<select id={`r-c-rowU${i}`} onChange={applyRows}>
 						<option value='px'>PX</option>
 						<option value='%'>%</option>
 						<option value='vh'>VH</option>
@@ -217,6 +217,49 @@ const DivProperties = () => {
 			)
 		}
 		return temp
+	}
+
+	const applyRows = () => {
+		const rows = []
+		for (let i = 0; i < rowNum; i++) {
+			const rowInput = document.getElementById(`r-c-row${i}`)
+			const rowUnitSelect = document.getElementById(`r-c-rowU${i}`)
+
+			if (rowInput && rowUnitSelect) {
+				rows.push(`${rowInput.value}${rowUnitSelect.value}`)
+			}
+		}
+
+		let gridRow = ''
+		rows.forEach(e => (gridRow += `${e} `))
+
+		if (small && medium && large && xlarge && gridRow !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'gridTemplateRows', gridRow)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridRow)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridRow)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridRow)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'gridTemplateRows', gridRow)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridRow)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridRow)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridRow)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'gridTemplateRows', gridRow)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridRow)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridRow)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateRows', gridRow)
+			} else {
+				setProperties(xlarge, setXlarge, 'gridTemplateRows', gridRow)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridRow)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridRow)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridRow)
+			}
+		}
 	}
 
 	return (
