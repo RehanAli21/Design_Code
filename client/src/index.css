@@ -569,12 +569,16 @@ nav .d-v button:hover {
 	column-gap: 5%;
 	margin-bottom: 10px;
 }
-.propertybar .r-c .row-col-div .two {
+.propertybar .r-c .row-col-div .half {
 	display: grid;
 	grid-template-columns: 48% 48%;
 	justify-content: left;
 	margin-bottom: 10px;
 	column-gap: 5px;
+}
+.propertybar .r-c .row-col-div .half label {
+	margin-top: 3px;
+	text-align: center;
 }
 .propertybar .r-c .invalue {
 	display: grid;

@@ -36,6 +36,8 @@ const DivProperties = () => {
 	const [showGridComps, setShowGridComps] = useState('')
 	const [rowGap, setRowGap] = useState('')
 	const [colGap, setColGap] = useState('')
+	const [rowNum, setRowNum] = useState(0)
+	const [colNum, setColNum] = useState(0)
 
 	//For default values
 	useEffect(() => {
@@ -181,6 +183,42 @@ const DivProperties = () => {
 		setObj(temp)
 	}
 
+	const showRows = () => {
+		const temp = []
+		for (let i = 0; i < rowNum; i++) {
+			temp.push(
+				<div key={`row${i}`} className='invalue'>
+					<input id={`r-c-row${i}`} type='number' />
+					<select id={`r-c-rowU${i}`}>
+						<option value='px'>PX</option>
+						<option value='%'>%</option>
+						<option value='vh'>VH</option>
+						<option value='em'>EM</option>
+					</select>
+				</div>
+			)
+		}
+		return temp
+	}
+
+	const showCols = () => {
+		const temp = []
+		for (let i = 0; i < colNum; i++) {
+			temp.push(
+				<div key={`col${i}`} className='invalue'>
+					<input id={`r-c-col${i}`} type='number' />
+					<select id={`r-c-colU${i}`}>
+						<option value='px'>PX</option>
+						<option value='%'>%</option>
+						<option value='vw'>VW</option>
+						<option value='em'>EM</option>
+					</select>
+				</div>
+			)
+		}
+		return temp
+	}
+
 	return (
 		<div className='borders r-c btn-specific'>
 			<p className='second-heading' onClick={() => setShowDivProperties(!showDivProperties)}>
@@ -223,7 +261,7 @@ const DivProperties = () => {
 					<i className='bi-columns'></i> Rows/Columns
 				</label>
 			</div>
-			<div className='btn-specific'>
+			<div style={{ display: showGridComps === 'yes' ? 'grid' : 'none' }} className='btn-specific row-col-div'>
 				<div className='two'>
 					<label>Row Gap: </label>
 					<input
@@ -243,6 +281,34 @@ const DivProperties = () => {
 						id='r-c-colGap-input'
 						onChange={e => setColGap(`${e.target.value}px`)}
 					/>
+				</div>
+				<div className='half' style={{ marginTop: '20px' }}>
+					<div>
+						<div className='half'>
+							<label>Rows:</label>
+							<input
+								type='number'
+								id='r-c-rowNum-input'
+								min='0'
+								max='12'
+								onChange={e => setRowNum(e.target.value > 12 ? 12 : e.target.value < 0 ? 0 : e.target.value)}
+							/>
+						</div>
+						{showRows()}
+					</div>
+					<div>
+						<div className='half'>
+							<label>Cols:</label>
+							<input
+								type='number'
+								id='r-c-colNum-input'
+								min='0'
+								max='12'
+								onChange={e => setColNum(e.target.value > 12 ? 12 : e.target.value < 0 ? 0 : e.target.value)}
+							/>
+						</div>
+						{showCols()}
+					</div>
 				</div>
 			</div>
 		</div>
