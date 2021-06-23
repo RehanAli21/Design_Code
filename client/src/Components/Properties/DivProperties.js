@@ -188,7 +188,7 @@ const DivProperties = () => {
 		for (let i = 0; i < rowNum; i++) {
 			temp.push(
 				<div key={`row${i}`} className='invalue'>
-					<input id={`r-c-row${i}`} type='number' onChange={applyRows} defaultValue='0' />
+					<input id={`r-c-row${i}`} type='number' onChange={applyRows} defaultValue='-1' min='-1' />
 					<select id={`r-c-rowU${i}`} onChange={applyRows}>
 						<option value='px'>PX</option>
 						<option value='%'>%</option>
@@ -206,8 +206,8 @@ const DivProperties = () => {
 		for (let i = 0; i < colNum; i++) {
 			temp.push(
 				<div key={`col${i}`} className='invalue'>
-					<input id={`r-c-col${i}`} type='number' />
-					<select id={`r-c-colU${i}`}>
+					<input id={`r-c-col${i}`} type='number' onChange={applyCols} defaultValue='-1' min='-1' />
+					<select id={`r-c-colU${i}`} onChange={applyCols}>
 						<option value='px'>PX</option>
 						<option value='%'>%</option>
 						<option value='vw'>VW</option>
@@ -225,7 +225,7 @@ const DivProperties = () => {
 			const rowInput = document.getElementById(`r-c-row${i}`)
 			const rowUnitSelect = document.getElementById(`r-c-rowU${i}`)
 
-			if (rowInput && rowUnitSelect) {
+			if (rowInput && rowUnitSelect && rowInput.value > -1) {
 				rows.push(`${rowInput.value}${rowUnitSelect.value}`)
 			}
 		}
@@ -258,6 +258,49 @@ const DivProperties = () => {
 				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateRows', gridRow)
 				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateRows', gridRow)
 				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateRows', gridRow)
+			}
+		}
+	}
+
+	const applyCols = () => {
+		const cols = []
+		for (let i = 0; i < colNum; i++) {
+			const colInput = document.getElementById(`r-c-col${i}`)
+			const colUnitSelect = document.getElementById(`r-c-colU${i}`)
+
+			if (colInput && colUnitSelect && colInput.value > -1) {
+				cols.push(`${colInput.value}${colUnitSelect.value}`)
+			}
+		}
+
+		let gridCol = ''
+		cols.forEach(e => (gridCol += `${e} `))
+
+		if (small && medium && large && xlarge && gridCol !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'gridTemplateColumns', gridCol)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateColumns', gridCol)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridCol)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridCol)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'gridTemplateColumns', gridCol)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridCol)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridCol)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridCol)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'gridTemplateColumns', gridCol)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridCol)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateColumns', gridCol)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridCol)
+			} else {
+				setProperties(xlarge, setXlarge, 'gridTemplateColumns', gridCol)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'gridTemplateColumns', gridCol)
+				if (!changedMedium) setProperties(medium, setMedium, 'gridTemplateColumns', gridCol)
+				if (!changedLarge) setProperties(large, setLarge, 'gridTemplateColumns', gridCol)
 			}
 		}
 	}
