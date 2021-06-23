@@ -32,6 +32,8 @@ const DivProperties = () => {
 	const { width, activeElement, sBreakPoint, mBreakPoint, lBreakPoint, setMsgBoxMsg, setShowMsgBox } = useContext(PageContext)
 
 	const [overflow, setOverflow] = useState('')
+	const [grid, setGrid] = useState('')
+	const [showGridComps, setShowGridComps] = useState('')
 
 	//For default values
 	useEffect(() => {
@@ -81,6 +83,36 @@ const DivProperties = () => {
 		}
 	}, [overflow])
 
+	useEffect(() => {
+		if (small && medium && large && xlarge && grid !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'display', grid === 'yes' ? 'grid' : '')
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid === 'yes' ? 'grid' : '')
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'display', grid === 'yes' ? 'grid' : '')
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid === 'yes' ? 'grid' : '')
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'display', grid === 'yes' ? 'grid' : '')
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'display', grid === 'yes' ? 'grid' : '')
+			} else {
+				setProperties(xlarge, setXlarge, 'display', grid === 'yes' ? 'grid' : '')
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedMedium) setProperties(medium, setMedium, 'display', grid === 'yes' ? 'grid' : '')
+				if (!changedLarge) setProperties(large, setLarge, 'display', grid === 'yes' ? 'grid' : '')
+			}
+		}
+	}, [grid])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -117,7 +149,14 @@ const DivProperties = () => {
 			<GridColumn style={showDivProperties ? 'grid' : 'none'} />
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
 			<div className='grid'>
-				<input type='checkbox' id='r-c-checkbox' />
+				<input
+					type='checkbox'
+					id='r-c-checkbox'
+					onChange={e => {
+						setGrid(e.target.checked ? 'yes' : 'no')
+						setShowGridComps(e.target.checked ? 'yes' : 'no')
+					}}
+				/>
 				<label>
 					<i className='bi-columns'></i> Rows/Columns
 				</label>

@@ -31,13 +31,17 @@ const Display = ({ type }) => {
 
 			if (displaySelect) {
 				if (width < sBreakPoint) {
-					displaySelect.value = small.display && small.display !== '' ? small.display : 'normal'
+					displaySelect.value =
+						small.display && small.display !== '' && small.display !== 'grid' ? small.display : 'normal'
 				} else if (width < mBreakPoint) {
-					displaySelect.value = medium.display && medium.display !== '' ? medium.display : 'normal'
+					displaySelect.value =
+						medium.display && medium.display !== '' && medium.display !== 'grid' ? medium.display : 'normal'
 				} else if (width < lBreakPoint) {
-					displaySelect.value = large.display && large.display !== '' ? large.display : 'normal'
+					displaySelect.value =
+						large.display && large.display !== '' && large.display !== 'grid' ? large.display : 'normal'
 				} else {
-					displaySelect.value = xlarge.display && xlarge.display !== '' ? xlarge.display : 'normal'
+					displaySelect.value =
+						xlarge.display && xlarge.display !== '' && xlarge.display !== 'grid' ? xlarge.display : 'normal'
 				}
 			}
 		}
