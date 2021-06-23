@@ -34,6 +34,8 @@ const DivProperties = () => {
 	const [overflow, setOverflow] = useState('')
 	const [grid, setGrid] = useState('')
 	const [showGridComps, setShowGridComps] = useState('')
+	const [rowGap, setRowGap] = useState('')
+	const [colGap, setColGap] = useState('')
 
 	//For default values
 	useEffect(() => {
@@ -113,6 +115,66 @@ const DivProperties = () => {
 		}
 	}, [grid])
 
+	useEffect(() => {
+		if (small && medium && large && xlarge && rowGap !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'rowGap', rowGap)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'rowGap', rowGap)
+				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'rowGap', rowGap)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
+				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'rowGap', rowGap)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'rowGap', rowGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+			} else {
+				setProperties(xlarge, setXlarge, 'rowGap', rowGap)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'rowGap', rowGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'rowGap', rowGap)
+				if (!changedLarge) setProperties(large, setLarge, 'rowGap', rowGap)
+			}
+		}
+	}, [rowGap])
+
+	useEffect(() => {
+		if (small && medium && large && xlarge && colGap !== '') {
+			if (width < sBreakPoint) {
+				setProperties(small, setSmall, 'columnGap', colGap)
+				setChangedSmall(true)
+				if (!changedMedium) setProperties(medium, setMedium, 'columnGap', colGap)
+				if (!changedLarge) setProperties(large, setLarge, 'columnGap', colGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', colGap)
+			} else if (width < mBreakPoint) {
+				setProperties(medium, setMedium, 'columnGap', colGap)
+				setChangedMedium(true)
+				if (!changedSmall) setProperties(small, setSmall, 'columnGap', colGap)
+				if (!changedLarge) setProperties(large, setLarge, 'columnGap', colGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', colGap)
+			} else if (width < lBreakPoint) {
+				setProperties(large, setLarge, 'columnGap', colGap)
+				setChangedLarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'columnGap', colGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'columnGap', colGap)
+				if (!changedXlarge) setProperties(xlarge, setXlarge, 'columnGap', colGap)
+			} else {
+				setProperties(xlarge, setXlarge, 'columnGap', colGap)
+				setChangedXlarge(true)
+				if (!changedSmall) setProperties(small, setSmall, 'columnGap', colGap)
+				if (!changedMedium) setProperties(medium, setMedium, 'columnGap', colGap)
+				if (!changedLarge) setProperties(large, setLarge, 'columnGap', colGap)
+			}
+		}
+	}, [colGap])
+
 	const setProperties = (obj, setObj, propertyName, property) => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
@@ -160,6 +222,28 @@ const DivProperties = () => {
 				<label>
 					<i className='bi-columns'></i> Rows/Columns
 				</label>
+			</div>
+			<div className='btn-specific'>
+				<div className='two'>
+					<label>Row Gap: </label>
+					<input
+						type='number'
+						min='0'
+						className='numberinput'
+						id='r-c-rowGap-input'
+						onChange={e => setRowGap(`${e.target.value}px`)}
+					/>
+				</div>
+				<div className='two'>
+					<label>Col Gap: </label>
+					<input
+						type='number'
+						min='0'
+						className='numberinput'
+						id='r-c-colGap-input'
+						onChange={e => setColGap(`${e.target.value}px`)}
+					/>
+				</div>
 			</div>
 		</div>
 	)
