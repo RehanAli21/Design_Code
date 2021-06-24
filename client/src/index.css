@@ -1029,3 +1029,15 @@ nav .d-v button:hover {
 ::-webkit-scrollbar-thumb:hover {
 	background: #444444;
 }
+
+/* Slider styles */
+.Slider {
+	position: relative;
+	overflow: hidden;
+}
+.Slider .slide {
+	animation-fill-mode: forwards !important;
+	position: absolute;
+	opacity: 0;
+	transform-style: preserve-3d;
+}

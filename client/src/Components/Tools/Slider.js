@@ -22,9 +22,10 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 			{
 				name: `Slider${counter}`,
 				type: 'main',
+				activeSlide: '',
 				id: uniqueString(),
 				showChildren: true,
-				class: '',
+				class: ' Slider ',
 				clickTargets: {},
 				hoverTargets: {},
 				styles: {
