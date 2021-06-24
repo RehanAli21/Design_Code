@@ -18,9 +18,10 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 		}
 		//For holding all data of a slider element
 		const slider = [
-			'div',
+			'section',
 			{
 				name: `Slider${counter}`,
+				type: 'main',
 				id: uniqueString(),
 				showChildren: true,
 				class: '',
@@ -47,36 +48,10 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 					{
 						name: `SRB${counter}`,
 						id: uniqueString(),
-						text: 'button',
+						text: 'right',
 						showChildren: true,
 						class: '',
 						indexOfText: 0,
-						clickTargets: {},
-						hoverTargets: {},
-						styles: {
-							small: {},
-							medium: {},
-							large: {},
-							xlarge: {},
-						},
-						styleWidth: {
-							changedSmall: false,
-							changedMedium: false,
-							changedLarge: false,
-							changeXlarge: false,
-						},
-						hoverStyle: {},
-						clickStyle: {},
-					},
-					[],
-				],
-				[
-					'div',
-					{
-						name: `SMD${counter}`,
-						id: uniqueString(),
-						showChildren: true,
-						class: '',
 						clickTargets: {},
 						hoverTargets: {},
 						styles: {
@@ -101,7 +76,7 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 					{
 						name: `SLB${counter}`,
 						id: uniqueString(),
-						text: 'button',
+						text: 'left',
 						showChildren: true,
 						class: '',
 						indexOfText: 0,
