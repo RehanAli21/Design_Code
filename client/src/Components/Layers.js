@@ -581,7 +581,8 @@ const Layers = () => {
 				{data.map(e => {
 					return (
 						<li draggable={true} onDragEnd={makeParentChild} id={e[1].id + '---li'} key={uuid()}>
-							{e[0] === 'button' ||
+							{e[0] === 'section' ||
+							e[0] === 'button' ||
 							e[0] === 'div' ||
 							e[0] === 'select' ||
 							e[0] === 'list' ||
@@ -611,7 +612,10 @@ const Layers = () => {
 									onClick={() => levelDown(`${e[1].id}`)}
 									className='btn bi-chevron-down'></button>
 							</div>
-							<button id={e[1].id + '---x'} onClick={() => deleteMe(`${e[1].id}`)} className='btn bi-x-lg'></button>
+							<button
+								id={e[1].id + '---x'}
+								onClick={() => (e[1].type === 'sliderButton' ? null : deleteMe(`${e[1].id}`))}
+								className='btn bi-x-lg'></button>
 							{e[2] && e[1].showChildren ? showLayers(e[2]) : null}
 						</li>
 					)

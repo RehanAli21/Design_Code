@@ -15,12 +15,18 @@
 }
 .pages-div input,
 .pages-div button,
-.pages-div select {
+.pages-div select,
+.fullScreenPage input,
+.fullScreenPage button,
+.fullScreenPage select {
 	border: none;
 }
+.fullScreenPage a,
 .pages-div a {
 	text-decoration: none;
 }
+.fullScreenPage ul,
+.fullScreenPage ol,
 .pages-div ul,
 .pages-div ol {
 	padding-left: 25px;

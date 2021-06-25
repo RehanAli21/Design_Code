@@ -50,6 +50,7 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 						name: `SRB${counter}`,
 						id: uniqueString(),
 						text: 'right',
+						type: 'sliderButton',
 						showChildren: true,
 						class: ' sliderButton rightButton ',
 						indexOfText: 0,
@@ -77,6 +78,7 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 					{
 						name: `SLB${counter}`,
 						id: uniqueString(),
+						type: 'sliderButton',
 						text: 'left',
 						showChildren: true,
 						class: ' sliderButton leftButton ',
