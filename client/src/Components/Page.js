@@ -237,6 +237,8 @@ const Page = () => {
 			else {
 				if (e[0] === 'div') {
 					temp.push(showElementsHelper(e, 'noType', 'children'))
+				} else if (e[0] === 'section') {
+					temp.push(showElementsHelper(e, 'noType', 'children'))
 				} else if (e[0] === 'input') {
 					temp.push(
 						React.createElement(

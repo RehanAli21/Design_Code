@@ -1034,10 +1034,21 @@ nav .d-v button:hover {
 .Slider {
 	position: relative;
 	overflow: hidden;
+	min-height: 50px;
 }
 .Slider .slide {
 	animation-fill-mode: forwards !important;
 	position: absolute;
 	opacity: 0;
 	transform-style: preserve-3d;
+}
+.Slider .sliderButton {
+	position: absolute;
+	top: 50%;
+}
+.Slider .leftButton {
+	left: 10%;
+}
+.Slider .rightButton {
+	right: 10%;
 }
