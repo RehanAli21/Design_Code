@@ -16,6 +16,7 @@ import IconProperties from './IconProperties'
 import Font from './PropertiesComponenets/Font'
 import Text from './PropertiesComponenets/Text'
 import Filter from './PropertiesComponenets/Filter'
+import SliderProperties from './SliderProperties'
 
 const Specific = ({ section }) => {
 	const { activeElement } = useContext(PageContext)
@@ -26,6 +27,8 @@ const Specific = ({ section }) => {
 	if (section === 'main') {
 		return ele.tagName === 'DIV' ? (
 			<DivProperties />
+		) : ele.tagName === 'SECTION' ? (
+			<SliderProperties />
 		) : ele.tagName === 'INPUT' ? (
 			<InputProperties />
 		) : ele.tagName === 'BUTTON' ? (
