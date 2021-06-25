@@ -11,6 +11,7 @@ import Option from './Tools/Option'
 import ListItem from './Tools/ListItem'
 import Icon from './Tools/Icon'
 import Slider from './Tools/Slider'
+import Slide from './Tools/Slide'
 
 //This component is for showing list of elemenets,
 //which can be added.
@@ -109,6 +110,24 @@ const Toolbar = () => {
 			return (
 				<React.Fragment>
 					<Icon findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+				</React.Fragment>
+			)
+		} else if (ele.tagName === 'SECTION' && ele.classList.contains('Slider')) {
+			return (
+				<React.Fragment>
+					<Slide findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+				</React.Fragment>
+			)
+		} else if (ele.tagName === 'SECTION') {
+			return (
+				<React.Fragment>
+					<Div findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Button findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Input findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Text findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Image findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<Select findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
+					<List findAndInsert={findAndInsert} uniqueString={uniqueString} findName={findName} />
 				</React.Fragment>
 			)
 		} else {
