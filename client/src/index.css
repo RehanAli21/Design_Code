@@ -1045,8 +1045,13 @@ nav .d-v button:hover {
 .Slider .slide {
 	animation-fill-mode: forwards !important;
 	position: absolute;
+	width: 100%;
+	height: 100%;
 	opacity: 0;
 	transform-style: preserve-3d;
+}
+.Slider .activeOne {
+	opacity: 1 !important;
 }
 .Slider .sliderButton {
 	position: absolute;

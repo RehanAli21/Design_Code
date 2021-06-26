@@ -13,9 +13,11 @@ const Slide = ({ findAndInsert, uniqueString, findName }) => {
 		//For inserting section(slide) element
 		const temp = Object.assign({}, pages)
 		//checking if name already exists, then counter increament and that make name unique
-		while (findName(temp[activePage], `section${counter}`)) {
+		while (findName(temp[activePage], `slide${counter}`)) {
 			counter++
 		}
+		const isFirst = CheckForFirst(temp[activePage], activeElement)
+
 		//For holding all data of a section(slide) element
 		const slide = [
 			'section',
@@ -23,7 +25,7 @@ const Slide = ({ findAndInsert, uniqueString, findName }) => {
 				name: `slide${counter}`,
 				id: uniqueString(),
 				showChildren: true,
-				class: ' animate__animated ',
+				class: `${isFirst === 'first' ? ' slide animate__animated activeOne ' : ' slide animate__animated '}`,
 				clickTargets: {},
 				hoverTargets: {},
 				styles: {
@@ -53,6 +55,23 @@ const Slide = ({ findAndInsert, uniqueString, findName }) => {
 
 		//Assigning new data into pages data
 		setPages(temp)
+	}
+
+	const CheckForFirst = (arr, id) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === id) {
+				if (arr[i][2] && arr[i][2].length > 0) {
+					for (let j = 0; j < arr[i][2].length; j++) {
+						if (arr[i][2][j][0] === 'section') return 'notFirst'
+					}
+					return 'first'
+				}
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				const ans = CheckForFirst(arr[i][2], id)
+				if (ans === 'first' || ans === 'notFirst') return ans
+			}
+		}
+		return false
 	}
 
 	return <p onClick={addSlide}>Slide</p>
