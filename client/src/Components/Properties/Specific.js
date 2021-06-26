@@ -17,6 +17,7 @@ import Font from './PropertiesComponenets/Font'
 import Text from './PropertiesComponenets/Text'
 import Filter from './PropertiesComponenets/Filter'
 import SliderProperties from './SliderProperties'
+import SlideProperties from './SlideProperties'
 
 const Specific = ({ section }) => {
 	const { activeElement } = useContext(PageContext)
@@ -27,8 +28,10 @@ const Specific = ({ section }) => {
 	if (section === 'main') {
 		return ele.tagName === 'DIV' ? (
 			<DivProperties />
-		) : ele.tagName === 'SECTION' ? (
+		) : ele.tagName === 'SECTION' && ele.classList.contains('Slider') ? (
 			<SliderProperties />
+		) : ele.tagName === 'SECTION' ? (
+			<SlideProperties />
 		) : ele.tagName === 'INPUT' ? (
 			<InputProperties />
 		) : ele.tagName === 'BUTTON' ? (
