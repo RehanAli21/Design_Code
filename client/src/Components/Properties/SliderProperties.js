@@ -13,6 +13,8 @@ const SliderProperties = () => {
 	const [effect, setEffect] = useState('')
 	const [duration, setDuration] = useState('')
 	const [loop, setLoop] = useState('')
+	const [autoplay, setAutoplay] = useState('')
+	const [autoplayTiming, setAutoplayTiming] = useState('')
 
 	useEffect(() => {
 		if (effect !== '') {
@@ -29,6 +31,22 @@ const SliderProperties = () => {
 			setPages(temp)
 		}
 	}, [loop])
+
+	useEffect(() => {
+		if (autoplay !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChangeAttributes(temp[activePage], 'autoplay', autoplay)
+			setPages(temp)
+		}
+	}, [autoplay])
+
+	useEffect(() => {
+		if (autoplayTiming !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChangeAttributes(temp[activePage], 'autoplayTiming', autoplayTiming)
+			setPages(temp)
+		}
+	}, [autoplayTiming])
 
 	const findAndChangeAttributes = (arr, property, value) => {
 		arr.forEach(e => {
@@ -98,8 +116,6 @@ const SliderProperties = () => {
 					onChange={e => setDuration(e.target.value < 0 ? 0 : e.target.value)}
 				/>
 			</div>
-			<Display type='sameLine' />
-			<GridColumn />
 			<div className='two'>
 				<label>Loop</label>
 				<select id='slider-loop-select' onChange={e => setLoop(e.target.value)}>
@@ -107,6 +123,23 @@ const SliderProperties = () => {
 					<option value='yes'>Yes</option>
 				</select>
 			</div>
+			<div className='three' style={{ gridTemplateColumns: 'auto 47px 72px 10%' }}>
+				<label>Autoplay</label>
+				<select id='slider-loop-select' onChange={e => setAutoplay(e.target.value)}>
+					<option value='no'>No</option>
+					<option value='yes'>Yes</option>
+				</select>
+				<input
+					disabled={!(autoplay === 'yes')}
+					type='number'
+					className='numberinput'
+					min='0'
+					step='100'
+					onChange={e => setAutoplayTiming(e.target.value)}
+				/>
+			</div>
+			<Display type='sameLine' />
+			<GridColumn />
 		</div>
 	)
 }
