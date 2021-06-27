@@ -20,9 +20,10 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 		const slider = [
 			'section',
 			{
-				name: `Slider${counter}`,
+				name: `slider${counter}`,
 				type: 'main',
 				activeSlide: '',
+				effect: 'effect1',
 				id: uniqueString(),
 				showChildren: true,
 				class: ' Slider ',
