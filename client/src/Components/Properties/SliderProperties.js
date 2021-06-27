@@ -16,6 +16,47 @@ const SliderProperties = () => {
 	const [autoplay, setAutoplay] = useState('')
 	const [autoplayTiming, setAutoplayTiming] = useState('')
 
+	//for default values
+	useEffect(() => {
+		const values = findAndReturnValues(pages[activePage], activeElement)
+		if (values) {
+			const effectSelect = document.getElementById('slider-effect-select')
+			const loopSelect = document.getElementById('slider-loop-select')
+			const autoplaySelect = document.getElementById('slider-autoplay-select')
+			const autoplayTimingInput = document.getElementById('slider-autoplayTiming-input')
+
+			effectSelect.value = values[0]
+			autoplaySelect.value = values[1]
+			autoplayTimingInput.value = values[2]
+			autoplayTimingInput.disabled = values[1] === 'no'
+			loopSelect.value = values[3]
+		}
+	}, [activeElement])
+
+	const findAndReturnValues = (arr, id) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === id) {
+				return [arr[i][1].effect, arr[i][1].autoplay, arr[i][1].autoplayTiming, arr[i][1].loop]
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				const found = findAndReturnValues(arr[i][2], id)
+				if (found) return found
+			}
+		}
+		return false
+	}
+
+	//default values for animation-duration
+	useEffect(() => {
+		if (small && medium && large && xlarge) {
+			const ele = document.getElementById('slider-duration-input')
+
+			if (ele) {
+				ele.value = large.animationDuration ? large.animationDuration.split('m')[0] : 0
+			}
+		}
+	}, [activeElement, small, large, medium, xlarge])
+
+	//for setting slider effect
 	useEffect(() => {
 		if (effect !== '') {
 			const temp = Object.assign({}, pages)
@@ -24,6 +65,7 @@ const SliderProperties = () => {
 		}
 	}, [effect])
 
+	//for setting slider loop
 	useEffect(() => {
 		if (loop !== '') {
 			const temp = Object.assign({}, pages)
@@ -32,6 +74,7 @@ const SliderProperties = () => {
 		}
 	}, [loop])
 
+	//for setting slider autoplay
 	useEffect(() => {
 		if (autoplay !== '') {
 			const temp = Object.assign({}, pages)
@@ -40,6 +83,7 @@ const SliderProperties = () => {
 		}
 	}, [autoplay])
 
+	//for setting slider autoplaytiming
 	useEffect(() => {
 		if (autoplayTiming !== '') {
 			const temp = Object.assign({}, pages)
@@ -48,11 +92,11 @@ const SliderProperties = () => {
 		}
 	}, [autoplayTiming])
 
+	//for finding element and changing it's properties
 	const findAndChangeAttributes = (arr, property, value) => {
 		arr.forEach(e => {
 			if (e[1].id === activeElement) {
 				e[1][property] = value
-				console.log(e)
 				return true
 			} else if (e[2] && e[2].length) {
 				if (findAndChangeAttributes(e[2], property, value)) return true
@@ -61,8 +105,9 @@ const SliderProperties = () => {
 		return false
 	}
 
+	//for setting animation duration
 	useEffect(() => {
-		if (duration !== '') {
+		if (small && medium && large && xlarge && duration !== '') {
 			setProperties(small, setSmall, 'animationDuration', `${duration}ms`)
 			setProperties(medium, setMedium, 'animationDuration', `${duration}ms`)
 			setProperties(large, setLarge, 'animationDuration', `${duration}ms`)
@@ -125,7 +170,7 @@ const SliderProperties = () => {
 			</div>
 			<div className='three' style={{ gridTemplateColumns: 'auto 47px 72px 10%' }}>
 				<label>Autoplay</label>
-				<select id='slider-loop-select' onChange={e => setAutoplay(e.target.value)}>
+				<select id='slider-autoplay-select' onChange={e => setAutoplay(e.target.value)}>
 					<option value='no'>No</option>
 					<option value='yes'>Yes</option>
 				</select>
@@ -133,6 +178,7 @@ const SliderProperties = () => {
 					disabled={!(autoplay === 'yes')}
 					type='number'
 					className='numberinput'
+					id='slider-autoplayTiming-input'
 					min='0'
 					step='100'
 					onChange={e => setAutoplayTiming(e.target.value)}
