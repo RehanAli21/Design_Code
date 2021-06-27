@@ -24,6 +24,7 @@ const Slider = ({ findAndInsert, uniqueString, findName }) => {
 				type: 'main',
 				activeSlide: '',
 				effect: 'effect1',
+				loop: 'no',
 				id: uniqueString(),
 				showChildren: true,
 				class: ' Slider ',

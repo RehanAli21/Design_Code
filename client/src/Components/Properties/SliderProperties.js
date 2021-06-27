@@ -12,22 +12,32 @@ const SliderProperties = () => {
 	const { pages, setPages, activeElement, activePage } = useContext(PageContext)
 	const [effect, setEffect] = useState('')
 	const [duration, setDuration] = useState('')
+	const [loop, setLoop] = useState('')
 
 	useEffect(() => {
 		if (effect !== '') {
 			const temp = Object.assign({}, pages)
-			findAndChange(temp[activePage])
+			findAndChangeAttributes(temp[activePage], 'effect', effect)
 			setPages(temp)
 		}
 	}, [effect])
 
-	const findAndChange = arr => {
+	useEffect(() => {
+		if (loop !== '') {
+			const temp = Object.assign({}, pages)
+			findAndChangeAttributes(temp[activePage], 'loop', loop)
+			setPages(temp)
+		}
+	}, [loop])
+
+	const findAndChangeAttributes = (arr, property, value) => {
 		arr.forEach(e => {
 			if (e[1].id === activeElement) {
-				e[1].effect = effect
+				e[1][property] = value
+				console.log(e)
 				return true
 			} else if (e[2] && e[2].length) {
-				if (findAndChange(e[2])) return true
+				if (findAndChangeAttributes(e[2], property, value)) return true
 			}
 		})
 		return false
@@ -90,6 +100,13 @@ const SliderProperties = () => {
 			</div>
 			<Display type='sameLine' />
 			<GridColumn />
+			<div className='two'>
+				<label>Loop</label>
+				<select id='slider-loop-select' onChange={e => setLoop(e.target.value)}>
+					<option value='no'>No</option>
+					<option value='yes'>Yes</option>
+				</select>
+			</div>
 		</div>
 	)
 }
