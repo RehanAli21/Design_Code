@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from '../Contexts/PageContext'
 import Name from './PropertiesComponenets/Name'
+import GridColumn from './PropertiesComponenets/GridColumn'
 import Tip from './PropertiesComponenets/Tip'
+import Display from './PropertiesComponenets/Display'
+import { PropertiesContext } from '../Contexts/PropertiesContext'
 
 const SliderProperties = () => {
 	const showBtnProperties = true
+	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 	const { pages, setPages, activeElement, activePage } = useContext(PageContext)
 	const [effect, setEffect] = useState('')
+	const [duration, setDuration] = useState('')
 
 	useEffect(() => {
 		if (effect !== '') {
@@ -26,6 +31,21 @@ const SliderProperties = () => {
 			}
 		})
 		return false
+	}
+
+	useEffect(() => {
+		if (duration !== '') {
+			setProperties(small, setSmall, 'animationDuration', `${duration}ms`)
+			setProperties(medium, setMedium, 'animationDuration', `${duration}ms`)
+			setProperties(large, setLarge, 'animationDuration', `${duration}ms`)
+			setProperties(xlarge, setXlarge, 'animationDuration', `${duration}ms`)
+		}
+	}, [duration])
+
+	const setProperties = (obj, setObj, propertyName, property) => {
+		const temp = Object.assign({}, obj)
+		temp[propertyName] = property
+		setObj(temp)
 	}
 
 	return (
@@ -55,6 +75,21 @@ const SliderProperties = () => {
 					<option value='effect6'>Six</option>
 				</select>
 			</div>
+			<div className='two'>
+				<label>
+					Slides <i className='bi-stopwatch'></i>
+				</label>
+				<input
+					type='number'
+					id='slider-duration-input'
+					className='numberinput'
+					min='0'
+					step='100'
+					onChange={e => setDuration(e.target.value < 0 ? 0 : e.target.value)}
+				/>
+			</div>
+			<Display type='sameLine' />
+			<GridColumn />
 		</div>
 	)
 }

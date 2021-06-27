@@ -636,7 +636,7 @@ const DivProperties = () => {
 					<option value='hidden'>Hidden</option>
 				</select>
 			</div>
-			<Display />
+			<Display type='sameLine' />
 			<Cursor style={showDivProperties ? 'grid' : 'none'} />
 			<GridColumn style={showDivProperties ? 'grid' : 'none'} />
 			<BGImage display={showDivProperties ? 'grid' : 'none'} width={width} activeElement={activeElement} />
