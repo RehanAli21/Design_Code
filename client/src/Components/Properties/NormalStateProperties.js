@@ -17,17 +17,8 @@ const NormalStateProperties = ({ activePage, activeElement, ele }) => {
 					</React.Fragment>
 				)
 			} else if (ele && ele.tagName === 'SECTION') {
-				return (
-					<React.Fragment>
-						<Align />
-						<Transform />
-						<Appearance />
-						<Specific section='other' />
-						<DsProperties />
-					</React.Fragment>
-				)
-			}
-			if (ele && ele.tagName === 'I') {
+				return <div></div>
+			} else if (ele && ele.tagName === 'I') {
 				return (
 					<React.Fragment>
 						<Appearance />
