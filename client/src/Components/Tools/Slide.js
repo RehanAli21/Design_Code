@@ -16,14 +16,15 @@ const Slide = ({ findAndInsert, uniqueString, findName }) => {
 		while (findName(temp[activePage], `slide${counter}`)) {
 			counter++
 		}
-		const isFirst = CheckForFirst(temp[activePage], activeElement)
+		const id = uniqueString()
+		const isFirst = CheckForFirst(temp[activePage], activeElement, id)
 
 		//For holding all data of a section(slide) element
 		const slide = [
 			'section',
 			{
 				name: `slide${counter}`,
-				id: uniqueString(),
+				id: id,
 				showChildren: true,
 				class: `${isFirst === 'first' ? ' slide animate__animated activeOne ' : ' slide animate__animated '}`,
 				clickTargets: {},
@@ -57,17 +58,22 @@ const Slide = ({ findAndInsert, uniqueString, findName }) => {
 		setPages(temp)
 	}
 
-	const CheckForFirst = (arr, id) => {
+	const CheckForFirst = (arr, id, slideId) => {
 		for (let i = 0; i < arr.length; i++) {
 			if (arr[i][1].id === id) {
 				if (arr[i][2] && arr[i][2].length > 0) {
+					let found = false
+
 					for (let j = 0; j < arr[i][2].length; j++) {
-						if (arr[i][2][j][0] === 'section') return 'notFirst'
+						found = arr[i][2][j][0] === 'section'
 					}
-					return 'first'
+
+					if (arr[i][1].activeSlide === '' && !found) arr[i][1].activeSlide = slideId
+
+					return found ? 'noFirst' : 'first'
 				}
 			} else if (arr[i][2] && arr[i][2].length > 0) {
-				const ans = CheckForFirst(arr[i][2], id)
+				const ans = CheckForFirst(arr[i][2], id, slideId)
 				if (ans === 'first' || ans === 'notFirst') return ans
 			}
 		}
