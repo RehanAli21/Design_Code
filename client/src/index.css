@@ -1049,6 +1049,7 @@ nav .d-v button:hover {
 	height: 100%;
 	opacity: 0;
 	transform-style: preserve-3d;
+	z-index: -2;
 }
 .Slider .activeOne {
 	opacity: 1 !important;

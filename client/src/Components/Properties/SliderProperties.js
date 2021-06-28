@@ -15,6 +15,7 @@ const SliderProperties = () => {
 	const [loop, setLoop] = useState('')
 	const [autoplay, setAutoplay] = useState('')
 	const [autoplayTiming, setAutoplayTiming] = useState('')
+	const [activeSlide, setActiveSlide] = useState('')
 
 	//for default values
 	useEffect(() => {
@@ -105,6 +106,44 @@ const SliderProperties = () => {
 		return false
 	}
 
+	useEffect(() => {
+		if (activeSlide !== '') {
+			const temp = Object.assign({}, pages)
+			changeActiveSlide(temp[activePage], activeElement, activeSlide)
+			setPages(temp)
+		}
+	}, [activeSlide])
+
+	const changeActiveSlide = (arr, id, activeSlideId) => {
+		arr.forEach(e => {
+			if (e[1].id === id) {
+				e[1].activeSlide = activeSlideId
+
+				if (e[2] && e[2].length > 2) {
+					for (let i = 2; i < e[2].length; i++) {
+						if (e[2][i][1].id === activeSlideId && e[2][i][1].class.search('activeOne') === -1) {
+							e[2][i][1].class += ' activeOne '
+						} else if (e[2][i][1].id !== activeSlideId && e[2][i][1].class.search('activeOne') !== -1) {
+							const classes = e[2][i][1].class.split(' ')
+							let newClass = ''
+							classes.forEach(e => {
+								const a = e.trim()
+								if (a !== 'activeOne' && a !== '' && a !== ' ') {
+									newClass += ` ${a} `
+								}
+							})
+							e[2][i][1].class = newClass.trim()
+						}
+					}
+				}
+				return true
+			} else if (e[2] && e[2].length > 0) {
+				if (changeActiveSlide(e[2], id, activeSlideId)) return true
+			}
+		})
+		return false
+	}
+
 	//for setting animation duration
 	useEffect(() => {
 		if (small && medium && large && xlarge && duration !== '') {
@@ -119,6 +158,42 @@ const SliderProperties = () => {
 		const temp = Object.assign({}, obj)
 		temp[propertyName] = property
 		setObj(temp)
+	}
+
+	const slidesOption = () => {
+		const slides = findSlides(pages[activePage])
+
+		return (
+			<select defaultValue={slides[0]} onChange={e => setActiveSlide(e.target.value)}>
+				{slides &&
+					slides !== true &&
+					slides[1].map(e => (
+						<option key={e[1].name + 'op'} value={e[1].id}>
+							{e[1].name}
+						</option>
+					))}
+			</select>
+		)
+	}
+
+	const findSlides = arr => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][1].id === activeElement) {
+				const slides = [arr[i][1].activeSlide, []]
+
+				if (arr[i][2] && arr[i][2].length > 2) {
+					for (let j = 2; j < arr[i][2].length; j++) {
+						slides[1].push(arr[i][2][j])
+					}
+					return slides
+				}
+				return true
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				const found = findSlides(arr[i][2])
+				if (found) return found
+			}
+		}
+		return false
 	}
 
 	return (
@@ -183,6 +258,10 @@ const SliderProperties = () => {
 					step='100'
 					onChange={e => setAutoplayTiming(e.target.value)}
 				/>
+			</div>
+			<div className='two'>
+				<label>Show Slide</label>
+				{slidesOption()}
 			</div>
 			<Display type='sameLine' />
 			<GridColumn />
