@@ -48,64 +48,88 @@ const Transform = () => {
 			const marginTopSelect = document.getElementById('a-t-mtu')
 
 			if (width < sBreakPoint) {
-				widthInput.value = small.width ? small.width.replace(/[^\d.-]/g, '') : '0'
-				heightInput.value = small.height ? small.height.replace(/[^\d.-]/g, '') : '0'
-				marginLeftInput.value = small.marginLeft ? small.marginLeft.replace(/[^\d.-]/g, '') : '0'
-				marginTopInput.value = small.marginTop ? small.marginTop.replace(/[^\d.-]/g, '') : '0'
+				const w = unitFinder(small.width ? small.width : '')
+				widthInput.value = w[0]
+				widthSelect.value = w[1]
 
-				widthSelect.value = small.width ? widthUnitFinder(small.width) : 'px'
-				heightSelect.value = small.height ? heightUnitFinder(small.height) : 'px'
-				marginLeftSelect.value = small.marginLeft ? marginUnitFinder(small.marginLeft) : 'em'
-				marginTopSelect.value = small.marginTop ? marginUnitFinder(small.marginTop) : 'em'
+				const h = unitFinder(small.height ? small.height : '')
+				heightInput.value = h[0]
+				heightSelect.value = h[1]
+
+				const ml = unitFinder(small.marginLeft ? small.marginLeft : '')
+				marginLeftInput.value = ml[0]
+				marginLeftSelect.value = ml[1]
+
+				const mt = unitFinder(small.marginTop ? small.marginTop : '')
+				marginTopInput.value = mt[0]
+				marginTopSelect.value = mt[1]
 			} else if (width < mBreakPoint) {
-				widthInput.value = medium.width ? medium.width.replace(/[^\d.-]/g, '') : '0'
-				heightInput.value = medium.height ? medium.height.replace(/[^\d.-]/g, '') : '0'
-				marginLeftInput.value = medium.marginLeft ? medium.marginLeft.replace(/[^\d.-]/g, '') : '0'
-				marginTopInput.value = medium.marginTop ? medium.marginTop.replace(/[^\d.-]/g, '') : '0'
+				const w = unitFinder(medium.width ? medium.width : '')
+				widthInput.value = w[0]
+				widthSelect.value = w[1]
 
-				widthSelect.value = medium.width ? widthUnitFinder(medium.width) : 'px'
-				heightSelect.value = medium.height ? heightUnitFinder(medium.height) : 'px'
-				marginLeftSelect.value = medium.marginLeft ? marginUnitFinder(medium.marginLeft) : 'em'
-				marginTopSelect.value = medium.marginTop ? marginUnitFinder(medium.marginTop) : 'em'
+				const h = unitFinder(medium.height ? medium.height : '')
+				heightInput.value = h[0]
+				heightSelect.value = h[1]
+
+				const ml = unitFinder(medium.marginLeft ? medium.marginLeft : '')
+				marginLeftInput.value = ml[0]
+				marginLeftSelect.value = ml[1]
+
+				const mt = unitFinder(medium.marginTop ? medium.marginTop : '')
+				marginTopInput.value = mt[0]
+				marginTopSelect.value = mt[1]
 			} else if (width < lBreakPoint) {
-				widthInput.value = large.width ? large.width.replace(/[^\d.-]/g, '') : '0'
-				heightInput.value = large.height ? large.height.replace(/[^\d.-]/g, '') : '0'
-				marginLeftInput.value = large.marginLeft ? large.marginLeft.replace(/[^\d.-]/g, '') : '0'
-				marginTopInput.value = large.marginTop ? large.marginTop.replace(/[^\d.-]/g, '') : '0'
+				const w = unitFinder(large.width ? large.width : '')
+				widthInput.value = w[0]
+				widthSelect.value = w[1]
 
-				widthSelect.value = large.width ? widthUnitFinder(large.width) : 'px'
-				heightSelect.value = large.height ? heightUnitFinder(large.height) : 'px'
-				marginLeftSelect.value = large.marginLeft ? marginUnitFinder(large.marginLeft) : 'em'
-				marginTopSelect.value = large.marginTop ? marginUnitFinder(large.marginTop) : 'em'
+				const h = unitFinder(large.height ? large.height : '')
+				heightInput.value = h[0]
+				heightSelect.value = h[1]
+
+				const ml = unitFinder(large.marginLeft ? large.marginLeft : '')
+				marginLeftInput.value = ml[0]
+				marginLeftSelect.value = ml[1]
+
+				const mt = unitFinder(large.marginTop ? large.marginTop : '')
+				marginTopInput.value = mt[0]
+				marginTopSelect.value = mt[1]
 			} else {
-				widthInput.value = xlarge.width ? xlarge.width.replace(/[^\d.-]/g, '') : '0'
-				heightInput.value = xlarge.height ? xlarge.height.replace(/[^\d.-]/g, '') : '0'
-				marginLeftInput.value = xlarge.marginLeft ? xlarge.marginLeft.replace(/[^\d.-]/g, '') : '0'
-				marginTopInput.value = xlarge.marginTop ? xlarge.marginTop.replace(/[^\d.-]/g, '') : '0'
+				const w = unitFinder(xlarge.width ? xlarge.width : '')
+				widthInput.value = w[0]
+				widthSelect.value = w[1]
 
-				widthSelect.value = xlarge.width ? widthUnitFinder(xlarge.width) : 'px'
-				heightSelect.value = xlarge.height ? heightUnitFinder(xlarge.height) : 'px'
-				marginLeftSelect.value = xlarge.marginLeft ? marginUnitFinder(xlarge.marginLeft) : 'em'
-				marginTopSelect.value = xlarge.marginTop ? marginUnitFinder(xlarge.marginTop) : 'em'
+				const h = unitFinder(xlarge.height ? xlarge.height : '')
+				heightInput.value = h[0]
+				heightSelect.value = h[1]
+
+				const ml = unitFinder(xlarge.marginLeft ? xlarge.marginLeft : '')
+				marginLeftInput.value = ml[0]
+				marginLeftSelect.value = ml[1]
+
+				const mt = unitFinder(xlarge.marginTop ? xlarge.marginTop : '')
+				marginTopInput.value = mt[0]
+				marginTopSelect.value = mt[1]
 			}
 		}
 	}, [width, activeElement, small, medium, large, xlarge])
 
-	const widthUnitFinder = s =>
-		s.search('px') !== -1 ? 'px' : s.search('%') !== -1 ? '%' : s.search('rem') !== -1 ? 'rem' : 'em'
-
-	const heightUnitFinder = s =>
-		s.search('px') !== -1
-			? 'px'
-			: s.search('vh') !== -1
-			? 'vh'
+	const unitFinder = s => {
+		return s.search('px') !== -1
+			? [s.split('p')[0], 'px']
 			: s.search('%') !== -1
-			? '%'
+			? [s.split('%'), '%']
+			: s.search('vh') !== -1
+			? [s.split('v')[0], 'vh']
+			: s.search('vw') !== -1
+			? [s.split('v')[0], 'vw']
 			: s.search('rem') !== -1
-			? 'rem'
-			: 'em'
-
-	const marginUnitFinder = s => (s.search('rem') !== -1 ? 'rem' : s.search('em') !== -1 ? 'em' : 'px')
+			? [s.split('r')[0], 'rem']
+			: s.search('em') !== -1
+			? [s.split('e')[0], 'em']
+			: ['0', 'px']
+	}
 
 	//For width change from input
 	useEffect(() => {
@@ -348,19 +372,7 @@ const Transform = () => {
 				</div>
 				<div className='x'>
 					<label>X : </label>
-					<input
-						id='a-t-ml'
-						type='number'
-						min='0'
-						onChange={e => {
-							if (e.target.value < 0) {
-								setMsgBoxMsg('X (Left space) can not be negative')
-								setShowMsgBox(true)
-							} else if (e.target.value >= 0) {
-								setMarginLeft(e.target.value)
-							}
-						}}
-					/>
+					<input id='a-t-ml' type='number' onChange={e => setMarginLeft(e.target.value)} />
 					<select id='a-t-mlu' onChange={e => setMLUnit(e.target.value)}>
 						<option value='em'>EM</option>
 						<option value='rem'>REM</option>
@@ -369,19 +381,7 @@ const Transform = () => {
 				</div>
 				<div className='y'>
 					<label>Y : </label>
-					<input
-						id='a-t-mt'
-						type='number'
-						min='0'
-						onChange={e => {
-							if (e.target.value < 0) {
-								setMsgBoxMsg('Y (Top space) can not be negative')
-								setShowMsgBox(true)
-							} else if (e.target.value >= 0) {
-								setMarginTop(e.target.value)
-							}
-						}}
-					/>
+					<input id='a-t-mt' type='number' onChange={e => setMarginTop(e.target.value)} />
 					<select id='a-t-mtu' onChange={e => setMTUnit(e.target.value)}>
 						<option value='em'>EM</option>
 						<option value='rem'>REM</option>

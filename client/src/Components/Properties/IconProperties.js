@@ -15,7 +15,7 @@ const IconProperties = () => {
 	//For default value of icon name
 	useEffect(() => {
 		findIconClass(pages[activePage], activeElement)
-	})
+	}, [activeElement])
 	//for finding getting icon name
 	const findIconClass = (arr, id) => {
 		for (let i = 0; i < arr.length; i++) {
@@ -24,11 +24,15 @@ const IconProperties = () => {
 
 				if (ele) {
 					let className = ''
-					for (let k = 0; k < arr[i][1].class.length; k++) {
-						arr[i][1].class[k] === '-' ? (className += ' ') : (className = arr[i][1].class[k])
-					}
+					const a = arr[i][1].class.split('-')
 
-					className = className.substring(2, className.length)
+					a.forEach(e => {
+						if (e !== 'bi') {
+							className += `${e} `
+						}
+					})
+
+					className = className.substring(0, className.length - 1)
 					if (className !== '') ele.value = className
 				}
 
