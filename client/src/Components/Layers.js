@@ -152,6 +152,12 @@ const Layers = () => {
 			if (a[1].id === id) {
 				setHistory(parentId, a, index)
 				setActiveElement('')
+				const ele = document.getElementById(id)
+				if (ele && ele.tagName === 'SECTION' && ele.classList.contains('animate__animated')) {
+					const temp = Object.assign({}, pages)
+					findAndChangeParent(temp[activePage], id, 'activeSlide', '')
+					setPages(temp)
+				}
 			}
 			//increamenting index after every child
 			index++
@@ -160,6 +166,23 @@ const Layers = () => {
 		index = 0
 
 		return e
+	}
+
+	const findAndChangeParent = (arr, id, attribute, value) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][2] && arr[i][2].length > 0) {
+				for (let j = 0; j < arr[i][2].length; j++) {
+					if (arr[i][2][j][1].id === id) {
+						arr[i][1][attribute] = value
+						return true
+					}
+				}
+			} else if (arr[i][2] && arr[i][2].length > 0) {
+				if (findAndChangeParent(arr[i][2], id, attribute, value)) {
+					return true
+				}
+			}
+		}
 	}
 
 	//For hiding feature of elements list

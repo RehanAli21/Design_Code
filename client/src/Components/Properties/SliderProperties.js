@@ -165,6 +165,11 @@ const SliderProperties = () => {
 
 		return (
 			<select defaultValue={slides[0]} onChange={e => setActiveSlide(e.target.value)}>
+				{slides[0] === '' && (
+					<option key='erere' value=''>
+						None
+					</option>
+				)}
 				{slides &&
 					slides !== true &&
 					slides[1].map(e => (
