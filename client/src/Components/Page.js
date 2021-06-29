@@ -2,6 +2,33 @@ import React, { useContext, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 import FullScreen from './FullScreen'
+import {
+	goLeftEffect1,
+	goLeftEffect1NoLoop,
+	goLeftEffect2,
+	goLeftEffect2NoLoop,
+	goLeftEffect3,
+	goLeftEffect3NoLoop,
+	goLeftEffect4,
+	goLeftEffect4NoLoop,
+	goLeftEffect5,
+	goLeftEffect5NoLoop,
+	goLeftEffect6,
+	goLeftEffect6NoLoop,
+	goRightEffect1,
+	goRightEffect1NoLoop,
+	goRightEffect2,
+	goRightEffect2NoLoop,
+	goRightEffect3,
+	goRightEffect3NoLoop,
+	goRightEffect4,
+	goRightEffect4NoLoop,
+	goRightEffect5,
+	goRightEffect5NoLoop,
+	goRightEffect6,
+	goRightEffect6NoLoop,
+} from './SliderFunctions'
+import Slider from './Tools/Slider'
 
 let move = false
 let zoom = false
@@ -225,6 +252,41 @@ const Page = () => {
 		}
 	}
 
+	const sliderButton = (type, id) => {
+		const details = sliderDetails(pages[activePage], id)
+		console.log(details)
+		if (details) {
+		}
+	}
+
+	const sliderDetails = (arr, id) => {
+		for (let i = 0; i < arr.length; i++) {
+			if (arr[i][2] && arr[i][2].length > 0) {
+				for (let j = 0; j < arr[i][2].length; j++) {
+					if (arr[i][2][j][1].id === id) {
+						const slidesId = []
+						for (let k = 0; k < arr[i][2].length; k++) {
+							if (arr[i][2][k][0] === 'section') {
+								slidesId.push(arr[i][2][k][1].id)
+							}
+						}
+						return [
+							arr[i][1].activeSlide,
+							slidesId,
+							arr[i][1].effect,
+							arr[i][1].loop,
+							arr[i][1].autoplay,
+							arr[i][1].autoplayTiming,
+						]
+					}
+				}
+				const found = sliderDetails(arr[i][2], id)
+				if (found) return found
+			}
+		}
+		return false
+	}
+
 	//For showing elements into a div which acts
 	//as body element/tag, using recursion
 	const showElements = arr => {
@@ -319,7 +381,57 @@ const Page = () => {
 					//changing children of new Array
 					newElement[2] = children
 
-					temp.push(showElementsHelper(newElement, 'noType', 'children'))
+					temp.push(
+						newElement[1].type === 'sliderRightButton' || newElement[1].type === 'sliderLeftButton'
+							? React.createElement(
+									newElement[0],
+									{
+										key: uuid(),
+										id: newElement[1].id,
+										className: newElement[1].class,
+										onClick: () => sliderButton(newElement[1].type, newElement[1].id),
+										onMouseOver: () =>
+											onHoverStyle(newElement[1].id, newElement[1].hoverStyle, newElement[1].hoverTargets),
+										onMouseLeave: () =>
+											onHoverLeaveStyle(
+												newElement[1].id,
+												newElement[1].hoverStyle,
+												width < sBreakPoint
+													? newElement[1].styles.small
+													: width < mBreakPoint
+													? newElement[1].styles.medium
+													: width < lBreakPoint
+													? newElement[1].styles.large
+													: newElement[1].styles.xlarge,
+												newElement[1].hoverTargets
+											),
+										onMouseDown: () =>
+											onClickStyle(newElement[1].id, newElement[1].clickStyle, newElement[1].clickTargets),
+										onMouseUp: () =>
+											onClickLeaveStyle(
+												newElement[1].id,
+												newElement[1].clickStyle,
+												width < sBreakPoint
+													? newElement[1].styles.small
+													: width < mBreakPoint
+													? newElement[1].styles.medium
+													: width < lBreakPoint
+													? newElement[1].styles.large
+													: newElement[1].styles.xlarge
+											),
+										style:
+											width < sBreakPoint
+												? newElement[1].styles.small
+												: width < mBreakPoint
+												? newElement[1].styles.medium
+												: width < lBreakPoint
+												? newElement[1].styles.large
+												: newElement[1].styles.xlarge,
+									},
+									newElement[2] && newElement[2].length > 0 ? showElements(newElement[2]) : null
+							  )
+							: showElementsHelper(newElement, 'noType', 'children')
+					)
 				} else if (e[0] === 'text' && e[1].type !== 'a') {
 					temp.push(showElementsHelper(e, 'type', 'text'))
 				} else if (e[0] === 'text' && e[1].type === 'a') {
