@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
-import FullScreen from './FullScreen'
 import {
 	goLeftEffect1,
 	goLeftEffect1NoLoop,
@@ -28,7 +27,6 @@ import {
 	goRightEffect6,
 	goRightEffect6NoLoop,
 } from './SliderFunctions'
-import Slider from './Tools/Slider'
 
 let move = false
 let zoom = false
@@ -39,7 +37,6 @@ let slidersData = {}
 const Page = () => {
 	const {
 		pages,
-		setPages,
 		activePage,
 		sBreakPoint,
 		mBreakPoint,
@@ -807,7 +804,6 @@ const Page = () => {
 				<div style={{ paddingTop: '0.1px' }}></div>
 				{showElements(pages[activePage])}
 			</div>
-			<FullScreen showElements={showElements} />
 		</div>
 	)
 }
