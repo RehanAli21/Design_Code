@@ -119,7 +119,7 @@ const Transform = () => {
 		return s.search('px') !== -1
 			? [s.split('p')[0], 'px']
 			: s.search('%') !== -1
-			? [s.split('%'), '%']
+			? [s.split('%')[0], '%']
 			: s.search('vh') !== -1
 			? [s.split('v')[0], 'vh']
 			: s.search('vw') !== -1

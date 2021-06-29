@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { PageContext } from './Contexts/PageContext'
 import uuid from 'react-uuid'
 import FullScreen from './FullScreen'
@@ -34,10 +34,12 @@ let move = false
 let zoom = false
 let oldx = 0
 let oldy = 0
+let slidersData = {}
 //This compoenent controls page.
 const Page = () => {
 	const {
 		pages,
+		setPages,
 		activePage,
 		sBreakPoint,
 		mBreakPoint,
@@ -49,6 +51,8 @@ const Page = () => {
 		inPageActiveElement,
 		showFullScreen,
 		setShowFullScreen,
+		setMsgBoxMsg,
+		setShowMsgBox,
 	} = useContext(PageContext)
 
 	//for show / hide fullscreen
@@ -252,10 +256,61 @@ const Page = () => {
 		}
 	}
 
+	useEffect(() => {
+		findSliders(pages[activePage])
+	}, [pages, activePage])
+
+	const findSliders = arr => {
+		arr.forEach(e => {
+			if (e[0] === 'section' && e[1].type === 'main') {
+				slidersData[e[1].id] = e[1].activeSlide
+			} else if (e[2] && e[2].length > 0) {
+				findSliders(e[2])
+			}
+		})
+	}
+
 	const sliderButton = (type, id) => {
-		const details = sliderDetails(pages[activePage], id)
-		console.log(details)
-		if (details) {
+		if (!inPageActiveElement) {
+			const details = sliderDetails(pages[activePage], id)
+			if (details) {
+				if (type === 'sliderRightButton') {
+					if (details[2] === 'effect1') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goRightEffect1(slidersData[details[6]], details[1], details[6], slidersData)
+								setInterval(
+									() => goRightEffect1(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+							} else if (details[4] === 'no') {
+								goRightEffect1(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goRightEffect1NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					}
+				} else if (type === 'sliderLeftButton') {
+					if (details[2] === 'effect1') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData)
+								setInterval(
+									() => goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+							} else if (details[4] === 'no') {
+								goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goLeftEffect1NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					}
+				}
+			}
+		} else {
+			setMsgBoxMsg('Slider button would not work, if inPageSelection is on')
+			setShowMsgBox(true)
 		}
 	}
 
@@ -277,6 +332,7 @@ const Page = () => {
 							arr[i][1].loop,
 							arr[i][1].autoplay,
 							arr[i][1].autoplayTiming,
+							arr[i][1].id,
 						]
 					}
 				}

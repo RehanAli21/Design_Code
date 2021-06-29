@@ -1,5 +1,5 @@
 // effect 1
-export const goRightEffect1 = (activeSlide, slides) => {
+export const goRightEffect1 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === slides.length - 1 ? -1 : i
@@ -22,14 +22,14 @@ export const goRightEffect1 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index + 1]
+				slidersData[id] = slides[index + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect1 = (activeSlide, slides) => {
+export const goLeftEffect1 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === 0 ? slides.length : i
@@ -52,14 +52,14 @@ export const goLeftEffect1 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index - 1]
+				slidersData[id] = slides[index - 1]
 				return
 			}
 		}
 	}
 }
 
-export const goRightEffect1NoLoop = (activeSlide, slides) => {
+export const goRightEffect1NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length - 1; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -79,14 +79,14 @@ export const goRightEffect1NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i + 1]
+				slidersData[id] = slides[i + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect1NoLoop = (activeSlide, slides) => {
+export const goLeftEffect1NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 1; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -106,7 +106,7 @@ export const goLeftEffect1NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i - 1]
+				slidersData[id] = slides[i - 1]
 				return
 			}
 		}
@@ -114,7 +114,7 @@ export const goLeftEffect1NoLoop = (activeSlide, slides) => {
 }
 
 // effect 2
-export const goRightEffect2 = (activeSlide, slides) => {
+export const goRightEffect2 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === slides.length - 1 ? -1 : i
@@ -137,14 +137,14 @@ export const goRightEffect2 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index + 1]
+				slidersData[id] = slides[index + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect2 = (activeSlide, slides) => {
+export const goLeftEffect2 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === 0 ? slides.length : i
@@ -167,14 +167,14 @@ export const goLeftEffect2 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index - 1]
+				slidersData[id] = slides[index - 1]
 				return
 			}
 		}
 	}
 }
 
-export const goRightEffect2NoLoop = (activeSlide, slides) => {
+export const goRightEffect2NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length - 1; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -194,14 +194,14 @@ export const goRightEffect2NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i + 1]
+				slidersData[id] = slides[i + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect2NoLoop = (activeSlide, slides) => {
+export const goLeftEffect2NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 1; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -221,7 +221,7 @@ export const goLeftEffect2NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i - 1]
+				slidersData[id] = slides[i - 1]
 				return
 			}
 		}
@@ -229,7 +229,7 @@ export const goLeftEffect2NoLoop = (activeSlide, slides) => {
 }
 
 // effect 3
-export const goRightEffect3 = (activeSlide, slides) => {
+export const goRightEffect3 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === slides.length - 1 ? -1 : i
@@ -252,14 +252,14 @@ export const goRightEffect3 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index + 1]
+				slidersData[id] = slides[index + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect3 = (activeSlide, slides) => {
+export const goLeftEffect3 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === 0 ? slides.length : i
@@ -282,14 +282,14 @@ export const goLeftEffect3 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index - 1]
+				slidersData[id] = slides[index - 1]
 				return
 			}
 		}
 	}
 }
 
-export const goRightEffect3NoLoop = (activeSlide, slides) => {
+export const goRightEffect3NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length - 1; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -309,14 +309,14 @@ export const goRightEffect3NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i + 1]
+				slidersData[id] = slides[i + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect3NoLoop = (activeSlide, slides) => {
+export const goLeftEffect3NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 1; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -336,7 +336,7 @@ export const goLeftEffect3NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i - 1]
+				slidersData[id] = slides[i - 1]
 				return
 			}
 		}
@@ -344,7 +344,7 @@ export const goLeftEffect3NoLoop = (activeSlide, slides) => {
 }
 
 // effect 4
-export const goRightEffect4 = (activeSlide, slides) => {
+export const goRightEffect4 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === slides.length - 1 ? -1 : i
@@ -367,14 +367,14 @@ export const goRightEffect4 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index + 1]
+				slidersData[id] = slides[index + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect4 = (activeSlide, slides) => {
+export const goLeftEffect4 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === 0 ? slides.length : i
@@ -397,14 +397,14 @@ export const goLeftEffect4 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index - 1]
+				slidersData[id] = slides[index - 1]
 				return
 			}
 		}
 	}
 }
 
-export const goRightEffect4NoLoop = (activeSlide, slides) => {
+export const goRightEffect4NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length - 1; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -424,14 +424,14 @@ export const goRightEffect4NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i + 1]
+				slidersData[id] = slides[i + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect4NoLoop = (activeSlide, slides) => {
+export const goLeftEffect4NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 1; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -451,7 +451,7 @@ export const goLeftEffect4NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i - 1]
+				slidersData[id] = slides[i - 1]
 				return
 			}
 		}
@@ -459,7 +459,7 @@ export const goLeftEffect4NoLoop = (activeSlide, slides) => {
 }
 
 // effect 5
-export const goRightEffect5 = (activeSlide, slides) => {
+export const goRightEffect5 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === slides.length - 1 ? -1 : i
@@ -482,14 +482,14 @@ export const goRightEffect5 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index + 1]
+				slidersData[id] = slides[index + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect5 = (activeSlide, slides) => {
+export const goLeftEffect5 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === 0 ? slides.length : i
@@ -512,14 +512,14 @@ export const goLeftEffect5 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index - 1]
+				slidersData[id] = slides[index - 1]
 				return
 			}
 		}
 	}
 }
 
-export const goRightEffect5NoLoop = (activeSlide, slides) => {
+export const goRightEffect5NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length - 1; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -539,14 +539,14 @@ export const goRightEffect5NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i + 1]
+				slidersData[id] = slides[i + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect5NoLoop = (activeSlide, slides) => {
+export const goLeftEffect5NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 1; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -566,14 +566,14 @@ export const goLeftEffect5NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i - 1]
+				slidersData[id] = slides[i - 1]
 				return
 			}
 		}
 	}
 }
 
-export const goRightEffect6 = (activeSlide, slides) => {
+export const goRightEffect6 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === slides.length - 1 ? -1 : i
@@ -594,14 +594,14 @@ export const goRightEffect6 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index + 1]
+				slidersData[id] = slides[index + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect6 = (activeSlide, slides) => {
+export const goLeftEffect6 = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const index = i === 0 ? slides.length : i
@@ -622,14 +622,14 @@ export const goLeftEffect6 = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[index - 1]
+				slidersData[id] = slides[index - 1]
 				return
 			}
 		}
 	}
 }
 
-export const goRightEffect6NoLoop = (activeSlide, slides) => {
+export const goRightEffect6NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 0; i < slides.length - 1; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -649,14 +649,14 @@ export const goRightEffect6NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i + 1]
+				slidersData[id] = slides[i + 1]
 				return
 			}
 		}
 	}
 }
 
-export const goLeftEffect6NoLoop = (activeSlide, slides) => {
+export const goLeftEffect6NoLoop = (activeSlide, slides, id, slidersData) => {
 	for (let i = 1; i < slides.length; i++) {
 		if (activeSlide === slides[i]) {
 			const oldActiveSlide = document.getElementById(activeSlide)
@@ -676,7 +676,7 @@ export const goLeftEffect6NoLoop = (activeSlide, slides) => {
 
 				oldActiveSlide.classList = nOC
 				newActiveSlide.classList = nNC
-				activeSlide = slides[i - 1]
+				slidersData[id] = slides[i - 1]
 				return
 			}
 		}
