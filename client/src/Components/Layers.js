@@ -325,6 +325,8 @@ const Layers = () => {
 			if (parent.tagName === 'SELECT' && child.tagName !== 'OPTION') return true
 			if ((parent.tagName === 'OL' || parent.tagName === 'UL') && child.tagName !== 'LI') return true
 			if (parent.tagName === 'BUTTON' && child.tagName !== 'I') return true
+			if (parent.tagName === 'SECTION' && !parent.classList.contains('Slider') && child.tagName === 'SECTION') return true
+			if (child.tagName === 'BUTTON' && child.classList.contains('sliderButton')) return true
 		}
 		if (parent) {
 			if (
@@ -435,7 +437,6 @@ const Layers = () => {
 			setRightClickId(e.target.id.split('---')[0])
 
 			document.getElementById('layersMenuCopyStyle').style.display = found ? 'none' : 'block'
-			document.getElementById('layersMenuPasteStyle').style.display = found ? 'none' : 'block'
 			document.getElementById('layersMenuCopyElement').style.display = found ? 'none' : 'block'
 			document.getElementById('layersMenuCutElement').style.display = found ? 'none' : 'block'
 		}
@@ -699,7 +700,7 @@ const Layers = () => {
 					id='layersMenuCopyStyle'>
 					Copy styles
 				</p>
-				<p onClick={pasteStyle} id='layersMenuPasteStyle' style={{ display: copyStyle !== '' ? 'block' : 'none' }}>
+				<p onClick={pasteStyle} id='layersMenuPasteStyle' style={{ display: copyStyle === '' ? 'none' : 'block' }}>
 					Paste styles
 				</p>
 			</div>
