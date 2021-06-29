@@ -779,6 +779,24 @@ const Page = () => {
 		)
 	}
 
+	//////////////////////////////////////////////////
+	//For controlling fullscreen
+	document.addEventListener('keydown', e => {
+		if (e.key === 'F' || e.key === 'f') {
+			setShowFullScreen(false)
+		}
+	})
+
+	const hideFullScreenTeller = () => {
+		const ele = document.getElementById('fullscreen-teller')
+
+		if (ele) {
+			ele.style.display = 'none'
+		}
+	}
+	setTimeout(hideFullScreenTeller, 2000)
+	///////////////////////////////////////////////
+
 	return (
 		<div
 			onMouseDown={enableMove}
@@ -790,20 +808,61 @@ const Page = () => {
 			onDoubleClick={resetMe}
 			tabIndex='0'
 			className='main-div'>
-			<div
-				className='pages-div'
-				id={activePage}
-				style={{
-					backgroundColor: pageBC,
-					width: `${width}px`,
-					minHeight: `${height}px`,
-					minWidth: '300px',
-					transform: `scale(${scale}) translate(${tX}px, ${tY}px)`,
-					marginLeft: width < mBreakPoint ? '15%' : width < 1000 ? '10%' : width < 1500 ? '5%' : '0%',
-				}}>
-				<div style={{ paddingTop: '0.1px' }}></div>
-				{showElements(pages[activePage])}
-			</div>
+			{showFullScreen ? (
+				<div
+					className='pages-div'
+					id={activePage}
+					onMouseLeave={hideFullScreenTeller}
+					style={{
+						backgroundColor: pageBC,
+						width: `100vw`,
+						Height: `100vh`,
+						minHeight: '100vh',
+						position: 'absolute',
+						zIndex: '99999999',
+						marginLeft: '0px',
+						marginTop: '0px',
+						top: '0px',
+						left: '0px',
+					}}>
+					<div style={{ paddingTop: '0.1px' }}></div>
+					{showElements(pages[activePage])}
+					<div
+						id='fullscreen-teller'
+						style={{
+							width: `300px`,
+							padding: '15px 5px',
+							position: 'absolute',
+							zIndex: '999999991',
+							marginLeft: '-150px',
+							marginTop: '0px',
+							top: '0px',
+							left: '50%',
+							boxShadow: '1px 3px 5px grey',
+							textAlign: 'center',
+							fontSize: '18px',
+							fontWeight: 'bold',
+							color: 'rgb(32, 144, 220)',
+						}}>
+						<p>Press (F) for to Full Screen</p>
+					</div>
+				</div>
+			) : (
+				<div
+					className='pages-div'
+					id={activePage}
+					style={{
+						backgroundColor: pageBC,
+						width: `${width}px`,
+						minHeight: `${height}px`,
+						minWidth: '300px',
+						transform: `scale(${scale}) translate(${tX}px, ${tY}px)`,
+						marginLeft: width < mBreakPoint ? '15%' : width < 1000 ? '10%' : width < 1500 ? '5%' : '0%',
+					}}>
+					<div style={{ paddingTop: '0.1px' }}></div>
+					{showElements(pages[activePage])}
+				</div>
+			)}
 		</div>
 	)
 }
