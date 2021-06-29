@@ -4,14 +4,11 @@ import Name from './PropertiesComponenets/Name'
 import GridColumn from './PropertiesComponenets/GridColumn'
 import Tip from './PropertiesComponenets/Tip'
 import Display from './PropertiesComponenets/Display'
-import { PropertiesContext } from '../Contexts/PropertiesContext'
 
 const SliderProperties = () => {
 	const showBtnProperties = true
-	const { small, setSmall, medium, setMedium, large, setLarge, xlarge, setXlarge } = useContext(PropertiesContext)
 	const { pages, setPages, activeElement, activePage } = useContext(PageContext)
 	const [effect, setEffect] = useState('')
-	const [duration, setDuration] = useState('')
 	const [loop, setLoop] = useState('')
 	const [autoplay, setAutoplay] = useState('')
 	const [autoplayTiming, setAutoplayTiming] = useState('')
@@ -45,17 +42,6 @@ const SliderProperties = () => {
 		}
 		return false
 	}
-
-	//default values for animation-duration
-	useEffect(() => {
-		if (small && medium && large && xlarge) {
-			const ele = document.getElementById('slider-duration-input')
-
-			if (ele) {
-				ele.value = large.animationDuration ? large.animationDuration.split('m')[0] : 0
-			}
-		}
-	}, [activeElement, small, large, medium, xlarge])
 
 	//for setting slider effect
 	useEffect(() => {
@@ -144,22 +130,6 @@ const SliderProperties = () => {
 		return false
 	}
 
-	//for setting animation duration
-	useEffect(() => {
-		if (small && medium && large && xlarge && duration !== '') {
-			setProperties(small, setSmall, 'animationDuration', `${duration}ms`)
-			setProperties(medium, setMedium, 'animationDuration', `${duration}ms`)
-			setProperties(large, setLarge, 'animationDuration', `${duration}ms`)
-			setProperties(xlarge, setXlarge, 'animationDuration', `${duration}ms`)
-		}
-	}, [duration])
-
-	const setProperties = (obj, setObj, propertyName, property) => {
-		const temp = Object.assign({}, obj)
-		temp[propertyName] = property
-		setObj(temp)
-	}
-
 	const slidesOption = () => {
 		const slides = findSlides(pages[activePage])
 
@@ -227,19 +197,6 @@ const SliderProperties = () => {
 					<option value='effect5'>Five</option>
 					<option value='effect6'>Six</option>
 				</select>
-			</div>
-			<div className='two'>
-				<label>
-					Slides <i className='bi-stopwatch'></i>
-				</label>
-				<input
-					type='number'
-					id='slider-duration-input'
-					className='numberinput'
-					min='0'
-					step='100'
-					onChange={e => setDuration(e.target.value < 0 ? 0 : e.target.value)}
-				/>
 			</div>
 			<div className='two'>
 				<label>Loop</label>

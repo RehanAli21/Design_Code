@@ -279,10 +279,11 @@ const Page = () => {
 						if (details[3] === 'yes') {
 							if (details[4] === 'yes') {
 								goRightEffect1(slidersData[details[6]], details[1], details[6], slidersData)
-								setInterval(
+								let interval = setInterval(
 									() => goRightEffect1(slidersData[details[6]], details[1], details[6], slidersData),
 									parseInt(details[5])
 								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
 							} else if (details[4] === 'no') {
 								goRightEffect1(slidersData[details[6]], details[1], details[6], slidersData)
 							}
@@ -295,10 +296,12 @@ const Page = () => {
 						if (details[3] === 'yes') {
 							if (details[4] === 'yes') {
 								goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData)
-								setInterval(
+								let interval = setInterval(
 									() => goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData),
 									parseInt(details[5])
 								)
+
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
 							} else if (details[4] === 'no') {
 								goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData)
 							}
