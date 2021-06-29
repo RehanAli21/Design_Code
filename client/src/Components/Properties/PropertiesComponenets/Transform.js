@@ -377,6 +377,7 @@ const Transform = () => {
 						<option value='em'>EM</option>
 						<option value='rem'>REM</option>
 						<option value='px'>PX</option>
+						<option value='%'>%</option>
 					</select>
 				</div>
 				<div className='y'>
@@ -386,6 +387,7 @@ const Transform = () => {
 						<option value='em'>EM</option>
 						<option value='rem'>REM</option>
 						<option value='px'>PX</option>
+						<option value='%'>%</option>
 					</select>
 				</div>
 			</div>
