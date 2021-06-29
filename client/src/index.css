@@ -1064,3 +1064,38 @@ nav .d-v button:hover {
 .Slider .rightButton {
 	right: 10%;
 }
+
+.animate__opacityIn {
+	animation-name: opacityIn;
+	animation-timing-function: linear;
+	animation-duration: 1s;
+}
+
+.animate__opacityOut {
+	animation-name: opacityOut;
+	animation-timing-function: linear;
+	animation-duration: 1s;
+}
+
+@keyframes opacityIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes opacityOut {
+	0% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 0;
+	}
+}

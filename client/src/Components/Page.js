@@ -290,6 +290,81 @@ const Page = () => {
 						} else if (details[3] === 'no') {
 							goRightEffect1NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
 						}
+					} else if (details[2] === 'effect2') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goRightEffect2(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goRightEffect2(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goRightEffect2(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goRightEffect2NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect3') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goRightEffect3(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goRightEffect3(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goRightEffect3(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goRightEffect3NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect4') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goRightEffect4(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goRightEffect4(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goRightEffect4(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goRightEffect4NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect5') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goRightEffect5(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goRightEffect5(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goRightEffect5(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goRightEffect5NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect6') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goRightEffect6(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goRightEffect6(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goRightEffect6(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goRightEffect6NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
 					}
 				} else if (type === 'sliderLeftButton') {
 					if (details[2] === 'effect1') {
@@ -300,13 +375,87 @@ const Page = () => {
 									() => goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData),
 									parseInt(details[5])
 								)
-
 								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
 							} else if (details[4] === 'no') {
 								goLeftEffect1(slidersData[details[6]], details[1], details[6], slidersData)
 							}
 						} else if (details[3] === 'no') {
 							goLeftEffect1NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect2') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goLeftEffect2(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goLeftEffect2(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goLeftEffect2(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goLeftEffect2NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect3') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goLeftEffect3(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goLeftEffect3(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goLeftEffect3(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goLeftEffect3NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect4') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goLeftEffect4(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goLeftEffect4(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goLeftEffect4(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goLeftEffect4NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect5') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goLeftEffect5(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goLeftEffect5(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goLeftEffect5(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goLeftEffect5NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
+						}
+					} else if (details[2] === 'effect6') {
+						if (details[3] === 'yes') {
+							if (details[4] === 'yes') {
+								goLeftEffect6(slidersData[details[6]], details[1], details[6], slidersData)
+								let interval = setInterval(
+									() => goLeftEffect6(slidersData[details[6]], details[1], details[6], slidersData),
+									parseInt(details[5])
+								)
+								setTimeout(() => clearInterval(interval), parseInt(details[5]) * (details[1].length * 2))
+							} else if (details[4] === 'no') {
+								goLeftEffect6(slidersData[details[6]], details[1], details[6], slidersData)
+							}
+						} else if (details[3] === 'no') {
+							goLeftEffect6NoLoop(slidersData[details[6]], details[1], details[6], slidersData)
 						}
 					}
 				}
